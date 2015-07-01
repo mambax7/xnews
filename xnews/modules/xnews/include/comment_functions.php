@@ -1,5 +1,5 @@
 <?php
-// $Id: comment_functions.php 8207 2011-11-07 04:18:27Z beckmi $
+// $Id: comment_functions.php,v 1.2 2004/01/29 17:15:54 mithyt2 Exp $
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -30,7 +30,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 	die("XOOPS root path not defined");
 }
 
-include_once NW_MODULE_PATH . '/class/class.newsstory.php';
+include_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
 function nw_com_update($story_id, $total_num){
 	$story_id = intval($story_id);

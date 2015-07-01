@@ -1,5 +1,5 @@
 <?php
-// $Id: blocks.php 8207 2011-11-07 04:18:27Z beckmi $								 //
+// $Id: blocks.php,v 1.70 2010/09/01 17:48:07 dnprossi Exp $								 //
 define("_MB_NW_NOTYET", "Non c'è nessuna notizia del giorno, ancora.");
 define("_MB_NW_TMRSI", "La notizia più letta di oggi è:");
 define("_MB_NW_ORDER", "Ordine");

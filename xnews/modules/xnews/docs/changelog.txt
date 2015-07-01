@@ -1,4 +1,50 @@
-Changelog
+xNews History
+
+Key:
++ Added feature.
+- Removed.
+! Bug fix.
+o General comment.
+
+version 2.00 (unreleased)
+===================================
+o Upgraded to Xoops 2.5.7 coding standard.
+o Upgraded to Xoops 2.5.7 directory structure.
+! Fix strtotime bug
+! Fix php 5.3+ bugs and remove some deprecates
+
+v1.71 (RC) UTF-8 SEO
+*******
+- Changed Frameworks/tcpdf/config/tcpdf_config.php with voltan's patch
+  Instead of getting default tcpdf header image and info now you get xoopsroot/images/logo.png and 
+  $xoopsConfig['slogan']); and $xoopsConfig['sitename']);
+- Modified xnews/makepdf.php to reflect above changes
+- Changed old SEO samples with fixed working ones in xnews/docs/seo-samples
+- Fixed Missing tags variable in class.newsstory.php store function
+  Fixes new news submit issue
+- Renamed and deleted xnews/extra/modules/tag content
+  now only fixed xnews.php plugin and index.html should be there
+  Fixes Tags not working issue reported by beduino
+- Deleted some unneccessary files
+- Fixed smaller issues
+- Added new options in preferences
+  - Display attached PDF - If enabled attached pdf files will be displayed in the article page.
+  - Actvate PDF plugin detection - If enabled this will affect client side browser not to show
+  PDF iframes if PDF browser plugin is not installed. Works together with Display attached PDF.
+  - Display attached images - If enabled attached images will be displayed in the article page.
+- Modified /language/xxxx/modinfo.php to reflect new additions
+- Added new options in submit page.
+  - Image Display Rows
+  - PDF Display Rows
+- Modified /language/xxxx/admin.php to reflect new additions
+- Added a javascript function to detect adobe reader.
+- Fixed backend.php outputting html tags.
+- Added thumb creation on attaching image files
+- Added thumb_maxwidth, thumb_maxheight in preferences
+- Modified /language/xxxx/modinfo.php to reflect new additions
+- Fixed SEO htaccess file in root level not working with clones - always redirected to xnews
+  - changed samples in docs
+
 
 v1.70 UTF-8 SEO
 *******

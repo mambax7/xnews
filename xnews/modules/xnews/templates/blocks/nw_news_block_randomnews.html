@@ -1,19 +1,19 @@
 <table>
 <tr>
-	<td>
-    	<ul>
+    <td>
+        <ul>
         <{foreach item=news from=$block.stories}>
-			<li>
+            <li>
             <{if $block.sort=='counter'}>
-            	[<{$news.hits}>]
+                [<{$news.hits}>]
             <{elseif $block.sort=='published'}>
-            	[<{$news.date}>]
+                [<{$news.date}>]
             <{else}>
-            	[<{$news.rating}>]
+                [<{$news.rating}>]
             <{/if}>
             <{$news.topic_title}> - <a href="<{$block.newsmodule_url}>/article.php?storyid=<{$news.id}>" <{$news.infotips}>><{$news.title}></a> <br /><{$news.teaser}></li>
-		<{/foreach}>
+        <{/foreach}>
         </ul>
-	</td>
+    </td>
 </tr>
 </table>

@@ -1,5 +1,5 @@
 <?php
-// $Id: blocks.php 8207 2011-11-07 04:18:27Z beckmi $
+// $Id: blocks.php,v 1.16 2004/09/01 17:48:07 hthouzard Exp $
 define("_MB_NW_NOTYET","امروز نوشته‌ای نداریم");
 define("_MB_NW_TMRSI","نوشته‌های پرطرف‌دار امروز");
 define("_MB_NW_ORDER","مرتب‌سازی بر پایه");

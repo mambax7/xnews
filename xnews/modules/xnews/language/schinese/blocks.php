@@ -1,5 +1,5 @@
 <?php
-// $Id: blocks.php 8207 2011-11-07 04:18:27Z beckmi $
+// $Id: blocks.php,v 1.16 2004/09/01 17:48:07 hthouzard Exp $
 define("_MB_NW_NOTYET", "目前还没有最新新闻。");
 define("_MB_NW_TMRSI", "今天阅读最多的新闻：");
 define("_MB_NW_ORDER", "排序");

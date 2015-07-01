@@ -1,5 +1,5 @@
 <?php
-// $Id: admin.php 10066 2012-08-13 09:22:47Z beckmi $
+// $Id: admin.php,v 1.18 2004/07/26 17:51:25 hthouzard Exp $
 //%%%%%%	Admin Module Name  Articles 	%%%%%
 define("_AM_NW_DBUPDATED","Datenbank wurde erfolgreich aktualisiert!");
 define("_AM_NW_CONFIG","Artikelkonfiguration");
@@ -191,9 +191,9 @@ define("_AM_NW_REMOVE_BR","Den html tag &lt;br&gt; zu einer neuen Zeile konverti
 define("_AM_NW_PLEASE_UPGRADE","<a href='upgrade.php'><font color='#FF0000'>Bitte das Modul updaten!</font></a>");
 
 // Added in verisn 1.50
-define('_AM_NW_NEWSLETTER_HEADER',"Header");
-define('_AM_NW_NEWSLETTER_FOOTER',"Footer");
-define('_AM_NW_NEWSLETTER_HTML_TAGS',"Html Tags entfernen?");
+define('_AM_NW_NEWSLETTER_HEADER', "Header");
+define('_AM_NW_NEWSLETTER_FOOTER', "Footer");
+define('_AM_NW_NEWSLETTER_HTML_TAGS', "Html Tags entfernen?");
 define('_AM_NW_VERIFY_TABLES','Tabellen pflegen');
 define('_AM_NW_METAGEN',"Metagen");
 define('_AM_NW_METAGEN_DESC',"Metagen ist ein System das Sie bei der Indexierung für Suchmaschinen unterstützt. <br />Bitte beachten Sie, wenn Sie selbst Keywords und Meta Daten eingeben, wird das System diese automatisch generieren.");
@@ -209,36 +209,36 @@ define('_AM_NW_META_KEYWORDS_FREQ1',"Reihenfolge der Wiederholung");
 define('_AM_NW_META_KEYWORDS_FREQ2',"Zurücksetzen der Reihenfolge");
 
 // Added in version 1.67 Beta
-define("_AM_NW_SUBPREFIX","Sub-prefix");
+define("_AM_XNEWS_SUBPREFIX", "Sub-prefix");
 
-define("_AM_NW_CLONER","Klon Manager");
-define("_AM_NW_CLONER_CLONES","Klone");
-define("_AM_NW_CLONER_ADD","Klon hinzufügen");
-define("_AM_NW_CLONER_ID","ID");
-define("_AM_NW_CLONER_NAME","Name");
-define("_AM_NW_CLONER_DIRFOL","Verzeichnis/Ordner");
-define("_AM_NW_CLONER_VERSION","Version");
+define("_AM_NW_CLONER", "Klon Manager");
+define("_AM_NW_CLONER_CLONES", "Klone");
+define("_AM_NW_CLONER_ADD", "Klon hinzufügen");
+define("_AM_NW_CLONER_ID", "ID");
+define("_AM_NW_CLONER_NAME", "Name");
+define("_AM_NW_CLONER_DIRFOL", "Verzeichnis/Ordner");
+define("_AM_NW_CLONER_VERSION", "Version");
 
-define("_AM_NW_CLONER_NEWNAME","Neuer Modulname");
-define("_AM_NW_CLONER_NEWNAMEDESC","Betrifft auch die Erzeugung des neuen Modul Ordners. <br /> Gr0ß-/Kleinbuchstaben werden ignoriert und korrigiert. <br /> zB.: neuer Name = <b>Aktuelles</b> neuer Ordner  = <b>aktuelles</b>, <br /> nuer Name <b>Mein Aktuelles</b> neuer Ordner = <b>meinaktuelles</b>. <br /><br /> Start Modul ist: <font color='#008400'><b> %s </b></font><br />");
-define("_AM_NW_CLONER_NEWNAMELABEL","Neues Modul:");
+define("_AM_NW_CLONER_NEWNAME", "Neuer Modulname");
+define("_AM_NW_CLONER_NEWNAMEDESC", "Betrifft auch die Erzeugung des neuen Modul Ordners. <br /> Gr0ß-/Kleinbuchstaben werden ignoriert und korrigiert. <br /> zB.: neuer Name = <b>Aktuelles</b> neuer Ordner  = <b>aktuelles</b>, <br /> nuer Name <b>Mein Aktuelles</b> neuer Ordner = <b>meinaktuelles</b>. <br /><br /> Start Modul ist: <font color='#008400'><b> %s </b></font><br />");
+define("_AM_NW_CLONER_NEWNAMELABEL", "Neues Modul:");
 
-define("_AM_NW_CLONER_DIREXISTS","Ordner '%s' existiert bereits!");
-define("_AM_NW_CLONER_CREATED","Modul '%s' wurde korrekt geklont!");
-define("_AM_NW_CLONER_UPRADED","Modul '%s' wurde korrekt aktualisiert!");
-define("_AM_NW_CLONER_NOMODULEID","Modul ID wurde nicht angegeben!"); 
+define("_AM_NW_CLONER_DIREXISTS", "Ordner '%s' existiert bereits!");
+define("_AM_NW_CLONER_CREATED", "Modul '%s' wurde korrekt geklont!");
+define("_AM_NW_CLONER_UPRADED", "Modul '%s' wurde korrekt aktualisiert!");
+define("_AM_NW_CLONER_NOMODULEID", "Modul ID wurde nicht angegeben!"); 
 
-define("_AM_NW_CLONER_UPDATE","Update");
-define("_AM_NW_CLONER_INSTALL","Install");
-define("_AM_NW_CLONER_UNINSTALL","Uninstall");
-define("_AM_NW_CLONER_ACTION_INSTALL","Install/Uninstall"); 
+define("_AM_NW_CLONER_UPDATE", "Update");
+define("_AM_NW_CLONER_INSTALL", "Install");
+define("_AM_NW_CLONER_UNINSTALL", "Uninstall");
+define("_AM_NW_CLONER_ACTION_INSTALL", "Install/Uninstall"); 
 
-define("_AM_NW_CLONER_IMPORTNEWS","Importiere original News Modul Daten");
-define("_AM_NW_CLONER_IMPORTNEWSDESC1","Original News Modul existiert! Daten jetzt importieren?");
-define("_AM_NW_CLONER_IMPORTNEWSDESC2","Der Import Button erscheint nur, wenn die x"."News 'stories' Tabelle leer ist. <br />
+define("_AM_NW_CLONER_IMPORTNEWS", "Importiere original News Modul Daten");
+define("_AM_NW_CLONER_IMPORTNEWSDESC1", "Original News Modul existiert! Daten jetzt importieren?");
+define("_AM_NW_CLONER_IMPORTNEWSDESC2", "Der Import Button erscheint nur, wenn die x"."News 'stories' Tabelle leer ist. <br />
                                          wenn vor dem importieren bereits Inhalte hinzugefügt wurden,<br />
                                          muß x"."News de- und neu installiert werden! <br />
                                          Falls die Daten bereits importiert wurden, ist nichts weiter nötig.");
-define("_AM_NW_CLONER_IMPORTNEWSSUB","Import");
-define("_AM_NW_CLONER_NEWSIMPORTED","Original News Modul Daten korrekt importiert");
+define("_AM_NW_CLONER_IMPORTNEWSSUB", "Import");
+define("_AM_NW_CLONER_NEWSIMPORTED", "Original News Modul Daten korrekt importiert");
 ?>

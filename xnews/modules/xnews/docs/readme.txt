@@ -35,38 +35,41 @@ and meta descriptions also created from your content.
 
 The module can also be used, as it's the case on some sites, to create a blog
 
-
-How to install news
+How to install xNews
 ====================
 
-news is installed as a regular XOOPS module, which means you should copy the
-complete /news folder into the /modules directory of your website. Then log in
-to your site as administrator, go to System Admin > Modules, look for the news
+xNews is installed as a regular XOOPS module, which means you should copy the
+complete /xnews folder into the /modules directory of your website. Then log in
+to your site as administrator, go to System Admin > Modules, look for the xNews
 icon in the list of uninstalled modules and click in the install icon. Follow
 the directions in the screen and you'll be ready to go.
 
-Please verify that the modules\news\images\topics directory is writable on the
+Please verify that the uploads\xnews\other directories are writable on the
 server (read+write e.g. chmod=777).
-
-After having created your first topic (category), and before creating your first
-article/news, you need to click on Permission Tab to set groups permissions.
-
 
 
 Xoops supported versions
 ==========================
-You can use this new version on all the recent versions of Xoops 2.0.
-We did not tested the module with Xoops 2.2 but it should run.
+You can use this new version on all the recent versions of Xoops 2.4.x & 2.5.x
 
 PHP/MYSQL supported versions
 =============================
- Mysql >= 3.23, 4.x, 5.x Php 4 & 5
+ Mysql >= 5.x 
+ Php 5.3.x
 
 
-How to upgrade
-==============
+How to upgrade xNews
+====================
 
-Copy all the files to your site (and be sure to erase the old files), then
-go in the Xoops modules manager and upgrade the module.
+Remove all files in modules/xnews and copy all the new files to 
+your empty modules/xnews, then go in the Xoops modules manager 
+and update the module.
+
+How to upgrade clones
+=====================
+
+Remove all files in modules/your_clone_name go in Admin-xNews-xNews Cloner and click on 
+Upgrade or Force Upgrade once finished go in the Xoops modules manager and update your_clone_name
+
 In case of troubles, consult the file UPGRADE.txt present in the module.
 

@@ -1,5 +1,5 @@
 <?php
-// $Id: notification.inc.php 8207 2011-11-07 04:18:27Z beckmi $
+// $Id: notification.inc.php,v 1.3 2004/05/09 12:56:07 mithyt2 Exp $
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -45,7 +45,7 @@ function nw_notify_iteminfo($category, $item_id)
 		if($result) {
 			$result_array = $xoopsDB->fetchArray($result);
 			$item['name'] = $result_array['title'];
-			$item['url'] = NW_MODULE_URL . '/article.php?storyid=' . intval($item_id);
+			$item['url'] = XNEWS_MODULE_URL . '/article.php?storyid=' . intval($item_id);
 			return $item;
 		} else {
 			return null;
@@ -59,7 +59,7 @@ function nw_notify_iteminfo($category, $item_id)
 		if($result) {
 			$result_array = $xoopsDB->fetchArray($result);
 			$item['name'] = $result_array['topic_id'];
-			$item['url'] = NW_MODULE_URL . '/index.php?topic_id=' . intval($item_id);
+			$item['url'] = XNEWS_MODULE_URL . '/index.php?topic_id=' . intval($item_id);
 			return $item;
 		} else {
 			return null;

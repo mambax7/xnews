@@ -1,5 +1,5 @@
 <?php
-// $Id: main.php 10066 2012-08-13 09:22:47Z beckmi $
+// $Id: main.php,v 1.9 2004/07/26 17:51:25 hthouzard Exp $
 //%%%%%%		File Name index.php 		%%%%%
 define("_MA_NW_PRINTER","Druckoptimierte Version");
 define("_MA_NW_SENDSTORY","Schicke den Artikel an einen Freund");
@@ -8,7 +8,7 @@ define("_MA_NW_COMMENTS","Kommentar?");
 define("_MA_NW_ONECOMMENT","1 Kommentar");
 define("_MA_NW_BYTESMORE","%s Bytes mehr");
 define("_MA_NW_NUMCOMMENTS","%s Kommentare");
-define("_MA_NW_MORERELEASES","Weitere Artikel in: ");
+define("_MA_NW_MORERELEASES", "Weitere Artikel in: ");
 
 
 //%%%%%%		File Name submit.php		%%%%%
@@ -113,6 +113,6 @@ define("_MA_NW_BOOKMARK_TO_YAHOO","Bookmark bei Yahoo");
 
 // Added in version 1.56
 define('_MA_NW_NOTYETSTORY',"Entschuldigung, der gewählte Artikel wurde noch nicht veröffentlicht. Bitte kommen Sie später wieder und versuche es erneut.");
-define('_MA_NW_SELECT_IMAGE',"Wählen Sie ein Bild aus um dies an die Nachricht anzuhängen");
-define('_MA_NW_CURENT_PICTURE',"Aktuelles Bild");
+define('_MA_NW_SELECT_IMAGE', "Wählen Sie ein Bild aus um dies an die Nachricht anzuhängen");
+define('_MA_NW_CURENT_PICTURE', "Aktuelles Bild");
 ?>

@@ -1,5 +1,5 @@
 <?php
-// $Id: import_ams.php 8207 2011-11-07 04:18:27Z beckmi $
+// $Id$
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //

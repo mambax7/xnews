@@ -1,5 +1,5 @@
 <?php
-// $Id: blocks.php 8207 2011-11-07 04:18:27Z beckmi $
+// $Id: blocks.php 1243 2010-08-29 18:59:52Z kris_fr $
 define("_MB_NW_NOTYET", "Aucun article du jour pour le moment.");
 define("_MB_NW_TMRSI", "L'article le plus consulté aujourd'hui est :");
 define("_MB_NW_ORDER", "Classé par");
