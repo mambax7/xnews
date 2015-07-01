@@ -1,0 +1,7 @@
+Changelog
+
+v1.01 (BETA)
+*******
+Preliminary version
+Imports from News 1.64 and above to xNews 1.68 and clones
+Also Imports from xnews clone to clone 
