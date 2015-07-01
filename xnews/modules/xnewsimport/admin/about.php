@@ -14,20 +14,17 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package      xNews
  * @since        1.6.0
- * @author       XOOPS Development Team,
+ * @author       XOOPS Development Team
  * @version      $Id $
  */
-// better place this on a separate file so you can reuse it
-class xni_TableObject extends XoopsObject
-{
-    /**
-     * constructor
-     */
-    public function __construct($row, $id_name = 'cid', $pid_name = 'pid', $title_name = 'title')
-    {
-        $this->XoopsObject();
-        $this->initVar($id_name, XOBJ_DTYPE_INT, $row[$id_name]);
-        $this->initVar($pid_name, XOBJ_DTYPE_INT, $row[$pid_name]);
-        $this->initVar($title_name, XOBJ_DTYPE_TXTBOX, $row[$title_name]);
-    }
-}
+
+include_once __DIR__ . '/admin_header.php';
+
+xoops_cp_header();
+
+$aboutAdmin = new ModuleAdmin();
+
+echo $aboutAdmin->addNavigation('about.php');
+echo $aboutAdmin->renderAbout('6KJ7RW5DR3VTJ', false);
+
+include 'admin_footer.php';

@@ -1,3 +1,6 @@
+README FIRST
+-----------------------
+
 This is xNews Importer module
 
 Install as any other module

@@ -1,31 +1,62 @@
 <?php
-// xNews Import Module                    										
-// Created by DNPROSSI
-												
-if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
-}
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-$modversion['name'] = "xNews Importer";
-$modversion['version'] = 1.01;
-$modversion['description'] = "xNews Importer Beta - This is an xNews Import module.";
-$modversion['author'] = "DNPROSSI";
-$modversion['credits'] = "";
-$modversion['help'] = "";
-$modversion['license'] = "GPL see LICENSE";
-$modversion['official'] = 0;
-$modversion['image'] = "images/xnewsimport_logo.png";
-$modversion['dirname'] = "xnewsimport";
+/**
+ * @copyright    XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package      xNewsImport
+ * @since        1.6.0
+ * @author       XOOPS Development Team, DNPROSSI
+ * @version      $Id $
+ */
 
-$modversion['sqlfile']['mysql'] = "sql/mysql.sql";
+defined('XOOPS_ROOT_PATH') || exit('XOOPS Root path not defined');
+
+$modversion['name']        = 'xNews Importer';
+$modversion['version']     = 1.02;
+$modversion['description'] = 'xNews Importer Beta - This is an xNews Import module.';
+$modversion['author']      = 'DNPROSSI';
+$modversion['credits']     = '';
+$modversion['help']        = 'page=help';
+$modversion['license']     = 'GNU GPL 2.0 or later';
+$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']    = 0;
+$modversion['image']       = 'images/module_logo.png';
+$modversion['dirname']     = basename(__DIR__);
+
+$modversion['dirmoduleadmin'] = '/Frameworks/moduleclasses/moduleadmin';
+$modversion['icons16']        = '../../Frameworks/moduleclasses/icons/16';
+$modversion['icons32']        = '../../Frameworks/moduleclasses/icons/32';
+//about
+$modversion['release_date']        = '2013/09/14';
+$modversion['module_website_url']  = 'www.xoops.org';
+$modversion['module_website_name'] = 'XOOPS';
+$modversion['module_status']       = 'Beta 1';
+$modversion['min_php']             = '5.2';
+$modversion['min_xoops']           = '2.5.6';
+$modversion['min_admin']           = '1.1';
+$modversion['min_db']              = array(
+    'mysql'  => '5.0.7',
+    'mysqli' => '5.0.7');
+
+$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
 // Tables created by sql file (without prefix!)
 $modversion['tables'][0] = 'xnews_import';
 
 // Admin
-$modversion['hasAdmin'] = 1;
-$modversion['adminindex'] = "admin/index.php";
-$modversion['adminmenu'] = "admin/menu.php";
+$modversion['hasAdmin']    = 1;
+$modversion['system_menu'] = 1;
+$modversion['adminindex']  = 'admin/index.php';
+$modversion['adminmenu']   = 'admin/menu.php';
 
 // Menu
 $modversion['hasMain'] = 0;
@@ -35,13 +66,11 @@ $i = 0;
 /**
  * Number of news and topics to display in the module's admin part
  */
-$i++;
-$modversion['config'][$i]['name'] = 'storycountadmin';
-$modversion['config'][$i]['title'] = '_MI_XNI_STORYCOUNTADMIN';
+++$i;
+$modversion['config'][$i]['name']        = 'storycountadmin';
+$modversion['config'][$i]['title']       = '_MI_XNI_STORYCOUNTADMIN';
 $modversion['config'][$i]['description'] = '_MI_XNI_STORYCOUNTADMIN_DESC';
-$modversion['config'][$i]['formtype'] = 'select';
-$modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 10;
-$modversion['config'][$i]['options'] = array('5' => 5, '10' => 10, '15' => 15, '20' => 20, '25' => 25, '30' => 30, '35' => 35, '40' => 40);
-
-?>
+$modversion['config'][$i]['formtype']    = 'select';
+$modversion['config'][$i]['valuetype']   = 'int';
+$modversion['config'][$i]['default']     = 10;
+$modversion['config'][$i]['options']     = array('5' => 5, '10' => 10, '15' => 15, '20' => 20, '25' => 25, '30' => 30, '35' => 35, '40' => 40);
