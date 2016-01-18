@@ -25,7 +25,7 @@ class xni_TableObject extends XoopsObject
      */
     public function __construct($row, $id_name = 'cid', $pid_name = 'pid', $title_name = 'title')
     {
-        $this->XoopsObject();
+        parent::__construct();
         $this->initVar($id_name, XOBJ_DTYPE_INT, $row[$id_name]);
         $this->initVar($pid_name, XOBJ_DTYPE_INT, $row[$pid_name]);
         $this->initVar($title_name, XOBJ_DTYPE_TXTBOX, $row[$title_name]);

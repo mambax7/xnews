@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // $Id: modinfo.php,v 1.21 2004/09/01 17:48:07 hthouzard Exp $
 // Module Info
 

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // $Id: main.php,v 1.9 2004/07/26 17:51:25 hthouzard Exp $
 //%%%%%%                File Name index.php             %%%%%
 define("_MA_NW_PRINTER", "可打印模式");
