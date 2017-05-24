@@ -68,7 +68,7 @@ if (trim($storyObj->description())!= '') {
 
 function PrintPage() {
     global $xoopsConfig, $xoopsModule, $storyObj, $xoops_meta_keywords, $xoops_meta_description;
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
     $datetime = formatTimestamp($storyObj->published(), $xnews->getConfig('dateformat'));
 ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

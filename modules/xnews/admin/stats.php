@@ -15,7 +15,7 @@ include_once XOOPS_ROOT_PATH . '/class/uploader.php';
 xoops_load('xoopspagenav');
 include_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $topicscount = 0;
 
 $storiesTableName = $GLOBALS['xoopsDB']->prefix('nw_stories');
@@ -56,7 +56,7 @@ xoops_cp_header();
 $indexAdmin = new ModuleAdmin();
 echo $indexAdmin->addNavigation($currentFile);
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 xoops_loadLanguage('main', XNEWS_MODULE_DIRNAME);
 $news = new nw_NewsStory();
 $stats = array();

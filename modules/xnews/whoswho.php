@@ -59,7 +59,7 @@ $xoopsTpl->assign('advertisement',  $xnews->getConfig('advertisement'));
 nw_CreateMetaDatas($article);
 
 $xoopsTpl->assign('xoops_pagetitle', _AM_NW_WHOS_WHO);
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $meta_description = _AM_NW_WHOS_WHO . ' - ' . $myts->htmlSpecialChars($xoopsModule->name());
 if (isset($xoTheme) && is_object($xoTheme)) {
     $xoTheme->addMeta( 'meta', 'description', $meta_description);

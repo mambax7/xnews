@@ -93,7 +93,7 @@ class XnewsDeprecateTopic
      */
     function store()
     {
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
         $title = "";
         $imgurl = "";
         if (isset($this->topic_title) && $this->topic_title != "") {
@@ -212,7 +212,7 @@ class XnewsDeprecateTopic
      */
     function topic_title($format = "S")
     {
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
         switch ($format) {
             case "S":
             case "E":
@@ -234,7 +234,7 @@ class XnewsDeprecateTopic
      */
     function topic_imgurl($format = "S")
     {
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
         switch ($format) {
             case "S":
             case "E":
@@ -357,7 +357,7 @@ class XnewsDeprecateTopic
     {
         $result = $this->db->query('SELECT topic_id, topic_pid, topic_title FROM '.$this->table);
         $ret = array();
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
         while ($myrow = $this->db->fetchArray($result)) {
             $ret[$myrow['topic_id']] = array('title' => $myts->htmlspecialchars($myrow['topic_title']), 'pid' => $myrow['topic_pid']);
         }

@@ -19,7 +19,7 @@ if (!defined('XNEWS_MODULE_PATH')) {
 function nw_b_news_topicsnav_show($options) {
     include_once XNEWS_MODULE_PATH . '/include/functions.php';
     include_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
     $block = array();
     $newscountbytopic = array();
     $perms = '';

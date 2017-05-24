@@ -13,7 +13,7 @@ class nw_Latestnewsstory extends nw_NewsStory
     function getAllPublished($limit = 0, $selected_stories = true, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'published', $topic_frontpage = false)
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
 
         $ret = array();
         $sql = "SELECT s.*, t.*";

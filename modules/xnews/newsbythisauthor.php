@@ -69,7 +69,7 @@ if (!$xnews->getConfig('newsbythisauthor')) {
     exit();
 }
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $articles = new nw_NewsStory();
 $xoopsOption['template_main'] = 'nw_news_by_this_author.html';
 include_once XOOPS_ROOT_PATH . '/header.php';

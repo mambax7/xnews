@@ -100,7 +100,7 @@ if ($xnews->getConfig('newsdisplay') == 'Classic' || $xoopsOption['storytopic'] 
 
 $firsttitle = '';
 $topictitle = '';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $sfiles = new nw_sFiles();
 
 $column_count = $xnews->getConfig('columnmode');

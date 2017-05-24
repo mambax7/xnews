@@ -88,7 +88,7 @@ $dateformat = $xnews->getConfig('dateformat');
 if($dateformat == '') {
     $dateformat='m';
 }
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_MA_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 
 //DNPROSSI - ADDED

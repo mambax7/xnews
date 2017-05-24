@@ -33,7 +33,7 @@ include_once XNEWS_MODULE_PATH . '/include/functions.php';
 * will switch to the "most recent news" mode (the visible news will be searched according to the permissions)
 */
 function nw_b_news_top_show($options) {
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
     $xnews = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //

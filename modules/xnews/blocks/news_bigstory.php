@@ -19,7 +19,7 @@ if (!defined('XNEWS_MODULE_PATH')) {
 function nw_b_news_bigstory_show() {
     include_once XNEWS_MODULE_PATH . '/include/functions.php';
     include_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
     $restricted = $xnews->getConfig('restrictindex');
     $dateformat = $xnews->getConfig('dateformat');
     $infotips = $xnews->getConfig('infotips');

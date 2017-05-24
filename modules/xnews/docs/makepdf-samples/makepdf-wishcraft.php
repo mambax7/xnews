@@ -1,7 +1,7 @@
 <?php
     error_reporting(0);
     include_once 'header.php';
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 
     include_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
     include_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';

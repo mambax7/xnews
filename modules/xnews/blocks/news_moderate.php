@@ -38,7 +38,7 @@ function nw_b_news_topics_moderate() {
         $block['lang_story_author'] =_MB_NW_POSTER;
         $block['lang_story_action'] =_MB_NW_ACTION;
         $block['lang_story_topic'] =_MB_NW_TOPIC;
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
         foreach($storyarray as $newstory) {
             $title = $newstory -> title();
             $htmltitle='';

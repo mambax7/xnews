@@ -107,7 +107,7 @@ if (empty($storyid)) {
     exit();
 }
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 // Not yet published
 $article = new nw_NewsStory($storyid);
