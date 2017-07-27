@@ -190,11 +190,12 @@ define("_MI_NW_TOPICDISPLAY", "Visualizza Argomenti");
 define("_MI_NW_TOPICDISPLAYDESC", "Abilita/disabilita la visualizzazione del titolo degli argomenti nelle intestazioni dei blocchi");
 
 define("_MI_NW_SEOENABLE", "Abilita SEO ");
-define("_MI_NW_SEOENABLEDESC", "This will enable/disable SEO activity.<br /> If <b>htaccess</b> is selected you will get: <br /> http://your.site.com/<b>xnews</b>/topics.1/your-topic-title.html <br /> If path-info is selected you will get: <br /> http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html");
+define("_MI_NW_SEOENABLEDESC",
+       "This will enable/disable SEO activity.<br> If <b>htaccess</b> is selected you will get: <br> http://your.site.com/<b>xnews</b>/topics.1/your-topic-title.html <br> If path-info is selected you will get: <br> http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html");
 
 // Added in version 1.68 RC1
 define("_MI_NW_EXTEND_META_DATA", "Estendi input meta-data");
-define("_MI_NW_EXTEND_META_DATA_DESC", "Alterna tra textbox e textarea per l'insrimento testi dei meta-data<br /> sia per la descrizione che per le parole chiave.");
+define("_MI_NW_EXTEND_META_DATA_DESC", "Alterna tra textbox e textarea per l'insrimento testi dei meta-data<br> sia per la descrizione che per le parole chiave.");
 
 define("_MI_NW_NONE", "Nessuno");
 define("_MI_NW_TOPONLY", "Solo sopra");
@@ -204,9 +205,11 @@ define("_MI_NW_DISPLAYLINKICNS", "Visualizza Icone Link");
 define("_MI_NW_DISPLAYLINKICNSDESC", "Visualizza le icone di stampa, friend e pdf nessuno-sopra-sotto-entrambi");
 
 define("_MI_NW_SEOPATH", "Percorso SEO ");
-define("_MI_NW_SEOPATHDESC", "Questo aggiunge un titolo al url SEO sia per <b>htaccess</b> che per <b>path-info</b>. <br /> Se lasciato vuoto si ottiene: <br /> http://tuo.sito.com/argomenti.1/il-tuo-titolo-argomento.html <br /> Se si scrive <b>notizie</b> si otterrà: <br /> http://tuo.sito.com/<b>notizie</b>/argomenti.1/il-tuo-titolo-argomento.html <br /><br /> <b>sono accettati i caratteri a-z e il carattere meno. es. notizie-del-giorno</b>");
+define("_MI_NW_SEOPATHDESC",
+       "Questo aggiunge un titolo al url SEO sia per <b>htaccess</b> che per <b>path-info</b>. <br> Se lasciato vuoto si ottiene: <br> http://tuo.sito.com/argomenti.1/il-tuo-titolo-argomento.html <br> Se si scrive <b>notizie</b> si otterrà: <br> http://tuo.sito.com/<b>notizie</b>/argomenti.1/il-tuo-titolo-argomento.html <br><br> <b>sono accettati i caratteri a-z e il carattere meno. es. notizie-del-giorno</b>");
 define("_MI_NW_SEOLEVEL", "Livello SEO ");
-define("_MI_NW_SEOLEVELDESC", "Quì si può scegliere se avere l'htaccess nella cartella root di xoops o in quella del modulo. <br /> Questo cambierà l'url visualizzato. <br /> A livello root: <br /> http://tuo.sito.com/notizie/argomenti.1/il-tuo-titolo-argomento.html  <br /> A livello modulo: <br /> http://tuo.sito.com/modules/xnews/notizie.argomenti.1/il-tuo-titolo-argomento.html<br /><br /> Solo nella modalità htaccess e i file dovranno essere installati di conseguenza.");
+define("_MI_NW_SEOLEVELDESC",
+       "Quì si può scegliere se avere l'htaccess nella cartella root di xoops o in quella del modulo. <br> Questo cambierà l'url visualizzato. <br> A livello root: <br> http://tuo.sito.com/notizie/argomenti.1/il-tuo-titolo-argomento.html  <br> A livello modulo: <br> http://tuo.sito.com/modules/xnews/notizie.argomenti.1/il-tuo-titolo-argomento.html<br><br> Solo nella modalità htaccess e i file dovranno essere installati di conseguenza.");
 define("_MI_NW_MODULE_LEVEL", "Livello modulo");
 define("_MI_NW_ROOT_LEVEL", "Livello root");
 
@@ -217,4 +220,3 @@ define("_MI_NW_SEOENDOFURLRSS", "Fine URL");
 define("_MI_NW_SEOENDOFURLRSS_DESC", "Estensione file per le pagine RSS");
 define("_MI_NW_SEOENDOFURLPDF", "Fine URL");
 define("_MI_NW_SEOENDOFURLPDF_DESC", "Estensione file per file Adobe Acrobat (PDF)");
-?>

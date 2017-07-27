@@ -65,7 +65,6 @@ define("_AM_NW_DEL", "Delete");
 define("_AM_NW_CANCEL", "Cancel");
 define("_AM_NW_WAYSYWTDTTAL", "WARNING: Are you sure you want to delete this Topic and ALL its Stories and Comments?");
 
-
 // Added in Beta6
 define("_AM_NW_TOPICSMNGR", "Topics Manager");
 define("_AM_NW_PEARTICLES", "Post/Edit Articles");
@@ -131,7 +130,7 @@ define("_AM_NW_UPGRADEFAILED0", "Please note the messages and try to correct the
 define("_AM_NW_UPGR_ACCESS_ERROR", "Error, to use the upgrade script, you must be an admin on this module");
 define("_AM_NW_PRUNE_BEFORE", "Prune stories that were published before");
 define("_AM_NW_PRUNE_EXPIREDONLY", "Only remove stories who have expired");
-define("_AM_NW_PRUNE_CONFIRM", "Warning, you are going to permanently remove stories that were published before %s (this action can't be undone). It represents %s stories.<br />Are you sure ?");
+define("_AM_NW_PRUNE_CONFIRM", "Warning, you are going to permanently remove stories that were published before %s (this action can't be undone). It represents %s stories.<br>Are you sure ?");
 define("_AM_NW_PRUNE_TOPICS", "Limit to the following topics");
 define("_AM_NW_PRUNENEWS", "Prune news");
 define("_AM_NW_EXPORT_NEWS", "News Export (in XML)");
@@ -140,14 +139,14 @@ define("_AM_NW_PRUNE_DELETED", "%d news was deleted");
 define("_AM_NW_PERM_WARNING", "<h2>Warning, you have 3 forms so you have 3 submit buttons</h2>");
 define("_AM_NW_EXPORT_BETWEEN", "Export news published between");
 define("_AM_NW_EXPORT_AND", " and ");
-define("_AM_NW_EXPORT_PRUNE_DSC", "If you don't check anything then all the topics will be used<br/> else only the selected topics will be used");
+define("_AM_NW_EXPORT_PRUNE_DSC", "If you don't check anything then all the topics will be used<br> else only the selected topics will be used");
 define("_AM_NW_EXPORT_INCTOPICS", "Include Topics Definitions ?");
 define("_AM_NW_EXPORT_ERROR", "Error while trying to create the file %s. Operation stopped.");
-define("_AM_NW_EXPORT_READY", "Your xml export file is ready for download. <br /><a href='%s'>Click on this link to download it</a>.<br />Don't forget <a href='%s'>to remove it</a> once you have finished.");
+define("_AM_NW_EXPORT_READY", "Your xml export file is ready for download. <br><a href='%s'>Click on this link to download it</a>.<br>Don't forget <a href='%s'>to remove it</a> once you have finished.");
 define("_AM_NW_RSS_URL", "URL of RSS feed");
 define("_AM_NW_NEWSLETTER", "Newsletter");
 define("_AM_NW_NEWSLETTER_BETWEEN", "Select News published between");
-define("_AM_NW_NEWSLETTER_READY", "Your newsletter file is ready for download. <br /><a href='%s'>Click on this link to download it</a>.<br />Don't forget to <a href='%s'>remove it</a> once you have finished.");
+define("_AM_NW_NEWSLETTER_READY", "Your newsletter file is ready for download. <br><a href='%s'>Click on this link to download it</a>.<br>Don't forget to <a href='%s'>remove it</a> once you have finished.");
 define("_AM_NW_DELETED_OK", "File deleted successfully");
 define("_AM_NW_DELETED_PB", "There was a problem while deleting the file");
 define("_AM_NW_STATS0", "Topics statistics");
@@ -165,7 +164,7 @@ define("_AM_NW_STATS10", "Authors statistics");
 define("_AM_NW_STATS11", "Articles count");
 define("_AM_NW_HELP", "Help");
 define("_AM_NW_MODULEADMIN", "Module Admin");
-define("_AM_NW_GENERALSET", "Preferences" );
+define("_AM_NW_GENERALSET", "Preferences");
 define("_AM_NW_GOTOMOD", "Go to module");
 define("_AM_NW_NOTHING", "Sorry but there's nothing to download, verify your criterias !");
 define("_AM_NW_NOTHING_PRUNE", "Sorry but there's no news to prune, verify your criterias !");
@@ -181,11 +180,11 @@ define("_AM_NW_NEWSLETTER_FOOTER", "Footer");
 define("_AM_NW_NEWSLETTER_HTML_TAGS", "Remove html tags ?");
 define("_AM_NW_VERIFY_TABLES", "Maintain tables");
 define("_AM_NW_METAGEN", "Metagen");
-define("_AM_NW_METAGEN_DESC", "Metagen is a system that can help you to have your page best indexed by search engines.<br />Except if you type meta keywords and meta descriptions yourself, the module will automatically create them.");
+define("_AM_NW_METAGEN_DESC", "Metagen is a system that can help you to have your page best indexed by search engines.<br>Except if you type meta keywords and meta descriptions yourself, the module will automatically create them.");
 define("_AM_NW_BLACKLIST", "Blacklist");
 define("_AM_NW_BLACKLIST_DESC", "The words in this list will not be used to create meta keywords");
 define("_AM_NW_BLACKLIST_ADD", "Add");
-define("_AM_NW_BLACKLIST_ADD_DSC", "Enter words to add in the list<br />(one word by line)");
+define("_AM_NW_BLACKLIST_ADD_DSC", "Enter words to add in the list<br>(one word by line)");
 define("_AM_NW_META_KEYWORDS_CNT", "Maximum count of meta keywords to auto-generate");
 define("_AM_NW_META_KEYWORDS_ORDER", "Keywords order");
 define("_AM_NW_META_KEYWORDS_INTEXT", "Create them in the order they appear in the text");
@@ -204,30 +203,31 @@ define("_AM_NW_CLONER_DIRFOL", "Directory/Folder");
 define("_AM_NW_CLONER_VERSION", "Version");
 
 define("_AM_NW_CLONER_NEWNAME", "New module name");
-define("_AM_NW_CLONER_NEWNAMEDESC", "This will also affect the creation of the new module folder. <br /> Case sensitivity and spaces are ignored and will be auto corrected. <br /> eg. new name = <b>Library</b> new dir  = <b>library</b>, <br /> new name <b>My Library</b> new dir = <b>mylibrary</b>. <br /><br /> Start module is: <font color='#008400'><b> %s </b></font><br />");
+define("_AM_NW_CLONER_NEWNAMEDESC",
+       "This will also affect the creation of the new module folder. <br> Case sensitivity and spaces are ignored and will be auto corrected. <br> eg. new name = <b>Library</b> new dir  = <b>library</b>, <br> new name <b>My Library</b> new dir = <b>mylibrary</b>. <br><br> Start module is: <font color='#008400'><b> %s </b></font><br>");
 define("_AM_NW_CLONER_NEWNAMELABEL", "New Module:");
 
 define("_AM_NW_CLONER_DIREXISTS", "Directory/Folder '%s' already exists!!");
 define("_AM_NW_CLONER_CREATED", "Module '%s' was correctly cloned!!");
 define("_AM_NW_CLONER_UPRADED", "Module '%s' has been correctly upgraded!!");
-define("_AM_NW_CLONER_NOMODULEID", "Module ID was not set!"); 
+define("_AM_NW_CLONER_NOMODULEID", "Module ID was not set!");
 
 define("_AM_NW_CLONER_UPDATE", "Update");
 define("_AM_NW_CLONER_INSTALL", "Install");
 define("_AM_NW_CLONER_UNINSTALL", "Uninstall");
-define("_AM_NW_CLONER_ACTION_INSTALL", "Install/Uninstall"); 
+define("_AM_NW_CLONER_ACTION_INSTALL", "Install/Uninstall");
 
 define("_AM_NW_CLONER_IMPORTNEWS", "Import original News module data");
 define("_AM_NW_CLONER_IMPORTNEWSDESC1", "Original News module exists! Import data now?");
-define("_AM_NW_CLONER_IMPORTNEWSDESC2", "The import button only appears if x"."News module stories table is empty. <br />
-                                         If you added story item before importing from <br />
-                                         original News module you will have to uninstall/reinstall x"."News. <br />
+define("_AM_NW_CLONER_IMPORTNEWSDESC2", "The import button only appears if x" . "News module stories table is empty. <br>
+                                         If you added story item before importing from <br>
+                                         original News module you will have to uninstall/reinstall x" . "News. <br>
                                          If you already imported original News Module data, leave as is.");
 define("_AM_NW_CLONER_IMPORTNEWSSUB", "Import");
 define("_AM_NW_CLONER_NEWSIMPORTED", "Original News module data correctly imported.");
 
 // Added in version 1.68 Beta
-define("_AM_NW_DESCRIPTION", "<H3>x"."News is a clonable news module</H3> 
+define("_AM_NW_DESCRIPTION", "<H3>x" . "News is a clonable news module</H3> 
 							  where users can post news/comments. The module can be cloned to enable one only method for many different tasks. Other than usual news it can be used for info, links and more all with their own blocks, topics and settings.");
 
 // Added in version 1.68 RC1
@@ -236,17 +236,16 @@ define("_AM_NW_CLONER_CLONEDELETEDERR", "'%s' clone could not be deleted - check
 define("_AM_NW_CLONER_CLONEUPGRADED", "Upgraded");
 define("_AM_NW_CLONER_UPGRADEFORCE", "Force upgrade");
 define("_AM_NW_CLONER_CLONEDELETION", "Deleting Clone");
-define("_AM_NW_CLONER_SUREDELETE", "Are you sure you want to delete <font color='#000000'>'%s'</font> clone?<br />");
+define("_AM_NW_CLONER_SUREDELETE", "Are you sure you want to delete <font color='#000000'>'%s'</font> clone?<br>");
 define("_AM_NW_CLONER_CLONEID", "Clone ID was not set!");
 
 // Added in version 1.68 RC2
-define("_AM_NW_INDEX", "Index"); 
+define("_AM_NW_INDEX", "Index");
 
 // Added in version 1.68 RC3
 define("_AM_NW_DOLINEBREAK", "Enable Line Break");
-define("_AM_NW_TOPICS","Topics");
+define("_AM_NW_TOPICS", "Topics");
 
 // Added in version 1.71
 define("_AM_NW_IMAGE_ROWS", "Image display rows");
 define("_AM_NW_PDF_ROWS", "PDF display rows");
-?>

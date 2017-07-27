@@ -3,12 +3,12 @@
 // File name   : example_012.php
 // Begin       : 2008-03-04
 // Last Update : 2009-09-30
-// 
+//
 // Description : Example 012 for TCPDF class
 //               Graphic Functions
-// 
+//
 // Author: Nicola Asuni
-// 
+//
 // (c) Copyright:
 //               Nicola Asuni
 //               Tecnick.com s.r.l.
@@ -21,20 +21,20 @@
 
 /**
  * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Graphic Functions
- * @author Nicola Asuni
+ * @package   com.tecnick.tcpdf
+ * @abstract  TCPDF - Example: Graphic Functions
+ * @author    Nicola Asuni
  * @copyright 2004-2009 Nicola Asuni - Tecnick.com S.r.l (www.tecnick.com) Via Della Pace, 11 - 09044 - Quartucciu (CA) - ITALY - www.tecnick.com - info@tecnick.com
- * @link http://tcpdf.org
- * @license http://www.gnu.org/copyleft/lesser.html LGPL
- * @since 2008-03-04
+ * @link      http://tcpdf.org
+ * @license   http://www.gnu.org/copyleft/lesser.html LGPL
+ * @since     2008-03-04
  */
 
 require_once('../config/lang/eng.php');
 require_once('../tcpdf.php');
 
 // create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false); 
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -54,13 +54,13 @@ $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 
 //set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
 
 //set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); 
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 //set some language-dependent strings
-$pdf->setLanguageArray($l); 
+$pdf->setLanguageArray($l);
 
 // ---------------------------------------------------------
 
@@ -70,13 +70,15 @@ $pdf->SetFont('helvetica', '', 10);
 // add a page
 $pdf->AddPage();
 
-$style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '10,20,5,10', 'phase' => 10, 'color' => array(255, 0, 0));
+$style  = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '10,20,5,10', 'phase' => 10, 'color' => array(255, 0, 0));
 $style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(255, 0, 0));
 $style3 = array('width' => 1, 'cap' => 'round', 'join' => 'round', 'dash' => '2,10', 'color' => array(255, 0, 0));
-$style4 = array('L' => 0,
-                'T' => array('width' => 0.25, 'cap' => 'butt', 'join' => 'miter', 'dash' => '20,10', 'phase' => 10, 'color' => array(100, 100, 255)),
-                'R' => array('width' => 0.50, 'cap' => 'round', 'join' => 'miter', 'dash' => 0, 'color' => array(50, 50, 127)),
-                'B' => array('width' => 0.75, 'cap' => 'square', 'join' => 'miter', 'dash' => '30,10,5,10'));
+$style4 = array(
+    'L' => 0,
+    'T' => array('width' => 0.25, 'cap' => 'butt', 'join' => 'miter', 'dash' => '20,10', 'phase' => 10, 'color' => array(100, 100, 255)),
+    'R' => array('width' => 0.50, 'cap' => 'round', 'join' => 'miter', 'dash' => 0, 'color' => array(50, 50, 127)),
+    'B' => array('width' => 0.75, 'cap' => 'square', 'join' => 'miter', 'dash' => '30,10,5,10')
+);
 $style5 = array('width' => 0.25, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 64, 128));
 $style6 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '10,10', 'color' => array(0, 128, 0));
 $style7 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(255, 128, 0));
@@ -101,32 +103,32 @@ $pdf->Curve(140, 40, 150, 55, 180, 45, 200, 75, 'DF', $style6, array(200, 220, 2
 // Circle and ellipse
 $pdf->Text(5, 82, 'Circle and ellipse examples');
 $pdf->SetLineStyle($style5);
-$pdf->Circle(25,105,20);
-$pdf->Circle(25,105,10, 90, 180, null, $style6);
-$pdf->Circle(25,105,10, 270, 360, 'F');
-$pdf->Circle(25,105,10, 270, 360, 'C', $style6);
+$pdf->Circle(25, 105, 20);
+$pdf->Circle(25, 105, 10, 90, 180, null, $style6);
+$pdf->Circle(25, 105, 10, 270, 360, 'F');
+$pdf->Circle(25, 105, 10, 270, 360, 'C', $style6);
 
 $pdf->SetLineStyle($style5);
-$pdf->Ellipse(100,105,40,20);
-$pdf->Ellipse(100,105,20,10, 0, 90, 180, null, $style6);
-$pdf->Ellipse(100,105,20,10, 0, 270, 360, 'DF', $style6);
+$pdf->Ellipse(100, 105, 40, 20);
+$pdf->Ellipse(100, 105, 20, 10, 0, 90, 180, null, $style6);
+$pdf->Ellipse(100, 105, 20, 10, 0, 270, 360, 'DF', $style6);
 
 $pdf->SetLineStyle($style5);
-$pdf->Ellipse(175,105,30,15,45);
-$pdf->Ellipse(175,105,15,7.50, 45, 90, 180, null, $style6);
-$pdf->Ellipse(175,105,15,7.50, 45, 270, 360, 'F', $style6, array(220, 200, 200));
+$pdf->Ellipse(175, 105, 30, 15, 45);
+$pdf->Ellipse(175, 105, 15, 7.50, 45, 90, 180, null, $style6);
+$pdf->Ellipse(175, 105, 15, 7.50, 45, 270, 360, 'F', $style6, array(220, 200, 200));
 
 // Polygon
 $pdf->Text(5, 132, 'Polygon examples');
 $pdf->SetLineStyle(array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-$pdf->Polygon(array(5,135,45,135,15,165));
-$pdf->Polygon(array(60,135,80,135,80,155,70,165,50,155), 'DF', array($style6, $style7, $style7, 0, $style6), array(220, 200, 200));
-$pdf->Polygon(array(120,135,140,135,150,155,110,155), 'D', array($style6, 0, $style7, $style6));
-$pdf->Polygon(array(160,135,190,155,170,155,200,160,160,165), 'DF', array('all' => $style6), array(220, 220, 220));
+$pdf->Polygon(array(5, 135, 45, 135, 15, 165));
+$pdf->Polygon(array(60, 135, 80, 135, 80, 155, 70, 165, 50, 155), 'DF', array($style6, $style7, $style7, 0, $style6), array(220, 200, 200));
+$pdf->Polygon(array(120, 135, 140, 135, 150, 155, 110, 155), 'D', array($style6, 0, $style7, $style6));
+$pdf->Polygon(array(160, 135, 190, 155, 170, 155, 200, 160, 160, 165), 'DF', array('all' => $style6), array(220, 220, 220));
 
 // Polygonal Line
 $pdf->SetLineStyle(array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 164)));
-$pdf->PolyLine(array(80,165,90,160,100,165,110,160,120,165,130,160,140,165), 'D', array(), array());
+$pdf->PolyLine(array(80, 165, 90, 160, 100, 165, 110, 160, 120, 165, 130, 160, 140, 165), 'D', array(), array());
 
 // Regular polygon
 $pdf->Text(5, 172, 'Regular polygon examples');
@@ -161,10 +163,10 @@ $pdf->RoundedRect(140, 255, 40, 30, 8.0, '0101', 'DF', $style6, array(200, 200, 
 $pdf->Text(190, 252, 'Arrows');
 $pdf->SetLineStyle($style5);
 $pdf->SetFillColor(255, 0, 0);
-$pdf->Arrow($x0=200, $y0=280, $x1=185, $y1=266, $head_style=0, $arm_size=5, $arm_angle=15);
-$pdf->Arrow($x0=200, $y0=280, $x1=190, $y1=263, $head_style=1, $arm_size=5, $arm_angle=15);
-$pdf->Arrow($x0=200, $y0=280, $x1=195, $y1=261, $head_style=2, $arm_size=5, $arm_angle=15);
-$pdf->Arrow($x0=200, $y0=280, $x1=200, $y1=260, $head_style=3, $arm_size=5, $arm_angle=15);
+$pdf->Arrow($x0 = 200, $y0 = 280, $x1 = 185, $y1 = 266, $head_style = 0, $arm_size = 5, $arm_angle = 15);
+$pdf->Arrow($x0 = 200, $y0 = 280, $x1 = 190, $y1 = 263, $head_style = 1, $arm_size = 5, $arm_angle = 15);
+$pdf->Arrow($x0 = 200, $y0 = 280, $x1 = 195, $y1 = 261, $head_style = 2, $arm_size = 5, $arm_angle = 15);
+$pdf->Arrow($x0 = 200, $y0 = 280, $x1 = 200, $y1 = 260, $head_style = 3, $arm_size = 5, $arm_angle = 15);
 
 // ---------------------------------------------------------
 
@@ -172,6 +174,5 @@ $pdf->Arrow($x0=200, $y0=280, $x1=200, $y1=260, $head_style=3, $arm_size=5, $arm
 $pdf->Output('example_012.pdf', 'I');
 
 //============================================================+
-// END OF FILE                                                 
-//============================================================+
-?>
+// END OF FILE
+//============================================================+;

@@ -3,116 +3,116 @@
 // Module Info
 
 // The name of this module
-define("_MI_NW_NAME", "x"."News");
+define("_MI_NW_NAME", "x" . "News");
 
 // A brief description of this module
 define("_MI_NW_DESC", "Module de gestion d'articles, ouverts aux contributions des utilisateurs.");
 
 // Names of blocks for this module (Not all module has blocks)
-define("_MI_NW_BNAME1", "Catégories d'articles");
+define("_MI_NW_BNAME1", "Catï¿½gories d'articles");
 define("_MI_NW_BNAME3", "Article du jour");
 define("_MI_NW_BNAME4", "Articles les plus populaires");
-define("_MI_NW_BNAME5", "Articles les plus récents");
-define("_MI_NW_BNAME6", "Modération des articles");
-define("_MI_NW_BNAME7", "Navigation dans les catégories");
+define("_MI_NW_BNAME5", "Articles les plus rï¿½cents");
+define("_MI_NW_BNAME6", "Modï¿½ration des articles");
+define("_MI_NW_BNAME7", "Navigation dans les catï¿½gories");
 
 // Sub menus in main menu block
 define("_MI_NW_SMNAME1", "Proposer un article");
 define("_MI_NW_SMNAME2", "Archives");
 
 // Names of admin menu items
-define("_MI_NW_ADMENU2", "Catégories");
+define("_MI_NW_ADMENU2", "Catï¿½gories");
 define("_MI_NW_ADMENU3", "Articles");
 define("_MI_NW_GROUPPERMS", "Permissions");
-// Added by Hervé for prune option
+// Added by Hervï¿½ for prune option
 define("_MI_NW_PRUNENEWS", "Gestion par lot");
-// Added by Hervé
+// Added by Hervï¿½
 define("_MI_NW_EXPORT", "Exportation");
 
 // Title of config items
-define("_MI_NW_STORYHOME", "Sélectionner le nombre d'articles à afficher sur la page d'accueil du module");
-define("_MI_NW_NOTIFYSUBMIT", "Choisir Oui pour alerter l'administrateur lorsqu'un nouvel article est proposé");
-define("_MI_NW_DISPLAYNAV", "Choisir Oui pour afficher la liste de navigation dans les catégories au sommet de chaque article");
-define("_MI_NW_AUTOAPPROVE", "Diffuser automatiquement - sans l'approbation préalable d'un administrateur - les articles proposés ?");
-define("_MI_NW_ALLOWEDSUBMITGROUPS", "Groupes autorisés à proposer des articles");
-define("_MI_NW_ALLOWEDAPPROVEGROUPS", "Groupes autorisés à diffuser un article");
+define("_MI_NW_STORYHOME", "Sï¿½lectionner le nombre d'articles ï¿½ afficher sur la page d'accueil du module");
+define("_MI_NW_NOTIFYSUBMIT", "Choisir Oui pour alerter l'administrateur lorsqu'un nouvel article est proposï¿½");
+define("_MI_NW_DISPLAYNAV", "Choisir Oui pour afficher la liste de navigation dans les catï¿½gories au sommet de chaque article");
+define("_MI_NW_AUTOAPPROVE", "Diffuser automatiquement - sans l'approbation prï¿½alable d'un administrateur - les articles proposï¿½s ?");
+define("_MI_NW_ALLOWEDSUBMITGROUPS", "Groupes autorisï¿½s ï¿½ proposer des articles");
+define("_MI_NW_ALLOWEDAPPROVEGROUPS", "Groupes autorisï¿½s ï¿½ diffuser un article");
 define("_MI_NW_NEWSDISPLAY", "Mise en page des articles");
 define("_MI_NW_NAMEDISPLAY", "Citation de l'auteur");
 define("_MI_NW_COLUMNMODE", "Nombre de colonnes pour lister les articles");
-define("_MI_NW_STORYCOUNTADMIN", "Nombre de nouveaux articles à afficher côté administration");
-define("_MI_NW_UPLOADFILESIZE", "Poids maximal du fichier attaché (KB) 1048576 = 1 Mo");
-define("_MI_NW_UPLOADGROUPS", "Groupes autorisés à attacher un document");
+define("_MI_NW_STORYCOUNTADMIN", "Nombre de nouveaux articles ï¿½ afficher cï¿½tï¿½ administration");
+define("_MI_NW_UPLOADFILESIZE", "Poids maximal du fichier attachï¿½ (KB) 1048576 = 1 Mo");
+define("_MI_NW_UPLOADGROUPS", "Groupes autorisï¿½s ï¿½ attacher un document");
 
 // Description of each config items
 define("_MI_NW_STORYHOMEDSC", "");
 define("_MI_NW_NOTIFYSUBMITDSC", "");
 define("_MI_NW_DISPLAYNAVDSC", "");
 define("_MI_NW_AUTOAPPROVEDSC", "");
-define("_MI_NW_ALLOWEDSUBMITGROUPSDESC", "Les groupes sélectionnés seront autorisés à proposer des articles");
-define("_MI_NW_ALLOWEDAPPROVEGROUPSDESC", "Les groupes sélectionnés seront autorisés à diffuser des articles");
-define("_MI_NW_NEWSDISPLAYDESC", "L'affichage par Catégories ordonne les articles par catégorie d'appartenance (l'article le plus récent est accompagné de son introduction, seul le titre apparaît pour les articles suivants)");
+define("_MI_NW_ALLOWEDSUBMITGROUPSDESC", "Les groupes sï¿½lectionnï¿½s seront autorisï¿½s ï¿½ proposer des articles");
+define("_MI_NW_ALLOWEDAPPROVEGROUPSDESC", "Les groupes sï¿½lectionnï¿½s seront autorisï¿½s ï¿½ diffuser des articles");
+define("_MI_NW_NEWSDISPLAYDESC", "L'affichage par Catï¿½gories ordonne les articles par catï¿½gorie d'appartenance (l'article le plus rï¿½cent est accompagnï¿½ de son introduction, seul le titre apparaï¿½t pour les articles suivants)");
 define("_MI_NW_ADISPLAYNAMEDSC", "");
 define("_MI_NW_COLUMNMODE_DESC", "");
-define("_MI_NW_STORYCOUNTADMIN_DESC", "Cette valeur sera également employée pour limiter le nombre de catégories affichées par page et pour l'affichage des statistiques");
+define("_MI_NW_STORYCOUNTADMIN_DESC", "Cette valeur sera ï¿½galement employï¿½e pour limiter le nombre de catï¿½gories affichï¿½es par page et pour l'affichage des statistiques");
 define("_MI_NW_UPLOADFILESIZE_DESC", "");
-define("_MI_NW_UPLOADGROUPS_DESC", "Les groupes sélectionnés seront autorisés à placer des fichiers joints sur le serveur");
+define("_MI_NW_UPLOADGROUPS_DESC", "Les groupes sï¿½lectionnï¿½s seront autorisï¿½s ï¿½ placer des fichiers joints sur le serveur");
 
 // Name of config item values
 define("_MI_NW_NEWSCLASSIC", "Liste ante-chronologique");
-define("_MI_NW_NEWSBYTOPIC", "Affichage par Catégories");
+define("_MI_NW_NEWSBYTOPIC", "Affichage par Catï¿½gories");
 define("_MI_NW_DISPLAYNAME1", "Nom d'utilisateur");
-define("_MI_NW_DISPLAYNAME2", "Nom réel");
+define("_MI_NW_DISPLAYNAME2", "Nom rï¿½el");
 define("_MI_NW_DISPLAYNAME3", "Ne pas citer d'auteur");
-define("_MI_NW_UPLOAD_GROUP1", "Contributeurs et modérateurs");
-define("_MI_NW_UPLOAD_GROUP2", "Modérateurs seulement");
-define("_MI_NW_UPLOAD_GROUP3", "Téléversement désactivé");
+define("_MI_NW_UPLOAD_GROUP1", "Contributeurs et modï¿½rateurs");
+define("_MI_NW_UPLOAD_GROUP2", "Modï¿½rateurs seulement");
+define("_MI_NW_UPLOAD_GROUP3", "Tï¿½lï¿½versement dï¿½sactivï¿½");
 
 // Text for notifications
 define("_MI_NW_GLOBAL_NOTIFY", "Globale");
 define("_MI_NW_GLOBAL_NOTIFYDSC", "Options de notification globales.");
 
 define("_MI_NW_STORY_NOTIFY", "Articles");
-define("_MI_NW_STORY_NOTIFYDSC", "Options de notification applicables à l'article affiché.");
+define("_MI_NW_STORY_NOTIFYDSC", "Options de notification applicables ï¿½ l'article affichï¿½.");
 
-define("_MI_NW_GLOBAL_NEWCATEGORY_NOTIFY", "Nouvelle catégorie");
-define("_MI_NW_GLOBAL_NEWCATEGORY_NOTIFYCAP", "Me notifier lorsque une nouvelle catégorie d'articles est créée.");
-define("_MI_NW_GLOBAL_NEWCATEGORY_NOTIFYDSC", "Recevoir une alerte lorsqu'une nouvelle catégorie est créée.");
-define("_MI_NW_GLOBAL_NEWCATEGORY_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : nouvelle catégorie d'articles");
+define("_MI_NW_GLOBAL_NEWCATEGORY_NOTIFY", "Nouvelle catï¿½gorie");
+define("_MI_NW_GLOBAL_NEWCATEGORY_NOTIFYCAP", "Me notifier lorsque une nouvelle catï¿½gorie d'articles est crï¿½ï¿½e.");
+define("_MI_NW_GLOBAL_NEWCATEGORY_NOTIFYDSC", "Recevoir une alerte lorsqu'une nouvelle catï¿½gorie est crï¿½ï¿½e.");
+define("_MI_NW_GLOBAL_NEWCATEGORY_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : nouvelle catï¿½gorie d'articles");
 
-define("_MI_NW_GLOBAL_STORYSUBMIT_NOTIFY", "Nouvel article proposé");
-define("_MI_NW_GLOBAL_STORYSUBMIT_NOTIFYCAP", "Me notifier lorsque un nouvel article est proposé et en attente de diffusion.");
-define("_MI_NW_GLOBAL_STORYSUBMIT_NOTIFYDSC", "Recevoir une alerte lorsque un nouvel article est proposé et en attente de diffusion.");
-define("_MI_NW_GLOBAL_STORYSUBMIT_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : nouvel article proposé");
+define("_MI_NW_GLOBAL_STORYSUBMIT_NOTIFY", "Nouvel article proposï¿½");
+define("_MI_NW_GLOBAL_STORYSUBMIT_NOTIFYCAP", "Me notifier lorsque un nouvel article est proposï¿½ et en attente de diffusion.");
+define("_MI_NW_GLOBAL_STORYSUBMIT_NOTIFYDSC", "Recevoir une alerte lorsque un nouvel article est proposï¿½ et en attente de diffusion.");
+define("_MI_NW_GLOBAL_STORYSUBMIT_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : nouvel article proposï¿½");
 
 define("_MI_NW_GLOBAL_NEWSTORY_NOTIFY", "Nouvel article");
-define("_MI_NW_GLOBAL_NEWSTORY_NOTIFYCAP", "Me notifier lorsque un nouvel article est publié.");
-define("_MI_NW_GLOBAL_NEWSTORY_NOTIFYDSC", "Recevoir une alerte lorsqu'un nouvel article est publié.");
-define("_MI_NW_GLOBAL_NEWSTORY_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : nouvel article publié");
+define("_MI_NW_GLOBAL_NEWSTORY_NOTIFYCAP", "Me notifier lorsque un nouvel article est publiï¿½.");
+define("_MI_NW_GLOBAL_NEWSTORY_NOTIFYDSC", "Recevoir une alerte lorsqu'un nouvel article est publiï¿½.");
+define("_MI_NW_GLOBAL_NEWSTORY_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : nouvel article publiï¿½");
 
-define("_MI_NW_STORY_APPROVE_NOTIFY", "Article approuvé");
-define("_MI_NW_STORY_APPROVE_NOTIFYCAP", "Me notifier lorsque la publication d'un nouvel article est approuvée.");
-define("_MI_NW_STORY_APPROVE_NOTIFYDSC", "Recevoir une alerte lorsque la publication d'un nouvel article est approuvée.");
-define("_MI_NW_STORY_APPROVE_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : publication d'article approuvée");
+define("_MI_NW_STORY_APPROVE_NOTIFY", "Article approuvï¿½");
+define("_MI_NW_STORY_APPROVE_NOTIFYCAP", "Me notifier lorsque la publication d'un nouvel article est approuvï¿½e.");
+define("_MI_NW_STORY_APPROVE_NOTIFYDSC", "Recevoir une alerte lorsque la publication d'un nouvel article est approuvï¿½e.");
+define("_MI_NW_STORY_APPROVE_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : publication d'article approuvï¿½e");
 
 define("_MI_NW_RESTRICTINDEX", "Restreindre la consultation des articles ?");
-define("_MI_NW_RESTRICTINDEXDSC", "En choisissant Oui la consultation des articles est réservée à certains groupes d'utilisateurs, conformément à la distribution des droits opérée à la rubrique Permissions. Les autres utilisateurs ne pourront aller plus loin que la page de la Catégorie.");
+define("_MI_NW_RESTRICTINDEXDSC", "En choisissant Oui la consultation des articles est rï¿½servï¿½e ï¿½ certains groupes d'utilisateurs, conformï¿½ment ï¿½ la distribution des droits opï¿½rï¿½e ï¿½ la rubrique Permissions. Les autres utilisateurs ne pourront aller plus loin que la page de la Catï¿½gorie.");
 
-define("_MI_NW_NEWSBYTHISAUTHOR", "Afficher le lien 'Articles du même auteur' ?");
+define("_MI_NW_NEWSBYTHISAUTHOR", "Afficher le lien 'Articles du mï¿½me auteur' ?");
 define("_MI_NW_NEWSBYTHISAUTHORDSC", "");
 
-define("_MI_NW_PREVNEX_LINK", "Afficher les liens 'Précédent' et 'Suivant' ?");
-define("_MI_NW_PREVNEX_LINK_DESC", "En choisissant Oui deux liens sont affichés au pied de chaque article et permettent de consulter un à un les articles selon leur ordre chronologique");
-define("_MI_NW_SUMMARY_SHOW", "Afficher la liste des articles récents ?");
-define("_MI_NW_SUMMARY_SHOW_DESC", "En choisissant Oui, le visiteur dispose de la liste des publications récentes au pied de chaque article. Il peut consulter celui de son choix en cliquant sur le titre.");
-define("_MI_NW_AUTHOR_EDIT", "Autoriser les auteurs à modifier leurs contributions ?");
+define("_MI_NW_PREVNEX_LINK", "Afficher les liens 'Prï¿½cï¿½dent' et 'Suivant' ?");
+define("_MI_NW_PREVNEX_LINK_DESC", "En choisissant Oui deux liens sont affichï¿½s au pied de chaque article et permettent de consulter un ï¿½ un les articles selon leur ordre chronologique");
+define("_MI_NW_SUMMARY_SHOW", "Afficher la liste des articles rï¿½cents ?");
+define("_MI_NW_SUMMARY_SHOW_DESC", "En choisissant Oui, le visiteur dispose de la liste des publications rï¿½centes au pied de chaque article. Il peut consulter celui de son choix en cliquant sur le titre.");
+define("_MI_NW_AUTHOR_EDIT", "Autoriser les auteurs ï¿½ modifier leurs contributions ?");
 define("_MI_NW_AUTHOR_EDIT_DESC", "");
-define("_MI_NW_RATE_NEWS", "Autoriser les utilisateur à évaluer les articles ?");
-define("_MI_NW_TOPICS_RSS", "Activer un flux RSS pour chaque catégorie ?");
+define("_MI_NW_RATE_NEWS", "Autoriser les utilisateur ï¿½ ï¿½valuer les articles ?");
+define("_MI_NW_TOPICS_RSS", "Activer un flux RSS pour chaque catï¿½gorie ?");
 define("_MI_NW_TOPICS_RSS_DESC", "");
 define("_MI_NW_DATEFORMAT", "Format de la date");
-define("_MI_NW_DATEFORMAT_DESC", "Pour plus d'informations, veuillez vous référer à la documentation PHP(http://fr.php.net/manual/en/function.date.php). Note : si vous ne saisissez aucune information, le format par défaut sera utilisé.");
-define("_MI_NW_META_DATA", "Activer la saisie manuelle des Metas (description et mot-clés) ?");
-define("_MI_NW_META_DATA_DESC", "En choisissant Oui le formulaire de création d'articles comporte deux champs de saisie supplémentaires.");
+define("_MI_NW_DATEFORMAT_DESC", "Pour plus d'informations, veuillez vous rï¿½fï¿½rer ï¿½ la documentation PHP(http://fr.php.net/manual/en/function.date.php). Note : si vous ne saisissez aucune information, le format par dï¿½faut sera utilisï¿½.");
+define("_MI_NW_META_DATA", "Activer la saisie manuelle des Metas (description et mot-clï¿½s) ?");
+define("_MI_NW_META_DATA_DESC", "En choisissant Oui le formulaire de crï¿½ation d'articles comporte deux champs de saisie supplï¿½mentaires.");
 define("_MI_NW_BNAME8", "Articles au hasard");
 define("_MI_NW_NEWSLETTER", "Newsletter");
 define("_MI_NW_STATS", "Statistique");
@@ -123,19 +123,19 @@ define("_MI_NW_FORM_SPAW", "Spaw Editor");
 define("_MI_NW_FORM_HTMLAREA", "Editeur HtmlArea");
 define("_MI_NW_FORM_FCK", "FCKEditor");
 define("_MI_NW_FORM_KOIVI", "Koivi Editor");
-define("_MI_NW_FORM_OPTIONS_DESC", "Sélectionner l'éditeur : DHTML et Compact sont disponibles par défaut. Les éditeurs plus avancés sont des applications tierces à mettre en place par vos soins.");
-define("_MI_NW_KEYWORDS_HIGH", "Utiliser le surlignement des mot-clés ?");
-define("_MI_NW_KEYWORDS_HIGH_DESC", "En choisissant Oui, les termes trouvés seront mis en évidence.");
+define("_MI_NW_FORM_OPTIONS_DESC", "Sï¿½lectionner l'ï¿½diteur : DHTML et Compact sont disponibles par dï¿½faut. Les ï¿½diteurs plus avancï¿½s sont des applications tierces ï¿½ mettre en place par vos soins.");
+define("_MI_NW_KEYWORDS_HIGH", "Utiliser le surlignement des mot-clï¿½s ?");
+define("_MI_NW_KEYWORDS_HIGH_DESC", "En choisissant Oui, les termes trouvï¿½s seront mis en ï¿½vidence.");
 define("_MI_NW_HIGH_COLOR", "Couleur de surlignement");
-define("_MI_NW_HIGH_COLOR_DES", "A renseigner si la précédente option est activée");
-define("_MI_NW_INFOTIPS", "Nombre de caractères affichés dans les infobulles");
-define("_MI_NW_INFOTIPS_DES", "En activant cette option les 'n' premiers caractères de l'article seront affichés dans l'infobulle affichée au survol du titre. Note : en indiquant 0, vous masquez les infobulles.");
+define("_MI_NW_HIGH_COLOR_DES", "A renseigner si la prï¿½cï¿½dente option est activï¿½e");
+define("_MI_NW_INFOTIPS", "Nombre de caractï¿½res affichï¿½s dans les infobulles");
+define("_MI_NW_INFOTIPS_DES", "En activant cette option les 'n' premiers caractï¿½res de l'article seront affichï¿½s dans l'infobulle affichï¿½e au survol du titre. Note : en indiquant 0, vous masquez les infobulles.");
 define("_MI_NW_SITE_NAVBAR", "Utiliser la barre de navigation Mozilla et Opera ?");
-define("_MI_NW_SITE_NAVBAR_DESC", "En choisissant Oui les visiteurs pourront utiliser les barres de navigation étendues de leur navigateur favori.");
-define("_MI_NW_TABS_SKIN", "Sélectionner l'apparence des onglets");
-define("_MI_NW_TABS_SKIN_DESC", "Ces styles sont utilisés par les blocs disposant d'un affichage par onglets");
+define("_MI_NW_SITE_NAVBAR_DESC", "En choisissant Oui les visiteurs pourront utiliser les barres de navigation ï¿½tendues de leur navigateur favori.");
+define("_MI_NW_TABS_SKIN", "Sï¿½lectionner l'apparence des onglets");
+define("_MI_NW_TABS_SKIN_DESC", "Ces styles sont utilisï¿½s par les blocs disposant d'un affichage par onglets");
 define("_MI_NW_SKIN_1", "Style barre");
-define("_MI_NW_SKIN_2", "Style incliné");
+define("_MI_NW_SKIN_2", "Style inclinï¿½");
 define("_MI_NW_SKIN_3", "Classique");
 define("_MI_NW_SKIN_4", "Dossiers");
 define("_MI_NW_SKIN_5", "MacOs");
@@ -155,30 +155,30 @@ define("_MI_NW_FF_MICROFORMAT", "Activate Firefox 2 Micro Summaries ?");
 define("_MI_NW_FF_MICROFORMAT_DSC", "Pour plus d'informations, <a href='http://wiki.mozilla.org/Microsummaries' target='_blank'>veuiller consulter ce lien</a>");
 define("_MI_NW_WHOS_WHO", "Annuaire des auteurs");
 define("_MI_NW_METAGEN", "Metagen");
-define("_MI_NW_TOPICS_DIRECTORY", "Répertoire des catégories");
-define("_MI_NW_ADVERTISEMENT", "Publicité");
-define("_MI_NW_ADV_DESCR", "Saisir le texte ou le code javascript de votre publicité");
-define("_MI_NW_MIME_TYPES", "Entrez les types mime autorisés pour le téléversement des fichiers attachés (séparez les par un retour à la ligne)");
-define("_MI_NW_ENHANCED_PAGENAV", "Utiliser le séparateur de pages amélioré ?");
-define("_MI_NW_ENHANCED_PAGENAV_DSC", "Avec cette option vous pouvez découper votre article avec des balises [pagrebreak:Titre page], les liens vers les pages sont remplacés par une liste déroulante et vous pouvez utiliser [summary] pour créer un sommaire automatique des pages");
+define("_MI_NW_TOPICS_DIRECTORY", "Rï¿½pertoire des catï¿½gories");
+define("_MI_NW_ADVERTISEMENT", "Publicitï¿½");
+define("_MI_NW_ADV_DESCR", "Saisir le texte ou le code javascript de votre publicitï¿½");
+define("_MI_NW_MIME_TYPES", "Entrez les types mime autorisï¿½s pour le tï¿½lï¿½versement des fichiers attachï¿½s (sï¿½parez les par un retour ï¿½ la ligne)");
+define("_MI_NW_ENHANCED_PAGENAV", "Utiliser le sï¿½parateur de pages amï¿½liorï¿½ ?");
+define("_MI_NW_ENHANCED_PAGENAV_DSC", "Avec cette option vous pouvez dï¿½couper votre article avec des balises [pagrebreak:Titre page], les liens vers les pages sont remplacï¿½s par une liste dï¿½roulante et vous pouvez utiliser [summary] pour crï¿½er un sommaire automatique des pages");
 
 // Added in version 1.54
-define("_MI_NW_CATEGORY_NOTIFY", "Catégorie");
-define("_MI_NW_CATEGORY_NOTIFYDSC", "Options de notification pour la catégorie en cours");
+define("_MI_NW_CATEGORY_NOTIFY", "Catï¿½gorie");
+define("_MI_NW_CATEGORY_NOTIFYDSC", "Options de notification pour la catï¿½gorie en cours");
 
-define("_MI_NW_CATEGORY_STORYPOSTED_NOTIFY", "Nouvel article proposé");
-define("_MI_NW_CATEGORY_STORYPOSTED_NOTIFYCAP", "Me notifier lorsque un nouvel article est publié dans cette catégorie.");
-define("_MI_NW_CATEGORY_STORYPOSTED_NOTIFYDSC", "Recevoir une alerte lorsqu'un nouvel article est publié dans cette catégorie.");
-define("_MI_NW_CATEGORY_STORYPOSTED_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : nouvel article publié");
+define("_MI_NW_CATEGORY_STORYPOSTED_NOTIFY", "Nouvel article proposï¿½");
+define("_MI_NW_CATEGORY_STORYPOSTED_NOTIFYCAP", "Me notifier lorsque un nouvel article est publiï¿½ dans cette catï¿½gorie.");
+define("_MI_NW_CATEGORY_STORYPOSTED_NOTIFYDSC", "Recevoir une alerte lorsqu'un nouvel article est publiï¿½ dans cette catï¿½gorie.");
+define("_MI_NW_CATEGORY_STORYPOSTED_NOTIFYSBJ", "[{X_SITENAME}] {X_MODULE} notification automatique : nouvel article publiï¿½");
 
 // Added in version 1.63
 define("_MI_NW_TAGS", "Utiliser la fonction TAG ?");
 define("_MI_NW_TAGS_DSC", "Requiert le module TAG");
 define("_MI_NW_BNAME10", "Nuage de tags");
 define("_MI_NW_BNAME11", "Tags populaires");
-define("_MI_NW_INTRO_TEXT", "Texte d'introduction à afficher au sommet du formulaire de soumission");
-define("_MI_NW_IMAGE_MAX_WIDTH", "Largeur maximale de l'image (au-delà de cette limite, l'image est redimensionnée)");
-define("_MI_NW_IMAGE_MAX_HEIGHT", "Hauteur maximale de l'image (au-delà de cette limite, l'image est redimensionnée)");
+define("_MI_NW_INTRO_TEXT", "Texte d'introduction ï¿½ afficher au sommet du formulaire de soumission");
+define("_MI_NW_IMAGE_MAX_WIDTH", "Largeur maximale de l'image (au-delï¿½ de cette limite, l'image est redimensionnï¿½e)");
+define("_MI_NW_IMAGE_MAX_HEIGHT", "Hauteur maximale de l'image (au-delï¿½ de cette limite, l'image est redimensionnï¿½e)");
 
 // Added in version 1.67
 define("_MI_NW_CLONER", "Clonage");
@@ -186,27 +186,29 @@ define("_MI_NW_CLONER", "Clonage");
 define("_MI_NW_LATESTNEWS_BLOCK", "Bloc des derniers articles");
 
 // Added in version 1.68 BETA
-define("_MI_NW_TOPICDISPLAY", "Afficher les catégories");
-define("_MI_NW_TOPICDISPLAYDESC", "Cette option permet d'afficher / de masquer le nom de la catégorie devant le titre des articles.");
+define("_MI_NW_TOPICDISPLAY", "Afficher les catï¿½gories");
+define("_MI_NW_TOPICDISPLAYDESC", "Cette option permet d'afficher / de masquer le nom de la catï¿½gorie devant le titre des articles.");
 
 define("_MI_NW_SEOENABLE", "Option SEO");
-define("_MI_NW_SEOENABLEDESC", "<strong>htaccess</strong> : <br /> http://your.site.com/<strong>xnews</strong>/topics.1/your-topic-title.html <br /><br /><strong>path-info</strong> : <br />http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html");
+define("_MI_NW_SEOENABLEDESC", "<strong>htaccess</strong> : <br> http://your.site.com/<strong>xnews</strong>/topics.1/your-topic-title.html <br><br><strong>path-info</strong> : <br>http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html");
 
 // Added in version 1.68 RC1
-define("_MI_NW_EXTEND_META_DATA", "Champ Meta amélioré");
-define("_MI_NW_EXTEND_META_DATA_DESC", "Cette option permet à l'utilisateur de contrôler les meta (description et mot-clés).");
+define("_MI_NW_EXTEND_META_DATA", "Champ Meta amï¿½liorï¿½");
+define("_MI_NW_EXTEND_META_DATA_DESC", "Cette option permet ï¿½ l'utilisateur de contrï¿½ler les meta (description et mot-clï¿½s).");
 
 define("_MI_NW_NONE", "None");
 define("_MI_NW_TOPONLY", "Au sommet seulement");
 define("_MI_NW_BOTTOMONLY", "En pied de page uniquement");
 define("_MI_NW_BOTH", "Les deux");
-define("_MI_NW_DISPLAYLINKICNS", "Afficher les icônes additionnelles");
-define("_MI_NW_DISPLAYLINKICNSDESC", "Affiche les fonctions Impression, En parler à un ami et Exporter au format PDF");
+define("_MI_NW_DISPLAYLINKICNS", "Afficher les icï¿½nes additionnelles");
+define("_MI_NW_DISPLAYLINKICNSDESC", "Affiche les fonctions Impression, En parler ï¿½ un ami et Exporter au format PDF");
 
 define("_MI_NW_SEOPATH", "Chemin SEO ");
-define("_MI_NW_SEOPATHDESC", "Cette option ajoute un titre SEO aux urls, générées via <strong>htaccess</strong> ou <strong>path-info</strong>. <br /><br />Laisser vide affiche : <br />http://your.site.com/topics.1/your-topic-title.html <br /><br />Saisir <strong>news</strong> affiche : <br />http://your.site.com/<strong>news</strong>/topics.1/your-topic-title.html <br /><br />Les caractères a-z et - sont autorisés (ex. article-du-jour)");
+define("_MI_NW_SEOPATHDESC",
+       "Cette option ajoute un titre SEO aux urls, gï¿½nï¿½rï¿½es via <strong>htaccess</strong> ou <strong>path-info</strong>. <br><br>Laisser vide affiche : <br>http://your.site.com/topics.1/your-topic-title.html <br><br>Saisir <strong>news</strong> affiche : <br>http://your.site.com/<strong>news</strong>/topics.1/your-topic-title.html <br><br>Les caractï¿½res a-z et - sont autorisï¿½s (ex. article-du-jour)");
 define("_MI_NW_SEOLEVEL", "Niveau SEO ");
-define("_MI_NW_SEOLEVELDESC", "Cette option permet de modifier l'apparence de l'url<br /><br />Niveau racine : <br />http://your.site.com/news/topics.1/your-topic-title.html <br /><br />Niveau module : <br /> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br /><br />Cette option ne peut fonctionner qu'en mode htaccess et en personnalisant le fichier .htaccess.");
+define("_MI_NW_SEOLEVELDESC",
+       "Cette option permet de modifier l'apparence de l'url<br><br>Niveau racine : <br>http://your.site.com/news/topics.1/your-topic-title.html <br><br>Niveau module : <br> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br><br>Cette option ne peut fonctionner qu'en mode htaccess et en personnalisant le fichier .htaccess.");
 define("_MI_NW_MODULE_LEVEL", "Niveau module");
 define("_MI_NW_ROOT_LEVEL", "Niveau racine");
 
@@ -216,13 +218,10 @@ define("_MI_NW_SEOENDOFURL_DESC", "Extension de fichier pour les HTML");
 define("_MI_NW_SEOENDOFURLRSS", "Fin de l'adresse URL");
 define("_MI_NW_SEOENDOFURLRSS_DESC", "Extension de fichier pour les pages RSS");
 define("_MI_NW_SEOENDOFURLPDF", "Fin de l'adresse URL");
-define("_MI_NW_SEOENDOFURLPDF_DESC", "Extension de fichier pour les Adobe Acrobat (PDF");
-
-/**
- * @translation     Communauté Francophone des Utilisateurs de Xoops
+define("_MI_NW_SEOENDOFURLPDF_DESC", "Extension de fichier pour les Adobe Acrobat (PDF");/**
+ * @translation     Communautï¿½ Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: ISO-8859-1
  *
  * @version         $Id $
-**/
-?>
+ **/;

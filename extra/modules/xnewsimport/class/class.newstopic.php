@@ -18,13 +18,11 @@
  * @version      $Id $
  */
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    die("XOOPS root path not defined");
-}
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . "/class/xoopsstory.php";
-include_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
-include_once XNI_MODULE_PATH . "/include/functions.php";
+require_once XOOPS_ROOT_PATH . "/class/xoopsstory.php";
+require_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
+require_once XNI_MODULE_PATH . "/include/functions.php";
 
 class xni_NewsTopic extends XoopsTopic
 {
@@ -36,7 +34,7 @@ class xni_NewsTopic extends XoopsTopic
 
     public function xni_NewsTopic($topicid = 0, $subprefix = '')
     {
-        $this->db    =& XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $this->db->prefix($subprefix . 'topics');
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
@@ -52,11 +50,11 @@ class xni_NewsTopic extends XoopsTopic
         $perms = '';
         if ($checkRight) {
             global $xoopsUser;
-            $module_handler =& xoops_gethandler('module');
-            $newsModule     =& $module_handler->getByDirname(XNI_MODULE_DIR_NAME);
-            $groups         = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-            $gperm_handler  =& xoops_gethandler('groupperm');
-            $topics         = $gperm_handler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
+            $moduleHandler = xoops_getHandler('module');
+            $newsModule    = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
+            $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+            $gpermHandler  = xoops_getHandler('groupperm');
+            $topics        = $gpermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
                 $topics = implode(',', $topics);
                 $perms  = " AND topic_id IN (" . $topics . ") ";
@@ -89,7 +87,7 @@ class xni_NewsTopic extends XoopsTopic
             $outbuffer .= " onchange='" . $onchange . "'";
         }
         $outbuffer .= ">\n";
-        $sql = "SELECT topic_id, " . $title . " FROM " . $this->table . " WHERE (topic_pid=0)" . $perms;
+        $sql       = "SELECT topic_id, " . $title . " FROM " . $this->table . " WHERE (topic_pid=0)" . $perms;
         if ($order != "") {
             $sql .= " ORDER BY $order";
         }
@@ -102,10 +100,10 @@ class xni_NewsTopic extends XoopsTopic
             if ($catid == $preset_id) {
                 $sel = " selected='selected'";
             }
-            $name = $myts->displayTarea($name);
+            $name      = $myts->displayTarea($name);
             $outbuffer .= "<option value='$catid'$sel>$name</option>\n";
-            $sel = "";
-            $arr = $this->getChildTreeArray($catid, $order, $perms);
+            $sel       = "";
+            $arr       = $this->getChildTreeArray($catid, $order, $perms);
             foreach ($arr as $option) {
                 $option['prefix'] = str_replace(".", "--", $option['prefix']);
                 $catpath          = $option['prefix'] . "&nbsp;" . $myts->displayTarea($option[$title]);
@@ -114,7 +112,7 @@ class xni_NewsTopic extends XoopsTopic
                     $sel = " selected='selected'";
                 }
                 $outbuffer .= "<option value='" . $option['topic_id'] . "'$sel>$catpath</option>\n";
-                $sel = "";
+                $sel       = "";
             }
         }
         $outbuffer .= "</select>\n";
@@ -159,11 +157,11 @@ class xni_NewsTopic extends XoopsTopic
         $perms = '';
         if ($checkRight) {
             global $xoopsUser;
-            $module_handler =& xoops_gethandler('module');
-            $newsModule     =& $module_handler->getByDirname(XNI_MODULE_DIR_NAME);
-            $groups         = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-            $gperm_handler  =& xoops_gethandler('groupperm');
-            $topics         = $gperm_handler->getItemIds('xni_submit', $groups, $newsModule->getVar('mid'));
+            $moduleHandler = xoops_getHandler('module');
+            $newsModule    = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
+            $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+            $gpermHandler  = xoops_getHandler('groupperm');
+            $topics        = $gpermHandler->getItemIds('xni_submit', $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
                 $topics = implode(',', $topics);
                 $perms  = " WHERE topic_id IN (" . $topics . ") ";
@@ -172,7 +170,7 @@ class xni_NewsTopic extends XoopsTopic
             }
         }
 
-        $sql   = "SELECT count(topic_id) as cpt FROM " . $this->table . $perms;
+        $sql   = "SELECT count(topic_id) AS cpt FROM " . $this->table . $perms;
         $array = $this->db->fetchArray($this->db->query($sql));
 
         return ($array['cpt']);
@@ -181,7 +179,7 @@ class xni_NewsTopic extends XoopsTopic
     public function getAllTopics($table_name = "nw_topics", $checkRight = true, $permission = "xni_view")
     {
         $topics_arr = array();
-        $db         =& XoopsDatabaseFactory::getDatabaseConnection();
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
         $table      = $db->prefix($table_name);
         $sql        = "SELECT * FROM " . $table;
         if ($checkRight) {
@@ -190,9 +188,9 @@ class xni_NewsTopic extends XoopsTopic
                 return array();
             }
             $topics = implode(',', $topics);
-            $sql .= " WHERE topic_id IN (" . $topics . ")";
+            $sql    .= " WHERE topic_id IN (" . $topics . ")";
         }
-        $sql .= " ORDER BY topic_title";
+        $sql    .= " ORDER BY topic_title";
         $result = $db->query($sql);
         while ($array = $db->fetchArray($result)) {
             $topic = new xni_NewsTopic();
@@ -210,7 +208,7 @@ class xni_NewsTopic extends XoopsTopic
     public function getnwCountByTopic()
     {
         $ret    = array();
-        $sql    = "SELECT count(storyid) as cpt, topicid FROM " . $this->db->prefix('xni_stories') . " WHERE (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ") GROUP BY topicid";
+        $sql    = "SELECT count(storyid) AS cpt, topicid FROM " . $this->db->prefix('xni_stories') . " WHERE (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ") GROUP BY topicid";
         $result = $this->db->query($sql);
         while ($row = $this->db->fetchArray($result)) {
             $ret[$row["topicid"]] = $row["cpt"];
@@ -225,7 +223,7 @@ class xni_NewsTopic extends XoopsTopic
     public function getTopicMiniStats($topicid)
     {
         $ret          = array();
-        $sql          = "SELECT count(storyid) as cpt1, sum(counter) as cpt2 FROM " . $this->db->prefix('xni_stories') . " WHERE (topicid=" . $topicid . ") AND (published>0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ")";
+        $sql          = "SELECT count(storyid) AS cpt1, sum(counter) AS cpt2 FROM " . $this->db->prefix('xni_stories') . " WHERE (topicid=" . $topicid . ") AND (published>0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ")";
         $result       = $this->db->query($sql);
         $row          = $this->db->fetchArray($result);
         $ret['count'] = $row["cpt1"];
@@ -284,9 +282,11 @@ class xni_NewsTopic extends XoopsTopic
         if (empty($this->topic_id)) {
             $insert         = true;
             $this->topic_id = $this->db->genId($this->table . "_topic_id_seq");
-            $sql            = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s')", $this->table, (int)($this->topic_id), (int)($this->topic_pid), $imgurl, $title, (int)($this->menu), $topic_description, $topic_frontpage, $topic_rssurl, $topic_color);
+            $sql            = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s')", $this->table, (int)($this->topic_id), (int)($this->topic_pid), $imgurl,
+                                      $title, (int)($this->menu), $topic_description, $topic_frontpage, $topic_rssurl, $topic_color);
         } else {
-            $sql = sprintf("UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s' WHERE topic_id = %u", $this->table, (int)($this->topic_pid), $imgurl, $title, (int)($this->menu), $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)($this->topic_id));
+            $sql = sprintf("UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s' WHERE topic_id = %u", $this->table, (int)($this->topic_pid), $imgurl, $title, (int)($this->menu),
+                           $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)($this->topic_id));
         }
         if (!$result = $this->db->query($sql)) {
             // TODO: Replace with something else
@@ -298,7 +298,7 @@ class xni_NewsTopic extends XoopsTopic
             }
         }
 
-        if ($this->use_permission == true) {
+        if ($this->use_permission === true) {
             $xt            = new XoopsTree($this->table, "topic_id", "topic_pid");
             $parent_topics = $xt->getAllParentId($this->topic_id);
             if (!empty($this->m_groups) && is_array($this->m_groups)) {
@@ -312,7 +312,7 @@ class xni_NewsTopic extends XoopsTopic
                             continue;
                         }
                     }
-                    if ($add == true) {
+                    if ($add === true) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName("ModInTopic");
@@ -332,7 +332,7 @@ class xni_NewsTopic extends XoopsTopic
                             continue;
                         }
                     }
-                    if ($add == true) {
+                    if ($add === true) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName("SubmitInTopic");
@@ -352,7 +352,7 @@ class xni_NewsTopic extends XoopsTopic
                             continue;
                         }
                     }
-                    if ($add == true) {
+                    if ($add === true) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName("ReadInTopic");
@@ -494,7 +494,7 @@ class xni_NewsTopic extends XoopsTopic
                 return '';
             }
             $topics = implode(',', $topicsids);
-            $sql .= " AND topic_id IN (" . $topics . ")";
+            $sql    .= " AND topic_id IN (" . $topics . ")";
         }
         $result = $this->db->query($sql);
         $ret    = array();
@@ -547,25 +547,25 @@ class xni_NewsTopic extends XoopsTopic
         $previous = array_key_exists($name, $_REQUEST) ? $_REQUEST[$name] : null;
 
         switch ($hash) {
-            case 'GET' :
+            case 'GET':
                 $_GET[$name]     = $value;
                 $_REQUEST[$name] = $value;
                 break;
-            case 'POST' :
+            case 'POST':
                 $_POST[$name]    = $value;
                 $_REQUEST[$name] = $value;
                 break;
-            case 'COOKIE' :
+            case 'COOKIE':
                 $_COOKIE[$name]  = $value;
                 $_REQUEST[$name] = $value;
                 break;
-            case 'FILES' :
+            case 'FILES':
                 $_FILES[$name] = $value;
                 break;
-            case 'ENV'    :
+            case 'ENV':
                 $_ENV['name'] = $value;
                 break;
-            case 'SERVER'    :
+            case 'SERVER':
                 $_SERVER['name'] = $value;
                 break;
         }

@@ -20,31 +20,31 @@
 
 /**
  * Alternative configuration file for TCPDF.
- * @author Nicola Asuni
+ * @author    Nicola Asuni
  * @copyright 2004-2008 Nicola Asuni - Tecnick.com S.r.l (www.tecnick.com) Via Della Pace, 11 - 09044 - Quartucciu (CA) - ITALY - www.tecnick.com - info@tecnick.com
- * @package com.tecnick.tcpdf
- * @version 4.0.014
- * @link http://tcpdf.sourceforge.net
- * @license http://www.gnu.org/copyleft/lesser.html LGPL
- * @since 2004-10-27
+ * @package   com.tecnick.tcpdf
+ * @version   4.0.014
+ * @link      http://tcpdf.sourceforge.net
+ * @license   http://www.gnu.org/copyleft/lesser.html LGPL
+ * @since     2004-10-27
  */
 
 // DOCUMENT_ROOT fix for IIS Webserver
-if ((!isset($_SERVER['DOCUMENT_ROOT'])) OR (empty($_SERVER['DOCUMENT_ROOT']))) {
-	if(isset($_SERVER['SCRIPT_FILENAME'])) {
-		$_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr($_SERVER['SCRIPT_FILENAME'], 0, 0-strlen($_SERVER['PHP_SELF'])));
-	} elseif(isset($_SERVER['PATH_TRANSLATED'])) {
-		$_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr(str_replace('\\\\', '\\', $_SERVER['PATH_TRANSLATED']), 0, 0-strlen($_SERVER['PHP_SELF'])));
-	}	else {
-		// define here your DOCUMENT_ROOT path if the previous fails
-		$_SERVER['DOCUMENT_ROOT'] = '/var/www';
-	}
+if ((!isset($_SERVER['DOCUMENT_ROOT'])) or (empty($_SERVER['DOCUMENT_ROOT']))) {
+    if (isset($_SERVER['SCRIPT_FILENAME'])) {
+        $_SERVER['DOCUMENT_ROOT'] = str_replace('\\', '/', substr($_SERVER['SCRIPT_FILENAME'], 0, 0 - strlen($_SERVER['PHP_SELF'])));
+    } elseif (isset($_SERVER['PATH_TRANSLATED'])) {
+        $_SERVER['DOCUMENT_ROOT'] = str_replace('\\', '/', substr(str_replace('\\\\', '\\', $_SERVER['PATH_TRANSLATED']), 0, 0 - strlen($_SERVER['PHP_SELF'])));
+    } else {
+        // define here your DOCUMENT_ROOT path if the previous fails
+        $_SERVER['DOCUMENT_ROOT'] = '/var/www';
+    }
 }
 
 // Automatic calculation for the following K_PATH_MAIN constant
-$k_path_main = str_replace( '\\', '/', realpath(substr(dirname(__FILE__), 0, 0-strlen('config'))));
+$k_path_main = str_replace('\\', '/', realpath(substr(__DIR__, 0, 0 - strlen('config'))));
 if (substr($k_path_main, -1) != '/') {
-	$k_path_main .= '/';
+    $k_path_main .= '/';
 }
 
 /**
@@ -54,14 +54,14 @@ if (substr($k_path_main, -1) != '/') {
 define('K_PATH_MAIN', $k_path_main);
 
 // Automatic calculation for the following K_PATH_URL constant
-if (isset($_SERVER['HTTP_HOST']) AND (!empty($_SERVER['HTTP_HOST']))) {
-	if(isset($_SERVER['HTTPS']) AND (!empty($_SERVER['HTTPS'])) AND strtolower($_SERVER['HTTPS'])!='off') {
-		$k_path_url = 'https://';
-	} else {
-		$k_path_url = 'http://';
-	}
-	$k_path_url .= $_SERVER['HTTP_HOST'];
-	$k_path_url .= str_replace( '\\', '/', substr($_SERVER['PHP_SELF'], 0, -24));
+if (isset($_SERVER['HTTP_HOST']) and (!empty($_SERVER['HTTP_HOST']))) {
+    if (isset($_SERVER['HTTPS']) and (!empty($_SERVER['HTTPS'])) and strtolower($_SERVER['HTTPS']) != 'off') {
+        $k_path_url = 'https://';
+    } else {
+        $k_path_url = 'http://';
+    }
+    $k_path_url .= $_SERVER['HTTP_HOST'];
+    $k_path_url .= str_replace('\\', '/', substr($_SERVER['PHP_SELF'], 0, -24));
 }
 
 /**
@@ -74,27 +74,27 @@ define('K_PATH_URL', $k_path_url);
  * path for PDF fonts
  * use K_PATH_MAIN.'fonts/old/' for old non-UTF8 fonts
  */
-define('K_PATH_FONTS', K_PATH_MAIN.'fonts/');
+define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
 
 /**
  * cache directory for temporary files (full path)
  */
-define('K_PATH_CACHE', K_PATH_MAIN.'cache/');
+define('K_PATH_CACHE', K_PATH_MAIN . 'cache/');
 
 /**
  * cache directory for temporary files (url path)
  */
-define('K_PATH_URL_CACHE', K_PATH_URL.'cache/');
+define('K_PATH_URL_CACHE', K_PATH_URL . 'cache/');
 
 /**
  *images directory
  */
-define('K_PATH_IMAGES', K_PATH_MAIN.'images/');
+define('K_PATH_IMAGES', K_PATH_MAIN . 'images/');
 
 /**
  * blank image
  */
-define('K_BLANK_IMAGE', K_PATH_IMAGES.'_blank.png');
+define('K_BLANK_IMAGE', K_PATH_IMAGES . '_blank.png');
 
 /**
  * page format
@@ -219,9 +219,8 @@ define('K_TITLE_MAGNIFICATION', 1.3);
 /**
  * reduction factor for small font
  */
-define('K_SMALL_RATIO', 2/3);
+define('K_SMALL_RATIO', 2 / 3);
 
 //============================================================+
-// END OF FILE                                                 
-//============================================================+
-?>
+// END OF FILE
+//============================================================+;

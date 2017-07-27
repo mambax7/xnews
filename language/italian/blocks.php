@@ -34,7 +34,7 @@ define("_MB_NW_TAB_COLOR2", "Colore di sfondo del contenuto cartella");
 define("_MB_NW_TAB_COLOR3", "Colore dell'header della cartella corrente");
 define("_MB_NW_TAB_COLOR4", "Colore dell'header per cartelle non selezionate");
 define("_MB_NW_TAB_COLOR5", "Colore dell'header col mouse sopra");
-define("_MB_NW_WHAT_PUBLISH", "Cosa vuoi pubblicare<br />in evidenza?");
+define("_MB_NW_WHAT_PUBLISH", "Cosa vuoi pubblicare<br>in evidenza?");
 define("_MB_NW_RECENT_NEWS", "Notizie Recenti(non usare la lista sotto)");
 define("_MB_NW_RECENT_SPECIFIC", "Notizie Specifiche (vedi sotto)");
 define("_MB_NW_DEFAULT_COLORS", "Lascia le zone vuote per usare i colori predefiniti");
@@ -93,4 +93,3 @@ define("_MB_NW_LATESTNEWS_SCROLL", "Abilita Scorrimento Notizie");
 define("_MB_NW_LATESTNEWS_SCROLLHEIGHT", "Altezza di Scorrimento");
 define("_MB_NW_LATESTNEWS_SCROLLSPEED", "Velocità di Scorrimento");
 define("_MB_NW_LATESTNEWS_SELECTEDSTORIES", "Imposta ID articoli da visualizzare (es: 3,8,23,46) nota: imposta a 0 per visualizzarli tutti.");
-?>

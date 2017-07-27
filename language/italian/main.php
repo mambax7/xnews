@@ -10,7 +10,6 @@ define("_MA_NW_BYTESMORE", "altri %s bytes");
 define("_MA_NW_NUMCOMMENTS", "%s commenti");
 define("_MA_NW_MORERELEASES", "Ulteriori rilasci in ");
 
-
 //%%%%%%		File Name submit.php		%%%%%
 define("_MA_NW_SUBMITNEWS", "Invia Notizia");
 define("_MA_NW_TITLE", "Titolo");
@@ -74,13 +73,13 @@ define("_MA_NW_NORATING", "Nessun rango selezionato.");
 define("_MA_NW_USERAVG", "Voto Medio Utente");
 define("_MA_NW_DLRATINGS", "Rango Notizia (voti totali: %s)");
 define("_MA_NW_ONEVOTE", "1 voto");
-define("_MA_NW_NUMVOTES", "%u voti");		// Warning
-define("_MA_NW_CANTVOTEOWN", "Non puoi votare sulle risorse inserite da te.<br />Tutti i voti sono memorizzati e verificati.");
+define("_MA_NW_NUMVOTES", "%u voti");        // Warning
+define("_MA_NW_CANTVOTEOWN", "Non puoi votare sulle risorse inserite da te.<br>Tutti i voti sono memorizzati e verificati.");
 define("_MA_NW_VOTEDELETED", "Dati sul voto cancellati.");
 define("_MA_NW_VOTEONCE", "Per favore, non votare due volte la stessa risorsa.");
 define("_MA_NW_VOTEAPPRE", "Apprezziamo il tuo voto.");
 define("_MA_NW_THANKYOU", "Grazie per aver speso il tempo di votare su %s"); // %s is your site name
-define("_MA_NW_RSSFEED", "RSS Feed");	// Warning, this text is included insided an Alt attribut (for a picture), so take care to the quotes
+define("_MA_NW_RSSFEED", "RSS Feed");    // Warning, this text is included insided an Alt attribut (for a picture), so take care to the quotes
 define("_MA_NW_AUTHOR", "Autore");
 define("_MA_NW_META_DESCRIPTION", "Meta description");
 define("_MA_NW_META_KEYWORDS", "Meta keywords");
@@ -129,4 +128,3 @@ define("_MA_NW_SEO_TOPICS", "argomenti");
 define("_MA_NW_SEO_ARTICLES", "articoli");
 define("_MA_NW_SEO_PRINT", "stampa");
 define("_MA_NW_SEO_PDF", "pdf");
-?>

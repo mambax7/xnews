@@ -65,7 +65,6 @@ define("_AM_NW_DEL", "Supprimer");
 define("_AM_NW_CANCEL", "Annuler");
 define("_AM_NW_WAYSYWTDTTAL", "AVERTISSEMENT : êtes-vous certain de vouloir supprimer cette catégorie ainsi que tous les articles contenus et les commentaires associés ?");
 
-
 // Added in Beta6
 define("_AM_NW_TOPICSMNGR", "Gestion des catégories");
 define("_AM_NW_PEARTICLES", "Gestion des articles");
@@ -131,7 +130,7 @@ define("_AM_NW_UPGRADEFAILED0", "Veuillez prendre note du message d'erreur et es
 define("_AM_NW_UPGR_ACCESS_ERROR", "Erreur : l'utilisation du script de mise à jour requiert des droits d'administration complets");
 define("_AM_NW_PRUNE_BEFORE", "Supprimer les articles publiés avant");
 define("_AM_NW_PRUNE_EXPIREDONLY", "Supprimer uniquement les articles dont la date de diffusion a expiré");
-define("_AM_NW_PRUNE_CONFIRM", "AVERTISSEMENT : vous êtes sur le point de supprimer définitivement les articles dont la date de publication est antérieure à : %s. %s articles seront supprimés.<br />Etes-vous certain de vouloir supprimer définitivement ces articles ?");
+define("_AM_NW_PRUNE_CONFIRM", "AVERTISSEMENT : vous êtes sur le point de supprimer définitivement les articles dont la date de publication est antérieure à : %s. %s articles seront supprimés.<br>Etes-vous certain de vouloir supprimer définitivement ces articles ?");
 define("_AM_NW_PRUNE_TOPICS", "Limiter aux catégories suivantes");
 define("_AM_NW_PRUNENEWS", "Suppression par lots");
 define("_AM_NW_EXPORT_NEWS", "Export des articles (XML)");
@@ -143,11 +142,11 @@ define("_AM_NW_EXPORT_AND", " et ");
 define("_AM_NW_EXPORT_PRUNE_DSC", "Si aucune catégorie n'est sélectionnée, toutes les catégories seront concernées");
 define("_AM_NW_EXPORT_INCTOPICS", "Inclure les descriptions de catégories ?");
 define("_AM_NW_EXPORT_ERROR", "Une erreur est survenue lors de la création du fichier %s. L'opération a été arrêtée.");
-define("_AM_NW_EXPORT_READY", "Le fichier XML est prêt pour le téléchargement.<br /><a href='%s'>Cliquer sur ce lien pour le télécharger</a>.<br />Ne pas oublier de <a href='%s'>le supprimer</a> une fois le téléchargement effectué.");
+define("_AM_NW_EXPORT_READY", "Le fichier XML est prêt pour le téléchargement.<br><a href='%s'>Cliquer sur ce lien pour le télécharger</a>.<br>Ne pas oublier de <a href='%s'>le supprimer</a> une fois le téléchargement effectué.");
 define("_AM_NW_RSS_URL", "URL du flux RSS");
 define("_AM_NW_NEWSLETTER", "Newsletter");
 define("_AM_NW_NEWSLETTER_BETWEEN", "Sélectionner les articles publiés entre");
-define("_AM_NW_NEWSLETTER_READY", "Le fichier pour votre Newsletter est prêt pour le tléchargement.<br /><a href='%s'>Cliquer sur ce lien pour le télécharger</a>.<br />Ne pas oublier de <a href='%s'>le supprimer</a> une fois le téléchargement effectué.");
+define("_AM_NW_NEWSLETTER_READY", "Le fichier pour votre Newsletter est prêt pour le tléchargement.<br><a href='%s'>Cliquer sur ce lien pour le télécharger</a>.<br>Ne pas oublier de <a href='%s'>le supprimer</a> une fois le téléchargement effectué.");
 define("_AM_NW_DELETED_OK", "Fichier supprimé");
 define("_AM_NW_DELETED_PB", "Une erreur est survenue lors de la suppression du fichier");
 define("_AM_NW_STATS0", "Statistiques des catégories");
@@ -165,7 +164,7 @@ define("_AM_NW_STATS10", "Statistiques des auteurs");
 define("_AM_NW_STATS11", "Décompte des articles");
 define("_AM_NW_HELP", "Aide");
 define("_AM_NW_MODULEADMIN", " - Interface d'administration");
-define("_AM_NW_GENERALSET", "Préférences" );
+define("_AM_NW_GENERALSET", "Préférences");
 define("_AM_NW_GOTOMOD", "Afficher le module côté public");
 define("_AM_NW_NOTHING", "Aucune ressource ne peut être téléchargée. Veuillez vérifier votre paramétrage.");
 define("_AM_NW_NOTHING_PRUNE", "Aucun article ne correspond à vos critères, aucune suppression n'a été réalisée.");
@@ -181,11 +180,11 @@ define("_AM_NW_NEWSLETTER_FOOTER", "Pied de page");
 define("_AM_NW_NEWSLETTER_HTML_TAGS", "Supprimer les balises Html ?");
 define("_AM_NW_VERIFY_TABLES", "Maintenir les tables");
 define("_AM_NW_METAGEN", "Metagen");
-define("_AM_NW_METAGEN_DESC", "Metagen vous permet de générer automatiquement les balises meta associées à chaque article.<br />A moins que vous ne préfériez les saisir vous-même, le module les insèrera lui-même.");
+define("_AM_NW_METAGEN_DESC", "Metagen vous permet de générer automatiquement les balises meta associées à chaque article.<br>A moins que vous ne préfériez les saisir vous-même, le module les insèrera lui-même.");
 define("_AM_NW_BLACKLIST", "Liste d'exclusion");
 define("_AM_NW_BLACKLIST_DESC", "Les termes présents dans cette liste seront bannis des mots-clés utilisés par metagen");
 define("_AM_NW_BLACKLIST_ADD", "Ajouter");
-define("_AM_NW_BLACKLIST_ADD_DSC", "Saisir les termes à bannir<br />(un terme par ligne)");
+define("_AM_NW_BLACKLIST_ADD_DSC", "Saisir les termes à bannir<br>(un terme par ligne)");
 define("_AM_NW_META_KEYWORDS_CNT", "Nombre maximum de mots-clés à générer automatiquement");
 define("_AM_NW_META_KEYWORDS_ORDER", "Classement des mots-clés");
 define("_AM_NW_META_KEYWORDS_INTEXT", "Classer les mots-clés conformément à leur ordre d'apparition dans l'article");
@@ -204,31 +203,32 @@ define("_AM_NW_CLONER_DIRFOL", "Répertoire");
 define("_AM_NW_CLONER_VERSION", "Version");
 
 define("_AM_NW_CLONER_NEWNAME", "Nom du nouveau module");
-define("_AM_NW_CLONER_NEWNAMEDESC", "Cette information affecte également le nom du répertoire du module. <br />La saisie est insensible à la casse et les espaces sont automatiquement supprimés.<br /><br />Exemples :<br /><strong>Library</strong> devient <strong>library</strong> dans le répertoire des modules<br /><strong>My Library</strong> devient <strong>mylibrary</strong> dans le répertoire des modules<br /><br /> Le module d'origine est : <font color='#008400'><strong> %s </strong></font><br />");
+define("_AM_NW_CLONER_NEWNAMEDESC",
+       "Cette information affecte également le nom du répertoire du module. <br>La saisie est insensible à la casse et les espaces sont automatiquement supprimés.<br><br>Exemples :<br><strong>Library</strong> devient <strong>library</strong> dans le répertoire des modules<br><strong>My Library</strong> devient <strong>mylibrary</strong> dans le répertoire des modules<br><br> Le module d'origine est : <font color='#008400'><strong> %s </strong></font><br>");
 define("_AM_NW_CLONER_NEWNAMELABEL", "Nouveau module :");
 
 define("_AM_NW_CLONER_DIREXISTS", "Le répertoire '%s' existe déjà");
 define("_AM_NW_CLONER_CREATED", "Le module '%s' a été cloné");
 define("_AM_NW_CLONER_UPRADED", "Le module '%s' a été mis à jour");
-define("_AM_NW_CLONER_NOMODULEID", "L'ID du module n'a pas été défini"); 
+define("_AM_NW_CLONER_NOMODULEID", "L'ID du module n'a pas été défini");
 
 define("_AM_NW_CLONER_UPDATE", "Mise à jour");
 define("_AM_NW_CLONER_INSTALL", "Installation");
 define("_AM_NW_CLONER_UNINSTALL", "Désinstallation");
-define("_AM_NW_CLONER_ACTION_INSTALL", "Installer / désinstaller"); 
+define("_AM_NW_CLONER_ACTION_INSTALL", "Installer / désinstaller");
 
 define("_AM_NW_CLONER_IMPORTNEWS", "Importer les données depuis le module News");
 define("_AM_NW_CLONER_IMPORTNEWSDESC1", "Le module News a été trouvé. Voulez-vous importer les données ?");
-define("_AM_NW_CLONER_IMPORTNEWSDESC2", "Le bouton d'import n'est disponible que si la table des artciles du module xNews est vierge.<br />
-                                         Si vous avez déjà créé des articles dans xNews<br />
-                                         veuillez le désinstaller complètement et le réinstaller.<br />
+define("_AM_NW_CLONER_IMPORTNEWSDESC2", "Le bouton d'import n'est disponible que si la table des artciles du module xNews est vierge.<br>
+                                         Si vous avez déjà créé des articles dans xNews<br>
+                                         veuillez le désinstaller complètement et le réinstaller.<br>
                                          Si vous avez déjà importé des données depuis le module News, un nouvel import est impossible.");
 define("_AM_NW_CLONER_IMPORTNEWSSUB", "Importer");
 define("_AM_NW_CLONER_NEWSIMPORTED", "Les données du module News ont été importées.");
 
 // Added in version 1.68 Beta
 define("_AM_NW_DESCRIPTION", "<h3>xNews est une version clonable du module News</h3> 
-							  Les utilisateur peuvent poster des articles et les commenter.<br />Le module peut être cloné et ainsi couvrir tous vos besoins en matière de gestion d'articles.");
+							  Les utilisateur peuvent poster des articles et les commenter.<br>Le module peut être cloné et ainsi couvrir tous vos besoins en matière de gestion d'articles.");
 
 // Added in version 1.68 RC1
 define("_AM_NW_CLONER_CLONEDELETED", "Le clone '%s' a été supprimé.");
@@ -236,22 +236,19 @@ define("_AM_NW_CLONER_CLONEDELETEDERR", "Le clone '%s' ne peut pas être supprim
 define("_AM_NW_CLONER_CLONEUPGRADED", "Mis à jour");
 define("_AM_NW_CLONER_UPGRADEFORCE", "Forcer la mise à jour");
 define("_AM_NW_CLONER_CLONEDELETION", "Suppression du clone");
-define("_AM_NW_CLONER_SUREDELETE", "AVERTISSEMENT : êtes-vous certain de vouloir effacer  le clone <font color='#000000'>'%s'</font> ?<br />");
-define("_AM_NW_CLONER_CLONEID", "L'ID du clone ID n'a pas été défini"); 
+define("_AM_NW_CLONER_SUREDELETE", "AVERTISSEMENT : êtes-vous certain de vouloir effacer  le clone <font color='#000000'>'%s'</font> ?<br>");
+define("_AM_NW_CLONER_CLONEID", "L'ID du clone ID n'a pas été défini");
 
 // Added in version 1.68 RC2
-define("_AM_NW_INDEX", "Index"); 
+define("_AM_NW_INDEX", "Index");
 
 // Added in version 1.68 RC3
 define("_AM_NW_DOLINEBREAK", "Activer le saut de ligne");
 
-define("_AM_NW_TOPICS","Catégories");
-
-/**
+define("_AM_NW_TOPICS", "Catégories");/**
  * @translation     Communauté Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  * @version         $Id $
-**/
-?>
+ **/;

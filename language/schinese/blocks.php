@@ -34,7 +34,7 @@ define("_MB_NW_TAB_COLOR2", "标签内容的颜色");
 define("_MB_NW_TAB_COLOR3", "当前标签的颜色");
 define("_MB_NW_TAB_COLOR4", "非选择标签的颜色");
 define("_MB_NW_TAB_COLOR5", "标签的鼠标停留颜色");
-define("_MB_NW_WHAT_PUBLISH", "要在焦点中发布的<br />");
+define("_MB_NW_WHAT_PUBLISH", "要在焦点中发布的<br>");
 define("_MB_NW_RECENT_NEWS", "最新新闻 (不用以下所列的)");
 define("_MB_NW_RECENT_SPECIFIC", "特定新闻 (如下)");
 define("_MB_NW_DEFAULT_COLORS", "内容为空时用缺省颜色");
@@ -93,4 +93,3 @@ define("_MB_NW_LATESTNEWS_SCROLL", "Enable Scrolling News Ticker");
 define("_MB_NW_LATESTNEWS_SCROLLHEIGHT", "Scroll Height");
 define("_MB_NW_LATESTNEWS_SCROLLSPEED", "Scroll Speed");
 define("_MB_NW_LATESTNEWS_SELECTEDSTORIES", "Set article IDs (eg:3,8,23,46) note: set 0 to show all");
-?>

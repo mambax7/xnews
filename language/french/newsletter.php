@@ -1,5 +1,5 @@
 <?php
-$newslettertemplate=<<<contentend
+$newslettertemplate = <<<contentend
 Titre : %title%
 Catégorie : %topic_title%
 Auteur : %publisher%
@@ -13,13 +13,10 @@ Contenu :
 En savoir plus : %link%
  ----------------------------------------------------------------------------
 
-contentend;
-
-/**
+contentend;/**
  * @translation     Communauté Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  * @version         $Id $
-**/
-?>
+ **/;

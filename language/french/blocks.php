@@ -92,13 +92,10 @@ define("_MB_NW_LATESTNEWS_EMAIL", "Afficher l'icône d'envoi par Email");
 define("_MB_NW_LATESTNEWS_SCROLL", "Activer le défilement des articles");
 define("_MB_NW_LATESTNEWS_SCROLLHEIGHT", "Hauteur de la zone défilante");
 define("_MB_NW_LATESTNEWS_SCROLLSPEED", "Vitesse du défilement");
-define("_MB_NW_LATESTNEWS_SELECTEDSTORIES", "Indiquer l'ID des articles, séparés par une virgule (exemple : 3,8,23,46)<br />Note : 0 équivaut à sélectionner tous les articles");
-
-/**
+define("_MB_NW_LATESTNEWS_SELECTEDSTORIES", "Indiquer l'ID des articles, séparés par une virgule (exemple : 3,8,23,46)<br>Note : 0 équivaut à sélectionner tous les articles");/**
  * @translation     Communauté Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  * @version         $Id $
-**/
-?>
+ **/;

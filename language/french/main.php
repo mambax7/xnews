@@ -10,7 +10,6 @@ define("_MA_NW_BYTESMORE", "%s bytes supplémentaires");
 define("_MA_NW_NUMCOMMENTS", "%s commentaires");
 define("_MA_NW_MORERELEASES", "Plus de publications dans ");
 
-
 //%%%%%%		File Name submit.php		%%%%%
 define("_MA_NW_SUBMITNEWS", "Proposer un article");
 define("_MA_NW_TITLE", "Titre");
@@ -74,8 +73,8 @@ define("_MA_NW_NORATING", "Aucune note sélectionnée.");
 define("_MA_NW_USERAVG", "Notation moyenne de l'utilisateur");
 define("_MA_NW_DLRATINGS", "Evalusation de l'article (total des votes: %s)");
 define("_MA_NW_ONEVOTE", "1 vote");
-define("_MA_NW_NUMVOTES", "%u votes");		// Warning
-define("_MA_NW_CANTVOTEOWN", "Vous n'êtes pas autorisé à voter pour vos propres articles.<br />Toutes les évaluations sont enregistrées.");
+define("_MA_NW_NUMVOTES", "%u votes");        // Warning
+define("_MA_NW_CANTVOTEOWN", "Vous n'êtes pas autorisé à voter pour vos propres articles.<br>Toutes les évaluations sont enregistrées.");
 define("_MA_NW_VOTEDELETED", "Vote supprimé.");
 define("_MA_NW_VOTEONCE", "Veuillez ne pas voter plusieurs fois pour un même article.");
 define("_MA_NW_VOTEAPPRE", "Merci pour votre évalusation.");
@@ -128,13 +127,10 @@ define("_MA_NW_METASIZE", "Vous ne devez pas ajouter plus de '+len+' caractères
 define("_MA_NW_SEO_TOPICS", "Catégories");
 define("_MA_NW_SEO_ARTICLES", "Articles");
 define("_MA_NW_SEO_PRINT", "Impression");
-define("_MA_NW_SEO_PDF", "pdf");
-
-/**
+define("_MA_NW_SEO_PDF", "pdf");/**
  * @translation     Communauté Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  * @version         $Id $
-**/
-?>
+ **/;

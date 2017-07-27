@@ -3,16 +3,17 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 class nw_Latestnewsstory extends nw_NewsStory
 {
-    function __construct($id = -1)
+    public function __construct($id = -1)
     {
         parent::nw_NewsStory($id);
     }
+
     /**
      * Returns published stories according to some options
      */
-    function getAllPublished($limit = 0, $selected_stories = true, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'published', $topic_frontpage = false)
+    public function getAllPublished($limit = 0, $selected_stories = true, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'published', $topic_frontpage = false)
     {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db   = XoopsDatabaseFactory::getDatabaseConnection();
         $myts = MyTextSanitizer::getInstance();
 
         $ret = array();
@@ -26,7 +27,7 @@ class nw_Latestnewsstory extends nw_NewsStory
             if (!is_array($topic)) {
                 if ($checkRight) {
                     $topics = nw_MygetItemIds('nw_view');
-                    if (!in_array($topic,$topics)) {
+                    if (!in_array($topic, $topics)) {
                         return null;
                     } else {
                         $sql .= ' AND s.topicid = ' . intval($topic) . ' AND (s.ihome = 1 OR s.ihome = 0)';
@@ -37,16 +38,16 @@ class nw_Latestnewsstory extends nw_NewsStory
             } else {
                 if ($checkRight) {
                     $topics = nw_MygetItemIds('nw_view');
-                    $topic = array_intersect($topic,$topics);
+                    $topic  = array_intersect($topic, $topics);
                 }
-                if (count($topic)>0) {
+                if (count($topic) > 0) {
                     $sql .= ' AND s.topicid IN (' . implode(',', $topic) . ')';
                 } else {
                     return null;
                 }
             }
         } else {
-            if($checkRight) {
+            if ($checkRight) {
                 $topics = nw_MygetItemIds('nw_view');
                 if (count($topics) > 0) {
                     $sql .= ' AND s.topicid IN (' . implode(',', $topics) . ')';
@@ -58,19 +59,20 @@ class nw_Latestnewsstory extends nw_NewsStory
                 $sql .= ' AND s.ihome = 0';
             }
         }
-        if($topic_frontpage) {
-        	$sql .=' AND t.topic_frontpage=1';
+        if ($topic_frontpage) {
+            $sql .= ' AND t.topic_frontpage=1';
         }
-        $sql .= " ORDER BY s.$order DESC";
+        $sql    .= " ORDER BY s.$order DESC";
         $result = $db->query($sql, intval($limit), intval($start));
 
-        while ( $myrow = $db->fetchArray($result) ) {
+        while ($myrow = $db->fetchArray($result)) {
             if ($asObject) {
                 $ret[] = new nw_Latestnewsstory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
         }
+
         return $ret;
     }
 }

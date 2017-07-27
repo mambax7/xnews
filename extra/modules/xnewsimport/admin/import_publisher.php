@@ -20,7 +20,7 @@
  * @version         $Id: news.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-include_once dirname(__DIR__) . '/admin_header.php';
+require_once dirname(__DIR__) . '/admin_header.php';
 $myts = MyTextSanitizer::getInstance();
 
 $importFromModuleName = "Smartsection " . @$_POST['smartsection_version'];
@@ -46,7 +46,7 @@ if ($op == 'start') {
     if ($totalCat == 0) {
         echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . _AM_XNI_IMPORT_NO_CATEGORY . "</span>";
     } else {
-        include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
         $result = $xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix('smartsection_items'));
         list($totalArticles) = $xoopsDB->fetchRow($result);
@@ -69,7 +69,7 @@ if ($op == 'start') {
                 $cat_cbox_options[$cid] = "$cat_title ($art_count)";
             }
 
-            $cat_label = new XoopsFormLabel(_AM_XNI_IMPORT_CATEGORIES, implode("<br />", $cat_cbox_options));
+            $cat_label = new XoopsFormLabel(_AM_XNI_IMPORT_CATEGORIES, implode("<br>", $cat_cbox_options));
             $cat_label->setDescription(_AM_XNI_IMPORT_CATEGORIES_DSC);
             $form->addElement($cat_label);
 
@@ -101,11 +101,11 @@ if ($op == 'go') {
     publisher_adminMenu(-1, _AM_XNI_IMPORT);
     publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon', sprintf(_AM_XNI_IMPORT_FROM, $importFromModuleName), _AM_XNI_IMPORT_RESULT);
 
-    $module_handler         =& xoops_gethandler('module');
-    $moduleObj              = $module_handler->getByDirname('smartsection');
+    $moduleHandler          = xoops_getHandler('module');
+    $moduleObj              = $moduleHandler->getByDirname('smartsection');
     $smartsection_module_id = $moduleObj->getVar('mid');
 
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gpermHandler = xoops_getHandler('groupperm');
 
     $cnt_imported_cat      = 0;
     $cnt_imported_articles = 0;
@@ -125,7 +125,7 @@ if ($op == 'go') {
         $newCat['oldid']  = $arrCat['categoryid'];
         $newCat['oldpid'] = $arrCat['parentid'];
 
-        $categoryObj =& $publisher->getHandler('category')->create();
+        $categoryObj = $publisher->getHandler('category')->create();
 
         $categoryObj->setVars($arrCat);
         $categoryObj->setVar('categoryid', 0);
@@ -136,7 +136,7 @@ if ($op == 'go') {
         }
 
         if (!$publisher->getHandler('category')->insert($categoryObj)) {
-            echo sprintf(_AM_XNI_IMPORT_CATEGORY_ERROR, $arrCat['name']) . "<br/>";
+            echo sprintf(_AM_XNI_IMPORT_CATEGORY_ERROR, $arrCat['name']) . "<br>";
             continue;
         }
 
@@ -150,7 +150,7 @@ if ($op == 'go') {
 
         while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
             // insert article
-            $itemObj =& $publisher->getHandler('item')->create();
+            $itemObj = $publisher->getHandler('item')->create();
 
             $itemObj->setVars($arrArticle);
             $itemObj->setVar('itemid', 0);
@@ -166,14 +166,14 @@ if ($op == 'go') {
              if (file_exists($pagewrap_filename)) {
              if (copy($pagewrap_filename, XOOPS_ROOT_PATH . "/uploads/publisher/content/" . $arrArticle['htmlpage'])) {
              $itemObj->setVar('body', "[pagewrap=" . $arrArticle['htmlpage'] . "]");
-             echo sprintf("&nbsp;&nbsp;&nbsp;&nbsp;" . _AM_XNI_IMPORT_ARTICLE_WRAP, $arrArticle['htmlpage']) . "<br/>";
+             echo sprintf("&nbsp;&nbsp;&nbsp;&nbsp;" . _AM_XNI_IMPORT_ARTICLE_WRAP, $arrArticle['htmlpage']) . "<br>";
              }
              }
              }
              */
 
             if (!$itemObj->store()) {
-                echo sprintf("  " . _AM_XNI_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . "<br/>";
+                echo sprintf("  " . _AM_XNI_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . "<br>";
                 continue;
             } else {
 
@@ -190,22 +190,22 @@ if ($op == 'go') {
                             $fileObj->setVar('fileid', 0);
 
                             if ($fileObj->store($allowed_mimetypes, true, false)) {
-                                echo "&nbsp;&nbsp;&nbsp;&nbsp;" . sprintf(_AM_XNI_IMPORTED_ARTICLE_FILE, $arrFile['filename']) . "<br />";
+                                echo "&nbsp;&nbsp;&nbsp;&nbsp;" . sprintf(_AM_XNI_IMPORTED_ARTICLE_FILE, $arrFile['filename']) . "<br>";
                             }
                         }
                     }
                 }
 
                 $newArticleArray[$arrArticle['itemid']] = $itemObj->itemid();
-                echo "&nbsp;&nbsp;" . sprintf(_AM_XNI_IMPORTED_ARTICLE, $itemObj->title()) . "<br />";
+                echo "&nbsp;&nbsp;" . sprintf(_AM_XNI_IMPORTED_ARTICLE, $itemObj->title()) . "<br>";
                 ++$cnt_imported_articles;
             }
         }
 
         // Saving category permissions
-        $groupsIds = $gperm_handler->getGroupIds('category_read', $arrCat['categoryid'], $smartsection_module_id);
+        $groupsIds = $gpermHandler->getGroupIds('category_read', $arrCat['categoryid'], $smartsection_module_id);
         publisher_saveCategory_Permissions($groupsIds, $categoryObj->categoryid(), 'category_read');
-        $groupsIds = $gperm_handler->getGroupIds('item_submit', $arrCat['categoryid'], $smartsection_module_id);
+        $groupsIds = $gpermHandler->getGroupIds('item_submit', $arrCat['categoryid'], $smartsection_module_id);
         publisher_saveCategory_Permissions($groupsIds, $categoryObj->categoryid(), 'item_submit');
 
         // Saving items permissions
@@ -213,7 +213,7 @@ if ($op == 'go') {
 
         $newCatArray[$newCat['oldid']] = $newCat;
         unset($newCat);
-        echo "<br/>";
+        echo "<br>";
     }
 
     // Looping through cat to change the parentid to the new parentid
@@ -231,29 +231,29 @@ if ($op == 'go') {
     }
 
     // Looping through the comments to link them to the new articles and module
-    echo _AM_XNI_IMPORT_COMMENTS . "<br />";
+    echo _AM_XNI_IMPORT_COMMENTS . "<br>";
 
     $publisher_module_id = $publisher->getModule()->mid();
 
-    $comment_handler = xoops_gethandler('comment');
-    $criteria        = new CriteriaCompo();
+    $commentHandler = xoops_getHandler('comment');
+    $criteria       = new CriteriaCompo();
     $criteria->add(new Criteria('com_modid', $smartsection_module_id));
-    $comments = $comment_handler->getObjects($criteria);
+    $comments = $commentHandler->getObjects($criteria);
     foreach ($comments as $comment) {
         $comment->setVar('com_itemid', $newArticleArray[$comment->getVar('com_itemid')]);
         $comment->setVar('com_modid', $publisher_module_id);
         $comment->setNew();
-        if (!$comment_handler->insert($comment)) {
-            echo "&nbsp;&nbsp;" . sprintf(_AM_XNI_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br />";
+        if (!$commentHandler->insert($comment)) {
+            echo "&nbsp;&nbsp;" . sprintf(_AM_XNI_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br>";
         } else {
-            echo "&nbsp;&nbsp;" . sprintf(_AM_XNI_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br />";
+            echo "&nbsp;&nbsp;" . sprintf(_AM_XNI_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br>";
         }
     }
 
-    echo "<br/><br/>Done.<br/>";
-    echo sprintf(_AM_XNI_IMPORTED_CATEGORIES, $cnt_imported_cat) . "<br/>";
-    echo sprintf(_AM_XNI_IMPORTED_ARTICLES, $cnt_imported_articles) . "<br/>";
-    echo "<br/><a href='" . PUBLISHER_URL . "/'>" . _AM_XNI_IMPORT_GOTOMODULE . "</a><br/>";
+    echo "<br><br>Done.<br>";
+    echo sprintf(_AM_XNI_IMPORTED_CATEGORIES, $cnt_imported_cat) . "<br>";
+    echo sprintf(_AM_XNI_IMPORTED_ARTICLES, $cnt_imported_articles) . "<br>";
+    echo "<br><a href='" . PUBLISHER_URL . "/'>" . _AM_XNI_IMPORT_GOTOMODULE . "</a><br>";
 
     publisher_closeCollapsableBar('newsimportgo', 'newsimportgoicon');
     xoops_cp_footer();

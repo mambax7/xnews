@@ -18,13 +18,13 @@
  * @version      $Id $
  */
 
-include_once __DIR__ . '/admin_header.php';
-include_once '../../../include/cp_header.php';
-include_once XNI_MODULE_PATH . '/include/functions.php';
-include_once XNI_MODULE_PATH . '/admin/functions.php';
-include_once XNI_MODULE_PATH . '/class/class.newstopic.php';
-include_once XNI_MODULE_PATH . '/class/class.newsstory.php';
-include_once XNI_MODULE_PATH . '/class/class.xnewsimport.php';
+require_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once XNI_MODULE_PATH . '/include/functions.php';
+require_once XNI_MODULE_PATH . '/admin/functions.php';
+require_once XNI_MODULE_PATH . '/class/class.newstopic.php';
+require_once XNI_MODULE_PATH . '/class/class.newsstory.php';
+require_once XNI_MODULE_PATH . '/class/class.xnewsimport.php';
 
 function NewsImport()
 {
@@ -36,7 +36,7 @@ function NewsImport()
     //	adminMenu(0, _AM_XNI_IMPORT);
 
     echo '<h1>' . _AM_XNI_IMPORT_TITLE . '</h1>';
-    echo _AM_XNI_IMPORT_INFO . '<br /><br />';
+    echo _AM_XNI_IMPORT_INFO . '<br><br>';
 
     xoops_load('XoopsFormLoader');
 
@@ -46,23 +46,25 @@ function NewsImport()
     $news_fieldsearch_array = array(
         'topic_id',
         'topic_pid',
-        'banner');
+        'banner'
+    );
 
     $other_fieldsearch_array = array(
         'categoryid',
         'parentid',
-        'moderator');
+        'moderator'
+    );
 
     //Get From Module Data
-    $module_handler =& xoops_gethandler('module');
-    $installed_mods = $module_handler->getObjects();
+    $moduleHandler  = xoops_getHandler('module');
+    $installed_mods = $moduleHandler->getObjects();
     $listed_mods    = array();
     $count          = 0;
     foreach ($installed_mods as $module) {
         if ($module->getVar('dirname') != 'system' && $module->getVar('isactive') == 1) {
             $module->loadInfo($module->getVar('dirname'));
             $modtables = $module->getInfo('tables');
-            if ($modtables != false && is_array($modtables)) {
+            if ($modtables !== false && is_array($modtables)) {
                 foreach ($modtables as $table) {
                     $newscount = 0;
                     foreach ($news_fieldsearch_array as $field) {
@@ -112,7 +114,7 @@ function NewsImport()
     }
 
     if (isset($importfrom_array) && count($importfrom_array) > 0 && isset($importto_array) && count($importto_array) > 0) {
-        $sform = new XoopsThemeForm(_AM_XNI_IMPORT_SELECTION, 'op', xoops_getenv('PHP_SELF'));
+        $sform = new XoopsThemeForm(_AM_XNI_IMPORT_SELECTION, 'op', xoops_getenv('PHP_SELF'), 'post', true);
         $sform->setExtra('enctype="multipart/form-data"');
 
         // Partners to import from
@@ -161,11 +163,11 @@ function TopicSelect()
     global $xoopsDB;
 
     $begin = isset($_GET['begin']) ? (int)($_GET['begin']) : 0;
-    include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
-    include_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
-    include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-    include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-    include_once XOOPS_ROOT_PATH . '/class/tree.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+    require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+    require_once XOOPS_ROOT_PATH . '/class/tree.php';
     $myts = MyTextSanitizer::getInstance();
 
     //Detect in out modules and prepare form
@@ -202,12 +204,12 @@ function TopicSelect()
     $from_table_name       = '';
 
     //GET ALL MODULE-FROM DATA
-    $module_handler = &xoops_gethandler('module');
-    $from_module    = &$module_handler->getByDirname($from_import_dirname);
+    $moduleHandler = xoops_getHandler('module');
+    $from_module   = $moduleHandler->getByDirname($from_import_dirname);
     $from_module->loadInfo($from_module->getVar('dirname'));
 
     $from_modtables = $from_module->getInfo('tables');
-    if ($from_modtables != false && is_array($from_modtables)) {
+    if ($from_modtables !== false && is_array($from_modtables)) {
         foreach ($from_modtables as $from_table) {
             $from_table_arr = explode('_', $from_table);
             if (count($from_table_arr) > 0) { //&& $from_import_dirname != 'news') {
@@ -336,11 +338,11 @@ function StartImport()
         $to_module_subprefix   = $_POST['importtosubprefix'];
     }
 
-    $module_handler =& xoops_gethandler('module');
-    $moduleObj      = $module_handler->getByDirname($from_module_dirname);
+    $moduleHandler  = xoops_getHandler('module');
+    $moduleObj      = $moduleHandler->getByDirname($from_module_dirname);
     $news_module_id = $moduleObj->getVar('mid');
 
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gpermHandler = xoops_getHandler('groupperm');
 
     $cnt_imported_cat      = 0;
     $cnt_imported_articles = 0;
@@ -350,13 +352,13 @@ function StartImport()
     // If none selected then import all topics
     if (!isset($_POST['from_topics'])) {
         $resultCat = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix($from_module_subprefix . 'topics'));
-        include_once 'import.php';
+        require_once __DIR__ . '/import.php';
     } // Import selected topics
     else {
         $ftpcs     = $_POST['from_topics'];
         $ftpcs     = implode("', '", $ftpcs);
         $resultCat = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix($from_module_subprefix . 'topics') . " WHERE topic_id IN ('" . $ftpcs . "')");
-        include_once 'import.php';
+        require_once __DIR__ . '/import.php';
     }
 
     xoops_cp_footer();
@@ -389,11 +391,11 @@ switch ($op) {
         adminmenu(-1);
         echo '<h4>' . _AM_XNI_CONFIG . '</h4>';
         echo "<table width='100%' border='0' cellspacing='1' class='outer'><tr><td width='59%' class=\"odd\" id=\"xo-newsicons\" >";
-        echo "<b><a href='index.php?op=import'><img  src='" . XNI_MODULE_URL . "/images/import32.png' alt='' /><br/>" . _AM_XNI_IMPORT_TITLE . '</a></b>';
-        echo "<b><a href='" . XOOPS_URL . "/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule->getVar('mid') . "'><img  src='" . NW_MODULE_URL . "/images/prefs32.png' alt='' /><br/>" . _AM_XNI_PREFERENCES . "</a></b>";
-        echo "<br /><br />\n";
+        echo "<b><a href='index.php?op=import'><img  src='" . XNI_MODULE_URL . "/images/import32.png' alt=''><br>" . _AM_XNI_IMPORT_TITLE . '</a></b>';
+        echo "<b><a href='" . XOOPS_URL . "/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule->getVar('mid') . "'><img  src='" . NW_MODULE_URL . "/images/prefs32.png' alt=''><br>" . _AM_XNI_PREFERENCES . "</a></b>";
+        echo "<br><br>\n";
         echo "</td><td width='50%' class=\"even\" id=\"xo-newsicons\" >";
-        echo _AM_XNI_DESCRIPTION . "<br />";
+        echo _AM_XNI_DESCRIPTION . "<br>";
         echo "</td></tr></table>";
         break;
 }

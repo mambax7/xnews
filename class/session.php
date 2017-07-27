@@ -20,7 +20,7 @@
  * @version         $Id: session.php 10283 2012-11-28 13:39:36Z trabis $
  */
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
-include_once dirname(dirname(__FILE__)) . '/include/common.php';
+require_once dirname(__DIR__) . '/include/common.php';
 
 /**
  * Class XnewsSession
@@ -28,7 +28,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 class XnewsSession
 {
     /**
-     * Session constructor<br />
+     * Session constructor<br>
      * Starts the session with session_start()
      * <strong>Note:</strong> that if the session has already started,
      * session_start() does nothing

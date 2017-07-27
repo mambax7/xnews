@@ -3,12 +3,12 @@
 // File name   : example_053.php
 // Begin       : 2009-09-02
 // Last Update : 2009-09-30
-// 
+//
 // Description : Example 053 for TCPDF class
 //               Javascript example.
-// 
+//
 // Author: Nicola Asuni
-// 
+//
 // (c) Copyright:
 //               Nicola Asuni
 //               Tecnick.com s.r.l.
@@ -21,20 +21,20 @@
 
 /**
  * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Javascript example.
- * @author Nicola Asuni
+ * @package   com.tecnick.tcpdf
+ * @abstract  TCPDF - Example: Javascript example.
+ * @author    Nicola Asuni
  * @copyright 2004-2009 Nicola Asuni - Tecnick.com S.r.l (www.tecnick.com) Via Della Pace, 11 - 09044 - Quartucciu (CA) - ITALY - www.tecnick.com - info@tecnick.com
- * @link http://tcpdf.org
- * @license http://www.gnu.org/copyleft/lesser.html LGPL
- * @since 2009-09-02
+ * @link      http://tcpdf.org
+ * @license   http://www.gnu.org/copyleft/lesser.html LGPL
+ * @since     2009-09-02
  */
 
 require_once('../config/lang/eng.php');
 require_once('../tcpdf.php');
 
 // create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false); 
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -59,13 +59,13 @@ $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 //set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
 
 //set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); 
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 //set some language-dependent strings
-$pdf->setLanguageArray($l); 
+$pdf->setLanguageArray($l);
 
 // ---------------------------------------------------------
 
@@ -76,7 +76,7 @@ $pdf->SetFont('times', '', 14);
 $pdf->AddPage();
 
 // print a some of text
-$text = 'This is an example of JavaScript usage on PDF documents.<br /><br />For more information check the source code of this example, the source code documentation for the <i>IncludeJS()</i> method and the <i>JavaScript for Acrobat API Reference</i> guide.<br /><br /><a href="http://www.tcpdf.org">www.tcpdf.org</a>.';
+$text = 'This is an example of JavaScript usage on PDF documents.<br><br>For more information check the source code of this example, the source code documentation for the <i>IncludeJS()</i> method and the <i>JavaScript for Acrobat API Reference</i> guide.<br><br><a href="http://www.tcpdf.org">www.tcpdf.org</a>.';
 $pdf->writeHTML($text, true, 0, true, 0);
 
 // write some JavaScript code
@@ -107,6 +107,5 @@ $pdf->IncludeJS($js);
 $pdf->Output('example_053.pdf', 'I');
 
 //============================================================+
-// END OF FILE                                                 
-//============================================================+
-?>
+// END OF FILE
+//============================================================+;

@@ -1,7 +1,7 @@
 <?php
-$newslettertemplate=<<<contentend
+$newslettertemplate = <<<contentend
 Titre : %title%
-Catégorie : %topic_title%
+Catï¿½gorie : %topic_title%
 Auteur : %publisher%
 Date de publication : %published%
 Evaluation : %rating%
@@ -13,13 +13,10 @@ Contenu :
 En savoir plus : %link%
  ----------------------------------------------------------------------------
 
-contentend;
-
-/**
- * @translation     Communauté Francophone des Utilisateurs de Xoops
+contentend;/**
+ * @translation     Communautï¿½ Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: ISO-8859-1
  *
  * @version         $Id $
-**/
-?>
+ **/;

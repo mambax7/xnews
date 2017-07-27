@@ -1,14 +1,14 @@
 <?php
 // $Id: blocks.php,v 1.16 2004/09/01 17:48:07 hthouzard Exp $
-define("_MB_NW_NOTYET","امروز نوشته‌ای نداریم");
-define("_MB_NW_TMRSI","نوشته‌های پرطرف‌دار امروز");
-define("_MB_NW_ORDER","مرتب‌سازی بر پایه");
-define("_MB_NW_DATE","تاریخ انتشار");
-define("_MB_NW_HITS","شمار بازدید");
-define("_MB_NW_DISP","نمایش");
-define("_MB_NW_ARTCLS","خبر");
-define("_MB_NW_CHARS","اندازه عنوان");
-define("_MB_NW_LENGTH","نویسه");
+define("_MB_NW_NOTYET", "امروز نوشته‌ای نداریم");
+define("_MB_NW_TMRSI", "نوشته‌های پرطرف‌دار امروز");
+define("_MB_NW_ORDER", "مرتب‌سازی بر پایه");
+define("_MB_NW_DATE", "تاریخ انتشار");
+define("_MB_NW_HITS", "شمار بازدید");
+define("_MB_NW_DISP", "نمایش");
+define("_MB_NW_ARTCLS", "خبر");
+define("_MB_NW_CHARS", "اندازه عنوان");
+define("_MB_NW_LENGTH", "نویسه");
 define("_MB_NW_TITLE", "عنوان");
 define("_MB_NW_POSTED", "زمان ارسال");
 define("_MB_NW_POSTER", "فرستنده");
@@ -23,9 +23,9 @@ define("_MB_NW_IMAGE", "تصویر برای اسپات لایت");
 define("_MB_NW_SPOTLIGHT_TOPIC", "سرفصل(ها) را برای استفاده انتخاب کنید");
 define("_MB_NW_SPOTLIGHT_ALL_TOPICS", "همه سرفصل‌ها");
 define("_MB_NW_SPOTLIGHT_ARTICLE", "یک خبر را انتخاب کنید:");
-define("_MB_NW_READMORE","ادامه متن...");
-define("_MB_NW_RATE","ارزش‌گذاری");
-define("_MB_NW_SHOW_NEWS_COUNT","دفعات نمایش خبر نشان داده شود؟");
+define("_MB_NW_READMORE", "ادامه متن...");
+define("_MB_NW_RATE", "ارزش‌گذاری");
+define("_MB_NW_SHOW_NEWS_COUNT", "دفعات نمایش خبر نشان داده شود؟");
 define("_MB_NW_SPOTLIGHT_TITLE", "اسپات لایت");
 define("_MB_NW_VIEW_TYPE1", "مرسوم (classic)");
 define("_MB_NW_VIEW_TYPE2", "جدولی (Tabbed)");
@@ -34,7 +34,7 @@ define("_MB_NW_TAB_COLOR2", "رنگ زمینه حالت tab");
 define("_MB_NW_TAB_COLOR3", "رنگ سر کلید سر فصل انتخاب شده حالت tab");
 define("_MB_NW_TAB_COLOR4", "رنگ سر کلید سرفصل‌(های) انتخاب نشده");
 define("_MB_NW_TAB_COLOR5", "رنگ سر کلید وقتی موس روی سرفصل برده می‌شود");
-define("_MB_NW_WHAT_PUBLISH", "می‌خواهید در اسپات لایت چه چیزی نمایش داده شود<br />نوع نمایش در اسپات لایت؟");
+define("_MB_NW_WHAT_PUBLISH", "می‌خواهید در اسپات لایت چه چیزی نمایش داده شود<br>نوع نمایش در اسپات لایت؟");
 define("_MB_NW_RECENT_NEWS", "خبرهای جدید (از لیست زیر استفاده نکنید)");
 define("_MB_NW_RECENT_SPECIFIC", "یک خبر مشخص (از لیست زیر یکی را انتخاب کنید)");
 define("_MB_NW_DEFAULT_COLORS", "این قسمت‌ها را خالی بگذارید تا از رنگ‌های پیش فرض استفاده شود");
@@ -93,4 +93,3 @@ define("_MB_NW_LATESTNEWS_SCROLL", "فعال کردن سیستم اسکرول ا
 define("_MB_NW_LATESTNEWS_SCROLLHEIGHT", "ارتفاع ارکرول");
 define("_MB_NW_LATESTNEWS_SCROLLSPEED", "سرعت اسکرول");
 define("_MB_NW_LATESTNEWS_SELECTEDSTORIES", "تنظیم ID های اخبار (eg:3,8,23,46) توجه: عدد 0 همه مطلب را نمایش میدهد");
-?>

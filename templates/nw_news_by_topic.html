@@ -9,7 +9,7 @@
 		<{counter start=0 print=false assign=storynum}>
         <{foreach item=story from=$topic.stories}>
         	<{if $storynum == 0}>
-        		<{include file="db:nw_news_item.html" story=$story}><br />
+        		<{include file="db:nw_news_item.html" story=$story}><br>
 			<{else}>
         		<{if $storynum == 1}>
             		<ul>
@@ -22,11 +22,11 @@
 				</ul>
 				<a href="<{$newsmodule_url}>/index.php?topic_id=<{$topic.id}>"><{$lang_morereleases}><{$topic.title}></a>
 			<{/if}>
-	</div><br />
+	</div><br>
 	<{/foreach}>
 	</td>
 <{/section}>
 </tr>
 </table>
 </div>
-<{include file='db:system_notification_select.html'}>
+<{include file='db:system_notification_select.tpl'}>

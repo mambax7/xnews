@@ -18,13 +18,13 @@
  * @version      $Id $
  */
 
-include_once __DIR__ . "/admin_header.php";
-include_once '../../../include/cp_header.php';
-include_once XNI_MODULE_PATH . '/include/functions.php';
-include_once XNI_MODULE_PATH . '/admin/functions.php';
+require_once __DIR__ . "/admin_header.php";
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once XNI_MODULE_PATH . '/include/functions.php';
+require_once XNI_MODULE_PATH . '/admin/functions.php';
 
-//include_once XNI_MODULE_PATH . '/class/class.newstopic.php';
-//include_once XNI_MODULE_PATH . '/class/class.newsstory.php';
+//require_once XNI_MODULE_PATH . '/class/class.newstopic.php';
+//require_once XNI_MODULE_PATH . '/class/class.newsstory.php';
 
 $myts = MyTextSanitizer::getInstance();
 
@@ -39,11 +39,11 @@ if ($op == 'go') {
 
     adminMenu(-1, _AM_XNI_IMPORT);
 
-    $module_handler =& xoops_gethandler('module');
-    $moduleObj      = $module_handler->getByDirname('news');
+    $moduleHandler  = xoops_getHandler('module');
+    $moduleObj      = $moduleHandler->getByDirname('news');
     $news_module_id = $moduleObj->getVar('mid');
 
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gpermHandler = xoops_getHandler('groupperm');
 
     $cnt_imported_cat      = 0;
     $cnt_imported_articles = 0;
@@ -92,7 +92,7 @@ if ($op == 'go') {
 
         //trigger_error((int)($auto_increment -1) , E_USER_WARNING);
         if (!$topic->store($topic)) {
-            echo sprintf(_AM_XNI_IMPORT_CATEGORY_ERROR, $arrCat['topic_title']) . "<br/>";
+            echo sprintf(_AM_XNI_IMPORT_CATEGORY_ERROR, $arrCat['topic_title']) . "<br>";
             continue;
         }
 
@@ -139,18 +139,18 @@ if ($op == 'go') {
 
             $storyPublished = $arrArticle['published'] != 0 ? $story->setApproved(1) : $story->setApproved(0);
             if ( !$story->store() ) {
-                echo sprintf("  " . _AM_XNI_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . "<br/>";
+                echo sprintf("  " . _AM_XNI_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . "<br>";
                 continue;
             } else {
                 $newArticleArray[$arrArticle['storyid']] = $story->storyid();
-                echo "<br />" . sprintf(_AM_XNI_IMPORTED_ARTICLE, $story->title());
+                echo "<br>" . sprintf(_AM_XNI_IMPORTED_ARTICLE, $story->title());
                 ++$cnt_imported_articles;
             }
 
         // Saving category permissions
-        //$groupsIds = $gperm_handler->getGroupIds('news_view', $arrCat['topic_id'], $news_module_id);
+        //$groupsIds = $gpermHandler->getGroupIds('news_view', $arrCat['topic_id'], $news_module_id);
         //nw_saveCategory_Permissions($groupsIds, $categoryObj->categoryid(), 'category_read');
-        //$groupsIds = $gperm_handler->getGroupIds('news_submit', $arrCat['topic_id'], $news_module_id);
+        //$groupsIds = $gpermHandler->getGroupIds('news_submit', $arrCat['topic_id'], $news_module_id);
         //nw_saveCategory_Permissions($groupsIds, $categoryObj->categoryid(), 'item_submit');
 
         // Saving items permissions
@@ -181,31 +181,31 @@ if ($op == 'go') {
 
         /*
             // Looping through the comments to link them to the new articles and module
-            echo _AM_XNI_IMPORT_COMMENTS . "<br />";
+            echo _AM_XNI_IMPORT_COMMENTS . "<br>";
 
             $publisher_module_id = $publisher->getModule()->mid();
 
-            $comment_handler = xoops_gethandler('comment');
+            $commentHandler = xoops_getHandler('comment');
             $criteria = new CriteriaCompo();
             $criteria->add(new Criteria('com_modid', $news_module_id));
-            $comments = $comment_handler->getObjects($criteria);
+            $comments = $commentHandler->getObjects($criteria);
             foreach ($comments as $comment) {
                 $comment->setVar('com_itemid', $newArticleArray[$comment->getVar('com_itemid')]);
                 $comment->setVar('com_modid', $publisher_module_id);
                 $comment->setNew();
-                if (!$comment_handler->insert($comment)) {
-                    echo "&nbsp;&nbsp;"  . sprintf(_AM_XNI_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br />";
+                if (!$commentHandler->insert($comment)) {
+                    echo "&nbsp;&nbsp;"  . sprintf(_AM_XNI_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br>";
                 } else {
-                    echo "&nbsp;&nbsp;"  . sprintf(_AM_XNI_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br />";
+                    echo "&nbsp;&nbsp;"  . sprintf(_AM_XNI_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br>";
                 }
         */
         echo $arrCat['topic_title'];
     }
 
-    echo "<br/><br/>Done.<br/>";
-    echo sprintf(_AM_XNI_IMPORTED_CATEGORIES, $cnt_imported_cat) . "<br/>";
-    echo sprintf(_AM_XNI_IMPORTED_ARTICLES, $cnt_imported_articles) . "<br/>";
-    echo "<br/><a href='index.php'>" . _AM_XNI_IMPORT_GOTOMODULE . "</a><br/>";
+    echo "<br><br>Done.<br>";
+    echo sprintf(_AM_XNI_IMPORTED_CATEGORIES, $cnt_imported_cat) . "<br>";
+    echo sprintf(_AM_XNI_IMPORTED_ARTICLES, $cnt_imported_articles) . "<br>";
+    echo "<br><a href='index.php'>" . _AM_XNI_IMPORT_GOTOMODULE . "</a><br>";
 
     xoops_cp_footer();
 }

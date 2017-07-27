@@ -1,17 +1,16 @@
 <?php
-$newslettertemplate=<<<contentend
-Título : %title%
+$newslettertemplate = <<<contentend
+Tï¿½tulo : %title%
 Tema : %topic_title%
 Redactor : %publisher%
-Fecha de publicación : %published%
-Valoración : %rating%
+Fecha de publicaciï¿½n : %published%
+Valoraciï¿½n : %rating%
 Lecturas : %reads%
 
 Contenido :
 %hometext%
 
-Leer Más... : %link%
+Leer Mï¿½s... : %link%
  ----------------------------------------------------------------------------
 
 contentend;
-?>

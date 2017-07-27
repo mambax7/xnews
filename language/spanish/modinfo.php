@@ -110,7 +110,8 @@ define("_MI_NW_RATE_NEWS", "Permitir a los usuarios valorar noticias");
 define("_MI_NW_TOPICS_RSS", "Habilitar RSS en los temas");
 define("_MI_NW_TOPICS_RSS_DESC", "Si es activada esta opción, los contenidos de los temas serán accesibles por RSS.");
 define("_MI_NW_DATEFORMAT", "Formato de la fecha");
-define("_MI_NW_DATEFORMAT_DESC", "Por favor consulte la <a href='http://fr.php.net/manual/es/function.date.php' target='_blank'>documentación Php</a>, para obtener más información sobre como configurar el formato de fecha y hora.<br /> Nota: Si no define ningún formato, se usará el formato por defecto.");
+define("_MI_NW_DATEFORMAT_DESC",
+       "Por favor consulte la <a href='http://fr.php.net/manual/es/function.date.php' target='_blank'>documentación Php</a>, para obtener más información sobre como configurar el formato de fecha y hora.<br> Nota: Si no define ningún formato, se usará el formato por defecto.");
 define("_MI_NW_META_DATA", "Habilitar inclusión de meta datos");
 define("_MI_NW_META_DATA_DESC", "Si es activada esta opción, los usuarios con permisos para enviar noticias podrán incluir datos en la etiqueta Meta, estos son: metakeywords y metadescription");
 define("_MI_NW_BNAME8", "Noticias aleatorias");
@@ -190,11 +191,12 @@ define("_MI_NW_TOPICDISPLAY", "Mostrar temas ");
 define("_MI_NW_TOPICDISPLAYDESC", "Esto habilita/desabilita Temas en el título de cabeceras");
 
 define("_MI_NW_SEOENABLE", "Habilitar SEO");
-define("_MI_NW_SEOENABLEDESC", "Esto habilita/desabilita la actividad SEO.<br /> Si <b>htaccess</b> se selecciona usted obtendrá:<br /> http://su.sitio.com/<b>xnews</b>/topics.1/titulo-de-su-tema.html <br /> Si selecciona path-info is selected usted obtendrá: <br /> http://su.sitio.com/modules/xnews/index.php/topics.1/titulo-de_su-tema.html");
+define("_MI_NW_SEOENABLEDESC",
+       "Esto habilita/desabilita la actividad SEO.<br> Si <b>htaccess</b> se selecciona usted obtendrá:<br> http://su.sitio.com/<b>xnews</b>/topics.1/titulo-de-su-tema.html <br> Si selecciona path-info is selected usted obtendrá: <br> http://su.sitio.com/modules/xnews/index.php/topics.1/titulo-de_su-tema.html");
 
 // Added in version 1.68 RC1
 define("_MI_NW_EXTEND_META_DATA", "Amplíe los meta-data de entrada");
-define("_MI_NW_EXTEND_META_DATA_DESC", "Alterna entre el texto y textarea para que el usuario edite la entrada meta-data<br /> tanto para la descripción como para las palabras clave.");
+define("_MI_NW_EXTEND_META_DATA_DESC", "Alterna entre el texto y textarea para que el usuario edite la entrada meta-data<br> tanto para la descripción como para las palabras clave.");
 
 define("_MI_NW_NONE", "Ninguno");
 define("_MI_NW_TOPONLY", "Solo arriba");
@@ -204,9 +206,11 @@ define("_MI_NW_DISPLAYLINKICNS", "Mostrar enlaces de iconos");
 define("_MI_NW_DISPLAYLINKICNSDESC", "Mostrar impresión amigable e iconos de pdf ninguno-arriba-abajo-ambos");
 
 define("_MI_NW_SEOPATH", "Ruta SEO");
-define("_MI_NW_SEOPATHDESC", "Esto agregará un título a la URL de SEO para ambos modos <b>htaccess</b> y <b>path-info</b>. <br /> Si se deja vacío usted obtendrá: <br /> http://su.sitio.com/topics.1/titulo-de-su-tema.html <br /> Si escribe <b>noticias</b> usted obtendrá: <br /> http://su.sitio.com/<b>noticias</b>/topics.1/titulo-de-su-tema.html <br /><br /> <b>son aceptados caracteres de a-z y el caracter menos(-). ej. noticia-del-dia</b>");
+define("_MI_NW_SEOPATHDESC",
+       "Esto agregará un título a la URL de SEO para ambos modos <b>htaccess</b> y <b>path-info</b>. <br> Si se deja vacío usted obtendrá: <br> http://su.sitio.com/topics.1/titulo-de-su-tema.html <br> Si escribe <b>noticias</b> usted obtendrá: <br> http://su.sitio.com/<b>noticias</b>/topics.1/titulo-de-su-tema.html <br><br> <b>son aceptados caracteres de a-z y el caracter menos(-). ej. noticia-del-dia</b>");
 define("_MI_NW_SEOLEVEL", "Nivel SEO");
-define("_MI_NW_SEOLEVELDESC", "Aquí puedes elegir si tener htaccess en la raíz de xoops o en el módulo. <br /> Esto cambiará la apariencia de la URL.<br /> En el Nivel Raíz: <br /> http://su.sitio.com/news/topics.1/titulo-de-su-tema.html <br /> En el nivel Módulo: <br /> http://su.sitio.com/modules/xnews/news.topics.1/titulo-de-su-tema.html<br /><br /> Solo trabaja en el modo htaccess y el archivo htaccess tendrá que ser instalado en consecuencia.");
+define("_MI_NW_SEOLEVELDESC",
+       "Aquí puedes elegir si tener htaccess en la raíz de xoops o en el módulo. <br> Esto cambiará la apariencia de la URL.<br> En el Nivel Raíz: <br> http://su.sitio.com/news/topics.1/titulo-de-su-tema.html <br> En el nivel Módulo: <br> http://su.sitio.com/modules/xnews/news.topics.1/titulo-de-su-tema.html<br><br> Solo trabaja en el modo htaccess y el archivo htaccess tendrá que ser instalado en consecuencia.");
 define("_MI_NW_MODULE_LEVEL", "Nivel Módulo");
 define("_MI_NW_ROOT_LEVEL", "Nivel Raíz");
 
@@ -217,4 +221,3 @@ define("_MI_NW_SEOENDOFURLRSS", "End of URL");
 define("_MI_NW_SEOENDOFURLRSS_DESC", "File Extension to RSS Pages");
 define("_MI_NW_SEOENDOFURLPDF", "End of URL");
 define("_MI_NW_SEOENDOFURLPDF_DESC", "File Extension to Adobe Acrobat (PDF) Files");
-?>

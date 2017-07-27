@@ -10,7 +10,6 @@ define("_MA_NW_BYTESMORE", "%s字符 (含本文)");
 define("_MA_NW_NUMCOMMENTS", "%s篇评论");
 define("_MA_NW_MORERELEASES", "更多内容 ");
 
-
 //%%%%%%                File Name submit.php            %%%%%
 define("_MA_NW_SUBMITNEWS", "发布新闻");
 define("_MA_NW_TITLE", "标题");
@@ -75,7 +74,7 @@ define("_MA_NW_USERAVG", "平均用户评分");
 define("_MA_NW_DLRATINGS", "新闻评分 (总票数: %s)");
 define("_MA_NW_ONEVOTE", "1 票");
 define("_MA_NW_NUMVOTES", "%u 票");                // Warning
-define("_MA_NW_CANTVOTEOWN", "您不能对自己的新闻投票。<br />所有投票将被记录和检查。");
+define("_MA_NW_CANTVOTEOWN", "您不能对自己的新闻投票。<br>所有投票将被记录和检查。");
 define("_MA_NW_VOTEDELETED", "投票数据已删除。");
 define("_MA_NW_VOTEONCE", "请勿对同一篇新闻多次投票。");
 define("_MA_NW_VOTEAPPRE", "感谢您的投票。");
@@ -129,4 +128,3 @@ define("_MA_NW_SEO_TOPICS", "topics");
 define("_MA_NW_SEO_ARTICLES", "articles");
 define("_MA_NW_SEO_PRINT", "print");
 define("_MA_NW_SEO_PDF", "pdf");
-?>

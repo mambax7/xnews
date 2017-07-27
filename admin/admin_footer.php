@@ -9,9 +9,10 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+$pathIcon32 = \Xmf\Module\Admin::iconUrl('', 32);
 echo "<div class='adminfooter'>\n";
 echo "    <div style='text-align: center;'>\n";
-echo "        <a href='http://www.xoops.org' rel='external'><img src='{$pathIcon32}/xoopsmicrobutton.gif' alt='XOOPS' title='XOOPS'></a>\n";
+echo "        <a href='https://xoops.org' rel='external'><img src='{$pathIcon32}/xoopsmicrobutton.gif' alt='XOOPS' title='XOOPS'></a>\n";
 echo "    </div>\n";
 echo "" . _AM_MODULEADMIN_ADMIN_FOOTER . "\n";
 echo "</div>";

@@ -20,9 +20,9 @@
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS Root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
-include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
-include_once XNI_MODULE_PATH . '/include/functions.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
+require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
+require_once XNI_MODULE_PATH . '/include/functions.php';
 
 class xni_NewsStory extends XoopsStory
 {
@@ -40,7 +40,7 @@ class xni_NewsStory extends XoopsStory
      */
     public function xni_NewsStory($storyid = -1, $subprefix = '')
     {
-        $this->db          =& XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db          = XoopsDatabaseFactory::getDatabaseConnection();
         $this->table       = $this->db->prefix($subprefix . 'stories');
         $this->topicstable = $this->db->prefix($subprefix . 'topics');
         if (is_array($storyid)) {
@@ -96,9 +96,13 @@ class xni_NewsStory extends XoopsStory
             $newstoryid = $this->db->genId($this->table . '_storyid_seq');
             $created    = time();
             $published  = ($this->approved) ? (int)($this->published) : 0;
-            $sql        = sprintf("INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s')", $this->table, $newstoryid, (int)($this->uid()), $title, $created, $published, $expired, $hostname, (int)($this->nohtml()), (int)($this->nosmiley()), $hometext, $bodytext, $counter, (int)($this->topicid()), (int)($this->ihome()), (int)($this->notifypub()), $type, (int)($this->topicdisplay()), $this->topicalign, (int)($this->comments()), $rating, $votes, $description, $keywords, $picture);
+            $sql        = sprintf("INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s')",
+                                  $this->table, $newstoryid, (int)($this->uid()), $title, $created, $published, $expired, $hostname, (int)($this->nohtml()), (int)($this->nosmiley()), $hometext, $bodytext, $counter, (int)($this->topicid()), (int)($this->ihome()), (int)($this->notifypub()), $type,
+                                  (int)($this->topicdisplay()), $this->topicalign, (int)($this->comments()), $rating, $votes, $description, $keywords, $picture);
         } else {
-            $sql        = sprintf("UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s' WHERE storyid = %u", $this->table, $title, (int)($this->published()), $expired, (int)($this->nohtml()), (int)($this->nosmiley()), $hometext, $bodytext, (int)($this->topicid()), (int)($this->ihome()), (int)($this->topicdisplay()), $this->topicalign, (int)($this->comments()), $rating, $votes, (int)($this->uid()), $description, $keywords, $picture, (int)($this->storyid()));
+            $sql        = sprintf("UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s' WHERE storyid = %u",
+                                  $this->table, $title, (int)($this->published()), $expired, (int)($this->nohtml()), (int)($this->nosmiley()), $hometext, $bodytext, (int)($this->topicid()), (int)($this->ihome()), (int)($this->topicdisplay()), $this->topicalign, (int)($this->comments()), $rating,
+                                  $votes, (int)($this->uid()), $description, $keywords, $picture, (int)($this->storyid()));
             $newstoryid = (int)($this->storyid());
         }
         if (!$this->db->queryF($sql)) {

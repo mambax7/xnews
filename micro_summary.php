@@ -12,23 +12,23 @@
  * NOTE : If you use this code, please make credit.
  *
  */
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
-include_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
 if (!$xnews->getConfig('firefox_microsummaries')) {
     exit();
 }
-$story = new nw_NewsStory();
+$story      = new nw_NewsStory();
 $restricted = $xnews->getConfig('restrictindex');
-$sarray = array();
+$sarray     = array();
 // Get the last news from all topics according to the module's restrictions
 $sarray = $story->getAllPublished(1, 0, $restricted, 0);
 if (count($sarray) > 0) {
     $laststory = null;
     $laststory = $sarray[0];
     if (is_object($laststory)) {
-        header ('Content-Type:text;');
+        header('Content-Type:text;');
         echo $laststory->title() . ' - ' . $xoopsConfig['sitename'];
     }
 }

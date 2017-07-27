@@ -65,7 +65,6 @@ define("_AM_NW_DEL", "Cancella");
 define("_AM_NW_CANCEL", "Annulla");
 define("_AM_NW_WAYSYWTDTTAL", "ATTENZIONE: Sei certo di voler cancellare questo argomento e tutti i suoi gli articoli e commenti?");
 
-
 // Added in Beta6
 define("_AM_NW_TOPICSMNGR", "Gestione Argomenti");
 define("_AM_NW_PEARTICLES", "Gestione Notizie");
@@ -131,7 +130,7 @@ define("_AM_NW_UPGRADEFAILED0", "Per favore, annota i messaggi e cerca di correg
 define("_AM_NW_UPGR_ACCESS_ERROR", "Errore, per usare lo script di upgrade devi essere un admin di questo modulo");
 define("_AM_NW_PRUNE_BEFORE", "Elimina storie pubblicate prima del");
 define("_AM_NW_PRUNE_EXPIREDONLY", "Rimuovi solo le storie scadute");
-define("_AM_NW_PRUNE_CONFIRM", "Attenzione, stai per rimuovere permanentemente le storie pubblicate prima del %s (questa azione non può essere annullata). Parliamo di %s storie.<br />Sei sicuro?");
+define("_AM_NW_PRUNE_CONFIRM", "Attenzione, stai per rimuovere permanentemente le storie pubblicate prima del %s (questa azione non può essere annullata). Parliamo di %s storie.<br>Sei sicuro?");
 define("_AM_NW_PRUNE_TOPICS", "Limita ai seguenti argomenti");
 define("_AM_NW_PRUNENEWS", "Elimina Notizie");
 define("_AM_NW_EXPORT_NEWS", "Esporta Notizie");
@@ -140,14 +139,14 @@ define("_AM_NW_PRUNE_DELETED", "%d storie sono state eliminate");
 define("_AM_NW_PERM_WARNING", "<h2>Attenzione, hai 3 forms, quindi hai 3 pulsanti 'inserimento'</h2>");
 define("_AM_NW_EXPORT_BETWEEN", "Esporta le notizie pubblicate tra il");
 define("_AM_NW_EXPORT_AND", " e il ");
-define("_AM_NW_EXPORT_PRUNE_DSC", "Se non selezioni nulla, tutti gli argomenti verranno utilizzati<br />altrimenti, saranno usati solo quelli selezionati");
+define("_AM_NW_EXPORT_PRUNE_DSC", "Se non selezioni nulla, tutti gli argomenti verranno utilizzati<br>altrimenti, saranno usati solo quelli selezionati");
 define("_AM_NW_EXPORT_INCTOPICS", "Includi le definizioni degli Argomenti?");
 define("_AM_NW_EXPORT_ERROR", "Errore durante la creazione del file %s. Operazione interrotta.");
 define("_AM_NW_EXPORT_READY", "Il tuo file di esportazione xml è pronto per il download. <br>Clicca  <a href='%s'>qui</a> per scaricarlo.<br>Non dimenticare <a href='%s'>di rimuoverlo</a> quando hai finito.");
 define("_AM_NW_RSS_URL", "URL del feed RSS");
 define("_AM_NW_NEWSLETTER", "Newsletter");
 define("_AM_NW_NEWSLETTER_BETWEEN", "Seleziona le notizie pubblicate tra");
-define("_AM_NW_NEWSLETTER_READY", "Il tuo file newsletter è pronto per il download.<br /><a href='%s'>Clicca su questo link per scaricarlo.</a>.<br />Non dimenticare <a href='%s'>di rimuoverlo</a> quando hai finito.");
+define("_AM_NW_NEWSLETTER_READY", "Il tuo file newsletter è pronto per il download.<br><a href='%s'>Clicca su questo link per scaricarlo.</a>.<br>Non dimenticare <a href='%s'>di rimuoverlo</a> quando hai finito.");
 define("_AM_NW_DELETED_OK", "File cancellato con successo");
 define("_AM_NW_DELETED_PB", "C'è stato un problema nella cancellazione del file");
 define("_AM_NW_STATS0", "Statistiche degli argomenti");
@@ -181,11 +180,11 @@ define("_AM_NW_NEWSLETTER_FOOTER", "Piè di Pagina");
 define("_AM_NW_NEWSLETTER_HTML_TAGS", "Rimuovi i tags html?");
 define("_AM_NW_VERIFY_TABLES", "Manutenzione tabelle");
 define("_AM_NW_METAGEN", "Metagen");
-define("_AM_NW_METAGEN_DESC", "Metagen è un sistema che ti aiuta ad avere una migliore indicizzazione nei motori di ricerca per le tue pagine web.<br />Infatti se inserisci meta keywords e meta descriptions, il modulo creerà automaticamente le chiavi di indicizzazione.");
+define("_AM_NW_METAGEN_DESC", "Metagen è un sistema che ti aiuta ad avere una migliore indicizzazione nei motori di ricerca per le tue pagine web.<br>Infatti se inserisci meta keywords e meta descriptions, il modulo creerà automaticamente le chiavi di indicizzazione.");
 define("_AM_NW_BLACKLIST", "Lista nera");
 define("_AM_NW_BLACKLIST_DESC", "Le parole in questa lista non saranno usate per creare meta keywords");
 define("_AM_NW_BLACKLIST_ADD", "Aggiungi");
-define("_AM_NW_BLACKLIST_ADD_DSC", "Inserisci parole da aggiungere alla lista<br />(una parola per riga)");
+define("_AM_NW_BLACKLIST_ADD_DSC", "Inserisci parole da aggiungere alla lista<br>(una parola per riga)");
 define("_AM_NW_META_KEYWORDS_CNT", "Ammontare massimo di meta keywords auto-generate");
 define("_AM_NW_META_KEYWORDS_ORDER", "Ordine delle keywords");
 define("_AM_NW_META_KEYWORDS_INTEXT", "Creale in ordine di apparizione nel testo");
@@ -204,30 +203,31 @@ define("_AM_NW_CLONER_DIRFOL", "Dir/Cartella");
 define("_AM_NW_CLONER_VERSION", "Versione");
 
 define("_AM_NW_CLONER_NEWNAME", "Nome nuovo modulo");
-define("_AM_NW_CLONER_NEWNAMEDESC", "Avrà effetto anche sulla creazione della nuova cartella. <br /> Le maiuscole/minuscole e spazi vengono ignorati e corretti automaticamente. <br /> es. nuovo nome = <b>Biblioteca</b> nuova dir = <b>biblioteca</b>, <br /> nuovo nome <b>La Mia Biblioteca</b> nuova dir = <b>lamiacartella</b>. <br /><br /> Il modulo di partenza è: <font color='#008400'><b> %s </b></font><br />");
+define("_AM_NW_CLONER_NEWNAMEDESC",
+       "Avrà effetto anche sulla creazione della nuova cartella. <br> Le maiuscole/minuscole e spazi vengono ignorati e corretti automaticamente. <br> es. nuovo nome = <b>Biblioteca</b> nuova dir = <b>biblioteca</b>, <br> nuovo nome <b>La Mia Biblioteca</b> nuova dir = <b>lamiacartella</b>. <br><br> Il modulo di partenza è: <font color='#008400'><b> %s </b></font><br>");
 define("_AM_NW_CLONER_NEWNAMELABEL", "Nuovo Modulo:");
 
 define("_AM_NW_CLONER_DIREXISTS", "Dir/Cartella '%s' esistente!!");
 define("_AM_NW_CLONER_CREATED", "Il modulo '%s' è stato clonato correttamente!!");
 define("_AM_NW_CLONER_UPRADED", "Il modulo '%s' è stato aggiornato correttamente!!");
-define("_AM_NW_CLONER_NOMODULEID", "L'id modulo non è attivo!"); 
+define("_AM_NW_CLONER_NOMODULEID", "L'id modulo non è attivo!");
 
 define("_AM_NW_CLONER_UPDATE", "Attualizza");
 define("_AM_NW_CLONER_INSTALL", "Installa");
 define("_AM_NW_CLONER_UNINSTALL", "Disinstalla");
-define("_AM_NW_CLONER_ACTION_INSTALL", "Installa/Disinstalla"); 
+define("_AM_NW_CLONER_ACTION_INSTALL", "Installa/Disinstalla");
 
 define("_AM_NW_CLONER_IMPORTNEWS", "Importare dati del modulo News originale");
 define("_AM_NW_CLONER_IMPORTNEWSDESC1", "Il modulo News originale esiste! Importare i dati ora?");
-define("_AM_NW_CLONER_IMPORTNEWSDESC2", "Il bottone di importazione appare solo se la tabella stories è vuota. <br />
-                                         Se è stata aggiunto una notizia prima di importare dal modulo news originale <br /> 
-                                         si dovrà disinstallare e reinstallare x"."News. <br />
+define("_AM_NW_CLONER_IMPORTNEWSDESC2", "Il bottone di importazione appare solo se la tabella stories è vuota. <br>
+                                         Se è stata aggiunto una notizia prima di importare dal modulo news originale <br> 
+                                         si dovrà disinstallare e reinstallare x" . "News. <br>
                                          Se sono già stati importati i dati dal mosulo originale News, lasciare così.");
 define("_AM_NW_CLONER_IMPORTNEWSSUB", "Importa");
 define("_AM_NW_CLONER_NEWSIMPORTED", "Dati modulo News originale importati correttamente");
 
 // Added in version 1.68 Beta
-define("_AM_NW_DESCRIPTION", "<H3>x"."News e un modulo delle notizie clonabile</H3> 
+define("_AM_NW_DESCRIPTION", "<H3>x" . "News e un modulo delle notizie clonabile</H3> 
 							  dove gli utenti possono inviare notizie/commenti. Il modulo può essere clonato per avere un unico metodo per diversi compiti. Oltre che per le normali notizie il modulo può essere utilizzato per info, collegamenti e altro ancora, tutti coi propri blocchi, argomenti e impostazioni.");
 
 // Added in version 1.68 RC1
@@ -236,14 +236,13 @@ define("_AM_NW_CLONER_CLONEDELETEDERR", "il clone '%s' non è stato cancellato -
 define("_AM_NW_CLONER_CLONEUPGRADED", "Aggiornato");
 define("_AM_NW_CLONER_UPGRADEFORCE", "Forza aggiornamento");
 define("_AM_NW_CLONER_CLONEDELETION", "Cancellazione Clone");
-define("_AM_NW_CLONER_SUREDELETE", "Sicuri di voler cancellare il clone <font color='#000000'>'%s'</font>?<br />");
-define("_AM_NW_CLONER_CLONEID", "L'ID del clone non trovato!"); 
+define("_AM_NW_CLONER_SUREDELETE", "Sicuri di voler cancellare il clone <font color='#000000'>'%s'</font>?<br>");
+define("_AM_NW_CLONER_CLONEID", "L'ID del clone non trovato!");
 
 // Added in version 1.68 RC2
-define("_AM_NW_INDEX", "Indice"); 
+define("_AM_NW_INDEX", "Indice");
 
 // Added in version 1.68 Final
-define("_AM_NW_DOLINEBREAK", "Abilita Fine Riga"); 
+define("_AM_NW_DOLINEBREAK", "Abilita Fine Riga");
 
-define("_AM_NW_TOPICS","Argomenti");
-?>
+define("_AM_NW_TOPICS", "Argomenti");

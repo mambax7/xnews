@@ -18,7 +18,7 @@
         <td align='right'>
         <{$print_link}>
         <a target="_top" href="<{$mail_link}>" title="<{$lang_sendstory}>">
-            <img src="<{$newsmodule_url}>/assets/images/friend.png" width="28px" height="28px" border="0" alt="<{$lang_sendstory}>" />
+            <img src="<{$newsmodule_url}>/assets/images/friend.png" width="28px" height="28px" border="0" alt="<{$lang_sendstory}>">
         </a>
         <{$pdf_link}>
         </td>
@@ -35,7 +35,7 @@
 <{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._MA_NW_PAGE}> <{$pagenav}></div><{/if}>
 
 <{if $tags}>
-    <br /><{include file="db:tag_bar.html"}>
+    <br><{include file="db:tag_bar.html"}>
 <{/if}>
 
 <table width="100%" border="0" style="padding: 5px;">
@@ -57,7 +57,7 @@
         <td align='right'>
         <{$print_link}>
         <a target="_top" href="<{$mail_link}>" title="<{$lang_sendstory}>">
-            <img src="<{$newsmodule_url}>/assets/images/friend.png" width="28px" height="28px" border="0" alt="<{$lang_sendstory}>" />
+            <img src="<{$newsmodule_url}>/assets/images/friend.png" width="28px" height="28px" border="0" alt="<{$lang_sendstory}>">
         </a>
         <{$pdf_link}>
         </td>
@@ -75,8 +75,8 @@
 <{/if}>
 
 <{if $showsummary == true && $summary_count>0}>
-<br />
-<br />
+<br>
+<br>
 <table width='50%' cellspacing='0' cellpadding='1'>
     <tr>
         <th><{$lang_other_story}></th>
@@ -97,5 +97,5 @@
     <{/foreach}>
 <{/if}>
 </table>
-<br />
+<br>
 <{/if}>

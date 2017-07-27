@@ -5,14 +5,14 @@
  * This page displays a list of the published articles and can also display the
  * stories of a particular topic.
  *
- * @package News
- * @author Xoops Modules Dev Team
- * @copyright (c) The Xoops Project - www.xoops.org
+ * @package                     News
+ * @author                      Xoops Modules Dev Team
+ * @copyright (c)               The Xoops Project - www.xoops.org
  *
  * Parameters received by this page :
- * @page_param int              topic_id Topic's ID
- * @page_param int              storynum Number of news per page
- * @page_param int              start   First news to display
+ * @page_param                  int              topic_id Topic's ID
+ * @page_param                  int              storynum Number of news per page
+ * @page_param                  int              start   First news to display
  *
  * @page_title                  Topic's title - Story's title - Module's name
  *
@@ -20,58 +20,57 @@
  *
  * Template's variables :
  * For each article
- * @template_var int            id story's ID
- * @template_var string         poster Complete link to the author's profile
- * @template_var string         author_name Author's name according to the module's option called displayname
- * @template_var int            author_uid Author's ID
- * @template_var float          rating New's rating
- * @template_var int            votes number of votes
- * @template_var int            posttimestamp Timestamp representing the published date
- * @template_var string         posttime Formated published date
- * @template_var string         text The introduction's text
- * @template_var string         morelink The link to read the full article (points to article.php)
- * @template_var string         adminlink Link reserved to the admin to edit and delete the news
- * @template_var string         mail_link Link used to send the story's url by email
- * @template_var string         title Story's title presented on the form of a link
+ * @template_var                int            id story's ID
+ * @template_var                string         poster Complete link to the author's profile
+ * @template_var                string         author_name Author's name according to the module's option called displayname
+ * @template_var                int            author_uid Author's ID
+ * @template_var                float          rating New's rating
+ * @template_var                int            votes number of votes
+ * @template_var                int            posttimestamp Timestamp representing the published date
+ * @template_var                string         posttime Formated published date
+ * @template_var                string         text The introduction's text
+ * @template_var                string         morelink The link to read the full article (points to article.php)
+ * @template_var                string         adminlink Link reserved to the admin to edit and delete the news
+ * @template_var                string         mail_link Link used to send the story's url by email
+ * @template_var                string         title Story's title presented on the form of a link
  * @template_varstring          news_title Just the news title
- * @template_var string         topic_title Just the topic's title
- * @template_var int            hits Number of times the article was read
- * @template_var int            files_attached Number of files attached to this news
- * @template_var string         attached_link An URL pointing to the attached files
- * @template_var string topic_color The topic's color
- * @template_var int            column_width column's width
- * @template_var int            displaynav To know if we must display the navigation's box
- * @template_var string         lang_go fixed text : Go!
- * @template_var string         lang_morereleases fixed text : More releases in
- * @template_var string         lang_on fixed text : on
- * @template_var string         lang_postedby fixed text : Posted by
- * @template_var string         lang_printerpage fixed text : Printer Friendly Page
- * @template_var string         lang_ratethisnews fixed text : Rate this News
- * @template_var string         lang_ratingc fixed text : Rating:
- * @template_var string         lang_reads fixed text : reads
- * @template_var string         lang_sendstory fixed text : Send this Story to a Friend
- * @template_var string         topic_select contains the topics selector
-*/
-include_once __DIR__ . '/header.php';
+ * @template_var                string         topic_title Just the topic's title
+ * @template_var                int            hits Number of times the article was read
+ * @template_var                int            files_attached Number of files attached to this news
+ * @template_var                string         attached_link An URL pointing to the attached files
+ * @template_var                string topic_color The topic's color
+ * @template_var                int            column_width column's width
+ * @template_var                int            displaynav To know if we must display the navigation's box
+ * @template_var                string         lang_go fixed text : Go!
+ * @template_var                string         lang_morereleases fixed text : More releases in
+ * @template_var                string         lang_on fixed text : on
+ * @template_var                string         lang_postedby fixed text : Posted by
+ * @template_var                string         lang_printerpage fixed text : Printer Friendly Page
+ * @template_var                string         lang_ratethisnews fixed text : Rate this News
+ * @template_var                string         lang_ratingc fixed text : Rating:
+ * @template_var                string         lang_reads fixed text : reads
+ * @template_var                string         lang_sendstory fixed text : Send this Story to a Friend
+ * @template_var                string         topic_select contains the topics selector
+ */
+require_once __DIR__ . '/header.php';
 
-include_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-include_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-include_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-include_once XOOPS_ROOT_PATH . '/class/tree.php';
+require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
+require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
 $nw_NewsStoryHandler = new nw_NewsStory();
 
 $topic_id = 0;
-if(isset($_GET['topic_id'])) {
+if (isset($_GET['topic_id'])) {
     $topic_id = intval($_GET['topic_id']);
-} 
+}
 
 if ($topic_id) {
-    $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler =& xoops_gethandler('groupperm');
-    if (!$gperm_handler->checkRight('nw_view', $topic_id, $groups, $xnews->getModule()->getVar('mid'))) {
+    $groups       = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    $gpermHandler = xoops_getHandler('groupperm');
+    if (!$gpermHandler->checkRight('nw_view', $topic_id, $groups, $xnews->getModule()->getVar('mid'))) {
         redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
-        exit();
     }
     $xoopsOption['storytopic'] = $topic_id;
 } else {
@@ -86,7 +85,7 @@ if (isset($_GET['storynum'])) {
     $xoopsOption['storynum'] = $xnews->getConfig('storyhome');
 }
 
-if (isset($_GET['start']) ) {
+if (isset($_GET['start'])) {
     $start = intval($_GET['start']);
 } else {
     $start = 0;
@@ -100,14 +99,14 @@ if ($xnews->getConfig('newsdisplay') == 'Classic' || $xoopsOption['storytopic'] 
 
 $firsttitle = '';
 $topictitle = '';
-$myts = MyTextSanitizer::getInstance();
-$sfiles = new nw_sFiles();
+$myts       = MyTextSanitizer::getInstance();
+$sfiles     = new nw_sFiles();
 
 $column_count = $xnews->getConfig('columnmode');
 
 if ($showclassic) {
-    $xoopsOption['template_main'] = 'nw_news_index.html';
-    include_once XOOPS_ROOT_PATH . '/header.php';
+    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_index.html';
+    require_once XOOPS_ROOT_PATH . '/header.php';
     $xt = new nw_NewsTopic();
     //DNPROSSI - ADDED
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
@@ -125,14 +124,14 @@ if ($showclassic) {
         $xt->getTopic($xoopsOption['storytopic']);
         $xoopsTpl->assign('topic_description', $xt->topic_description('S'));
         $xoopsTpl->assign('topic_color', '#' . $xt->topic_color('S'));
-        $topictitle=$xt->topic_title();
+        $topictitle = $xt->topic_title();
     }
 
-    if ($xnews->getConfig('displaynav') == 1 ) {
+    if ($xnews->getConfig('displaynav') == 1) {
         $xoopsTpl->assign('displaynav', true);
 
-        $allTopics = $xt->getAllTopics($xnews->getConfig('restrictindex'));
-        $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+        $allTopics    = $xt->getAllTopics($xnews->getConfig('restrictindex'));
+        $topic_tree   = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
 
         $xoopsTpl->assign('topic_select', $topic_select);
@@ -157,7 +156,7 @@ if ($showclassic) {
 
     $scount = count($sarray);
     $xoopsTpl->assign('story_count', $scount);
-    $k = 0;
+    $k       = 0;
     $columns = array();
     if ($scount > 0) {
         $storieslist = array();
@@ -168,16 +167,16 @@ if ($showclassic) {
 
         foreach ($sarray as $storyid => $thisstory) {
             $filescount = array_key_exists($thisstory->storyid(), $filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
-            $story = $thisstory->prepare2show($filescount);
+            $story      = $thisstory->prepare2show($filescount);
             // The line below can be used to display a Permanent Link image
-            // $story['title'] .= "&nbsp;&nbsp;<a href='" . XNEWS_MODULE_URL . "/article.php?storyid=" . $sarray[$i]->storyid() . "'><img src='".XNEWS_MODULE_URL . "/assets/images/x.gif' alt='Permanent Link' /></a>";
-            $story['news_title'] = $thisstory->storylink(); //$story['title'];
-            $story['title'] = $thisstory->textlink() . '&nbsp;:&nbsp;' . $story['title'];
-            $story['topic_title'] = $thisstory->textlink();
-            $story['topic_separator'] = ( $thisstory->textlink() != '' ) ? _MA_NW_SP : '';
-            $story['topic_color'] = '#' . $myts->displayTarea($thisstory->topic_color);
+            // $story['title'] .= "&nbsp;&nbsp;<a href='" . XNEWS_MODULE_URL . "/article.php?storyid=" . $sarray[$i]->storyid() . "'><img src='".XNEWS_MODULE_URL . "/assets/images/x.gif' alt='Permanent Link'></a>";
+            $story['news_title']      = $thisstory->storylink(); //$story['title'];
+            $story['title']           = $thisstory->textlink() . '&nbsp;:&nbsp;' . $story['title'];
+            $story['topic_title']     = $thisstory->textlink();
+            $story['topic_separator'] = ($thisstory->textlink() != '') ? _MA_NW_SP : '';
+            $story['topic_color']     = '#' . $myts->displayTarea($thisstory->topic_color);
             if ($firsttitle == '') {
-                $firsttitle=$myts->htmlSpecialChars($thisstory->topic_title()) . ' - ' . $myts->htmlSpecialChars($thisstory->title());
+                $firsttitle = $myts->htmlSpecialChars($thisstory->topic_title()) . ' - ' . $myts->htmlSpecialChars($thisstory->title());
             }
             $columns[$k][] = $story;
             $k++;
@@ -194,7 +193,7 @@ if ($showclassic) {
     if ($totalcount > $scount) {
         xoops_load('xoopspagenav');
         $pagenav = new XoopsPageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'topic_id=' . $xoopsOption['storytopic']);
-        if(nw_isbot()) { // A bot is reading the news, we are going to show it all the links so that he can read everything
+        if (nw_isbot()) { // A bot is reading the news, we are going to show it all the links so that he can read everything
             $xoopsTpl->assign('pagenav', $pagenav->renderNav($totalcount));
         } else {
             $xoopsTpl->assign('pagenav', $pagenav->renderNav());
@@ -202,9 +201,9 @@ if ($showclassic) {
     } else {
         $xoopsTpl->assign('pagenav', '');
     }
-} else {	// Affichage par sujets
-    $xoopsOption['template_main'] = 'nw_news_by_topic.html';
-    include_once XOOPS_ROOT_PATH . '/header.php';
+} else {    // Affichage par sujets
+    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_by_topic.html';
+    require_once XOOPS_ROOT_PATH . '/header.php';
 
     //DNPROSSI - ADDED
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
@@ -218,34 +217,34 @@ if ($showclassic) {
         $xoopsTpl->assign('rates', false);
     }
 
-    $xt = new nw_NewsTopic();
-    $alltopics =& $xt->getTopicsList(true, $xnews->getConfig('restrictindex'));
+    $xt            = new nw_NewsTopic();
+    $alltopics     =& $xt->getTopicsList(true, $xnews->getConfig('restrictindex'));
     $smarty_topics = array();
-    $topicstories = array();
+    $topicstories  = array();
 
     foreach ($alltopics as $topicid => $topic) {
-        $allstories = $nw_NewsStoryHandler->getAllPublished($xnews->getConfig('storyhome'), 0, $xnews->getConfig('restrictindex'), $topicid);
-        $storieslist=array();
+        $allstories  = $nw_NewsStoryHandler->getAllPublished($xnews->getConfig('storyhome'), 0, $xnews->getConfig('restrictindex'), $topicid);
+        $storieslist = array();
         foreach ($allstories as $thisstory) {
             $storieslist[] = $thisstory->storyid();
         }
         $filesperstory = $sfiles->getCountbyStories($storieslist);
         foreach ($allstories as $thisstory) {
-            $filescount = array_key_exists($thisstory->storyid(),$filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
-            $story = $thisstory->prepare2show($filescount);
-            $story['topic_title'] = $thisstory->textlink();
+            $filescount               = array_key_exists($thisstory->storyid(), $filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
+            $story                    = $thisstory->prepare2show($filescount);
+            $story['topic_title']     = $thisstory->textlink();
             $story['topic_separator'] = ($thisstory->textlink() != '') ? _MA_NW_SP : '';
-            $story['news_title'] = $story['title'];//$thisstory->storylink();
+            $story['news_title']      = $story['title'];//$thisstory->storylink();
             $topicstories[$topicid][] = $story;
         }
-        if(isset($topicstories[$topicid])) {
+        if (isset($topicstories[$topicid])) {
             $smarty_topics[$topicstories[$topicid][0]['posttimestamp']] = array('title' => $topic['title'], 'stories' => $topicstories[$topicid], 'id' => $topicid, 'topic_color' => $topic['color']);
         }
     }
 
     krsort($smarty_topics);
     $columns = array();
-    $i = 0;
+    $i       = 0;
     foreach ($smarty_topics as $thistopictimestamp => $thistopic) {
         $columns[$i][] = $thistopic;
         $i++;
@@ -264,15 +263,14 @@ $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
  */
 nw_CreateMetaDatas();
 
-
 /**
  * Create a clickable path from the root to the current topic (if we are viewing a topic)
  * Actually this is not used in the default templates but you can use it as you want
  * You can comment the code to optimize the requests count
  */
 if ($xoopsOption['storytopic']) {
-    include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
-    $mytree = new XoopsTree($xoopsDB->prefix('nw_topics'), 'topic_id', 'topic_pid');
+    require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
+    $mytree    = new XoopsTree($xoopsDB->prefix('nw_topics'), 'topic_id', 'topic_pid');
     $topicpath = $mytree->getNicePathFromId($xoopsOption['storytopic'], 'topic_title', 'index.php?op=1');
     $xoopsTpl->assign('topic_path', $topicpath);
     unset($mytree);
@@ -314,4 +312,4 @@ $xoopsTpl->assign('lang_sendstory', _MA_NW_SENDSTORY);
 $xoopsTpl->assign('lang_reads', _READS);
 $xoopsTpl->assign('lang_morereleases', _MA_NW_MORERELEASES);
 
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

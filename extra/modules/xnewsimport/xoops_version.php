@@ -32,9 +32,11 @@ $modversion['official']    = 0;
 $modversion['image']       = 'images/module_logo.png';
 $modversion['dirname']     = basename(__DIR__);
 
-$modversion['dirmoduleadmin'] = '/Frameworks/moduleclasses/moduleadmin';
-$modversion['icons16']        = '../../Frameworks/moduleclasses/icons/16';
-$modversion['icons32']        = '../../Frameworks/moduleclasses/icons/32';
+//$modversion['dirmoduleadmin'] = '/Frameworks/moduleclasses/moduleadmin';
+//$modversion['icons16']        = '../../Frameworks/moduleclasses/icons/16';
+//$modversion['icons32']        = '../../Frameworks/moduleclasses/icons/32';
+$modversion['modicons16'] = 'assets/images/icons/16';
+$modversion['modicons32'] = 'assets/images/icons/32';
 //about
 $modversion['release_date']        = '2013/09/14';
 $modversion['module_website_url']  = 'www.xoops.org';
@@ -45,7 +47,8 @@ $modversion['min_xoops']           = '2.5.6';
 $modversion['min_admin']           = '1.1';
 $modversion['min_db']              = array(
     'mysql'  => '5.0.7',
-    'mysqli' => '5.0.7');
+    'mysqli' => '5.0.7'
+);
 
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 

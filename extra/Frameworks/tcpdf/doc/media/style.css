@@ -159,37 +159,59 @@ ul {
 
 .src-php { font-weight: bold; }
 
-.src-doc { color: #009999 }
-.src-doc-close-template { color: #0000FF }
-.src-doc-coretag { color: #0099FF; font-weight: bold }
-.src-doc-inlinetag { color: #0099FF }
-.src-doc-internal { color: #6699cc }
-.src-doc-tag { color: #0080CC }
-.src-doc-template { color: #0000FF }
-.src-doc-type { font-style: italic }
-.src-doc-var { font-style: italic }
+.src-doc { color: #009999;
+}
+.src-doc-close-template { color: #0000FF;
+}
+.src-doc-coretag { color: #0099FF; font-weight: bold;
+}
+.src-doc-inlinetag { color: #0099FF;
+}
+.src-doc-internal { color: #6699cc;
+}
+.src-doc-tag { color: #0080CC;
+}
+.src-doc-template { color: #0000FF;
+}
+.src-doc-type { font-style: italic;
+}
+.src-doc-var { font-style: italic;
+}
 
-.tute-tag { color: #009999 }
-.tute-attribute-name { color: #0000FF }
-.tute-attribute-value { color: #0099FF }
+.tute-tag { color: #009999;
+}
+.tute-attribute-name { color: #0000FF;
+}
+.tute-attribute-value { color: #0099FF;
+}
 .tute-entity { font-weight: bold; }
-.tute-comment { font-style: italic }
-.tute-inline-tag { color: #636311; font-weight: bold }
+.tute-comment { font-style: italic;
+}
+.tute-inline-tag { color: #636311; font-weight: bold;
+}
 
 /* tutorial */
 
 .authors {  }
-.author { font-style: italic; font-weight: bold }
-.author-blurb { margin: .5em 0em .5em 2em; font-size: 85%; font-weight: normal; font-style: normal }
+.author { font-style: italic; font-weight: bold;
+}
+.author-blurb { margin: .5em 0em .5em 2em; font-size: 85%; font-weight: normal; font-style: normal;
+}
 .example { border: 1px dashed #999999; background-color: #EEEEEE; padding: .5em; }
 .listing { border: 1px dashed #999999; background-color: #EEEEEE; padding: .5em; white-space: nowrap; }
-.release-info { font-size: 85%; font-style: italic; margin: 1em 0em }
+.release-info { font-size: 85%; font-style: italic; margin: 1em 0em;
+}
 .ref-title-box {  }
 .ref-title {  }
-.ref-purpose { font-style: italic; color: #666666 }
+.ref-purpose { font-style: italic; color: #666666;
+}
 .ref-synopsis {  }
-.title { font-weight: bold; margin: 1em 0em 0em 0em; padding: .25em; border: 2px solid #999999; background-color: #9999CC  }
-.cmd-synopsis { margin: 1em 0em }
-.cmd-title { font-weight: bold }
-.toc { margin-left: 2em; padding-left: 0em }
+.title { font-weight: bold; margin: 1em 0em 0em 0em; padding: .25em; border: 2px solid #999999; background-color: #9999CC;
+}
+.cmd-synopsis { margin: 1em 0em;
+}
+.cmd-title { font-weight: bold;
+}
+.toc { margin-left: 2em; padding-left: 0em;
+}
 

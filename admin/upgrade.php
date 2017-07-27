@@ -1,51 +1,50 @@
 <?php
-include_once "header.php";
-include_once '../../../include/cp_header.php';
+require_once "header.php";
+require_once __DIR__ . '/../../../include/cp_header.php';
 xoops_cp_header();
-include_once XNEWS_MODULE_PATH . '/include/functions.php';
-
+require_once XNEWS_MODULE_PATH . '/include/functions.php';
 
 if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
-    $errors=0;
+    $errors = 0;
     //DNPROSSI - Upgrade if clone version is different from original's version
     //DNPROSSI - Import data from old news database files
     if (nw_TableExists($xoopsDB->prefix('stories'))) {
-        $sql = sprintf("INSERT INTO ". $xoopsDB->prefix('nw_stories') ." SELECT * FROM ". $xoopsDB->prefix('stories') .";");
+        $sql    = sprintf("INSERT INTO " . $xoopsDB->prefix('nw_stories') . " SELECT * FROM " . $xoopsDB->prefix('stories') . ";");
         $result = $xoopsDB->queryF($sql);
 
-        $sql = sprintf("INSERT INTO ". $xoopsDB->prefix('nw_stories_files') ." SELECT * FROM ". $xoopsDB->prefix('stories_files') .";");
+        $sql    = sprintf("INSERT INTO " . $xoopsDB->prefix('nw_stories_files') . " SELECT * FROM " . $xoopsDB->prefix('stories_files') . ";");
         $result = $xoopsDB->queryF($sql);
 
-        $sql = sprintf("INSERT INTO ". $xoopsDB->prefix('nw_topics') ." SELECT * FROM ". $xoopsDB->prefix('topics') .";");
+        $sql    = sprintf("INSERT INTO " . $xoopsDB->prefix('nw_topics') . " SELECT * FROM " . $xoopsDB->prefix('topics') . ";");
         $result = $xoopsDB->queryF($sql);
 
-        $sql = sprintf("INSERT INTO ". $xoopsDB->prefix('nw_stories_votedata') ." SELECT * FROM ". $xoopsDB->prefix('stories_votedata'). ";");
-        $result=$xoopsDB->queryF($sql);
+        $sql    = sprintf("INSERT INTO " . $xoopsDB->prefix('nw_stories_votedata') . " SELECT * FROM " . $xoopsDB->prefix('stories_votedata') . ";");
+        $result = $xoopsDB->queryF($sql);
     }
     // 1) Create, if it does not exists, the nw_stories_files table
-    if(!nw_TableExists($xoopsDB->prefix('nw_stories_files'))) {
-        $sql = 'CREATE TABLE ' . $xoopsDB->prefix('nw_stories_files')." (
-            fileid int(8) unsigned NOT NULL auto_increment,
-            filerealname varchar(255) NOT NULL default '',
-            storyid int(8) unsigned NOT NULL default '0',
-            date int(10) NOT NULL default '0',
-            mimetype varchar(64) NOT NULL default '',
-            downloadname varchar(255) NOT NULL default '',
-            counter int(8) unsigned NOT NULL default '0',
+    if (!nw_TableExists($xoopsDB->prefix('nw_stories_files'))) {
+        $sql = 'CREATE TABLE ' . $xoopsDB->prefix('nw_stories_files') . " (
+            fileid INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+            filerealname VARCHAR(255) NOT NULL DEFAULT '',
+            storyid INT(8) UNSIGNED NOT NULL DEFAULT '0',
+            date INT(10) NOT NULL DEFAULT '0',
+            mimetype VARCHAR(64) NOT NULL DEFAULT '',
+            downloadname VARCHAR(255) NOT NULL DEFAULT '',
+            counter INT(8) UNSIGNED NOT NULL DEFAULT '0',
             PRIMARY KEY  (fileid),
             KEY storyid (storyid)
             ) ENGINE=MyISAM;";
         if (!$xoopsDB->queryF($sql)) {
-            echo '<br />' . _AM_NW_UPGRADEFAILED.' '._AM_NW_UPGRADEFAILED1;
+            echo '<br>' . _AM_NW_UPGRADEFAILED . ' ' . _AM_NW_UPGRADEFAILED1;
             $errors++;
         }
     }
 
     // 2) Change the topic title's length, in the nw_topics table
-    $sql = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . ' CHANGE topic_title topic_title VARCHAR( 255 ) NOT NULL;');
+    $sql    = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . ' CHANGE topic_title topic_title VARCHAR( 255 ) NOT NULL;');
     $result = $xoopsDB->queryF($sql);
     if (!$result) {
-        echo '<br />' .  _AM_NW_UPGRADEFAILED.' '._AM_NW_UPGRADEFAILED2;
+        echo '<br>' . _AM_NW_UPGRADEFAILED . ' ' . _AM_NW_UPGRADEFAILED2;
         $errors++;
     }
 
@@ -71,20 +70,20 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 
     // 3) If it does not exists, create the table nw_stories_votedata
     if (!nw_TableExists($xoopsDB->prefix('nw_stories_votedata'))) {
-        $sql = 'CREATE TABLE ' . $xoopsDB->prefix('nw_stories_votedata')." (
-            ratingid int(11) unsigned NOT NULL auto_increment,
-            storyid int(8) unsigned NOT NULL default '0',
-            ratinguser int(11) NOT NULL default '0',
-            rating tinyint(3) unsigned NOT NULL default '0',
-            ratinghostname varchar(60) NOT NULL default '',
-            ratingtimestamp int(10) NOT NULL default '0',
+        $sql = 'CREATE TABLE ' . $xoopsDB->prefix('nw_stories_votedata') . " (
+            ratingid INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            storyid INT(8) UNSIGNED NOT NULL DEFAULT '0',
+            ratinguser INT(11) NOT NULL DEFAULT '0',
+            rating TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+            ratinghostname VARCHAR(60) NOT NULL DEFAULT '',
+            ratingtimestamp INT(10) NOT NULL DEFAULT '0',
             PRIMARY KEY  (ratingid),
             KEY ratinguser (ratinguser),
             KEY ratinghostname (ratinghostname),
             KEY storyid (storyid)
             ) ENGINE=MyISAM;";
         if (!$xoopsDB->queryF($sql)) {
-            echo '<br />' .  _AM_NW_UPGRADEFAILED.' '._AM_NW_UPGRADEFAILED3;
+            echo '<br>' . _AM_NW_UPGRADEFAILED . ' ' . _AM_NW_UPGRADEFAILED3;
             $errors++;
         }
     }
@@ -116,9 +115,9 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     }
 
     // 5) Add some indexes to the topics table
-    $sql = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . " ADD INDEX ( `topic_title` );");
+    $sql    = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . " ADD INDEX ( `topic_title` );");
     $result = $xoopsDB->queryF($sql);
-    $sql = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . " ADD INDEX ( `menu` );");
+    $sql    = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . " ADD INDEX ( `menu` );");
     $result = $xoopsDB->queryF($sql);
 
     $moduledirname = XNEWS_MODULE_DIRNAME;
@@ -126,7 +125,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     // At the end, if there was errors, show them or redirect user to the module's upgrade page
     if ($errors) {
         echo '<H1>' . _AM_NW_UPGRADEFAILED . '</H1>';
-        echo '<br />' . _AM_NW_UPGRADEFAILED0;
+        echo '<br>' . _AM_NW_UPGRADEFAILED0;
     } else {
         echo _AM_NW_UPGRADECOMPLETE . " - <a href='" . XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=" . $moduledirname . "'>" . _AM_NW_UPDATEMODULE . "</a>";
     }

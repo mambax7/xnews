@@ -27,7 +27,7 @@ define("_AM_XNI_IMPORT_CATEGORIES", "Categories to be imported");
 define("_AM_XNI_IMPORT_CATEGORIES_DSC", "Here are the categories that will be imported in xNews");
 define("_AM_XNI_IMPORT_SETTINGS", "Import Settings");
 define("_AM_XNI_IMPORT_SUCCESS", "The articles were successfully imported in the module.");
-define("_AM_XNI_IMPORT_CATEGORY_SUCCESS", "<b>Category</b> <em>%s</em> imported successfully. <br/>");
+define("_AM_XNI_IMPORT_CATEGORY_SUCCESS", "<b>Category</b> <em>%s</em> imported successfully. <br>");
 
 define("_AM_XNI_IMPORTED_ARTICLE", "Imported <b>article</b> : <em>%s</em>");
 define("_AM_XNI_IMPORTED_ARTICLES", "Articles imported : <em>%s</em>");
@@ -48,7 +48,7 @@ define("_AM_XNI_IMPORT_TO_DSC", "Choose the module you want to import articles <
 define("_AM_XNI_IMPORT_NO_CATEGORY", "No category was found");
 
 define("_AM_XNI_IMPORT_FROM_TOPICS", "Import from");
-define("_AM_XNI_IMPORT_FROM_TOPICS_DSC", "Select one or more categories to import from.<br /> Do not select anything to import all categories.");
+define("_AM_XNI_IMPORT_FROM_TOPICS_DSC", "Select one or more categories to import from.<br> Do not select anything to import all categories.");
 define("_AM_XNI_IMPORT_TO_TOPICS", "Import to");
 define("_AM_XNI_IMPORT_TO_TOPICS_DSC", "Select a topic to import to.");
 define("_AM_XNI_IMPORT_GOTOMODULE", "Goto module");

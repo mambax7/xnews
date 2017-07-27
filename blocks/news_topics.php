@@ -4,7 +4,7 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 /**
  * Solves issue when upgrading xoops version
  * Paths not set and block would not work
-*/
+ */
 if (!defined('XNEWS_MODULE_PATH')) {
     define("XNEWS_SUBPREFIX", "nw");
     define("XNEWS_MODULE_DIRNAME", "xnews");
@@ -17,32 +17,33 @@ if (!defined('XNEWS_MODULE_PATH')) {
     define("XNEWS_ATTACHED_FILES_URL", XOOPS_URL . "/uploads/" . XNEWS_MODULE_DIRNAME . "/attached");
 }
 
-function nw_b_news_topics_show() {
+function nw_b_news_topics_show()
+{
     global $topic_id; // Don't know why this is used and where it's coming from ....
-    include_once XNEWS_MODULE_PATH . '/include/functions.php';
-    include_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-    include_once XNEWS_MODULE_PATH . '/class/common/tree.php';
+    require_once XNEWS_MODULE_PATH . '/include/functions.php';
+    require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+    require_once XNEWS_MODULE_PATH . '/class/common/tree.php';
 
-    $jump = XNEWS_MODULE_URL . '/index.php?topic_id=';
-    $topic_id = !empty($topic_id) ? intval($topic_id) : 0;
+    $jump       = XNEWS_MODULE_URL . '/index.php?topic_id=';
+    $topic_id   = !empty($topic_id) ? intval($topic_id) : 0;
     $restricted = $xnews->getConfig('restrictindex');
 
-    $xt = new nw_NewsTopic();
-    $allTopics = $xt->getAllTopics($restricted);
-    $topic_tree = new XnewsMyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
-    $additional = " onchange='location=\"" . $jump . "\"+this.options[this.selectedIndex].value'";
+    $xt                 = new nw_NewsTopic();
+    $allTopics          = $xt->getAllTopics($restricted);
+    $topic_tree         = new XnewsMyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+    $additional         = " onchange='location=\"" . $jump . "\"+this.options[this.selectedIndex].value'";
     $block['selectbox'] = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', '', true, 0, $additional);
 
     //DNPROSSI ADDED
-    $block['newsmodule_url']= XNEWS_MODULE_URL;
+    $block['newsmodule_url'] = XNEWS_MODULE_URL;
 
     return $block;
 }
 
-
-function nw_b_news_topics_onthefly($options) {
-    $options = explode('|',$options);
-    $block = & nw_b_news_topics_show($options);
+function nw_b_news_topics_onthefly($options)
+{
+    $options = explode('|', $options);
+    $block   = &nw_b_news_topics_show($options);
 
     $tpl = new XoopsTpl();
     $tpl->assign('block', $block);

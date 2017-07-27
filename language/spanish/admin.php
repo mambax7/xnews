@@ -65,7 +65,6 @@ define("_AM_NW_DEL", "Eliminar");
 define("_AM_NW_CANCEL", "Cancelar");
 define("_AM_NW_WAYSYWTDTTAL", "Advertencia: ¿Está seguro de que quiere borrar este tema y todas sus historias y comentarios?");
 
-
 // Added in Beta6
 define("_AM_NW_TOPICSMNGR", "Gestor de temas");
 define("_AM_NW_PEARTICLES", "Enviar/Editar noticias");
@@ -131,23 +130,23 @@ define("_AM_NW_UPGRADEFAILED0", "Por favor anote los mensajes y trate de corregi
 define("_AM_NW_UPGR_ACCESS_ERROR", "Error, para lanzar el script de actualización, debe tener permisos de administrador en este módulo.");
 define("_AM_NW_PRUNE_BEFORE", "Purgar noticias publicadas antes de");
 define("_AM_NW_PRUNE_EXPIREDONLY", "Eliminar sólo las noticias expiradas");
-define("_AM_NW_PRUNE_CONFIRM", "Peligro, se dispone a eliminar permanentemente las noticias publicadas antes del %s .<br />Esta acción es irreversible y serán eliminadas %s noticias.<br />¿Está seguro de querer continuar?");
+define("_AM_NW_PRUNE_CONFIRM", "Peligro, se dispone a eliminar permanentemente las noticias publicadas antes del %s .<br>Esta acción es irreversible y serán eliminadas %s noticias.<br>¿Está seguro de querer continuar?");
 define("_AM_NW_PRUNE_TOPICS", "Limitar a los siguientes temas");
 define("_AM_NW_PRUNENEWS", "Purgar noticias");
 define("_AM_NW_EXPORT_NEWS", "Exportar noticias (en XML)");
 define("_AM_NW_EXPORT_NOTHING", "Lo siento pero no hay nada que exportar, por favor verifique los criterios.");
 define("_AM_NW_PRUNE_DELETED", "%d noticias han sido eliminadas.");
-define("_AM_NW_PERM_WARNING", "<h2><u>Atención</u>: <br />El botón de envío de cada formulario es independiente de los otros, por lo que necesitará hacer un envío de datos en cada uno de los 3 formularios y con su botón correspondiente.</h2>");
+define("_AM_NW_PERM_WARNING", "<h2><u>Atención</u>: <br>El botón de envío de cada formulario es independiente de los otros, por lo que necesitará hacer un envío de datos en cada uno de los 3 formularios y con su botón correspondiente.</h2>");
 define("_AM_NW_EXPORT_BETWEEN", "Exportar noticias publicadas entre");
 define("_AM_NW_EXPORT_AND", " y ");
-define("_AM_NW_EXPORT_PRUNE_DSC", "Si no selecciona ninguno serán utilizados todos los temas<br/> por el contrario, sólo los temas seleccionados serán usados.");
+define("_AM_NW_EXPORT_PRUNE_DSC", "Si no selecciona ninguno serán utilizados todos los temas<br> por el contrario, sólo los temas seleccionados serán usados.");
 define("_AM_NW_EXPORT_INCTOPICS", "Incluir definiciones de temas");
 define("_AM_NW_EXPORT_ERROR", "Error al intentar crear el archivo %s. Operación detenida.");
-define("_AM_NW_EXPORT_READY", "Su archivo de exportación xml está listo para ser descargado. <br /><a href='%s'>Haga clic en este enlace para descargarlo</a>.<br />No olvide <a href='%s'>eliminarlo</a> una vez descargado.");
+define("_AM_NW_EXPORT_READY", "Su archivo de exportación xml está listo para ser descargado. <br><a href='%s'>Haga clic en este enlace para descargarlo</a>.<br>No olvide <a href='%s'>eliminarlo</a> una vez descargado.");
 define("_AM_NW_RSS_URL", "URL de la agregación RSS");
 define("_AM_NW_NEWSLETTER", "Boletín de noticias");
 define("_AM_NW_NEWSLETTER_BETWEEN", "Seleccionar noticias publicadas entre");
-define("_AM_NW_NEWSLETTER_READY", "Su boletín de noticias está listo para ser descargado. <br /><a href='%s'>Haga clic en este enlace para descargarlo</a>.<br />No olvide <a href='%s'>eliminarlo</a> una vez descargado.");
+define("_AM_NW_NEWSLETTER_READY", "Su boletín de noticias está listo para ser descargado. <br><a href='%s'>Haga clic en este enlace para descargarlo</a>.<br>No olvide <a href='%s'>eliminarlo</a> una vez descargado.");
 define("_AM_NW_DELETED_OK", "Archivo eliminado satisfactoriamente.");
 define("_AM_NW_DELETED_PB", "Ha ocurrido un error al intentar eliminar el archivo.");
 define("_AM_NW_STATS0", "Estadísticas de las noticias");
@@ -165,7 +164,7 @@ define("_AM_NW_STATS10", "Estadísticas de los redactores");
 define("_AM_NW_STATS11", "Total noticias");
 define("_AM_NW_HELP", "Ayuda");
 define("_AM_NW_MODULEADMIN", "Administración del módulo");
-define("_AM_NW_GENERALSET", "Ajustes generales" );
+define("_AM_NW_GENERALSET", "Ajustes generales");
 define("_AM_NW_GOTOMOD", "Ir al módulo");
 define("_AM_NW_NOTHING", "Lo siento pero no hay nada que descargar, revise los criterios.");
 define("_AM_NW_NOTHING_PRUNE", "Lo siento pero no hay nada que purgar, revise los criterios.");
@@ -181,11 +180,11 @@ define("_AM_NW_NEWSLETTER_FOOTER", "Pie de Pag.");
 define("_AM_NW_NEWSLETTER_HTML_TAGS", "¿Eliminar etiquetas html?");
 define("_AM_NW_VERIFY_TABLES", "Mantenimiento de tablas");
 define("_AM_NW_METAGEN", "Metagen");
-define("_AM_NW_METAGEN_DESC", "Metagen es un sistema que le ayudará a indexar su página mejor en los buscadores.<br />Si no indica ninguno de los campos (palabras clave y descripción) el módulo los añadirá automáticamente.");
+define("_AM_NW_METAGEN_DESC", "Metagen es un sistema que le ayudará a indexar su página mejor en los buscadores.<br>Si no indica ninguno de los campos (palabras clave y descripción) el módulo los añadirá automáticamente.");
 define("_AM_NW_BLACKLIST", "Lista negra");
 define("_AM_NW_BLACKLIST_DESC", "Las palabras que aparezcan en la lista no podrán ser usadas como palabras clave (keywords)");
 define("_AM_NW_BLACKLIST_ADD", "Añadir");
-define("_AM_NW_BLACKLIST_ADD_DSC", "Indique las palabras que serán añadidas a la lista<br />(una palabra por línea)");
+define("_AM_NW_BLACKLIST_ADD_DSC", "Indique las palabras que serán añadidas a la lista<br>(una palabra por línea)");
 define("_AM_NW_META_KEYWORDS_CNT", "Número máximo de palabras clave para la autogeneración");
 define("_AM_NW_META_KEYWORDS_ORDER", "Orden de las palabras clave");
 define("_AM_NW_META_KEYWORDS_INTEXT", "Crearlas según el orden en el que aparezcan en el texto");
@@ -204,30 +203,31 @@ define("_AM_NW_CLONER_DIRFOL", "Directorio/Carpeta");
 define("_AM_NW_CLONER_VERSION", "Versión");
 
 define("_AM_NW_CLONER_NEWNAME", "Nombre del Módulo");
-define("_AM_NW_CLONER_NEWNAMEDESC", "Esto también afectará a la creación de la carpeta del módulo nuevo. <br /> mayúsculas, minúsculas y los espacios son ignorados y se auto corrigen. <br /> ej. nuevo nombre = <b>Biblioteca</b> nuevo dir  = <b>biblioteca</b>, <br /> nuevo nombre <b>Mi Biblioteca</b> new dir = <b>mibiblioteca</b>. <br /><br /> módulo de inicio es: <font color='#008400'><b> %s </b></font><br />");
+define("_AM_NW_CLONER_NEWNAMEDESC",
+       "Esto también afectará a la creación de la carpeta del módulo nuevo. <br> mayúsculas, minúsculas y los espacios son ignorados y se auto corrigen. <br> ej. nuevo nombre = <b>Biblioteca</b> nuevo dir  = <b>biblioteca</b>, <br> nuevo nombre <b>Mi Biblioteca</b> new dir = <b>mibiblioteca</b>. <br><br> módulo de inicio es: <font color='#008400'><b> %s </b></font><br>");
 define("_AM_NW_CLONER_NEWNAMELABEL", "Nuevo Módulo:");
 
 define("_AM_NW_CLONER_DIREXISTS", "Directorio/Carpeta '%s' ya exíste!!");
 define("_AM_NW_CLONER_CREATED", "El Módulo '%s' fue clonado correctamente!!");
 define("_AM_NW_CLONER_UPRADED", "El Módulo '%s' ha sido actualizado correctamente!!");
-define("_AM_NW_CLONER_NOMODULEID", "No se ha establecido la ID del módulo!"); 
+define("_AM_NW_CLONER_NOMODULEID", "No se ha establecido la ID del módulo!");
 
 define("_AM_NW_CLONER_UPDATE", "Actualizar");
 define("_AM_NW_CLONER_INSTALL", "Instalar");
 define("_AM_NW_CLONER_UNINSTALL", "Desinstalar");
-define("_AM_NW_CLONER_ACTION_INSTALL", "Instalar/Desinstalar"); 
+define("_AM_NW_CLONER_ACTION_INSTALL", "Instalar/Desinstalar");
 
 define("_AM_NW_CLONER_IMPORTNEWS", "Importar datos originales del módulo de Noticias");
 define("_AM_NW_CLONER_IMPORTNEWSDESC1", "Módulo original de Noticias existe! ¿Importar datos ahora?");
-define("_AM_NW_CLONER_IMPORTNEWSDESC2", "El botón de importación sólo aparece si la tabla stories del módulo x"."News está vacia. <br />
-                                         Si ha añadido el tema de la historia antes de importar<br />
-                                         El módulo original de Noticias tendrá que desinstalar / reinstalar x"."News. <br />
+define("_AM_NW_CLONER_IMPORTNEWSDESC2", "El botón de importación sólo aparece si la tabla stories del módulo x" . "News está vacia. <br>
+                                         Si ha añadido el tema de la historia antes de importar<br>
+                                         El módulo original de Noticias tendrá que desinstalar / reinstalar x" . "News. <br>
                                          Si usted ya ha importado los datos originales del módulo Noticias, déjelo como está.");
 define("_AM_NW_CLONER_IMPORTNEWSSUB", "Importar");
 define("_AM_NW_CLONER_NEWSIMPORTED", "Los datos originales del módulo News se importaron correctamente.");
 
 // Added in version 1.68 Beta
-define("_AM_NW_DESCRIPTION", "<H3>x"."News es un módulo clonable de noticias </H3> 
+define("_AM_NW_DESCRIPTION", "<H3>x" . "News es un módulo clonable de noticias </H3> 
 							  donde los usuarios pueden publicar noticias y comentarios. El módulo puede ser clonado para que ser un método único para muchas tareas diferentes. Otras noticias que las de costumbre,  También puede ser utilizado para obtener información, enlaces y más, todos con sus propios bloques, temas y sus ajustes.");
 
 // Added in version 1.68 RC1
@@ -236,14 +236,13 @@ define("_AM_NW_CLONER_CLONEDELETEDERR", "'%s' El clon no puede ser eliminado - r
 define("_AM_NW_CLONER_CLONEUPGRADED", "Actualizado");
 define("_AM_NW_CLONER_UPGRADEFORCE", "Forzar actualización");
 define("_AM_NW_CLONER_CLONEDELETION", "Eliminando clon");
-define("_AM_NW_CLONER_SUREDELETE", "¿Está seguro que desea eliminar el<font color='#000000'>'%s'</font> clon?<br />");
-define("_AM_NW_CLONER_CLONEID", "La ID del clon no estaba definida"); 
+define("_AM_NW_CLONER_SUREDELETE", "¿Está seguro que desea eliminar el<font color='#000000'>'%s'</font> clon?<br>");
+define("_AM_NW_CLONER_CLONEID", "La ID del clon no estaba definida");
 
 // Added in version 1.68 RC2
-define("_AM_NW_INDEX", "Index"); 
+define("_AM_NW_INDEX", "Index");
 
 // Added in version 1.68 RC3
 define("_AM_NW_DOLINEBREAK", "Enable Line Break");
 
-define("_AM_NW_TOPICS","Topics");
-?>
+define("_AM_NW_TOPICS", "Topics");

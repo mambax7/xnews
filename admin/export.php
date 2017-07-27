@@ -1,32 +1,35 @@
 <?php
+
+use Xmf\Request;
+
 $currentFile = basename(__FILE__);
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
-include_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
-include_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-include_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-include_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-include_once XNEWS_MODULE_PATH . '/class/blacklist.php';
-include_once XNEWS_MODULE_PATH . '/class/registryfile.php';
+require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
+require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
+require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
 
-include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 xoops_load('xoopspagenav');
-include_once XOOPS_ROOT_PATH . '/class/tree.php';
+require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-$myts = MyTextSanitizer::getInstance();
+$myts        = MyTextSanitizer::getInstance();
 $topicscount = 0;
 
 $storiesTableName = $GLOBALS['xoopsDB']->prefix('nw_stories');
-if(!nw_FieldExists('picture', $storiesTableName)) {
+if (!nw_FieldExists('picture', $storiesTableName)) {
     nw_AddField('`picture` VARCHAR( 50 ) NOT NULL', $storiesTableName);
 }
 
 // admin navigation
 xoops_cp_header();
-$indexAdmin = new ModuleAdmin();
-echo $indexAdmin->addNavigation($currentFile);
+$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject->displayNavigation($currentFile);
 //
 
 function nw_utf8_encode($text)
@@ -34,24 +37,24 @@ function nw_utf8_encode($text)
     return xoops_utf8_encode($text);
 }
 
-$op = XoopsRequest::getString('op', 'default');
+$op = Request::getString('op', 'default');
 
 switch ($op) {
     default:
     case 'export':
-        include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-        $sform = new XoopsThemeForm(_AM_NW_EXPORT_NEWS, 'exportform', $currentFile, 'post', true);
+        require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+        $sform      = new XoopsThemeForm(_AM_NW_EXPORT_NEWS, 'exportform', $currentFile, 'post', true);
         $dates_tray = new XoopsFormElementTray(_AM_NW_EXPORT_BETWEEN);
-        $date1 = new XoopsFormTextDateSelect('', 'date1', 15, time());
-        $date2 = new XoopsFormTextDateSelect(_AM_NW_EXPORT_AND, 'date2', 15, time());
+        $date1      = new XoopsFormTextDateSelect('', 'date1', 15, time());
+        $date2      = new XoopsFormTextDateSelect(_AM_NW_EXPORT_AND, 'date2', 15, time());
         $dates_tray->addElement($date1);
         $dates_tray->addElement($date2);
         $sform->addElement($dates_tray);
 
-        $topiclist=new XoopsFormSelect(_AM_NW_PRUNE_TOPICS, 'export_topics','', 5, true);
-        $topics_arr=array();
-        $xt = new nw_NewsTopic();
-        $allTopics = $xt->getAllTopics(false);                // The webmaster can see everything
+        $topiclist  = new XoopsFormSelect(_AM_NW_PRUNE_TOPICS, 'export_topics', '', 5, true);
+        $topics_arr = array();
+        $xt         = new nw_NewsTopic();
+        $allTopics  = $xt->getAllTopics(false);                // The webmaster can see everything
         $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topics_arr = $topic_tree->getAllChild(0);
         if (count($topics_arr)) {
@@ -60,11 +63,11 @@ switch ($op) {
             }
         }
         $topiclist->setDescription(_AM_NW_EXPORT_PRUNE_DSC);
-        $sform->addElement($topiclist,false);
-        $sform->addElement(new XoopsFormRadioYN(_AM_NW_EXPORT_INCTOPICS, 'includetopics', 0),false);
+        $sform->addElement($topiclist, false);
+        $sform->addElement(new XoopsFormRadioYN(_AM_NW_EXPORT_INCTOPICS, 'includetopics', 0), false);
         $sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
-        $button_tray = new XoopsFormElementTray('' ,'');
-        $submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+        $button_tray = new XoopsFormElementTray('', '');
+        $submit_btn  = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
         $button_tray->addElement($submit_btn);
         $sform->addElement($button_tray);
         $sform->display();
@@ -72,23 +75,23 @@ switch ($op) {
         break;
 
     case 'launchexport':
-        $story = new nw_NewsStory();
-        $topic = new nw_NewsTopic();
+        $story           = new nw_NewsStory();
+        $topic           = new nw_NewsTopic();
         $exportedstories = array();
-        $date1 = $_POST['date1'];
-        $date2 = $_POST['date2'];
-        $timestamp1 = mktime(0, 0, 0, intval(substr($date1, 5,2)), intval(substr($date1, 8, 2)), intval(substr($date1, 0, 4)));
-        $timestamp2 = mktime(23, 59, 59, intval(substr($date2, 5, 2)), intval(substr($date2, 8, 2)), intval(substr($date2, 0, 4)));
-        $topiclist = '';
+        $date1           = $_POST['date1'];
+        $date2           = $_POST['date2'];
+        $timestamp1      = mktime(0, 0, 0, intval(substr($date1, 5, 2)), intval(substr($date1, 8, 2)), intval(substr($date1, 0, 4)));
+        $timestamp2      = mktime(23, 59, 59, intval(substr($date2, 5, 2)), intval(substr($date2, 8, 2)), intval(substr($date2, 0, 4)));
+        $topiclist       = '';
         if (isset($_POST['export_topics'])) {
             $topiclist = implode(',', $_POST['export_topics']);
         }
-        $topicsexport = intval($_POST['includetopics']);
-        $tbltopics = array();
-        $exportedstories=$story->NewsExport($timestamp1, $timestamp2, $topiclist, $topicsexport, $tbltopics);
+        $topicsexport    = intval($_POST['includetopics']);
+        $tbltopics       = array();
+        $exportedstories = $story->NewsExport($timestamp1, $timestamp2, $topiclist, $topicsexport, $tbltopics);
         if (count($exportedstories)) {
             $xmlfile = XOOPS_ROOT_PATH . '/uploads/nw_stories.xml';
-            $fp = fopen($xmlfile, 'w');
+            $fp      = fopen($xmlfile, 'w');
             if (!$fp) {
                 redirect_header('index.php', 4, sprintf(_AM_NW_EXPORT_ERROR, $xmlfile));
             }
@@ -143,9 +146,9 @@ switch ($op) {
                 $content .= sprintf("\t<tags>%s</tags>\n", $onestory->tags());
                 $content .= sprintf("</xoops_story>\n");
                 $content = nw_utf8_encode($content);
-                fwrite($fp,$content);
+                fwrite($fp, $content);
             }
-            fwrite($fp,nw_utf8_encode("</nw_stories>\n"));
+            fwrite($fp, nw_utf8_encode("</nw_stories>\n"));
             fclose($fp);
             $xmlfile = XOOPS_URL . '/uploads/nw_stories.xml';
             printf(_AM_NW_EXPORT_READY, $xmlfile, NW_MODULE_URL . '/admin/index.php?op=deletefile&amp;type=xml');

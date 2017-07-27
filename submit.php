@@ -1,15 +1,14 @@
 <?php
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
-include_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-include_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-include_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
+require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 xoops_loadLanguage('admin', $xnews->getModule()->dirname());
 
-include_once XOOPS_ROOT_PATH . '/header.php';
-
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $storyid = 0;
 
@@ -19,7 +18,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 
-$gperm_handler =& xoops_gethandler('groupperm');
+$gpermHandler = xoops_getHandler('groupperm');
 
 if (isset($_POST['topic_id'])) {
     $perm_itemid = intval($_POST['topic_id']);
@@ -27,15 +26,14 @@ if (isset($_POST['topic_id'])) {
     $perm_itemid = 0;
 }
 //If no access
-if (!$gperm_handler->checkRight('nw_submit', $perm_itemid, $groups, $xnews->getModule()->getVar('mid'))) {
+if (!$gpermHandler->checkRight('nw_submit', $perm_itemid, $groups, $xnews->getModule()->getVar('mid'))) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
-    exit();
 }
 $op = 'form';
 
 //If approve privileges
 $approveprivilege = 0;
-if (is_object($xoopsUser) && $gperm_handler->checkRight('nw_approve', $perm_itemid, $groups, $xnews->getModule()->getVar('mid'))) {
+if (is_object($xoopsUser) && $gpermHandler->checkRight('nw_approve', $perm_itemid, $groups, $xnews->getModule()->getVar('mid'))) {
     $approveprivilege = 1;
 }
 
@@ -46,44 +44,40 @@ if (isset($_POST['preview'])) {
 } elseif (isset($_GET['op']) && isset($_GET['storyid'])) {
     // Verify that the user can edit or delete an article
     if ($_GET['op'] == 'edit' || $_GET['op'] == 'delete') {
-        if($xnews->getConfig('authoredit') == 1) {
+        if ($xnews->getConfig('authoredit') == 1) {
             $tmpstory = new nw_NewsStory(intval($_GET['storyid']));
             if (is_object($xoopsUser) && $xoopsUser->getVar('uid') != $tmpstory->uid() && !nw_is_admin_group()) {
                 redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
-                exit();
             }
         } else { // Users can't edit their articles
             if (!nw_is_admin_group()) {
                 redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
-                exit();
             }
         }
     }
 
     if ($approveprivilege && $_GET['op'] == 'edit') {
-        $op = 'edit';
+        $op      = 'edit';
         $storyid = intval($_GET['storyid']);
-    }
-    elseif ($approveprivilege && $_GET['op'] == 'delete') {
-        $op = 'delete';
+    } elseif ($approveprivilege && $_GET['op'] == 'delete') {
+        $op      = 'delete';
         $storyid = intval($_GET['storyid']);
     } else {
-        if ($xnews->getConfig('authoredit') && is_object($xoopsUser) && isset($_GET['storyid']) && ($_GET['op']=='edit' || $_POST['op']=='preview' || $_POST['op']=='post')) {
+        if ($xnews->getConfig('authoredit') && is_object($xoopsUser) && isset($_GET['storyid']) && ($_GET['op'] == 'edit' || $_POST['op'] == 'preview' || $_POST['op'] == 'post')) {
             $storyid = 0;
             $storyid = isset($_GET['storyid']) ? intval($_GET['storyid']) : intval($_POST['storyid']);
             if (!empty($storyid)) {
                 $tmpstory = new nw_NewsStory($storyid);
-                if ($tmpstory->uid()==$xoopsUser->getVar('uid')) {
-                    $op= isset($_GET['op']) ? $_GET['op'] : $_POST['post'];
+                if ($tmpstory->uid() == $xoopsUser->getVar('uid')) {
+                    $op = isset($_GET['op']) ? $_GET['op'] : $_POST['post'];
                     unset($tmpstory);
-                    $approveprivilege=1;
+                    $approveprivilege = 1;
                 } else {
                     unset($tmpstory);
                     if (!nw_is_admin_group()) {
                         redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
-                        exit();
                     } else {
-                        $approveprivilege=1;
+                        $approveprivilege = 1;
                     }
                 }
             }
@@ -91,9 +85,8 @@ if (isset($_POST['preview'])) {
             if (!nw_is_admin_group()) {
                 unset($tmpstory);
                 redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
-                exit();
             } else {
-                $approveprivilege=1;
+                $approveprivilege = 1;
             }
         }
     }
@@ -103,37 +96,35 @@ switch ($op) {
     case 'edit':
         if (!$approveprivilege) {
             redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
-            exit();
             break;
         }
         //if($storyid==0 && isset($_POST['storyid'])) {
-         //    $storyid=intval($_POST['storyid']);
-           //}
+        //    $storyid=intval($_POST['storyid']);
+        //}
         $story = new nw_NewsStory($storyid);
-        if (!$gperm_handler->checkRight('nw_view', $story->topicid(), $groups, $xnews->getModule()->getVar('mid'))) {
+        if (!$gpermHandler->checkRight('nw_view', $story->topicid(), $groups, $xnews->getModule()->getVar('mid'))) {
             redirect_header(XNEWS_MODULE_URL . '/index.php', 0, _NOPERM);
-            exit();
         }
-        echo"<table width='100%' border='0' cellspacing='1' class='outer'><tr><td class=\"odd\">";
+        echo "<table width='100%' border='0' cellspacing='1' class='outer'><tr><td class=\"odd\">";
         echo '<h4>' . _AM_NW_EDITARTICLE . '</h4>';
-        $title = $story->title('Edit');
-        $hometext = $story->hometext('Edit');
-        $bodytext = $story->bodytext('Edit');
-        $nohtml = $story->nohtml();
-        $nosmiley = $story->nosmiley();
+        $title       = $story->title('Edit');
+        $hometext    = $story->hometext('Edit');
+        $bodytext    = $story->bodytext('Edit');
+        $nohtml      = $story->nohtml();
+        $nosmiley    = $story->nosmiley();
         $description = $story->description();
-        $keywords = $story->keywords();
-        $ihome = $story->ihome();
-        $newsauthor = $story->uid();
-        $topicid = $story->topicid();
-        $notifypub = $story->notifypub();
-        $picture = $story->picture();
+        $keywords    = $story->keywords();
+        $ihome       = $story->ihome();
+        $newsauthor  = $story->uid();
+        $topicid     = $story->topicid();
+        $notifypub   = $story->notifypub();
+        $picture     = $story->picture();
         //DNPROSSI - 1.71
         $imagerows = $story->imagerows();
-        $pdfrows = $story->pdfrows();
+        $pdfrows   = $story->pdfrows();
         //DNPROSSI - dobr
-        $dobr = $story->dobr();
-        $approve = 0;
+        $dobr      = $story->dobr();
+        $approve   = 0;
         $published = $story->published();
         if (isset($published) && $published > 0) {
             $approve = 1;
@@ -146,36 +137,36 @@ switch ($op) {
         } else {
             $expired = 0;
         }
-        $type = $story->type();
+        $type         = $story->type();
         $topicdisplay = $story->topicdisplay();
-        $topicalign = $story->topicalign(false);
+        $topicalign   = $story->topicalign(false);
         if (!nw_is_admin_group()) {
-            include_once XNEWS_MODULE_PATH . '/include/storyform.inc.php';
+            require_once XNEWS_MODULE_PATH . '/include/storyform.inc.php';
         } else {
-            include_once XNEWS_MODULE_PATH . '/include/storyform.original.php';
+            require_once XNEWS_MODULE_PATH . '/include/storyform.original.php';
         }
-        echo'</td></tr></table>';
+        echo '</td></tr></table>';
         break;
 
     case 'preview':
         $topic_id = intval($_POST['topic_id']);
-        $xt = new nw_NewsTopic($topic_id);
+        $xt       = new nw_NewsTopic($topic_id);
         if (isset($_GET['storyid'])) {
-            $storyid=intval($_GET['storyid']);
+            $storyid = intval($_GET['storyid']);
         } else {
-            if(isset($_POST['storyid'])) {
-                $storyid=intval($_POST['storyid']);
+            if (isset($_POST['storyid'])) {
+                $storyid = intval($_POST['storyid']);
             } else {
-                $storyid=0;
+                $storyid = 0;
             }
         }
 
         if (!empty($storyid)) {
-            $story = new nw_NewsStory($storyid);
+            $story     = new nw_NewsStory($storyid);
             $published = $story->published();
-            $expired = $story->expired();
+            $expired   = $story->expired();
         } else {
-            $story = new nw_NewsStory();
+            $story     = new nw_NewsStory();
             $published = isset($_POST['publish_date']) ? $_POST['publish_date'] : 0;
             if (!empty($published) && isset($_POST['autodate']) && intval($_POST['autodate'] == 1)) {
                 $published = strtotime($published['date']) + $published['time'];
@@ -196,7 +187,7 @@ switch ($op) {
             $topicdisplay = 1;
         }
 
-        $approve = isset($_POST['approve']) ? intval($_POST['approve']) : 0;
+        $approve    = isset($_POST['approve']) ? intval($_POST['approve']) : 0;
         $topicalign = 'R';
         if (isset($_POST['topicalign'])) {
             $topicalign = $_POST['topicalign'];
@@ -217,15 +208,15 @@ switch ($op) {
         }
 
         if ($approveprivilege || (is_object($xoopsUser) && $xoopsUser->isAdmin($xnews->getModule()->mid()))) {
-            if(isset($_POST['author'])) {
+            if (isset($_POST['author'])) {
                 $story->setUid(intval($_POST['author']));
             }
         }
 
         $notifypub = isset($_POST['notifypub']) ? intval($_POST['notifypub']) : 0;
-        $nosmiley = isset($_POST['nosmiley']) ? intval($_POST['nosmiley']) : 0;
+        $nosmiley  = isset($_POST['nosmiley']) ? intval($_POST['nosmiley']) : 0;
         if (isset($nosmiley) && ($nosmiley == 0 || $nosmiley == 1)) {
-            $story -> setNosmiley($nosmiley);
+            $story->setNosmiley($nosmiley);
         } else {
             $nosmiley = 0;
         }
@@ -246,40 +237,40 @@ switch ($op) {
             $dobr = 0;
         }
 
-        $title = $story->title('InForm');
-          $hometext = $story->hometext('InForm');
-          if ($approveprivilege) {
-              $bodytext = $story->bodytext('InForm');
-              $ihome = $story->ihome();
-              $description = $story->description('E');
-              $keywords = $story->keywords('E');
-          }
+        $title    = $story->title('InForm');
+        $hometext = $story->hometext('InForm');
+        if ($approveprivilege) {
+            $bodytext    = $story->bodytext('InForm');
+            $ihome       = $story->ihome();
+            $description = $story->description('E');
+            $keywords    = $story->keywords('E');
+        }
 
         // Display post preview
-        $newsauthor=$story->uid();
-        $p_title = $story->title('Preview');
+        $newsauthor = $story->uid();
+        $p_title    = $story->title('Preview');
         $p_hometext = $story->hometext('Preview');
         if ($approveprivilege) {
             $p_bodytext = $story->bodytext('Preview');
-            $p_hometext .= '<br /><br />' . $p_bodytext;
+            $p_hometext .= '<br><br>' . $p_bodytext;
         }
         $topicalign2 = isset($story->topicalign) ? 'align="' . $story->topicalign() . '"' : '';
-        $p_hometext = (($xt->topic_imgurl() != '') && $topicdisplay) ? '<img src="assets/images/topics/' . $xt->topic_imgurl() . '" ' . $topicalign2 . ' alt="" />' . $p_hometext : $p_hometext;
+        $p_hometext  = (($xt->topic_imgurl() != '') && $topicdisplay) ? '<img src="assets/images/topics/' . $xt->topic_imgurl() . '" ' . $topicalign2 . ' alt="">' . $p_hometext : $p_hometext;
         themecenterposts($p_title, $p_hometext);
 
         // Display post edit form
-        $returnside=intval($_POST['returnside']);
-        include_once XNEWS_MODULE_PATH . '/include/storyform.inc.php';
+        $returnside = intval($_POST['returnside']);
+        require_once XNEWS_MODULE_PATH . '/include/storyform.inc.php';
         break;
 
     case 'post':
         $nohtml_db = isset($_POST['nohtml']) ? $_POST['nohtml'] : 1;
-        if (is_object($xoopsUser) ) {
+        if (is_object($xoopsUser)) {
             $uid = $xoopsUser->getVar('uid');
             if ($approveprivilege) {
                 $nohtml_db = empty($_POST['nohtml']) ? 0 : 1;
             }
-            if (isset($_POST['author']) && ($approveprivilege || $xoopsUser->isAdmin($xnews->getModule()->mid())) ) {
+            if (isset($_POST['author']) && ($approveprivilege || $xoopsUser->isAdmin($xnews->getModule()->mid()))) {
                 $uid = intval($_POST['author']);
             }
         } else {
@@ -289,7 +280,7 @@ switch ($op) {
         if (isset($_GET['storyid'])) {
             $storyid = intval($_GET['storyid']);
         } else {
-            if(isset($_POST['storyid'])) {
+            if (isset($_POST['storyid'])) {
                 $storyid = intval($_POST['storyid']);
             } else {
                 $storyid = 0;
@@ -297,10 +288,10 @@ switch ($op) {
         }
 
         if (empty($storyid)) {
-            $story = new nw_NewsStory();
+            $story    = new nw_NewsStory();
             $editmode = false;
         } else {
-            $story = new nw_NewsStory($storyid);
+            $story    = new nw_NewsStory($storyid);
             $editmode = true;
         }
         $story->setUid($uid);
@@ -338,7 +329,7 @@ switch ($op) {
             $dateTimeObj->setTime(0, 0, 0);
             $expiry_date = $dateTimeObj->getTimestamp() + $_POST['expiry_date']['time'];
             unset($dateTimeObj);
-            $offset = $xoopsUser->timezone() - $xoopsConfig['server_TZ'];
+            $offset      = $xoopsUser->timezone() - $xoopsConfig['server_TZ'];
             $expiry_date = $expiry_date - ($offset * 3600);
             $story->setExpired($expiry_date);
         } else {
@@ -352,7 +343,7 @@ switch ($op) {
             }
             $story->setTopicdisplay($_POST['topicdisplay']); // Display Topic Image ? (Yes or No)
             $story->setTopicalign($_POST['topicalign']); // Topic Align, 'Right' or 'Left'
-               $story->setIhome($_POST['ihome']); // Publish in home ? (Yes or No)
+            $story->setIhome($_POST['ihome']); // Publish in home ? (Yes or No)
             if (isset($_POST['bodytext'])) {
                 $story->setBodytext($_POST['bodytext']);
             } else {
@@ -395,18 +386,18 @@ switch ($op) {
         // Increment author's posts count (only if it's a new article)
         // First case, it's not an anonyous, the story is approved and it's a new story
         if ($uid && $approve && empty($storyid)) {
-            $tmpuser = new xoopsUser($uid);
-            $member_handler =& xoops_gethandler('member');
-            $member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
+            $tmpuser       = new xoopsUser($uid);
+            $memberHandler = xoops_getHandler('member');
+            $memberHandler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
         }
 
         // Second case, it's not an anonymous, the story is NOT approved and it's NOT a new story (typical when someone is approving a submited story)
         if (is_object($xoopsUser) && $approve && !empty($storyid)) {
-            $storytemp = new nw_NewsStory( $storyid );
-            if (!$storytemp->published() && $storytemp->uid()>0) { // the article has been submited but not approved
-                $tmpuser = new xoopsUser($storytemp->uid());
-                $member_handler =& xoops_gethandler('member');
-                $member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
+            $storytemp = new nw_NewsStory($storyid);
+            if (!$storytemp->published() && $storytemp->uid() > 0) { // the article has been submited but not approved
+                $tmpuser       = new xoopsUser($storytemp->uid());
+                $memberHandler = xoops_getHandler('member');
+                $memberHandler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
             }
             unset($storytemp);
         }
@@ -427,7 +418,7 @@ switch ($op) {
         if ($allowupload && isset($_POST['deleteimage']) && intval($_POST['deleteimage']) == 1) {
             $currentPicture = $story->picture();
             if (xoops_trim($currentPicture) != '') {
-                $currentPicture = XNEWS_TOPICS_FILES_PATH . '/'.xoops_trim($story->picture());
+                $currentPicture = XNEWS_TOPICS_FILES_PATH . '/' . xoops_trim($story->picture());
                 if (is_file($currentPicture) && file_exists($currentPicture)) {
                     if (!unlink($currentPicture)) {
                         trigger_error("Error, impossible to delete the picture attached to this article");
@@ -442,15 +433,15 @@ switch ($op) {
                 $fldname = $_FILES[$_POST['xoops_upload_file'][1]];
                 $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
                 if (xoops_trim($fldname != '')) {
-                    $sfiles = new nw_sFiles();
-                    $destname = $sfiles->createUploadName(XNEWS_TOPICS_FILES_PATH, $fldname);
+                    $sfiles         = new nw_sFiles();
+                    $destname       = $sfiles->createUploadName(XNEWS_TOPICS_FILES_PATH, $fldname);
                     $permittedTypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-                    $uploader = new XoopsMediaUploader(XNEWS_TOPICS_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
+                    $uploader       = new XoopsMediaUploader(XNEWS_TOPICS_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
                     $uploader->setTargetFileName($destname);
                     if ($uploader->fetchMedia($_POST['xoops_upload_file'][1])) {
                         if ($uploader->upload()) {
                             $fullPictureName = XNEWS_TOPICS_FILES_PATH . '/' . basename($destname);
-                            $newName = XNEWS_TOPICS_FILES_PATH . '/redim_' . basename($destname);
+                            $newName         = XNEWS_TOPICS_FILES_PATH . '/redim_' . basename($destname);
                             nw_resizePicture($fullPictureName, $newName, $xnews->getConfig('maxwidth'), $xnews->getConfig('maxheight'));
                             if (file_exists($newName)) {
                                 @unlink($fullPictureName);
@@ -458,7 +449,7 @@ switch ($op) {
                             }
                             $story->Setpicture(basename($destname));
                         } else {
-                            echo _AM_NW_UPLOAD_ERROR. ' ' . $uploader->getErrors();
+                            echo _AM_NW_UPLOAD_ERROR . ' ' . $uploader->getErrors();
                         }
                     } else {
                         echo $uploader->getErrors();
@@ -476,30 +467,30 @@ switch ($op) {
 
         if ($result) {
             if ($approveprivilege && $xnews->getConfig('tags')) {
-                $tag_handler = xoops_getmodulehandler('tag', 'tag');
-                $tag_handler->updateByItem($_POST['item_tag'], $story->storyid(), $xnews->getModule()->getVar('dirname'), 0);
+                $tagHandler = xoops_getModuleHandler('tag', 'tag');
+                $tagHandler->updateByItem($_POST['item_tag'], $story->storyid(), $xnews->getModule()->getVar('dirname'), 0);
             }
             if (!$editmode) {
                 //     Notification
                 // TODO: modifier afin qu'en cas de prépublication, la notification ne se fasse pas
-                $notification_handler =& xoops_gethandler('notification');
-                $tags = array();
-                $tags['STORY_NAME'] = $story->title();
-                $tags['STORY_URL'] = XNEWS_MODULE_URL . '/article.php?storyid=' . $story->storyid();
+                $notificationHandler = xoops_getHandler('notification');
+                $tags                = array();
+                $tags['STORY_NAME']  = $story->title();
+                $tags['STORY_URL']   = XNEWS_MODULE_URL . '/article.php?storyid=' . $story->storyid();
                 // If notify checkbox is set, add subscription for approve
                 if ($notifypub && $approve) {
-                    include_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
-                    $notification_handler->subscribe('story', $story->storyid(), 'approve', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE, $xnews->getModule()->getVar('mid'), $story->uid());
+                    require_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
+                    $notificationHandler->subscribe('story', $story->storyid(), 'approve', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE, $xnews->getModule()->getVar('mid'), $story->uid());
                 }
 
                 if ($approve == 1) {
-                    $notification_handler->triggerEvent('global', 0, 'new_story', $tags);
-                    $notification_handler->triggerEvent('story', $story->storyid(), 'approve', $tags);
+                    $notificationHandler->triggerEvent('global', 0, 'new_story', $tags);
+                    $notificationHandler->triggerEvent('story', $story->storyid(), 'approve', $tags);
                     // Added by Lankford on 2007/3/23
-                    $notification_handler->triggerEvent('category', $story->topicid(), 'new_story', $tags);
+                    $notificationHandler->triggerEvent('category', $story->topicid(), 'new_story', $tags);
                 } else {
                     $tags['WAITINGSTORIES_URL'] = XNEWS_MODULE_URL . '/admin/index.php?op=newarticle';
-                    $notification_handler->triggerEvent('global', 0, 'story_submit', $tags);
+                    $notificationHandler->triggerEvent('global', 0, 'story_submit', $tags);
                 }
             }
 
@@ -507,7 +498,6 @@ switch ($op) {
                 //DNPROSSI - Control if writable dir
                 if (!is_writeable(XNEWS_ATTACHED_FILES_PATH)) {
                     redirect_header(XNEWS_MODULE_URL . '/admin/index.php?op=newarticle', 2, _AD_WARNINGNOTWRITEABLE);
-                    exit();
                 }
                 // Manage upload(s)
                 if (isset($_POST['delupload']) && count($_POST['delupload']) > 0) {
@@ -519,15 +509,15 @@ switch ($op) {
                 if (isset($_POST['xoops_upload_file'])) {
                     $fldname = $_FILES[$_POST['xoops_upload_file'][0]];
                     $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-                    if (xoops_trim($fldname!='')) {
-                        $sfiles = new nw_sFiles();
-                        $destname = $sfiles->createUploadName(XNEWS_ATTACHED_FILES_PATH,$fldname);
+                    if (xoops_trim($fldname != '')) {
+                        $sfiles   = new nw_sFiles();
+                        $destname = $sfiles->createUploadName(XNEWS_ATTACHED_FILES_PATH, $fldname);
                         /**
                          * You can attach files to your news
                          */
-                        $permittedTypes = explode("\n",str_replace("\r", '', $xnews->getConfig('mimetypes')));
+                        $permittedTypes = explode("\n", str_replace("\r", '', $xnews->getConfig('mimetypes')));
                         array_walk($permittedTypes, 'trim');
-                        $uploader = new XoopsMediaUploader( XNEWS_ATTACHED_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
+                        $uploader = new XoopsMediaUploader(XNEWS_ATTACHED_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
                         $uploader->setTargetFileName($destname);
                         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
                             if ($uploader->upload()) {
@@ -535,16 +525,16 @@ switch ($op) {
                                 $sfiles->setStoryid($story->storyid());
                                 $sfiles->setMimetype($sfiles->giveMimetype(XNEWS_ATTACHED_FILES_PATH . '/' . $uploader->getMediaName()));
                                 $sfiles->setDownloadname($destname);
-                                if(!$sfiles->store()) {
+                                if (!$sfiles->store()) {
                                     echo _AM_NW_UPLOAD_DBERROR_SAVE;
                                 }
                                 //DNPROSSI - 1.71 - creates attached image maxsize
                                 if (strstr($sfiles->getMimetype(), 'image')) {
                                     $fullPictureName = XNEWS_ATTACHED_FILES_PATH . '/' . basename($destname);
-                                    $newName = XNEWS_ATTACHED_FILES_PATH . '/redim_' . basename($destname);
-// IN PROGRESS
-// IN PROGRESS
-// IN PROGRESS
+                                    $newName         = XNEWS_ATTACHED_FILES_PATH . '/redim_' . basename($destname);
+                                    // IN PROGRESS
+                                    // IN PROGRESS
+                                    // IN PROGRESS
                                     nw_resizePicture($fullPictureName, $newName, $xnews->getConfig('maxwidth'), $xnews->getConfig('maxheight'));
                                     if (file_exists($newName)) {
                                         @unlink($fullPictureName);
@@ -554,10 +544,10 @@ switch ($op) {
                                 //DNPROSSI - 1.71 - creates attached image thumb
                                 if (strstr($sfiles->getMimetype(), 'image')) {
                                     $fullPictureName = XNEWS_ATTACHED_FILES_PATH . '/' . basename($destname);
-                                    $thumbName = XNEWS_ATTACHED_FILES_PATH . '/thumb_' . basename($destname);
-// IN PROGRESS
-// IN PROGRESS
-// IN PROGRESS
+                                    $thumbName       = XNEWS_ATTACHED_FILES_PATH . '/thumb_' . basename($destname);
+                                    // IN PROGRESS
+                                    // IN PROGRESS
+                                    // IN PROGRESS
                                     nw_resizePicture($fullPictureName, $thumbName, $xnews->getConfig('thumb_maxwidth'), $xnews->getConfig('thumb_maxheight'), true);
                                 }
                             } else {
@@ -575,39 +565,37 @@ switch ($op) {
         $returnside = isset($_POST['returnside']) ? intval($_POST['returnside']) : 0;
         if (!$returnside) {
             redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MA_NW_THANKS);
-            exit();
         } else {
             redirect_header(XNEWS_MODULE_URL . '/admin/index.php?op=newarticle', 2, _MA_NW_THANKS);
-            exit();
         }
         break;
 
     case 'form':
-        $xt = new nw_NewsTopic();
-        $title = '';
-        $hometext = '';
-        $noname = 0;
-        $nohtml = 0;
-        $nosmiley = 0;
-        $dobr = 0;
+        $xt        = new nw_NewsTopic();
+        $title     = '';
+        $hometext  = '';
+        $noname    = 0;
+        $nohtml    = 0;
+        $nosmiley  = 0;
+        $dobr      = 0;
         $notifypub = 1;
-        $topicid = 0;
+        $topicid   = 0;
         if ($approveprivilege) {
-            $description = '';
-            $keywords = '';
+            $description  = '';
+            $keywords     = '';
             $topicdisplay = 0;
-            $topicalign = 'R';
-            $ihome = 0;
-            $bodytext = '';
-            $approve = 0;
-            $autodate = '';
-            $expired = 0;
-            $published = 0;
+            $topicalign   = 'R';
+            $ihome        = 0;
+            $bodytext     = '';
+            $approve      = 0;
+            $autodate     = '';
+            $expired      = 0;
+            $published    = 0;
         }
         if ($xnews->getConfig('autoapprove') == 1) {
             $approve = 1;
         }
-        include_once XNEWS_MODULE_PATH . '/include/storyform.inc.php';
+        require_once XNEWS_MODULE_PATH . '/include/storyform.inc.php';
         break;
 }
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

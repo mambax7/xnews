@@ -6,16 +6,15 @@ xoops_load('XoopsFormLoader');
 xoops_load('XoopsPageNav');
 xoops_load('XoopsUserUtility');
 xoops_load('XoopsLocal');
-xoops_load('XoopsRequest');
 
 // MyTextSanitizer object
 $myts = MyTextSanitizer::getInstance();
 
 // load Xoops handlers
-$module_handler = xoops_gethandler('module');
-$member_handler = xoops_gethandler('member');
-$notification_handler = &xoops_gethandler('notification');
-$groupperm_handler = xoops_gethandler('groupperm');
+$moduleHandler       = xoops_getHandler('module');
+$memberHandler       = xoops_getHandler('member');
+$notificationHandler = xoops_getHandler('notification');
+$grouppermHandler    = xoops_getHandler('groupperm');
 
 // common module_skeleton stuff
 define('XNEWS_SUBPREFIX', 'nw');
@@ -29,15 +28,15 @@ define('XNEWS_TOPICS_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME 
 define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 xoops_loadLanguage('common', XNEWS_MODULE_DIRNAME);
 
-include_once XNEWS_MODULE_PATH . '/include/functions.php';
-include_once XNEWS_MODULE_PATH . '/include/constants.php';
+require_once XNEWS_MODULE_PATH . '/include/functions.php';
+require_once XNEWS_MODULE_PATH . '/include/constants.php';
 
-include_once XNEWS_MODULE_PATH . '/class/session.php'; // XnewsSession class
-include_once XNEWS_MODULE_PATH . '/class/xnews.php'; // XnewsXnews class
-//include_once XNEWS_MODULE_PATH . '/class/common/breadcrumb.php'; // XnewsBreadcrumb class
-//include_once XNEWS_MODULE_PATH . '/class/common/choicebyletter.php'; // XnewsChoiceByLetter class
-include_once XNEWS_MODULE_PATH . '/class/common/tree.php'; // xnews_MyXoopsObjectTree class
-//include_once XNEWS_MODULE_PATH . '/class/common/uploader.php'; // XnewsMediaUploader class
+require_once XNEWS_MODULE_PATH . '/class/session.php'; // XnewsSession class
+require_once XNEWS_MODULE_PATH . '/class/xnews.php'; // XnewsXnews class
+//require_once XNEWS_MODULE_PATH . '/class/common/breadcrumb.php'; // XnewsBreadcrumb class
+//require_once XNEWS_MODULE_PATH . '/class/common/choicebyletter.php'; // XnewsChoiceByLetter class
+require_once XNEWS_MODULE_PATH . '/class/common/tree.php'; // xnews_MyXoopsObjectTree class
+//require_once XNEWS_MODULE_PATH . '/class/common/uploader.php'; // XnewsMediaUploader class
 
 $debug = false;
 $xnews = XnewsXnews::getInstance($debug);
@@ -51,4 +50,4 @@ if (is_object($xnews->getModule())) {
     $xnews_isAdmin = xnews_userIsAdmin();
 }
 
-include_once XNEWS_MODULE_PATH . '/include/config.php';
+require_once XNEWS_MODULE_PATH . '/include/config.php';

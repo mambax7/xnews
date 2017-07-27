@@ -34,7 +34,7 @@ define("_MB_NW_TAB_COLOR2", "Background color of the tab's content");
 define("_MB_NW_TAB_COLOR3", "Current tab header's color");
 define("_MB_NW_TAB_COLOR4", "Color of header for the non selected tabs");
 define("_MB_NW_TAB_COLOR5", "Header's hover color");
-define("_MB_NW_WHAT_PUBLISH", "What do you want to publish<br />in the spotlight ?");
+define("_MB_NW_WHAT_PUBLISH", "What do you want to publish<br>in the spotlight ?");
 define("_MB_NW_RECENT_NEWS", "Recent news (don't use the list below)");
 define("_MB_NW_RECENT_SPECIFIC", "A specific news (see below)");
 define("_MB_NW_DEFAULT_COLORS", "Leave the zones empty to use the default colors");
@@ -93,4 +93,3 @@ define("_MB_NW_LATESTNEWS_SCROLL", "Enable Scrolling News Ticker");
 define("_MB_NW_LATESTNEWS_SCROLLHEIGHT", "Scroll Height");
 define("_MB_NW_LATESTNEWS_SCROLLSPEED", "Scroll Speed");
 define("_MB_NW_LATESTNEWS_SELECTEDSTORIES", "Set article IDs (eg:3,8,23,46) note: set 0 to show all");
-?>

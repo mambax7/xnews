@@ -20,11 +20,11 @@ function xni_getmoduleoption($option, $repmodule)
             $retval = $xoopsModuleConfig[$option];
         }
     } else {
-        $module_handler =& xoops_gethandler('module');
-        $module         =& $module_handler->getByDirname($repmodule);
-        $config_handler =& xoops_gethandler('config');
+        $moduleHandler = xoops_getHandler('module');
+        $module        = $moduleHandler->getByDirname($repmodule);
+        $configHandler = xoops_getHandler('config');
         if ($module) {
-            $moduleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
+            $moduleConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
             if (isset($moduleConfig[$option])) {
                 $retval = $moduleConfig[$option];
             }
@@ -83,11 +83,11 @@ function xni_MygetItemIds($permtype = 'nw_view')
         return $tblperms[$permtype];
     }
 
-    $module_handler      =& xoops_gethandler('module');
-    $newsModule          =& $module_handler->getByDirname(XNI_MODULE_DIR_NAME);
+    $moduleHandler       = xoops_getHandler('module');
+    $newsModule          = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
     $groups              = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler       =& xoops_gethandler('groupperm');
-    $topics              = $gperm_handler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
+    $gpermHandler        = xoops_getHandler('groupperm');
+    $topics              = $gpermHandler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
     $tblperms[$permtype] = $topics;
 
     return $topics;
@@ -115,19 +115,19 @@ function xni_savePermissions($dirname, $groups, $itemid, $permname)
 {
     global $xoopsModule;
 
-    $module_handler =& xoops_gethandler('module');
-    $news_module    =& $module_handler->getByDirname($dirname);
+    $moduleHandler = xoops_getHandler('module');
+    $news_module   = $moduleHandler->getByDirname($dirname);
 
     $result = true;
 
-    $module_id     = $news_module->getVar('mid');
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $module_id    = $news_module->getVar('mid');
+    $gpermHandler = xoops_getHandler('groupperm');
     // First, if the permissions are already there, delete them
-    $gperm_handler->deleteByModule($module_id, $permname, $itemid);
+    $gpermHandler->deleteByModule($module_id, $permname, $itemid);
     // Save the new permissions
     if (count($groups) > 0) {
         foreach ($groups as $group_id) {
-            $gperm_handler->addRight($permname, $itemid, $group_id, $module_id);
+            $gpermHandler->addRight($permname, $itemid, $group_id, $module_id);
             //trigger_error($permname . ' ---- ' . $itemid . ' ---- ' . $group_id . ' ---- ' . $module_id, E_USER_WARNING);
         }
     }

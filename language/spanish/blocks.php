@@ -34,7 +34,7 @@ define("_MB_NW_TAB_COLOR2", "Color de fondo del contenido de la pestaña");
 define("_MB_NW_TAB_COLOR3", "Color de la pestaña activa");
 define("_MB_NW_TAB_COLOR4", "Color de las pestañas inactivas");
 define("_MB_NW_TAB_COLOR5", "Color de las pestañas al poner el ratón encima");
-define("_MB_NW_WHAT_PUBLISH", "noticias a publicar en<br />destacadas?");
+define("_MB_NW_WHAT_PUBLISH", "noticias a publicar en<br>destacadas?");
 define("_MB_NW_RECENT_NEWS", "Noticias recientes (no usar la lista de abajo)");
 define("_MB_NW_RECENT_SPECIFIC", "Una noticia específica (usar la lista de abajo)");
 define("_MB_NW_DEFAULT_COLORS", "Dejar los campos en blanco para utilizar los colores por defecto.");
@@ -93,4 +93,3 @@ define("_MB_NW_LATESTNEWS_SCROLL", "Activar desplazamiento de noticias");
 define("_MB_NW_LATESTNEWS_SCROLLHEIGHT", "Alto de desplazamiento");
 define("_MB_NW_LATESTNEWS_SCROLLSPEED", "Velocidad de Desplazamiento");
 define("_MB_NW_LATESTNEWS_SELECTEDSTORIES", "Ponga la ID de los artículos (ej:3,8,23,46) nota: poner 0 para mostrarlos todos");
-?>

@@ -3,7 +3,7 @@
 // Module Info
 
 // The name of this module
-define("_MI_NW_NAME", "x"."News");
+define("_MI_NW_NAME", "x" . "News");
 
 // A brief description of this module
 define("_MI_NW_DESC", "Module de gestion d'articles, ouverts aux contributions des utilisateurs.");
@@ -190,7 +190,7 @@ define("_MI_NW_TOPICDISPLAY", "Afficher les catégories");
 define("_MI_NW_TOPICDISPLAYDESC", "Cette option permet d'afficher / de masquer le nom de la catégorie devant le titre des articles.");
 
 define("_MI_NW_SEOENABLE", "Option SEO");
-define("_MI_NW_SEOENABLEDESC", "<strong>htaccess</strong> : <br /> http://your.site.com/<strong>xnews</strong>/topics.1/your-topic-title.html <br /><br /><strong>path-info</strong> : <br />http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html");
+define("_MI_NW_SEOENABLEDESC", "<strong>htaccess</strong> : <br> http://your.site.com/<strong>xnews</strong>/topics.1/your-topic-title.html <br><br><strong>path-info</strong> : <br>http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html");
 
 // Added in version 1.68 RC1
 define("_MI_NW_EXTEND_META_DATA", "Champ Meta amélioré");
@@ -204,9 +204,11 @@ define("_MI_NW_DISPLAYLINKICNS", "Afficher les icônes additionnelles");
 define("_MI_NW_DISPLAYLINKICNSDESC", "Affiche les fonctions Impression, En parler à un ami et Exporter au format PDF");
 
 define("_MI_NW_SEOPATH", "Chemin SEO ");
-define("_MI_NW_SEOPATHDESC", "Cette option ajoute un titre SEO aux urls, générées via <strong>htaccess</strong> ou <strong>path-info</strong>. <br /><br />Laisser vide affiche : <br />http://your.site.com/topics.1/your-topic-title.html <br /><br />Saisir <strong>news</strong> affiche : <br />http://your.site.com/<strong>news</strong>/topics.1/your-topic-title.html <br /><br />Les caractères a-z et - sont autorisés (ex. article-du-jour)");
+define("_MI_NW_SEOPATHDESC",
+       "Cette option ajoute un titre SEO aux urls, générées via <strong>htaccess</strong> ou <strong>path-info</strong>. <br><br>Laisser vide affiche : <br>http://your.site.com/topics.1/your-topic-title.html <br><br>Saisir <strong>news</strong> affiche : <br>http://your.site.com/<strong>news</strong>/topics.1/your-topic-title.html <br><br>Les caractères a-z et - sont autorisés (ex. article-du-jour)");
 define("_MI_NW_SEOLEVEL", "Niveau SEO ");
-define("_MI_NW_SEOLEVELDESC", "Cette option permet de modifier l'apparence de l'url<br /><br />Niveau racine : <br />http://your.site.com/news/topics.1/your-topic-title.html <br /><br />Niveau module : <br /> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br /><br />Cette option ne peut fonctionner qu'en mode htaccess et en personnalisant le fichier .htaccess.");
+define("_MI_NW_SEOLEVELDESC",
+       "Cette option permet de modifier l'apparence de l'url<br><br>Niveau racine : <br>http://your.site.com/news/topics.1/your-topic-title.html <br><br>Niveau module : <br> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br><br>Cette option ne peut fonctionner qu'en mode htaccess et en personnalisant le fichier .htaccess.");
 define("_MI_NW_MODULE_LEVEL", "Niveau module");
 define("_MI_NW_ROOT_LEVEL", "Niveau racine");
 
@@ -216,13 +218,10 @@ define("_MI_NW_SEOENDOFURL_DESC", "Extension de fichier pour les HTML");
 define("_MI_NW_SEOENDOFURLRSS", "Fin de l'adresse URL");
 define("_MI_NW_SEOENDOFURLRSS_DESC", "Extension de fichier pour les pages RSS");
 define("_MI_NW_SEOENDOFURLPDF", "Fin de l'adresse URL");
-define("_MI_NW_SEOENDOFURLPDF_DESC", "Extension de fichier pour les Adobe Acrobat (PDF");
-
-/**
+define("_MI_NW_SEOENDOFURLPDF_DESC", "Extension de fichier pour les Adobe Acrobat (PDF");/**
  * @translation     Communauté Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  * @version         $Id $
-**/
-?>
+ **/;

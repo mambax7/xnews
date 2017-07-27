@@ -1,30 +1,31 @@
 <?php
-function xnews_tag_iteminfo(&$items) {
-    if (empty($items) || !is_array($items)){
+function xnews_tag_iteminfo(&$items)
+{
+    if (empty($items) || !is_array($items)) {
         return false;
     }
 
     $items_id = array();
-    foreach(array_keys($items) as $cat_id){
-        foreach(array_keys($items[$cat_id]) as $item_id){
+    foreach (array_keys($items) as $cat_id) {
+        foreach (array_keys($items[$cat_id]) as $item_id) {
             $items_id[] = intval($item_id);
         }
     }
     require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-    $tempnw = new nw_NewsStory();
+    $tempnw    = new nw_NewsStory();
     $items_obj = $tempnw->getStoriesByIds($items_id);
 
-    foreach(array_keys($items) as $cat_id){
-        foreach(array_keys($items[$cat_id]) as $item_id) {
+    foreach (array_keys($items) as $cat_id) {
+        foreach (array_keys($items[$cat_id]) as $item_id) {
             if (isset($items_obj[$item_id])) {
-                $item_obj =& $items_obj[$item_id];
+                $item_obj                 =& $items_obj[$item_id];
                 $items[$cat_id][$item_id] = array(
-                    'title'     => $item_obj->title(),
-                    'uid'       => $item_obj->uid(),
-                    'link'      => "article.php?storyid={$item_id}",
-                    'time'      => $item_obj->published(),
-                    'tags'      => tag_parse_tag($item_obj->tags()), // optional
-                    'content'   => $item_obj->hometext()
+                    'title'   => $item_obj->title(),
+                    'uid'     => $item_obj->uid(),
+                    'link'    => "article.php?storyid={$item_id}",
+                    'time'    => $item_obj->published(),
+                    'tags'    => tag_parse_tag($item_obj->tags()), // optional
+                    'content' => $item_obj->hometext()
                 );
             }
         }
@@ -32,25 +33,26 @@ function xnews_tag_iteminfo(&$items) {
     unset($items_obj);
 }
 
-function xnews_tag_synchronization($mid) {
+function xnews_tag_synchronization($mid)
+{
     global $xoopsDB;
-    $item_handler_keyName = 'storyid';
-    $item_handler_table = $xoopsDB->prefix('nw_stories');
-    $link_handler =& xoops_getmodulehandler("link", "tag");
-    $where = "({$item_handler_table}.published > 0 AND {$item_handler_table}.published <= " . time() . ") AND ({$item_handler_table}.expired = 0 OR {$item_handler_table}.expired > " . time() . ')';
+    $itemHandler_keyName = 'storyid';
+    $itemHandler_table   = $xoopsDB->prefix('nw_stories');
+    $linkHandler         = xoops_getModuleHandler("link", "tag");
+    $where               = "({$itemHandler_table}.published > 0 AND {$itemHandler_table}.published <= " . time() . ") AND ({$itemHandler_table}.expired = 0 OR {$itemHandler_table}.expired > " . time() . ')';
 
     /* clear tag-item links */
-    if ($link_handler->mysql_major_version() >= 4) {
-    $sql = "DELETE";
-    $sql .= " FROM {$link_handler->table}";
-    $sql .= " WHERE tag_modid = {$mid} AND (tag_itemid NOT IN (SELECT DISTINCT {$item_handler_keyName} FROM {$item_handler_table} WHERE {$where}) )";
+    if ($linkHandler->mysql_major_version() >= 4) {
+        $sql = "DELETE";
+        $sql .= " FROM {$linkHandler->table}";
+        $sql .= " WHERE tag_modid = {$mid} AND (tag_itemid NOT IN (SELECT DISTINCT {$itemHandler_keyName} FROM {$itemHandler_table} WHERE {$where}) )";
     } else {
-    $sql = "DELETE {$link_handler->table}";
-    $sql .= " FROM {$link_handler->table}";
-    $sql .= " LEFT JOIN {$item_handler_table} AS aa ON {$link_handler->table}.tag_itemid = aa.{$item_handler_keyName} ";
-    $sql .= " WHERE tag_modid = {$mid} AND ( aa.{$item_handler_keyName} IS NULL OR {$where})";
+        $sql = "DELETE {$linkHandler->table}";
+        $sql .= " FROM {$linkHandler->table}";
+        $sql .= " LEFT JOIN {$itemHandler_table} AS aa ON {$linkHandler->table}.tag_itemid = aa.{$itemHandler_keyName} ";
+        $sql .= " WHERE tag_modid = {$mid} AND ( aa.{$itemHandler_keyName} IS NULL OR {$where})";
     }
-    if (!$result = $link_handler->db->queryF($sql)) {
-        //xoops_error($link_handler->db->error());
+    if (!$result = $linkHandler->db->queryF($sql)) {
+        //xoops_error($linkHandler->db->error());
     }
 }

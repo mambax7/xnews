@@ -65,7 +65,6 @@ define("_AM_NW_DEL", "删除");
 define("_AM_NW_CANCEL", "取消");
 define("_AM_NW_WAYSYWTDTTAL", "警告：您确定要删除这个新闻分类及其所有的内容和评论吗？");
 
-
 // Added in Beta6
 define("_AM_NW_TOPICSMNGR", "分类管理");
 define("_AM_NW_PEARTICLES", "发表/编辑新闻");
@@ -131,7 +130,7 @@ define("_AM_NW_UPGRADEFAILED0", "请记住此信息，并尝试使用phpMyadmin�
 define("_AM_NW_UPGR_ACCESS_ERROR", "错误，使用此升级脚本，您必须是此模块的管理员");
 define("_AM_NW_PRUNE_BEFORE", "删除在此之前发布的新闻：");
 define("_AM_NW_PRUNE_EXPIREDONLY", "仅删除过期的新闻");
-define("_AM_NW_PRUNE_CONFIRM", "警告，您将永久删除在 %s 之前发布的新闻 (此操作不可撤消)。共有 %s 篇新闻。<br />您是否确定？");
+define("_AM_NW_PRUNE_CONFIRM", "警告，您将永久删除在 %s 之前发布的新闻 (此操作不可撤消)。共有 %s 篇新闻。<br>您是否确定？");
 define("_AM_NW_PRUNE_TOPICS", "仅限於以下分类");
 define("_AM_NW_PRUNENEWS", "删除新闻");
 define("_AM_NW_EXPORT_NEWS", "新闻导出（XML）");
@@ -140,14 +139,14 @@ define("_AM_NW_PRUNE_DELETED", "%d 篇新闻已删除");
 define("_AM_NW_PERM_WARNING", "<h2>警告，您有3个表单，因此有3个提交按钮</h2>");
 define("_AM_NW_EXPORT_BETWEEN", "导出以下范围的新闻：");
 define("_AM_NW_EXPORT_AND", " -- ");
-define("_AM_NW_EXPORT_PRUNE_DSC", "如果您未选择任何分类，则将选择所有分类<br/> 否则仅为选择的分类");
+define("_AM_NW_EXPORT_PRUNE_DSC", "如果您未选择任何分类，则将选择所有分类<br> 否则仅为选择的分类");
 define("_AM_NW_EXPORT_INCTOPICS", "是否包括分类定义？");
 define("_AM_NW_EXPORT_ERROR", "当尝试创建%s文件时产生错误。操作终止。");
-define("_AM_NW_EXPORT_READY", "您导出的xml文件已可以下载。<br /><a href='%s'>点击此链接下载</a>。<br />当您完成下载後，请勿忘记 <a href='%s'>删除</a>。");
+define("_AM_NW_EXPORT_READY", "您导出的xml文件已可以下载。<br><a href='%s'>点击此链接下载</a>。<br>当您完成下载後，请勿忘记 <a href='%s'>删除</a>。");
 define("_AM_NW_RSS_URL", "RSS feed 链接");
 define("_AM_NW_NEWSLETTER", "新闻快报");
 define("_AM_NW_NEWSLETTER_BETWEEN", "选择新闻发布的时间范围：");
-define("_AM_NW_NEWSLETTER_READY", "您的新闻快报文件已可以下载。<br /><a href='%s'>点击此链接下载</a>。<br />当您完成下载後，请勿忘记 <a href='%s'>删除</a>。");
+define("_AM_NW_NEWSLETTER_READY", "您的新闻快报文件已可以下载。<br><a href='%s'>点击此链接下载</a>。<br>当您完成下载後，请勿忘记 <a href='%s'>删除</a>。");
 define("_AM_NW_DELETED_OK", "文件删除成功");
 define("_AM_NW_DELETED_PB", "删除此文件时发生错误");
 define("_AM_NW_STATS0", "分类统计");
@@ -165,7 +164,7 @@ define("_AM_NW_STATS10", "作者统计");
 define("_AM_NW_STATS11", "新闻数目");
 define("_AM_NW_HELP", "帮助");
 define("_AM_NW_MODULEADMIN", "模块管理");
-define("_AM_NW_GENERALSET", "偏好设定" );
+define("_AM_NW_GENERALSET", "偏好设定");
 define("_AM_NW_GOTOMOD", "转至模块前台");
 define("_AM_NW_NOTHING", "抱歉，没有任何内容可以下载，请检查您的设定！");
 define("_AM_NW_NOTHING_PRUNE", "抱歉，没有任何新闻可以删除，请检查您的设定！");
@@ -181,11 +180,11 @@ define("_AM_NW_NEWSLETTER_FOOTER", "信尾");
 define("_AM_NW_NEWSLETTER_HTML_TAGS", "清除HTML标记");
 define("_AM_NW_VERIFY_TABLES", "保持表格");
 define("_AM_NW_METAGEN", "Metagen");
-define("_AM_NW_METAGEN_DESC", "Metagen是一个能够帮助你的页面更够更好的被搜索引擎收录的系统。<br />除了你自己输入meta关键字和meta的描述，模块会自动生成。");
+define("_AM_NW_METAGEN_DESC", "Metagen是一个能够帮助你的页面更够更好的被搜索引擎收录的系统。<br>除了你自己输入meta关键字和meta的描述，模块会自动生成。");
 define("_AM_NW_BLACKLIST", "黑名单");
 define("_AM_NW_BLACKLIST_DESC", "此名单上的词不能用来生成meta关键字。");
 define("_AM_NW_BLACKLIST_ADD", "添加");
-define("_AM_NW_BLACKLIST_ADD_DSC", "输入添加到此名单上的词。<br />(每一行一个词)");
+define("_AM_NW_BLACKLIST_ADD_DSC", "输入添加到此名单上的词。<br>(每一行一个词)");
 define("_AM_NW_META_KEYWORDS_CNT", "自动生成meta关键字的最大数目");
 define("_AM_NW_META_KEYWORDS_ORDER", "关键字顺序");
 define("_AM_NW_META_KEYWORDS_INTEXT", "按照在文中出现的顺序生成");
@@ -204,30 +203,31 @@ define("_AM_NW_CLONER_DIRFOL", "Directory/Folder");
 define("_AM_NW_CLONER_VERSION", "Version");
 
 define("_AM_NW_CLONER_NEWNAME", "New module name");
-define("_AM_NW_CLONER_NEWNAMEDESC", "This will also affect the creation of the new module folder. <br /> Case sensitivity and spaces are ignored and will be auto corrected. <br /> eg. new name = <b>Library</b> new dir  = <b>library</b>, <br /> new name <b>My Library</b> new dir = <b>mylibrary</b>. <br /><br /> Start module is: <font color='#008400'><b> %s </b></font><br />");
+define("_AM_NW_CLONER_NEWNAMEDESC",
+       "This will also affect the creation of the new module folder. <br> Case sensitivity and spaces are ignored and will be auto corrected. <br> eg. new name = <b>Library</b> new dir  = <b>library</b>, <br> new name <b>My Library</b> new dir = <b>mylibrary</b>. <br><br> Start module is: <font color='#008400'><b> %s </b></font><br>");
 define("_AM_NW_CLONER_NEWNAMELABEL", "New Module:");
 
 define("_AM_NW_CLONER_DIREXISTS", "Directory/Folder '%s' already exists!!");
 define("_AM_NW_CLONER_CREATED", "Module '%s' was correctly cloned!!");
 define("_AM_NW_CLONER_UPRADED", "Module '%s' has been correctly upgraded!!");
-define("_AM_NW_CLONER_NOMODULEID", "Module ID was not set!"); 
+define("_AM_NW_CLONER_NOMODULEID", "Module ID was not set!");
 
 define("_AM_NW_CLONER_UPDATE", "Update");
 define("_AM_NW_CLONER_INSTALL", "Install");
 define("_AM_NW_CLONER_UNINSTALL", "Uninstall");
-define("_AM_NW_CLONER_ACTION_INSTALL", "Install/Uninstall"); 
+define("_AM_NW_CLONER_ACTION_INSTALL", "Install/Uninstall");
 
 define("_AM_NW_CLONER_IMPORTNEWS", "Import original News module data");
 define("_AM_NW_CLONER_IMPORTNEWSDESC1", "Original News module exists! Import data now?");
-define("_AM_NW_CLONER_IMPORTNEWSDESC2", "The import button only appears if x"."News module stories table is empty. <br />
-                                         If you added story item before importing from <br />
-                                         original News module you will have to uninstall/reinstall x"."News. <br />
+define("_AM_NW_CLONER_IMPORTNEWSDESC2", "The import button only appears if x" . "News module stories table is empty. <br>
+                                         If you added story item before importing from <br>
+                                         original News module you will have to uninstall/reinstall x" . "News. <br>
                                          If you already imported original News Module data, leave as is.");
 define("_AM_NW_CLONER_IMPORTNEWSSUB", "Import");
 define("_AM_NW_CLONER_NEWSIMPORTED", "Original News module data correctly imported");
 
 // Added in version 1.68 Beta
-define("_AM_NW_DESCRIPTION", "<H3>x"."News is a clonable news module</H3> 
+define("_AM_NW_DESCRIPTION", "<H3>x" . "News is a clonable news module</H3> 
 							  where users can post news/comments. The module can be cloned to enable one only method for many different tasks. Other than usual news it can be used for info, links and more all with their own blocks, topics and settings.");
 
 // Added in version 1.68 RC1
@@ -236,14 +236,13 @@ define("_AM_NW_CLONER_CLONEDELETEDERR", "'%s' clone could not be deleted - check
 define("_AM_NW_CLONER_CLONEUPGRADED", "Upgraded");
 define("_AM_NW_CLONER_UPGRADEFORCE", "Force upgrade");
 define("_AM_NW_CLONER_CLONEDELETION", "Deleting Clone");
-define("_AM_NW_CLONER_SUREDELETE", "Are you sure you want to delete <font color='#000000'>'%s'</font> clone?<br />");
+define("_AM_NW_CLONER_SUREDELETE", "Are you sure you want to delete <font color='#000000'>'%s'</font> clone?<br>");
 define("_AM_NW_CLONER_CLONEID", "Clone ID was not set!");
 
 // Added in version 1.68 RC2
-define("_AM_NW_INDEX", "Index"); 
+define("_AM_NW_INDEX", "Index");
 
 // Added in version 1.68 RC3
 define("_AM_NW_DOLINEBREAK", "Enable Line Break");
 
-define("_AM_NW_TOPICS","Topics");
-?>
+define("_AM_NW_TOPICS", "Topics");

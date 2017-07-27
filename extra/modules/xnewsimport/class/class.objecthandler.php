@@ -40,7 +40,7 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
      *
      * @param object $db reference to a xoopsDB object
      */
-    public function init(&$db)
+    public function init($db)
     {
         $this->_db = $db;
     }
@@ -120,7 +120,7 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
         return $ret;
     }
 
-    public function insert(&$obj, $force = false)
+    public function insert(XoopsObject $obj, $force = false)
     {
         // Make sure object is of correct type
         if (strcasecmp($this->classname, get_class($obj)) != 0) {
@@ -211,12 +211,12 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
     /**
      * delete object based on id
      *
-     * @param  object $obj   {@link XoopsObject} to delete
-     * @param  bool   $force override XOOPS delete protection
+     * @param  XoopsObject $obj   {@link XoopsObject} to delete
+     * @param  bool        $force override XOOPS delete protection
      * @return bool   deletion successful?
      * @access public
      */
-    public function delete(&$obj, $force = false)
+    public function delete(XoopsObject $obj, $force = false)
     {
         if (strcasecmp($this->classname, get_class($obj)) != 0) {
             return false;
@@ -299,7 +299,7 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
      * @return object {@link pagesCategoryHandler}
      * @access public
      */
-    public function &getInstance(&$db)
+    public static function getInstance($db)
     {
         static $instance;
         if (!isset($instance)) {

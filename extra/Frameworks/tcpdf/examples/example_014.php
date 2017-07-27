@@ -3,12 +3,12 @@
 // File name   : example_014.php
 // Begin       : 2008-03-04
 // Last Update : 2009-09-30
-// 
+//
 // Description : Example 014 for TCPDF class
 //               Javascript Form and user rights (only works on Adobe Acrobat)
-// 
+//
 // Author: Nicola Asuni
-// 
+//
 // (c) Copyright:
 //               Nicola Asuni
 //               Tecnick.com s.r.l.
@@ -21,20 +21,20 @@
 
 /**
  * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Javascript Form and user rights (only works on Adobe Acrobat)
- * @author Nicola Asuni
+ * @package   com.tecnick.tcpdf
+ * @abstract  TCPDF - Example: Javascript Form and user rights (only works on Adobe Acrobat)
+ * @author    Nicola Asuni
  * @copyright 2004-2009 Nicola Asuni - Tecnick.com S.r.l (www.tecnick.com) Via Della Pace, 11 - 09044 - Quartucciu (CA) - ITALY - www.tecnick.com - info@tecnick.com
- * @link http://tcpdf.org
- * @license http://www.gnu.org/copyleft/lesser.html LGPL
- * @since 2008-03-04
+ * @link      http://tcpdf.org
+ * @license   http://www.gnu.org/copyleft/lesser.html LGPL
+ * @since     2008-03-04
  */
 
 require_once('../config/lang/eng.php');
 require_once('../tcpdf.php');
 
 // create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false); 
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -59,13 +59,13 @@ $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 //set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
 
 //set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); 
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 //set some language-dependent strings
-$pdf->setLanguageArray($l); 
+$pdf->setLanguageArray($l);
 
 // ---------------------------------------------------------
 
@@ -82,7 +82,7 @@ This name allows to manipulate them via JavaScript in order to perform some vali
 */
 
 // set default form properties
-$pdf->setFormDefaultProp(array('lineWidth'=>1, 'borderStyle'=>'solid', 'fillColor'=>array(255, 255, 200), 'strokeColor'=>array(255, 128, 128)));
+$pdf->setFormDefaultProp(array('lineWidth' => 1, 'borderStyle' => 'solid', 'fillColor' => array(255, 255, 200), 'strokeColor' => array(255, 128, 128)));
 
 $pdf->SetFont('helvetica', 'BI', 18);
 $pdf->Cell(0, 5, 'Subscription form', 0, 1, 'C');
@@ -122,12 +122,12 @@ $pdf->Ln(10);
 
 // Listbox
 $pdf->Cell(35, 5, 'List:');
-$pdf->ListBox('listbox', 60, 15, array('', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7'), array('multipleSelection'=>'true'));
+$pdf->ListBox('listbox', 60, 15, array('', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7'), array('multipleSelection' => 'true'));
 $pdf->Ln(20);
 
 // Adress
 $pdf->Cell(35, 5, 'Address:');
-$pdf->TextField('address', 60, 18, array('multiline'=>true));
+$pdf->TextField('address', 60, 18, array('multiline' => true));
 $pdf->Ln(19);
 
 // E-mail
@@ -142,20 +142,19 @@ $pdf->Ln(10);
 
 // Date of the day
 $pdf->Cell(35, 5, 'Date:');
-$pdf->TextField('date', 30, 5, array(), array('v'=>date('Y-m-d'), 'dv'=>date('Y-m-d')));
+$pdf->TextField('date', 30, 5, array(), array('v' => date('Y-m-d'), 'dv' => date('Y-m-d')));
 $pdf->Ln(10);
 
 $pdf->SetX(50);
 
 // Button to validate and print
-$pdf->Button('print', 30, 10, 'Print', 'Print()', array('lineWidth'=>2, 'borderStyle'=>'beveled', 'fillColor'=>array(128, 196, 255), 'strokeColor'=>array(64, 64, 64)));
+$pdf->Button('print', 30, 10, 'Print', 'Print()', array('lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => array(128, 196, 255), 'strokeColor' => array(64, 64, 64)));
 
 // Reset Button
-$pdf->Button('reset', 30, 10, 'Reset', array('S'=>'ResetForm'), array('lineWidth'=>2, 'borderStyle'=>'beveled', 'fillColor'=>array(128, 196, 255), 'strokeColor'=>array(64, 64, 64)));
+$pdf->Button('reset', 30, 10, 'Reset', array('S' => 'ResetForm'), array('lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => array(128, 196, 255), 'strokeColor' => array(64, 64, 64)));
 
 // Submit Button
-$pdf->Button('submit', 30, 10, 'Submit', array('S'=>'SubmitForm', 'F'=>'http://localhost/printvars.php', 'Flags'=>array('ExportFormat')), array('lineWidth'=>2, 'borderStyle'=>'beveled', 'fillColor'=>array(128, 196, 255), 'strokeColor'=>array(64, 64, 64)));
-
+$pdf->Button('submit', 30, 10, 'Submit', array('S' => 'SubmitForm', 'F' => 'http://localhost/printvars.php', 'Flags' => array('ExportFormat')), array('lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => array(128, 196, 255), 'strokeColor' => array(64, 64, 64)));
 
 // Form validation functions
 $js = <<<EOD
@@ -186,6 +185,5 @@ $pdf->IncludeJS($js);
 $pdf->Output('example_014.pdf', 'I');
 
 //============================================================+
-// END OF FILE                                                 
-//============================================================+
-?>
+// END OF FILE
+//============================================================+;

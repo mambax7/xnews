@@ -50,43 +50,43 @@
 # [11-may-2001] Kenneth Lee - http://www.nexgear.com/
 ######################################################################
 
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
-$xoopsOption['template_main'] = 'nw_news_archive.html';
-include_once XOOPS_ROOT_PATH.'/header.php';
-include_once XOOPS_ROOT_PATH.'/language/' . $xoopsConfig['language'] . '/calendar.php';
-include_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+$GLOBALS['xoopsOption']['template_main'] = 'nw_news_archive.html';
+require_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
+require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
-$lastyear = 0;
+$lastyear  = 0;
 $lastmonth = 0;
 
 $months_arr = array(
-    1 => _CAL_JANUARY,
-    2 => _CAL_FEBRUARY,
-    3 => _CAL_MARCH,
-    4 => _CAL_APRIL,
-    5 => _CAL_MAY,
-    6 => _CAL_JUNE,
-    7 => _CAL_JULY,
-    8 => _CAL_AUGUST,
-    9 => _CAL_SEPTEMBER,
+    1  => _CAL_JANUARY,
+    2  => _CAL_FEBRUARY,
+    3  => _CAL_MARCH,
+    4  => _CAL_APRIL,
+    5  => _CAL_MAY,
+    6  => _CAL_JUNE,
+    7  => _CAL_JULY,
+    8  => _CAL_AUGUST,
+    9  => _CAL_SEPTEMBER,
     10 => _CAL_OCTOBER,
     11 => _CAL_NOVEMBER,
     12 => _CAL_DECEMBER
 );
 
-$fromyear = (isset($_GET['year'])) ? intval ($_GET['year']): 0;
+$fromyear  = (isset($_GET['year'])) ? intval($_GET['year']) : 0;
 $frommonth = (isset($_GET['month'])) ? intval($_GET['month']) : 0;
 
-$pgtitle='';
-if($fromyear && $frommonth) {
-    $pgtitle=sprintf(" - %d - %d",$fromyear,$frommonth);
+$pgtitle = '';
+if ($fromyear && $frommonth) {
+    $pgtitle = sprintf(" - %d - %d", $fromyear, $frommonth);
 }
-$infotips = $xnews->getConfig('infotips');
+$infotips   = $xnews->getConfig('infotips');
 $restricted = $xnews->getConfig('restrictindex');
 $dateformat = $xnews->getConfig('dateformat');
-if($dateformat == '') {
-    $dateformat='m';
+if ($dateformat == '') {
+    $dateformat = 'm';
 }
 $myts = MyTextSanitizer::getInstance();
 $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_MA_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
@@ -95,12 +95,12 @@ $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_MA_NW_NEWSARCHIVES
 $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
 $useroffset = '';
-if(is_object($xoopsUser)) {
+if (is_object($xoopsUser)) {
     $timezone = $xoopsUser->timezone();
-    if(isset($timezone)){
+    if (isset($timezone)) {
         $useroffset = $xoopsUser->timezone();
     } else {
-    	$useroffset = $xoopsConfig['default_TZ'];
+        $useroffset = $xoopsConfig['default_TZ'];
     }
 }
 $result = $xoopsDB->query('SELECT published FROM ' . $xoopsDB->prefix('nw_stories') . ' WHERE (published>0 AND published<=' . time() . ') AND (expired = 0 OR expired <= ' . time() . ') ORDER BY published DESC');
@@ -108,9 +108,9 @@ if (!$result) {
     echo _ERRORS;
     exit();
 } else {
-    $years = array();
+    $years  = array();
     $months = array();
-    $i = 0;
+    $i      = 0;
     while (list($time) = $xoopsDB->fetchRow($result)) {
         $time = formatTimestamp($time, 'mysql', $useroffset);
         if (preg_match("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $time, $datetime)) {
@@ -120,20 +120,20 @@ if (!$result) {
                 $lastyear = $this_year;
             }
             if ($lastmonth == 0) {
-                $lastmonth = $this_month;
+                $lastmonth                    = $this_month;
                 $months[$lastmonth]['string'] = $months_arr[$lastmonth];
                 $months[$lastmonth]['number'] = $lastmonth;
             }
             if ($lastyear != $this_year) {
                 $years[$i]['number'] = $lastyear;
                 $years[$i]['months'] = $months;
-                $months = array();
-                $lastmonth = 0;
-                $lastyear = $this_year;
+                $months              = array();
+                $lastmonth           = 0;
+                $lastyear            = $this_year;
                 $i++;
             }
             if ($lastmonth != $this_month) {
-                $lastmonth = $this_month;
+                $lastmonth                    = $this_month;
                 $months[$lastmonth]['string'] = $months_arr[$lastmonth];
                 $months[$lastmonth]['number'] = $lastmonth;
             }
@@ -157,37 +157,37 @@ if ($fromyear != 0 && $frommonth != 0) {
     // must adjust the selected time to server timestamp
     $timeoffset = $useroffset - $xoopsConfig['server_TZ'];
     $monthstart = mktime(0 - $timeoffset, 0, 0, $frommonth, 1, $fromyear);
-    $monthend = mktime(23 - $timeoffset, 59, 59, $frommonth + 1, 0, $fromyear);
-    $monthend = ($monthend > time()) ? time() : $monthend;
+    $monthend   = mktime(23 - $timeoffset, 59, 59, $frommonth + 1, 0, $fromyear);
+    $monthend   = ($monthend > time()) ? time() : $monthend;
 
-    $count=0;
-    $news = new nw_NewsStory();
+    $count      = 0;
+    $news       = new nw_NewsStory();
     $storyarray = $news->getArchive($monthstart, $monthend, $restricted);
-    $count=count($storyarray);
+    $count      = count($storyarray);
     if (is_array($storyarray) && $count > 0) {
         foreach ($storyarray as $article) {
-            $story = array();
-            $htmltitle='';
-            if($infotips>0) {
+            $story     = array();
+            $htmltitle = '';
+            if ($infotips > 0) {
                 $story['infotips'] = nw_make_infotips($article->hometext());
-                $htmltitle=' title="' . $story['infotips'] . '"';
+                $htmltitle         = ' title="' . $story['infotips'] . '"';
             }
             $seo_enabled = $xnews->getConfig('seo_enable');
             //DNPROSSI SEO
-            $cat_path = '';
-            $item_path = '';
+            $cat_path   = '';
+            $item_path  = '';
             $print_item = '';
             if ($seo_enabled != 0) {
-                $cat_path = nw_remove_accents($article->topic_title());
-                $item_path = nw_remove_accents($article->title());
+                $cat_path   = nw_remove_accents($article->topic_title());
+                $item_path  = nw_remove_accents($article->title());
                 $print_item = nw_remove_accents(_MA_NW_PRINTERFRIENDLY);
             }
-            $story['title'] = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $article->topicid(), $cat_path) . "'>" . $article->topic_title() . "</a>";
-            $story['title'] .= ": <a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $article->storyid(), $item_path) . "'" . $htmltitle . ">" . $article->title() . "</a>";
+            $story['title']      = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $article->topicid(), $cat_path) . "'>" . $article->topic_title() . "</a>";
+            $story['title']      .= ": <a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $article->storyid(), $item_path) . "'" . $htmltitle . ">" . $article->title() . "</a>";
             $story['print_link'] = nw_seo_UrlGenerator(_MA_NW_SEO_PRINT, $article->storyid(), $print_item);
 
-            $story['counter'] = $article->counter();
-            $story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
+            $story['counter']   = $article->counter();
+            $story['date']      = formatTimestamp($article->published(), $dateformat, $useroffset);
             $story['mail_link'] = 'mailto:?subject=' . sprintf(_MA_NW_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_MA_NW_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $article->storyid();
             $xoopsTpl->append('stories', $story);
         }
@@ -202,8 +202,8 @@ if ($fromyear != 0 && $frommonth != 0) {
 $xoopsTpl->assign('lang_newsarchives', _MA_NW_NEWSARCHIVES);
 
 /**
-* Create the meta datas
-*/
+ * Create the meta datas
+ */
 nw_CreateMetaDatas();
 
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';
