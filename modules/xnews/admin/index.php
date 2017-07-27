@@ -676,7 +676,7 @@ switch ($op) {
             $topic_color = '000000';
         }
 
-        $sform = new XoopsThemeForm($formlabel, 'topicform', XNEWS_MODULE_URL . '/admin/index.php', 'post');
+        $sform = new XoopsThemeForm($formlabel, 'topicform', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
         $sform->setExtra('enctype="multipart/form-data"');
         $sform->addElement(new XoopsFormText(_AM_NW_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
         $editor = nw_getWysiwygForm(_AM_NW_TOPIC_DESCR,'topic_description', $topic_description, 15, 60, '100%', '350px', 'hometext_hidden');

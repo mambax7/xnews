@@ -153,7 +153,7 @@ function NewsCloner() {
     }
           
     //Draw Form
-    $sform = new XoopsThemeForm(_AM_NW_CLONER_ADD, "clonerform", XNEWS_MODULE_URL . "/admin/clone.php", "post");
+    $sform = new XoopsThemeForm(_AM_NW_CLONER_ADD, "clonerform", XNEWS_MODULE_URL . "/admin/clone.php", 'post', true);
     
     $filedir_tray = new XoopsFormElementTray(_AM_NW_CLONER_NEWNAME, "");
     $label = sprintf(_AM_NW_CLONER_NEWNAMEDESC, $xnews->getModule()->name());

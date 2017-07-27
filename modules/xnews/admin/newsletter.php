@@ -42,7 +42,7 @@ function Newsletter() {
     echo $indexAdmin->addNavigation('newsletter.php');
     //
     xoops_load('XoopsFormLoader');
-    $sform = new XoopsThemeForm(_AM_NW_NEWSLETTER, 'newsletterform', XNEWS_MODULE_URL . '/admin/index.php', 'post');
+    $sform = new XoopsThemeForm(_AM_NW_NEWSLETTER, 'newsletterform', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
     //
     $dates_tray = new XoopsFormElementTray(_AM_NW_NEWSLETTER_BETWEEN);
     $date1 = new XoopsFormTextDateSelect('', 'date1', 15, time());

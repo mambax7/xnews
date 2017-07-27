@@ -40,7 +40,7 @@ switch ($op) {
     default:
     case 'export':
         include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-        $sform = new XoopsThemeForm(_AM_NW_EXPORT_NEWS, 'exportform', $currentFile, 'post');
+        $sform = new XoopsThemeForm(_AM_NW_EXPORT_NEWS, 'exportform', $currentFile, 'post', true);
         $dates_tray = new XoopsFormElementTray(_AM_NW_EXPORT_BETWEEN);
         $date1 = new XoopsFormTextDateSelect('', 'date1', 15, time());
         $date2 = new XoopsFormTextDateSelect(_AM_NW_EXPORT_AND, 'date2', 15, time());

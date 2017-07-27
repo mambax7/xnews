@@ -63,7 +63,7 @@ switch ($op) {
             $keywordscount = $cfg['meta_keywords_count'];
             $keywordsorder = $cfg['meta_keywords_order'];
         }
-        $sform = new XoopsThemeForm(_OPTIONS, 'metagenoptions', XNEWS_MODULE_URL . '/admin/index.php', 'post');
+        $sform = new XoopsThemeForm(_OPTIONS, 'metagenoptions', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
         $sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
         $sform->addElement(new XoopsFormText(_AM_NW_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
         $keywordsorder=new XoopsFormRadio(_AM_NW_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
@@ -78,7 +78,7 @@ switch ($op) {
         $sform->display();
 
         // Blacklist
-        $sform = new XoopsThemeForm(_AM_NW_BLACKLIST, 'metagenblacklist', XNEWS_MODULE_URL . '/admin/index.php', 'post');
+        $sform = new XoopsThemeForm(_AM_NW_BLACKLIST, 'metagenblacklist', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
         $sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
 
         // Remove words

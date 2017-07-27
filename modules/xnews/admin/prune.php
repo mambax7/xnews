@@ -51,7 +51,7 @@ switch ($op) {
         echo $indexAdmin->addNavigation($currentFile);
         //
         include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-        $sform = new XoopsThemeForm(_AM_NW_PRUNENEWS, 'pruneform', $currentFile, 'post');
+        $sform = new XoopsThemeForm(_AM_NW_PRUNENEWS, 'pruneform', $currentFile, 'post', true);
         $sform->addElement(new XoopsFormTextDateSelect(_AM_NW_PRUNE_BEFORE, 'prune_date', 15, time()), true);
         $onlyexpired = new xoopsFormCheckBox('', 'onlyexpired');
         $onlyexpired->addOption(1, _AM_NW_PRUNE_EXPIREDONLY);
