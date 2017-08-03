@@ -71,25 +71,25 @@ function adminmenu($currentoption = 0, $breadcrumb = '')
     ";
     // | <a href='import.php'>". 'Import' ."</a>
     echo "<div id='buttontop'>";
-    echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
+    echo '<table style="width: 100%; padding: 0; " cellspacing="0"><tr>';
     echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a href='"
          . XOOPS_URL
-         . "/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod="
-         . $xoopsModule->getVar("mid")
+         . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='
+         . $xoopsModule->getVar('mid')
          . "'>"
          . _AM_XNI_PREFERENCES
-         . "</a> | <a href=\"#\">"
+         . '</a> | <a href="#">'
          . _AM_XNI_HELP
-         . "</a> | <a href=\"index.php\">"
+         . '</a> | <a href="index.php">'
          . _AM_XNI_IMPORT_GOTOINDEX
-         . "</a></td>";
-    echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $xoopsModule->name() . "  " . _AM_XNI_MODULEADMIN . "</b></td>";
+         . '</a></td>';
+    echo '<td style="width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;"><b>' . $xoopsModule->name() . '  ' . _AM_XNI_MODULEADMIN . '</b></td>';
     echo '</tr></table>';
     echo '</div>';
     echo "<div id='buttonbar'>";
     echo '<ul>';
     echo "<li id='" . $tblColors[0] . "'><a href=\"index.php?op=import\"\"><span>" . _MI_XNI_IMPORT . "</span></a></li>\n";
-    echo '<li id="' . $tblColors[1] . '"><a href="' . XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar("mid") . '"> <span>' . _MI_XNI_PREFERENCES . '</span></a></li>';
+    echo '<li id="' . $tblColors[1] . '"><a href="' . XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid') . '"> <span>' . _MI_XNI_PREFERENCES . '</span></a></li>';
     echo '</ul></div>';
     echo '<br><br><pre>&nbsp;</pre><pre>&nbsp;</pre>';
 }

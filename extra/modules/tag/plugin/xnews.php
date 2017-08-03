@@ -38,12 +38,12 @@ function xnews_tag_synchronization($mid)
     global $xoopsDB;
     $itemHandler_keyName = 'storyid';
     $itemHandler_table   = $xoopsDB->prefix('nw_stories');
-    $linkHandler         = xoops_getModuleHandler("link", "tag");
+    $linkHandler         = xoops_getModuleHandler('link', 'tag');
     $where               = "({$itemHandler_table}.published > 0 AND {$itemHandler_table}.published <= " . time() . ") AND ({$itemHandler_table}.expired = 0 OR {$itemHandler_table}.expired > " . time() . ')';
 
     /* clear tag-item links */
     if ($linkHandler->mysql_major_version() >= 4) {
-        $sql = "DELETE";
+        $sql = 'DELETE';
         $sql .= " FROM {$linkHandler->table}";
         $sql .= " WHERE tag_modid = {$mid} AND (tag_itemid NOT IN (SELECT DISTINCT {$itemHandler_keyName} FROM {$itemHandler_table} WHERE {$where}) )";
     } else {

@@ -18,7 +18,7 @@
  * @version      $Id $
  */
 
-require_once __DIR__ . "/admin_header.php";
+require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once XNI_MODULE_PATH . '/include/functions.php';
 require_once XNI_MODULE_PATH . '/admin/functions.php';
@@ -32,7 +32,7 @@ $importFromModuleName = isset($_POST['importfrom']);
 $importToCloneID      = @$_POST['importto'];
 trigger_error($importToModuleDirName, E_USER_WARNING);
 trigger_error($importToCloneID, E_USER_WARNING);
-$scriptname = "import_news.php";
+$scriptname = 'import_news.php';
 
 if ($op == 'go') {
     xoops_cp_header();
@@ -50,7 +50,7 @@ if ($op == 'go') {
 
     $parentId = $_POST['parent_category'];
 
-    $resultCat = $xoopsDB->query("SELECT * FROM " . $xoopsDB->prefix('topics'));
+    $resultCat = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('topics'));
 
     $newCatArray     = array();
     $newArticleArray = array();
@@ -202,10 +202,10 @@ if ($op == 'go') {
         echo $arrCat['topic_title'];
     }
 
-    echo "<br><br>Done.<br>";
-    echo sprintf(_AM_XNI_IMPORTED_CATEGORIES, $cnt_imported_cat) . "<br>";
-    echo sprintf(_AM_XNI_IMPORTED_ARTICLES, $cnt_imported_articles) . "<br>";
-    echo "<br><a href='index.php'>" . _AM_XNI_IMPORT_GOTOMODULE . "</a><br>";
+    echo '<br><br>Done.<br>';
+    echo sprintf(_AM_XNI_IMPORTED_CATEGORIES, $cnt_imported_cat) . '<br>';
+    echo sprintf(_AM_XNI_IMPORTED_ARTICLES, $cnt_imported_articles) . '<br>';
+    echo "<br><a href='index.php'>" . _AM_XNI_IMPORT_GOTOMODULE . '</a><br>';
 
     xoops_cp_footer();
 }

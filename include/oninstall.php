@@ -23,21 +23,21 @@ function xoops_module_install_xnews(&$xoopsModule)
         //Create Cloner table
         if (!nw_TableExists($xoopsDB->prefix('news_clonerdata'))) {
             $sql    = "CREATE TABLE IF NOT EXISTS {$xoopsDB->prefix('news_clonerdata')}";
-            $sql    .= "(";
-            $sql    .= "clone_id int(11) unsigned NOT NULL auto_increment, ";
+            $sql    .= '(';
+            $sql    .= 'clone_id int(11) unsigned NOT NULL auto_increment, ';
             $sql    .= "clone_name varchar(50) NOT NULL default '', ";
             $sql    .= "clone_dir varchar(255) NOT NULL default '', ";
             $sql    .= "clone_subprefix varchar(50) NOT NULL default '' ,";
             $sql    .= "clone_version varchar(5) NOT NULL default '', ";
             $sql    .= "clone_installed tinyint(1) NOT NULL default '0', ";
-            $sql    .= "PRIMARY KEY (clone_id)";
+            $sql    .= 'PRIMARY KEY (clone_id)';
             $sql    .= ") ENGINE=MyISAM CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'";
             $result = $xoopsDB->queryF($sql);
         }
         if (nw_TableExists($xoopsDB->prefix('news_clonerdata'))) {
             //Add cloned module to cloner dtb
             $sql    = "INSERT INTO {$xoopsDB->prefix('news_clonerdata')}";
-            $sql    .= " (clone_name, clone_dir, clone_version, clone_subprefix, clone_installed)";
+            $sql    .= ' (clone_name, clone_dir, clone_version, clone_subprefix, clone_installed)';
             $sql    .= " VALUES ('{$module_name}', '{$module_dirname}', '{$module_version}', '{$sub}', '1')";
             $result = $xoopsDB->queryF($sql);
         }

@@ -108,7 +108,7 @@ function nw_updaterating($storyid)
     }
     $finalrating = $totalrating / $votesDB;
     $finalrating = number_format($finalrating, 4);
-    $sql         = sprintf("UPDATE %s SET rating = %u, votes = %u WHERE storyid = %u", $xoopsDB->prefix('nw_stories'), $finalrating, $votesDB, $storyid);
+    $sql         = sprintf('UPDATE %s SET rating = %u, votes = %u WHERE storyid = %u', $xoopsDB->prefix('nw_stories'), $finalrating, $votesDB, $storyid);
     $xoopsDB->queryF($sql);
 }
 
@@ -168,14 +168,14 @@ function nw_html2text($document)
     ); // evaluate as php
 
     $replace = array(
-        "",
-        "",
+        '',
+        '',
         "\\1",
-        "\"",
-        "&",
-        "<",
-        ">",
-        " ",
+        '"',
+        '&',
+        '<',
+        '>',
+        ' ',
         chr(161),
         chr(162),
         chr(163),
@@ -254,7 +254,7 @@ function &nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $heig
  */
 function nw_DublinQuotes($text)
 {
-    return str_replace("\"", ' ', $text);
+    return str_replace('"', ' ', $text);
 }
 
 /**
@@ -397,11 +397,11 @@ function nw_createmeta_keywords($content)
         $_SESSION['nw_keywords_limit'] = $limit;
     }
     $myts            = MyTextSanitizer::getInstance();
-    $content         = str_replace("<br>", " ", $content);
+    $content         = str_replace('<br>', ' ', $content);
     $content         = $myts->undoHtmlSpecialChars($content);
     $content         = strip_tags($content);
     $content         = strtolower($content);
-    $search_pattern  = array("&nbsp;", "\t", "\r\n", "\r", "\n", ",", ".", "'", ";", ":", ")", "(", '"', '?', '!', '{', '}', '[', ']', '<', '>', '/', '+', '-', '_', '\\', '*');
+    $search_pattern  = array('&nbsp;', "\t", "\r\n", "\r", "\n", ',', '.', "'", ';', ':', ')', '(', '"', '?', '!', '{', '}', '[', ']', '<', '>', '/', '+', '-', '_', '\\', '*');
     $replace_pattern = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
     $content         = str_replace($search_pattern, $replace_pattern, $content);
     $keywords        = explode(' ', $content);
@@ -719,39 +719,39 @@ function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $ke
 
 function nw_latestnews_mk_chkbox($options, $number)
 {
-    $chk = "";
+    $chk = '';
     if ($options[$number] == 1) {
-        $chk = " checked";
+        $chk = ' checked';
     }
-    $chkbox = "<input type='radio' name='options[$number]' value='1'" . $chk . ">&nbsp;" . _YES . "&nbsp;&nbsp;";
-    $chk    = "";
+    $chkbox = "<input type='radio' name='options[$number]' value='1'" . $chk . '>&nbsp;' . _YES . '&nbsp;&nbsp;';
+    $chk    = '';
     if ($options[$number] == 0) {
-        $chk = " checked";
+        $chk = ' checked';
     }
-    $chkbox .= "<input type='radio' name='options[$number]' value='0'" . $chk . ">&nbsp;" . _NO . "</td></tr>";
+    $chkbox .= "<input type='radio' name='options[$number]' value='0'" . $chk . '>&nbsp;' . _NO . '</td></tr>';
 
     return $chkbox;
 }
 
 function nw_latestnews_mk_select($options, $number)
 {
-    $slc = "";
+    $slc = '';
     if ($options[$number] == 1) {
-        $slc = " checked";
+        $slc = ' checked';
     }
-    $select = "<input type='radio' name='options[$number]' value='1'" . $slc . ">&nbsp;" . _LEFT . "&nbsp;&nbsp;";
-    $slc    = "";
+    $select = "<input type='radio' name='options[$number]' value='1'" . $slc . '>&nbsp;' . _LEFT . '&nbsp;&nbsp;';
+    $slc    = '';
     if ($options[$number] == 0) {
-        $slc = " checked";
+        $slc = ' checked';
     }
-    $select .= "<input type='radio' name='options[$number]' value='0'" . $slc . ">&nbsp;" . _RIGHT . "</td></tr>";
+    $select .= "<input type='radio' name='options[$number]' value='0'" . $slc . '>&nbsp;' . _RIGHT . '</td></tr>';
 
     return $select;
 }
 
 function nw_remove_numbers($string)
 {
-    $vowels = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " ");
+    $vowels = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' ');
     $string = str_replace($vowels, '', $string);
 
     return $string;
@@ -794,43 +794,43 @@ function nw_remove_accents($chain)
     // Transform punctuation
     //                 Tab     Space      !        "        #        %        &        '        (        )        ,        /        :        ;        <        =        >        ?        @        [        \        ]        ^        {        |        }        ~       .
     $pattern = array(
-        "/%09/",
-        "/%20/",
-        "/%21/",
-        "/%22/",
-        "/%23/",
-        "/%25/",
-        "/%26/",
-        "/%27/",
-        "/%28/",
-        "/%29/",
-        "/%2C/",
-        "/%2F/",
-        "/%3A/",
-        "/%3B/",
-        "/%3C/",
-        "/%3D/",
-        "/%3E/",
-        "/%3F/",
-        "/%40/",
-        "/%5B/",
-        "/%5C/",
-        "/%5D/",
-        "/%5E/",
-        "/%7B/",
-        "/%7C/",
-        "/%7D/",
-        "/%7E/",
-        "/%39/",
+        '/%09/',
+        '/%20/',
+        '/%21/',
+        '/%22/',
+        '/%23/',
+        '/%25/',
+        '/%26/',
+        '/%27/',
+        '/%28/',
+        '/%29/',
+        '/%2C/',
+        '/%2F/',
+        '/%3A/',
+        '/%3B/',
+        '/%3C/',
+        '/%3D/',
+        '/%3E/',
+        '/%3F/',
+        '/%40/',
+        '/%5B/',
+        '/%5C/',
+        '/%5D/',
+        '/%5E/',
+        '/%7B/',
+        '/%7C/',
+        '/%7D/',
+        '/%7E/',
+        '/%39/',
         "/\./"
     );
-    $rep_pat = array("-", "-", "", "", "", "-100", "", "-", "", "", "", "-", "", "", "", "-", "", "", "-at-", "", "-", "", "-", "", "-", "", "-", "-", "");
+    $rep_pat = array('-', '-', '', '', '', '-100', '', '-', '', '', '', '-', '', '', '', '-', '', '', '-at-', '', '-', '', '-', '', '-', '', '-', '-', '');
     $chain   = preg_replace($pattern, $rep_pat, $chain);
 
     return $chain;
 }
 
-function nw_seo_UrlGenerator($op, $id, $short_url = "")
+function nw_seo_UrlGenerator($op, $id, $short_url = '')
 {
     $xnews = XnewsXnews::getInstance();
     //
@@ -855,27 +855,27 @@ function nw_seo_UrlGenerator($op, $id, $short_url = "")
         }
         if ($xnews->getConfig('seo_enable') == 1) {
             // generate SEO url using htaccess
-            $seo_path = "";
+            $seo_path = '';
             if ($xnews->getConfig('seo_path') != '') {
                 // generate SEO url using seo path eg news, info, blog
-                $seo_path = "/" . strtolower($xnews->getConfig('seo_path'));
+                $seo_path = '/' . strtolower($xnews->getConfig('seo_path'));
                 if ($xnews->getConfig('seo_level') == 0) {
                     // generate SEO url using root level htaccess
-                    $seo_path .= ".";
+                    $seo_path .= '.';
 
-                    return XOOPS_URL . "/" . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
+                    return XOOPS_URL . '/' . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
                 } else {
                     // generate SEO url using module level htaccess
-                    $seo_path .= ".";
+                    $seo_path .= '.';
 
                     return XNEWS_MODULE_URL . $seo_path . "${op}.${id}/${short_url}";
                 }
             } else {
                 // generate SEO url with no seo path
-                $seo_path = "/" . strtolower($xnews->getConfig('seo_path'));
+                $seo_path = '/' . strtolower($xnews->getConfig('seo_path'));
                 if ($xnews->getConfig('seo_level') == 0) {
                     // generate SEO url using root level htaccess
-                    return XOOPS_URL . "/" . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
+                    return XOOPS_URL . '/' . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
                 } else {
                     // generate SEO url using module level htaccess
                     return XNEWS_MODULE_URL . $seo_path . "${op}.${id}/${short_url}";
@@ -883,12 +883,12 @@ function nw_seo_UrlGenerator($op, $id, $short_url = "")
             }
         } elseif ($xnews->getConfig('seo_enable') == 2) {
             // generate SEO url using path-info
-            $seo_path = "";
-            if ($xnews->getConfig('seo_path') != "") {
-                $seo_path = strtolower($xnews->getConfig('seo_path')) . ".";
+            $seo_path = '';
+            if ($xnews->getConfig('seo_path') != '') {
+                $seo_path = strtolower($xnews->getConfig('seo_path')) . '.';
             }
 
-            return XNEWS_MODULE_URL . "/index.php/" . $seo_path . "${op}.${id}/${short_url}";
+            return XNEWS_MODULE_URL . '/index.php/' . $seo_path . "${op}.${id}/${short_url}";
         } else {
             die('Unknown SEO method.');
         }
@@ -927,7 +927,7 @@ function nw_callJavascriptFile($javascriptFile, $inLanguageFolder = false, $oldW
     if (!$oldWay && isset($xoTheme)) {
         $xoTheme->addScript($fileToCall);
     } else {
-        echo "<script type=\"text/javascript\" src=\"" . $fileToCall . "\"></script>\n";
+        echo '<script type="text/javascript" src="' . $fileToCall . "\"></script>\n";
     }
 }
 
@@ -1081,10 +1081,10 @@ function nw_detect_adobe()
         </script>
     ';
 
-    if (isset($_COOKIE["xnews"])) {
-        $has_adobe = $_COOKIE["xnews"];
+    if (isset($_COOKIE['xnews'])) {
+        $has_adobe = $_COOKIE['xnews'];
         //Delete cookie
-        setcookie("xnews", "", time() - 3600);
+        setcookie('xnews', '', time() - 3600);
     }
 
     return $has_adobe;

@@ -84,7 +84,7 @@ $pdf->SetLineStyle(array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'da
 $pdf->SetFillColor(255, 255, 128);
 $pdf->SetTextColor(0, 0, 128);
 
-$text = "DUMMY";
+$text = 'DUMMY';
 
 $pdf->Cell(0, 0, $text, 1, 1, 'L', 1, 0);
 

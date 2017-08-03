@@ -79,7 +79,7 @@ class nw_blacklist
         foreach ($keywords as $onekeyword) {
             $add = true;
             foreach ($tmp_array as $onebanned) {
-                if (preg_match("/" . $onebanned . "/i", $onekeyword)) {
+                if (preg_match('/' . $onebanned . '/i', $onekeyword)) {
                     $add = false;
                     break;
                 }
@@ -105,10 +105,10 @@ class nw_blacklist
         fputs($fd, "<?php\n");
         fputs($fd, '$tbl_black_list=array(' . "\n");
         foreach ($this->keywords as $onekeyword) {
-            fputs($fd, "\"" . $onekeyword . "\",\n");
+            fputs($fd, '"' . $onekeyword . "\",\n");
         }
         fputs($fd, "'');\n");
-        fputs($fd, "?" . ">\n");
+        fputs($fd, '?' . ">\n");
         fclose($fd);
     }
 }

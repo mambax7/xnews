@@ -10,7 +10,7 @@ if (empty($seoOp) && @$_SERVER['PATH_INFO']) {
     // Sample URL for path-info
     // http://localhost/modules/xnews/index.php/articles.1/seo-is-active.html
     //
-    $data = explode("/", $_SERVER['PATH_INFO']);
+    $data = explode('/', $_SERVER['PATH_INFO']);
 
     $seoParts = explode('.', $data[1]);
     if (count($seoParts) == 2) {

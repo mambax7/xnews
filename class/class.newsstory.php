@@ -41,11 +41,11 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = MyTextSanitizer::getInstance();
         //
-        $sql = "SELECT count(*) as cpt";
+        $sql = 'SELECT count(*) as cpt';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql .= " WHERE published <= " . $timestamp;
+        $sql .= ' WHERE published <= ' . $timestamp;
         if ($expired) {
-            $sql .= " AND (expired > 0 AND expired <= " . time() . ")";
+            $sql .= ' AND (expired > 0 AND expired <= ' . time() . ')';
         }
         if (strlen(trim($topicsList)) > 0) {
             $sql .= " AND topicid IN ({$topicsList})";
@@ -63,9 +63,9 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = MyTextSanitizer::getInstance();
         //
-        $sql   = "SELECT s.*, t.*";
+        $sql   = 'SELECT s.*, t.*';
         $sql   .= " FROM {$this->table} s, {$this->db->prefix('nw_topics')} t";
-        $sql   .= " WHERE (storyid = " . intval($storyid) . ") AND (s.topicid = t.topic_id)";
+        $sql   .= ' WHERE (storyid = ' . intval($storyid) . ') AND (s.topicid = t.topic_id)';
         $array = $this->db->fetchArray($this->db->query($sql));
         $this->makeStory($array);
     }
@@ -77,11 +77,11 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = MyTextSanitizer::getInstance();
         //
-        $sql = "SELECT storyid";
+        $sql = 'SELECT storyid';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql .= " WHERE published <= " . $timestamp;
+        $sql .= ' WHERE published <= ' . $timestamp;
         if ($expired) {
-            $sql .= " (AND expired>0 AND expired<=" . time() . ")";
+            $sql .= ' (AND expired>0 AND expired<=' . time() . ')';
         }
         if (strlen(trim($topicsList)) > 0) {
             $sql .= ' AND topicid IN (' . $topicsList . ')';
@@ -116,14 +116,14 @@ class nw_NewsStory extends XnewsDeprecateStory
         $ret     = array();
         $storyid = intval($storyid);
         if ($next) {
-            $sql     = "SELECT storyid, title";
+            $sql     = 'SELECT storyid, title';
             $sql     .= " FROM {$this->db->prefix('nw_stories')}";
-            $sql     .= " WHERE (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ") AND storyid > " . $storyid;
+            $sql     .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') AND storyid > ' . $storyid;
             $orderBy = ' ORDER BY storyid ASC';
         } else {
-            $sql     = "SELECT storyid, title";
+            $sql     = 'SELECT storyid, title';
             $sql     .= " FROM {$this->db->prefix('nw_stories')}";
-            $sql     .= " WHERE (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ") AND storyid < " . $storyid;
+            $sql     .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') AND storyid < ' . $storyid;
             $orderBy = ' ORDER BY storyid DESC';
         }
         if ($checkRight) {
@@ -165,9 +165,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         $myts = MyTextSanitizer::getInstance();
         //
         $ret = array();
-        $sql = "SELECT s.*, t.*";
+        $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
-        $sql .= " WHERE (s.published > 0 AND s.published <= " . time() . ") AND (s.expired = 0 OR s.expired > " . time() . ") AND (s.topicid=t.topic_id) ";
+        $sql .= ' WHERE (s.published > 0 AND s.published <= ' . time() . ') AND (s.expired = 0 OR s.expired > ' . time() . ') AND (s.topicid=t.topic_id) ';
         if ($topic != 0) {
             if (!is_array($topic)) {
                 if ($checkRight) {
@@ -229,9 +229,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         $myts = MyTextSanitizer::getInstance();
         //
         $ret = array();
-        $sql = "SELECT s.*, t.*";
+        $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
-        $sql .= " WHERE (s.topicid = t.topic_id) AND (s.published > {$publish_start} AND s.published <= {$publish_end}) AND (expired = 0 OR expired > " . time() . ") ";
+        $sql .= " WHERE (s.topicid = t.topic_id) AND (s.published > {$publish_start} AND s.published <= {$publish_end}) AND (expired = 0 OR expired > " . time() . ') ';
 
         if ($checkRight) {
             $topics = nw_MygetItemIds('nw_view');
@@ -271,9 +271,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         //
         $ret   = array();
         $tdate = mktime(0, 0, 0, date('n'), date('j'), date('Y'));
-        $sql   = "SELECT s.*, t.*";
+        $sql   = 'SELECT s.*, t.*';
         $sql   .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
-        $sql   .= " WHERE (s.topicid=t.topic_id) AND (published > {$tdate} AND published < " . time() . ") AND (expired > " . time() . " OR expired = 0) ";
+        $sql   .= " WHERE (s.topicid=t.topic_id) AND (published > {$tdate} AND published < " . time() . ') AND (expired > ' . time() . ' OR expired = 0) ';
 
         if (intval($topic) != 0) {
             if (!is_array($topic)) {
@@ -331,8 +331,8 @@ class nw_NewsStory extends XnewsDeprecateStory
         $ret = array();
         $sql = "SELECT {$this->db->prefix('nw_stories')}.*, {$this->db->prefix('nw_topics')}.topic_title, {$this->db->prefix('nw_topics')}.topic_color";
         $sql .= " FROM {$this->db->prefix('nw_stories')}, {$this->db->prefix('nw_topics')}";
-        $sql .= " WHERE ({$this->db->prefix('nw_stories')}.topicid = {$this->db->prefix('nw_topics')}.topic_id) AND (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ")";
-        $sql .= " AND uid = " . intval($uid);
+        $sql .= " WHERE ({$this->db->prefix('nw_stories')}.topicid = {$this->db->prefix('nw_topics')}.topic_id) AND (published > 0 AND published <= " . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
+        $sql .= ' AND uid = ' . intval($uid);
         if ($checkRight) {
             $topics = nw_MygetItemIds('nw_view');
             $topics = implode(',', $topics);
@@ -389,11 +389,11 @@ class nw_NewsStory extends XnewsDeprecateStory
         $myts = MyTextSanitizer::getInstance();
         //
         $ret = array();
-        $sql = "SELECT *";
+        $sql = 'SELECT *';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql .= " WHERE expired <= " . time() . " AND expired > 0";
+        $sql .= ' WHERE expired <= ' . time() . ' AND expired > 0';
         if (!empty($topic)) {
-            $sql .= " AND topicid = " . intval($topic) . " AND (ihome = 1 OR ihome = 0)";
+            $sql .= ' AND topicid = ' . intval($topic) . ' AND (ihome = 1 OR ihome = 0)';
         } else {
             if (intval($ihome) == 0) {
                 $sql .= ' AND ihome=0';
@@ -420,9 +420,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         $myts = MyTextSanitizer::getInstance();
         //
         $ret    = array();
-        $sql    = "SELECT *";
+        $sql    = 'SELECT *';
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql    .= " WHERE published > " . time() . " ORDER BY published ASC";
+        $sql    .= ' WHERE published > ' . time() . ' ORDER BY published ASC';
         $result = $this->db->query($sql, intval($limit), intval($start));
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
@@ -459,7 +459,7 @@ class nw_NewsStory extends XnewsDeprecateStory
             }
             $criteria->add($criteria2);
         }
-        $sql    = "SELECT s.*, t.*";
+        $sql    = 'SELECT s.*, t.*';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t ";
         $sql    .= " {$criteria->renderWhere()} AND (s.topicid = t.topic_id) ORDER BY created DESC";
         $result = $this->db->query($sql, intval($limit), intval($start));
@@ -488,9 +488,9 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = MyTextSanitizer::getInstance();
         //
-        $sql = "SELECT count(*) as cpt";
+        $sql = 'SELECT count(*) as cpt';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql .= " WHERE ";
+        $sql .= ' WHERE ';
         switch ($storyType) {
             case 1: // Expired
                 $sql .= '(expired <= ' . time() . ' AND expired >0)';
@@ -525,9 +525,9 @@ class nw_NewsStory extends XnewsDeprecateStory
     public function getByTopic($topicid, $limit = 0)
     {
         $ret    = array();
-        $sql    = "SELECT *";
+        $sql    = 'SELECT *';
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql    .= "WHERE topicid = " . intval($topicid) . " ORDER BY published DESC";
+        $sql    .= 'WHERE topicid = ' . intval($topicid) . ' ORDER BY published DESC';
         $result = $this->db->query($sql, intval($limit), 0);
         while ($myrow = $this->db->fetchArray($result)) {
             $ret[] = new nw_NewsStory($myrow);
@@ -541,17 +541,17 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function countPublishedByTopic($topicid = 0, $checkRight = false)
     {
-        $sql = "SELECT COUNT(*)";
+        $sql = 'SELECT COUNT(*)';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql .= " WHERE published > 0 AND published <= " . time() . " AND (expired = 0 OR expired > " . time() . ")";
+        $sql .= ' WHERE published > 0 AND published <= ' . time() . ' AND (expired = 0 OR expired > ' . time() . ')';
         if (!empty($topicid)) {
-            $sql .= " AND topicid = " . intval($topicid);
+            $sql .= ' AND topicid = ' . intval($topicid);
         } else {
-            $sql .= " AND ihome = 0";
+            $sql .= ' AND ihome = 0';
             if ($checkRight) {
                 $topics = nw_MygetItemIds('nw_view');
                 if (count($topics) > 0) {
-                    $sql .= " AND topicid IN (" . implode(',', $topics) . ")";
+                    $sql .= ' AND topicid IN (' . implode(',', $topics) . ')';
                 } else {
                     return null;
                 }
@@ -569,9 +569,9 @@ class nw_NewsStory extends XnewsDeprecateStory
     public function adminlink()
     {
         //<img src='" . XNEWS_MODULE_URL . "/assets/images/leftarrow22.png' border='0' alt='" . _MA_NW_PREVIOUS_ARTICLE . "'></a>";
-        $ret2 = "<a href='" . XNEWS_MODULE_URL . "/submit.php?op=edit&amp;storyid=" . $this->storyid() . "' title='" . _EDIT . "'>";
+        $ret2 = "<a href='" . XNEWS_MODULE_URL . '/submit.php?op=edit&amp;storyid=' . $this->storyid() . "' title='" . _EDIT . "'>";
         $ret2 .= "<img src='" . XNEWS_MODULE_URL . "/assets/images/edit_block.png' width='22px' height='22px' border='0' alt='" . _EDIT . "'></a>&nbsp;&nbsp;&nbsp;";
-        $ret2 .= "<a href='" . XNEWS_MODULE_URL . "/admin/index.php?op=delete&amp;storyid=" . $this->storyid() . "' title='" . _DELETE . "'>";
+        $ret2 .= "<a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=delete&amp;storyid=' . $this->storyid() . "' title='" . _DELETE . "'>";
         $ret2 .= "<img src='" . XNEWS_MODULE_URL . "/assets/images/delete_block.png' width='24px' height='24px' border='0' alt='" . _DELETE . "'></a>&nbsp;&nbsp;&nbsp;";
 
         //$ret = "&nbsp;[ <a href='" . XNEWS_MODULE_URL . "/submit.php?op=edit&amp;storyid=".$this->storyid()."'>"._EDIT."</a> | <a href='".XNEWS_MODULE_URL . "/admin/index.php?op=delete&amp;storyid=".$this->storyid()."'>"._DELETE."</a> ]&nbsp;";
@@ -655,11 +655,11 @@ class nw_NewsStory extends XnewsDeprecateStory
                         $cat_path = nw_remove_accents($this->topic_title());
                     }
                     $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>";
-                    $ret .= "<img src='" . XNEWS_TOPICS_FILES_URL . "/" . $this->topic_imgurl() . "' alt='";
+                    $ret .= "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $this->topic_imgurl() . "' alt='";
                     $ret .= $this->topic_title() . "' hspace='10' vspace='10' align='";
-                    $ret .= $this->topicalign() . "'" . $margin . "></a>";
+                    $ret .= $this->topicalign() . "'" . $margin . '></a>';
                 } else {
-                    $ret = "<img src='" . XNEWS_TOPICS_FILES_URL . "/" . $this->topic_imgurl() . "' alt='" . $this->topic_title() . "' hspace='10' vspace='10' align='" . $this->topicalign() . "'" . $margin . ">";
+                    $ret = "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $this->topic_imgurl() . "' alt='" . $this->topic_title() . "' hspace='10' vspace='10' align='" . $this->topicalign() . "'" . $margin . '>';
                 }
             }
         } else {
@@ -670,11 +670,11 @@ class nw_NewsStory extends XnewsDeprecateStory
                     $cat_path = nw_remove_accents($this->topic_title());
                 }
                 $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>";
-                $ret .= "<img src='" . XNEWS_TOPICS_FILES_URL . "/" . $this->picture() . "' alt='";
+                $ret .= "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $this->picture() . "' alt='";
                 $ret .= $this->topic_title() . "' hspace='10' vspace='10' align='";
-                $ret .= $this->topicalign() . "'" . $margin . "></a>";
+                $ret .= $this->topicalign() . "'" . $margin . '></a>';
             } else {
-                $ret = "<img src='" . XNEWS_TOPICS_FILES_URL . "/" . $this->picture() . "' alt='" . $this->topic_title() . "' hspace='10' vspace='10' align='" . $this->topicalign() . "'" . $margin . ">";
+                $ret = "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $this->picture() . "' alt='" . $this->topic_title() . "' hspace='10' vspace='10' align='" . $this->topicalign() . "'" . $margin . '>';
             }
         }
 
@@ -691,7 +691,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if ($seo_enabled != 0) {
             $story_path = nw_remove_accents($this->title());
         }
-        $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . "</a>";
+        $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . '</a>';
 
         return $ret;
     }
@@ -717,7 +717,7 @@ class nw_NewsStory extends XnewsDeprecateStory
             if ($seo_enabled != 0) {
                 $cat_path = nw_remove_accents($this->topic_title());
             }
-            $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>" . $this->topic_title() . "</a>";
+            $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>" . $this->topic_title() . '</a>';
         }
 
         return $ret;
@@ -739,7 +739,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $story['author_name'] = $this->uname();
         $story['author_uid']  = $this->uid();
         if ($story['poster'] !== false) {
-            $story['poster'] = "<a href='" . XOOPS_URL . "/userinfo.php?uid=" . $this->uid() . "'>" . $story['poster'] . "</a>";
+            $story['poster'] = "<a href='" . XOOPS_URL . '/userinfo.php?uid=' . $this->uid() . "'>" . $story['poster'] . '</a>';
         } else {
             if ($this->xnews->getConfig('displayname') != 3) {
                 $story['poster'] = $GLOBALS['xoopsConfig']['anonymous'];
@@ -776,10 +776,10 @@ class nw_NewsStory extends XnewsDeprecateStory
                 $story_path = nw_remove_accents($this->title());
             }
             $morelink .= "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>";
-            $morelink .= _MA_NW_READMORE . "</a>";
+            $morelink .= _MA_NW_READMORE . '</a>';
             //$morelink .= " | ".sprintf(_MA_NW_BYTESMORE, $totalcount);
             if (XOOPS_COMMENT_APPROVENONE != $this->xnews->getConfig('com_rule')) {
-                $morelink .= " | ";
+                $morelink .= ' | ';
             }
         }
         if (XOOPS_COMMENT_APPROVENONE != $this->xnews->getConfig('com_rule')) {
@@ -794,11 +794,11 @@ class nw_NewsStory extends XnewsDeprecateStory
             } else {
                 $morelink .= "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path);
                 if ($ccount == 1) {
-                    $morelink .= "'>" . _MA_NW_ONECOMMENT . "</a>";
+                    $morelink .= "'>" . _MA_NW_ONECOMMENT . '</a>';
                 } else {
                     $morelink .= "'>";
                     $morelink .= sprintf(_MA_NW_NUMCOMMENTS, $ccount);
-                    $morelink .= "</a>";
+                    $morelink .= '</a>';
                 }
             }
         }
@@ -834,7 +834,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if ($seo_enabled != 0) {
             $story_path = nw_remove_accents($this->title());
         }
-        $story['title'] = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . "</a>";
+        $story['title'] = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . '</a>';
         $story['hits']  = $this->counter();
         if ($filescount > 0) {
             $story['files_attached'] = true;
@@ -908,7 +908,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $ret = array();
         if ($usetopicsdef) { // We firt begin by exporting topics definitions
             // Before all we must know wich topics to export
-            $sql = "SELECT distinct topicid";
+            $sql = 'SELECT distinct topicid';
             $sql .= " FROM {$this->db->prefix('nw_stories')}";
             $sql .= " WHERE (published >= {$fromDate} AND published <= {$toDate})";
             if (strlen(trim($topicsList)) > 0) {
@@ -921,7 +921,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
 
         // Now we can search for the stories
-        $sql = "SELECT s.*, t.*";
+        $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$this->table} s, {$this->db->prefix('nw_topics')} t";
         $sql .= " WHERE (s.topicid = t.topic_id) AND (s.published >= {$fromDate} AND s.published <= {$toDate})";
         if (strlen(trim($topicsList)) > 0) {
@@ -1112,9 +1112,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         $myts = MyTextSanitizer::getInstance();
         //
         $ret = $rand_keys = $ret3 = array();
-        $sql = "SELECT storyid";
+        $sql = 'SELECT storyid';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql .= " WHERE (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ")";
+        $sql .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
         if ($topic != 0) {
             if (!is_array($topic)) {
                 if ($checkRight) {
@@ -1187,9 +1187,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         $ret = array();
         // Number of stories per topic, including expired and non published stories
         $ret2   = array();
-        $sql    = "SELECT count(s.storyid) as cpt, s.topicid, t.topic_title";
+        $sql    = 'SELECT count(s.storyid) as cpt, s.topicid, t.topic_title';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
-        $sql    .= " WHERE s.topicid = t.topic_id GROUP BY s.topicid ORDER BY t.topic_title";
+        $sql    .= ' WHERE s.topicid = t.topic_id GROUP BY s.topicid ORDER BY t.topic_title';
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
             $ret2[$myrow['topicid']] = $myrow;
@@ -1198,7 +1198,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Total of reads per topic
         $ret2   = array();
-        $sql    = "SELECT Sum(counter) as cpt, topicid";
+        $sql    = 'SELECT Sum(counter) as cpt, topicid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} GROUP BY topicid ORDER BY topicid";
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
@@ -1208,9 +1208,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Attached files per topic
         $ret2   = array();
-        $sql    = "SELECT Count(*) as cpt, s.topicid";
+        $sql    = 'SELECT Count(*) as cpt, s.topicid';
         $sql    .= " FROM {$this->db->prefix('nw_stories_files')} f, {$this->db->prefix('nw_stories')} s";
-        $sql    .= " WHERE f.storyid = s.storyid GROUP BY s.topicid ORDER BY s.topicid";
+        $sql    .= ' WHERE f.storyid = s.storyid GROUP BY s.topicid ORDER BY s.topicid';
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
             $ret2[$myrow['topicid']] = $myrow['cpt'];
@@ -1219,9 +1219,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Expired articles per topic
         $ret2   = array();
-        $sql    = "SELECT Count(storyid) as cpt, topicid";
+        $sql    = 'SELECT Count(storyid) as cpt, topicid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql    .= " WHERE expired > 0 AND expired <= " . time() . " GROUP BY topicid ORDER BY topicid";
+        $sql    .= ' WHERE expired > 0 AND expired <= ' . time() . ' GROUP BY topicid ORDER BY topicid';
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
             $ret2[$myrow['topicid']] = $myrow['cpt'];
@@ -1230,7 +1230,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Number of unique authors per topic
         $ret2   = array();
-        $sql    = "SELECT Count(Distinct(uid)) as cpt, topicid";
+        $sql    = 'SELECT Count(Distinct(uid)) as cpt, topicid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} GROUP BY topicid ORDER BY topicid";
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
@@ -1240,9 +1240,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Most readed articles
         $ret2   = array();
-        $sql    = "SELECT s.storyid, s.uid, s.title, s.counter, s.topicid, t.topic_title";
+        $sql    = 'SELECT s.storyid, s.uid, s.title, s.counter, s.topicid, t.topic_title';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
-        $sql    .= " WHERE s.topicid = t.topic_id ORDER BY s.counter DESC";
+        $sql    .= ' WHERE s.topicid = t.topic_id ORDER BY s.counter DESC';
         $result = $this->db->query($sql, intval($limit));
         while ($myrow = $this->db->fetchArray($result)) {
             $ret2[$myrow['storyid']] = $myrow;
@@ -1251,9 +1251,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Less readed articles
         $ret2   = array();
-        $sql    = "SELECT s.storyid, s.uid, s.title, s.counter, s.topicid, t.topic_title";
+        $sql    = 'SELECT s.storyid, s.uid, s.title, s.counter, s.topicid, t.topic_title';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
-        $sql    .= " WHERE s.topicid = t.topic_id ORDER BY s.counter";
+        $sql    .= ' WHERE s.topicid = t.topic_id ORDER BY s.counter';
         $result = $this->db->query($sql, intval($limit));
         while ($myrow = $this->db->fetchArray($result)) {
             $ret2[$myrow['storyid']] = $myrow;
@@ -1263,9 +1263,9 @@ class nw_NewsStory extends XnewsDeprecateStory
 
         // Best rated articles
         $ret2   = array();
-        $sql    = "SELECT s.storyid, s.uid, s.title, s.rating, s.topicid, t.topic_title";
+        $sql    = 'SELECT s.storyid, s.uid, s.title, s.rating, s.topicid, t.topic_title';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
-        $sql    .= " WHERE s.topicid = t.topic_id ORDER BY s.rating DESC";
+        $sql    .= ' WHERE s.topicid = t.topic_id ORDER BY s.rating DESC';
         $result = $this->db->query($sql, intval($limit));
         while ($myrow = $this->db->fetchArray($result)) {
             $ret2[$myrow['storyid']] = $myrow;
@@ -1274,7 +1274,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Most readed authors
         $ret2   = array();
-        $sql    = "SELECT Sum(counter) as cpt, uid";
+        $sql    = 'SELECT Sum(counter) as cpt, uid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} GROUP BY uid ORDER BY cpt DESC";
         $result = $this->db->query($sql, intval($limit));
         while ($myrow = $this->db->fetchArray($result)) {
@@ -1284,9 +1284,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Best rated authors
         $ret2   = array();
-        $sql    = "SELECT Avg(rating) as cpt, uid";
+        $sql    = 'SELECT Avg(rating) as cpt, uid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql    .= " WHERE votes > 0 GROUP BY uid ORDER BY cpt DESC";
+        $sql    .= ' WHERE votes > 0 GROUP BY uid ORDER BY cpt DESC';
         $result = $this->db->query($sql, intval($limit));
         while ($myrow = $this->db->fetchArray($result)) {
             $ret2[$myrow['uid']] = $myrow['cpt'];
@@ -1295,7 +1295,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         unset($ret2);
         // Biggest contributors
         $ret2   = array();
-        $sql    = "SELECT Count(*) as cpt, uid";
+        $sql    = 'SELECT Count(*) as cpt, uid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} GROUP BY uid ORDER BY cpt DESC";
         $result = $this->db->query($sql, intval($limit));
         while ($myrow = $this->db->fetchArray($result)) {
@@ -1314,7 +1314,7 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = MyTextSanitizer::getInstance();
         //
-        $sql    = "SELECT min(published) as minpublish, max(published) as maxpublish";
+        $sql    = 'SELECT min(published) as minpublish, max(published) as maxpublish';
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
         $result = $this->db->query($sql);
         if (!$result) {
@@ -1332,9 +1332,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         $myts = MyTextSanitizer::getInstance();
         //
         $ret = array();
-        $sql = "SELECT distinct(uid) as uid";
+        $sql = 'SELECT distinct(uid) as uid';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql .= " WHERE (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ")";
+        $sql .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
         if ($checkRight) {
             $topics = nw_MygetItemIds('nw_view');
             if (count($topics) > 0) {
@@ -1343,7 +1343,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                 return null;
             }
         }
-        $sql    .= " ORDER BY uid";
+        $sql    .= ' ORDER BY uid';
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
             $ret[] = $myrow['uid'];

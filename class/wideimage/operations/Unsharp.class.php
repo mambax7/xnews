@@ -63,21 +63,21 @@ class wioUnsharp
             for ($x = 0; $x < $image->getWidth(); $x++) { // each row
                 for ($y = 0; $y < $image->getHeight(); $y++) { // each pixel
                     $rgbOrig = $image->getRGBAt($x, $y);
-                    $rOrig   = $rgbOrig["red"];
-                    $gOrig   = $rgbOrig["green"];
-                    $bOrig   = $rgbOrig["blue"];
+                    $rOrig   = $rgbOrig['red'];
+                    $gOrig   = $rgbOrig['green'];
+                    $bOrig   = $rgbOrig['blue'];
 
                     $rgbBlur = $blurred->getRGBAt($x, $y);
-                    $rBlur   = $rgbBlur["red"];
-                    $gBlur   = $rgbBlur["green"];
-                    $bBlur   = $rgbBlur["blue"];
+                    $rBlur   = $rgbBlur['red'];
+                    $gBlur   = $rgbBlur['green'];
+                    $bBlur   = $rgbBlur['blue'];
 
                     // When the masked pixels differ less from the original
                     // than the threshold specifies, they are set to their original value.
                     $rNew   = (abs($rOrig - $rBlur) >= $threshold) ? max(0, min(255, ($amount * ($rOrig - $rBlur)) + $rOrig)) : $rOrig;
                     $gNew   = (abs($gOrig - $gBlur) >= $threshold) ? max(0, min(255, ($amount * ($gOrig - $gBlur)) + $gOrig)) : $gOrig;
                     $bNew   = (abs($bOrig - $bBlur) >= $threshold) ? max(0, min(255, ($amount * ($bOrig - $bBlur)) + $bOrig)) : $bOrig;
-                    $rgbNew = array("red" => $rNew, "green" => $gNew, "blue" => $bNew, "alpha" => 0);
+                    $rgbNew = array('red' => $rNew, 'green' => $gNew, 'blue' => $bNew, 'alpha' => 0);
 
                     if (($rOrig != $rNew) || ($gOrig != $gNew) || ($bOrig != $bNew)) {
                         $image->setRGBAt($x, $y, $rgbNew);
@@ -90,14 +90,14 @@ class wioUnsharp
             for ($x = 0; $x < $w; $x++) { // each row
                 for ($y = 0; $y < $h; $y++) { // each pixel
                     $rgbOrig = $image->getRGBAt($x, $y);
-                    $rOrig   = $rgbOrig["red"];
-                    $gOrig   = $rgbOrig["green"];
-                    $bOrig   = $rgbOrig["blue"];
+                    $rOrig   = $rgbOrig['red'];
+                    $gOrig   = $rgbOrig['green'];
+                    $bOrig   = $rgbOrig['blue'];
 
                     $rgbBlur = $blurred->getRGBAt($x, $y);
-                    $rBlur   = $rgbBlur["red"];
-                    $gBlur   = $rgbBlur["green"];
-                    $bBlur   = $rgbBlur["blue"];
+                    $rBlur   = $rgbBlur['red'];
+                    $gBlur   = $rgbBlur['green'];
+                    $bBlur   = $rgbBlur['blue'];
 
                     $rNew = ($amount * ($rOrig - $rBlur)) + $rOrig;
                     if ($rNew > 255) {
@@ -117,7 +117,7 @@ class wioUnsharp
                     } elseif ($bNew < 0) {
                         $bNew = 0;
                     }
-                    $rgbNew = array("red" => $rNew, "green" => $gNew, "blue" => $bNew, "alpha" => 0);
+                    $rgbNew = array('red' => $rNew, 'green' => $gNew, 'blue' => $bNew, 'alpha' => 0);
 
                     $image->setRGBAt($x, $y, $rgbNew);
                 }

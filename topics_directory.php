@@ -56,7 +56,7 @@ if (is_array($topics_arr) && count($topics_arr)) {
         if ($seo_enabled != 0) {
             $cat_path = nw_remove_accents($onetopic['topic_title']);
         }
-        $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $onetopic['topic_id'], $cat_path) . "'>" . $onetopic['topic_title'] . "</a>";
+        $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $onetopic['topic_id'], $cat_path) . "'>" . $onetopic['topic_title'] . '</a>';
 
         $tbl_topics[] = array(
             'id'          => $onetopic['topic_id'],

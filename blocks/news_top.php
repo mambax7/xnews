@@ -251,7 +251,7 @@ function nw_b_news_top_show($options)
             $spotlight['topic_description'] = $myts->displayTarea($tmpstory->topic_description, 1);
 
             if ($displayname != 3) {
-                $spotlight['author']           = sprintf("%s %s", _POSTEDBY, $tmpstory->uname());
+                $spotlight['author']           = sprintf('%s %s', _POSTEDBY, $tmpstory->uname());
                 $spotlight['author_with_link'] = sprintf("%s <a href='%s'>%s</a>", _POSTEDBY, XOOPS_URL . '/userinfo.php?uid=' . $tmpstory->uid(), $tmpstory->uname());
             } else {
                 $spotlight['author']           = '';
@@ -289,7 +289,7 @@ function nw_b_news_top_show($options)
                     $news['topic_title'] = $story->topic_title();
                     $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
                     if ($displayname != 3) {
-                        $news['author'] = sprintf("%s %s", _POSTEDBY, $story->uname());
+                        $news['author'] = sprintf('%s %s', _POSTEDBY, $story->uname());
                     } else {
                         $news['author'] = '';
                     }
@@ -327,8 +327,8 @@ function nw_b_news_top_show($options)
                 $smallheader   = array();
                 $stats         = $topic->getTopicMiniStats($thetopic);
                 $smallheader[] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/index.php?topic_id=' . $thetopic, _MB_NW_READMORE);
-                $smallheader[] = sprintf("%u %s", $stats['count'], _MA_NW_ARTICLES);
-                $smallheader[] = sprintf("%u %s", $stats['reads'], _READS);
+                $smallheader[] = sprintf('%u %s', $stats['count'], _MA_NW_ARTICLES);
+                $smallheader[] = sprintf('%u %s', $stats['reads'], _READS);
                 if (count($stories) > 0) {
                     foreach ($stories as $key => $story) {
                         $news  = array();
@@ -371,7 +371,7 @@ function nw_b_news_top_show($options)
                         $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
 
                         if ($displayname != 3) {
-                            $news['author'] = sprintf("%s %s", _POSTEDBY, $story->uname());
+                            $news['author'] = sprintf('%s %s', _POSTEDBY, $story->uname());
                         } else {
                             $news['author'] = '';
                         }
@@ -477,7 +477,7 @@ function nw_b_news_top_show($options)
                     }
 
                     if ($displayname != 3) {
-                        $spotlight['author'] = sprintf("%s %s", _POSTEDBY, $story->uname());
+                        $spotlight['author'] = sprintf('%s %s', _POSTEDBY, $story->uname());
                     } else {
                         $spotlight['author'] = '';
                     }
@@ -494,7 +494,7 @@ function nw_b_news_top_show($options)
                 $news['topic_title'] = $story->topic_title();
                 $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
                 if ($displayname != 3) {
-                    $news['author'] = sprintf("%s %s", _POSTEDBY, $story->uname());
+                    $news['author'] = sprintf('%s %s', _POSTEDBY, $story->uname());
                 } else {
                     $news['author'] = '';
                 }
@@ -579,7 +579,7 @@ function nw_b_news_top_show($options)
                 $spotlight['topic_image']       = XNEWS_TOPICS_FILES_URL . '/' . $spotlightArticle->topic_imgurl();
                 $spotlight['topic_description'] = $myts->displayTarea($spotlightArticle->topic_description, 1);
                 if ($displayname != 3) {
-                    $spotlight['author'] = sprintf("%s %s", _POSTEDBY, $spotlightArticle->uname());
+                    $spotlight['author'] = sprintf('%s %s', _POSTEDBY, $spotlightArticle->uname());
                 } else {
                     $spotlight['author'] = '';
                 }
@@ -605,9 +605,9 @@ function nw_b_news_top_show($options)
     // DNPROSSI SEO
     $seo_enabled = $xnews->getConfig('seo_enable');
     if ($seo_enabled != 0) {
-        $block['urlrewrite'] = "true";
+        $block['urlrewrite'] = 'true';
     } else {
-        $block['urlrewrite'] = "false";
+        $block['urlrewrite'] = 'false';
     }
 
     return $block;
@@ -639,19 +639,19 @@ function nw_b_news_top_edit($options)
     $form .= "</select>\n";
 
     $form .= '&nbsp;' . _MB_NW_DISP . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'>&nbsp;" . _MB_NW_ARTCLS;
-    $form .= "&nbsp;<br><br>" . _MB_NW_CHARS . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'>&nbsp;" . _MB_NW_LENGTH . '<br><br>';
+    $form .= '&nbsp;<br><br>' . _MB_NW_CHARS . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'>&nbsp;" . _MB_NW_LENGTH . '<br><br>';
 
     $form .= _MB_NW_TEASER . " <input type='text' name='options[]' value='" . $options[3] . "'>" . _MB_NW_LENGTH;
     $form .= '<br><br>';
 
     $form .= _MB_NW_SPOTLIGHT . " <input type='radio' name='options[]' value='1'";
     if ($options[4] == 1) {
-        $form .= " checked";
+        $form .= ' checked';
     }
     $form .= '>' . _YES;
     $form .= "<input type='radio' name='options[]' value='0'";
     if ($options[4] == 0) {
-        $form .= " checked";
+        $form .= ' checked';
     }
     $form .= '>' . _NO . '<br><br>';
 
@@ -692,12 +692,12 @@ function nw_b_news_top_edit($options)
     $form .= '>' . _MB_NW_VIEW_TYPE2 . '</option></select><br><br>';
 
     $form .= "<table border=0>\n";
-    $form .= "<tr><td colspan='2' align='center'><u>" . _MB_NW_DEFAULT_COLORS . "</u></td></tr>";
-    $form .= "<tr><td>" . _MB_NW_TAB_COLOR1 . "</td><td><input type='text' name='options[]' value='" . $options[9] . "' size=7></td></tr>";
-    $form .= "<tr><td>" . _MB_NW_TAB_COLOR2 . "</td><td><input type='text' name='options[]' value='" . $options[10] . "' size=7></td></tr>";
-    $form .= "<tr><td>" . _MB_NW_TAB_COLOR3 . "</td><td><input type='text' name='options[]' value='" . $options[11] . "' size=7></td></tr>";
-    $form .= "<tr><td>" . _MB_NW_TAB_COLOR4 . "</td><td><input type='text' name='options[]' value='" . $options[12] . "' size=7></td></tr>";
-    $form .= "<tr><td>" . _MB_NW_TAB_COLOR5 . "</td><td><input type='text' name='options[]' value='" . $options[13] . "' size=7></td></tr>";
+    $form .= "<tr><td colspan='2' align='center'><u>" . _MB_NW_DEFAULT_COLORS . '</u></td></tr>';
+    $form .= '<tr><td>' . _MB_NW_TAB_COLOR1 . "</td><td><input type='text' name='options[]' value='" . $options[9] . "' size=7></td></tr>";
+    $form .= '<tr><td>' . _MB_NW_TAB_COLOR2 . "</td><td><input type='text' name='options[]' value='" . $options[10] . "' size=7></td></tr>";
+    $form .= '<tr><td>' . _MB_NW_TAB_COLOR3 . "</td><td><input type='text' name='options[]' value='" . $options[11] . "' size=7></td></tr>";
+    $form .= '<tr><td>' . _MB_NW_TAB_COLOR4 . "</td><td><input type='text' name='options[]' value='" . $options[12] . "' size=7></td></tr>";
+    $form .= '<tr><td>' . _MB_NW_TAB_COLOR5 . "</td><td><input type='text' name='options[]' value='" . $options[13] . "' size=7></td></tr>";
     $form .= "</table>\n";
 
     $form .= '<br><br>' . _MB_NW_SPOTLIGHT_TOPIC . "<br><select name='options[]' multiple='multiple'>";

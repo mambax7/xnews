@@ -70,7 +70,7 @@ $pdf->setLanguageArray($l);
 // ---------------------------------------------------------
 
 // set font
-$pdf->SetFont('helvetica', "B", 12);
+$pdf->SetFont('helvetica', 'B', 12);
 
 // add a page
 $pdf->AddPage();

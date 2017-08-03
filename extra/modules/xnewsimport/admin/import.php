@@ -19,15 +19,15 @@
  */
 
 //DELETE ALL DATA FROM DESTINATION TABLES
-$resultDELETE = $xoopsDB->query("DELETE FROM " . $xoopsDB->prefix($to_module_subprefix . 'topics'));
-$resultDELETE = $xoopsDB->query("DELETE FROM " . $xoopsDB->prefix($to_module_subprefix . 'stories'));
-$resultDELETE = $xoopsDB->query("DELETE FROM " . $xoopsDB->prefix($to_module_subprefix . 'stories_files'));
-$resultDELETE = $xoopsDB->query("DELETE FROM " . $xoopsDB->prefix($to_module_subprefix . 'stories_votedata'));
+$resultDELETE = $xoopsDB->query('DELETE FROM ' . $xoopsDB->prefix($to_module_subprefix . 'topics'));
+$resultDELETE = $xoopsDB->query('DELETE FROM ' . $xoopsDB->prefix($to_module_subprefix . 'stories'));
+$resultDELETE = $xoopsDB->query('DELETE FROM ' . $xoopsDB->prefix($to_module_subprefix . 'stories_files'));
+$resultDELETE = $xoopsDB->query('DELETE FROM ' . $xoopsDB->prefix($to_module_subprefix . 'stories_votedata'));
 //RESET ALL TABLE AUTOINCREMENT VALUES
-$resultALTER = $xoopsDB->query("ALTER TABLE " . $xoopsDB->prefix($to_module_subprefix . 'topics') . " AUTO_INCREMENT = 1");
-$resultALTER = $xoopsDB->query("ALTER TABLE " . $xoopsDB->prefix($to_module_subprefix . 'stories') . " AUTO_INCREMENT = 1");
-$resultALTER = $xoopsDB->query("ALTER TABLE " . $xoopsDB->prefix($to_module_subprefix . 'stories_files') . " AUTO_INCREMENT = 1");
-$resultALTER = $xoopsDB->query("ALTER TABLE " . $xoopsDB->prefix($to_module_subprefix . 'stories_votedata') . " AUTO_INCREMENT = 1");
+$resultALTER = $xoopsDB->query('ALTER TABLE ' . $xoopsDB->prefix($to_module_subprefix . 'topics') . ' AUTO_INCREMENT = 1');
+$resultALTER = $xoopsDB->query('ALTER TABLE ' . $xoopsDB->prefix($to_module_subprefix . 'stories') . ' AUTO_INCREMENT = 1');
+$resultALTER = $xoopsDB->query('ALTER TABLE ' . $xoopsDB->prefix($to_module_subprefix . 'stories_files') . ' AUTO_INCREMENT = 1');
+$resultALTER = $xoopsDB->query('ALTER TABLE ' . $xoopsDB->prefix($to_module_subprefix . 'stories_votedata') . ' AUTO_INCREMENT = 1');
 
 $newArticleArray = array();
 
@@ -61,7 +61,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
         } else {
             if (copy($sourcepath . $arrCat['topic_imgurl'], $destinationpath . $arrCat['topic_imgurl'])) {
                 $topic->topic_imgurl = $arrCat['topic_imgurl'];
-                echo sprintf(_AM_XNI_IMPORTED_FILE, $topic->topic_imgurl()) . "<br>";
+                echo sprintf(_AM_XNI_IMPORTED_FILE, $topic->topic_imgurl()) . '<br>';
                 ++$cnt_imported_files;
             }
         }
@@ -73,7 +73,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
 
     //trigger_error((int)($auto_increment -1) , E_USER_WARNING);
     if (!$topic->store($topic)) {
-        echo sprintf(_AM_XNI_IMPORT_CATEGORY_ERROR, $arrCat['topic_title']) . "<br>";
+        echo sprintf(_AM_XNI_IMPORT_CATEGORY_ERROR, $arrCat['topic_title']) . '<br>';
         continue;
     }
 
@@ -99,7 +99,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
 
     echo sprintf(_AM_XNI_IMPORT_CATEGORY_SUCCESS, $topic->topic_title());
 
-    $sql            = "SELECT * FROM " . $xoopsDB->prefix($from_module_subprefix . 'stories') . " WHERE topicid=" . $arrCat['topic_id'];
+    $sql            = 'SELECT * FROM ' . $xoopsDB->prefix($from_module_subprefix . 'stories') . ' WHERE topicid=' . $arrCat['topic_id'];
     $resultArticles = $xoopsDB->query($sql);
     while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
         // Insert article
@@ -139,7 +139,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
         if (($arrArticle['picture'] != '')) {
             if (copy($sourcepath . $arrArticle['picture'], $destinationpath . $arrArticle['picture'])) {
                 $story->picture = $arrArticle['picture'];
-                echo sprintf(_AM_XNI_IMPORTED_FILE, $story->picture()) . "<br>";
+                echo sprintf(_AM_XNI_IMPORTED_FILE, $story->picture()) . '<br>';
                 ++$cnt_imported_files;
             }
         }
@@ -153,12 +153,12 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
             $attached_destinationpath = XOOPS_ROOT_PATH . '/uploads/' . $to_module_dirname . '/attached/';
         }
 
-        $sql         = "SELECT * FROM " . $xoopsDB->prefix($from_module_subprefix . 'stories_files') . " WHERE storyid=" . $arrArticle['storyid'];
+        $sql         = 'SELECT * FROM ' . $xoopsDB->prefix($from_module_subprefix . 'stories_files') . ' WHERE storyid=' . $arrArticle['storyid'];
         $resultfiles = $xoopsDB->query($sql);
         while ($arrFiles = $xoopsDB->fetchArray($resultfiles)) {
-            $result = $xoopsDB->query("INSERT INTO "
+            $result = $xoopsDB->query('INSERT INTO '
                                       . $xoopsDB->prefix($to_module_subprefix . 'stories_files')
-                                      . " (filerealname, storyid, date, mimetype, downloadname, counter)"
+                                      . ' (filerealname, storyid, date, mimetype, downloadname, counter)'
                                       . " VALUES ('"
                                       . $arrFiles['filerealname']
                                       . "', '"
@@ -173,18 +173,18 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
                                       . $arrFiles['counter']
                                       . "'); ");
             if (copy($attached_sourcepath . $arrFiles['downloadname'], $attached_destinationpath . $arrFiles['downloadname'])) {
-                echo sprintf(_AM_XNI_IMPORTED_FILE, $arrFiles['downloadname']) . "<br>";
+                echo sprintf(_AM_XNI_IMPORTED_FILE, $arrFiles['downloadname']) . '<br>';
                 ++$cnt_imported_files;
             }
         }
 
         // Vote Data
-        $sql         = "SELECT * FROM " . $xoopsDB->prefix($from_module_subprefix . 'stories_votedata') . " WHERE storyid=" . $arrArticle['storyid'];
+        $sql         = 'SELECT * FROM ' . $xoopsDB->prefix($from_module_subprefix . 'stories_votedata') . ' WHERE storyid=' . $arrArticle['storyid'];
         $resultvotes = $xoopsDB->query($sql);
         while ($arrVotes = $xoopsDB->fetchArray($resultvotes)) {
-            $result = $xoopsDB->query("INSERT INTO "
+            $result = $xoopsDB->query('INSERT INTO '
                                       . $xoopsDB->prefix($to_module_subprefix . 'stories_votedata')
-                                      . " (storyid, ratinguser, rating, ratinghostname, ratingtimestamp)"
+                                      . ' (storyid, ratinguser, rating, ratinghostname, ratingtimestamp)'
                                       . " VALUES ('"
                                       . $arrVotes['storyid']
                                       . "', '"
@@ -201,11 +201,11 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
         // Save story
         $storyPublished = $arrArticle['published'] != 0 ? $story->setApproved(1) : $story->setApproved(0);
         if (!$story->store()) {
-            echo sprintf("  " . _AM_XNI_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . "<br>";
+            echo sprintf('  ' . _AM_XNI_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . '<br>';
             continue;
         } else {
             $newArticleArray[$arrArticle['storyid']] = $story->storyid();
-            echo sprintf(_AM_XNI_IMPORTED_ARTICLE, $story->title()) . "<br>";
+            echo sprintf(_AM_XNI_IMPORTED_ARTICLE, $story->title()) . '<br>';
             ++$cnt_imported_articles;
         }
     }
@@ -226,16 +226,16 @@ foreach ($comments as $comment) {
     $comment->setVar('com_modid', $module_id);
     $comment->setNew();
     if (!$commentHandler->insert($comment)) {
-        echo sprintf(_AM_XNI_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br>";
+        echo sprintf(_AM_XNI_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . '<br>';
     } else {
-        echo sprintf(_AM_XNI_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br>";
+        echo sprintf(_AM_XNI_IMPORTED_COMMENT, $comment->getVar('com_title')) . '<br>';
         ++$cnt_imported_comments;
     }
 }
 
-echo "<br><br>Done.<br>";
-echo sprintf(_AM_XNI_IMPORTED_CATEGORIES, $cnt_imported_cat) . "<br>";
-echo sprintf(_AM_XNI_IMPORTED_ARTICLES, $cnt_imported_articles) . "<br>";
-echo sprintf(_AM_XNI_IMPORTED_FILES, $cnt_imported_files) . "<br>";
-echo sprintf(_AM_XNI_IMPORTED_COMMENTS, $cnt_imported_comments) . "<br>";
-echo "<br><a href='" . XOOPS_URL . "/modules/" . $to_module_dirname . "/index.php'>" . _AM_XNI_IMPORT_GOTOMODULE . "</a><br>";
+echo '<br><br>Done.<br>';
+echo sprintf(_AM_XNI_IMPORTED_CATEGORIES, $cnt_imported_cat) . '<br>';
+echo sprintf(_AM_XNI_IMPORTED_ARTICLES, $cnt_imported_articles) . '<br>';
+echo sprintf(_AM_XNI_IMPORTED_FILES, $cnt_imported_files) . '<br>';
+echo sprintf(_AM_XNI_IMPORTED_COMMENTS, $cnt_imported_comments) . '<br>';
+echo "<br><a href='" . XOOPS_URL . '/modules/' . $to_module_dirname . "/index.php'>" . _AM_XNI_IMPORT_GOTOMODULE . '</a><br>';

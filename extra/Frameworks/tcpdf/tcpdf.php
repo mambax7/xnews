@@ -10650,7 +10650,7 @@ if (!class_exists('TCPDF', false)) {
             // the followind avoid fields duplication after saving the document
             $this->javascript .= "if(getField('tcpdfdocsaved').value != 'saved') {";
             $k                = $this->k;
-            $this->javascript .= sprintf("f" . $name . "=this.addField('%s','%s',%d,[%.2F,%.2F,%.2F,%.2F]);", $name, $type, $this->PageNo() - 1, $x * $k, ($this->h - $y) * $k + 1, ($x + $w) * $k, ($this->h - $y - $h) * $k + 1) . "\n";
+            $this->javascript .= sprintf('f' . $name . "=this.addField('%s','%s',%d,[%.2F,%.2F,%.2F,%.2F]);", $name, $type, $this->PageNo() - 1, $x * $k, ($this->h - $y) * $k + 1, ($x + $w) * $k, ($this->h - $y - $h) * $k + 1) . "\n";
             $this->javascript .= 'f' . $name . '.textSize=' . $this->FontSizePt . ";\n";
             while (list($key, $val) = each($prop)) {
                 if (strcmp(substr($key, -5), 'Color') == 0) {
@@ -13298,8 +13298,8 @@ if (!class_exists('TCPDF', false)) {
                 $html   = $html_a . $html_b . substr($html, $pos + 11);
                 $offset = strlen($html_a . $html_b);
             }
-            $html   = preg_replace("'([\s]*)<option'si", "<option", $html);
-            $html   = preg_replace("'</option>([\s]*)'si", "</option>", $html);
+            $html   = preg_replace("'([\s]*)<option'si", '<option', $html);
+            $html   = preg_replace("'</option>([\s]*)'si", '</option>', $html);
             $offset = 0;
             while (($offset < strlen($html)) and ($pos = strpos($html, '</option>', $offset)) !== false) {
                 $html_a = substr($html, 0, $offset);
@@ -13312,7 +13312,7 @@ if (!class_exists('TCPDF', false)) {
                 $offset = strlen($html_a . $html_b);
             }
             $html = preg_replace("'<select([^\>]*)>'si", "<select\\1 opt=\"", $html);
-            $html = preg_replace("'([\s]+)</select>'si", "\">", $html);
+            $html = preg_replace("'([\s]+)</select>'si", '">', $html);
             $html = str_replace("\n", ' ', $html);
             // restore textarea newlines
             $html = str_replace('<TBR>', "\n", $html);

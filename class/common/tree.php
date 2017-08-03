@@ -192,7 +192,7 @@ class XnewsMyXoopsObjectTree
         if ($additional != '') {
             $ret .= $additional;
         }
-        $ret .= ">";
+        $ret .= '>';
         if (false != $addEmptyOption) {
             $ret .= '<option value=\'0\'>----</option>';
         }

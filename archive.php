@@ -80,7 +80,7 @@ $frommonth = (isset($_GET['month'])) ? intval($_GET['month']) : 0;
 
 $pgtitle = '';
 if ($fromyear && $frommonth) {
-    $pgtitle = sprintf(" - %d - %d", $fromyear, $frommonth);
+    $pgtitle = sprintf(' - %d - %d', $fromyear, $frommonth);
 }
 $infotips   = $xnews->getConfig('infotips');
 $restricted = $xnews->getConfig('restrictindex');
@@ -113,7 +113,7 @@ if (!$result) {
     $i      = 0;
     while (list($time) = $xoopsDB->fetchRow($result)) {
         $time = formatTimestamp($time, 'mysql', $useroffset);
-        if (preg_match("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $time, $datetime)) {
+        if (preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/', $time, $datetime)) {
             $this_year  = intval($datetime[1]);
             $this_month = intval($datetime[2]);
             if (empty($lastyear)) {
@@ -182,8 +182,8 @@ if ($fromyear != 0 && $frommonth != 0) {
                 $item_path  = nw_remove_accents($article->title());
                 $print_item = nw_remove_accents(_MA_NW_PRINTERFRIENDLY);
             }
-            $story['title']      = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $article->topicid(), $cat_path) . "'>" . $article->topic_title() . "</a>";
-            $story['title']      .= ": <a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $article->storyid(), $item_path) . "'" . $htmltitle . ">" . $article->title() . "</a>";
+            $story['title']      = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $article->topicid(), $cat_path) . "'>" . $article->topic_title() . '</a>';
+            $story['title']      .= ": <a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $article->storyid(), $item_path) . "'" . $htmltitle . '>' . $article->title() . '</a>';
             $story['print_link'] = nw_seo_UrlGenerator(_MA_NW_SEO_PRINT, $article->storyid(), $print_item);
 
             $story['counter']   = $article->counter();

@@ -13,10 +13,10 @@ function xoops_module_update_xnews(&$xoopsModule)
     $module_version = $xoopsModule->getVar('version');
     //
     // EDIT Cloner table
-    $result     = $xoopsDB->query("SELECT clone_id FROM " . $xoopsDB->prefix('news_clonerdata') . " WHERE clone_dir = '" . $module_dirname . "' ;");
+    $result     = $xoopsDB->query('SELECT clone_id FROM ' . $xoopsDB->prefix('news_clonerdata') . " WHERE clone_dir = '" . $module_dirname . "' ;");
     $tmpcloneid = $xoopsDB->fetchRow($result);
     $cloneid    = $tmpcloneid[0];
-    $xoopsDB->query("UPDATE " . $xoopsDB->prefix('news_clonerdata') . " SET clone_version = " . $module_version . " WHERE clone_id = " . $cloneid);
+    $xoopsDB->query('UPDATE ' . $xoopsDB->prefix('news_clonerdata') . ' SET clone_version = ' . $module_version . ' WHERE clone_id = ' . $cloneid);
     if (!nw_FieldExists('dobr', $xoopsDB->prefix('nw_stories'))) {
         nw_AddField("dobr TINYINT( 1 ) NOT NULL DEFAULT '1'", $xoopsDB->prefix('nw_stories'));
     }

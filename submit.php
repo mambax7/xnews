@@ -421,7 +421,7 @@ switch ($op) {
                 $currentPicture = XNEWS_TOPICS_FILES_PATH . '/' . xoops_trim($story->picture());
                 if (is_file($currentPicture) && file_exists($currentPicture)) {
                     if (!unlink($currentPicture)) {
-                        trigger_error("Error, impossible to delete the picture attached to this article");
+                        trigger_error('Error, impossible to delete the picture attached to this article');
                     }
                 }
             }

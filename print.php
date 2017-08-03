@@ -239,7 +239,7 @@ function PrintPage()
         <small><b>' . _MA_NW_DATE . '</b>&nbsp;' . $datetime . ' | <b>' . _MA_NW_TOPICC . '</b>&nbsp;' . $myts->htmlSpecialChars($storyObj->topic_title()) . '</small><br><br></td></tr>';
     echo '<tr valign="top" style="font:12px;"><td>' . $storyObj->hometext() . '<br>';
     $bodytext = $storyObj->bodytext();
-    $bodytext = str_replace('[pagebreak]', "<br style=\"page-break-after:always;\">", $bodytext);
+    $bodytext = str_replace('[pagebreak]', '<br style="page-break-after:always;">', $bodytext);
     if ($bodytext != '') {
         echo $bodytext . '<br><br>';
     }

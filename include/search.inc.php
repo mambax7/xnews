@@ -21,10 +21,10 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
         $groups = XOOPS_GROUP_ANONYMOUS;
     }
 
-    $sql = "SELECT storyid, topicid, uid, title, created FROM " . $xoopsDB->prefix('nw_stories') . " WHERE (published>0 AND published<=" . time() . ") AND (expired = 0 OR expired > " . time() . ') ';
+    $sql = 'SELECT storyid, topicid, uid, title, created FROM ' . $xoopsDB->prefix('nw_stories') . ' WHERE (published>0 AND published<=' . time() . ') AND (expired = 0 OR expired > ' . time() . ') ';
 
     if ($userid != 0) {
-        $sql .= " AND uid=" . $userid . " ";
+        $sql .= ' AND uid=' . $userid . ' ';
     }
     // because count() returns 1 even if a supplied variable
     // is not an array, we must check if $querryarray is really an array
@@ -34,28 +34,28 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
             $sql .= " $andor ";
             $sql .= "(hometext LIKE '%$queryarray[$i]%' OR bodytext LIKE '%$queryarray[$i]%' OR title LIKE '%$queryarray[$i]%' OR keywords LIKE '%$queryarray[$i]%' OR description LIKE '%$queryarray[$i]%')";
         }
-        $sql .= ") ";
+        $sql .= ') ';
         // keywords highlighting
         if ($highlight) {
             $searchparam = '&keywords=' . urlencode(trim(implode(' ', $queryarray)));
         }
     }
 
-    $sql    .= "ORDER BY created DESC";
+    $sql    .= 'ORDER BY created DESC';
     $result = $xoopsDB->query($sql, $limit, $offset);
     $ret    = array();
     $i      = 0;
     while ($myrow = $xoopsDB->fetchArray($result)) {
         $display = true;
         if ($modid && $gpermHandler) {
-            if ($restricted && !$gpermHandler->checkRight("nw_view", $myrow['topicid'], $groups, $modid)) {
+            if ($restricted && !$gpermHandler->checkRight('nw_view', $myrow['topicid'], $groups, $modid)) {
                 $display = false;
             }
         }
 
         if ($display) {
-            $ret[$i]['image'] = "assets/images/forum.gif";
-            $ret[$i]['link']  = "article.php?storyid=" . $myrow['storyid'] . "" . $searchparam;
+            $ret[$i]['image'] = 'assets/images/forum.gif';
+            $ret[$i]['link']  = 'article.php?storyid=' . $myrow['storyid'] . '' . $searchparam;
             $ret[$i]['title'] = $myrow['title'];
             $ret[$i]['time']  = $myrow['created'];
             $ret[$i]['uid']   = $myrow['uid'];
@@ -68,9 +68,9 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
     if ($searchincomments && (isset($limit) && $i <= $limit)) {
         require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
         $ind = $i;
-        $sql = "SELECT com_id, com_modid, com_itemid, com_created, com_uid, com_title, com_text, com_status FROM " . $xoopsDB->prefix("xoopscomments") . " WHERE (com_id>0) AND (com_modid=$modid) AND (com_status=" . XOOPS_COMMENT_ACTIVE . ") ";
+        $sql = 'SELECT com_id, com_modid, com_itemid, com_created, com_uid, com_title, com_text, com_status FROM ' . $xoopsDB->prefix('xoopscomments') . " WHERE (com_id>0) AND (com_modid=$modid) AND (com_status=" . XOOPS_COMMENT_ACTIVE . ') ';
         if ($userid != 0) {
-            $sql .= " AND com_uid=" . $userid . " ";
+            $sql .= ' AND com_uid=' . $userid . ' ';
         }
 
         if (is_array($queryarray) && $count = count($queryarray)) {
@@ -79,15 +79,15 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
                 $sql .= " $andor ";
                 $sql .= "(com_title LIKE '%$queryarray[$i]%' OR com_text LIKE '%$queryarray[$i]%')";
             }
-            $sql .= ") ";
+            $sql .= ') ';
         }
         $i      = $ind;
-        $sql    .= "ORDER BY com_created DESC";
+        $sql    .= 'ORDER BY com_created DESC';
         $result = $xoopsDB->query($sql, $limit, $offset);
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $display = true;
             if ($modid && $gpermHandler) {
-                if ($restricted && !$gpermHandler->checkRight("nw_view", $myrow['com_itemid'], $groups, $modid)) {
+                if ($restricted && !$gpermHandler->checkRight('nw_view', $myrow['com_itemid'], $groups, $modid)) {
                     $display = false;
                 }
             }
@@ -96,8 +96,8 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
             }
 
             if ($display) {
-                $ret[$i]['image'] = "assets/images/forum.gif";
-                $ret[$i]['link']  = "article.php?storyid=" . $myrow['com_itemid'] . "" . $searchparam;
+                $ret[$i]['image'] = 'assets/images/forum.gif';
+                $ret[$i]['link']  = 'article.php?storyid=' . $myrow['com_itemid'] . '' . $searchparam;
                 $ret[$i]['title'] = $myrow['com_title'];
                 $ret[$i]['time']  = $myrow['com_created'];
                 $ret[$i]['uid']   = $myrow['com_uid'];

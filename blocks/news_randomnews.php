@@ -6,15 +6,15 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
  * Paths not set and block would not work
  */
 if (!defined('XNEWS_MODULE_PATH')) {
-    define("XNEWS_SUBPREFIX", "nw");
-    define("XNEWS_MODULE_DIRNAME", "xnews");
-    define("XNEWS_MODULE_PATH", XOOPS_ROOT_PATH . "/modules/" . XNEWS_MODULE_DIRNAME);
-    define("XNEWS_MODULE_URL", XOOPS_URL . "/modules/" . XNEWS_MODULE_DIRNAME);
-    define("XNEWS_UPLOADS_NEWS_PATH", XOOPS_ROOT_PATH . "/uploads/" . XNEWS_MODULE_DIRNAME);
-    define("XNEWS_TOPICS_FILES_PATH", XOOPS_ROOT_PATH . "/uploads/" . XNEWS_MODULE_DIRNAME . "/topics");
-    define("XNEWS_ATTACHED_FILES_PATH", XOOPS_ROOT_PATH . "/uploads/" . XNEWS_MODULE_DIRNAME . "/attached");
-    define("XNEWS_TOPICS_FILES_URL", XOOPS_URL . "/uploads/" . XNEWS_MODULE_DIRNAME . "/topics");
-    define("XNEWS_ATTACHED_FILES_URL", XOOPS_URL . "/uploads/" . XNEWS_MODULE_DIRNAME . "/attached");
+    define('XNEWS_SUBPREFIX', 'nw');
+    define('XNEWS_MODULE_DIRNAME', 'xnews');
+    define('XNEWS_MODULE_PATH', XOOPS_ROOT_PATH . '/modules/' . XNEWS_MODULE_DIRNAME);
+    define('XNEWS_MODULE_URL', XOOPS_URL . '/modules/' . XNEWS_MODULE_DIRNAME);
+    define('XNEWS_UPLOADS_NEWS_PATH', XOOPS_ROOT_PATH . '/uploads/' . XNEWS_MODULE_DIRNAME);
+    define('XNEWS_TOPICS_FILES_PATH', XOOPS_ROOT_PATH . '/uploads/' . XNEWS_MODULE_DIRNAME . '/topics');
+    define('XNEWS_ATTACHED_FILES_PATH', XOOPS_ROOT_PATH . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
+    define('XNEWS_TOPICS_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/topics');
+    define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
@@ -74,7 +74,7 @@ function nw_b_news_randomnews_show($options)
         $news['hits']        = $story->counter();
         $news['rating']      = $story->rating();
         $news['votes']       = $story->votes();
-        $news['author']      = sprintf("%s %s", _POSTEDBY, $story->uname());
+        $news['author']      = sprintf('%s %s', _POSTEDBY, $story->uname());
         $news['topic_title'] = $story->topic_title();
         $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
 
@@ -102,9 +102,9 @@ function nw_b_news_randomnews_show($options)
     // DNPROSSI SEO
     $seo_enabled = $xnews->getConfig('seo_enable');
     if ($seo_enabled != 0) {
-        $block['urlrewrite'] = "true";
+        $block['urlrewrite'] = 'true';
     } else {
-        $block['urlrewrite'] = "false";
+        $block['urlrewrite'] = 'false';
     }
 
     return $block;
@@ -114,7 +114,7 @@ function nw_b_news_randomnews_edit($options)
 {
     $form = _MB_NW_ORDER . "&nbsp;<select name='options[]'>";
     $form .= "<option value='published'";
-    if ($options[0] == "published") {
+    if ($options[0] == 'published') {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_DATE . "</option>\n";

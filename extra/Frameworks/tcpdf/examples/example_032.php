@@ -73,7 +73,7 @@ $pdf->ImageEps('../images/tiger.ai', 10, 50, 190);
 
 // Page 2: EPS, with link
 $pdf->AddPage();
-$pdf->ImageEps('../images/bug.eps', 0, 25, 0, 240, "http://www.tcpdf.org", true, 'T', 'C');
+$pdf->ImageEps('../images/bug.eps', 0, 25, 0, 240, 'http://www.tcpdf.org', true, 'T', 'C');
 
 // Page 3: AI
 $pdf->AddPage();

@@ -91,7 +91,7 @@ function LaunchNewsletter()
     //
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
-    $adminObject->displayNavigation("index.php?op=configurenewsletter");
+    $adminObject->displayNavigation('index.php?op=configurenewsletter');
 
     xoops_loadLanguage('newsletter', XNEWS_MODULE_DIRNAME);
 

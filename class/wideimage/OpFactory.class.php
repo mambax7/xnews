@@ -28,7 +28,7 @@ class wiOpFactory
     public static function get($operationName)
     {
         if (!isset(self::$cache[$operationName])) {
-            $opClassName = "wio" . $operationName;
+            $opClassName = 'wio' . $operationName;
             if (!class_exists($opClassName)) {
                 $fileName = WI_LIB_PATH . 'operations/' . $operationName . '.class.php';
                 if (file_exists($fileName)) {

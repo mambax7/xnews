@@ -117,8 +117,8 @@ function nw_b_news_latestnews_show($options)
                 $patterns[] = "/\[img align=(['\"]?)(left|center|right)\\1 width=(['\"]?)([0-9]*)\\3]([^\"\(\)\?\&'<>]*)\[\/img\]/sU";
                 $patterns[] = "/\[img align=(['\"]?)(left|center|right)\\1]([^\"\(\)\?\&'<>]*)\[\/img\]/sU";
                 $patterns[] = "/\[img]([^\"\(\)\?\&'<>]*)\[\/img\]/sU";
-                $patterns[] = "/<img src=\"(.*)\" >/sU";
-                $patterns[] = "/<img src=(.*) >/sU";
+                $patterns[] = '/<img src="(.*)" >/sU';
+                $patterns[] = '/<img src=(.*) >/sU';
 
                 $replacements[] = $startdiv . '<img ' . $style . ' src="\\3" ' . $enddiv;
                 $replacements[] = $startdiv . '<img ' . $style . ' src="\\3" ' . $enddiv;
@@ -127,7 +127,7 @@ function nw_b_news_latestnews_show($options)
                 $replacements[] = $startdiv . '<img ' . $style . ' src="\\1" ' . $enddiv;
 
                 //DNPROSSI Added - xlanguage installed and active
-                $story = "";
+                $story = '';
                 $story = $thisstory->hometext;
 
                 if ($xlang === true) {
@@ -287,17 +287,17 @@ function nw_b_news_latestnews_edit($options)
 
     $form = "<table border='0'>";
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_DISPLAY . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[0] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS . "</td></tr>";
+    $form .= "<input type='text' name='options[]' value='" . $options[0] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS . '</td></tr>';
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_COLUMNS . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[1] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_COLUMN . "</td></tr>";
+    $form .= "<input type='text' name='options[]' value='" . $options[1] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_COLUMN . '</td></tr>';
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_TEXTLENGTH . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[2] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_LETTER . "</td></tr>";
+    $form .= "<input type='text' name='options[]' value='" . $options[2] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_LETTER . '</td></tr>';
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_IMGWIDTH . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[3] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . "</td></tr>";
+    $form .= "<input type='text' name='options[]' value='" . $options[3] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . '</td></tr>';
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_IMGHEIGHT . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[4] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . "</td></tr>";
+    $form .= "<input type='text' name='options[]' value='" . $options[4] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . '</td></tr>';
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_BORDER . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[5] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . "</td></tr>";
+    $form .= "<input type='text' name='options[]' value='" . $options[5] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . '</td></tr>';
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_BORDERCOLOR . $tabletag2;
     $form .= "<input type='text' name='options[]' value='" . $options[6] . "' size='8'></td></tr>";
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_SELECTEDSTORIES . $tabletag2;
@@ -356,7 +356,7 @@ function nw_b_news_latestnews_edit($options)
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_LATESTNEWS_RATE . '</option>';
-    $form .= "</select></td></tr>";
+    $form .= '</select></td></tr>';
     //topics
     $form       .= $tabletag1 . _MB_NW_LATESTNEWS_TOPICSDISPLAY . $tabletag2;
     $form       .= "<select name='options[]' multiple='multiple'>";
@@ -380,7 +380,7 @@ function nw_b_news_latestnews_edit($options)
     }
     $form .= '</select></td></tr>';
 
-    $form .= "</table>";
+    $form .= '</table>';
 
     return $form;
 }

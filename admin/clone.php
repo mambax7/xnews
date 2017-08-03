@@ -51,7 +51,7 @@ function NewsCloner()
     $iy     = 0;
     while ($clone = $GLOBALS['xoopsDB']->fetchArray($result)) {
         //DNPROSSI - Control if clone dir exists
-        if (is_dir(XOOPS_ROOT_PATH . "/modules/" . $clone['clone_dir'])) {
+        if (is_dir(XOOPS_ROOT_PATH . '/modules/' . $clone['clone_dir'])) {
             $clone_arr[$ix] = $clone;
             $ix++;
         } else {
@@ -62,7 +62,7 @@ function NewsCloner()
     // If cloned dir does not exists because deleted remove from dtb
     if (isset($nonclone_arr)) {
         for ($iy = 0; $iy < count($nonclone_arr); $iy++) {
-            $result = $GLOBALS['xoopsDB']->queryF("DELETE FROM " . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . " WHERE clone_dir = '" . $nonclone_arr[$iy]['clone_dir'] . "' ;");
+            $result = $GLOBALS['xoopsDB']->queryF('DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . " WHERE clone_dir = '" . $nonclone_arr[$iy]['clone_dir'] . "' ;");
         }
     }
 
@@ -70,7 +70,7 @@ function NewsCloner()
     $class       = '';
 
     xnews_collapsableBar('NewsCloner', 'topNewsCloner');
-    echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topNewsCloner' name='topNewsCloner' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_CLONER_CLONES . ' (' . $totalclones . ')' . "</h4>";
+    echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topNewsCloner' name='topNewsCloner' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_CLONER_CLONES . ' (' . $totalclones . ')' . '</h4>';
     echo "<div id='NewsCloner'>";
     echo '<br>';
     echo "<div style='text-align: center;'>";
@@ -86,7 +86,7 @@ function NewsCloner()
          . _AM_NW_ACTION
          . "</td><td align='center'>"
          . _AM_NW_CLONER_ACTION_INSTALL
-         . "</td></tr>";
+         . '</td></tr>';
     if (is_array($clone_arr) && $totalclones) {
         $cpt    = 1;
         $tmpcpt = $start;
@@ -137,11 +137,11 @@ function NewsCloner()
                           . $clone_arr[$tmpcpt]['clone_subprefix']
                           . "</td><td align='center'>"
                           . round($clone_arr[$tmpcpt]['clone_version'] / 100, 2)
-                          . "</td><td>"
+                          . '</td><td>'
                           . $action
-                          . "</td><td>"
+                          . '</td><td>'
                           . $installaction
-                          . "</td></tr>";
+                          . '</td></tr>';
             } else {
                 $ok = false;
             }
@@ -184,25 +184,25 @@ function NewsCloner()
     }
 
     //Draw Form
-    $sform = new XoopsThemeForm(_AM_NW_CLONER_ADD, "clonerform", XNEWS_MODULE_URL . "/admin/clone.php", 'post', true);
+    $sform = new XoopsThemeForm(_AM_NW_CLONER_ADD, 'clonerform', XNEWS_MODULE_URL . '/admin/clone.php', 'post', true);
 
-    $filedir_tray = new XoopsFormElementTray(_AM_NW_CLONER_NEWNAME, "");
+    $filedir_tray = new XoopsFormElementTray(_AM_NW_CLONER_NEWNAME, '');
     $label        = sprintf(_AM_NW_CLONER_NEWNAMEDESC, $xnews->getModule()->name());
     $filedir_tray->addElement(new XoopsFormLabel($label), false);
-    $filedir_tray->addElement(new XoopsFormText(_AM_NW_CLONER_NEWNAMELABEL, "clone_modulename", 50, 255, $clone_modulename), true);
+    $filedir_tray->addElement(new XoopsFormText(_AM_NW_CLONER_NEWNAMELABEL, 'clone_modulename', 50, 255, $clone_modulename), true);
     $sform->addElement($filedir_tray);
 
-    $sform->addElement(new XoopsFormHidden("op", "clonerapply"), false);
+    $sform->addElement(new XoopsFormHidden('op', 'clonerapply'), false);
 
-    $button_tray = new XoopsFormElementTray("", "");
-    $submit_btn  = new XoopsFormButton("", "post", _SUBMIT, "submit");
+    $button_tray = new XoopsFormElementTray('', '');
+    $submit_btn  = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
     $button_tray->addElement($submit_btn);
     $sform->addElement($button_tray);
     $sform->display();
 
     //recalc original subprefix
     $sub     = nw_remove_numbers(XNEWS_SUBPREFIX);
-    $result2 = $GLOBALS['xoopsDB']->query("SELECT * FROM " . $GLOBALS['xoopsDB']->prefix($sub . '_stories'));
+    $result2 = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix($sub . '_stories'));
     $count   = $GLOBALS['xoopsDB']->getRowsNum($result2);
 
     $tmpmoduleHandler = xoops_getHandler('module');
@@ -229,7 +229,7 @@ function NewsClonerApply()
         $new_modulename = ucwords(strtolower($new_modulename));
 
         //Select last id for new sub-prefix.
-        $result         = $GLOBALS['xoopsDB']->query("SHOW TABLE STATUS LIKE '" . $GLOBALS['xoopsDB']->prefix("news_clonerdata") . "'");
+        $result         = $GLOBALS['xoopsDB']->query("SHOW TABLE STATUS LIKE '" . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . "'");
         $row            = $GLOBALS['xoopsDB']->fetchArray($result);
         $Auto_increment = $row['Auto_increment'];
 
@@ -248,8 +248,8 @@ function NewsClonerApply()
         $patValues = array_values($patterns);
 
         $newPath = str_replace($patKeys[0], $patValues[0], XNEWS_MODULE_PATH);
-        $oldlogo = $newPath . "/" . $old_dirname . "_logo.png";
-        $newlogo = $newPath . "/" . $new_dirname . "_logo.png";
+        $oldlogo = $newPath . '/' . $old_dirname . '_logo.png';
+        $newlogo = $newPath . '/' . $new_dirname . '_logo.png';
 
         if (!is_dir($newPath)) { //&& !$old_subprefix == $new_subprefix ) {
             nw_cloneFileFolder(XNEWS_MODULE_PATH, $patterns);
@@ -264,8 +264,8 @@ function NewsClonerApply()
             nw_clonefilename($path_array, $old_subprefix, $new_subprefix);
 
             //Add cloned module to cloner dtb
-            $sql    = "INSERT";
-            $sql    .= " INTO " . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . " (clone_name, clone_dir, clone_version, clone_subprefix, clone_installed)";
+            $sql    = 'INSERT';
+            $sql    .= ' INTO ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' (clone_name, clone_dir, clone_version, clone_subprefix, clone_installed)';
             $sql    .= " VALUES ('" . $new_modulename . "', '" . $new_dirname . "', '" . $module_version . "', '" . $new_subprefix . "', 0);";
             $result = $GLOBALS['xoopsDB']->query($sql);
 
@@ -285,14 +285,14 @@ function CloneUpgrade()
 {
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
-    require_once "cloner.php";
+    require_once 'cloner.php';
     //
     if (!isset($_GET['clone_id'])) {
         //trigger_error("Not set", E_USER_WARNING);
         redirect_header('clone.php?op=cloner', 3, _AM_NW_CLONER_NOMODULEID);
     } else {
         $cloneid = $_GET['clone_id'];
-        $result  = $GLOBALS['xoopsDB']->query("SELECT * FROM " . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . " WHERE clone_id = " . $cloneid);
+        $result  = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' WHERE clone_id = ' . $cloneid);
         $ix      = 0;
         while ($clone = $GLOBALS['xoopsDB']->fetchArray($result)) {
             $clone_arr[$ix] = $clone;
@@ -323,8 +323,8 @@ function CloneUpgrade()
         // IN PROGRESS
         // IN PROGRESS
         // IN PROGRESS
-        $oldlogo = $newPath . "/" . $org_dirname . "_logo.png";
-        $newlogo = $newPath . "/" . $upg_dirname . "_logo.png";
+        $oldlogo = $newPath . '/' . $org_dirname . '_logo.png';
+        $newlogo = $newPath . '/' . $upg_dirname . '_logo.png';
         //
         nw_cloneFileFolder(XNEWS_MODULE_PATH, $patterns);
         //rename logo.png
@@ -335,7 +335,7 @@ function CloneUpgrade()
         // check all files in dir, and process them
         nw_clonefilename($path_array, $org_subprefix, $upg_subprefix);
         //Update module dtb
-        $GLOBALS['xoopsDB']->queryF("UPDATE " . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . " SET clone_version  = " . $org_version . " WHERE clone_id = " . $cloneid);
+        $GLOBALS['xoopsDB']->queryF('UPDATE ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' SET clone_version  = ' . $org_version . ' WHERE clone_id = ' . $cloneid);
         $label = sprintf(_AM_NW_CLONER_UPRADED, $upg_modulename);
         redirect_header('clone.php?op=cloner', 3, $label);
     }
@@ -351,7 +351,7 @@ function CloneDelete()
     //  admin navigation
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
-    $adminObject->displayNavigation("clone.php?op=cloner");
+    $adminObject->displayNavigation('clone.php?op=cloner');
     //
     xoops_load('XoopsFormLoader');
     //
@@ -359,7 +359,7 @@ function CloneDelete()
         redirect_header('clone.php?op=cloner', 3, _AM_NW_CLONER_CLONEID);
     } else {
         $cloneid = $_GET['clone_id'];
-        $result  = $GLOBALS['xoopsDB']->query("SELECT * FROM " . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . " WHERE clone_id = " . $cloneid);
+        $result  = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' WHERE clone_id = ' . $cloneid);
         $ix      = 0;
         while ($clone = $GLOBALS['xoopsDB']->fetchArray($result)) {
             $clone_arr[$ix] = $clone;
@@ -367,8 +367,8 @@ function CloneDelete()
         }
         $module_dirname = $clone_arr[0]['clone_dir'];
         echo "<div id='NewsCloner' style='text-align: center;'>";
-        echo "<h2>" . _AM_NW_CLONER_CLONEDELETION . "</h2>";
-        echo "</div>";
+        echo '<h2>' . _AM_NW_CLONER_CLONEDELETION . '</h2>';
+        echo '</div>';
         //echo "<div style='text-align: center;'>";
         $message = sprintf(_AM_NW_CLONER_SUREDELETE, $module_dirname);
         xoops_confirm(array('op' => 'clonedeleteapply', 'clone_id' => $cloneid, 'ok' => 1, 'module_name' => $module_dirname), 'clone.php', $message);
@@ -382,15 +382,15 @@ function CloneDeleteApply()
 {
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
-    require_once "cloner.php";
+    require_once 'cloner.php';
     //
     //trigger_error("Not set", E_USER_WARNING);
     if (!isset($_POST['clone_id'])) {
         redirect_header('clone.php?op=cloner', 3, _AM_NW_CLONER_CLONEID);
     } else {
         $del_dirname = $_POST['module_name'];
-        $delPath1    = XOOPS_ROOT_PATH . "/modules/" . $del_dirname;
-        $delPath2    = XOOPS_ROOT_PATH . "/uploads/" . $del_dirname;
+        $delPath1    = XOOPS_ROOT_PATH . '/modules/' . $del_dirname;
+        $delPath2    = XOOPS_ROOT_PATH . '/uploads/' . $del_dirname;
         if (file_exists($delPath2) && is_dir($delPath2)) {
             if (nw_removewholeclone($delPath1) === true && nw_removewholeclone($delPath2) === true) {
                 $label = sprintf(_AM_NW_CLONER_CLONEDELETED, $del_dirname);

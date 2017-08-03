@@ -29,7 +29,7 @@
  */
 
 require_once __DIR__ . '/../../../include/cp_header.php';
-require_once __DIR__ . "/admin_header.php";
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 require_once NW_MODULE_PATH . '/include/functions.php';
 require_once NW_MODULE_PATH . '/class/class.newsstory.php';
@@ -193,7 +193,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
                 while ($ratings = $db->fetchArray($result5)) {
                     $result6 = $db->queryF('INSERT INTO '
                                            . $news_stories_votedata
-                                           . " (storyid, ratinguser, rating, ratinghostname, ratingtimestamp) VALUES ("
+                                           . ' (storyid, ratinguser, rating, ratinghostname, ratingtimestamp) VALUES ('
                                            . $news_newsid
                                            . ','
                                            . $ratings['ratinguser']

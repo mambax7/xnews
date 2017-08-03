@@ -20,9 +20,9 @@
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-require_once XOOPS_ROOT_PATH . "/class/xoopsstory.php";
-require_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
-require_once XNI_MODULE_PATH . "/include/functions.php";
+require_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
+require_once XNI_MODULE_PATH . '/include/functions.php';
 
 class xni_NewsTopic extends XoopsTopic
 {
@@ -45,7 +45,7 @@ class xni_NewsTopic extends XoopsTopic
         }
     }
 
-    public function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = "", $onchange = "", $checkRight = false, $perm_type = 'xni_view')
+    public function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = '', $onchange = '', $checkRight = false, $perm_type = 'xni_view')
     {
         $perms = '';
         if ($checkRight) {
@@ -57,18 +57,18 @@ class xni_NewsTopic extends XoopsTopic
             $topics        = $gpermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
                 $topics = implode(',', $topics);
-                $perms  = " AND topic_id IN (" . $topics . ") ";
+                $perms  = ' AND topic_id IN (' . $topics . ') ';
             } else {
                 return null;
             }
         }
 
         if ($seltopic != -1) {
-            return $this->makeMySelBox("topic_title", "topic_title", $seltopic, $none, $selname, $onchange, $perms);
+            return $this->makeMySelBox('topic_title', 'topic_title', $seltopic, $none, $selname, $onchange, $perms);
         } elseif (!empty($this->topic_id)) {
-            return $this->makeMySelBox("topic_title", "topic_title", $this->topic_id, $none, $selname, $onchange, $perms);
+            return $this->makeMySelBox('topic_title', 'topic_title', $this->topic_id, $none, $selname, $onchange, $perms);
         } else {
-            return $this->makeMySelBox("topic_title", "topic_title", 0, $none, $selname, $onchange, $perms);
+            return $this->makeMySelBox('topic_title', 'topic_title', 0, $none, $selname, $onchange, $perms);
         }
     }
 
@@ -78,17 +78,17 @@ class xni_NewsTopic extends XoopsTopic
      * @param int $preset_id is used to specify a preselected item
      * @param int $none      set $none to 1 to add a option with value 0
      */
-    public function makeMySelBox($title, $order = "", $preset_id = 0, $none = 0, $sel_name = "topic_id", $onchange = "", $perms)
+    public function makeMySelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = 'topic_id', $onchange = '', $perms)
     {
         $myts      = MyTextSanitizer::getInstance();
         $outbuffer = '';
         $outbuffer = "<select name='" . $sel_name . "'";
-        if ($onchange != "") {
+        if ($onchange != '') {
             $outbuffer .= " onchange='" . $onchange . "'";
         }
         $outbuffer .= ">\n";
-        $sql       = "SELECT topic_id, " . $title . " FROM " . $this->table . " WHERE (topic_pid=0)" . $perms;
-        if ($order != "") {
+        $sql       = 'SELECT topic_id, ' . $title . ' FROM ' . $this->table . ' WHERE (topic_pid=0)' . $perms;
+        if ($order != '') {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -96,23 +96,23 @@ class xni_NewsTopic extends XoopsTopic
             $outbuffer .= "<option value='0'>----</option>\n";
         }
         while (list($catid, $name) = $this->db->fetchRow($result)) {
-            $sel = "";
+            $sel = '';
             if ($catid == $preset_id) {
                 $sel = " selected='selected'";
             }
             $name      = $myts->displayTarea($name);
             $outbuffer .= "<option value='$catid'$sel>$name</option>\n";
-            $sel       = "";
+            $sel       = '';
             $arr       = $this->getChildTreeArray($catid, $order, $perms);
             foreach ($arr as $option) {
-                $option['prefix'] = str_replace(".", "--", $option['prefix']);
-                $catpath          = $option['prefix'] . "&nbsp;" . $myts->displayTarea($option[$title]);
+                $option['prefix'] = str_replace('.', '--', $option['prefix']);
+                $catpath          = $option['prefix'] . '&nbsp;' . $myts->displayTarea($option[$title]);
 
                 if ($option['topic_id'] == $preset_id) {
                     $sel = " selected='selected'";
                 }
                 $outbuffer .= "<option value='" . $option['topic_id'] . "'$sel>$catpath</option>\n";
-                $sel       = "";
+                $sel       = '';
             }
         }
         $outbuffer .= "</select>\n";
@@ -122,8 +122,8 @@ class xni_NewsTopic extends XoopsTopic
 
     public function getChildTreeArray($sel_id = 0, $order = '', $perms = '', $parray = array(), $r_prefix = '')
     {
-        $sql = "SELECT * FROM " . $this->table . " WHERE (topic_pid=" . $sel_id . ")" . $perms;
-        if ($order != "") {
+        $sql = 'SELECT * FROM ' . $this->table . ' WHERE (topic_pid=' . $sel_id . ')' . $perms;
+        if ($order != '') {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -132,7 +132,7 @@ class xni_NewsTopic extends XoopsTopic
             return $parray;
         }
         while ($row = $this->db->fetchArray($result)) {
-            $row['prefix'] = $r_prefix . ".";
+            $row['prefix'] = $r_prefix . '.';
             array_push($parray, $row);
             $parray = $this->getChildTreeArray($row['topic_id'], $order, $perms, $parray, $row['prefix']);
         }
@@ -164,33 +164,33 @@ class xni_NewsTopic extends XoopsTopic
             $topics        = $gpermHandler->getItemIds('xni_submit', $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
                 $topics = implode(',', $topics);
-                $perms  = " WHERE topic_id IN (" . $topics . ") ";
+                $perms  = ' WHERE topic_id IN (' . $topics . ') ';
             } else {
                 return null;
             }
         }
 
-        $sql   = "SELECT count(topic_id) AS cpt FROM " . $this->table . $perms;
+        $sql   = 'SELECT count(topic_id) AS cpt FROM ' . $this->table . $perms;
         $array = $this->db->fetchArray($this->db->query($sql));
 
         return ($array['cpt']);
     }
 
-    public function getAllTopics($table_name = "nw_topics", $checkRight = true, $permission = "xni_view")
+    public function getAllTopics($table_name = 'nw_topics', $checkRight = true, $permission = 'xni_view')
     {
         $topics_arr = array();
         $db         = XoopsDatabaseFactory::getDatabaseConnection();
         $table      = $db->prefix($table_name);
-        $sql        = "SELECT * FROM " . $table;
+        $sql        = 'SELECT * FROM ' . $table;
         if ($checkRight) {
             $topics = xni_MygetItemIds($permission);
             if (count($topics) == 0) {
                 return array();
             }
             $topics = implode(',', $topics);
-            $sql    .= " WHERE topic_id IN (" . $topics . ")";
+            $sql    .= ' WHERE topic_id IN (' . $topics . ')';
         }
-        $sql    .= " ORDER BY topic_title";
+        $sql    .= ' ORDER BY topic_title';
         $result = $db->query($sql);
         while ($array = $db->fetchArray($result)) {
             $topic = new xni_NewsTopic();
@@ -208,10 +208,10 @@ class xni_NewsTopic extends XoopsTopic
     public function getnwCountByTopic()
     {
         $ret    = array();
-        $sql    = "SELECT count(storyid) AS cpt, topicid FROM " . $this->db->prefix('xni_stories') . " WHERE (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ") GROUP BY topicid";
+        $sql    = 'SELECT count(storyid) AS cpt, topicid FROM ' . $this->db->prefix('xni_stories') . ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') GROUP BY topicid';
         $result = $this->db->query($sql);
         while ($row = $this->db->fetchArray($result)) {
-            $ret[$row["topicid"]] = $row["cpt"];
+            $ret[$row['topicid']] = $row['cpt'];
         }
 
         return $ret;
@@ -223,11 +223,11 @@ class xni_NewsTopic extends XoopsTopic
     public function getTopicMiniStats($topicid)
     {
         $ret          = array();
-        $sql          = "SELECT count(storyid) AS cpt1, sum(counter) AS cpt2 FROM " . $this->db->prefix('xni_stories') . " WHERE (topicid=" . $topicid . ") AND (published>0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ")";
+        $sql          = 'SELECT count(storyid) AS cpt1, sum(counter) AS cpt2 FROM ' . $this->db->prefix('xni_stories') . ' WHERE (topicid=' . $topicid . ') AND (published>0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
         $result       = $this->db->query($sql);
         $row          = $this->db->fetchArray($result);
-        $ret['count'] = $row["cpt1"];
-        $ret['reads'] = $row["cpt2"];
+        $ret['count'] = $row['cpt1'];
+        $ret['reads'] = $row['cpt2'];
 
         return $ret;
     }
@@ -244,7 +244,7 @@ class xni_NewsTopic extends XoopsTopic
 
     public function getTopic($topicid)
     {
-        $sql   = "SELECT * FROM " . $this->table . " WHERE topic_id=" . $topicid . "";
+        $sql   = 'SELECT * FROM ' . $this->table . ' WHERE topic_id=' . $topicid . '';
         $array = $this->db->fetchArray($this->db->query($sql));
         $this->makeTopic($array);
     }
@@ -261,17 +261,17 @@ class xni_NewsTopic extends XoopsTopic
     public function store()
     {
         $myts              = MyTextSanitizer::getInstance();
-        $title             = "";
-        $imgurl            = "";
+        $title             = '';
+        $imgurl            = '';
         $topic_description = $myts->censorString($this->topic_description);
         $topic_description = $myts->addSlashes($topic_description);
         $topic_rssurl      = $myts->addSlashes($this->topic_rssurl);
         $topic_color       = $myts->addSlashes($this->topic_color);
 
-        if (isset($this->topic_title) && $this->topic_title != "") {
+        if (isset($this->topic_title) && $this->topic_title != '') {
             $title = $myts->addSlashes($this->topic_title);
         }
-        if (isset($this->topic_imgurl) && $this->topic_imgurl != "") {
+        if (isset($this->topic_imgurl) && $this->topic_imgurl != '') {
             $imgurl = $myts->addSlashes($this->topic_imgurl);
         }
         if (!isset($this->topic_pid) || !is_numeric($this->topic_pid)) {
@@ -281,7 +281,7 @@ class xni_NewsTopic extends XoopsTopic
         $insert          = false;
         if (empty($this->topic_id)) {
             $insert         = true;
-            $this->topic_id = $this->db->genId($this->table . "_topic_id_seq");
+            $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
             $sql            = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s')", $this->table, (int)($this->topic_id), (int)($this->topic_pid), $imgurl,
                                       $title, (int)($this->menu), $topic_description, $topic_frontpage, $topic_rssurl, $topic_color);
         } else {
@@ -299,11 +299,11 @@ class xni_NewsTopic extends XoopsTopic
         }
 
         if ($this->use_permission === true) {
-            $xt            = new XoopsTree($this->table, "topic_id", "topic_pid");
+            $xt            = new XoopsTree($this->table, 'topic_id', 'topic_pid');
             $parent_topics = $xt->getAllParentId($this->topic_id);
             if (!empty($this->m_groups) && is_array($this->m_groups)) {
                 foreach ($this->m_groups as $m_g) {
-                    $moderate_topics = XoopsPerms::getPermitted($this->mid, "ModInTopic", $m_g);
+                    $moderate_topics = XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
                     $add             = true;
                     // only grant this permission when the group has this permission in all parent topics of the created topic
                     foreach ($parent_topics as $p_topic) {
@@ -315,7 +315,7 @@ class xni_NewsTopic extends XoopsTopic
                     if ($add === true) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
-                        $xp->setName("ModInTopic");
+                        $xp->setName('ModInTopic');
                         $xp->setItemId($this->topic_id);
                         $xp->store();
                         $xp->addGroup($m_g);
@@ -324,7 +324,7 @@ class xni_NewsTopic extends XoopsTopic
             }
             if (!empty($this->s_groups) && is_array($this->s_groups)) {
                 foreach ($this->s_groups as $s_g) {
-                    $submit_topics = XoopsPerms::getPermitted($this->mid, "SubmitInTopic", $s_g);
+                    $submit_topics = XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
                     $add           = true;
                     foreach ($parent_topics as $p_topic) {
                         if (!in_array($p_topic, $submit_topics)) {
@@ -335,7 +335,7 @@ class xni_NewsTopic extends XoopsTopic
                     if ($add === true) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
-                        $xp->setName("SubmitInTopic");
+                        $xp->setName('SubmitInTopic');
                         $xp->setItemId($this->topic_id);
                         $xp->store();
                         $xp->addGroup($s_g);
@@ -344,7 +344,7 @@ class xni_NewsTopic extends XoopsTopic
             }
             if (!empty($this->r_groups) && is_array($this->r_groups)) {
                 foreach ($this->s_groups as $r_g) {
-                    $read_topics = XoopsPerms::getPermitted($this->mid, "ReadInTopic", $r_g);
+                    $read_topics = XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
                     $add         = true;
                     foreach ($parent_topics as $p_topic) {
                         if (!in_array($p_topic, $read_topics)) {
@@ -355,7 +355,7 @@ class xni_NewsTopic extends XoopsTopic
                     if ($add === true) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
-                        $xp->setName("ReadInTopic");
+                        $xp->setName('ReadInTopic');
                         $xp->setItemId($this->topic_id);
                         $xp->store();
                         $xp->addGroup($r_g);
@@ -376,14 +376,14 @@ class xni_NewsTopic extends XoopsTopic
     {
         $myts = MyTextSanitizer::getInstance();
         switch ($format) {
-            case "S":
+            case 'S':
                 $topic_rssurl = $myts->displayTarea($this->topic_rssurl);
                 break;
-            case "P":
+            case 'P':
                 $topic_rssurl = $myts->previewTarea($this->topic_rssurl);
                 break;
-            case "F":
-            case "E":
+            case 'F':
+            case 'E':
                 $topic_rssurl = $myts->htmlSpecialChars($this->topic_rssurl);
                 break;
         }
@@ -395,14 +395,14 @@ class xni_NewsTopic extends XoopsTopic
     {
         $myts = MyTextSanitizer::getInstance();
         switch ($format) {
-            case "S":
+            case 'S':
                 $topic_color = $myts->displayTarea($this->topic_color);
                 break;
-            case "P":
+            case 'P':
                 $topic_color = $myts->previewTarea($this->topic_color);
                 break;
-            case "F":
-            case "E":
+            case 'F':
+            case 'E':
                 $topic_color = $myts->htmlSpecialChars($this->topic_color);
                 break;
         }
@@ -415,18 +415,18 @@ class xni_NewsTopic extends XoopsTopic
         return $this->menu;
     }
 
-    public function topic_description($format = "S")
+    public function topic_description($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
         switch ($format) {
-            case "S":
+            case 'S':
                 $topic_description = $myts->displayTarea($this->topic_description, 1);
                 break;
-            case "P":
+            case 'P':
                 $topic_description = $myts->previewTarea($this->topic_description);
                 break;
-            case "F":
-            case "E":
+            case 'F':
+            case 'E':
                 $topic_description = $myts->htmlSpecialChars($myts->stripSlashesGPC($this->topic_description));
                 break;
         }
@@ -434,24 +434,24 @@ class xni_NewsTopic extends XoopsTopic
         return $topic_description;
     }
 
-    public function topic_imgurl($format = "S")
+    public function topic_imgurl($format = 'S')
     {
         if (trim($this->topic_imgurl) == '') {
             $this->topic_imgurl = 'blank.png';
         }
         $myts = MyTextSanitizer::getInstance();
         switch ($format) {
-            case "S":
+            case 'S':
                 $imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
                 break;
-            case "E":
+            case 'E':
                 $imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
                 break;
-            case "P":
+            case 'P':
                 $imgurl = $myts->stripSlashesGPC($this->topic_imgurl);
                 $imgurl = $myts->htmlSpecialChars($imgurl);
                 break;
-            case "F":
+            case 'F':
                 $imgurl = $myts->stripSlashesGPC($this->topic_imgurl);
                 $imgurl = $myts->htmlSpecialChars($imgurl);
                 break;
@@ -463,19 +463,19 @@ class xni_NewsTopic extends XoopsTopic
     public function getTopicTitleFromId($topic, &$topicstitles)
     {
         $myts = MyTextSanitizer::getInstance();
-        $sql  = "SELECT topic_id, topic_title, topic_imgurl FROM " . $this->table . " WHERE ";
+        $sql  = 'SELECT topic_id, topic_title, topic_imgurl FROM ' . $this->table . ' WHERE ';
         if (!is_array($topic)) {
-            $sql .= " topic_id=" . (int)($topic);
+            $sql .= ' topic_id=' . (int)($topic);
         } else {
             if (count($topic) > 0) {
-                $sql .= " topic_id IN (" . implode(',', $topic) . ")";
+                $sql .= ' topic_id IN (' . implode(',', $topic) . ')';
             } else {
                 return null;
             }
         }
         $result = $this->db->query($sql);
         while ($row = $this->db->fetchArray($result)) {
-            $topicstitles[$row["topic_id"]] = array("title" => $myts->displayTarea($row["topic_title"]), "picture" => XNI_TOPICS_FILES_URL . '/' . $row["topic_imgurl"]);
+            $topicstitles[$row['topic_id']] = array('title' => $myts->displayTarea($row['topic_title']), 'picture' => XNI_TOPICS_FILES_URL . '/' . $row['topic_imgurl']);
         }
 
         return $topicstitles;
@@ -483,9 +483,9 @@ class xni_NewsTopic extends XoopsTopic
 
     public function &getTopicsList($frontpage = false, $perms = false)
     {
-        $sql = 'SELECT topic_id, topic_pid, topic_title, topic_color FROM ' . $this->table . " WHERE 1 ";
+        $sql = 'SELECT topic_id, topic_pid, topic_title, topic_color FROM ' . $this->table . ' WHERE 1 ';
         if ($frontpage) {
-            $sql .= " AND topic_frontpage=1";
+            $sql .= ' AND topic_frontpage=1';
         }
         if ($perms) {
             $topicsids = array();
@@ -494,7 +494,7 @@ class xni_NewsTopic extends XoopsTopic
                 return '';
             }
             $topics = implode(',', $topicsids);
-            $sql    .= " AND topic_id IN (" . $topics . ")";
+            $sql    .= ' AND topic_id IN (' . $topics . ')';
         }
         $result = $this->db->query($sql);
         $ret    = array();

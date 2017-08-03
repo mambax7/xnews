@@ -135,7 +135,7 @@ $hcontent   = '';
 //DNPROSSI - Added for adobe detection * does not work in msie
 $browser = $_SERVER['HTTP_USER_AGENT'];
 //'msie', 'firefox', 'safari', 'webkit', 'opera', 'netscape', 'konqueror', 'gecko'
-if (!preg_match("/msie[^;]*/i", $browser)) {
+if (!preg_match('/msie[^;]*/i', $browser)) {
     $has_adobe = nw_detect_adobe();
 } else {
     $has_adobe = 1;
@@ -428,7 +428,7 @@ if ($xnews->getConfig('showsummarytable')) {
             $story_path = '';
             if ($seo_enabled != 0) {
                 $story_path = nw_remove_accents($onearticle->title());
-                $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . "</a>";
+                $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
                 $xoopsTpl->append('summary', array(
                     'story_id'        => $onearticle->storyid(),
                     'htmltitle'       => $htmltitle,
@@ -610,8 +610,8 @@ if ($xnews->getConfig('tags')) {
 // Include the comments
 // Problem with url_rewrite and posting comments :
 if ($xnews->getConfig('com_rule') != 0) {
-    require_once XOOPS_ROOT_PATH . "/include/comment_view.php";
-    require_once XOOPS_ROOT_PATH . "/class/commentrenderer.php";
+    require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
+    require_once XOOPS_ROOT_PATH . '/class/commentrenderer.php';
 
     if ($seo_enabled != 0) {
         $navbar = '

@@ -9,10 +9,10 @@
  * -------------------------------------------------------------------------------------
  **/
 
-define("XOSMARTY_FILENOTFOUND", "XoSmartyPlugin : %s does not exist");
-define("XOSMARTY_SECTIONNOTFOUND", "XoSmartyPlugin : section [%s] does not exist in %s");
-define("XOSMARTY_GDNOTINSTALLED", "XoSmartyPlugin : GD Librairy is not installed");
-define("XOSMARTY_DEFAULTVALUE", "XoSmartyPlugin : %s use the default values");
+define('XOSMARTY_FILENOTFOUND', 'XoSmartyPlugin : %s does not exist');
+define('XOSMARTY_SECTIONNOTFOUND', 'XoSmartyPlugin : section [%s] does not exist in %s');
+define('XOSMARTY_GDNOTINSTALLED', 'XoSmartyPlugin : GD Librairy is not installed');
+define('XOSMARTY_DEFAULTVALUE', 'XoSmartyPlugin : %s use the default values');
 
 /**
  * -------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ function XoSmartyPluginGetSection($section = '')
 function XoSmartyPluginLoadGD()
 {
     if (extension_loaded('gd')) {
-        $required_functions = array("imagecreate", "imagecreatetruecolor", "imagecolorallocate", "imagefilledrectangle", "ImagePNG", "imagedestroy", "imageftbbox", "ImageColorTransparent");
+        $required_functions = array('imagecreate', 'imagecreatetruecolor', 'imagecolorallocate', 'imagefilledrectangle', 'ImagePNG', 'imagedestroy', 'imageftbbox', 'ImageColorTransparent');
         foreach ($required_functions as $func) {
             if (!function_exists($func)) {
                 XoopsErrorHandler_HandleError(E_USER_WARNING, XOSMARTY_GDNOTINSTALLED, __FILE__, __LINE__);
@@ -86,7 +86,7 @@ function XoSmartyPluginLoadGD()
 
 function XoSmartyPluginHTML2RGB($color = '#000000')
 {
-    if (substr($color, 0, 1) == "#") {
+    if (substr($color, 0, 1) == '#') {
         $color = substr($color, 1, 6);
     }
 
@@ -137,19 +137,19 @@ function XoSmartyPlugin_write_index_file($path = '')
         return false;
     }
 
-    $path     = substr($path, -1) == "/" ? substr($path, 0, -1) : $path;
+    $path     = substr($path, -1) == '/' ? substr($path, 0, -1) : $path;
     $filename = $path . '/index.html';
 
     if (file_exists($filename)) {
         return true;
     }
 
-    if (!$file = fopen($filename, "w")) {
+    if (!$file = fopen($filename, 'w')) {
         echo 'failed open file';
 
         return false;
     }
-    if (fwrite($file, "<script>history.go(-1);</script>") == -1) {
+    if (fwrite($file, '<script>history.go(-1);</script>') == -1) {
         echo 'failed write file';
 
         return false;

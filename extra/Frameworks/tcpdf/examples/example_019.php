@@ -34,7 +34,7 @@ require_once('../config/lang/eng.php');
 
 // load alternative config file
 require_once('../config/tcpdf_config_alt.php');
-define("K_TCPDF_EXTERNAL_CONFIG", true);
+define('K_TCPDF_EXTERNAL_CONFIG', true);
 
 require_once('../tcpdf.php');
 

@@ -17,20 +17,20 @@ if (empty($storyid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
 }
 
-$sql = "SELECT a.topic_title, b.title FROM " . $GLOBALS['xoopsDB']->prefix('nw_stories') . " b INNER JOIN " . $GLOBALS['xoopsDB']->prefix('nw_topics') . " a on b.topicid = a.topic_id where b.storyid = $storyid";
+$sql = 'SELECT a.topic_title, b.title FROM ' . $GLOBALS['xoopsDB']->prefix('nw_stories') . ' b INNER JOIN ' . $GLOBALS['xoopsDB']->prefix('nw_topics') . " a on b.topicid = a.topic_id where b.storyid = $storyid";
 $ret = $GLOBALS['xoopsDB']->query($sql);
 $row = $GLOBALS['xoopsDB']->fetchArray($ret);
-$url = XOOPS_URL . "/" . $GLOBALS['xoopsModuleConfig']['seopath'] . "/" . xoops_sef($row['topic_title']) . "/" . xoops_sef($row['title']) . "/pdf," . $_REQUEST['storyid'] . $GLOBALS['xoopsModuleConfig']['seo_endofurl_pdf'];
+$url = XOOPS_URL . '/' . $GLOBALS['xoopsModuleConfig']['seopath'] . '/' . xoops_sef($row['topic_title']) . '/' . xoops_sef($row['title']) . '/pdf,' . $_REQUEST['storyid'] . $GLOBALS['xoopsModuleConfig']['seo_endofurl_pdf'];
 
 if (!strpos($url, $_SERVER['REQUEST_URI']) && $GLOBALS['xoopsModuleConfig']['seo_enable'] == 1) {
-    header("HTTP/1.1 301 Moved Permanently");
+    header('HTTP/1.1 301 Moved Permanently');
     header("Location: $url");
     exit(0);
 }
 
 xoops_loadLanguage('user');
 if (!isset($GLOBALS['xoopsTpl']) || !is_object($GLOBALS['xoopsTpl'])) {
-    require_once $GLOBALS['xoops']->path("/class/template.php");
+    require_once $GLOBALS['xoops']->path('/class/template.php');
     $GLOBALS['xoopsTpl'] = new xoopsTpl();
 }
 
@@ -290,7 +290,7 @@ if ($xnews->getConfig('showsummarytable')) {
             $story_path = '';
             if ($seo_enabled != 0) {
                 $story_path = nw_remove_accents($onearticle->title());
-                $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . "</a>";
+                $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
                 $GLOBALS['xoopsTpl']->append('summary', array(
                     'story_id'        => $onearticle->storyid(),
                     'htmltitle'       => $htmltitle,
@@ -519,7 +519,7 @@ $doc_title    = $myts->undoHtmlSpecialChars($pdf_data['title']);
 $doc_keywords = 'XOOPS';
 
 //DNPROSSI ADDED gbsn00lp chinese to tcpdf fonts dir
-if (_LANGCODE == "cn") {
+if (_LANGCODE == 'cn') {
     $pdf->SetFont('gbsn00lp', '', 10);
 }
 
@@ -546,7 +546,7 @@ $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->setImageScale(1); //set image scale factor
 
 //DNPROSSI ADDED FOR SCHINESE
-if (_LANGCODE == "cn") {
+if (_LANGCODE == 'cn') {
     $pdf->setHeaderFont(array('gbsn00lp', '', 10));
     $pdf->setFooterFont(array('gbsn00lp', '', 10));
 } else {

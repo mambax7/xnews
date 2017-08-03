@@ -170,11 +170,11 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
 			$cmp = $basename.'.z';
 			SaveToFile($cmp, gzcompress($file, 9), 'b');
 			$s .= '$file=\''.$cmp."';\n";
-			print "Font file compressed (".$cmp.")\n";
+			print 'Font file compressed (' . $cmp . ")\n";
 			if (!empty($cidtogidmap)) {
 				$cmp = $basename.'.ctg.z';
 				SaveToFile($cmp, gzcompress($cidtogidmap, 9), 'b');
-				print "CIDToGIDMap created and compressed (".$cmp.")\n";
+				print 'CIDToGIDMap created and compressed (' . $cmp . ")\n";
 				$s .= '$ctg=\''.$cmp."';\n";
 			}
 		} else {
@@ -185,7 +185,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
 				$f = fopen($cmp, 'wb');
 				fwrite($f, $cidtogidmap);
 				fclose($f);
-				print "CIDToGIDMap created (".$cmp.")\n";
+				print 'CIDToGIDMap created (' . $cmp . ")\n";
 				$s .= '$ctg=\''.$cmp."';\n";
 			}
 		}
@@ -199,9 +199,9 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
 		//Not embedded font
 		$s .= '$file='."'';\n";
 	}
-	$s .= "?>";
+	$s .= '?>';
 	SaveToFile($basename.'.php',$s);
-	print "Font definition file generated (".$basename.".php)\n";
+	print 'Font definition file generated (' . $basename . ".php)\n";
 }
 
 /**
@@ -425,7 +425,7 @@ function ReadAFM($file,&$map) {
 		//Order widths according to map
 		for ($i = 0; $i <= 255; $i++) {
 			if (!isset($widths[$map[$i]])) {
-				print "Warning: character ".$map[$i]." is missing\n";
+				print 'Warning: character ' . $map[$i] . " is missing\n";
 				$widths[$i] = $widths['.notdef'];
 			} else {
 				$widths[$i] = $widths[$map[$i]];

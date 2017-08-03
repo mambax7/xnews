@@ -95,7 +95,7 @@ switch ($op) {
             if (!$fp) {
                 redirect_header('index.php', 4, sprintf(_AM_NW_EXPORT_ERROR, $xmlfile));
             }
-            fwrite($fp, nw_utf8_encode("<?xml version=\"1.0\" encoding=\"UTF-8\" ?" . ">\n"));
+            fwrite($fp, nw_utf8_encode('<?xml version="1.0" encoding="UTF-8" ?' . ">\n"));
             fwrite($fp, nw_utf8_encode("<nw_stories>\n"));
             if ($topicsexport) {
                 foreach ($tbltopics as $onetopic) {

@@ -76,7 +76,7 @@ $pdf->SetFont('times', '', 10);
 $pdf->AddPage();
 
 // Multicell test
-$pdf->MultiCell(0, 0, "DISK CACHING TEST: check the parameters on class constructor.", 1, 'L', 0, 0, '', '', true);
+$pdf->MultiCell(0, 0, 'DISK CACHING TEST: check the parameters on class constructor.', 1, 'L', 0, 0, '', '', true);
 
 // ---------------------------------------------------------
 

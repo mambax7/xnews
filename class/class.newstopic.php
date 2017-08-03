@@ -1,9 +1,9 @@
 <?php
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-require_once XNEWS_MODULE_PATH . "/include/functions.php";
-require_once XNEWS_MODULE_PATH . "/class/deprecate/xnewsstory.php";
-require_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
+require_once XNEWS_MODULE_PATH . '/include/functions.php';
+require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
 class nw_NewsTopic extends XnewsDeprecateTopic
 {
@@ -41,7 +41,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
             $gpermHandler  = xoops_getHandler('groupperm');
             $topics        = $gpermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
-                $perms = " AND topic_id IN (" . implode(',', $topics) . ") ";
+                $perms = ' AND topic_id IN (' . implode(',', $topics) . ') ';
             } else {
                 return null;
             }
@@ -73,7 +73,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $outbuffer .= ">\n";
         $sql       = "SELECT topic_id, {$title}";
         $sql       .= " FROM {$this->table}";
-        $sql       .= " WHERE (topic_pid = 0)" . $perms;
+        $sql       .= ' WHERE (topic_pid = 0)' . $perms;
         if ($order != '') {
             $sql .= " ORDER BY {$order}";
         }
@@ -82,7 +82,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
             $outbuffer .= "<option value='0'>----</option>\n";
         }
         while (list($catid, $name) = $this->db->fetchRow($result)) {
-            $sel = "";
+            $sel = '';
             if ($catid == $preset_id) {
                 $sel = " selected='selected'";
             }
@@ -92,12 +92,12 @@ class nw_NewsTopic extends XnewsDeprecateTopic
             $arr       = $this->getChildTreeArray($catid, $order, $perms);
             foreach ($arr as $option) {
                 $option['prefix'] = str_replace('.', '--', $option['prefix']);
-                $catpath          = $option['prefix'] . "&nbsp;" . $myts->displayTarea($option[$title]);
+                $catpath          = $option['prefix'] . '&nbsp;' . $myts->displayTarea($option[$title]);
                 if ($option['topic_id'] == $preset_id) {
                     $sel = " selected='selected'";
                 }
                 $outbuffer .= "<option value='{$option['topic_id']}'{$sel}>{$catpath}</option>\n";
-                $sel       = "";
+                $sel       = '';
             }
         }
         $outbuffer .= "</select>\n";
@@ -107,7 +107,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
 
     public function getChildTreeArray($sel_id = 0, $order = '', $perms = '', $parray = array(), $r_prefix = '')
     {
-        $sql = "SELECT *";
+        $sql = 'SELECT *';
         $sql .= " FROM {$this->table}";
         $sql .= " WHERE (topic_pid = {$sel_id})" . $perms;
         if ($order != '') {
@@ -152,33 +152,33 @@ class nw_NewsTopic extends XnewsDeprecateTopic
             $gpermHandler  = xoops_getHandler('groupperm');
             $topics        = $gpermHandler->getItemIds('nw_submit', $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
-                $perms = " WHERE topic_id IN (" . implode(',', $topics) . ") ";
+                $perms = ' WHERE topic_id IN (' . implode(',', $topics) . ') ';
             } else {
                 return null;
             }
         }
-        $sql   = "SELECT count(topic_id) as cpt";
+        $sql   = 'SELECT count(topic_id) as cpt';
         $sql   .= " FROM {$this->table}" . $perms;
         $array = $db->fetchArray($db->query($sql));
 
         return ($array['cpt']);
     }
 
-    public function getAllTopics($checkRight = true, $permission = "nw_view")
+    public function getAllTopics($checkRight = true, $permission = 'nw_view')
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         //
         $topics_arr = array();
-        $sql        = "SELECT *";
+        $sql        = 'SELECT *';
         $sql        .= " FROM {$db->prefix('nw_topics')}";
         if ($checkRight) {
             $topics = nw_MygetItemIds($permission);
             if (count($topics) == 0) {
                 return array();
             }
-            $sql .= " WHERE topic_id IN (" . implode(',', $topics) . ")";
+            $sql .= ' WHERE topic_id IN (' . implode(',', $topics) . ')';
         }
-        $sql    .= " ORDER BY topic_title";
+        $sql    .= ' ORDER BY topic_title';
         $result = $db->query($sql);
         while ($array = $db->fetchArray($result)) {
             $topic = new nw_NewsTopic();
@@ -198,9 +198,9 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         //
         $ret    = array();
-        $sql    = "SELECT count(storyid) as cpt, topicid";
+        $sql    = 'SELECT count(storyid) as cpt, topicid';
         $sql    .= " FROM {$db->prefix('nw_stories')}";
-        $sql    .= " WHERE (published > 0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ") GROUP BY topicid";
+        $sql    .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') GROUP BY topicid';
         $result = $db->query($sql);
         while ($row = $db->fetchArray($result)) {
             $ret[$row['topicid']] = $row['cpt'];
@@ -215,13 +215,13 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     public function getTopicMiniStats($topicid)
     {
         $ret          = array();
-        $sql          = "SELECT count(storyid) as cpt1, sum(counter) as cpt2";
+        $sql          = 'SELECT count(storyid) as cpt1, sum(counter) as cpt2';
         $sql          .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql          .= " WHERE (topicid = {$topicid}) AND (published>0 AND published <= " . time() . ") AND (expired = 0 OR expired > " . time() . ")";
+        $sql          .= " WHERE (topicid = {$topicid}) AND (published>0 AND published <= " . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
         $result       = $this->db->query($sql);
         $row          = $this->db->fetchArray($result);
-        $ret['count'] = $row["cpt1"];
-        $ret['reads'] = $row["cpt2"];
+        $ret['count'] = $row['cpt1'];
+        $ret['reads'] = $row['cpt2'];
 
         return $ret;
     }
@@ -238,7 +238,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
 
     public function getTopic($topicid)
     {
-        $sql   = "SELECT *";
+        $sql   = 'SELECT *';
         $sql   .= " FROM {$this->table}";
         $sql   .= " WHERE topic_id = {$topicid}";
         $array = $this->db->fetchArray($this->db->query($sql));
@@ -264,10 +264,10 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $topic_rssurl      = $myts->addSlashes($this->topic_rssurl);
         $topic_color       = $myts->addSlashes($this->topic_color);
 
-        if (isset($this->topic_title) && $this->topic_title != "") {
+        if (isset($this->topic_title) && $this->topic_title != '') {
             $title = $myts->addSlashes($this->topic_title);
         }
-        if (isset($this->topic_imgurl) && $this->topic_imgurl != "") {
+        if (isset($this->topic_imgurl) && $this->topic_imgurl != '') {
             $imgurl = $myts->addSlashes($this->topic_imgurl);
         }
         if (!isset($this->topic_pid) || !is_numeric($this->topic_pid)) {
@@ -277,7 +277,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $insert          = false;
         if (empty($this->topic_id)) {
             $insert         = true;
-            $this->topic_id = $this->db->genId($this->table . "_topic_id_seq");
+            $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
             $sql            = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color, topic_weight) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s', %u)", $this->table, intval($this->topic_id),
                                       intval($this->topic_pid), $imgurl, $title, intval($this->menu), $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, intval($this->topic_weight));
         } else {
@@ -371,14 +371,14 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     {
         $myts = MyTextSanitizer::getInstance();
         switch ($format) {
-            case "S":
+            case 'S':
                 $topic_rssurl = $myts->displayTarea($this->topic_rssurl);
                 break;
-            case "P":
+            case 'P':
                 $topic_rssurl = $myts->previewTarea($this->topic_rssurl);
                 break;
-            case "F":
-            case "E":
+            case 'F':
+            case 'E':
                 $topic_rssurl = $myts->htmlSpecialChars($this->topic_rssurl);
                 break;
         }
@@ -390,14 +390,14 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     {
         $myts = MyTextSanitizer::getInstance();
         switch ($format) {
-            case "S":
+            case 'S':
                 $topic_color = $myts->displayTarea($this->topic_color);
                 break;
-            case "P":
+            case 'P':
                 $topic_color = $myts->previewTarea($this->topic_color);
                 break;
-            case "F":
-            case "E":
+            case 'F':
+            case 'E':
                 $topic_color = $myts->htmlSpecialChars($this->topic_color);
                 break;
         }
@@ -410,18 +410,18 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $this->menu;
     }
 
-    public function topic_description($format = "S")
+    public function topic_description($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
         switch ($format) {
-            case "S":
+            case 'S':
                 $topic_description = $myts->displayTarea($this->topic_description, 1);
                 break;
-            case "P":
+            case 'P':
                 $topic_description = $myts->previewTarea($this->topic_description);
                 break;
-            case "F":
-            case "E":
+            case 'F':
+            case 'E':
                 $topic_description = $myts->htmlSpecialChars($myts->stripSlashesGPC($this->topic_description));
                 break;
         }
@@ -429,24 +429,24 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $topic_description;
     }
 
-    public function topic_imgurl($format = "S")
+    public function topic_imgurl($format = 'S')
     {
         if (trim($this->topic_imgurl) == '') {
             $this->topic_imgurl = 'blank.png';
         }
         $myts = MyTextSanitizer::getInstance();
         switch ($format) {
-            case "S":
+            case 'S':
                 $imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
                 break;
-            case "E":
+            case 'E':
                 $imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
                 break;
-            case "P":
+            case 'P':
                 $imgurl = $myts->stripSlashesGPC($this->topic_imgurl);
                 $imgurl = $myts->htmlSpecialChars($imgurl);
                 break;
-            case "F":
+            case 'F':
                 $imgurl = $myts->stripSlashesGPC($this->topic_imgurl);
                 $imgurl = $myts->htmlSpecialChars($imgurl);
                 break;
@@ -458,14 +458,14 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     public function getTopicTitleFromId($topic, &$topicstitles)
     {
         $myts = MyTextSanitizer::getInstance();
-        $sql  = "SELECT topic_id, topic_title, topic_imgurl";
+        $sql  = 'SELECT topic_id, topic_title, topic_imgurl';
         $sql  .= " FROM {$this->table}";
-        $sql  .= " WHERE ";
+        $sql  .= ' WHERE ';
         if (!is_array($topic)) {
-            $sql .= " topic_id = " . intval($topic);
+            $sql .= ' topic_id = ' . intval($topic);
         } else {
             if (count($topic) > 0) {
-                $sql .= " topic_id IN (" . implode(',', $topic) . ")";
+                $sql .= ' topic_id IN (' . implode(',', $topic) . ')';
             } else {
                 return null;
             }
@@ -480,11 +480,11 @@ class nw_NewsTopic extends XnewsDeprecateTopic
 
     public function &getTopicsList($frontpage = false, $perms = false)
     {
-        $sql = "SELECT topic_id, topic_pid, topic_title, topic_color";
+        $sql = 'SELECT topic_id, topic_pid, topic_title, topic_color';
         $sql .= " FROM {$this->table}";
-        $sql .= " WHERE 1 ";
+        $sql .= ' WHERE 1 ';
         if ($frontpage) {
-            $sql .= " AND topic_frontpage = 1";
+            $sql .= ' AND topic_frontpage = 1';
         }
         if ($perms) {
             $topicsids = array();

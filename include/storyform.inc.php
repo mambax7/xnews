@@ -9,7 +9,7 @@ if (file_exists(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/ca
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
 
-$sform = new XoopsThemeForm(_MA_NW_SUBMITNEWS, "storyform", XNEWS_MODULE_URL . '/submit.php');
+$sform = new XoopsThemeForm(_MA_NW_SUBMITNEWS, 'storyform', XNEWS_MODULE_URL . '/submit.php');
 $sform->setExtra('enctype="multipart/form-data"');
 $sform->addElement(new XoopsFormText(_MA_NW_TITLE, 'title', 50, 255, $title), true);
 
@@ -18,10 +18,10 @@ if (!isset($xt)) {
     $xt = new nw_NewsTopic();
 }
 if ($xt->getAllTopicsCount() == 0) {
-    redirect_header("index.php", 4, _MA_NW_POST_SORRY);
+    redirect_header('index.php', 4, _MA_NW_POST_SORRY);
 }
 
-require_once XOOPS_ROOT_PATH . "/class/tree.php";
+require_once XOOPS_ROOT_PATH . '/class/tree.php';
 $allTopics    = $xt->getAllTopics($xnews->getConfig('restrictindex'), 'nw_submit');
 $topic_tree   = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
@@ -228,9 +228,9 @@ $sform->addElement(new XoopsFormHidden('returnside', $returnside), false);
 
 if (!isset($type)) {
     if ($approveprivilege) {
-        $type = "admin";
+        $type = 'admin';
     } else {
-        $type = "user";
+        $type = 'user';
     }
 }
 $type_hidden = new XoopsFormHidden('type', $type);
@@ -238,7 +238,7 @@ $sform->addElement($type_hidden);
 
 echo '<h1>' . _MA_NW_SUBMITNEWS . '</h1>';
 if (xoops_trim($xnews->getConfig('submitintromsg')) != '') {
-    echo "<div class='infotext'><br><br>" . nl2br($xnews->getConfig('submitintromsg')) . "<br><br></div>";
+    echo "<div class='infotext'><br><br>" . nl2br($xnews->getConfig('submitintromsg')) . '<br><br></div>';
 }
 
 $sform->display();

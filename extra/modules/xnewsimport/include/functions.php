@@ -48,9 +48,9 @@ function xni_gettopics($subprefix)
     global $xoopsDB;
     $topics_arr = '';
     if (!empty($subprefix)) {
-        $result = $xoopsDB->query("SELECT * FROM " . $xoopsDB->prefix($subprefix . "topics"));
+        $result = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix($subprefix . 'topics'));
     } else {
-        $result = $xoopsDB->query("SELECT * FROM " . $xoopsDB->prefix("topics"));
+        $result = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('topics'));
     }
     $ix = 0;
     while ($all_topics = $xoopsDB->fetchArray($result)) {
@@ -65,7 +65,7 @@ function xni_getcategories($subprefix)
 {
     global $xoopsDB;
     $topics_arr = '';
-    $result     = $xoopsDB->query("SELECT * FROM " . $xoopsDB->prefix($subprefix . "categories"));
+    $result     = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix($subprefix . 'categories'));
     $ix         = 0;
     while ($all_topics = $xoopsDB->fetchArray($result)) {
         $topics_arr[$ix] = $all_topics;

@@ -17,9 +17,9 @@ class nw_Latestnewsstory extends nw_NewsStory
         $myts = MyTextSanitizer::getInstance();
 
         $ret = array();
-        $sql = "SELECT s.*, t.*";
+        $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$db->prefix('nw_stories')} s, {$db->prefix('nw_topics')}";
-        $sql .= " t WHERE (s.published > 0 AND s.published <= " . time() . ") AND (s.expired = 0 OR s.expired > " . time() . ") AND (s.topicid = t.topic_id) ";
+        $sql .= ' t WHERE (s.published > 0 AND s.published <= ' . time() . ') AND (s.expired = 0 OR s.expired > ' . time() . ') AND (s.topicid = t.topic_id) ';
         if ($topic != 0) {
             if ($selected_stories) {
                 $sql .= " AND s.storyid IN ({$selected_stories})";

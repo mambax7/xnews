@@ -1,5 +1,5 @@
 <?php
-require_once "header.php";
+require_once 'header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
 xoops_cp_header();
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
@@ -9,16 +9,16 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     //DNPROSSI - Upgrade if clone version is different from original's version
     //DNPROSSI - Import data from old news database files
     if (nw_TableExists($xoopsDB->prefix('stories'))) {
-        $sql    = sprintf("INSERT INTO " . $xoopsDB->prefix('nw_stories') . " SELECT * FROM " . $xoopsDB->prefix('stories') . ";");
+        $sql    = sprintf('INSERT INTO ' . $xoopsDB->prefix('nw_stories') . ' SELECT * FROM ' . $xoopsDB->prefix('stories') . ';');
         $result = $xoopsDB->queryF($sql);
 
-        $sql    = sprintf("INSERT INTO " . $xoopsDB->prefix('nw_stories_files') . " SELECT * FROM " . $xoopsDB->prefix('stories_files') . ";");
+        $sql    = sprintf('INSERT INTO ' . $xoopsDB->prefix('nw_stories_files') . ' SELECT * FROM ' . $xoopsDB->prefix('stories_files') . ';');
         $result = $xoopsDB->queryF($sql);
 
-        $sql    = sprintf("INSERT INTO " . $xoopsDB->prefix('nw_topics') . " SELECT * FROM " . $xoopsDB->prefix('topics') . ";");
+        $sql    = sprintf('INSERT INTO ' . $xoopsDB->prefix('nw_topics') . ' SELECT * FROM ' . $xoopsDB->prefix('topics') . ';');
         $result = $xoopsDB->queryF($sql);
 
-        $sql    = sprintf("INSERT INTO " . $xoopsDB->prefix('nw_stories_votedata') . " SELECT * FROM " . $xoopsDB->prefix('stories_votedata') . ";");
+        $sql    = sprintf('INSERT INTO ' . $xoopsDB->prefix('nw_stories_votedata') . ' SELECT * FROM ' . $xoopsDB->prefix('stories_votedata') . ';');
         $result = $xoopsDB->queryF($sql);
     }
     // 1) Create, if it does not exists, the nw_stories_files table
@@ -56,10 +56,10 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
         nw_AddField("topic_frontpage TINYINT( 1 ) DEFAULT '1' NOT NULL", $xoopsDB->prefix('nw_topics'));
     }
     if (!nw_FieldExists('topic_rssurl', $xoopsDB->prefix('nw_topics'))) {
-        nw_AddField("topic_rssurl VARCHAR( 255 ) NOT NULL", $xoopsDB->prefix('nw_topics'));
+        nw_AddField('topic_rssurl VARCHAR( 255 ) NOT NULL', $xoopsDB->prefix('nw_topics'));
     }
     if (!nw_FieldExists('topic_description', $xoopsDB->prefix('nw_topics'))) {
-        nw_AddField("topic_description TEXT NOT NULL", $xoopsDB->prefix('nw_topics'));
+        nw_AddField('topic_description TEXT NOT NULL', $xoopsDB->prefix('nw_topics'));
     }
     if (!nw_FieldExists('topic_color', $xoopsDB->prefix('nw_topics'))) {
         nw_AddField("topic_color varchar( 6 ) NOT NULL default '000000'", $xoopsDB->prefix('nw_topics'));
@@ -96,10 +96,10 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
         nw_AddField("votes INT( 11 ) UNSIGNED DEFAULT '0' NOT NULL", $xoopsDB->prefix('nw_stories'));
     }
     if (!nw_FieldExists('keywords', $xoopsDB->prefix('nw_stories'))) {
-        nw_AddField("keywords VARCHAR( 255 ) NOT NULL", $xoopsDB->prefix('nw_stories'));
+        nw_AddField('keywords VARCHAR( 255 ) NOT NULL', $xoopsDB->prefix('nw_stories'));
     }
     if (!nw_FieldExists('description', $xoopsDB->prefix('nw_stories'))) {
-        nw_AddField("description VARCHAR( 255 ) NOT NULL", $xoopsDB->prefix('nw_stories'));
+        nw_AddField('description VARCHAR( 255 ) NOT NULL', $xoopsDB->prefix('nw_stories'));
     }
     if (!nw_FieldExists('dobr', $xoopsDB->prefix('nw_stories'))) {
         nw_AddField("dobr TINYINT( 1 ) NOT NULL DEFAULT '1'", $xoopsDB->prefix('nw_stories'));
@@ -115,9 +115,9 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     }
 
     // 5) Add some indexes to the topics table
-    $sql    = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . " ADD INDEX ( `topic_title` );");
+    $sql    = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . ' ADD INDEX ( `topic_title` );');
     $result = $xoopsDB->queryF($sql);
-    $sql    = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . " ADD INDEX ( `menu` );");
+    $sql    = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . ' ADD INDEX ( `menu` );');
     $result = $xoopsDB->queryF($sql);
 
     $moduledirname = XNEWS_MODULE_DIRNAME;
@@ -127,7 +127,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
         echo '<H1>' . _AM_NW_UPGRADEFAILED . '</H1>';
         echo '<br>' . _AM_NW_UPGRADEFAILED0;
     } else {
-        echo _AM_NW_UPGRADECOMPLETE . " - <a href='" . XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=" . $moduledirname . "'>" . _AM_NW_UPDATEMODULE . "</a>";
+        echo _AM_NW_UPGRADECOMPLETE . " - <a href='" . XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=update&module=' . $moduledirname . "'>" . _AM_NW_UPDATEMODULE . '</a>';
     }
 } else {
     printf("<h2>%s</h2>\n", _AM_NW_UPGR_ACCESS_ERROR);

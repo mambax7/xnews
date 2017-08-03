@@ -72,7 +72,7 @@ $authorsPerTopic = $stats['authorspertopic'];
 $class           = '';
 
 echo "<div style='text-align: center;'><b>" . _AM_NW_STATS0 . "</b><br>\n";
-echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>" . _AM_NW_TOPIC . "</td><td align='center'>" . _MA_NW_ARTICLES . "</td><td>" . _MA_NW_VIEWS . "</td><td>" . _AM_NW_UPLOAD_ATTACHFILE . "</td><td>" . _AM_NW_EXPARTS . "</td><td>" . _AM_NW_STATS1 . "</td></tr>";
+echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>" . _AM_NW_TOPIC . "</td><td align='center'>" . _MA_NW_ARTICLES . '</td><td>' . _MA_NW_VIEWS . '</td><td>' . _AM_NW_UPLOAD_ATTACHFILE . '</td><td>' . _AM_NW_EXPARTS . '</td><td>' . _AM_NW_STATS1 . '</td></tr>';
 foreach ($storiesPerTopic as $topicid => $data) {
     $url   = XNEWS_MODULE_URL . '/index.php?topic_id=' . $topicid;
     $views = 0;
@@ -109,7 +109,7 @@ echo '</table></div><br><br><br>';
 // a) Most readed articles
 $mostReadNews = $stats['mostreadnews'];
 echo "<div style='text-align: center;'><b>" . _AM_NW_STATS3 . '</b><br><br>' . _AM_NW_STATS4 . "<br>\n";
-echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>" . _AM_NW_TOPIC . "</td><td align='center'>" . _AM_NW_TITLE . "</td><td>" . _AM_NW_POSTER . "</td><td>" . _MA_NW_VIEWS . "</td></tr>\n";
+echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>" . _AM_NW_TOPIC . "</td><td align='center'>" . _AM_NW_TITLE . '</td><td>' . _AM_NW_POSTER . '</td><td>' . _MA_NW_VIEWS . "</td></tr>\n";
 foreach ($mostReadNews as $storyid => $data) {
     $url1  = XNEWS_MODULE_URL . '/index.php?topic_id=' . $data['topicid'];
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
@@ -123,7 +123,7 @@ echo '</table>';
 // b) Less readed articles
 $lessReadNews = $stats['lessreadnews'];
 echo '<br><br>' . _AM_NW_STATS5;
-echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>" . _AM_NW_TOPIC . "</td><td align='center'>" . _AM_NW_TITLE . "</td><td>" . _AM_NW_POSTER . "</td><td>" . _MA_NW_VIEWS . "</td></tr>\n";
+echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>" . _AM_NW_TOPIC . "</td><td align='center'>" . _AM_NW_TITLE . '</td><td>' . _AM_NW_POSTER . '</td><td>' . _MA_NW_VIEWS . "</td></tr>\n";
 foreach ($lessReadNews as $storyid => $data) {
     $url1  = XNEWS_MODULE_URL . '/index.php?topic_id=' . $data['topicid'];
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
@@ -137,7 +137,7 @@ echo '</table>';
 // c) Best rated articles (this is an average)
 $bestRatedNews = $stats['besratednw'];
 echo '<br><br>' . _AM_NW_STATS6;
-echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>" . _AM_NW_TOPIC . "</td><td align='center'>" . _AM_NW_TITLE . "</td><td>" . _AM_NW_POSTER . "</td><td>" . _MA_NW_RATING . "</td></tr>\n";
+echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>" . _AM_NW_TOPIC . "</td><td align='center'>" . _AM_NW_TITLE . '</td><td>' . _AM_NW_POSTER . '</td><td>' . _MA_NW_RATING . "</td></tr>\n";
 foreach ($bestRatedNews as $storyid => $data) {
     $url1  = XNEWS_MODULE_URL . '/index.php?topic_id=' . $data['topicid'];
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
@@ -163,7 +163,7 @@ echo '</table>';
 // b) Best rated authors
 $bestRatedAuthors = $stats['bestratedauthors'];
 echo '<br><br>' . _AM_NW_STATS8;
-echo "<table border='0' width='100%'><tr class='bg3'><td>" . _AM_NW_POSTER . "</td><td>" . _MA_NW_RATING . "</td></tr>\n";
+echo "<table border='0' width='100%'><tr class='bg3'><td>" . _AM_NW_POSTER . '</td><td>' . _MA_NW_RATING . "</td></tr>\n";
 foreach ($bestRatedAuthors as $uid => $rating) {
     $url   = XOOPS_URL . '/userinfo.php?uid=' . $uid;
     $class = ($class == 'even') ? 'odd' : 'even';
@@ -174,7 +174,7 @@ echo '</table>';
 // c) Biggest contributors
 $biggestContributors = $stats['biggestcontributors'];
 echo '<br><br>' . _AM_NW_STATS9;
-echo "<table border='0' width='100%'><tr class='bg3'><td>" . _AM_NW_POSTER . "</td><td>" . _AM_NW_STATS11 . "</td></tr>\n";
+echo "<table border='0' width='100%'><tr class='bg3'><td>" . _AM_NW_POSTER . '</td><td>' . _AM_NW_STATS11 . "</td></tr>\n";
 foreach ($biggestContributors as $uid => $count) {
     $url   = XOOPS_URL . '/userinfo.php?uid=' . $uid;
     $class = ($class == 'even') ? 'odd' : 'even';

@@ -149,7 +149,7 @@ function NewsImport()
         $sform->display();
         unset($hidden);
     } else {
-        echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-weight: bold; font-size: small; display: block; \">" . _AM_XNI_IMPORT_NO_MODULE . '</span>';
+        echo '<span style="color: #567; margin: 3px 0 12px 0; font-weight: bold; font-size: small; display: block; ">' . _AM_XNI_IMPORT_NO_MODULE . '</span>';
     }
 }
 
@@ -269,15 +269,15 @@ function TopicSelect()
     list($totalCat) = $xoopsDB->fetchRow($result);
 
     if ($totalCat == 0) {
-        echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . _AM_XNI_IMPORT_NO_CATEGORY . '</span>';
+        echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . _AM_XNI_IMPORT_NO_CATEGORY . '</span>';
     } else {
         $result = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix($from_story_table));
         list($totalArticles) = $xoopsDB->fetchRow($result);
 
         if ($totalArticles == 0) {
-            echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_XNI_IMPORT_MODULE_FOUND_NO_ITEMS, $from_import_dirname, $totalArticles) . '</span>';
+            echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . sprintf(_AM_XNI_IMPORT_MODULE_FOUND_NO_ITEMS, $from_import_dirname, $totalArticles) . '</span>';
         } else {
-            echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_XNI_IMPORT_MODULE_FOUND, $totalArticles, $totalCat, $from_import_dirname) . '</span>';
+            echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . sprintf(_AM_XNI_IMPORT_MODULE_FOUND, $totalArticles, $totalCat, $from_import_dirname) . '</span>';
 
             $form = new XoopsThemeForm(_AM_XNI_IMPORT_SETTINGS, 'import_form', XNI_MODULE_URL . '/admin/main.php');
 
@@ -392,11 +392,11 @@ switch ($op) {
         echo '<h4>' . _AM_XNI_CONFIG . '</h4>';
         echo "<table width='100%' border='0' cellspacing='1' class='outer'><tr><td width='59%' class=\"odd\" id=\"xo-newsicons\" >";
         echo "<b><a href='index.php?op=import'><img  src='" . XNI_MODULE_URL . "/images/import32.png' alt=''><br>" . _AM_XNI_IMPORT_TITLE . '</a></b>';
-        echo "<b><a href='" . XOOPS_URL . "/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule->getVar('mid') . "'><img  src='" . NW_MODULE_URL . "/images/prefs32.png' alt=''><br>" . _AM_XNI_PREFERENCES . "</a></b>";
+        echo "<b><a href='" . XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid') . "'><img  src='" . NW_MODULE_URL . "/images/prefs32.png' alt=''><br>" . _AM_XNI_PREFERENCES . '</a></b>';
         echo "<br><br>\n";
         echo "</td><td width='50%' class=\"even\" id=\"xo-newsicons\" >";
-        echo _AM_XNI_DESCRIPTION . "<br>";
-        echo "</td></tr></table>";
+        echo _AM_XNI_DESCRIPTION . '<br>';
+        echo '</td></tr></table>';
         break;
 }
 

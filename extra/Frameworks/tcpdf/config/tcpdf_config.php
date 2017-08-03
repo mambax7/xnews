@@ -33,7 +33,7 @@ defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
 // If you define the constant K_TCPDF_EXTERNAL_CONFIG, the following settings will be ignored.
 
 if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
-    include "../../mainfile.php";  // added for xoops
+    include '../../mainfile.php';  // added for xoops
     require_once XOOPS_ROOT_PATH . '/include/functions.php'; // added for xoops
 
     // DOCUMENT_ROOT fix for IIS Webserver

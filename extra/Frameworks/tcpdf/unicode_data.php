@@ -100,7 +100,7 @@ define('K_RE_PATTERN_RTL', "/(
  * Pattern to test Arabic strings using regular expressions.
  * source: http://www.w3.org/International/questions/qa-forms-utf-8
  */
-define("K_RE_PATTERN_ARABIC", "/(
+define('K_RE_PATTERN_ARABIC', "/(
 		  \xD8[\x80-\x83\x8B\x8D\x9B\x9E\x9F\xA1-\xBA]  # AL
 		| \xD9[\x80-\x8A\xAD-\xAF\xB1-\xBF]             # AL
 		| \xDA[\x80-\xBF]                               # AL

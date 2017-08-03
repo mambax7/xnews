@@ -180,7 +180,7 @@ abstract class wiImage
     public static function loadFromHandle($handle)
     {
         if (!self::isValidImageHandle($handle)) {
-            throw new wiInvalidImageSourceException("Handle is not a valid GD image resource.");
+            throw new wiInvalidImageSourceException('Handle is not a valid GD image resource.');
         }
 
         if (imageistruecolor($handle)) {

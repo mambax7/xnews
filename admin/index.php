@@ -48,7 +48,7 @@ function newSubmissions()
     if (count($storyarray) > 0) {
         $pagenav = new XoopsPageNav($newsubcount, $xnews->getConfig('storycountadmin'), $start, 'startnew', 'op=newarticle');
         xnews_collapsableBar('newsub', 'topnewsubicon');
-        echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topnewsubicon' name='topnewsubicon' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_NEWSUB . "</h4>";
+        echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topnewsubicon' name='topnewsubicon' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_NEWSUB . '</h4>';
         echo "<div id='newsub'>";
         echo '<br>';
         echo "<div style='text-align: center;'><table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'><tr class='bg3'><td align='center'>"
@@ -68,23 +68,23 @@ function newSubmissions()
             echo "<tr class='" . $class . "'><td align='left'>\n";
             $title = $newstory->title();
             if (!isset($title) || ($title == '')) {
-                echo "<a href='" . XNEWS_MODULE_URL . "/admin/index.php?op=edit&amp;returnside=1&amp;storyid=" . $newstory->storyid() . "'>" . _AD_NOSUBJECT . "</a>\n";
+                echo "<a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=edit&amp;returnside=1&amp;storyid=' . $newstory->storyid() . "'>" . _AD_NOSUBJECT . "</a>\n";
             } else {
-                echo "&nbsp;<a href='" . XNEWS_MODULE_URL . "/submit.php?returnside=1&amp;op=edit&amp;storyid=" . $newstory->storyid() . "'>" . $title . "</a>\n";
+                echo "&nbsp;<a href='" . XNEWS_MODULE_URL . '/submit.php?returnside=1&amp;op=edit&amp;storyid=' . $newstory->storyid() . "'>" . $title . "</a>\n";
             }
-            echo "</td><td>"
+            echo '</td><td>'
                  . $newstory->topic_title()
                  . "</td><td align='center' class='news'>"
                  . formatTimestamp($newstory->created(), $xnews->getConfig('dateformat'))
                  . "</td><td align='center'><a href='"
                  . XOOPS_URL
-                 . "/userinfo.php?uid="
+                 . '/userinfo.php?uid='
                  . $newstory->uid()
                  . "'>"
                  . $newstory->uname()
                  . "</a></td><td align='right'><a href='"
                  . XNEWS_MODULE_URL
-                 . "/admin/index.php?op=delete&amp;storyid="
+                 . '/admin/index.php?op=delete&amp;storyid='
                  . $newstory->storyid()
                  . "'>"
                  . _AM_NW_DELETE
@@ -118,7 +118,7 @@ function autoStories()
     if (count($storyarray) > 0) {
         $pagenav = new XoopsPageNav($storiescount, $xnews->getConfig('storycountadmin'), $start, 'startauto', 'op=newarticle');
         xnews_collapsableBar('autostories', 'topautostories');
-        echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topautostories' name='topautostories' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_AUTOARTICLES . "</h4>";
+        echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topautostories' name='topautostories' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_AUTOARTICLES . '</h4>';
         echo "<div id='autostories'>";
         echo '<br>';
         echo "<div style='text-align: center;'>\n";
@@ -136,7 +136,7 @@ function autoStories()
              . _AM_NW_EXPIRED
              . "</td><td align='center'>"
              . _AM_NW_ACTION
-             . "</td></tr>";
+             . '</td></tr>';
         foreach ($storyarray as $autostory) {
             $topic  = $autostory->topic();
             $expire = ($autostory->expired() > 0) ? formatTimestamp($autostory->expired(), $xnews->getConfig('dateformat')) : '';
@@ -147,7 +147,7 @@ function autoStories()
                  . "</b>
                 </td><td align='left'><a href='"
                  . XNEWS_MODULE_URL
-                 . "/article.php?storyid="
+                 . '/article.php?storyid='
                  . $autostory->storyid()
                  . "'>"
                  . $autostory->title()
@@ -157,7 +157,7 @@ function autoStories()
                  . "
                 </td><td align='center'><a href='"
                  . XOOPS_URL
-                 . "/userinfo.php?uid="
+                 . '/userinfo.php?uid='
                  . $autostory->uid()
                  . "'>"
                  . $autostory->uname()
@@ -167,17 +167,17 @@ function autoStories()
                  . $expire
                  . "</td><td align='center'><a href='"
                  . XNEWS_MODULE_URL
-                 . "/submit.php?returnside=1&amp;op=edit&amp;storyid="
+                 . '/submit.php?returnside=1&amp;op=edit&amp;storyid='
                  . $autostory->storyid()
                  . "'>"
                  . _AM_NW_EDIT
                  . "</a>-<a href='"
                  . XNEWS_MODULE_URL
-                 . "/admin/index.php?op=delete&amp;storyid="
+                 . '/admin/index.php?op=delete&amp;storyid='
                  . $autostory->storyid()
                  . "'>"
                  . _AM_NW_DELETE
-                 . "</a>";
+                 . '</a>';
             echo "</td></tr>\n";
         }
         echo '</table></div>';
@@ -205,7 +205,7 @@ function lastStories()
     $nw_NewsStoryHandler = new nw_NewsStory();
     //
     xnews_collapsableBar('laststories', 'toplaststories');
-    echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='toplaststories' name='toplaststories' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . sprintf(_AM_NW_LAST10ARTS, $xnews->getConfig('storycountadmin')) . "</h4>";
+    echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='toplaststories' name='toplaststories' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . sprintf(_AM_NW_LAST10ARTS, $xnews->getConfig('storycountadmin')) . '</h4>';
     echo "<div id='laststories'>";
     echo '<br>';
     echo "<div style='text-align: center;'>";
@@ -228,7 +228,7 @@ function lastStories()
          . _AM_NW_HITS
          . "</td><td align='center'>"
          . _AM_NW_ACTION
-         . "</td></tr>";
+         . '</td></tr>';
     foreach ($storyarray as $eachstory) {
         $published = formatTimestamp($eachstory->published(), $xnews->getConfig('dateformat'));
         // $expired = ( $eachstory -> expired() > 0) ? formatTimestamp($eachstory->expired(), $xnews->getConfig('dateformat')) : '---';
@@ -240,7 +240,7 @@ function lastStories()
              . "</b>
             </td><td align='left'><a href='"
              . XNEWS_MODULE_URL
-             . "/article.php?storyid="
+             . '/article.php?storyid='
              . $eachstory->storyid()
              . "'>"
              . $eachstory->title()
@@ -250,7 +250,7 @@ function lastStories()
              . "
             </td><td align='center'><a href='"
              . XOOPS_URL
-             . "/userinfo.php?uid="
+             . '/userinfo.php?uid='
              . $eachstory->uid()
              . "'>"
              . $eachstory->uname()
@@ -260,17 +260,17 @@ function lastStories()
              . $eachstory->counter()
              . "</td><td align='center'><a href='"
              . XNEWS_MODULE_URL
-             . "/submit.php?returnside=1&amp;op=edit&amp;storyid="
+             . '/submit.php?returnside=1&amp;op=edit&amp;storyid='
              . $eachstory->storyid()
              . "'>"
              . _AM_NW_EDIT
              . "</a>-<a href='"
              . XNEWS_MODULE_URL
-             . "/admin/index.php?op=delete&amp;storyid="
+             . '/admin/index.php?op=delete&amp;storyid='
              . $eachstory->storyid()
              . "'>"
              . _AM_NW_DELETE
-             . "</a>";
+             . '</a>';
         echo "</td></tr>\n";
     }
     echo '</table><br>';
@@ -315,7 +315,7 @@ function expStories()
     if (count($storyarray) > 0) {
         $class = '';
         xnews_collapsableBar('expstories', 'topexpstories');
-        echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topexpstories' name='topexpstories' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_EXPARTS . "</h4>";
+        echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topexpstories' name='topexpstories' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_EXPARTS . '</h4>';
         echo "<div id='expstories'>";
         echo '<br>';
         echo "<div style='text-align: center;'>";
@@ -333,7 +333,7 @@ function expStories()
              . _AM_NW_EXPIRED
              . "</td><td align='center'>"
              . _AM_NW_ACTION
-             . "</td></tr>";
+             . '</td></tr>';
         foreach ($storyarray as $eachstory) {
             $created = formatTimestamp($eachstory->created(), $xnews->getConfig('dateformat'));
             $expired = formatTimestamp($eachstory->expired(), $xnews->getConfig('dateformat'));
@@ -346,7 +346,7 @@ function expStories()
                  . "</b>
                 </td><td align='left'><a href='"
                  . XNEWS_MODULE_URL
-                 . "/article.php?returnside=1&amp;storyid="
+                 . '/article.php?returnside=1&amp;storyid='
                  . $eachstory->storyid()
                  . "'>"
                  . $eachstory->title()
@@ -356,7 +356,7 @@ function expStories()
                  . "
                 </td><td align='center'><a href='"
                  . XOOPS_URL
-                 . "/userinfo.php?uid="
+                 . '/userinfo.php?uid='
                  . $eachstory->uid()
                  . "'>"
                  . $eachstory->uname()
@@ -366,17 +366,17 @@ function expStories()
                  . $expired
                  . "</td><td align='center'><a href='"
                  . XNEWS_MODULE_URL
-                 . "/submit.php?returnside=1&amp;op=edit&amp;storyid="
+                 . '/submit.php?returnside=1&amp;op=edit&amp;storyid='
                  . $eachstory->storyid()
                  . "'>"
                  . _AM_NW_EDIT
                  . "</a>-<a href='"
                  . XNEWS_MODULE_URL
-                 . "/admin/index.php?op=delete&amp;storyid="
+                 . '/admin/index.php?op=delete&amp;storyid='
                  . $eachstory->storyid()
                  . "'>"
                  . _AM_NW_DELETE
-                 . "</a>";
+                 . '</a>';
             echo "</td></tr>\n";
         }
         echo '</table><br>';
@@ -651,7 +651,7 @@ switch ($op) {
     case 'newarticle':
         xoops_cp_header();
         $adminObject = \Xmf\Module\Admin::getInstance();
-        $adminObject->displayNavigation("index.php?op=newarticle");
+        $adminObject->displayNavigation('index.php?op=newarticle');
 
         require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
         newSubmissions();
@@ -746,7 +746,7 @@ switch ($op) {
         //  admin navigation
         xoops_cp_header();
         $adminObject = \Xmf\Module\Admin::getInstance();
-        $adminObject->displayNavigation("index.php?op=topicsmanager");
+        $adminObject->displayNavigation('index.php?op=topicsmanager');
         //
         xoops_load('XoopsFormLoader');
 
@@ -760,7 +760,7 @@ switch ($op) {
         $class       = '';
 
         xnews_collapsableBar('topicsmanager', 'toptopicsmanager');
-        echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='toptopicsmanager' name='toptopicsmanager' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_TOPICS . ' (' . $totaltopics . ')' . "</h4>";
+        echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='toptopicsmanager' name='toptopicsmanager' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_TOPICS . ' (' . $totaltopics . ')' . '</h4>';
         echo "<div id='topicsmanager'>";
         echo '<br>';
         echo "<div style='text-align: center;'>";
@@ -774,7 +774,7 @@ switch ($op) {
              . _AM_NW_SUB_MENU_YESNO
              . "</td><td align='center'>"
              . _AM_NW_ACTION
-             . "</td></tr>";
+             . '</td></tr>';
         if (is_array($topics_arr) && $totaltopics) {
             $cpt    = 1;
             $tmpcpt = $start;
@@ -808,11 +808,11 @@ switch ($op) {
                                . $myts->displayTarea($topics_arr[$tmpcpt]['topic_title'])
                                . "</td><td align='left'>"
                                . $parent
-                               . "</td><td>"
+                               . '</td><td>'
                                . $submenu
-                               . "</td><td>"
+                               . '</td><td>'
                                . $action
-                               . "</td></tr>";
+                               . '</td></tr>';
                 } else {
                     $ok = false;
                 }
@@ -1102,7 +1102,7 @@ switch ($op) {
             } else {
                 $selected = '';
             }
-            $select_color .= "<option" . $selected . " value='" . $color_value . "' style='background-color:#" . $color_value . ";color:#" . $color_value . ";'>#" . $color_value . "</option>\n";
+            $select_color .= '<option' . $selected . " value='" . $color_value . "' style='background-color:#" . $color_value . ';color:#' . $color_value . ";'>#" . $color_value . "</option>\n";
         }
 
         $select_color .= "</select>&nbsp;\n<span id='NewsColorSelect'>&nbsp;&nbsp;&nbsp;&nbsp;</span>";
@@ -1121,9 +1121,9 @@ switch ($op) {
         foreach ($topics_array as $image) {
             $imageselect->addOption("$image", $image);
         }
-        $imageselect->setExtra("onchange='showImgSelected(\"image3\", \"topic_imgurl\", \"" . $uploadirectory . "\", \"\", \"" . XOOPS_URL . "\")'");
+        $imageselect->setExtra("onchange='showImgSelected(\"image3\", \"topic_imgurl\", \"" . $uploadirectory . '", "", "' . XOOPS_URL . "\")'");
         $imgtray->addElement($imageselect, false);
-        $imgtray->addElement(new XoopsFormLabel('', "<br><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt=''>"));
+        $imgtray->addElement(new XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadirectory . '/' . $topicimage . "' name='image3' id='image3' alt=''>"));
 
         $uploadfolder = sprintf(_AM_NW_UPLOAD_WARNING, XNEWS_TOPICS_FILES_URL);
         $fileseltray  = new XoopsFormElementTray('', '<br>');
@@ -1221,7 +1221,7 @@ switch ($op) {
         $adminObject->displayNavigation($currentFile);
         // buttons
         //$adminObject = \Xmf\Module\Admin::getInstance();
-        $adminObject->addItemButton(_AM_NW_VERIFY_TABLES, $currentFile . "?op=verifydb", 'list');
+        $adminObject->addItemButton(_AM_NW_VERIFY_TABLES, $currentFile . '?op=verifydb', 'list');
         $adminObject->displayButton('left', '');
 
         $adminObject->displayIndex();

@@ -6,15 +6,15 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
  * Paths not set and block would not work
  */
 if (!defined('XNEWS_MODULE_PATH')) {
-    define("XNEWS_SUBPREFIX", "nw");
-    define("XNEWS_MODULE_DIRNAME", "xnews");
-    define("XNEWS_MODULE_PATH", XOOPS_ROOT_PATH . "/modules/" . XNEWS_MODULE_DIRNAME);
-    define("XNEWS_MODULE_URL", XOOPS_URL . "/modules/" . XNEWS_MODULE_DIRNAME);
-    define("XNEWS_UPLOADS_NEWS_PATH", XOOPS_ROOT_PATH . "/uploads/" . XNEWS_MODULE_DIRNAME);
-    define("XNEWS_TOPICS_FILES_PATH", XOOPS_ROOT_PATH . "/uploads/" . XNEWS_MODULE_DIRNAME . "/topics");
-    define("XNEWS_ATTACHED_FILES_PATH", XOOPS_ROOT_PATH . "/uploads/" . XNEWS_MODULE_DIRNAME . "/attached");
-    define("XNEWS_TOPICS_FILES_URL", XOOPS_URL . "/uploads/" . XNEWS_MODULE_DIRNAME . "/topics");
-    define("XNEWS_ATTACHED_FILES_URL", XOOPS_URL . "/uploads/" . XNEWS_MODULE_DIRNAME . "/attached");
+    define('XNEWS_SUBPREFIX', 'nw');
+    define('XNEWS_MODULE_DIRNAME', 'xnews');
+    define('XNEWS_MODULE_PATH', XOOPS_ROOT_PATH . '/modules/' . XNEWS_MODULE_DIRNAME);
+    define('XNEWS_MODULE_URL', XOOPS_URL . '/modules/' . XNEWS_MODULE_DIRNAME);
+    define('XNEWS_UPLOADS_NEWS_PATH', XOOPS_ROOT_PATH . '/uploads/' . XNEWS_MODULE_DIRNAME);
+    define('XNEWS_TOPICS_FILES_PATH', XOOPS_ROOT_PATH . '/uploads/' . XNEWS_MODULE_DIRNAME . '/topics');
+    define('XNEWS_ATTACHED_FILES_PATH', XOOPS_ROOT_PATH . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
+    define('XNEWS_TOPICS_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/topics');
+    define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
 function nw_b_news_topics_show()

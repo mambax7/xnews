@@ -54,7 +54,7 @@ switch ($op) {
         $myts = MyTextSanitizer::getInstance();
         xoops_loadLanguage('main', XNEWS_MODULE_DIRNAME);
 
-        echo _AM_NW_METAGEN_DESC . "<br>";
+        echo _AM_NW_METAGEN_DESC . '<br>';
 
         // Metagen Options
         $registry = new nw_registryfile('nw_metagen_options.txt');
