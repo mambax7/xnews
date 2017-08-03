@@ -4,7 +4,7 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 /**
  * Solves issue when upgrading xoops version
  * Paths not set and block would not work
-*/
+ */
 if (!defined('XNEWS_MODULE_PATH')) {
     define('XNEWS_SUBPREFIX', 'nw');
     define('XNEWS_MODULE_DIRNAME', 'xnews');
@@ -23,12 +23,14 @@ function nw_news_tag_block_cloud_show($options)
     if (!isset($module_dirname)) {
         $module_dirname = XNEWS_MODULE_DIRNAME;
     }
+
     return tag_block_cloud_show($options, $module_dirname);
 }
 
 function nw_news_tag_block_cloud_edit($options)
 {
     require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
+
     return tag_block_cloud_edit($options);
 }
 
@@ -38,11 +40,13 @@ function nw_news_tag_block_top_show($options)
     if (!isset($module_dirname)) {
         $module_dirname = XNEWS_MODULE_DIRNAME;
     }
+
     return tag_block_top_show($options, $module_dirname);
 }
 
 function nw_news_tag_block_top_edit($options)
 {
     require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
+
     return tag_block_top_edit($options);
 }
