@@ -238,6 +238,7 @@ abstract class wiImage
      * Allocate a color by RGB values.
      *
      * @param mixed $R Red-component value or an RGB array (with red, green, blue keys)
+     * @return int
      */
     public function allocateColor($R, $G = null, $B = null)
     {
@@ -266,6 +267,7 @@ abstract class wiImage
 
     /**
      * @param int $color Transparent color index
+     * @return int
      */
     public function setTransparentColor($color)
     {
@@ -332,6 +334,7 @@ abstract class wiImage
      * PHP's imagecolorclosest()
      *
      * @param mixed $R Red or RGBA array
+     * @return int
      */
     public function getClosestColor($R, $G = null, $B = null)
     {
@@ -347,6 +350,7 @@ abstract class wiImage
      * PHP's imagecolorexact()
      *
      * @param mixed $R Red or RGBA array
+     * @return int
      */
     public function getExactColor($R, $G = null, $B = null)
     {

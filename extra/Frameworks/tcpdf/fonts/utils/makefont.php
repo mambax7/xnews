@@ -207,6 +207,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
 /**
  * Read the specified encoding map.
  * @param string $enc map name (see /enc/ folder for valid names).
+ * @return array
  */
 function ReadMap($enc) {
 	//Read a map file

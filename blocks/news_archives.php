@@ -28,6 +28,7 @@ require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
  *                                  3 = Ending date, year
  *                                  4 = Ending date, month
  *                                  5 = until today ?
+ * @return array|string
  */
 function nw_b_news_archives_show($options)
 {

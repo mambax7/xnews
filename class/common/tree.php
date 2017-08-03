@@ -29,7 +29,9 @@ class XnewsMyXoopsObjectTree
      * @param   string $myId      field name of object ID
      * @param   string $parentId  field name of parent object ID
      * @param   string $rootId    field name of root object ID
-     **/
+     *
+     * @return \XnewsMyXoopsObjectTree
+     */
     public function __construct(&$objectArr, $myId, $parentId, $rootId = null)
     {
         $this->_objects  =& $objectArr;

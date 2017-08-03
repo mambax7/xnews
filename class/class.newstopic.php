@@ -61,6 +61,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
      *
      * @param    int $preset_id is used to specify a preselected item
      * @param    int $none      set $none to 1 to add a option with value 0
+     * @return string
      */
     public function makeMySelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = 'topic_id', $onchange = '', $perms)
     {

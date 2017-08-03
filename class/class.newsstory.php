@@ -264,6 +264,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      * @param int     $ihome      Limit to articles published in home page only ?
      * @param boolean $asObject   Do we have to return an array of objects or a simple array ?
      * @param string  $order      Fields to sort on
+     * @return array
      */
     public function getBigStory($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'counter')
     {
@@ -323,6 +324,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      *
      * @param int     $uid        author's id
      * @param boolean $checkRight whether to check the user's rights to topics
+     * @return array
      */
     public function getAllPublishedByAuthor($uid, $checkRight = false, $asObject = true)
     {
@@ -441,6 +443,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      * @param int     $limit      Denotes where to start the query
      * @param boolean $asObject   true will returns the stories as an array of objects, false will return storyid => title
      * @param boolean $checkRight whether to check the user's rights to topics
+     * @return array
      */
     public function getAllSubmitted($limit = 0, $asObject = true, $checkRight = false, $start = 0)
     {
@@ -483,6 +486,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      *                               3 = New submissions
      *                               4 = Last published stories
      * @param bool $checkRight       verify permissions or not ?
+     * @return int
      */
     public function getAllStoriesCount($storyType = 1, $checkRight = false)
     {
@@ -900,6 +904,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      * @param string  $topiclist    If not empty, a list of topics to limit to
      * @param boolean $usetopicsdef Should we also export topics definitions ?
      * @param boolean $asObject     Return values as an object or not ?
+     * @return array
      */
     public function NewsExport($fromDate, $toDate, $topicsList = '', $usetopicsdef = 0, &$topicsTable, $asObject = true, $order = 'published')
     {

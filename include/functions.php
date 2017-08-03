@@ -687,6 +687,7 @@ function nw_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words =
  * @param integer $param_height  Maximum picture's height
  * @param boolean $keep_original Do we have to keep the original picture ?
  * @param string  $fit           Resize mode (see the wideImage library for more information)
+ * @return bool
  */
 function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false, $fit = 'inside')
 {

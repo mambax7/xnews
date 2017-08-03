@@ -4003,6 +4003,7 @@ if (!class_exists('TCPDF', false)) {
          * @access protected
          * @since  1.0
          * @see    Cell()
+         * @return string
          */
         protected function getCellCode($w, $h = 0, $txt = '', $border = 0, $ln = 0, $align = '', $fill = 0, $link = '', $stretch = 0, $ignore_min_height = false)
         {
@@ -5289,6 +5290,7 @@ if (!class_exists('TCPDF', false)) {
          * @param image  $image Image object.
          *                      return image JPEG image object.
          * @access protected
+         * @return array
          */
         protected function _toJPEG($image)
         {
@@ -5525,6 +5527,7 @@ if (!class_exists('TCPDF', false)) {
          * @param float $v the gamma value to be corrected
          * @access protected
          * @since  4.3.007 (2008-12-04)
+         * @return number
          */
         protected function getGDgamma($v)
         {
@@ -5693,6 +5696,7 @@ if (!class_exists('TCPDF', false)) {
          * @access public
          * @since  1.0
          * @see    Close()
+         * @return string
          */
         public function Output($name = 'doc.pdf', $dest = 'I')
         {
@@ -7690,6 +7694,7 @@ if (!class_exists('TCPDF', false)) {
          * @param int    $y   Y coordinate
          * @param string $txt text to underline
          * @access protected
+         * @return string
          */
         protected function _dounderline($x, $y, $txt)
         {
@@ -7704,6 +7709,7 @@ if (!class_exists('TCPDF', false)) {
          * @param int    $y   Y coordinate
          * @param string $txt text to linethrough
          * @access protected
+         * @return string
          */
         protected function _dolinethrough($x, $y, $txt)
         {
@@ -7719,6 +7725,7 @@ if (!class_exists('TCPDF', false)) {
          * @param int $w width to underline
          * @access protected
          * @since  4.8.008 (2009-09-29)
+         * @return string
          */
         protected function _dounderlinew($x, $y, $w)
         {
@@ -7735,6 +7742,7 @@ if (!class_exists('TCPDF', false)) {
          * @param string $txt text to linethrough
          * @access protected
          * @since  4.8.008 (2009-09-29)
+         * @return string
          */
         protected function _dolinethroughw($x, $y, $w)
         {
@@ -8342,6 +8350,7 @@ if (!class_exists('TCPDF', false)) {
          * @param int $n object number
          * @access protected
          * @since  2.0.000 (2008-01-02)
+         * @return bool|string
          */
         protected function _objectkey($n)
         {
@@ -10615,6 +10624,7 @@ if (!class_exists('TCPDF', false)) {
          * @access protected
          * @author Denis Van Nuffelen, Nicola Asuni
          * @since  2.1.002 (2008-02-12)
+         * @return string
          */
         protected function _JScolor($color)
         {
@@ -11869,6 +11879,7 @@ if (!class_exists('TCPDF', false)) {
          * @param int $num page number
          * @access protected
          * @since  4.2.005 (2008-11-06)
+         * @return string
          */
         protected function formatPageNumber($num)
         {
@@ -11882,6 +11893,7 @@ if (!class_exists('TCPDF', false)) {
          * @access protected
          * @since  4.5.001 (2009-01-04)
          * @see    addTOC()
+         * @return string
          */
         protected function formatTOCPageNumber($num)
         {
@@ -13251,6 +13263,7 @@ if (!class_exists('TCPDF', false)) {
          * @access public
          * @uses   MultiCell()
          * @see    Multicell(), writeHTML()
+         * @return int
          */
         public function writeHTMLCell($w, $h, $x, $y, $html = '', $border = 0, $ln = 0, $fill = 0, $reseth = true, $align = '', $autopadding = true)
         {
@@ -15746,6 +15759,7 @@ if (!class_exists('TCPDF', false)) {
          * @param float $width width of the indentation. Use negative value to disable it.
          * @access public
          * @since  4.2.007 (2008-11-12)
+         * @return float
          */
         public function setListIndentWidth($width)
         {
@@ -16138,6 +16152,7 @@ if (!class_exists('TCPDF', false)) {
          *                       return string filename.
          * @access protected
          * @since  4.5.000 (2008-12-31)
+         * @return bool|string
          */
         protected function getObjFilename($name)
         {
