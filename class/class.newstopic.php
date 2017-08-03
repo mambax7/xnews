@@ -15,7 +15,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     public $topic_rssurl;
     public $topic_color;
 
-    public function nw_NewsTopic($topicid = 0)
+    public function __construct($topicid = 0)
     {
         $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $this->db->prefix('nw_topics');

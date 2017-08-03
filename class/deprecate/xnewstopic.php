@@ -21,7 +21,7 @@ class XnewsDeprecateTopic
      * @param     $table
      * @param int $topicid
      */
-    public function XnewsDeprecateTopic($table, $topicid = 0)
+    public function __construct($table, $topicid = 0)
     {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
         ;

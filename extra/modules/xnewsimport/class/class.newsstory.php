@@ -38,7 +38,7 @@ class xni_NewsStory extends XoopsStory
     /**
      * Constructor
      */
-    public function xni_NewsStory($storyid = -1, $subprefix = '')
+    public function __construct($storyid = -1, $subprefix = '')
     {
         $this->db          = XoopsDatabaseFactory::getDatabaseConnection();
         $this->table       = $this->db->prefix($subprefix . 'stories');

@@ -32,7 +32,7 @@ class xni_NewsTopic extends XoopsTopic
     public $topic_rssurl;
     public $topic_color;
 
-    public function xni_NewsTopic($topicid = 0, $subprefix = '')
+    public function __construct($topicid = 0, $subprefix = '')
     {
         $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $this->db->prefix($subprefix . 'topics');
