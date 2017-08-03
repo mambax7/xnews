@@ -4120,13 +4120,13 @@ if (!class_exists('TCPDF', false)) {
                         // get string width without spaces
                         $width = $this->GetStringWidth(str_replace(' ', '', $txt));
                         // calculate average space width
-                        $spacewidth = -1000 * ($w - $width - (2 * $this->cMargin)) / ($ns ? $ns : 1) / $this->FontSize;
+                        $spacewidth = -1000 * ($w - $width - (2 * $this->cMargin)) / ($ns ?: 1) / $this->FontSize;
                         // set word position to be used with TJ operator
                         $txt2 = str_replace(chr(0) . ' ', ') ' . ($spacewidth) . ' (', $txt2);
                     } else {
                         // get string width
                         $width      = $txwidth;
-                        $spacewidth = (($w - $width - (2 * $this->cMargin)) / ($ns ? $ns : 1)) * $this->k;
+                        $spacewidth = (($w - $width - (2 * $this->cMargin)) / ($ns ?: 1)) * $this->k;
                         // set word spacing
                         $rs .= sprintf('BT %.3F Tw ET ', $spacewidth);
                     }
@@ -14102,8 +14102,8 @@ if (!class_exists('TCPDF', false)) {
                                     }
                                     // calculate additional space to add to each space
                                     $spacelen    = $one_space_width;
-                                    $spacewidth  = ((($tw - $linew) + (($no - $ns) * $spacelen)) / ($ns ? $ns : 1)) * $this->k;
-                                    $spacewidthu = -1000 * (($tw - $linew) + ($ns * $spacelen)) / ($ns ? $ns : 1) / $this->FontSize;
+                                    $spacewidth  = ((($tw - $linew) + (($no - $ns) * $spacelen)) / ($ns ?: 1)) * $this->k;
+                                    $spacewidthu = -1000 * (($tw - $linew) + ($ns * $spacelen)) / ($ns ?: 1) / $this->FontSize;
                                     $nsmax       = $ns;
                                     $ns          = 0;
                                     reset($lnstring);
