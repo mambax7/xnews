@@ -496,7 +496,7 @@ switch ($op) {
 
             if ($allowupload) {
                 //DNPROSSI - Control if writable dir
-                if (!is_writeable(XNEWS_ATTACHED_FILES_PATH)) {
+                if (!is_writable(XNEWS_ATTACHED_FILES_PATH)) {
                     redirect_header(XNEWS_MODULE_URL . '/admin/index.php?op=newarticle', 2, _AD_WARNINGNOTWRITEABLE);
                 }
                 // Manage upload(s)

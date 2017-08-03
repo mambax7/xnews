@@ -26,7 +26,7 @@ function nw_cloneFileFolder($path, $patterns)
 
                 return;
             }
-            fputs($fp, $data);
+            fwrite($fp, $data);
             fclose($fp);
         }
     }
@@ -59,7 +59,7 @@ function nw_cloneFileFolder($path, $patterns)
             //trigger_error($path , E_USER_WARNING);
             $content = file_get_contents($path);
             if ($path_ext != 'txt') {
-                for ($i = 0; $i < sizeof($patterns); ++$i) {
+                for ($i = 0; $i < count($patterns); ++$i) {
                     $content = str_replace($patKeys[$i], $patValues[$i], $content);
                 }
             }

@@ -246,7 +246,7 @@ function ReadUFM($file, &$cidtogidmap) {
 	$widths = array();
 	$fm = array();
 	foreach($a as $l) {
-		$e = explode(' ',chop($l));
+		$e = explode(' ', rtrim($l));
 		if(count($e) < 2) {
 			continue;
 		}
@@ -587,7 +587,7 @@ $arg = $GLOBALS['argv'];
 if (count($arg) >= 3) {
 	ob_start();
 	array_shift($arg);
-	if (sizeof($arg) == 3) {
+	if (count($arg) == 3) {
 		$arg[3] = $arg[2];
 		$arg[2] = true;
 	} else {

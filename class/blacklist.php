@@ -102,13 +102,13 @@ class nw_blacklist
             unlink($filename);
         }
         $fd = fopen($filename, 'w') || exit('Error unable to create the blacklist file');
-        fputs($fd, "<?php\n");
-        fputs($fd, '$tbl_black_list=array(' . "\n");
+        fwrite($fd, "<?php\n");
+        fwrite($fd, '$tbl_black_list=array(' . "\n");
         foreach ($this->keywords as $onekeyword) {
-            fputs($fd, '"' . $onekeyword . "\",\n");
+            fwrite($fd, '"' . $onekeyword . "\",\n");
         }
-        fputs($fd, "'');\n");
-        fputs($fd, '?' . ">\n");
+        fwrite($fd, "'');\n");
+        fwrite($fd, '?' . ">\n");
         fclose($fd);
     }
 }
