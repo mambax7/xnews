@@ -24,8 +24,8 @@ require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
 function nw_com_update($story_id, $total_num)
 {
-    $story_id  = intval($story_id);
-    $total_num = intval($total_num);
+    $story_id  = (int)$story_id;
+    $total_num = (int)$total_num;
     $article   = new nw_NewsStory($story_id);
     if (!$article->updateComments($total_num)) {
         return false;

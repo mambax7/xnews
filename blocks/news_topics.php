@@ -25,7 +25,7 @@ function nw_b_news_topics_show()
     require_once XNEWS_MODULE_PATH . '/class/common/tree.php';
 
     $jump       = XNEWS_MODULE_URL . '/index.php?topic_id=';
-    $topic_id   = !empty($topic_id) ? intval($topic_id) : 0;
+    $topic_id   = !empty($topic_id) ? (int)$topic_id : 0;
     $restricted = $xnews->getConfig('restrictindex');
 
     $xt                 = new nw_NewsTopic();

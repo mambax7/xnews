@@ -26,7 +26,7 @@ class wiDimension
 
     public static function calculateRelativeDimension($max, $dim)
     {
-        return intval(round($max * floatval(str_replace('%', '', $dim)) / 100));
+        return (int)round($max * (float)str_replace('%', '', $dim) / 100);
     }
 
     public static function fix($max, $dim)
@@ -34,7 +34,7 @@ class wiDimension
         if (self::isPercent($dim)) {
             return self::calculateRelativeDimension($max, $dim);
         } else {
-            return intval(round(floatval($dim)));
+            return (int)round((float)$dim);
         }
     }
 }

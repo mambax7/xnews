@@ -29,7 +29,7 @@ class XnewsDeprecateTopic
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
         } elseif ($topicid != 0) {
-            $this->getTopic(intval($topicid));
+            $this->getTopic((int)$topicid);
         } else {
             $this->topic_id = $topicid;
         }
@@ -64,7 +64,7 @@ class XnewsDeprecateTopic
      */
     public function getTopic($topicid)
     {
-        $topicid = intval($topicid);
+        $topicid = (int)$topicid;
         $sql     = 'SELECT * FROM ' . $this->table . ' WHERE topic_id=' . $topicid . '';
         $array   = $this->db->fetchArray($this->db->query($sql));
         $this->makeTopic($array);
@@ -375,7 +375,7 @@ class XnewsDeprecateTopic
      */
     public function topicExists($pid, $title)
     {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->table . ' WHERE topic_pid = ' . intval($pid) . " AND topic_title = '" . trim($title) . "'";
+        $sql = 'SELECT COUNT(*) FROM ' . $this->table . ' WHERE topic_pid = ' . (int)$pid . " AND topic_title = '" . trim($title) . "'";
         $rs  = $this->db->query($sql);
         list($count) = $this->db->fetchRow($rs);
         if ($count > 0) {

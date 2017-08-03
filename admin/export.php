@@ -80,13 +80,13 @@ switch ($op) {
         $exportedstories = array();
         $date1           = $_POST['date1'];
         $date2           = $_POST['date2'];
-        $timestamp1      = mktime(0, 0, 0, intval(substr($date1, 5, 2)), intval(substr($date1, 8, 2)), intval(substr($date1, 0, 4)));
-        $timestamp2      = mktime(23, 59, 59, intval(substr($date2, 5, 2)), intval(substr($date2, 8, 2)), intval(substr($date2, 0, 4)));
+        $timestamp1      = mktime(0, 0, 0, (int)substr($date1, 5, 2), (int)substr($date1, 8, 2), (int)substr($date1, 0, 4));
+        $timestamp2      = mktime(23, 59, 59, (int)substr($date2, 5, 2), (int)substr($date2, 8, 2), (int)substr($date2, 0, 4));
         $topiclist       = '';
         if (isset($_POST['export_topics'])) {
             $topiclist = implode(',', $_POST['export_topics']);
         }
-        $topicsexport    = intval($_POST['includetopics']);
+        $topicsexport    = (int)$_POST['includetopics'];
         $tbltopics       = array();
         $exportedstories = $story->NewsExport($timestamp1, $timestamp2, $topiclist, $topicsexport, $tbltopics);
         if (count($exportedstories)) {

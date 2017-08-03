@@ -229,9 +229,9 @@ if (isset($storyid)) {
 }
 
 if (!isset($returnside)) {
-    $returnside = isset($_POST['returnside']) ? intval($_POST['returnside']) : 0;
+    $returnside = isset($_POST['returnside']) ? (int)$_POST['returnside'] : 0;
     if (empty($returnside)) {
-        $returnside = isset($_GET['returnside']) ? intval($_GET['returnside']) : 0;
+        $returnside = isset($_GET['returnside']) ? (int)$_GET['returnside'] : 0;
     }
 }
 

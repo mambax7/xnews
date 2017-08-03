@@ -44,7 +44,7 @@ function NewsCloner()
 
     $clone_modulename = '';
 
-    $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
+    $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 
     $result = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata'));
     $ix     = 0;
@@ -157,7 +157,7 @@ function NewsCloner()
     echo "</table><div align='right'>" . $pagenav->renderNav() . '</div><br>';
     echo "</div></div><br>\n";
 
-    $clone_id = isset($_GET['clone_id']) ? intval($_GET['clone_id']) : 0;
+    $clone_id = isset($_GET['clone_id']) ? (int)$_GET['clone_id'] : 0;
     if ($clone_id > 0) {
         $xtmod           = new nw_NewsTopic($clone_id);
         $clone_name      = $xtmod->clone_name('E');
@@ -233,7 +233,7 @@ function NewsClonerApply()
         $row            = $GLOBALS['xoopsDB']->fetchArray($result);
         $Auto_increment = $row['Auto_increment'];
 
-        $new_subprefix = 'nw' . strval($Auto_increment);
+        $new_subprefix = 'nw' . (string)$Auto_increment;
         //trigger_error($result. ' ---- ' .$count. ' ---- ' .$new_subprefix , E_USER_WARNING);
 
         $patterns = array(

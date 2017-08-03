@@ -53,7 +53,7 @@ if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsMo
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
 }
 
-$storypage  = isset($_GET['page']) ? intval($_GET['page']) : 0;
+$storypage  = isset($_GET['page']) ? (int)$_GET['page'] : 0;
 $dateformat = $xnews->getConfig('dateformat');
 $hcontent   = '';
 

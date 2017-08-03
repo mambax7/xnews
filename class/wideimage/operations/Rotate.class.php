@@ -21,7 +21,7 @@ class wioRotate
 {
     public function execute($image, $angle, $bgColor, $ignoreTransparent)
     {
-        $angle = -floatval($angle);
+        $angle = -(float)$angle;
         if ($angle < 0) {
             $angle = 360 + $angle;
         }

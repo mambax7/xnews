@@ -13,7 +13,7 @@ if ($xnews->getConfig('com_anonpost') == 0 && !is_object($xoopsUser)) { // Anony
 }
 // ****************************************************************************
 
-$com_itemid = isset($_GET['com_itemid']) ? intval($_GET['com_itemid']) : 0;
+$com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
 if ($com_itemid > 0) {
     $article = new nw_NewsStory($com_itemid);
     if ($article->storyid > 0) {

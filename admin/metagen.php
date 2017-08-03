@@ -120,7 +120,7 @@ switch ($op) {
     case 'metagenoptions':
         // Save Metagen Options
         $registry = new nw_registryfile('nw_metagen_options.txt');
-        $registry->savefile(intval($_POST['keywordscount']) . ',' . intval($_POST['keywordsorder']));
+        $registry->savefile((int)$_POST['keywordscount'] . ',' . (int)$_POST['keywordsorder']);
         redirect_header('index.php?op=metagen', 3, _AM_NW_DBUPDATED);
         xoops_cp_footer();
         break;

@@ -58,9 +58,9 @@ function nw_b_news_archives_show($options)
     );
     $block         = array();
     $sort_order    = $options[0] == 0 ? 'ASC' : 'DESC';
-    $starting_date = mktime(0, 0, 0, intval($options[2]), 1, intval($options[1]));
-    if (intval($options[5]) != 1) {
-        $ending_date = mktime(23, 59, 59, intval($options[4]), 28, intval($options[3]));
+    $starting_date = mktime(0, 0, 0, (int)$options[2], 1, (int)$options[1]);
+    if ((int)$options[5] != 1) {
+        $ending_date = mktime(23, 59, 59, (int)$options[4], 28, (int)$options[3]);
     } else {
         $ending_date = time();
     }
@@ -72,8 +72,8 @@ function nw_b_news_archives_show($options)
         return '';
     }
     while ($myrow = $xoopsDB->fetchArray($result)) {
-        $year                = intval(substr($myrow['published'], 0, 4));
-        $month               = intval(substr($myrow['published'], 5, 2));
+        $year                = (int)substr($myrow['published'], 0, 4);
+        $month               = (int)substr($myrow['published'], 5, 2);
         $formated_month      = $months_arr[$month];
         $block['archives'][] = array('month' => $month, 'year' => $year, 'formated_month' => $formated_month);
     }

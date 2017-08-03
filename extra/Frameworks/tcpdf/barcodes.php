@@ -1234,7 +1234,7 @@ class TCPDFBarcode
                 $new_code = '';
                 $hclen    = (strlen($code) / 2);
                 for ($i = 0; $i < $hclen; ++$i) {
-                    $new_code .= chr(intval($code{(2 * $i)} . $code{(2 * $i + 1)}));
+                    $new_code .= chr((int)($code{(2 * $i)} . $code{(2 * $i + 1)}));
                 }
                 $code = $new_code;
                 break;
@@ -1325,7 +1325,7 @@ class TCPDFBarcode
         if ($code_len == $data_len) {
             // add check digit
             $code .= $r;
-        } elseif ($r !== intval($code{$data_len})) {
+        } elseif ($r !== (int)$code{$data_len}) {
             // wrong checkdigit
             return false;
         }
@@ -1607,7 +1607,7 @@ class TCPDFBarcode
         // calculate checksum
         $sum = 0;
         for ($i = 0; $i < $len; ++$i) {
-            $sum += intval($code{$i});
+            $sum += (int)$code{$i};
         }
         $chkd = ($sum % 10);
         if ($chkd > 0) {
@@ -1885,7 +1885,7 @@ class TCPDFBarcode
             if ($digit == '-') {
                 $dval = 10;
             } else {
-                $dval = intval($digit);
+                $dval = (int)$digit;
             }
             $check += ($dval * $p);
             ++$p;
@@ -1907,7 +1907,7 @@ class TCPDFBarcode
                 if ($digit == '-') {
                     $dval = 10;
                 } else {
-                    $dval = intval($digit);
+                    $dval = (int)$digit;
                 }
                 $check += ($dval * $p);
                 ++$p;
@@ -1952,7 +1952,7 @@ class TCPDFBarcode
     protected function barcode_pharmacode($code)
     {
         $seq  = '';
-        $code = intval($code);
+        $code = (int)$code;
         while ($code > 0) {
             if (($code % 2) == 0) {
                 $seq  .= '11100';
@@ -1980,7 +1980,7 @@ class TCPDFBarcode
     protected function barcode_pharmacode2t($code)
     {
         $seq  = '';
-        $code = intval($code);
+        $code = (int)$code;
         do {
             switch ($code % 3) {
                 case 0: {
@@ -2541,7 +2541,7 @@ class TCPDFBarcode
         for ($count = 0; $count < 8192; ++$count) {
             $bit_count = 0;
             for ($bit_index = 0; $bit_index < 13; ++$bit_index) {
-                $bit_count += intval(($count & (1 << $bit_index)) != 0);
+                $bit_count += (int)(($count & (1 << $bit_index)) != 0);
             }
             // if we don't have the right number of bits on, go on to the next value
             if ($bit_count == $n) {

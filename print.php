@@ -18,7 +18,7 @@
 require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
-$storyid = isset($_GET['storyid']) ? intval($_GET['storyid']) : 0;
+$storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
 if (empty($storyid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MA_NW_NOSTORY);
 }

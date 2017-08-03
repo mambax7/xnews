@@ -63,7 +63,7 @@ $nw_NewsStoryHandler = new nw_NewsStory();
 
 $topic_id = 0;
 if (isset($_GET['topic_id'])) {
-    $topic_id = intval($_GET['topic_id']);
+    $topic_id = (int)$_GET['topic_id'];
 }
 
 if ($topic_id) {
@@ -77,7 +77,7 @@ if ($topic_id) {
     $xoopsOption['storytopic'] = 0;
 }
 if (isset($_GET['storynum'])) {
-    $xoopsOption['storynum'] = intval($_GET['storynum']);
+    $xoopsOption['storynum'] = (int)$_GET['storynum'];
     if ($xoopsOption['storynum'] > 30) {
         $xoopsOption['storynum'] = $xnews->getConfig('storyhome');
     }
@@ -86,7 +86,7 @@ if (isset($_GET['storynum'])) {
 }
 
 if (isset($_GET['start'])) {
-    $start = intval($_GET['start']);
+    $start = (int)$_GET['start'];
 } else {
     $start = 0;
 }
@@ -111,7 +111,7 @@ if ($showclassic) {
     //DNPROSSI - ADDED
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
-    $xoopsTpl->assign('column_width', intval(1 / $column_count * 100));
+    $xoopsTpl->assign('column_width', (int)(1 / $column_count * 100));
     if ($xnews->getConfig('ratenews')) {
         $xoopsTpl->assign('rates', true);
         $xoopsTpl->assign('lang_ratingc', _MA_NW_RATINGC);
@@ -208,7 +208,7 @@ if ($showclassic) {
     //DNPROSSI - ADDED
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
-    $xoopsTpl->assign('column_width', intval(1 / $column_count * 100));
+    $xoopsTpl->assign('column_width', (int)(1 / $column_count * 100));
     if ($xnews->getConfig('ratenews')) {
         $xoopsTpl->assign('rates', true);
         $xoopsTpl->assign('lang_ratingc', _MA_NW_RATINGC);

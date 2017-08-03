@@ -65,7 +65,7 @@ function nw_b_news_latestnews_show($options)
     $bordercolor      = $options[6];
     $selected_stories = $options[7];
 
-    $block['spec']['columnwidth'] = intval(1 / $column_count * 100);
+    $block['spec']['columnwidth'] = (int)(1 / $column_count * 100);
     if ($options[8] == 1) {
         $imgposition = 'right';
     } else {

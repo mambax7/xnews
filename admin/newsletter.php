@@ -101,8 +101,8 @@ function LaunchNewsletter()
     $exportedStories = array();
     $topiclist       = '';
     $removeBr        = $removehtml = false;
-    $removeBr        = isset($_POST['removebr']) ? intval($_POST['removebr']) : 0;
-    $removehtml      = isset($_POST['removehtml']) ? intval($_POST['removehtml']) : 0;
+    $removeBr        = isset($_POST['removebr']) ? (int)$_POST['removebr'] : 0;
+    $removehtml      = isset($_POST['removehtml']) ? (int)$_POST['removehtml'] : 0;
     $header          = isset($_POST['header']) ? $_POST['header'] : '';
     $footer          = isset($_POST['footer']) ? $_POST['footer'] : '';
     //

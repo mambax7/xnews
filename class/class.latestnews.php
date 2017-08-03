@@ -30,10 +30,10 @@ class nw_Latestnewsstory extends nw_NewsStory
                     if (!in_array($topic, $topics)) {
                         return null;
                     } else {
-                        $sql .= ' AND s.topicid = ' . intval($topic) . ' AND (s.ihome = 1 OR s.ihome = 0)';
+                        $sql .= ' AND s.topicid = ' . (int)$topic . ' AND (s.ihome = 1 OR s.ihome = 0)';
                     }
                 } else {
-                    $sql .= ' AND s.topicid = ' . intval($topic) . ' AND (s.ihome = 1 OR s.ihome = 0)';
+                    $sql .= ' AND s.topicid = ' . (int)$topic . ' AND (s.ihome = 1 OR s.ihome = 0)';
                 }
             } else {
                 if ($checkRight) {
@@ -55,7 +55,7 @@ class nw_Latestnewsstory extends nw_NewsStory
                     return null;
                 }
             }
-            if (intval($ihome) == 0) {
+            if ((int)$ihome == 0) {
                 $sql .= ' AND s.ihome = 0';
             }
         }
@@ -63,7 +63,7 @@ class nw_Latestnewsstory extends nw_NewsStory
             $sql .= ' AND t.topic_frontpage=1';
         }
         $sql    .= " ORDER BY s.$order DESC";
-        $result = $db->query($sql, intval($limit), intval($start));
+        $result = $db->query($sql, (int)$limit, (int)$start);
 
         while ($myrow = $db->fetchArray($result)) {
             if ($asObject) {

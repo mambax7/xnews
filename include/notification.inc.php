@@ -32,12 +32,12 @@ function nw_notify_iteminfo($category, $item_id)
 
     if ($category == 'story') {
         // Assume we have a valid story id
-        $sql    = 'SELECT title FROM ' . $xoopsDB->prefix('nw_stories') . ' WHERE storyid = ' . intval($item_id);
+        $sql    = 'SELECT title FROM ' . $xoopsDB->prefix('nw_stories') . ' WHERE storyid = ' . (int)$item_id;
         $result = $xoopsDB->query($sql);
         if ($result) {
             $result_array = $xoopsDB->fetchArray($result);
             $item['name'] = $result_array['title'];
-            $item['url']  = XNEWS_MODULE_URL . '/article.php?storyid=' . intval($item_id);
+            $item['url']  = XNEWS_MODULE_URL . '/article.php?storyid=' . (int)$item_id;
 
             return $item;
         } else {
@@ -47,12 +47,12 @@ function nw_notify_iteminfo($category, $item_id)
 
     // Added by Lankford on 2007/3/23
     if ($category == 'category') {
-        $sql    = 'SELECT title FROM ' . $xoopsDB->prefix('nw_topics') . ' WHERE topic_id = ' . intval($item_id);
+        $sql    = 'SELECT title FROM ' . $xoopsDB->prefix('nw_topics') . ' WHERE topic_id = ' . (int)$item_id;
         $result = $xoopsDB->query($sql);
         if ($result) {
             $result_array = $xoopsDB->fetchArray($result);
             $item['name'] = $result_array['topic_id'];
-            $item['url']  = XNEWS_MODULE_URL . '/index.php?topic_id=' . intval($item_id);
+            $item['url']  = XNEWS_MODULE_URL . '/index.php?topic_id=' . (int)$item_id;
 
             return $item;
         } else {

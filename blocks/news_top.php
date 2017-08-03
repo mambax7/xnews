@@ -130,10 +130,10 @@ function nw_b_news_top_show($options)
         $usespotlight = false;
 
         if (isset($_GET['nwTab'])) {
-            $_SESSION['nwTab'] = intval($_GET['nwTab']);
-            $currenttab        = intval($_GET['nwTab']);
+            $_SESSION['nwTab'] = (int)$_GET['nwTab'];
+            $currenttab        = (int)$_GET['nwTab'];
         } elseif (isset($_SESSION['nwTab'])) {
-            $currenttab = intval($_SESSION['nwTab']);
+            $currenttab = (int)$_SESSION['nwTab'];
         } else {
             $currenttab = 0;
         }

@@ -30,7 +30,7 @@ class nw_sFiles
         if (is_array($fileid)) {
             $this->makeFile($fileid);
         } elseif ($fileid != -1) {
-            $this->getFile(intval($fileid));
+            $this->getFile((int)$fileid);
         }
     }
 
@@ -82,7 +82,7 @@ class nw_sFiles
         $ret    = array();
         $sql    = 'SELECT *';
         $sql    .= " FROM {$this->table}";
-        $sql    .= ' WHERE storyid = ' . intval($storyid);
+        $sql    .= ' WHERE storyid = ' . (int)$storyid;
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
             $ret[] = new nw_sFiles($myrow);
@@ -95,7 +95,7 @@ class nw_sFiles
     {
         $sql   = 'SELECT *';
         $sql   .= " FROM {$this->table}";
-        $sql   .= ' WHERE fileid = ' . intval($id);
+        $sql   .= ' WHERE fileid = ' . (int)$id;
         $array = $this->db->fetchArray($this->db->query($sql));
         $this->makeFile($array);
     }
@@ -115,11 +115,11 @@ class nw_sFiles
         $downloadname = $myts->addSlashes($this->downloadname);
         $date         = time();
         $mimetype     = $myts->addSlashes($this->mimetype);
-        $counter      = intval($this->counter);
-        $storyid      = intval($this->storyid);
+        $counter      = (int)$this->counter;
+        $storyid      = (int)$this->storyid;
 
         if (!isset($this->fileid)) {
-            $newid        = intval($this->db->genId($this->table . '_fileid_seq'));
+            $newid        = (int)$this->db->genId($this->table . '_fileid_seq');
             $sql          = "INSERT INTO {$this->table} (fileid, storyid, filerealname, date, mimetype, downloadname, counter)";
             $sql          .= " VALUES ({$newid}, {$storyid}, '{$fileRealName}', '{$date}','{$mimetype}', '{$downloadname}', {$counter})";
             $this->fileid = $newid;
@@ -177,7 +177,7 @@ class nw_sFiles
 
     public function setStoryid($id)
     {
-        $this->storyid = intval($id);
+        $this->storyid = (int)$id;
     }
 
     public function setMimetype($value)
@@ -195,22 +195,22 @@ class nw_sFiles
     // ****************************************************************************************************************
     public function getFileid()
     {
-        return intval($this->fileid);
+        return (int)$this->fileid;
     }
 
     public function getStoryid()
     {
-        return intval($this->storyid);
+        return (int)$this->storyid;
     }
 
     public function getCounter()
     {
-        return intval($this->counter);
+        return (int)$this->counter;
     }
 
     public function getDate()
     {
-        return intval($this->date);
+        return (int)$this->date;
     }
 
     public function getFileRealName($format = 'S')
@@ -296,7 +296,7 @@ class nw_sFiles
     {
         $sql    = 'SELECT count(fileid) as cnt';
         $sql    .= " FROM {$this->table}";
-        $sql    .= ' WHERE storyid = ' . intval($storyid) . '';
+        $sql    .= ' WHERE storyid = ' . (int)$storyid . '';
         $result = $this->db->query($sql);
         $myrow  = $this->db->fetchArray($result);
 

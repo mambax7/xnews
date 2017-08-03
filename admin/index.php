@@ -111,7 +111,7 @@ function autoStories()
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //
-    $start        = isset($_GET['startauto']) ? intval($_GET['startauto']) : 0;
+    $start        = isset($_GET['startauto']) ? (int)$_GET['startauto'] : 0;
     $storiescount = $nw_NewsStoryHandler->getAllStoriesCount(2, false);
     $storyarray   = $nw_NewsStoryHandler->getAllAutoStory($xnews->getConfig('storycountadmin'), true, $start);
     $class        = '';
@@ -209,7 +209,7 @@ function lastStories()
     echo "<div id='laststories'>";
     echo '<br>';
     echo "<div style='text-align: center;'>";
-    $start        = isset($_GET['start']) ? intval($_GET['start']) : 0;
+    $start        = isset($_GET['start']) ? (int)$_GET['start'] : 0;
     $storyarray   = $nw_NewsStoryHandler->getAllPublished($xnews->getConfig('storycountadmin'), $start, false, 0, 1);
     $storiescount = $nw_NewsStoryHandler->getAllStoriesCount(4, false);
     $pagenav      = new XoopsPageNav($storiescount, $xnews->getConfig('storycountadmin'), $start, 'start', 'op=newarticle');
@@ -307,7 +307,7 @@ function expStories()
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //
-    $start        = isset($_GET['startexp']) ? intval($_GET['startexp']) : 0;
+    $start        = isset($_GET['startexp']) ? (int)$_GET['startexp'] : 0;
     $expiredcount = $nw_NewsStoryHandler->getAllStoriesCount(1, false);
     $storyarray   = $nw_NewsStoryHandler->getAllExpired($xnews->getConfig('storycountadmin'), $start, 0, 1);
     $pagenav      = new XoopsPageNav($expiredcount, $xnews->getConfig('storycountadmin'), $start, 'startexp', 'op=newarticle');
@@ -401,11 +401,11 @@ function modTopicS()
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //
-    $xt = new nw_NewsTopic(intval($_POST['topic_id']));
-    if (intval($_POST['topic_pid']) == intval($_POST['topic_id'])) {
+    $xt = new nw_NewsTopic((int)$_POST['topic_id']);
+    if ((int)$_POST['topic_pid'] == (int)$_POST['topic_id']) {
         redirect_header('index.php?op=topicsmanager', 3, _AM_NW_ADD_TOPIC_ERROR1);
     }
-    $xt->setTopicPid(intval($_POST['topic_pid']));
+    $xt->setTopicPid((int)$_POST['topic_pid']);
     if (empty($_POST['topic_title'])) {
         redirect_header('index.php?op=topicsmanager', 3, _AM_NW_ERRORTOPICNAME);
     }
@@ -416,8 +416,8 @@ function modTopicS()
     if (isset($_POST['topic_imgurl']) && $_POST['topic_imgurl'] != '') {
         $xt->setTopicImgurl($_POST['topic_imgurl']);
     }
-    $xt->setMenu(intval($_POST['submenu']));
-    $xt->setTopicFrontpage(intval($_POST['topic_frontpage']));
+    $xt->setMenu((int)$_POST['submenu']);
+    $xt->setTopicFrontpage((int)$_POST['topic_frontpage']);
     if (isset($_POST['topic_description'])) {
         $xt->setTopicDescription($_POST['topic_description']);
     } else {
@@ -500,11 +500,11 @@ function delTopic()
     if (!isset($_POST['ok'])) {
         xoops_cp_header();
         echo '<h2>' . _AM_NW_TOPICSMNGR . '</h2>';
-        $xt = new XnewsDeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'), intval($_GET['topic_id']));
-        xoops_confirm(array('op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_NW_WAYSYWTDTTAL . '<br>' . $xt->topic_title('S'));
+        $xt = new XnewsDeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'), (int)$_GET['topic_id']);
+        xoops_confirm(array('op' => 'delTopic', 'topic_id' => (int)$_GET['topic_id'], 'ok' => 1), 'index.php', _AM_NW_WAYSYWTDTTAL . '<br>' . $xt->topic_title('S'));
     } else {
         xoops_cp_header();
-        $xt = new XnewsDeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'), intval($_POST['topic_id']));
+        $xt = new XnewsDeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'), (int)$_POST['topic_id']);
         if (isset($_SESSION['items_count'])) {
             $_SESSION['items_count'] = -1;
         }
@@ -539,7 +539,7 @@ function addTopic()
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //
-    $topicpid = isset($_POST['topic_pid']) ? intval($_POST['topic_pid']) : 0;
+    $topicpid = isset($_POST['topic_pid']) ? (int)$_POST['topic_pid'] : 0;
     $xt       = new nw_NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
         $xt->setTopicPid($topicpid);
@@ -552,8 +552,8 @@ function addTopic()
         if (isset($_POST['topic_imgurl']) && $_POST['topic_imgurl'] != '') {
             $xt->setTopicImgurl($_POST['topic_imgurl']);
         }
-        $xt->setMenu(intval($_POST['submenu']));
-        $xt->setTopicFrontpage(intval($_POST['topic_frontpage']));
+        $xt->setMenu((int)$_POST['submenu']);
+        $xt->setTopicFrontpage((int)$_POST['topic_frontpage']);
         if (isset($_SESSION['items_count'])) {
             $_SESSION['items_count'] = -1;
         }
@@ -693,7 +693,7 @@ switch ($op) {
 
     case 'delete':
         if (isset($_REQUEST['storyid'])) {
-            $storyid = intval($_REQUEST['storyid']);
+            $storyid = (int)$_REQUEST['storyid'];
         } else {
             $storyid = 0;
         }
@@ -752,7 +752,7 @@ switch ($op) {
 
         $uploadfolder   = sprintf(_AM_NW_UPLOAD_WARNING, XNEWS_TOPICS_FILES_URL);
         $uploadirectory = '/uploads/' . $xnews->getModule()->dirname() . '/assets/images/topics';
-        $start          = isset($_GET['start']) ? intval($_GET['start']) : 0;
+        $start          = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 
         $xt          = new XoopsTree($GLOBALS['xoopsDB']->prefix('nw_topics'), 'topic_id', 'topic_pid');
         $topics_arr  = $xt->getChildTreeArray(0, 'topic_title');
@@ -828,7 +828,7 @@ switch ($op) {
         echo "</table><div align='right'>" . $pagenav->renderNav() . '</div><br>';
         echo "</div></div><br>\n";
 
-        $topic_id = isset($_GET['topic_id']) ? intval($_GET['topic_id']) : 0;
+        $topic_id = isset($_GET['topic_id']) ? (int)$_GET['topic_id'] : 0;
         if ($topic_id > 0) {
             $xtmod             = new nw_NewsTopic($topic_id);
             $topic_title       = $xtmod->topic_title('E');

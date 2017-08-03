@@ -93,7 +93,7 @@ switch ($op) {
         }
         $expired = 0;
         if (isset($_POST['onlyexpired'])) {
-            $expired = intval($_POST['onlyexpired']);
+            $expired = (int)$_POST['onlyexpired'];
         }
         $dateTimeObj = DateTime::createFromFormat(_SHORTDATESTRING, $_POST['prune_date']);
         $dateTimeObj->setTime(0, 0, 0);
@@ -113,13 +113,13 @@ switch ($op) {
 
     case 'prunenews':
         $story     = new nw_NewsStory();
-        $timestamp = intval($_POST['prune_date']);
-        $expired   = intval($_POST['expired']);
+        $timestamp = (int)$_POST['prune_date'];
+        $expired   = (int)$_POST['expired'];
         $topiclist = '';
         if (isset($_POST['pruned_topics'])) {
             $topiclist = $_POST['pruned_topics'];
         }
-        if (intval($_POST['ok']) == 1) {
+        if ((int)$_POST['ok'] == 1) {
             $story = new nw_NewsStory();
             xoops_cp_header();
             $count = $story->GetCountStoriesPublishedBefore($timestamp, $expired, $topiclist);

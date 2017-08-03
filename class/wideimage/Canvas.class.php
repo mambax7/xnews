@@ -36,7 +36,7 @@ class wiCanvas
 
     public function writeText($x, $y, $text, $angle)
     {
-        $angle = -floatval($angle);
+        $angle = -(float)$angle;
         if ($angle < 0) {
             $angle = 360 + $angle;
         }

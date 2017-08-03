@@ -59,10 +59,10 @@ if ($cfg['config_rating_registred_only']) {
 // 2) Is the story published ?
 $storyid = 0;
 if (isset($_GET['storyid'])) {
-    $storyid = intval($_GET['storyid']);
+    $storyid = (int)$_GET['storyid'];
 } else {
     if (isset($_POST['storyid'])) {
-        $storyid = intval($_POST['storyid']);
+        $storyid = (int)$_POST['storyid'];
     }
 }
 
@@ -102,8 +102,8 @@ if (!empty($_POST['submit'])) { // The form was submited
     // Make sure only 1 anonymous from an IP in a single day.
     $anonwaitdays = 1;
     $ip           = getenv('REMOTE_ADDR');
-    $storyid      = intval($_POST['storyid']);
-    $rating       = intval($_POST['rating']);
+    $storyid      = (int)$_POST['storyid'];
+    $rating       = (int)$_POST['rating'];
 
     // Check if Rating is Null
     if ($rating == '--') {

@@ -45,7 +45,7 @@ class XnewsDeprecateStory
         if (is_array($storyid)) {
             $this->makeStory($storyid);
         } elseif ($storyid != -1) {
-            $this->getStory(intval($storyid));
+            $this->getStory((int)$storyid);
         }
     }
 
@@ -54,7 +54,7 @@ class XnewsDeprecateStory
      */
     public function setStoryId($value)
     {
-        $this->storyid = intval($value);
+        $this->storyid = (int)$value;
     }
 
     /**
@@ -62,7 +62,7 @@ class XnewsDeprecateStory
      */
     public function setTopicId($value)
     {
-        $this->topicid = intval($value);
+        $this->topicid = (int)$value;
     }
 
     /**
@@ -70,7 +70,7 @@ class XnewsDeprecateStory
      */
     public function setUid($value)
     {
-        $this->uid = intval($value);
+        $this->uid = (int)$value;
     }
 
     /**
@@ -102,7 +102,7 @@ class XnewsDeprecateStory
      */
     public function setPublished($value)
     {
-        $this->published = intval($value);
+        $this->published = (int)$value;
     }
 
     /**
@@ -110,7 +110,7 @@ class XnewsDeprecateStory
      */
     public function setExpired($value)
     {
-        $this->expired = intval($value);
+        $this->expired = (int)$value;
     }
 
     /**
@@ -166,7 +166,7 @@ class XnewsDeprecateStory
      */
     public function setApproved($value)
     {
-        $this->approved = intval($value);
+        $this->approved = (int)$value;
     }
 
     /**
@@ -190,7 +190,7 @@ class XnewsDeprecateStory
      */
     public function setComments($value)
     {
-        $this->comments = intval($value);
+        $this->comments = (int)$value;
     }
 
     /**
@@ -255,7 +255,7 @@ class XnewsDeprecateStory
      */
     public function getStory($storyid)
     {
-        $storyid = intval($storyid);
+        $storyid = (int)$storyid;
         $sql     = 'SELECT * FROM ' . $this->table . ' WHERE storyid=' . $storyid . '';
         $array   = $this->db->fetchArray($this->db->query($sql));
         $this->makeStory($array);

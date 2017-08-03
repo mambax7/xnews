@@ -62,7 +62,7 @@ class wiTrueColorImage extends wiImage
 
     public function asPalette($nColors = 255, $dither = null, $matchPalette = true)
     {
-        $nColors = intval($nColors);
+        $nColors = (int)$nColors;
         if ($nColors < 1) {
             $nColors = 1;
         } elseif ($nColors > 255) {
