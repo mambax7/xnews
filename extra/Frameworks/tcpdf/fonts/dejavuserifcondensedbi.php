@@ -296,4 +296,3 @@ $diff='';
 $file='dejavuserifcondensedbi.z';
 $ctg='dejavuserifcondensedbi.ctg.z';
 $originalsize=293472;
-?>
