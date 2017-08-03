@@ -37,6 +37,8 @@ class xni_NewsStory extends XoopsStory
 
     /**
      * Constructor
+     * @param int    $storyid
+     * @param string $subprefix
      */
     public function __construct($storyid = -1, $subprefix = '')
     {
@@ -52,6 +54,8 @@ class xni_NewsStory extends XoopsStory
 
     /**
      * Load the specified story from the database
+     * @param $storyid
+     * @param $subprefix
      */
     public function getStory($storyid, $subprefix)
     {
@@ -62,6 +66,8 @@ class xni_NewsStory extends XoopsStory
 
     /**
      * Create or update an article
+     * @param bool $approved
+     * @return bool|int
      */
     public function store($approved = false)
     {

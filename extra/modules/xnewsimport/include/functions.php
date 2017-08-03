@@ -5,6 +5,7 @@ defined('XOOPS_ROOT_PATH') || exit('XOOPS Root path not defined');
  * Returns a module's option
  *
  * @param string $option module option's name
+ * @param        $repmodule
  * @return bool
  */
 function xni_getmoduleoption($option, $repmodule)

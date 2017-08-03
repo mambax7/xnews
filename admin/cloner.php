@@ -9,6 +9,8 @@
  * @package       News
  * @author        DNPROSSI
  * @copyright (c) DNPROSSI
+ * @param $path
+ * @param $patterns
  */
 
 function nw_cloneFileFolder($path, $patterns)

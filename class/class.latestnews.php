@@ -10,6 +10,16 @@ class nw_Latestnewsstory extends nw_NewsStory
 
     /**
      * Returns published stories according to some options
+     * @param int    $limit
+     * @param bool   $selected_stories
+     * @param int    $start
+     * @param bool   $checkRight
+     * @param int    $topic
+     * @param int    $ihome
+     * @param bool   $asObject
+     * @param string $order
+     * @param bool   $topic_frontpage
+     * @return array
      */
     public function getAllPublished($limit = 0, $selected_stories = true, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'published', $topic_frontpage = false)
     {

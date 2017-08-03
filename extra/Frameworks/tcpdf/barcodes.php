@@ -234,6 +234,7 @@ class TCPDFBarcode
      * CODE 39 - ANSI MH10.8M-1983 - USD-3 - 3 of 9.
      * General-purpose code in very wide use world-wide
      * @param string  $code     code to represent.
+     * @param bool    $extended
      * @param boolean $checksum if true add a checksum to the code
      * @return array barcode representation.
      * @access protected
@@ -545,10 +546,10 @@ class TCPDFBarcode
     /**
      * CODE 93 - USS-93
      * Compact code similar to Code 39
-     * @param string  $code     code to represent.
-     * @param boolean $checksum if true add a checksum to the code
+     * @param string $code code to represent.
      * @return array barcode representation.
-     * @access protected
+     * @internal param bool $checksum if true add a checksum to the code
+     * @access   protected
      */
     protected function barcode_code93($code)
     {
@@ -993,6 +994,7 @@ class TCPDFBarcode
      * Convert binary barcode sequence to TCPDF barcode array
      * @param string $seq barcode as binary sequence
      *                    òparam array $bararray TCPDF barcode array to fill up
+     * @param        $bararray
      * @return array barcode representation.
      * @access protected
      */
@@ -1287,8 +1289,8 @@ class TCPDFBarcode
      * EAN13: European Article Numbering international retail product code
      * UPC-A: Universal product code seen on almost all retail products in the USA and Canada
      * UPC-E: Short version of UPC symbol
-     * @param string $code code to represent.
-     * @param string $len  barcode type: 6 = UPC-E, 8 = EAN8, 13 = EAN13, 12 = UPC-A
+     * @param string     $code code to represent.
+     * @param int|string $len  barcode type: 6 = UPC-E, 8 = EAN8, 13 = EAN13, 12 = UPC-A
      * @return array barcode representation.
      * @access protected
      */
@@ -1485,8 +1487,8 @@ class TCPDFBarcode
      * UPC-Based Extentions
      * 2-Digit Ext.: Used to indicate magazines and newspaper issue numbers
      * 5-Digit Ext.: Used to mark suggested retail price of books
-     * @param string $code code to represent.
-     * @param string $len  barcode type: 2 = 2-Digit, 5 = 5-Digit
+     * @param string     $code code to represent.
+     * @param int|string $len  barcode type: 2 = 2-Digit, 5 = 5-Digit
      * @return array barcode representation.
      * @access protected
      */

@@ -31,6 +31,8 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
  *
  * Also, if you have selected a tabbed view and wanted to use the Spotlight but did not choosed a story, then the block
  * will switch to the "most recent news" mode (the visible news will be searched according to the permissions)
+ * @param $options
+ * @return array
  */
 function nw_b_news_top_show($options)
 {
@@ -615,6 +617,8 @@ function nw_b_news_top_show($options)
 
 /**
  * Function used to edit the block
+ * @param $options
+ * @return string
  */
 function nw_b_news_top_edit($options)
 {

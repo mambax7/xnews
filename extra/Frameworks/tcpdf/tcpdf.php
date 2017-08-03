@@ -1895,9 +1895,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Set page orientation.
-         * @param string  $orientation   page orientation. Possible values are (case insensitive):<ul><li>P or PORTRAIT (default)</li><li>L or LANDSCAPE</li></ul>
-         * @param boolean $autopagebreak Boolean indicating if auto-page-break mode should be on or off.
-         * @param float   $bottommargin  bottom margin of the page.
+         * @param string       $orientation   page orientation. Possible values are (case insensitive):<ul><li>P or PORTRAIT (default)</li><li>L or LANDSCAPE</li></ul>
+         * @param bool|string  $autopagebreak Boolean indicating if auto-page-break mode should be on or off.
+         * @param float|string $bottommargin  bottom margin of the page.
          * @access public
          * @since  3.0.015 (2008-06-06)
          */
@@ -2090,7 +2090,7 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Returns an array of page dimensions:
          * <ul><li>$this->pagedim[$this->page]['w'] => page_width_in_points</li><li>$this->pagedim[$this->page]['h'] => height in points</li><li>$this->pagedim[$this->page]['wk'] => page_width_in_points</li><li>$this->pagedim[$this->page]['hk'] => height</li><li>$this->pagedim[$this->page]['tm'] => top_margin</li><li>$this->pagedim[$this->page]['bm'] => bottom_margin</li><li>$this->pagedim[$this->page]['lm'] => left_margin</li><li>$this->pagedim[$this->page]['rm'] => right_margin</li><li>$this->pagedim[$this->page]['pb'] => auto_page_break</li><li>$this->pagedim[$this->page]['or'] => page_orientation</li><li>$this->pagedim[$this->page]['olm'] => original_left_margin</li><li>$this->pagedim[$this->page]['orm'] => original_right_margin</li></ul>
-         * @param int $pagenum page number (empty = current page)
+         * @param int|string $pagenum page number (empty = current page)
          * @return array of page dimensions.
          * @author Nicola Asuni
          * @access public
@@ -2107,7 +2107,7 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Returns the page width in units.
-         * @param int $pagenum page number (empty = current page)
+         * @param int|string $pagenum page number (empty = current page)
          * @return int page width.
          * @author Nicola Asuni
          * @access public
@@ -2125,7 +2125,7 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Returns the page height in units.
-         * @param int $pagenum page number (empty = current page)
+         * @param int|string $pagenum page number (empty = current page)
          * @return int page height.
          * @author Nicola Asuni
          * @access public
@@ -2143,7 +2143,7 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Returns the page break margin.
-         * @param int $pagenum page number (empty = current page)
+         * @param int|string $pagenum page number (empty = current page)
          * @return int page break margin.
          * @author Nicola Asuni
          * @access public
@@ -2173,9 +2173,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Defines the left, top and right margins. By default, they equal 1 cm. Call this method to change them.
-         * @param float $left  Left margin.
-         * @param float $top   Top margin.
-         * @param float $right Right margin. Default value is the left one.
+         * @param float     $left  Left margin.
+         * @param float     $top   Top margin.
+         * @param float|int $right Right margin. Default value is the left one.
          * @access public
          * @since  1.0
          * @see    SetLeftMargin(), SetTopMargin(), SetRightMargin(), SetAutoPageBreak()
@@ -2252,8 +2252,8 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Enables or disables the automatic page breaking mode. When enabling, the second parameter is the distance from the bottom of the page that defines the triggering limit. By default, the mode is on and the margin is 2 cm.
-         * @param boolean $auto   Boolean indicating if mode should be on or off.
-         * @param float   $margin Distance from the bottom of the page.
+         * @param boolean   $auto   Boolean indicating if mode should be on or off.
+         * @param float|int $margin Distance from the bottom of the page.
          * @access public
          * @since  1.0
          * @see    Cell(), MultiCell(), AcceptPageBreak()
@@ -2688,10 +2688,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Set header data.
-         * @param string $ln header image logo
-         * @param string $lw header image logo width in mm
-         * @param string $ht string to print as title on document header
-         * @param string $hs string to print on document header
+         * @param string     $ln header image logo
+         * @param int|string $lw header image logo width in mm
+         * @param string     $ht string to print as title on document header
+         * @param string     $hs string to print on document header
          * @access public
          */
         public function setHeaderData($ln = '', $lw = 0, $ht = '', $hs = '')
@@ -2776,8 +2776,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Set a flag to print page footer.
-         * @param boolean $value set to true to print the page footer (default), false otherwise.
-         * @access public
+         * @param bool $val
+         * @internal param bool $value set to true to print the page footer (default), false otherwise.
+         * @access   public
          */
         public function setPrintFooter($val = true)
         {
@@ -3016,6 +3017,7 @@ if (!class_exists('TCPDF', false)) {
          * Defines a new spot color.
          * It can be expressed in RGB components or gray scale.
          * The method can be called before the first page is created and the value is retained from page to page.
+         * @param     $name
          * @param int $c Cyan color for CMYK. Value between 0 and 255
          * @param int $m Magenta color for CMYK. Value between 0 and 255
          * @param int $y Yellow color for CMYK. Value between 0 and 255
@@ -3289,10 +3291,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Returns the length of a string in user unit. A font must be selected.<br>
-         * @param string $s         The string whose length is to be computed
-         * @param string $fontname  Family font. It can be either a name defined by AddFont() or one of the standard families. It is also possible to pass an empty string, in that case, the current family is retained.
-         * @param string $fontstyle Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line trough</li></ul> or any combination. The default value is regular.
-         * @param float  $fontsize  Font size in points. The default value is the current size.
+         * @param string    $s         The string whose length is to be computed
+         * @param string    $fontname  Family font. It can be either a name defined by AddFont() or one of the standard families. It is also possible to pass an empty string, in that case, the current family is retained.
+         * @param string    $fontstyle Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line trough</li></ul> or any combination. The default value is regular.
+         * @param float|int $fontsize  Font size in points. The default value is the current size.
          * @return int string length
          * @author Nicola Asuni
          * @access public
@@ -3305,10 +3307,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Returns the string length of an array of chars in user unit. A font must be selected.<br>
-         * @param string $sa        The array of chars whose total length is to be computed
-         * @param string $fontname  Family font. It can be either a name defined by AddFont() or one of the standard families. It is also possible to pass an empty string, in that case, the current family is retained.
-         * @param string $fontstyle Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line trough</li></ul> or any combination. The default value is regular.
-         * @param float  $fontsize  Font size in points. The default value is the current size.
+         * @param string    $sa        The array of chars whose total length is to be computed
+         * @param string    $fontname  Family font. It can be either a name defined by AddFont() or one of the standard families. It is also possible to pass an empty string, in that case, the current family is retained.
+         * @param string    $fontstyle Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line trough</li></ul> or any combination. The default value is regular.
+         * @param float|int $fontsize  Font size in points. The default value is the current size.
          * @return int string length
          * @author Nicola Asuni
          * @access public
@@ -3603,10 +3605,10 @@ if (!class_exists('TCPDF', false)) {
          * The method can be called before the first page is created and the font is retained from page to page.
          * If you just wish to change the current font size, it is simpler to call SetFontSize().
          * Note: for the standard fonts, the font metric files must be accessible. There are three possibilities for this:<ul><li>They are in the current directory (the one where the running script lies)</li><li>They are in one of the directories defined by the include_path parameter</li><li>They are in the directory defined by the K_PATH_FONTS constant</li></ul><br>
-         * @param string $family   Family font. It can be either a name defined by AddFont() or one of the standard Type1 families (case insensitive):<ul><li>times (Times-Roman)</li><li>timesb (Times-Bold)</li><li>timesi (Times-Italic)</li><li>timesbi (Times-BoldItalic)</li><li>helvetica (Helvetica)</li><li>helveticab (Helvetica-Bold)</li><li>helveticai (Helvetica-Oblique)</li><li>helveticabi (Helvetica-BoldOblique)</li><li>courier (Courier)</li><li>courierb (Courier-Bold)</li><li>courieri (Courier-Oblique)</li><li>courierbi (Courier-BoldOblique)</li><li>symbol (Symbol)</li><li>zapfdingbats (ZapfDingbats)</li></ul> It is also possible to pass an empty string. In that case, the current family is retained.
-         * @param string $style    Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line trough</li></ul> or any combination. The default value is regular. Bold and italic styles do not apply to Symbol and ZapfDingbats basic fonts or other fonts when not defined.
-         * @param float  $size     Font size in points. The default value is the current size. If no size has been specified since the beginning of the document, the value taken is 12
-         * @param string $fontfile The font definition file. By default, the name is built from the family and style, in lower case with no spaces.
+         * @param string    $family   Family font. It can be either a name defined by AddFont() or one of the standard Type1 families (case insensitive):<ul><li>times (Times-Roman)</li><li>timesb (Times-Bold)</li><li>timesi (Times-Italic)</li><li>timesbi (Times-BoldItalic)</li><li>helvetica (Helvetica)</li><li>helveticab (Helvetica-Bold)</li><li>helveticai (Helvetica-Oblique)</li><li>helveticabi (Helvetica-BoldOblique)</li><li>courier (Courier)</li><li>courierb (Courier-Bold)</li><li>courieri (Courier-Oblique)</li><li>courierbi (Courier-BoldOblique)</li><li>symbol (Symbol)</li><li>zapfdingbats (ZapfDingbats)</li></ul> It is also possible to pass an empty string. In that case, the current family is retained.
+         * @param string    $style    Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line trough</li></ul> or any combination. The default value is regular. Bold and italic styles do not apply to Symbol and ZapfDingbats basic fonts or other fonts when not defined.
+         * @param float|int $size     Font size in points. The default value is the current size. If no size has been specified since the beginning of the document, the value taken is 12
+         * @param string    $fontfile The font definition file. By default, the name is built from the family and style, in lower case with no spaces.
          * @access public
          * @since  1.0
          * @see    AddFont(), SetFontSize()
@@ -3681,9 +3683,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Defines the page and position a link points to.
-         * @param int   $link The link identifier returned by AddLink()
-         * @param float $y    Ordinate of target position; -1 indicates the current position. The default value is 0 (top of page)
-         * @param int   $page Number of target page; -1 indicates the current page. This is the default value
+         * @param int       $link The link identifier returned by AddLink()
+         * @param float|int $y    Ordinate of target position; -1 indicates the current position. The default value is 0 (top of page)
+         * @param int       $page Number of target page; -1 indicates the current page. This is the default value
          * @access public
          * @since  1.5
          * @see    AddLink()
@@ -3720,13 +3722,13 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Puts a markup annotation on a rectangular area of the page.
          * !!!!THE ANNOTATION SUPPORT IS NOT YET FULLY IMPLEMENTED !!!!
-         * @param float  $x      Abscissa of the upper-left corner of the rectangle
-         * @param float  $y      Ordinate of the upper-left corner of the rectangle
-         * @param float  $w      Width of the rectangle
-         * @param float  $h      Height of the rectangle
-         * @param string $text   annotation text or alternate content
-         * @param array  $opt    array of options (see section 8.4 of PDF reference 1.7).
-         * @param int    $spaces number of spaces on the text to link
+         * @param float|string $x      Abscissa of the upper-left corner of the rectangle
+         * @param float|string $y      Ordinate of the upper-left corner of the rectangle
+         * @param float        $w      Width of the rectangle
+         * @param float        $h      Height of the rectangle
+         * @param string       $text   annotation text or alternate content
+         * @param array        $opt    array of options (see section 8.4 of PDF reference 1.7).
+         * @param int          $spaces number of spaces on the text to link
          * @access public
          * @since  4.0.018 (2008-08-06)
          */
@@ -3891,10 +3893,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Add page if needed.
-         * @param float   $h       Cell height. Default value: 0.
-         * @param mixed   $y       starting y position, leave empty for current position.
-         * @param boolean $addpage if true add a page, otherwise only return the true/false state
-         * @return boolean true in case of page break, false otherwise.
+         * @param float|int $h       Cell height. Default value: 0.
+         * @param mixed     $y       starting y position, leave empty for current position.
+         * @param boolean   $addpage if true add a page, otherwise only return the true/false state
+         * @return bool true in case of page break, false otherwise.
          * @since  3.2.000 (2008-07-01)
          * @access protected
          */
@@ -3934,17 +3936,17 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Prints a cell (rectangular area) with optional borders, background color and character string. The upper-left corner of the cell corresponds to the current position. The text can be aligned or centered. After the call, the current position moves to the right or to the next line. It is possible to put a link on the text.<br>
          * If automatic page breaking is enabled and the cell goes beyond the limit, a page break is done before outputting.
-         * @param float   $w                 Cell width. If 0, the cell extends up to the right margin.
-         * @param float   $h                 Cell height. Default value: 0.
-         * @param string  $txt               String to print. Default value: empty string.
-         * @param mixed   $border            Indicates if borders must be drawn around the cell. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
-         * @param int     $ln                Indicates where the current position should go after the call. Possible values are:<ul><li>0: to the right (or left for RTL languages)</li><li>1: to the beginning of the next line</li><li>2: below</li></ul>
-         *                                   Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value: 0.
-         * @param string  $align             Allows to center or align the text. Possible values are:<ul><li>L or empty string: left align (default value)</li><li>C: center</li><li>R: right align</li><li>J: justify</li></ul>
-         * @param int     $fill              Indicates if the cell background must be painted (1) or transparent (0). Default value: 0.
-         * @param mixed   $link              URL or identifier returned by AddLink().
-         * @param int     $stretch           stretch carachter mode: <ul><li>0 = disabled</li><li>1 = horizontal scaling only if necessary</li><li>2 = forced horizontal scaling</li><li>3 = character spacing only if necessary</li><li>4 = forced character spacing</li></ul>
-         * @param boolean $ignore_min_height if true ignore automatic minimum height value.
+         * @param float     $w                 Cell width. If 0, the cell extends up to the right margin.
+         * @param float|int $h                 Cell height. Default value: 0.
+         * @param string    $txt               String to print. Default value: empty string.
+         * @param mixed     $border            Indicates if borders must be drawn around the cell. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
+         * @param int       $ln                Indicates where the current position should go after the call. Possible values are:<ul><li>0: to the right (or left for RTL languages)</li><li>1: to the beginning of the next line</li><li>2: below</li></ul>
+         *                                     Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value: 0.
+         * @param string    $align             Allows to center or align the text. Possible values are:<ul><li>L or empty string: left align (default value)</li><li>C: center</li><li>R: right align</li><li>J: justify</li></ul>
+         * @param int       $fill              Indicates if the cell background must be painted (1) or transparent (0). Default value: 0.
+         * @param mixed     $link              URL or identifier returned by AddLink().
+         * @param int       $stretch           stretch carachter mode: <ul><li>0 = disabled</li><li>1 = horizontal scaling only if necessary</li><li>2 = forced horizontal scaling</li><li>3 = character spacing only if necessary</li><li>4 = forced character spacing</li></ul>
+         * @param boolean   $ignore_min_height if true ignore automatic minimum height value.
          * @access public
          * @since  1.0
          * @see    SetFont(), SetDrawColor(), SetFillColor(), SetTextColor(), SetLineWidth(), AddLink(), Ln(), MultiCell(), Write(), SetAutoPageBreak()
@@ -3990,20 +3992,20 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Returns the PDF string code to print a cell (rectangular area) with optional borders, background color and character string. The upper-left corner of the cell corresponds to the current position. The text can be aligned or centered. After the call, the current position moves to the right or to the next line. It is possible to put a link on the text.<br>
          * If automatic page breaking is enabled and the cell goes beyond the limit, a page break is done before outputting.
-         * @param float   $w                 Cell width. If 0, the cell extends up to the right margin.
-         * @param float   $h                 Cell height. Default value: 0.
-         * @param string  $txt               String to print. Default value: empty string.
-         * @param mixed   $border            Indicates if borders must be drawn around the cell. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
-         * @param int     $ln                Indicates where the current position should go after the call. Possible values are:<ul><li>0: to the right (or left for RTL languages)</li><li>1: to the beginning of the next line</li><li>2: below</li></ul>Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value: 0.
-         * @param string  $align             Allows to center or align the text. Possible values are:<ul><li>L or empty string: left align (default value)</li><li>C: center</li><li>R: right align</li><li>J: justify</li></ul>
-         * @param int     $fill              Indicates if the cell background must be painted (1) or transparent (0). Default value: 0.
-         * @param mixed   $link              URL or identifier returned by AddLink().
-         * @param int     $stretch           stretch carachter mode: <ul><li>0 = disabled</li><li>1 = horizontal scaling only if necessary</li><li>2 = forced horizontal scaling</li><li>3 = character spacing only if necessary</li><li>4 = forced character spacing</li></ul>
-         * @param boolean $ignore_min_height if true ignore automatic minimum height value.
+         * @param float     $w                 Cell width. If 0, the cell extends up to the right margin.
+         * @param float|int $h                 Cell height. Default value: 0.
+         * @param string    $txt               String to print. Default value: empty string.
+         * @param mixed     $border            Indicates if borders must be drawn around the cell. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
+         * @param int       $ln                Indicates where the current position should go after the call. Possible values are:<ul><li>0: to the right (or left for RTL languages)</li><li>1: to the beginning of the next line</li><li>2: below</li></ul>Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value: 0.
+         * @param string    $align             Allows to center or align the text. Possible values are:<ul><li>L or empty string: left align (default value)</li><li>C: center</li><li>R: right align</li><li>J: justify</li></ul>
+         * @param int       $fill              Indicates if the cell background must be painted (1) or transparent (0). Default value: 0.
+         * @param mixed     $link              URL or identifier returned by AddLink().
+         * @param int       $stretch           stretch carachter mode: <ul><li>0 = disabled</li><li>1 = horizontal scaling only if necessary</li><li>2 = forced horizontal scaling</li><li>3 = character spacing only if necessary</li><li>4 = forced character spacing</li></ul>
+         * @param boolean   $ignore_min_height if true ignore automatic minimum height value.
+         * @return string
          * @access protected
          * @since  1.0
          * @see    Cell()
-         * @return string
          */
         protected function getCellCode($w, $h = 0, $txt = '', $border = 0, $ln = 0, $align = '', $fill = 0, $link = '', $stretch = 0, $ignore_min_height = false)
         {
@@ -4227,20 +4229,20 @@ if (!class_exists('TCPDF', false)) {
          * This method allows printing text with line breaks.
          * They can be automatic (as soon as the text reaches the right border of the cell) or explicit (via the \n character). As many cells as necessary are output, one below the other.<br>
          * Text can be aligned, centered or justified. The cell block can be framed and the background painted.
-         * @param float   $w           Width of cells. If 0, they extend up to the right margin of the page.
-         * @param float   $h           Cell minimum height. The cell extends automatically if needed.
-         * @param string  $txt         String to print
-         * @param mixed   $border      Indicates if borders must be drawn around the cell block. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
-         * @param string  $align       Allows to center or align the text. Possible values are:<ul><li>L or empty string: left align</li><li>C: center</li><li>R: right align</li><li>J: justification (default value when $ishtml=false)</li></ul>
-         * @param int     $fill        Indicates if the cell background must be painted (1) or transparent (0). Default value: 0.
-         * @param int     $ln          Indicates where the current position should go after the call. Possible values are:<ul><li>0: to the right</li><li>1: to the beginning of the next line [DEFAULT]</li><li>2: below</li></ul>
-         * @param float   $x           x position in user units
-         * @param float   $y           y position in user units
-         * @param boolean $reseth      if true reset the last cell height (default true).
-         * @param int     $stretch     stretch carachter mode: <ul><li>0 = disabled</li><li>1 = horizontal scaling only if necessary</li><li>2 = forced horizontal scaling</li><li>3 = character spacing only if necessary</li><li>4 = forced character spacing</li></ul>
-         * @param boolean $ishtml      set to true if $txt is HTML content (default = false).
-         * @param boolean $autopadding if true, uses internal padding and automatically adjust it to account for line width.
-         * @param float   $maxh        maximum height. It should be >= $h and less then remaining space to the bottom of the page, or 0 for disable this feature. This feature works only when $ishtml=false.
+         * @param float        $w           Width of cells. If 0, they extend up to the right margin of the page.
+         * @param float        $h           Cell minimum height. The cell extends automatically if needed.
+         * @param string       $txt         String to print
+         * @param mixed        $border      Indicates if borders must be drawn around the cell block. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
+         * @param string       $align       Allows to center or align the text. Possible values are:<ul><li>L or empty string: left align</li><li>C: center</li><li>R: right align</li><li>J: justification (default value when $ishtml=false)</li></ul>
+         * @param int          $fill        Indicates if the cell background must be painted (1) or transparent (0). Default value: 0.
+         * @param int          $ln          Indicates where the current position should go after the call. Possible values are:<ul><li>0: to the right</li><li>1: to the beginning of the next line [DEFAULT]</li><li>2: below</li></ul>
+         * @param float|string $x           x position in user units
+         * @param float|string $y           y position in user units
+         * @param boolean      $reseth      if true reset the last cell height (default true).
+         * @param int          $stretch     stretch carachter mode: <ul><li>0 = disabled</li><li>1 = horizontal scaling only if necessary</li><li>2 = forced horizontal scaling</li><li>3 = character spacing only if necessary</li><li>4 = forced character spacing</li></ul>
+         * @param boolean      $ishtml      set to true if $txt is HTML content (default = false).
+         * @param boolean      $autopadding if true, uses internal padding and automatically adjust it to account for line width.
+         * @param float|int    $maxh        maximum height. It should be >= $h and less then remaining space to the bottom of the page, or 0 for disable this feature. This feature works only when $ishtml=false.
          * @return int Return the number of cells or 1 for html mode.
          * @access public
          * @since  1.3
@@ -4482,8 +4484,8 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * This method returns the estimated number of lines required to print the text.
-         * @param string $txt text to print
-         * @param float  $w   width of cell. If 0, they extend up to the right margin of the page.
+         * @param string    $txt text to print
+         * @param float|int $w   width of cell. If 0, they extend up to the right margin of the page.
          * @return int Return the estimated number of lines.
          * @access public
          * @since  4.5.011
@@ -4519,16 +4521,16 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * This method prints text from the current position.<br>
-         * @param float   $h          Line height
-         * @param string  $txt        String to print
-         * @param mixed   $link       URL or identifier returned by AddLink()
-         * @param int     $fill       Indicates if the background must be painted (1) or transparent (0). Default value: 0.
-         * @param string  $align      Allows to center or align the text. Possible values are:<ul><li>L or empty string: left align (default value)</li><li>C: center</li><li>R: right align</li><li>J: justify</li></ul>
-         * @param boolean $ln         if true set cursor at the bottom of the line, otherwise set cursor at the top of the line.
-         * @param int     $stretch    stretch carachter mode: <ul><li>0 = disabled</li><li>1 = horizontal scaling only if necessary</li><li>2 = forced horizontal scaling</li><li>3 = character spacing only if necessary</li><li>4 = forced character spacing</li></ul>
-         * @param boolean $firstline  if true prints only the first line and return the remaining string.
-         * @param boolean $firstblock if true the string is the starting of a line.
-         * @param float   $maxh       maximum height. The remaining unprinted text will be returned. It should be >= $h and less then remaining space to the bottom of the page, or 0 for disable this feature.
+         * @param float     $h          Line height
+         * @param string    $txt        String to print
+         * @param mixed     $link       URL or identifier returned by AddLink()
+         * @param int       $fill       Indicates if the background must be painted (1) or transparent (0). Default value: 0.
+         * @param string    $align      Allows to center or align the text. Possible values are:<ul><li>L or empty string: left align (default value)</li><li>C: center</li><li>R: right align</li><li>J: justify</li></ul>
+         * @param boolean   $ln         if true set cursor at the bottom of the line, otherwise set cursor at the top of the line.
+         * @param int       $stretch    stretch carachter mode: <ul><li>0 = disabled</li><li>1 = horizontal scaling only if necessary</li><li>2 = forced horizontal scaling</li><li>3 = character spacing only if necessary</li><li>4 = forced character spacing</li></ul>
+         * @param boolean   $firstline  if true prints only the first line and return the remaining string.
+         * @param boolean   $firstblock if true the string is the starting of a line.
+         * @param float|int $maxh       maximum height. The remaining unprinted text will be returned. It should be >= $h and less then remaining space to the bottom of the page, or 0 for disable this feature.
          * @return mixed Return the number of cells or the remaining string if $firstline = true.
          * @access public
          * @since  1.5
@@ -4877,10 +4879,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Extract a slice of the $strarr array and return it as string.
-         * @param string $strarr The input array of characters.
-         * @param int    $start  the starting element of $strarr.
-         * @param int    $end    first element that will not be returned.
-         * @return Return part of a string
+         * @param string     $strarr The input array of characters.
+         * @param int|string $start  the starting element of $strarr.
+         * @param int|string $end    first element that will not be returned.
+         * @return \Return part of a string
          * @access public
          */
         public function UTF8ArrSubString($strarr, $start = '', $end = '')
@@ -4901,10 +4903,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Extract a slice of the $uniarr array and return it as string.
-         * @param string $uniarr The input array of characters.
-         * @param int    $start  the starting element of $strarr.
-         * @param int    $end    first element that will not be returned.
-         * @return Return part of a string
+         * @param string     $uniarr The input array of characters.
+         * @param int|string $start  the starting element of $strarr.
+         * @param int|string $end    first element that will not be returned.
+         * @return \Return part of a string
          * @access public
          * @since  4.5.037 (2009-04-07)
          */
@@ -4996,23 +4998,23 @@ if (!class_exists('TCPDF', false)) {
          * The format can be specified explicitly or inferred from the file extension.<br>
          * It is possible to put a link on the image.<br>
          * Remark: if an image is used several times, only one copy will be embedded in the file.<br>
-         * @param string  $file    Name of the file containing the image.
-         * @param float   $x       Abscissa of the upper-left corner.
-         * @param float   $y       Ordinate of the upper-left corner.
-         * @param float   $w       Width of the image in the page. If not specified or equal to zero, it is automatically calculated.
-         * @param float   $h       Height of the image in the page. If not specified or equal to zero, it is automatically calculated.
-         * @param string  $type    Image format. Possible values are (case insensitive): JPEG and PNG (whitout GD library) and all images supported by GD: GD, GD2, GD2PART, GIF, JPEG, PNG, BMP, XBM, XPM;. If not specified, the type is inferred from the file extension.
-         * @param mixed   $link    URL or identifier returned by AddLink().
-         * @param string  $align   Indicates the alignment of the pointer next to image insertion relative to image height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
-         * @param mixed   $resize  If true resize (reduce) the image to fit $w and $h (requires GD or ImageMagick library); if false do not resize; if 2 force resize in all cases (upscaling and downscaling).
-         * @param int     $dpi     dot-per-inch resolution used on resize
-         * @param string  $palign  Allows to center or align the image on the current line. Possible values are:<ul><li>L : left align</li><li>C : center</li><li>R : right align</li><li>'' : empty string : left for LTR or right for RTL</li></ul>
-         * @param boolean $ismask  true if this image is a mask, false otherwise
-         * @param mixed   $imgmask image object returned by this function or false
-         * @param mixed   $border  Indicates if borders must be drawn around the image. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
-         * @param boolean $fitbox  If true scale image dimensions proportionally to fit within the ($w, $h) box.
-         * @param boolean $hidden  if true do not display the image.
-         * @return image information
+         * @param string       $file    Name of the file containing the image.
+         * @param float|string $x       Abscissa of the upper-left corner.
+         * @param float|string $y       Ordinate of the upper-left corner.
+         * @param float|int    $w       Width of the image in the page. If not specified or equal to zero, it is automatically calculated.
+         * @param float|int    $h       Height of the image in the page. If not specified or equal to zero, it is automatically calculated.
+         * @param string       $type    Image format. Possible values are (case insensitive): JPEG and PNG (whitout GD library) and all images supported by GD: GD, GD2, GD2PART, GIF, JPEG, PNG, BMP, XBM, XPM;. If not specified, the type is inferred from the file extension.
+         * @param mixed        $link    URL or identifier returned by AddLink().
+         * @param string       $align   Indicates the alignment of the pointer next to image insertion relative to image height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
+         * @param mixed        $resize  If true resize (reduce) the image to fit $w and $h (requires GD or ImageMagick library); if false do not resize; if 2 force resize in all cases (upscaling and downscaling).
+         * @param int          $dpi     dot-per-inch resolution used on resize
+         * @param string       $palign  Allows to center or align the image on the current line. Possible values are:<ul><li>L : left align</li><li>C : center</li><li>R : right align</li><li>'' : empty string : left for LTR or right for RTL</li></ul>
+         * @param boolean      $ismask  true if this image is a mask, false otherwise
+         * @param mixed        $imgmask image object returned by this function or false
+         * @param mixed        $border  Indicates if borders must be drawn around the image. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
+         * @param boolean      $fitbox  If true scale image dimensions proportionally to fit within the ($w, $h) box.
+         * @param boolean      $hidden  if true do not display the image.
+         * @return \image information
          * @access public
          * @since  1.1
          */
@@ -5286,11 +5288,11 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Convert the loaded php image to a JPEG and then return a structure for the PDF creator.
          * This function requires GD library and write access to the directory defined on K_PATH_CACHE constant.
-         * @param string $file  Image file name.
-         * @param image  $image Image object.
+         * @param image $image  Image object.
          *                      return image JPEG image object.
-         * @access protected
          * @return array
+         * @internal param string $file Image file name.
+         * @access   protected
          */
         protected function _toJPEG($image)
         {
@@ -5467,17 +5469,17 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Extract info from a PNG image with alpha channel using the GD library.
-         * @param string  $file   Name of the file containing the image.
-         * @param float   $x      Abscissa of the upper-left corner.
-         * @param float   $y      Ordinate of the upper-left corner.
-         * @param float   $w      Width of the image in the page. If not specified or equal to zero, it is automatically calculated.
-         * @param float   $h      Height of the image in the page. If not specified or equal to zero, it is automatically calculated.
-         * @param string  $type   Image format. Possible values are (case insensitive): JPEG and PNG (whitout GD library) and all images supported by GD: GD, GD2, GD2PART, GIF, JPEG, PNG, BMP, XBM, XPM;. If not specified, the type is inferred from the file extension.
-         * @param mixed   $link   URL or identifier returned by AddLink().
-         * @param string  $align  Indicates the alignment of the pointer next to image insertion relative to image height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
-         * @param boolean $resize If true resize (reduce) the image to fit $w and $h (requires GD library).
-         * @param int     $dpi    dot-per-inch resolution used on resize
-         * @param string  $palign Allows to center or align the image on the current line. Possible values are:<ul><li>L : left align</li><li>C : center</li><li>R : right align</li><li>'' : empty string : left for LTR or right for RTL</li></ul>
+         * @param string       $file   Name of the file containing the image.
+         * @param float|string $x      Abscissa of the upper-left corner.
+         * @param float|string $y      Ordinate of the upper-left corner.
+         * @param float|int    $w      Width of the image in the page. If not specified or equal to zero, it is automatically calculated.
+         * @param float|int    $h      Height of the image in the page. If not specified or equal to zero, it is automatically calculated.
+         * @param string       $type   Image format. Possible values are (case insensitive): JPEG and PNG (whitout GD library) and all images supported by GD: GD, GD2, GD2PART, GIF, JPEG, PNG, BMP, XBM, XPM;. If not specified, the type is inferred from the file extension.
+         * @param mixed        $link   URL or identifier returned by AddLink().
+         * @param string       $align  Indicates the alignment of the pointer next to image insertion relative to image height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
+         * @param boolean      $resize If true resize (reduce) the image to fit $w and $h (requires GD library).
+         * @param int          $dpi    dot-per-inch resolution used on resize
+         * @param string       $palign Allows to center or align the image on the current line. Possible values are:<ul><li>L : left align</li><li>C : center</li><li>R : right align</li><li>'' : empty string : left for LTR or right for RTL</li></ul>
          * @author Valentin Schmidt, Nicola Asuni
          * @access protected
          * @since  4.3.007 (2008-12-04)
@@ -5537,8 +5539,8 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Performs a line break.
          * The current abscissa goes back to the left margin and the ordinate increases by the amount passed in parameter.
-         * @param float   $h    The height of the break. By default, the value equals the height of the last printed cell.
-         * @param boolean $cell if true add a cMargin to the x coordinate
+         * @param float|string $h    The height of the break. By default, the value equals the height of the last printed cell.
+         * @param boolean      $cell if true add a cMargin to the x coordinate
          * @access public
          * @since  1.0
          * @see    Cell()
@@ -6868,6 +6870,8 @@ if (!class_exists('TCPDF', false)) {
          * @author    Nicola Asuni
          * @access    protected
          * @since     4.4.000 (2008-12-07)
+         * @param     $font
+         * @param int $cidoffset
          */
         protected function _putfontwidths($font, $cidoffset = 0)
         {
@@ -6964,6 +6968,7 @@ if (!class_exists('TCPDF', false)) {
          * Adds unicode fonts.<br>
          * Based on PDF Reference 1.3 (section 5)
          * @parameter array $font font data
+         * @param $font
          * @return int font object ID
          * @access    protected
          * @author    Nicola Asuni
@@ -7737,12 +7742,13 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Line through for rectangular text area.
-         * @param int    $x   X coordinate
-         * @param int    $y   Y coordinate
-         * @param string $txt text to linethrough
-         * @access protected
-         * @since  4.8.008 (2009-09-29)
+         * @param int $x X coordinate
+         * @param int $y Y coordinate
+         * @param     $w
          * @return string
+         * @internal param string $txt text to linethrough
+         * @access   protected
+         * @since    4.8.008 (2009-09-29)
          */
         protected function _dolinethroughw($x, $y, $w)
         {
@@ -8221,13 +8227,13 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Output anchor link.
-         * @param string  $url       link URL or internal link (i.e.: &lt;a href="#23"&gt;link to page 23&lt;/a&gt;)
-         * @param string  $name      link name
-         * @param int     $fill      Indicates if the cell background must be painted (1) or transparent (0). Default value: 0.
-         * @param boolean $firstline if true prints only the first line and return the remaining string.
-         * @param array   $color     array of RGB text color
-         * @param string  $style     font style (U, D, B, I)
-         * @return the number of cells used or the remaining text if $firstline = true;
+         * @param string       $url       link URL or internal link (i.e.: &lt;a href="#23"&gt;link to page 23&lt;/a&gt;)
+         * @param string       $name      link name
+         * @param int          $fill      Indicates if the cell background must be painted (1) or transparent (0). Default value: 0.
+         * @param boolean      $firstline if true prints only the first line and return the remaining string.
+         * @param array|string $color     array of RGB text color
+         * @param int|string   $style     font style (U, D, B, I)
+         * @return \the number of cells used or the remaining text if $firstline = true;
          * @access public
          */
         public function addHtmlLink($url, $name, $fill = 0, $firstline = false, $color = '', $style = -1)
@@ -8557,9 +8563,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Horizontal Scaling.
-         * @param float $s_x scaling factor for width as percent. 0 is not allowed.
-         * @param int   $x   abscissa of the scaling center. Default is current x position
-         * @param int   $y   ordinate of the scaling center. Default is current y position
+         * @param float      $s_x scaling factor for width as percent. 0 is not allowed.
+         * @param int|string $x   abscissa of the scaling center. Default is current x position
+         * @param int|string $y   ordinate of the scaling center. Default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8571,9 +8577,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Vertical Scaling.
-         * @param float $s_y scaling factor for height as percent. 0 is not allowed.
-         * @param int   $x   abscissa of the scaling center. Default is current x position
-         * @param int   $y   ordinate of the scaling center. Default is current y position
+         * @param float      $s_y scaling factor for height as percent. 0 is not allowed.
+         * @param int|string $x   abscissa of the scaling center. Default is current x position
+         * @param int|string $y   ordinate of the scaling center. Default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8585,9 +8591,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Vertical and horizontal proportional Scaling.
-         * @param float $s scaling factor for width and height as percent. 0 is not allowed.
-         * @param int   $x abscissa of the scaling center. Default is current x position
-         * @param int   $y ordinate of the scaling center. Default is current y position
+         * @param float      $s scaling factor for width and height as percent. 0 is not allowed.
+         * @param int|string $x abscissa of the scaling center. Default is current x position
+         * @param int|string $y ordinate of the scaling center. Default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8599,10 +8605,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Vertical and horizontal non-proportional Scaling.
-         * @param float $s_x scaling factor for width as percent. 0 is not allowed.
-         * @param float $s_y scaling factor for height as percent. 0 is not allowed.
-         * @param int   $x   abscissa of the scaling center. Default is current x position
-         * @param int   $y   ordinate of the scaling center. Default is current y position
+         * @param float      $s_x scaling factor for width as percent. 0 is not allowed.
+         * @param float      $s_y scaling factor for height as percent. 0 is not allowed.
+         * @param int|string $x   abscissa of the scaling center. Default is current x position
+         * @param int|string $y   ordinate of the scaling center. Default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8638,7 +8644,7 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Horizontal Mirroring.
-         * @param int $x abscissa of the point. Default is current x position
+         * @param int|string $x abscissa of the point. Default is current x position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8650,7 +8656,7 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Verical Mirroring.
-         * @param int $y ordinate of the point. Default is current y position
+         * @param int|string $y ordinate of the point. Default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8662,8 +8668,8 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Point reflection mirroring.
-         * @param int $x abscissa of the point. Default is current x position
-         * @param int $y ordinate of the point. Default is current y position
+         * @param int|string $x abscissa of the point. Default is current x position
+         * @param int|string $y ordinate of the point. Default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8675,9 +8681,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Reflection against a straight line through point (x, y) with the gradient angle (angle).
-         * @param float $angle gradient angle of the straight line. Default is 0 (horizontal line).
-         * @param int   $x     abscissa of the point. Default is current x position
-         * @param int   $y     ordinate of the point. Default is current y position
+         * @param float|int  $angle gradient angle of the straight line. Default is 0 (horizontal line).
+         * @param int|string $x     abscissa of the point. Default is current x position
+         * @param int|string $y     ordinate of the point. Default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8738,9 +8744,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Rotate object.
-         * @param float $angle angle in degrees for counter-clockwise rotation
-         * @param int   $x     abscissa of the rotation center. Default is current x position
-         * @param int   $y     ordinate of the rotation center. Default is current y position
+         * @param float      $angle angle in degrees for counter-clockwise rotation
+         * @param int|string $x     abscissa of the rotation center. Default is current x position
+         * @param int|string $y     ordinate of the rotation center. Default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8772,9 +8778,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Skew horizontally.
-         * @param float $angle_x angle in degrees between -90 (skew to the left) and 90 (skew to the right)
-         * @param int   $x       abscissa of the skewing center. default is current x position
-         * @param int   $y       ordinate of the skewing center. default is current y position
+         * @param float      $angle_x angle in degrees between -90 (skew to the left) and 90 (skew to the right)
+         * @param int|string $x       abscissa of the skewing center. default is current x position
+         * @param int|string $y       ordinate of the skewing center. default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8786,9 +8792,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Skew vertically.
-         * @param float $angle_y angle in degrees between -90 (skew to the bottom) and 90 (skew to the top)
-         * @param int   $x       abscissa of the skewing center. default is current x position
-         * @param int   $y       ordinate of the skewing center. default is current y position
+         * @param float      $angle_y angle in degrees between -90 (skew to the bottom) and 90 (skew to the top)
+         * @param int|string $x       abscissa of the skewing center. default is current x position
+         * @param int|string $y       ordinate of the skewing center. default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8800,10 +8806,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Skew.
-         * @param float $angle_x angle in degrees between -90 (skew to the left) and 90 (skew to the right)
-         * @param float $angle_y angle in degrees between -90 (skew to the bottom) and 90 (skew to the top)
-         * @param int   $x       abscissa of the skewing center. default is current x position
-         * @param int   $y       ordinate of the skewing center. default is current y position
+         * @param float      $angle_x angle in degrees between -90 (skew to the left) and 90 (skew to the right)
+         * @param float      $angle_y angle in degrees between -90 (skew to the bottom) and 90 (skew to the top)
+         * @param int|string $x       abscissa of the skewing center. default is current x position
+         * @param int|string $y       ordinate of the skewing center. default is current y position
          * @access public
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
@@ -8841,6 +8847,7 @@ if (!class_exists('TCPDF', false)) {
          * @access protected
          * @since  2.1.000 (2008-01-07)
          * @see    StartTransform(), StopTransform()
+         * @param $tm
          */
         protected function Transform($tm)
         {
@@ -9277,25 +9284,26 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Draws an ellipse.
          * An ellipse is formed from n Bezier curves.
-         * @param float   $x0         Abscissa of center point.
-         * @param float   $y0         Ordinate of center point.
-         * @param float   $rx         Horizontal radius.
-         * @param float   $ry         Vertical radius (if ry = 0 then is a circle, see {@link Circle Circle}). Default value: 0.
-         * @param float   $angle      : Angle oriented (anti-clockwise). Default value: 0.
-         * @param float   $astart     : Angle start of draw line. Default value: 0.
-         * @param float   $afinish    : Angle finish of draw line. Default value: 360.
-         * @param string  $style      Style of rendering. Possible values are:
-         *                            <ul>
-         *                            <li>D or empty string: Draw (default).</li>
-         *                            <li>F: Fill.</li>
-         *                            <li>DF or FD: Draw and fill.</li>
-         *                            <li>C: Draw close.</li>
-         *                            <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
-         *                            <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
-         *                            </ul>
-         * @param array   $line_style Line style of ellipse. Array like for {@link SetLineStyle SetLineStyle}. Default value: default line style (empty array).
-         * @param array   $fill_color Fill color. Format: array(GREY) or array(R,G,B) or array(C,M,Y,K). Default value: default color (empty array).
-         * @param integer $nc         Number of curves used in ellipse. Default value: 8.
+         * @param float     $x0         Abscissa of center point.
+         * @param float     $y0         Ordinate of center point.
+         * @param float     $rx         Horizontal radius.
+         * @param float|int $ry         Vertical radius (if ry = 0 then is a circle, see {@link Circle Circle}
+         *                              ). Default value: 0.
+         * @param float|int $angle      : Angle oriented (anti-clockwise). Default value: 0.
+         * @param float|int $astart     : Angle start of draw line. Default value: 0.
+         * @param float|int $afinish    : Angle finish of draw line. Default value: 360.
+         * @param string    $style      Style of rendering. Possible values are:
+         *                              <ul>
+         *                              <li>D or empty string: Draw (default).</li>
+         *                              <li>F: Fill.</li>
+         *                              <li>DF or FD: Draw and fill.</li>
+         *                              <li>C: Draw close.</li>
+         *                              <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
+         *                              <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
+         *                              </ul>
+         * @param array     $line_style Line style of ellipse. Array like for {@link SetLineStyle SetLineStyle}. Default value: default line style (empty array).
+         * @param array     $fill_color Fill color. Format: array(GREY) or array(R,G,B) or array(C,M,Y,K). Default value: default color (empty array).
+         * @param integer   $nc         Number of curves used in ellipse. Default value: 8.
          * @access public
          * @since  2.1.000 (2008-01-08)
          */
@@ -9385,23 +9393,23 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Draws a circle.
          * A circle is formed from n Bezier curves.
-         * @param float   $x0         Abscissa of center point.
-         * @param float   $y0         Ordinate of center point.
-         * @param float   $r          Radius.
-         * @param float   $astart     : Angle start of draw line. Default value: 0.
-         * @param float   $afinish    : Angle finish of draw line. Default value: 360.
-         * @param string  $style      Style of rendering. Possible values are:
-         *                            <ul>
-         *                            <li>D or empty string: Draw (default).</li>
-         *                            <li>F: Fill.</li>
-         *                            <li>DF or FD: Draw and fill.</li>
-         *                            <li>C: Draw close.</li>
-         *                            <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
-         *                            <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
-         *                            </ul>
-         * @param array   $line_style Line style of circle. Array like for {@link SetLineStyle SetLineStyle}. Default value: default line style (empty array).
-         * @param array   $fill_color Fill color. Format: array(red, green, blue). Default value: default color (empty array).
-         * @param integer $nc         Number of curves used in circle. Default value: 8.
+         * @param float     $x0         Abscissa of center point.
+         * @param float     $y0         Ordinate of center point.
+         * @param float     $r          Radius.
+         * @param float|int $astart     : Angle start of draw line. Default value: 0.
+         * @param float|int $afinish    : Angle finish of draw line. Default value: 360.
+         * @param string    $style      Style of rendering. Possible values are:
+         *                              <ul>
+         *                              <li>D or empty string: Draw (default).</li>
+         *                              <li>F: Fill.</li>
+         *                              <li>DF or FD: Draw and fill.</li>
+         *                              <li>C: Draw close.</li>
+         *                              <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
+         *                              <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
+         *                              </ul>
+         * @param array     $line_style Line style of circle. Array like for {@link SetLineStyle SetLineStyle}. Default value: default line style (empty array).
+         * @param array     $fill_color Fill color. Format: array(red, green, blue). Default value: default color (empty array).
+         * @param integer   $nc         Number of curves used in circle. Default value: 8.
          * @access public
          * @since  2.1.000 (2008-01-08)
          */
@@ -9412,8 +9420,8 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Draws a polygonal line
-         * @param array   $p          Points 0 to ($np - 1). Array with values (x0, y0, x1, y1,..., x(np-1), y(np - 1))
-         * @param string  $style      Style of rendering. Possible values are:
+         * @param array  $p           Points 0 to ($np - 1). Array with values (x0, y0, x1, y1,..., x(np-1), y(np - 1))
+         * @param string $style       Style of rendering. Possible values are:
          *                            <ul>
          *                            <li>D or empty string: Draw (default).</li>
          *                            <li>F: Fill.</li>
@@ -9421,16 +9429,16 @@ if (!class_exists('TCPDF', false)) {
          *                            <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
          *                            <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
          *                            </ul>
-         * @param array   $line_style Line style of polygon. Array with keys among the following:
+         * @param array  $line_style  Line style of polygon. Array with keys among the following:
          *                            <ul>
          *                            <li>all: Line style of all lines. Array like for {@link SetLineStyle SetLineStyle}.</li>
          *                            <li>0 to ($np - 1): Line style of each line. Array like for {@link SetLineStyle SetLineStyle}.</li>
          *                            </ul>
          *                            If a key is not present or is null, not draws the line. Default value is default line style (empty array).
-         * @param array   $fill_color Fill color. Format: array(GREY) or array(R,G,B) or array(C,M,Y,K). Default value: default color (empty array).
-         * @param boolean $closed     if true the polygon is closes, otherwise will remain open
-         * @access public
-         * @since  4.8.003 (2009-09-15)
+         * @param array  $fill_color  Fill color. Format: array(GREY) or array(R,G,B) or array(C,M,Y,K). Default value: default color (empty array).
+         * @internal param bool $closed if true the polygon is closes, otherwise will remain open
+         * @access   public
+         * @since    4.8.003 (2009-09-15)
          */
         public function PolyLine($p, $style = '', $line_style = array(), $fill_color = array())
         {
@@ -9551,37 +9559,37 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Draws a regular polygon.
-         * @param float   $x0                   Abscissa of center point.
-         * @param float   $y0                   Ordinate of center point.
-         * @param float   $r                    : Radius of inscribed circle.
-         * @param integer $ns                   Number of sides.
-         * @param float   $angle                Angle oriented (anti-clockwise). Default value: 0.
-         * @param boolean $draw_circle          Draw inscribed circle or not. Default value: false.
-         * @param string  $style                Style of rendering. Possible values are:
-         *                                      <ul>
-         *                                      <li>D or empty string: Draw (default).</li>
-         *                                      <li>F: Fill.</li>
-         *                                      <li>DF or FD: Draw and fill.</li>
-         *                                      <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
-         *                                      <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
-         *                                      </ul>
-         * @param array   $line_style           Line style of polygon sides. Array with keys among the following:
-         *                                      <ul>
-         *                                      <li>all: Line style of all sides. Array like for {@link SetLineStyle SetLineStyle}.</li>
-         *                                      <li>0 to ($ns - 1): Line style of each side. Array like for {@link SetLineStyle SetLineStyle}.</li>
-         *                                      </ul>
-         *                                      If a key is not present or is null, not draws the side. Default value is default line style (empty array).
-         * @param array   $fill_color           Fill color. Format: array(red, green, blue). Default value: default color (empty array).
-         * @param string  $circle_style         Style of rendering of inscribed circle (if draws). Possible values are:
-         *                                      <ul>
-         *                                      <li>D or empty string: Draw (default).</li>
-         *                                      <li>F: Fill.</li>
-         *                                      <li>DF or FD: Draw and fill.</li>
-         *                                      <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
-         *                                      <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
-         *                                      </ul>
-         * @param array   $circle_outLine_style Line style of inscribed circle (if draws). Array like for {@link SetLineStyle SetLineStyle}. Default value: default line style (empty array).
-         * @param array   $circle_fill_color    Fill color of inscribed circle (if draws). Format: array(red, green, blue). Default value: default color (empty array).
+         * @param float     $x0                   Abscissa of center point.
+         * @param float     $y0                   Ordinate of center point.
+         * @param float     $r                    : Radius of inscribed circle.
+         * @param integer   $ns                   Number of sides.
+         * @param float|int $angle                Angle oriented (anti-clockwise). Default value: 0.
+         * @param boolean   $draw_circle          Draw inscribed circle or not. Default value: false.
+         * @param string    $style                Style of rendering. Possible values are:
+         *                                        <ul>
+         *                                        <li>D or empty string: Draw (default).</li>
+         *                                        <li>F: Fill.</li>
+         *                                        <li>DF or FD: Draw and fill.</li>
+         *                                        <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
+         *                                        <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
+         *                                        </ul>
+         * @param array     $line_style           Line style of polygon sides. Array with keys among the following:
+         *                                        <ul>
+         *                                        <li>all: Line style of all sides. Array like for {@link SetLineStyle SetLineStyle}.</li>
+         *                                        <li>0 to ($ns - 1): Line style of each side. Array like for {@link SetLineStyle SetLineStyle}.</li>
+         *                                        </ul>
+         *                                        If a key is not present or is null, not draws the side. Default value is default line style (empty array).
+         * @param array     $fill_color           Fill color. Format: array(red, green, blue). Default value: default color (empty array).
+         * @param string    $circle_style         Style of rendering of inscribed circle (if draws). Possible values are:
+         *                                        <ul>
+         *                                        <li>D or empty string: Draw (default).</li>
+         *                                        <li>F: Fill.</li>
+         *                                        <li>DF or FD: Draw and fill.</li>
+         *                                        <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
+         *                                        <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
+         *                                        </ul>
+         * @param array     $circle_outLine_style Line style of inscribed circle (if draws). Array like for {@link SetLineStyle SetLineStyle}. Default value: default line style (empty array).
+         * @param array     $circle_fill_color    Fill color of inscribed circle (if draws). Format: array(red, green, blue). Default value: default color (empty array).
          * @access public
          * @since  2.1.000 (2008-01-08)
          */
@@ -9617,39 +9625,39 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Draws a star polygon
-         * @param float   $x0                   Abscissa of center point.
-         * @param float   $y0                   Ordinate of center point.
-         * @param float   $r                    Radius of inscribed circle.
-         * @param integer $nv                   Number of vertices.
-         * @param integer $ng                   Number of gap (if ($ng % $nv = 1) then is a regular polygon).
-         * @param float   $angle                : Angle oriented (anti-clockwise). Default value: 0.
-         * @param boolean $draw_circle          : Draw inscribed circle or not. Default value is false.
-         * @param string  $style                Style of rendering. Possible values are:
-         *                                      <ul>
-         *                                      <li>D or empty string: Draw (default).</li>
-         *                                      <li>F: Fill.</li>
-         *                                      <li>DF or FD: Draw and fill.</li>
-         *                                      <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
-         *                                      <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
-         *                                      </ul>
-         * @param array   $line_style           Line style of polygon sides. Array with keys among the following:
-         *                                      <ul>
-         *                                      <li>all: Line style of all sides. Array like for
-         *                                      {@link SetLineStyle SetLineStyle}.</li>
-         *                                      <li>0 to (n - 1): Line style of each side. Array like for {@link SetLineStyle SetLineStyle}.</li>
-         *                                      </ul>
-         *                                      If a key is not present or is null, not draws the side. Default value is default line style (empty array).
-         * @param array   $fill_color           Fill color. Format: array(red, green, blue). Default value: default color (empty array).
-         * @param string  $circle_style         Style of rendering of inscribed circle (if draws). Possible values are:
-         *                                      <ul>
-         *                                      <li>D or empty string: Draw (default).</li>
-         *                                      <li>F: Fill.</li>
-         *                                      <li>DF or FD: Draw and fill.</li>
-         *                                      <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
-         *                                      <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
-         *                                      </ul>
-         * @param array   $circle_outLine_style Line style of inscribed circle (if draws). Array like for {@link SetLineStyle SetLineStyle}. Default value: default line style (empty array).
-         * @param array   $circle_fill_color    Fill color of inscribed circle (if draws). Format: array(red, green, blue). Default value: default color (empty array).
+         * @param float     $x0                   Abscissa of center point.
+         * @param float     $y0                   Ordinate of center point.
+         * @param float     $r                    Radius of inscribed circle.
+         * @param integer   $nv                   Number of vertices.
+         * @param integer   $ng                   Number of gap (if ($ng % $nv = 1) then is a regular polygon).
+         * @param float|int $angle                : Angle oriented (anti-clockwise). Default value: 0.
+         * @param boolean   $draw_circle          : Draw inscribed circle or not. Default value is false.
+         * @param string    $style                Style of rendering. Possible values are:
+         *                                        <ul>
+         *                                        <li>D or empty string: Draw (default).</li>
+         *                                        <li>F: Fill.</li>
+         *                                        <li>DF or FD: Draw and fill.</li>
+         *                                        <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
+         *                                        <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
+         *                                        </ul>
+         * @param array     $line_style           Line style of polygon sides. Array with keys among the following:
+         *                                        <ul>
+         *                                        <li>all: Line style of all sides. Array like for
+         *                                        {@link SetLineStyle SetLineStyle}.</li>
+         *                                        <li>0 to (n - 1): Line style of each side. Array like for {@link SetLineStyle SetLineStyle}.</li>
+         *                                        </ul>
+         *                                        If a key is not present or is null, not draws the side. Default value is default line style (empty array).
+         * @param array     $fill_color           Fill color. Format: array(red, green, blue). Default value: default color (empty array).
+         * @param string    $circle_style         Style of rendering of inscribed circle (if draws). Possible values are:
+         *                                        <ul>
+         *                                        <li>D or empty string: Draw (default).</li>
+         *                                        <li>F: Fill.</li>
+         *                                        <li>DF or FD: Draw and fill.</li>
+         *                                        <li>CNZ: Clipping mode (using the even-odd rule to determine which regions lie inside the clipping path).</li>
+         *                                        <li>CEO: Clipping mode (using the nonzero winding number rule to determine which regions lie inside the clipping path).</li>
+         *                                        </ul>
+         * @param array     $circle_outLine_style Line style of inscribed circle (if draws). Array like for {@link SetLineStyle SetLineStyle}. Default value: default line style (empty array).
+         * @param array     $circle_fill_color    Fill color of inscribed circle (if draws). Format: array(red, green, blue). Default value: default color (empty array).
          * @access public
          * @since  2.1.000 (2008-01-08)
          */
@@ -9801,6 +9809,13 @@ if (!class_exists('TCPDF', false)) {
          * @parameter int $arm_angle angle between an arm and the shaft
          * @author    Piotr Galecki, Nicola Asuni, Andy Meier
          * @since     4.6.018 (2009-07-10)
+         * @param     $x0
+         * @param     $y0
+         * @param     $x1
+         * @param     $y1
+         * @param int $head_style
+         * @param int $arm_size
+         * @param int $arm_angle
          */
         public function Arrow($x0, $y0, $x1, $y1, $head_style = 0, $arm_size = 5, $arm_angle = 15)
         {
@@ -9856,6 +9871,7 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Reverse the RLT substrings using the Bidirectional Algorithm (http://unicode.org/reports/tr9/).
          * @param string $str      string to manipulate.
+         * @param bool   $setbom
          * @param bool   $forcertl if 'R' forces RTL, if 'L' forces LTR
          * @return string
          * @access protected
@@ -10421,10 +10437,10 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Adds a bookmark.
-         * @param string $txt   bookmark description.
-         * @param int    $level bookmark level (minimum value is 0).
-         * @param float  $y     Ordinate of the boorkmark position (default = -1 = current position).
-         * @param int    $page  target page number (leave empty for current page).
+         * @param string     $txt   bookmark description.
+         * @param int        $level bookmark level (minimum value is 0).
+         * @param float|int  $y     Ordinate of the boorkmark position (default = -1 = current position).
+         * @param int|string $page  target page number (leave empty for current page).
          * @access public
          * @author Olivier Plathey, Nicola Asuni
          * @since  2.1.002 (2008-02-12)
@@ -11072,14 +11088,14 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Creates a text field
-         * @param string  $name field name
-         * @param float   $w    Width of the rectangle
-         * @param float   $h    Height of the rectangle
-         * @param array   $prop javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
-         * @param array   $opt  annotation parameters. Possible values are described on official PDF32000_2008 reference.
-         * @param float   $x    Abscissa of the upper-left corner of the rectangle
-         * @param float   $y    Ordinate of the upper-left corner of the rectangle
-         * @param boolean $js   if true put the field using JavaScript (requires Acrobat Writer to be rendered).
+         * @param string       $name field name
+         * @param float        $w    Width of the rectangle
+         * @param float        $h    Height of the rectangle
+         * @param array        $prop javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
+         * @param array        $opt  annotation parameters. Possible values are described on official PDF32000_2008 reference.
+         * @param float|string $x    Abscissa of the upper-left corner of the rectangle
+         * @param float|string $y    Ordinate of the upper-left corner of the rectangle
+         * @param boolean      $js   if true put the field using JavaScript (requires Acrobat Writer to be rendered).
          * @access public
          * @author Nicola Asuni
          * @since  4.8.000 (2009-09-07)
@@ -11164,15 +11180,15 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Creates a RadioButton field
-         * @param string  $name    field name
-         * @param int     $w       width
-         * @param array   $prop    javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
-         * @param array   $opt     annotation parameters. Possible values are described on official PDF32000_2008 reference.
-         * @param string  $onvalue value to be returned if selected.
-         * @param boolean $checked define the initial state.
-         * @param float   $x       Abscissa of the upper-left corner of the rectangle
-         * @param float   $y       Ordinate of the upper-left corner of the rectangle
-         * @param boolean $js      if true put the field using JavaScript (requires Acrobat Writer to be rendered).
+         * @param string       $name    field name
+         * @param int          $w       width
+         * @param array        $prop    javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
+         * @param array        $opt     annotation parameters. Possible values are described on official PDF32000_2008 reference.
+         * @param string       $onvalue value to be returned if selected.
+         * @param boolean      $checked define the initial state.
+         * @param float|string $x       Abscissa of the upper-left corner of the rectangle
+         * @param float|string $y       Ordinate of the upper-left corner of the rectangle
+         * @param boolean      $js      if true put the field using JavaScript (requires Acrobat Writer to be rendered).
          * @access public
          * @author Nicola Asuni
          * @since  4.8.000 (2009-09-07)
@@ -11254,15 +11270,15 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Creates a List-box field
-         * @param string  $name   field name
-         * @param int     $w      width
-         * @param int     $h      height
-         * @param array   $values array containing the list of values.
-         * @param array   $prop   javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
-         * @param array   $opt    annotation parameters. Possible values are described on official PDF32000_2008 reference.
-         * @param float   $x      Abscissa of the upper-left corner of the rectangle
-         * @param float   $y      Ordinate of the upper-left corner of the rectangle
-         * @param boolean $js     if true put the field using JavaScript (requires Acrobat Writer to be rendered).
+         * @param string       $name   field name
+         * @param int          $w      width
+         * @param int          $h      height
+         * @param array        $values array containing the list of values.
+         * @param array        $prop   javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
+         * @param array        $opt    annotation parameters. Possible values are described on official PDF32000_2008 reference.
+         * @param float|string $x      Abscissa of the upper-left corner of the rectangle
+         * @param float|string $y      Ordinate of the upper-left corner of the rectangle
+         * @param boolean      $js     if true put the field using JavaScript (requires Acrobat Writer to be rendered).
          * @access public
          * @author Nicola Asuni
          * @since  4.8.000 (2009-09-07)
@@ -11316,15 +11332,15 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Creates a Combo-box field
-         * @param string  $name   field name
-         * @param int     $w      width
-         * @param int     $h      height
-         * @param array   $values array containing the list of values.
-         * @param array   $prop   javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
-         * @param array   $opt    annotation parameters. Possible values are described on official PDF32000_2008 reference.
-         * @param float   $x      Abscissa of the upper-left corner of the rectangle
-         * @param float   $y      Ordinate of the upper-left corner of the rectangle
-         * @param boolean $js     if true put the field using JavaScript (requires Acrobat Writer to be rendered).
+         * @param string       $name   field name
+         * @param int          $w      width
+         * @param int          $h      height
+         * @param array        $values array containing the list of values.
+         * @param array        $prop   javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
+         * @param array        $opt    annotation parameters. Possible values are described on official PDF32000_2008 reference.
+         * @param float|string $x      Abscissa of the upper-left corner of the rectangle
+         * @param float|string $y      Ordinate of the upper-left corner of the rectangle
+         * @param boolean      $js     if true put the field using JavaScript (requires Acrobat Writer to be rendered).
          * @access public
          * @author Nicola Asuni
          * @since  4.8.000 (2009-09-07)
@@ -11379,15 +11395,15 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Creates a CheckBox field
-         * @param string  $name    field name
-         * @param int     $w       width
-         * @param boolean $checked define the initial state.
-         * @param array   $prop    javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
-         * @param array   $opt     annotation parameters. Possible values are described on official PDF32000_2008 reference.
-         * @param string  $onvalue value to be returned if selected.
-         * @param float   $x       Abscissa of the upper-left corner of the rectangle
-         * @param float   $y       Ordinate of the upper-left corner of the rectangle
-         * @param boolean $js      if true put the field using JavaScript (requires Acrobat Writer to be rendered).
+         * @param string       $name    field name
+         * @param int          $w       width
+         * @param boolean      $checked define the initial state.
+         * @param array        $prop    javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
+         * @param array        $opt     annotation parameters. Possible values are described on official PDF32000_2008 reference.
+         * @param string       $onvalue value to be returned if selected.
+         * @param float|string $x       Abscissa of the upper-left corner of the rectangle
+         * @param float|string $y       Ordinate of the upper-left corner of the rectangle
+         * @param boolean      $js      if true put the field using JavaScript (requires Acrobat Writer to be rendered).
          * @access public
          * @author Nicola Asuni
          * @since  4.8.000 (2009-09-07)
@@ -11450,16 +11466,16 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Creates a button field
-         * @param string  $name    field name
-         * @param int     $w       width
-         * @param int     $h       height
-         * @param string  $caption caption.
-         * @param mixed   $action  action triggered by pressing the button. Use a string to specify a javascript action. Use an array to specify a form action options as on section 12.7.5 of PDF32000_2008.
-         * @param array   $prop    javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
-         * @param array   $opt     annotation parameters. Possible values are described on official PDF32000_2008 reference.
-         * @param float   $x       Abscissa of the upper-left corner of the rectangle
-         * @param float   $y       Ordinate of the upper-left corner of the rectangle
-         * @param boolean $js      if true put the field using JavaScript (requires Acrobat Writer to be rendered).
+         * @param string       $name    field name
+         * @param int          $w       width
+         * @param int          $h       height
+         * @param string       $caption caption.
+         * @param mixed        $action  action triggered by pressing the button. Use a string to specify a javascript action. Use an array to specify a form action options as on section 12.7.5 of PDF32000_2008.
+         * @param array        $prop    javascript field properties. Possible values are described on official Javascript for Acrobat API reference.
+         * @param array        $opt     annotation parameters. Possible values are described on official PDF32000_2008 reference.
+         * @param float|string $x       Abscissa of the upper-left corner of the rectangle
+         * @param float|string $y       Ordinate of the upper-left corner of the rectangle
+         * @param boolean      $js      if true put the field using JavaScript (requires Acrobat Writer to be rendered).
          * @access public
          * @author Nicola Asuni
          * @since  4.8.000 (2009-09-07)
@@ -11744,7 +11760,7 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Create a new page group.
          * NOTE: call this function before calling AddPage()
-         * @param int $page starting group page (leave empty for next page).
+         * @param int|string $page starting group page (leave empty for next page).
          * @access public
          * @since  3.0.000 (2008-03-27)
          */
@@ -11970,10 +11986,11 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Add transparency parameters to the current extgstate
-         * @param array $params parameters
-         * @return the number of extgstates
-         * @access protected
-         * @since  3.0.000 (2008-03-27)
+         * @param $parms
+         * @return \the number of extgstates
+         * @internal param array $params parameters
+         * @access   protected
+         * @since    3.0.000 (2008-03-27)
          */
         protected function addExtGState($parms)
         {
@@ -12003,9 +12020,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Put extgstates for object transparency
-         * @param array $gs extgstate
-         * @access protected
-         * @since  3.0.000 (2008-03-27)
+         * @internal param array $gs extgstate
+         * @access   protected
+         * @since    3.0.000 (2008-03-27)
          */
         protected function _putextgstates()
         {
@@ -12086,6 +12103,7 @@ if (!class_exists('TCPDF', false)) {
          * Default value is 1.t
          * @access public
          * @since  3.1.000 (2008-06-09)
+         * @param string $version
          */
         public function setPDFVersion($version = '1.7')
         {
@@ -12146,17 +12164,17 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Paints a coons patch mesh.
-         * @param float $x          abscissa of the top left corner of the rectangle.
-         * @param float $y          ordinate of the top left corner of the rectangle.
-         * @param float $w          width of the rectangle.
-         * @param float $h          height of the rectangle.
-         * @param array $col1       first color (lower left corner) (RGB components).
-         * @param array $col2       second color (lower right corner) (RGB components).
-         * @param array $col3       third color (upper right corner) (RGB components).
-         * @param array $col4       fourth color (upper left corner) (RGB components).
-         * @param array $coords     <ul><li>for one patch mesh: array(float x1, float y1, .... float x12, float y12): 12 pairs of coordinates (normally from 0 to 1) which specify the Bezier control points that define the patch. First pair is the lower left edge point, next is its right control point (control point 2). Then the other points are defined in the order: control point 1, edge point, control point 2 going counter-clockwise around the patch. Last (x12, y12) is the first edge point's left control point (control point 1).</li><li>for two or more patch meshes: array[number of patches]: arrays with the following keys for each patch: f: where to put that patch (0 = first patch, 1, 2, 3 = right, top and left of precedent patch - I didn't figure this out completely - just try and error ;-) points: 12 pairs of coordinates of the Bezier control points as above for the first patch, 8 pairs of coordinates for the following patches, ignoring the coordinates already defined by the precedent patch (I also didn't figure out the order of these - also: try and see what's happening) colors: must be 4 colors for the first patch, 2 colors for the following patches</li></ul>
-         * @param array $coords_min minimum value used by the coordinates. If a coordinate's value is smaller than this it will be cut to coords_min. default: 0
-         * @param array $coords_max maximum value used by the coordinates. If a coordinate's value is greater than this it will be cut to coords_max. default: 1
+         * @param float     $x          abscissa of the top left corner of the rectangle.
+         * @param float     $y          ordinate of the top left corner of the rectangle.
+         * @param float     $w          width of the rectangle.
+         * @param float     $h          height of the rectangle.
+         * @param array     $col1       first color (lower left corner) (RGB components).
+         * @param array     $col2       second color (lower right corner) (RGB components).
+         * @param array     $col3       third color (upper right corner) (RGB components).
+         * @param array     $col4       fourth color (upper left corner) (RGB components).
+         * @param array     $coords     <ul><li>for one patch mesh: array(float x1, float y1, .... float x12, float y12): 12 pairs of coordinates (normally from 0 to 1) which specify the Bezier control points that define the patch. First pair is the lower left edge point, next is its right control point (control point 2). Then the other points are defined in the order: control point 1, edge point, control point 2 going counter-clockwise around the patch. Last (x12, y12) is the first edge point's left control point (control point 1).</li><li>for two or more patch meshes: array[number of patches]: arrays with the following keys for each patch: f: where to put that patch (0 = first patch, 1, 2, 3 = right, top and left of precedent patch - I didn't figure this out completely - just try and error ;-) points: 12 pairs of coordinates of the Bezier control points as above for the first patch, 8 pairs of coordinates for the following patches, ignoring the coordinates already defined by the precedent patch (I also didn't figure out the order of these - also: try and see what's happening) colors: must be 4 colors for the first patch, 2 colors for the following patches</li></ul>
+         * @param array|int $coords_min minimum value used by the coordinates. If a coordinate's value is smaller than this it will be cut to coords_min. default: 0
+         * @param array|int $coords_max maximum value used by the coordinates. If a coordinate's value is greater than this it will be cut to coords_max. default: 1
          * @author Andreas W�rmser, Nicola Asuni
          * @since  3.1.000 (2008-06-09)
          * @access public
@@ -12352,6 +12370,12 @@ if (!class_exists('TCPDF', false)) {
          * @author Maxime Delorme, Nicola Asuni
          * @since  3.1.000 (2008-06-09)
          * @access protected
+         * @param $x1
+         * @param $y1
+         * @param $x2
+         * @param $y2
+         * @param $x3
+         * @param $y3
          */
         protected function _outarc($x1, $y1, $x2, $y2, $x3, $y3)
         {
@@ -12362,14 +12386,14 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Draw the sector of a circle.
          * It can be used for instance to render pie charts.
-         * @param float  $xc    abscissa of the center.
-         * @param float  $yc    ordinate of the center.
-         * @param float  $r     radius.
-         * @param float  $a     start angle (in degrees).
-         * @param float  $b     end angle (in degrees).
-         * @param string $style : D, F, FD or DF (draw, fill, fill and draw). Default: FD.
-         * @param float  $cw    : indicates whether to go clockwise (default: true).
-         * @param float  $o     : origin of angles (0 for 3 o'clock, 90 for noon, 180 for 9 o'clock, 270 for 6 o'clock). Default: 90.
+         * @param float      $xc    abscissa of the center.
+         * @param float      $yc    ordinate of the center.
+         * @param float      $r     radius.
+         * @param float      $a     start angle (in degrees).
+         * @param float      $b     end angle (in degrees).
+         * @param string     $style : D, F, FD or DF (draw, fill, fill and draw). Default: FD.
+         * @param bool|float $cw    : indicates whether to go clockwise (default: true).
+         * @param float|int  $o     : origin of angles (0 for 3 o'clock, 90 for noon, 180 for 9 o'clock, 270 for 6 o'clock). Default: 90.
          * @author Maxime Delorme, Nicola Asuni
          * @since  3.1.000 (2008-06-09)
          * @access public
@@ -12439,16 +12463,16 @@ if (!class_exists('TCPDF', false)) {
          * Embed vector-based Adobe Illustrator (AI) or AI-compatible EPS files.
          * Only vector drawing is supported, not text or bitmap.
          * Although the script was successfully tested with various AI format versions, best results are probably achieved with files that were exported in the AI3 format (tested with Illustrator CS2, Freehand MX and Photoshop CS2).
-         * @param string $file   Name of the file containing the image.
-         * @param float  $x      Abscissa of the upper-left corner.
-         * @param float  $y      Ordinate of the upper-left corner.
-         * @param float  $w      Width of the image in the page. If not specified or equal to zero, it is automatically calculated.
-         * @param float  $h      Height of the image in the page. If not specified or equal to zero, it is automatically calculated.
-         * @param mixed  $link   URL or identifier returned by AddLink().
-         * @param        boolean useBoundingBox specifies whether to position the bounding box (true) or the complete canvas (false) at location (x,y). Default value is true.
-         * @param string $align  Indicates the alignment of the pointer next to image insertion relative to image height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
-         * @param string $palign Allows to center or align the image on the current line. Possible values are:<ul><li>L : left align</li><li>C : center</li><li>R : right align</li><li>'' : empty string : left for LTR or right for RTL</li></ul>
-         * @param mixed  $border Indicates if borders must be drawn around the image. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
+         * @param string       $file           Name of the file containing the image.
+         * @param float|string $x              Abscissa of the upper-left corner.
+         * @param float|string $y              Ordinate of the upper-left corner.
+         * @param float|int    $w              Width of the image in the page. If not specified or equal to zero, it is automatically calculated.
+         * @param float|int    $h              Height of the image in the page. If not specified or equal to zero, it is automatically calculated.
+         * @param mixed        $link           URL or identifier returned by AddLink().
+         * @param bool         $useBoundingBox useBoundingBox specifies whether to position the bounding box (true) or the complete canvas (false) at location (x,y). Default value is true.
+         * @param string       $align          Indicates the alignment of the pointer next to image insertion relative to image height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
+         * @param string       $palign         Allows to center or align the image on the current line. Possible values are:<ul><li>L : left align</li><li>C : center</li><li>R : right align</li><li>'' : empty string : left for LTR or right for RTL</li></ul>
+         * @param mixed        $border         Indicates if borders must be drawn around the image. The value can be either a number:<ul><li>0: no border (default)</li><li>1: frame</li></ul>or a string containing some or all of the following characters (in any order):<ul><li>L: left</li><li>T: top</li><li>R: right</li><li>B: bottom</li></ul>
          * @author Valentin Schmidt, Nicola Asuni
          * @since  3.1.000 (2008-06-09)
          * @access public
@@ -12739,15 +12763,15 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Print a Linear Barcode.
-         * @param string $code  code to print
-         * @param string $type  type of barcode.
-         * @param int    $x     x position in user units
-         * @param int    $y     y position in user units
-         * @param int    $w     width in user units
-         * @param int    $h     height in user units
-         * @param float  $xres  width of the smallest bar in user units
-         * @param array  $style array of options:<ul><li>string $style['position'] barcode position inside the specified width: L = left (default for LTR); C = center; R = right (default for RTL); S = stretch</li><li>boolean $style['border'] if true prints a border around the barcode</li><li>int $style['padding'] padding to leave around the barcode in user units</li><li>array $style['fgcolor'] color array for bars and text</li><li>mixed $style['bgcolor'] color array for background or false for transparent</li><li>boolean $style["text"] boolean if true prints text below the barcode</li><li>string $style['font'] font name for text</li><li>int $style['fontsize'] font size for text</li><li>int $style['stretchtext']: 0 = disabled; 1 = horizontal scaling only if necessary; 2 = forced horizontal scaling; 3 = character spacing only if necessary; 4 = forced character spacing</li></ul>
-         * @param string $align Indicates the alignment of the pointer next to barcode insertion relative to barcode height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
+         * @param string       $code  code to print
+         * @param string       $type  type of barcode.
+         * @param int|string   $x     x position in user units
+         * @param int|string   $y     y position in user units
+         * @param int|string   $w     width in user units
+         * @param int|string   $h     height in user units
+         * @param float        $xres  width of the smallest bar in user units
+         * @param array|string $style array of options:<ul><li>string $style['position'] barcode position inside the specified width: L = left (default for LTR); C = center; R = right (default for RTL); S = stretch</li><li>boolean $style['border'] if true prints a border around the barcode</li><li>int $style['padding'] padding to leave around the barcode in user units</li><li>array $style['fgcolor'] color array for bars and text</li><li>mixed $style['bgcolor'] color array for background or false for transparent</li><li>boolean $style["text"] boolean if true prints text below the barcode</li><li>string $style['font'] font name for text</li><li>int $style['fontsize'] font size for text</li><li>int $style['stretchtext']: 0 = disabled; 1 = horizontal scaling only if necessary; 2 = forced horizontal scaling; 3 = character spacing only if necessary; 4 = forced character spacing</li></ul>
+         * @param string       $align Indicates the alignment of the pointer next to barcode insertion relative to barcode height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
          * @author Nicola Asuni
          * @since  3.1.000 (2008-06-09)
          * @access public
@@ -12999,14 +13023,14 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Print 2D Barcode.
-         * @param string $code  code to print
-         * @param string $type  type of barcode.
-         * @param int    $x     x position in user units
-         * @param int    $y     y position in user units
-         * @param int    $w     width in user units
-         * @param int    $h     height in user units
-         * @param array  $style array of options:<ul><li>boolean $style['border'] if true prints a border around the barcode</li><li>int $style['padding'] padding to leave around the barcode in user units</li><li>array $style['fgcolor'] color array for bars and text</li><li>mixed $style['bgcolor'] color array for background or false for transparent</li></ul>
-         * @param string $align Indicates the alignment of the pointer next to barcode insertion relative to barcode height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
+         * @param string       $code  code to print
+         * @param string       $type  type of barcode.
+         * @param int|string   $x     x position in user units
+         * @param int|string   $y     y position in user units
+         * @param int|string   $w     width in user units
+         * @param int|string   $h     height in user units
+         * @param array|string $style array of options:<ul><li>boolean $style['border'] if true prints a border around the barcode</li><li>int $style['padding'] padding to leave around the barcode in user units</li><li>array $style['fgcolor'] color array for bars and text</li><li>mixed $style['bgcolor'] color array for background or false for transparent</li></ul>
+         * @param string       $align Indicates the alignment of the pointer next to barcode insertion relative to barcode height. The value can be:<ul><li>T: top-right for LTR or top-left for RTL</li><li>M: middle-right for LTR or middle-left for RTL</li><li>B: bottom-right for LTR or bottom-left for RTL</li><li>N: next line</li></ul>
          * @author Nicola Asuni
          * @since  4.5.037 (2009-04-07)
          * @access public
@@ -13752,12 +13776,12 @@ if (!class_exists('TCPDF', false)) {
          * Allows to preserve some HTML formatting (limited support).<br>
          * IMPORTANT: The HTML must be well formatted - try to clean-up it using an application like HTML-Tidy before submitting.
          * Supported tags are: a, b, blockquote, br, dd, del, div, dl, dt, em, font, h1, h2, h3, h4, h5, h6, hr, i, img, li, ol, p, pre, small, span, strong, sub, sup, table, tcpdf, td, th, thead, tr, tt, u, ul
-         * @param string  $html   text to display
-         * @param boolean $ln     if true add a new line after text (default = true)
-         * @param int     $fill   Indicates if the background must be painted (true) or transparent (false).
-         * @param boolean $reseth if true reset the last cell height (default false).
-         * @param boolean $cell   if true add the default cMargin space to each Write (default false).
-         * @param string  $align  Allows to center or align the text. Possible values are:<ul><li>L : left align</li><li>C : center</li><li>R : right align</li><li>'' : empty string : left for LTR or right for RTL</li></ul>
+         * @param string   $html   text to display
+         * @param boolean  $ln     if true add a new line after text (default = true)
+         * @param bool|int $fill   Indicates if the background must be painted (true) or transparent (false).
+         * @param boolean  $reseth if true reset the last cell height (default false).
+         * @param boolean  $cell   if true add the default cMargin space to each Write (default false).
+         * @param string   $align  Allows to center or align the text. Possible values are:<ul><li>L : left align</li><li>C : center</li><li>R : right align</li><li>'' : empty string : left for LTR or right for RTL</li></ul>
          * @access public
          */
         public function writeHTML($html, $ln = true, $fill = false, $reseth = false, $cell = false, $align = '')
@@ -15701,9 +15725,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Set the booklet mode for double-sided pages.
-         * @param boolean $booklet true set the booklet mode on, fals eotherwise.
-         * @param float   $inner   Inner page margin.
-         * @param float   $outer   Outer page margin.
+         * @param boolean   $booklet true set the booklet mode on, fals eotherwise.
+         * @param float|int $inner   Inner page margin.
+         * @param float|int $outer   Outer page margin.
          * @access public
          * @since  4.2.000 (2008-10-29)
          */
@@ -15792,13 +15816,14 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * convert html string containing value and unit of measure to user's units or points.
-         * @param string  $htmlval     string containing values and unit
-         * @param string  $refsize     reference value in points
-         * @param string  $defaultunit default unit (can be one of the following: %, em, ex, px, in, mm, pc, pt).
-         * @param boolean $point       if true returns points, otherwise returns value in user's units
+         * @param string     $htmlval     string containing values and unit
+         * @param int|string $refsize     reference value in points
+         * @param string     $defaultunit default unit (can be one of the following: %, em, ex, px, in, mm, pc, pt).
+         * @param bool       $points
          * @return float value in user's unit or point if $points=true
-         * @access public
-         * @since  4.4.004 (2008-12-10)
+         * @internal param bool $point if true returns points, otherwise returns value in user's units
+         * @access   public
+         * @since    4.4.004 (2008-12-10)
          */
         public function getHTMLUnitToUnits($htmlval, $refsize = 1, $defaultunit = 'px', $points = false)
         {
@@ -15937,9 +15962,9 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Output an HTML list bullet or ordered item symbol
-         * @param int    $listdepth list nesting level
-         * @param string $listtype  type of list
-         * @param float  $size      current font size
+         * @param int       $listdepth list nesting level
+         * @param string    $listtype  type of list
+         * @param float|int $size      current font size
          * @access protected
          * @since  4.4.004 (2008-12-10)
          */
@@ -16148,11 +16173,12 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Returns a temporary filename for caching object on filesystem.
-         * @param string $prefix prefix to add to filename
-         *                       return string filename.
-         * @access protected
-         * @since  4.5.000 (2008-12-31)
+         * @param $name
          * @return bool|string
+         * @internal param string $prefix prefix to add to filename
+         *                       return string filename.
+         * @access   protected
+         * @since    4.5.000 (2008-12-31)
          */
         protected function getObjFilename($name)
         {
@@ -16161,11 +16187,12 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Writes data to a temporary file on filesystem.
-         * @param string  $file   file name
+         * @param         $filename
          * @param mixed   $data   data to write on file
          * @param boolean $append if true append data, false replace.
-         * @access protected
-         * @since  4.5.000 (2008-12-31)
+         * @internal param string $file file name
+         * @access   protected
+         * @since    4.5.000 (2008-12-31)
          */
         protected function writeDiskCache($filename, $data, $append = false)
         {
@@ -16191,10 +16218,11 @@ if (!class_exists('TCPDF', false)) {
 
         /**
          * Read data from a temporary file on filesystem.
-         * @param string $file file name
+         * @param $filename
          * @return mixed retrieved data
-         * @access protected
-         * @since  4.5.000 (2008-12-31)
+         * @internal param string $file file name
+         * @access   protected
+         * @since    4.5.000 (2008-12-31)
          */
         protected function readDiskCache($filename)
         {
@@ -16687,10 +16715,10 @@ if (!class_exists('TCPDF', false)) {
         /**
          * Output a Table of Content Index (TOC).
          * You can override this method to achieve different styles.
-         * @param int    $page        page number where this TOC should be inserted (leave empty for current page).
-         * @param string $numbersfont set the font for page numbers (please use monospaced font for better alignment).
-         * @param string $filler      string used to fill the space between text and page number.
-         * @param string $toc_name    name to use for TOC bookmark.
+         * @param int|string $page        page number where this TOC should be inserted (leave empty for current page).
+         * @param string     $numbersfont set the font for page numbers (please use monospaced font for better alignment).
+         * @param string     $filler      string used to fill the space between text and page number.
+         * @param string     $toc_name    name to use for TOC bookmark.
          * @access public
          * @author Nicola Asuni
          * @since  4.5.000 (2009-01-02)

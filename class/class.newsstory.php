@@ -36,6 +36,10 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Returns the number of stories published before a date
+     * @param        $timestamp
+     * @param        $expired
+     * @param string $topicsList
+     * @return
      */
     public function GetCountStoriesPublishedBefore($timestamp, $expired, $topicsList = '')
     {
@@ -58,6 +62,7 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Load the specified story from the database
+     * @param $storyid
      */
     public function getStory($storyid)
     {
@@ -72,6 +77,10 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Delete stories that were published before a given date
+     * @param        $timestamp
+     * @param        $expired
+     * @param string $topicsList
+     * @return bool
      */
     public function DeleteBeforeDate($timestamp, $expired, $topicsList = '')
     {
@@ -159,6 +168,15 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Returns published stories according to some options
+     * @param int    $limit
+     * @param int    $start
+     * @param bool   $checkRight
+     * @param int    $topic
+     * @param int    $ihome
+     * @param bool   $asObject
+     * @param string $order
+     * @param bool   $topic_frontpage
+     * @return array
      */
     public function getAllPublished($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'published', $topic_frontpage = false)
     {
@@ -223,6 +241,12 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Retourne la liste des articles aux archives (pour une période donnée)
+     * @param        $publish_start
+     * @param        $publish_end
+     * @param bool   $checkRight
+     * @param bool   $asObject
+     * @param string $order
+     * @return array|null
      */
     public function getArchive($publish_start, $publish_end, $checkRight = false, $asObject = true, $order = 'published')
     {
@@ -324,6 +348,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      *
      * @param int     $uid        author's id
      * @param boolean $checkRight whether to check the user's rights to topics
+     * @param bool    $asObject
      * @return array
      */
     public function getAllPublishedByAuthor($uid, $checkRight = false, $asObject = true)
@@ -385,6 +410,12 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Get all expired stories
+     * @param int  $limit
+     * @param int  $start
+     * @param int  $topic
+     * @param int  $ihome
+     * @param bool $asObject
+     * @return array
      */
     public function getAllExpired($limit = 0, $start = 0, $topic = 0, $ihome = 0, $asObject = true)
     {
@@ -416,6 +447,10 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Returns an array of object containing all the news to be automatically published.
+     * @param int  $limit
+     * @param bool $asObject
+     * @param int  $start
+     * @return array
      */
     public function getAllAutoStory($limit = 0, $asObject = true, $start = 0)
     {
@@ -443,6 +478,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      * @param int     $limit      Denotes where to start the query
      * @param boolean $asObject   true will returns the stories as an array of objects, false will return storyid => title
      * @param boolean $checkRight whether to check the user's rights to topics
+     * @param int     $start
      * @return array
      */
     public function getAllSubmitted($limit = 0, $asObject = true, $checkRight = false, $start = 0)
@@ -525,6 +561,9 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Get a list of stories (as objects) related to a specific topic
+     * @param     $topicid
+     * @param int $limit
+     * @return array
      */
     public function getByTopic($topicid, $limit = 0)
     {
@@ -542,6 +581,9 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Count the number of news published for a specific topic
+     * @param int  $topicid
+     * @param bool $checkRight
+     * @return null
      */
     public function countPublishedByTopic($topicid = 0, $checkRight = false)
     {
@@ -584,6 +626,8 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Get the topic image url
+     * @param string $format
+     * @return
      */
     public function topic_imgurl($format = 'S')
     {
@@ -729,6 +773,8 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Function used to prepare an article to be showed
+     * @param $filescount
+     * @return array
      */
     public function prepare2show($filescount)
     {
@@ -853,6 +899,8 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Returns the user's name of the current story according to the module's option "displayname"
+     * @param int $uid
+     * @return string
      */
     public function uname($uid = 0)
     {
@@ -899,12 +947,15 @@ class nw_NewsStory extends XnewsDeprecateStory
     /**
      * Function used to export news (in xml) and eventually the topics definitions
      * Warning, permissions are not exported !
-     * @param int     $fromDate     Starting date
-     * @param int     $toDate       Ending date
-     * @param string  $topiclist    If not empty, a list of topics to limit to
-     * @param boolean $usetopicsdef Should we also export topics definitions ?
-     * @param boolean $asObject     Return values as an object or not ?
+     * @param int      $fromDate     Starting date
+     * @param int      $toDate       Ending date
+     * @param string   $topicsList
+     * @param bool|int $usetopicsdef Should we also export topics definitions ?
+     * @param          $topicsTable
+     * @param boolean  $asObject     Return values as an object or not ?
+     * @param string   $order
      * @return array
+     * @internal param string $topiclist If not empty, a list of topics to limit to
      */
     public function NewsExport($fromDate, $toDate, $topicsList = '', $usetopicsdef = 0, &$topicsTable, $asObject = true, $order = 'published')
     {
@@ -947,6 +998,8 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Create or update an article
+     * @param bool $approved
+     * @return bool|int
      */
     public function store($approved = false)
     {
@@ -1111,6 +1164,14 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Returns a random number of news
+     * @param int    $limit
+     * @param int    $start
+     * @param bool   $checkRight
+     * @param int    $topic
+     * @param int    $ihome
+     * @param string $order
+     * @param bool   $topic_frontpage
+     * @return array
      */
     public function getRandomNews($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $order = 'published', $topic_frontpage = false)
     {
@@ -1184,6 +1245,8 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Returns statistics about the stories and topics
+     * @param $limit
+     * @return array
      */
     public function GetStats($limit)
     {
@@ -1314,6 +1377,8 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Get the date of the older and most recent news
+     * @param $older
+     * @param $recent
      */
     public function GetOlderRecentnews(&$older, &$recent)
     {
@@ -1359,6 +1424,9 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Returns the content of the summary and the titles requires for the list selector
+     * @param $text
+     * @param $titles
+     * @return string
      */
     public function auto_summary($text, &$titles)
     {
@@ -1473,6 +1541,12 @@ class nw_NewsStory extends XnewsDeprecateStory
 
     /**
      * Returns stories by Ids
+     * @param        $ids
+     * @param bool   $checkRight
+     * @param bool   $asObject
+     * @param string $order
+     * @param bool   $onlyOnline
+     * @return array|null
      */
     public function getStoriesByIds($ids, $checkRight = true, $asObject = true, $order = 'published', $onlyOnline = true)
     {

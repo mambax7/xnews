@@ -71,6 +71,8 @@ class nw_keyhighlighter
 
     /**
      * @access private
+     * @param $replace_matches
+     * @return mixed
      */
     public function replace($replace_matches)
     {
@@ -99,6 +101,8 @@ class nw_keyhighlighter
 
     /**
      * @access private
+     * @param $buffer
+     * @return mixed|string
      */
     public function highlight($buffer)
     {

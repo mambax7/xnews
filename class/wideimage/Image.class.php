@@ -100,6 +100,9 @@ abstract class wiImage
      * </code>
      *
      * @result wiPaletteImage or wiTrueColorImage instance
+     * @param      $source
+     * @param null $format
+     * @return mixed
      */
     public static function load($source, $format = null)
     {
@@ -134,6 +137,9 @@ abstract class wiImage
      * format by specifying the second parameter.
      *
      * @result wiPaletteImage or wiTrueColorImage instance
+     * @param      $uri
+     * @param null $format
+     * @return \wiPaletteImage|\wiTrueColorImage
      */
     public static function loadFromFile($uri, $format = null)
     {
@@ -150,6 +156,8 @@ abstract class wiImage
      * Create and load an image from a string. Format is auto-detected.
      *
      * @result wiPaletteImage or wiTrueColorImage instance
+     * @param $string
+     * @return \wiPaletteImage|\wiTrueColorImage
      */
     public static function loadFromString($string)
     {
@@ -176,6 +184,8 @@ abstract class wiImage
      * $image = wiImage::loadFromHandle($handle);
      * </code>
      * @result wiPaletteImage or wiTrueColorImage instance
+     * @param $handle
+     * @return \wiPaletteImage|\wiTrueColorImage
      */
     public static function loadFromHandle($handle)
     {
@@ -197,6 +207,7 @@ abstract class wiImage
      * are automatically converted to palette.
      *
      * @param string $uri The file locator (can be url)
+     * @param null   $format
      */
     public function saveToFile($uri, $format = null)
     {
@@ -210,6 +221,8 @@ abstract class wiImage
 
     /**
      * Returns binary string with image data in format specified by $format
+     * @param $format
+     * @return string
      */
     public function asString($format)
     {
@@ -238,6 +251,8 @@ abstract class wiImage
      * Allocate a color by RGB values.
      *
      * @param mixed $R Red-component value or an RGB array (with red, green, blue keys)
+     * @param null  $G
+     * @param null  $B
      * @return int
      */
     public function allocateColor($R, $G = null, $B = null)
@@ -284,6 +299,9 @@ abstract class wiImage
 
     /**
      * @result mixed Returns color RGBA array of a pixel at $x, $y
+     * @param $x
+     * @param $y
+     * @return array
      */
     public function getRGBAt($x, $y)
     {
@@ -307,6 +325,8 @@ abstract class wiImage
 
     /**
      * @result mixed RGBA array for a color with index $colorIndex
+     * @param $colorIndex
+     * @return array
      */
     public function getColorRGB($colorIndex)
     {
@@ -315,6 +335,9 @@ abstract class wiImage
 
     /**
      * @result int Color index for a pixel at $x, $y
+     * @param $x
+     * @param $y
+     * @return int
      */
     public function getColorAt($x, $y)
     {
@@ -323,6 +346,10 @@ abstract class wiImage
 
     /**
      * Set the color index $color to a pixel at $x, $y
+     * @param $x
+     * @param $y
+     * @param $color
+     * @return bool
      */
     public function setColorAt($x, $y, $color)
     {
@@ -334,6 +361,8 @@ abstract class wiImage
      * PHP's imagecolorclosest()
      *
      * @param mixed $R Red or RGBA array
+     * @param null  $G
+     * @param null  $B
      * @return int
      */
     public function getClosestColor($R, $G = null, $B = null)
@@ -350,6 +379,8 @@ abstract class wiImage
      * PHP's imagecolorexact()
      *
      * @param mixed $R Red or RGBA array
+     * @param null  $G
+     * @param null  $B
      * @return int
      */
     public function getExactColor($R, $G = null, $B = null)
@@ -382,6 +413,10 @@ abstract class wiImage
 
     /**
      * Fill the image at ($x, $y) with color index $color
+     * @param $x
+     * @param $y
+     * @param $color
+     * @return bool
      */
     public function fill($x, $y, $color)
     {

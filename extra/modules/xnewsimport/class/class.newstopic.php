@@ -75,8 +75,13 @@ class xni_NewsTopic extends XoopsTopic
     /**
      * makes a nicely ordered selection box
      *
-     * @param int $preset_id is used to specify a preselected item
-     * @param int $none      set $none to 1 to add a option with value 0
+     * @param        $title
+     * @param string $order
+     * @param int    $preset_id is used to specify a preselected item
+     * @param int    $none      set $none to 1 to add a option with value 0
+     * @param string $sel_name
+     * @param string $onchange
+     * @param        $perms
      * @return string
      */
     public function makeMySelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = 'topic_id', $onchange = '', $perms)
@@ -152,6 +157,8 @@ class xni_NewsTopic extends XoopsTopic
 
     /**
      * Get the total number of topics in the base
+     * @param bool $checkRight
+     * @return null
      */
     public function getAllTopicsCount($checkRight = true)
     {
@@ -220,6 +227,8 @@ class xni_NewsTopic extends XoopsTopic
 
     /**
      * Returns some stats about a topic
+     * @param $topicid
+     * @return array
      */
     public function getTopicMiniStats($topicid)
     {

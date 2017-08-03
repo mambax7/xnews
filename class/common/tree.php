@@ -155,10 +155,8 @@ class XnewsMyXoopsObjectTree
      * @param   string $ret         (reference to a string when called from outside) Result from previous recursions
      * @param   string $prefix_orig String to indent items at deeper levels
      * @param   string $prefix_curr String to indent the current item
-     * @return
-     *
      * @access    private
-     **/
+     */
     public function _makeSelBoxOptions($fieldName, $selected, $key, &$ret, $prefix_orig, $prefix_curr = '')
     {
         if ($key > 0) {
@@ -186,8 +184,9 @@ class XnewsMyXoopsObjectTree
      * @param   string  $selected       Value to display as selected
      * @param   bool    $addEmptyOption Set true to add an empty option with value "0" at the top of the hierarchy
      * @param   integer $key            ID of the object to display as the root of select options
-     * @return  string  HTML select box
-     **/
+     * @param string    $additional
+     * @return string HTML select box
+     */
     public function makeSelBox($name, $fieldName, $prefix = '-', $selected = '', $addEmptyOption = false, $key = 0, $additional = '')
     {
         $ret = "<select id='" . $name . "' name='" . $name . "'";
@@ -205,6 +204,11 @@ class XnewsMyXoopsObjectTree
 
     /**
      * Internal function used by makeTreeAsArray
+     * @param        $fieldName
+     * @param        $key
+     * @param        $ret
+     * @param        $prefix_orig
+     * @param string $prefix_curr
      */
     public function _recursiveMakeTreeAsArray($fieldName, $key, &$ret, $prefix_orig, $prefix_curr = '')
     {
@@ -226,7 +230,8 @@ class XnewsMyXoopsObjectTree
      * @param   string  $fieldName Name of the member variable from the node objects that should be used as the title for the options.
      * @param   string  $prefix    String to indent deeper levels
      * @param   integer $key       ID of the object to display as the root of select options
-     * @return array    key = object ID, value = $fieldName
+     * @param null      $empty
+     * @return array key = object ID, value = $fieldName
      */
     public function makeTreeAsArray($fieldName, $prefix = '-', $key = 0, $empty = null)
     {

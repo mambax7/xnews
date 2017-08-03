@@ -59,8 +59,13 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     /**
      * makes a nicely ordered selection box
      *
+     * @param        $title
+     * @param string $order
      * @param    int $preset_id is used to specify a preselected item
      * @param    int $none      set $none to 1 to add a option with value 0
+     * @param string $sel_name
+     * @param string $onchange
+     * @param        $perms
      * @return string
      */
     public function makeMySelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = 'topic_id', $onchange = '', $perms)
@@ -139,6 +144,8 @@ class nw_NewsTopic extends XnewsDeprecateTopic
 
     /**
      * Get the total number of topics in the base
+     * @param bool $checkRight
+     * @return null
      */
     public function getAllTopicsCount($checkRight = true)
     {
@@ -212,6 +219,8 @@ class nw_NewsTopic extends XnewsDeprecateTopic
 
     /**
      * Returns some stats about a topic
+     * @param $topicid
+     * @return array
      */
     public function getTopicMiniStats($topicid)
     {

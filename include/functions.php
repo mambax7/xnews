@@ -93,6 +93,7 @@ function xnews_checkModule($dirname)
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param $storyid
  */
 function nw_updaterating($storyid)
 {
@@ -117,6 +118,7 @@ function nw_updaterating($storyid)
  *
  * Returns a list of all the permitted topics Ids for the current user
  *
+ * @param string $permtype
  * @return array $topics    Permitted topics Ids
  *
  * @package       News
@@ -223,6 +225,15 @@ function nw_xoops_version()
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param $caption
+ * @param $name
+ * @param $value
+ * @param $rows
+ * @param $cols
+ * @param $width
+ * @param $height
+ * @param $supplemental
+ * @return bool|\XoopsFormEditor
  */
 //function &nw_getWysiwygForm($caption, $name, $value = '', $rows, $cols, $supplemental='')
 function &nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
@@ -251,6 +262,8 @@ function &nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $heig
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param $text
+ * @return mixed
  */
 function nw_DublinQuotes($text)
 {
@@ -268,6 +281,7 @@ function nw_DublinQuotes($text)
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param null $story
  */
 function nw_CreateMetaDatas($story = null)
 {
@@ -366,6 +380,8 @@ function nw_CreateMetaDatas($story = null)
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param $content
+ * @return string
  */
 function nw_createmeta_keywords($content)
 {
@@ -488,6 +504,8 @@ function nw_updateCache()
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param $tablename
+ * @return bool
  */
 function nw_TableExists($tablename)
 {
@@ -504,6 +522,9 @@ function nw_TableExists($tablename)
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param $fieldname
+ * @param $table
+ * @return bool
  */
 function nw_FieldExists($fieldname, $table)
 {
@@ -520,6 +541,9 @@ function nw_FieldExists($fieldname, $table)
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param $field
+ * @param $table
+ * @return bool|\mysqli_result
  */
 function nw_AddField($field, $table)
 {
@@ -593,6 +617,8 @@ function nw_isbot()
  * @package       News
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
+ * @param $text
+ * @return
  */
 function nw_make_infotips($text)
 {
@@ -608,6 +634,8 @@ function nw_make_infotips($text)
 /**
  * @author   Monte Ohrt <monte at ohrt dot com>, modified by Amos Robinson
  *           <amos dot robinson at gmail dot com>
+ * @param $string
+ * @return string
  */
 function nw_close_tags($string)
 {
@@ -682,12 +710,13 @@ function nw_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words =
  * Resize a Picture to some given dimensions (using the wideImage library)
  *
  * @param string  $src_path      Picture's source
- * @param         string         $              dst_path Picture's destination
+ * @param         $dst_path
  * @param integer $param_width   Maximum picture's width
  * @param integer $param_height  Maximum picture's height
  * @param boolean $keep_original Do we have to keep the original picture ?
  * @param string  $fit           Resize mode (see the wideImage library for more information)
  * @return bool
+ * @internal param $string $              dst_path Picture's destination
  */
 function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false, $fit = 'inside')
 {
@@ -769,6 +798,8 @@ function nw_prepareFolder($folder)
 //DNPROSSI SEO
 /**
  * if XOOPS ML is present, let's sanitize the title with the current language
+ * @param $chain
+ * @return mixed|string
  */
 function nw_remove_accents($chain)
 {

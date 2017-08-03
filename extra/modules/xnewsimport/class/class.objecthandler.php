@@ -259,8 +259,10 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
     /**
      * Assign a value to 1 field for tickets matching a set of conditions
      *
+     * @param         $fieldname
+     * @param         $fieldvalue
      * @param  object $criteria {@link CriteriaElement}
-     * @return bool   FALSE if update failed
+     * @return bool FALSE if update failed
      * @access    public
      */
     public function updateAll($fieldname, $fieldvalue, $criteria = null)

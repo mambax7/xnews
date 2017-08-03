@@ -31,6 +31,7 @@ class nw_blacklist
 
     /**
      * Remove one or many keywords from the list
+     * @param $keyword
      */
     public function delete($keyword)
     {
@@ -49,6 +50,7 @@ class nw_blacklist
 
     /**
      * Add one or many keywords
+     * @param $keyword
      */
     public function addkeywords($keyword)
     {
@@ -71,6 +73,8 @@ class nw_blacklist
 
     /**
      * Remove, from a list, all the blacklisted words
+     * @param $keywords
+     * @return array
      */
     public function remove_blacklisted($keywords)
     {

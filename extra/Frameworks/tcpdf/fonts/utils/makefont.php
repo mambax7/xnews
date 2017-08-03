@@ -235,6 +235,9 @@ function ReadMap($enc) {
 
 /**
  * Read UFM file
+ * @param $file
+ * @param $cidtogidmap
+ * @return array
  */
 function ReadUFM($file, &$cidtogidmap) {
 	//Prepare empty CIDToGIDMap
@@ -310,6 +313,9 @@ function ReadUFM($file, &$cidtogidmap) {
 
 /**
  * Read AFM file
+ * @param $file
+ * @param $map
+ * @return array
  */
 function ReadAFM($file,&$map) {
 	//Read a font metric file
