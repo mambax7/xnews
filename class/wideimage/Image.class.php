@@ -242,9 +242,9 @@ abstract class wiImage
     public function allocateColor($R, $G = null, $B = null)
     {
         if (is_array($R)) {
-            return imageColorAllocate($this->handle, $R['red'], $R['green'], $R['blue']);
+            return imagecolorallocate($this->handle, $R['red'], $R['green'], $R['blue']);
         } else {
-            return imageColorAllocate($this->handle, $R, $G, $B);
+            return imagecolorallocate($this->handle, $R, $G, $B);
         }
     }
 
@@ -308,7 +308,7 @@ abstract class wiImage
      */
     public function getColorRGB($colorIndex)
     {
-        return imageColorsForIndex($this->handle, $colorIndex);
+        return imagecolorsforindex($this->handle, $colorIndex);
     }
 
     /**
@@ -487,7 +487,7 @@ abstract class wiImage
 
     public function copyTo($dest, $left = 0, $top = 0)
     {
-        imageCopy($dest->getHandle(), $this->handle, $left, $top, 0, 0, $this->getWidth(), $this->getHeight());
+        imagecopy($dest->getHandle(), $this->handle, $left, $top, 0, 0, $this->getWidth(), $this->getHeight());
     }
 
     public function getCanvas()

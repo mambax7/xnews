@@ -54,9 +54,9 @@ class wiTrueColorImage extends wiImage
     public function allocateColorAlpha($R, $G = null, $B = null, $A = null)
     {
         if (is_array($R)) {
-            return imageColorAllocateAlpha($this->handle, $R['red'], $R['green'], $R['blue'], $R['alpha']);
+            return imagecolorallocatealpha($this->handle, $R['red'], $R['green'], $R['blue'], $R['alpha']);
         } else {
-            return imageColorAllocateAlpha($this->handle, $R, $G, $B, $A);
+            return imagecolorallocatealpha($this->handle, $R, $G, $B, $A);
         }
     }
 

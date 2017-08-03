@@ -60,7 +60,7 @@ class wiPaletteImage extends wiImage
             }
         }
 
-        imageCopy($new->getHandle(), $this->handle, 0, 0, 0, 0, $width, $height);
+        imagecopy($new->getHandle(), $this->handle, 0, 0, 0, 0, $width, $height);
 
         return $new;
     }
@@ -73,7 +73,7 @@ class wiPaletteImage extends wiImage
         if ($this->isTransparent()) {
             $new->copyTransparencyFrom($this);
         }
-        imageCopy($new->getHandle(), $this->handle, 0, 0, 0, 0, $width, $height);
+        imagecopy($new->getHandle(), $this->handle, 0, 0, 0, 0, $width, $height);
 
         return $new;
     }

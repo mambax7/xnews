@@ -5490,7 +5490,7 @@ if (!class_exists('TCPDF', false)) {
             $imgalpha = imagecreate($wpx, $hpx);
             // generate gray scale pallete
             for ($c = 0; $c < 256; ++$c) {
-                ImageColorAllocate($imgalpha, $c, $c, $c);
+                imagecolorallocate($imgalpha, $c, $c, $c);
             }
             // extract alpha channel
             for ($xpx = 0; $xpx < $wpx; ++$xpx) {
@@ -5698,7 +5698,7 @@ if (!class_exists('TCPDF', false)) {
         {
             //Output PDF to some destination
             //Finish document if necessary
-            $this->lastpage();
+            $this->lastPage();
             if ($this->state < 3) {
                 $this->Close();
             }

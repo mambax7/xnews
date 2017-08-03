@@ -30,7 +30,7 @@ class wioGetMask
         $mask->saveAlpha(false);
 
         for ($i = 0; $i <= 255; $i++) {
-            $greyscale[$i] = ImageColorAllocate($mask->getHandle(), $i, $i, $i);
+            $greyscale[$i] = imagecolorallocate($mask->getHandle(), $i, $i, $i);
         }
 
         imagefilledrectangle($mask->getHandle(), 0, 0, $width, $height, $greyscale[255]);

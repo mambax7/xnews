@@ -36,7 +36,7 @@ if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsMo
 $sfiles->updateCounter();
 $url = XNEWS_ATTACHED_FILES_URL . '/' . $sfiles->getDownloadname();
 if (!preg_match("/^ed2k*:\/\//i", $url)) {
-    Header("Location: $url");
+    header("Location: $url");
 }
 echo "<html><head><meta http-equiv=\"Refresh\" content=\"0; URL=" . $myts->htmlSpecialChars($url) . "\"></meta></head><body></body></html>";
 exit();
