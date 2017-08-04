@@ -52,3 +52,12 @@ define('_AM_XNI_IMPORT_FROM_TOPICS_DSC', 'Select one or more categories to impor
 define('_AM_XNI_IMPORT_TO_TOPICS', 'Import to');
 define('_AM_XNI_IMPORT_TO_TOPICS_DSC', 'Select a topic to import to.');
 define('_AM_XNI_IMPORT_GOTOMODULE', 'Goto module');
+
+//1.02
+define('_AM_XNI_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
+define('_AM_XNI_UPGRADEFAILED1', "Update failed - couldn't add new fields");
+define('_AM_XNI_UPGRADEFAILED2', "Update failed - couldn't rename table '%s'");
+define('_AM_XNI_ERROR_COLUMN', 'Could not create column in database : %s');
+define('_AM_XNI_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
+define('_AM_XNI_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
+define('_AM_XNI_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');

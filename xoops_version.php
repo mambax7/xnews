@@ -2,35 +2,29 @@
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 require_once __DIR__ . '/include/constants.php';
 
-$modversion['name']           = 'xNews';
-$modversion['version']        = 2.00;
-$modversion['description']    = _MI_NW_DESC;
-$modversion['author']         = 'The XOOPS Project Module Dev Team & Instant Zero';
-$modversion['credits']        = 'The XOOPS Project, Christian, Pilou, Marco, ALL the members of the Newbb Team, GIJOE, Zoullou, Mithrandir, Setec Astronomy, Marcan, 5vision, Anne, Wishcraft, DNPROSSI';
-$modversion['help']           = '';
-$modversion['license']        = 'GNU GPL 2.0 or later';
-$modversion['license_url']    = 'http://www.gnu.org/licenses/gpl-2.0.html';
-$modversion['image']          = 'assets/images/module_logo.png';
-$modversion['dirname']        = basename(__DIR__);
-$modversion['dirmoduleadmin'] = 'Frameworks/moduleclasses';
-$modversion['icons16']        = 'Frameworks/moduleclasses/icons/16';
-$modversion['icons32']        = 'Frameworks/moduleclasses/icons/32';
-
-$modversion['official'] = false;
-$modversion['original'] = 1;
-
-// About
+$modversion['version']             = 2.00;
 $modversion['module_status']       = 'Alpha';
-$modversion['release_date']        = '2014/12/14'; // YYYY/mm/dd
+$modversion['release_date']        = '2017/12/14'; // YYYY/mm/dd
+$modversion['name']                = 'xNews';
+$modversion['description']         = _MI_NW_DESC;
+$modversion['author']              = 'The XOOPS Project Module Dev Team & Instant Zero';
+$modversion['credits']             = 'The XOOPS Project, Christian, Pilou, Marco, ALL the members of the Newbb Team, GIJOE, Zoullou, Mithrandir, Setec Astronomy, Marcan, 5vision, Anne, Wishcraft, DNPROSSI';
+$modversion['help']                = '';
+$modversion['license']             = 'GNU GPL 2.0 or later';
+$modversion['license_url']         = 'http://www.gnu.org/licenses/gpl-2.0.html';
+$modversion['image']               = 'assets/images/module_logo.png';
+$modversion['dirname']             = basename(__DIR__);
+$modversion['dirmoduleadmin']      = 'Frameworks/moduleclasses';
+$modversion['icons16']             = 'Frameworks/moduleclasses/icons/16';
+$modversion['icons32']             = 'Frameworks/moduleclasses/icons/32';
+$modversion['official']            = false;
+$modversion['original']            = 1;
 $modversion['module_website_url']  = 'https://xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.7.2';
-$modversion['min_admin']           = '1.1';
-$modversion['min_db']              = array(
-    'mysql'  => '5.0.7',
-    'mysqli' => '5.0.7'
-);
+$modversion['min_xoops']           = '2.5.9';
+$modversion['min_admin']           = '1.2';
+$modversion['min_db']              = array('mysql' => '5.5');
 
 // Install, update, unistall
 $modversion['onInstall']   = 'include/oninstall.php';
@@ -68,6 +62,14 @@ $modversion['tables'][$i] = 'nw_stories_votedata';
 $modversion['hasSearch']      = true;
 $modversion['search']['file'] = 'include/search.inc.php';
 $modversion['search']['func'] = 'nw_search';
+
+// ------------------- Help files ------------------- //
+$modversion['helpsection'] = array(
+    ['name' => _MI_NW_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_NW_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_NW_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_NW_SUPPORT, 'link' => 'page=support'],
+);
 
 // Menu
 $modversion['hasMain'] = 1;

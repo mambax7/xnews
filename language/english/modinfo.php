@@ -230,3 +230,17 @@ define('_MI_NW_IMAGES_DISPLAY', 'Display attached images');
 define('_MI_NW_IMAGES_DISPLAY_DESC', 'If enabled attached images will be displayed in the article page.');
 define('_MI_NW_THUMB_MAX_WIDTH', 'Maximum attached image thumb width when it is resized');
 define('_MI_NW_THUMB_MAX_HEIGHT', 'Maximum attached image thumb height when it is resized');
+
+//2.00
+//Help
+define('_MI_NW_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_NW_HELP_HEADER', __DIR__.'/help/helpheader.tpl');
+define('_MI_NW_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_NW_OVERVIEW', 'Overview');
+
+//define('_MI_NW_HELP_DIR', __DIR__);
+
+//help multi-page
+define('_MI_NW_DISCLAIMER', 'Disclaimer');
+define('_MI_NW_LICENSE', 'License');
+define('_MI_NW_SUPPORT', 'Support');
