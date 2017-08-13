@@ -18,7 +18,7 @@ if (!$xnews->getConfig('newsbythisauthor')) {
     redirect_header('index.php', 3, _ERRORS);
 }
 
-$GLOBALS['xoopsOption']['template_main'] = 'nw_news_whos_who.html';
+$GLOBALS['xoopsOption']['template_main'] = 'nw_news_whos_who.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 $option  = $xnews->getConfig('displayname');

@@ -105,7 +105,7 @@ $sfiles     = new nw_sFiles();
 $column_count = $xnews->getConfig('columnmode');
 
 if ($showclassic) {
-    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_index.html';
+    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_index.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
     $xt = new nw_NewsTopic();
     //DNPROSSI - ADDED
@@ -202,7 +202,7 @@ if ($showclassic) {
         $xoopsTpl->assign('pagenav', '');
     }
 } else {    // Affichage par sujets
-    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_by_topic.html';
+    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_by_topic.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
 
     //DNPROSSI - ADDED

@@ -44,7 +44,7 @@ $tpl   = new XoopsTpl();
 $tpl->xoops_setCaching(2);
 $tpl->xoops_setCacheTime(3600); // Change this to the value you want
 
-if (!$tpl->is_cached('db:nw_news_rss.html', $topicid)) {
+if (!$tpl->is_cached('db:nw_news_rss.tpl', $topicid)) {
     $xt     = new nw_NewsTopic($topicid);
     $sarray = $story->getAllPublished($newsnumber, 0, $restricted, $topicid);
     if (is_array($sarray) && count($sarray > 0)) {
@@ -97,4 +97,4 @@ if (!$tpl->is_cached('db:nw_news_rss.html', $topicid)) {
     }
 }
 
-$tpl->display('db:nw_news_rss.html', $topicid);
+$tpl->display('db:nw_news_rss.tpl', $topicid);

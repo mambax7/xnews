@@ -47,5 +47,5 @@ function nw_b_news_topics_onthefly($options)
 
     $tpl = new XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_topics.html');
+    $tpl->display('db:nw_news_block_topics.tpl');
 }

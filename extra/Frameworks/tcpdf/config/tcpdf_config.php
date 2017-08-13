@@ -28,7 +28,7 @@
  * @license   http://www.gnu.org/copyleft/lesser.html LGPL
  * @since     2004-10-27
  */
-defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 // If you define the constant K_TCPDF_EXTERNAL_CONFIG, the following settings will be ignored.
 

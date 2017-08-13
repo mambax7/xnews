@@ -71,5 +71,5 @@ function nw_b_news_bigstory_onthefly($options)
 
     $tpl = new XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_bigstory.html');
+    $tpl->display('db:nw_news_block_bigstory.tpl');
 }

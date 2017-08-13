@@ -69,7 +69,7 @@ if (!$xnews->getConfig('newsbythisauthor')) {
 
 $myts                                    = MyTextSanitizer::getInstance();
 $articles                                = new nw_NewsStory();
-$GLOBALS['xoopsOption']['template_main'] = 'nw_news_by_this_author.html';
+$GLOBALS['xoopsOption']['template_main'] = 'nw_news_by_this_author.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 $dateformat = $xnews->getConfig('dateformat');

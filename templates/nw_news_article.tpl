@@ -29,7 +29,7 @@
     </tr>
 </table>
 
-<div style="padding: 3px; margin-right:3px;"><{include file="db:nw_news_item.html" story=$story}></div>
+<div style="padding: 3px; margin-right:3px;"><{include file="db:nw_news_item.tpl" story=$story}></div>
 
 </script>
 
@@ -75,7 +75,7 @@
 
 
 <{if $tags}>
-    <br><{include file="db:tag_bar.html"}>
+    <br><{include file="db:tag_bar.tpl"}>
 <{/if}>
 
 

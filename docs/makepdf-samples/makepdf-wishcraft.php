@@ -459,7 +459,7 @@ if ($author->getVar('name')) {
 }
 
 ob_start();
-$GLOBALS['xoopsTpl']->display('db:nw_news_article_pdf.html');
+$GLOBALS['xoopsTpl']->display('db:nw_news_article_pdf.tpl');
 $content = ob_get_contents();
 ob_end_clean();
 

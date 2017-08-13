@@ -173,5 +173,5 @@ function nw_b_news_archives_onthefly($options)
 
     $tpl = new XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_archives.html');
+    $tpl->display('db:nw_news_block_archives.tpl');
 }

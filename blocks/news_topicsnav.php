@@ -99,5 +99,5 @@ function nw_b_news_topicsnav_onthefly($options)
 
     $tpl = new XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_topicnav.html');
+    $tpl->display('db:nw_news_block_topicnav.tpl');
 }

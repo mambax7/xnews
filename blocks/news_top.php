@@ -737,5 +737,5 @@ function nw_b_news_top_onthefly($options)
 
     $tpl = new XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_top.html');
+    $tpl->display('db:nw_news_block_top.tpl');
 }

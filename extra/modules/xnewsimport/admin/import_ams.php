@@ -253,6 +253,5 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     }
 } else {
     redirect_header(NW_MODULE_URL . '/index.php', 3, _NOPERM);
-    exit();
 }
 xoops_cp_footer();

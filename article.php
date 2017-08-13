@@ -32,7 +32,7 @@
  *
  * @page_title                          Article's title - Topic's title - Module's name
  *
- * @template_name                       nw_news_article.html wich will call nw_news_item.html
+ * @template_name                       nw_news_article.tpl wich will call nw_news_item.tpl
  *
  * Template's variables :
  * @template_var                        string         pagenav some links to navigate thru pages
@@ -154,7 +154,7 @@ if (empty($_GET['com_id']) && $storypage == 0) {
         $article->updateCounter();
     }
 }
-$GLOBALS['xoopsOption']['template_main'] = 'nw_news_article.html';
+$GLOBALS['xoopsOption']['template_main'] = 'nw_news_article.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 //DNPROSSI - ADDED

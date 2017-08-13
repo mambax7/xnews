@@ -27,7 +27,7 @@
     </tr>
 </table>
 
-<div style="padding: 3px; margin-right:3px;"><{include file="db:nw_news_item_pdf.html" story=$story}></div>
+<div style="padding: 3px; margin-right:3px;"><{include file="db:nw_news_item_pdf.tpl" story=$story}></div>
 
 </script>
 
@@ -35,7 +35,7 @@
 <{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._MA_NW_PAGE}> <{$pagenav}></div><{/if}>
 
 <{if $tags}>
-    <br><{include file="db:tag_bar.html"}>
+    <br><{include file="db:tag_bar.tpl"}>
 <{/if}>
 
 <table width="100%" border="0" style="padding: 5px;">
