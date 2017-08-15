@@ -236,7 +236,7 @@ function nw_xoops_version()
  * @return bool|\XoopsFormEditor
  */
 //function &nw_getWysiwygForm($caption, $name, $value = '', $rows, $cols, $supplemental='')
-function &nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
+function nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
 {
     $xnews = XnewsXnews::getInstance();
     //
@@ -388,6 +388,7 @@ function nw_createmeta_keywords($content)
     require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
     require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
     $xnews = XnewsXnews::getInstance();
+    global $cfg;
 
     if (!$cfg['meta_keywords_auto_generate']) {
         return '';

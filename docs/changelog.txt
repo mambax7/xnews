@@ -1,20 +1,24 @@
-xNews History
-
-Key:
+<h5>Key:</h5>
 + Added feature.
 - Removed.
 ! Bug fix.
 o General comment.
 
-version 2.00 (unreleased)
-===================================
+<h5>2.xx Beta 1  [NOT RELEASED]</h5>
+<hr>
++ standardization for XOOPS 2.5.9 and PHP 7 (mamba)
+
+
+<h5>2.00 [NOT RELEASED]</h5>
+<hr>
 o Upgraded to Xoops 2.5.7 coding standard.
 o Upgraded to Xoops 2.5.7 directory structure.
 ! Fix strtotime bug
 ! Fix php 5.3+ bugs and remove some deprecates
 
-v1.71 (RC) UTF-8 SEO
-*******
+
+<h5>1.71 (RC) UTF-8 SEO</h5>
+<hr>
 - Changed Frameworks/tcpdf/config/tcpdf_config.php with voltan's patch
   Instead of getting default tcpdf header image and info now you get xoopsroot/images/logo.png and 
   $xoopsConfig['slogan']); and $xoopsConfig['sitename']);
@@ -46,8 +50,8 @@ v1.71 (RC) UTF-8 SEO
   - changed samples in docs
 
 
-v1.70 UTF-8 SEO
-*******
+<h5>1.70 UTF-8 SEO</h5>
+<hr>
 -Reverted some seo functions from patch
 -Fixed xnews title not redirecting issues 
 -Added tags Update in class-newsstory.php store function
@@ -55,8 +59,8 @@ v1.70 UTF-8 SEO
 -Added new htaccess working samples in docs/seo-samples
 -Added voltan's tcpdf_config.php patch after fixes
 
-v1.69 (FINAL) UTF-8 SEO
-*******
+<h5>1.69 (FINAL) UTF-8 SEO</h5>
+<hr>
 -Fixed missing storytopic to topic_id variable change (wishcraft patch)
   in:
      class/smarty/xoops_plugins/function.xoLanguage.php	
@@ -68,22 +72,22 @@ v1.69 (FINAL) UTF-8 SEO
 -kris_fr updated french language files
 
 
-v1.68 (FINAL) UTF-8 SEO
-*******
+<h5>1.68 (FINAL) UTF-8 SEO</h5>
+<hr>
 -Removed import button from within xnews and made a xnews importer new module.
 -Fixed update function part included by wishcraft to update database with tag field - this would zero data in tags on new release updates.
 -Added in database and update topic_weight field for next 1.69 topic sorting
 -changed tags name file to xnews_news.php so when cloned also clones will have correct tag file name.
 
-v1.68 (RC3) UTF-8 SEO
-*******
+<h5>1.68 (RC3) UTF-8 SEO</h5>
+<hr>
 -Merged wishcraft additions in his 1.69 Wrong numbering Next 1.68 Final
 -Added dobg to enable disable line break issue with some wysiwyg editors
 -moved seo samples in xnews/docs/seo
 -tags plugin is in extra folder as always has so if one needs it move into appropriate folder
 
-v1.68 (RC2) UTF-8 SEO
-*******
+<h5>1.68 (RC2) UTF-8 SEO</h5>
+<hr>
 - Added Index link in admin menu
 - Added define("_AM_NW_INDEX", "Index"); in language - admin.php
 - Fixed issue with "blocks" blank page
@@ -99,8 +103,8 @@ v1.68 (RC2) UTF-8 SEO
    -Spanish by Oswaldo
 -Fixed issues a few incompatability issues with xoops 2.5.2
 
-v1.68 (RC1) UTF-8 SEO
-*******
+<h5>1.68 (RC1) UTF-8 SEO</h5>
+<hr>
 I have made lots of old and new bug corrections, changes and improvements and before making any other
 addition I would like to consolidate 1.68 version as is so I made an RC1 version for testing and will
 soon realease xNews 1.68 FINAL after that i will concentrate on 1.69 version that will include: 
@@ -135,8 +139,8 @@ Upgrading clones Beta to RC1:
 	go to admin-xnews-Clone Manager and click on "Force Upgrade" for each clone then goto admin-modules
 	and update each upgraded clone.
 
-v1.68 (BETA)(BETA)(BETA) UTF-8 SEO
-*******
+<h5>1.68 (BETA)(BETA)(BETA) UTF-8 SEO</h5>
+<hr>
 - Fixed SEO utf-8 international chars
 - Fixed bug when topics are empty and "Author's name" in preferences is set to "Do not display author"
   - xnews/index.php 
@@ -144,8 +148,8 @@ v1.68 (BETA)(BETA)(BETA) UTF-8 SEO
     should be
 	if ( isset($story['poster']) && $story['poster'] != '' ) 
 
-v1.68 (BETA)(BETA)(BETA)(BETA) UTF-8 SEO
-*******
+<h5>1.68 (BETA)(BETA)(BETA)(BETA) UTF-8 SEO</h5>
+                                        <hr>
 - Added SEO
    - preferences Seo Enable config option
    - htaccess in modules/xnews folder
@@ -168,8 +172,8 @@ v1.68 (BETA)(BETA)(BETA)(BETA) UTF-8 SEO
 - Fixed topic image alignment
 - Many other small fixes
 
-v1.67 (BETA)(BETA)(BETA)(BETA) UTF-8 & Clonable
-*******
+<h5>1.67 (BETA)(BETA)(BETA)(BETA) UTF-8 & Clonable</h5>
+<hr>
 
 I needed a cloanable news module and one that worked correctly with xlanguage and UTF-8 so I decided to start a new news branch. 
 
@@ -227,20 +231,20 @@ I am writing a short help file eventhough changes are self explanatory and modul
 - Added News 1.64-5-6 module import function on xNews Clone Manager
 - Added Latest News Block.
 
-v1.66
-*******
+<h5>1.66</h5>
+<hr>
 - Removing double encoding with htmlspecialchars
 - Removing pdf folder (dhsoft)
 
-*******
-v1.65
-*******
+
+<h5>1.65</h5>
+<hr>
 - Adding prefix to adminmenu function for 2.4.2 compatibility
 - Correcting method for loading Editors in xoops_version.php
 
-*******
-v1.63
-*******
+
+<h5>1.63</h5>
+<hr>
 - The Xoops 2.3 editors are fully supported (tested with Xoops 2.3.1 RC)
 - The support for the Spaw editor is abandoned
 - The support of Xoops 2.2.x is abandoned
@@ -249,23 +253,23 @@ v1.63
 - Changes in translations (see lang.diff)
 - Correction of a bug in the "By Topic" presentation of the articles (on index.php)
 
-*******
-v1.62
-*******
+
+<h5>1.62</h5>
+<hr>
 - The module is now Xoops 2.3 compatible
 - Many corrections in the use of the deprecated TextSanitizer functions
 - Modification of tcpdf to be able to see pictures inside PDFs (thanks colossus)
 - TCPDF was updated to its version 4.0.017 (don't forget to create a file for your language in /xoops/modules/xnews/pdf/config/lang)
 
-*******
-v1.61
-*******
+
+<h5>1.61</h5>
+     <hr>
 - Correction of a bug in the link to the previous article (in article.php)
 - Update of TCPDF to its version 4.0.004
 
-*******
-v1.60
-*******
+
+<h5>1.60</h5>
+<hr>
 - It was possible to give any ranking to an article
 - After you have vote for an article, you are redirected to the article (and not to the module's index page)
 - TCPDF was updated to its version 4.0.001
@@ -277,9 +281,8 @@ v1.60
 - Now you can display html in the blocks
 
 
-*******
-v1.56
-*******
+<h5>1.56</h5>
+<hr>
 - In article.php and when you was using a site with multilinguals, there was a problem with the previous and next titles
 - It was possible to see the form used to post a comment even when anonymous users had not the right
 - Bug correction in the file /xoops/modules/xnews/include/notification.inc.php (thank you colossus)
@@ -292,14 +295,14 @@ v1.56
   ** This version of the news module is the last which will run with Php4 **
   **************************************************************************
 
-*******
-v1.55
-*******
+
+<h5>1.55</h5>
+<hr>
 > Correction of a bug in the files upload
 
-*******
-v1.54
-*******
+
+<h5>1.54</h5>
+<hr>
 > Added a missing picture in the Dojo toolkit used to create fun menus in the module's administration
 > Added some tests so that the module does not reveals its path
 > In the "Top news" block you can now see the avatar of the user who's story is at the spotlight
@@ -312,9 +315,9 @@ v1.54
   global_newstory_notify.tpl)
 
 
-*******
-v1.53
-*******
+
+<h5>1.53</h5>
+<hr>
 > Bug correction in the module's upgrade
 > Bugs corrections in the module's preferences (thank you nobunobu)
 > Bug corrected in the topics RSS
@@ -327,9 +330,9 @@ v1.53
   	$cfg['use_fun_menu'] = true;
 > We have added the French documentation inside the module
 
-*******
-v1.51
-*******
+
+<h5>1.51</h5>
+<hr>
 > I have corrected the backend.php and backendt.php (they were saved in UTF8)
 > I have added ALT and TITLES to the "Bookmark this article at these sites" pictures
   used on this "block"
@@ -337,9 +340,8 @@ v1.51
 > The expired articles were visible in the archives (thanks blueteen)
 
 
-*******
-v1.50
-*******
+<h5>1.50</h5>
+<hr>
 > I have renamed some functions in /xoops/modules/include/functions.php
   to prefix them with news_ (because of some conflicts with some other modules)
 > I have added a block to show archives (and two new files /xoops/modules/xnews/blocks/news_archives.php
@@ -458,9 +460,9 @@ v1.50
   the [pagebreak] "tag".
 
 
-*******
-v1.44
-*******
+
+<h5>1.44</h5>
+<hr>
 Some corrections available in this version was made by Marcan and 5vision, thank you both !
 > backendt.php, the "channel_category" tag now contains the topic's title (5vision)
 > When an article was submited, the author was not alarmed of the article's approbation (marcan)
@@ -471,9 +473,9 @@ Some corrections available in this version was made by Marcan and 5vision, thank
 > The template name "nw_news_archive.html" was corrected (a border propertie was missing to the pictures tags and a "</a>" tag) (5vision)
 
 
-*******
-v1.43
-*******
+
+<h5>1.43</h5>
+<hr>
 > Code corrected because of the bug "Call to a member function getConfigsByCat() on a non-object in include/functions.php on line 328"
   This bug was appearing under some rare circumstances.
 > A better Php 5.0.5 compatibility
@@ -483,15 +485,15 @@ v1.43
 > I have modified backend.php and pda.php to run with Php 5.0.5
 > The option "Enable authors to edit their posts" is now checked by default
 
-*******
-v1.42
-*******
+
+<h5>1.42</h5>
+<hr>
 > Corrected a bug in the infotips
 > Corrected a bug due to Php 5.0.5
 
-*******
-v1.41
-*******
+
+<h5>1.41</h5>
+<hr>
 Additions, modifications & bugs corrections :
 > For security reasons, I have removed the Xoops version from the printed version of an article
 > I have corrected an error in the block called "Navigate thru topics", the number of news was false, it was counting expired articles (thank you Solo71)
@@ -504,9 +506,9 @@ Additions, modifications & bugs corrections :
 > I have reduced the count of sql queries in the module's index page
 > I have corrected a bug in the option "Enable authors to edit their posts"
 
-*******
-v1.4
-*******
+
+<h5>1.4</h5>
+<hr>
 Additions, modifications & bugs corrections :
 > I have added the code recommanded in Xoops 2.0.13.1 for security reasons
 > Some templates were corrected to be a little more (but not completly) w3c compliants
@@ -532,16 +534,16 @@ Additions, modifications & bugs corrections :
   The imported article is always the last version in Ams
 
 
-*******
-v1.312
-*******
+
+<h5>1.312</h5>
+<hr>
 Modifications :
 > The module is now capable to use the editors provided with Xoops 2.2 (The module is also runing with older Xoops versions)
 > I have modified the templates so that the news printable version, the pdf version and the rating pages are not indexed by robots (thanks to tl for the tip)
 
-*******
-v1.311
-*******
+
+<h5>1.311</h5>
+<hr>
 Corrections :
 > A bug was corrected in the PDF's titles
 > A fatal error in the script used to print an article
@@ -549,9 +551,9 @@ Corrections :
 > A constant was visible in the PDF's footer
 
 
-**************************
-v1.31 Definitive version
-**************************
+
+<h5>1.31 Definitive version</h5>
+<hr>
 Corrections :
 > A correction in the automatic generation of keywords and description has been made.
 > The generation of PDFs was updated with the CBB's code.
@@ -563,9 +565,9 @@ Finally, the module was succesfully tested with Php 5.0.4
 Many tests were made with phpcoverage and xdebug to be sure that early all the code was treated by Php that's why I can affirm that the module is Php 5 compatible.
 
 
-************
-v1.31 RC2
-************
+
+<h5>1.31 RC2</h5>
+<hr>
 Corrections :
 > There was a bug int the "randon news" block when you was selecting to use only one or zero stories (thank you domifara)
 > I have, again, corrected a bug in the comments links (thank you mczolton)
@@ -595,9 +597,9 @@ Additions/Changes :
 > In the topics manager, by default the topics was created as a submenu of the "news" item, that's not the case anymore
 
 
-************
-v1.31 RC1
-************
+
+<h5>1.31 RC1</h5>
+<hr>
 Corrections :
 > news by this author, it was possible to call this page even if the module's option was desactivated
 > It was not possible to join zip files to the news
@@ -639,9 +641,8 @@ Additions/Changes :
   same number of news that the module's option called "Select the number of news items to display on top page"
 
 
-****************
-v1.3 Definitive
-****************
+<h5>1.3 Definitive</h5>
+<hr>
 > Relative paths was changed to absolute paths inside the scripts
 > I have added a lang.diff file for the translators
 > The spotlight available in the "recent articles" and "top news" blocks can now use up to 8 different skins :
@@ -661,9 +662,8 @@ v1.3 Definitive
 > A bug has been corrected for the htmlarea editor
 
 
-************
-v1.3 RC2
-************
+<h5>1.3 RC2</h5>
+<hr>
 Bugs corrections in :
 	- The form used to submit news
 		The article's title was limited to 80 characters whereas the db define 255 characters
@@ -689,9 +689,8 @@ Modifications :
 	- The spotlight look and feel has been modified (looks like "better").
 
 
-************
-v1.3 RC1
-************
+<h5>1.3 RC1</h5>
+        <hr>
 > New module's options :
 	- New page and link and option "news by the same author"
 	- Two new options are availables for the article's page, "Show Previous and Next link ?" and "Show summary table ?"
@@ -764,9 +763,8 @@ v1.3 RC1
 > For the Top articles and Recent news blocks, you can select between a classical view and a tabbed view. You can also use a Spotlight.
 
 
-*********
-v1.2.1
-*********
+<h5>1.2.1</h5>
+<hr>
 > Some important security holes have been corrected. That's why this version exists. Thanks goes to onokazu
 > The possibility to upload excel and word files have been removed.
   If you still need this "option", edit the file named :
@@ -790,23 +788,21 @@ v1.2.1
   https://xoops.org/modules/newbb/viewtopic.php?topic_id=22849&forum=11
 
 
-************
-v1.2 Final
-************
+<h5>1.2 Final</h5>
+<hr>
 > Added Spotlight Feature to Recent/Top news block
 > Added an icon below the article's title to show articles with attached files
 
-************
-v1.2 RC2
-************
+
+<h5>1.2 RC2</h5>
+<hr>
 > Fixed topic image alignment not saving
 > Fixed newsStory::getAllPublished to work with backend.php
 > Fixed new topics navigation block to work properly with restricting topics
 
 
-************
-v1.2 RC1
-************
+<h5>1.2 RC1</h5>
+<hr>
 > Added ALT+S as submit option (include/storyform.inc.php, admin/storyform.inc.php)
 > Fixed warning about invalid index "anonpost" in submit form (include/storyform.inc.php)
 > Changed $HTTP_GET_VARS to $_GET and $HTTP_POST_VARS to $_POST
@@ -828,4 +824,6 @@ v1.2 RC1
 > Added upload to topic creation form
 > The link "Comments" is not any more visible when comments are disabled
 
-v1.1 - Baseline
+
+<h5>1.1 - Baseline</h5>
+<hr>

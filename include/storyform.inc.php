@@ -8,6 +8,7 @@ if (file_exists(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/ca
 }
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
+require_once XNEWS_MODULE_PATH . '/class/utility.php';
 
 $sform = new XoopsThemeForm(_MA_NW_SUBMITNEWS, 'storyform', XNEWS_MODULE_URL . '/submit.php');
 $sform->setExtra('enctype="multipart/form-data"');
@@ -24,8 +25,32 @@ if ($xt->getAllTopicsCount() == 0) {
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 $allTopics    = $xt->getAllTopics($xnews->getConfig('restrictindex'), 'nw_submit');
 $topic_tree   = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
-$topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
-$sform->addElement(new XoopsFormLabel(_MA_NW_TOPIC, $topic_select));
+//$topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
+
+//$module = $xnews->getModule();
+$moduleDirName = basename(dirname(__DIR__));
+if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+} else {
+    $moduleHelper = Xmf\Module\Helper::getHelper('system');
+}
+$module = $moduleHelper->getModule();
+
+
+if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
+    //         $topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
+    $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $topicid, false, 0, '', '');
+    $sform->addElement($topic_select);
+
+} else {
+    $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
+    $sform->addElement(new XoopsFormLabel(_MA_NW_TOPIC, $topic_select));
+}
+
+
+
+
+
+
 
 //If admin - show admin form
 //TODO: Change to "If submit privilege"

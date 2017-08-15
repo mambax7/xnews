@@ -142,7 +142,7 @@ class XNewsUtility extends XoopsObject
         $verNum  = PHP_VERSION;
         $reqVer  = $module->getInfo('min_php');
         if (false !== $reqVer && '' !== $reqVer) {
-            if (version_compare($verNum, $reqVer, '<')) {
+            if (version_compare($verNum, (string)$reqVer, '<')) {
                 $module->setErrors(sprintf(_AM_NW_ERROR_BAD_PHP, $reqVer, $verNum));
                 $success = false;
             }

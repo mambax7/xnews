@@ -57,6 +57,7 @@ require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+require_once XNEWS_MODULE_PATH . '/class/utility.php';
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
 $nw_NewsStoryHandler = new nw_NewsStory();
@@ -132,9 +133,26 @@ if ($showclassic) {
 
         $allTopics    = $xt->getAllTopics($xnews->getConfig('restrictindex'));
         $topic_tree   = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
-        $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
+//        $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
+//        $xoopsTpl->assign('topic_select', $topic_select);
 
-        $xoopsTpl->assign('topic_select', $topic_select);
+        $moduleDirName = basename(__DIR__);
+        if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+        } else {
+            $moduleHelper = Xmf\Module\Helper::getHelper('system');
+        }
+        $module = $moduleHelper->getModule();
+
+        if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
+            $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $xoopsOption['storytopic'], true, 0, '', '');
+            $xoopsTpl->assign('topic_select', $topic_select->render());
+        } else {
+            $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
+            $xoopsTpl->assign('topic_select', $topic_select);
+        }
+
+
+
         $storynum_options = '';
         for ($i = 5; $i <= 30; $i = $i + 5) {
             $sel = '';

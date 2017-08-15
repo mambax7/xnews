@@ -1,61 +1,88 @@
 <?php
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-$moduleHandler = xoops_getHandler('module');
-$module        = $moduleHandler->getByDirname(basename(dirname(__DIR__)));
-$pathIcon32    = '../../' . $module->getInfo('icons32');
-//$pathIcon32 = '/assets/images/icons/32x32';
+$moduleDirName = basename(dirname(__DIR__));
 
-xoops_loadLanguage('modinfo', $module->dirname());
+if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+} else {
+    $moduleHelper = Xmf\Module\Helper::getHelper('system');
+}
 
-$adminmenu = array();
-$i                           = 0;
-$adminmenu[$i]['title']      = _MAIN;
-$adminmenu[$i]['link']       = 'admin/index.php';
-$adminmenu[$i]['icon']       = $pathIcon32 . '/home.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/topics32.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_ADMENU2;
-$adminmenu[$i]['link']       = 'admin/index.php?op=topicsmanager';
-$adminmenu[$i]['icon']       = 'assets/images/topics32.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/topics32.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_ADMENU3;
-$adminmenu[$i]['link']       = 'admin/index.php?op=newarticle';
-$adminmenu[$i]['icon']       = 'assets/images/newarticle32.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/newarticle32.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_GROUPPERMS;
-$adminmenu[$i]['link']       = 'admin/permissions.php';
-$adminmenu[$i]['icon']       = $pathIcon32 . '/permissions.png';
-$adminmenu[$i]['icon_small'] = $pathIcon32 . '/permissions.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_PRUNENEWS;
-$adminmenu[$i]['link']       = 'admin/prune.php';
-$adminmenu[$i]['icon']       = 'assets/images/prune32.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/prune32.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_EXPORT;
-$adminmenu[$i]['link']       = 'admin/export.php';
-$adminmenu[$i]['icon']       = 'assets/images/export32.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/export32.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_STATS;
-$adminmenu[$i]['link']       = 'admin/stats.php';
-$adminmenu[$i]['icon']       = 'assets/images/stats32.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/stats32.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_NEWSLETTER;
-$adminmenu[$i]['link']       = 'admin/newsletter.php';
-$adminmenu[$i]['icon']       = 'assets/images/newsletter32.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/newsletter32.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_METAGEN;
-$adminmenu[$i]['link']       = 'admin/metagen.php';
-$adminmenu[$i]['icon']       = 'assets/images/metagen32.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/metagen32.png';
-++$i;
-$adminmenu[$i]['title']      = _MI_NW_CLONER;
-$adminmenu[$i]['link']       = 'admin/clone.php';
-$adminmenu[$i]['icon']       = 'assets/images/cloner32.png';
-$adminmenu[$i]['icon_small'] = 'assets/images/cloner32.png';
+$pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
+$moduleHelper->loadLanguage('modinfo');
+
+$adminmenu[] = [
+    'title'      => _MAIN,
+    'link'       => 'admin/index.php',
+    'icon'       => $pathIcon32 . '/home.png',
+    'icon_small' => 'assets/images/topics32.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_ADMENU2,
+    'link'       => 'admin/index.php?op=topicsmanager',
+    'icon'       => 'assets/images/topics32.png',
+    'icon_small' => 'assets/images/topics32.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_ADMENU3,
+    'link'       => 'admin/index.php?op=newarticle',
+    'icon'       => 'assets/images/newarticle32.png',
+    'icon_small' => 'assets/images/newarticle32.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_GROUPPERMS,
+    'link'       => 'admin/permissions.php',
+    'icon'       => $pathIcon32 . '/permissions.png',
+    'icon_small' => $pathIcon32 . '/permissions.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_PRUNENEWS,
+    'link'       => 'admin/prune.php',
+    'icon'       => 'assets/images/prune32.png',
+    'icon_small' => 'assets/images/prune32.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_EXPORT,
+    'link'       => 'admin/export.php',
+    'icon'       => 'assets/images/export32.png',
+    'icon_small' => 'assets/images/export32.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_STATS,
+    'link'       => 'admin/stats.php',
+    'icon'       => 'assets/images/stats32.png',
+    'icon_small' => 'assets/images/stats32.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_NEWSLETTER,
+    'link'       => 'admin/newsletter.php',
+    'icon'       => 'assets/images/newsletter32.png',
+    'icon_small' => 'assets/images/newsletter32.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_METAGEN,
+    'link'       => 'admin/metagen.php',
+    'icon'       => 'assets/images/metagen32.png',
+    'icon_small' => 'assets/images/metagen32.png',
+];
+
+$adminmenu[] = [
+    'title'      => _MI_NW_CLONER,
+    'link'       => 'admin/clone.php',
+    'icon'       => 'assets/images/cloner32.png',
+    'icon_small' => 'assets/images/cloner32.png',
+];
+
+$adminmenu[] = [
+    'title' => _AM_MODULEADMIN_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png'
+];

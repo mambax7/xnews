@@ -2,7 +2,7 @@
 require_once __DIR__ . '/functions.php';
 
 //Default Permission Settings
-function xoops_module_update_xnews(&$xoopsModule)
+function xoops_module_update_xnews($xoopsModule)
 {
     global $xoopsDB;
     require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';

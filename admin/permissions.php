@@ -41,7 +41,7 @@ $module_id = $GLOBALS['xoopsModule']->getVar('mid');
 require_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
 $permissionsForm = new XoopsGroupPermForm($titleOfForm, $module_id, $permName, $permDesc, "admin/{$currentFile}");
 $xt              = new XnewsDeprecateTopic($xoopsDB->prefix('nw_topics'));
-$alltopics       =& $xt->getTopicsList();
+$alltopics       = $xt->getTopicsList();
 foreach ($alltopics as $topic_id => $topic) {
     $permissionsForm->addItem($topic_id, $topic['title'], $topic['pid']);
 }
