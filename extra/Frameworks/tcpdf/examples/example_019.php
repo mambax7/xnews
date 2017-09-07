@@ -52,8 +52,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -70,7 +70,7 @@ $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set some language dependent data:
-$lg                    = array();
+$lg                    = [];
 $lg['a_meta_charset']  = 'ISO-8859-1';
 $lg['a_meta_dir']      = 'ltr';
 $lg['a_meta_language'] = 'en';
@@ -93,9 +93,20 @@ $pdf->Cell(0, 10, 'Example 019', 1, 1, 'C');
 $pdf->Ln();
 
 $pdf->SetFont('times', '', 10);
-$pdf->MultiCell(80, 0,
+$pdf->MultiCell(
+    80,
+    0,
                 'Cras eros leo, porttitor porta, accumsan fermentum, ornare ac, est. Praesent dui lorem, imperdiet at, cursus sed, facilisis aliquam, nibh. Nulla accumsan nonummy diam. Donec tempus. Etiam posuere. Proin lectus. Donec purus. Duis in sem pretium urna feugiat vehicula. Ut suscipit velit eget massa. Nam nonummy, enim commodo euismod placerat, tortor elit tempus lectus, quis suscipit metus lorem blandit turpis.'
-                . "\n", 1, 'J', 0, 1, '', '', true, 0);
+                . "\n",
+    1,
+    'J',
+    0,
+    1,
+    '',
+    '',
+    true,
+    0
+);
 
 // ---------------------------------------------------------
 

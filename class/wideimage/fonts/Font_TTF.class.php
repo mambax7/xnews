@@ -34,12 +34,12 @@ class wiFont_TTF
     {
         $box = imagettfbbox($this->size, 0, $this->face, $text);
 
-        $rect = array(
+        $rect = [
             'offset_x' => -$box[0] - 1,
             'offset_y' => abs($box[7]) - 1,
             'width'    => abs($box[2] - $box[0]),
             'height'   => abs($box[1] - $box[7])
-        );
+        ];
 
         /**
          * print_r($box);

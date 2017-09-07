@@ -19,7 +19,7 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 //DNPROSSI SEO
 $seo_enabled = $xnews->getConfig('seo_enable');
 
-$newscountbytopic = $tbl_topics = array();
+$newscountbytopic = $tbl_topics = [];
 $perms            = '';
 $xt               = new nw_NewsTopic();
 $restricted       = $xnews->getConfig('restrictindex');
@@ -58,14 +58,14 @@ if (is_array($topics_arr) && count($topics_arr)) {
         }
         $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $onetopic['topic_id'], $cat_path) . "'>" . $onetopic['topic_title'] . '</a>';
 
-        $tbl_topics[] = array(
+        $tbl_topics[] = [
             'id'          => $onetopic['topic_id'],
             'nw_count'    => $count,
             'topic_color' => '#' . $onetopic['topic_color'],
             'prefix'      => $onetopic['prefix'],
             'title'       => $myts->displayTarea($onetopic['topic_title']),
             'topic_link'  => $topic_link
-        );
+        ];
     }
 }
 $xoopsTpl->assign('topics', $tbl_topics);

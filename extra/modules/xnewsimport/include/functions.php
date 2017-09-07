@@ -11,7 +11,7 @@ defined('XOOPS_ROOT_PATH') || exit('XOOPS Root path not defined');
 function xni_getmoduleoption($option, $repmodule)
 {
     global $xoopsModuleConfig, $xoopsModule;
-    static $tbloptions = array();
+    static $tbloptions = [];
     if (is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
         return $tbloptions[$option];
     }
@@ -80,7 +80,7 @@ function xni_getcategories($subprefix)
 function xni_MygetItemIds($permtype = 'nw_view')
 {
     global $xoopsUser;
-    static $tblperms = array();
+    static $tblperms = [];
     if (is_array($tblperms) && array_key_exists($permtype, $tblperms)) {
         return $tblperms[$permtype];
     }

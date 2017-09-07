@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -76,7 +76,7 @@ $pdf->SetFont('helvetica', '', 10);
 $pdf->AddPage();
 
 // array of core font names
-$core_fonts = array('courier', 'helvetica', 'times', 'symbol', 'zapfdingbats');
+$core_fonts = ['courier', 'helvetica', 'times', 'symbol', 'zapfdingbats'];
 
 $html = '<h1>Font Dump</h1>';
 
@@ -92,7 +92,7 @@ foreach ($core_fonts as $font) {
         }
         $chr = $pdf->unichr($i);
         // replace special characters
-        $trans = array('<' => '&lt;', '>' => '&gt;');
+        $trans = ['<' => '&lt;', '>' => '&gt;'];
         $chr   = strtr($chr, $trans);
         $html  .= '<td>' . $chr . '</td>';
     }

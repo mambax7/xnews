@@ -61,7 +61,7 @@ switch ($op) {
         $sform->addElement($onlyexpired, false);
         $sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
         $topiclist  = new XoopsFormSelect(_AM_NW_PRUNE_TOPICS, 'pruned_topics', '', 5, true);
-        $topics_arr = array();
+        $topics_arr = [];
         $xt         = new nw_NewsTopic();
         $allTopics  = $xt->getAllTopics(false); // The webmaster can see everything
         $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
@@ -103,7 +103,7 @@ switch ($op) {
         if ($count) {
             $displaydate = formatTimestamp($timestamp, $xnews->getConfig('dateformat'));
             $msg         = sprintf(_AM_NW_PRUNE_CONFIRM, $displaydate, $count);
-            xoops_confirm(array('op' => 'prunenews', 'expired' => $expired, 'pruned_topics' => $topiclist, 'prune_date' => $timestamp, 'ok' => 1), 'index.php', $msg);
+            xoops_confirm(['op' => 'prunenews', 'expired' => $expired, 'pruned_topics' => $topiclist, 'prune_date' => $timestamp, 'ok' => 1], 'index.php', $msg);
         } else {
             printf(_AM_NW_NOTHING_PRUNE);
         }

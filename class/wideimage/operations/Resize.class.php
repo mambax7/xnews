@@ -36,7 +36,7 @@ class wioResize
         $width  = wiDimension::fix($img->getWidth(), $width);
         $height = wiDimension::fix($img->getHeight(), $height);
 
-        $dim = array();
+        $dim = [];
         if ($fit == 'fill') {
             $dim['width']  = $width;
             $dim['height'] = $height;

@@ -101,7 +101,7 @@ class nw_cmimetype
 
     public function privBuildMimeArray()
     {
-        return array(
+        return [
             'ez'  => 'application/andrew-inset',
             'hqx' => 'application/mac-binhex40',
             'cpt' => 'application/mac-compactpro',
@@ -255,6 +255,6 @@ class nw_cmimetype
             'php3'  => 'text/php3',
             'ice'   => 'x-conference-xcooltalk',
             'unknown' => 'application/octet-stream'
-        );
+        ];
     }
 }

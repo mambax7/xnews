@@ -2,7 +2,7 @@
 // unicode to cid conversion table is from
 // ftp://ftp.oreilly.com/pub/examples/nutshell/cjkv/adobe/
 // cid2code.txt in ag15.tar.Z
-$cidinfo['uni2cid'] = array(
+$cidinfo['uni2cid'] = [
 32=>1,
 33=>2,
 34=>3,
@@ -23609,4 +23609,4 @@ $cidinfo['uni2cid'] = array(
 17630=>19085,
 17597=>19086,
 16877=>19087,
-);
+];

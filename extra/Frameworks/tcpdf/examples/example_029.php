@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -69,7 +69,7 @@ $pdf->setLanguageArray($l);
 
 // ---------------------------------------------------------
 
-$preferences = array(
+$preferences = [
     'HideToolbar'           => true,
     'HideMenubar'           => true,
     'HideWindowUI'          => true,
@@ -84,9 +84,9 @@ $preferences = array(
     'PrintScaling'          => 'AppDefault', // None, AppDefault
     'Duplex'                => 'DuplexFlipLongEdge', // Simplex, DuplexFlipShortEdge, DuplexFlipLongEdge
     'PickTrayByPDFSize'     => true,
-    'PrintPageRange'        => array(1, 1, 2, 3),
+    'PrintPageRange'        => [1, 1, 2, 3],
     'NumCopies'             => 2
-);
+];
 
 // set pdf viewer preferences
 $pdf->setViewerPreferences($preferences);

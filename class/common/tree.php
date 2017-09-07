@@ -18,7 +18,7 @@ class XnewsMyXoopsObjectTree
     public $_parentId;
     public $_myId;
     public $_rootId = null;
-    public $_tree   = array();
+    public $_tree   = [];
     public $_objects;
     /**#@-*/
 
@@ -91,7 +91,7 @@ class XnewsMyXoopsObjectTree
      **/
     public function getFirstChild($key)
     {
-        $ret = array();
+        $ret = [];
         if (isset($this->_tree[$key]['child'])) {
             foreach ($this->_tree[$key]['child'] as $childkey) {
                 $ret[$childkey] =& $this->_tree[$childkey]['obj'];
@@ -108,7 +108,7 @@ class XnewsMyXoopsObjectTree
      * @param   array  $ret (Empty when called from client) Array of children from previous recursions.
      * @return  array   Array of child nodes.
      **/
-    public function getAllChild($key, $ret = array())
+    public function getAllChild($key, $ret = [])
     {
         if (isset($this->_tree[$key]['child'])) {
             foreach ($this->_tree[$key]['child'] as $childkey) {
@@ -132,7 +132,7 @@ class XnewsMyXoopsObjectTree
      * @param   int    $uplevel (empty when called from outside) level of recursion
      * @return  array   Array of parent nodes.
      **/
-    public function getAllParent($key, $ret = array(), $uplevel = 1)
+    public function getAllParent($key, $ret = [], $uplevel = 1)
     {
         if (isset($this->_tree[$key]['parent']) && isset($this->_tree[$this->_tree[$key]['parent']]['obj'])) {
             $ret[$uplevel] =& $this->_tree[$this->_tree[$key]['parent']]['obj'];
@@ -235,7 +235,7 @@ class XnewsMyXoopsObjectTree
      */
     public function makeTreeAsArray($fieldName, $prefix = '-', $key = 0, $empty = null)
     {
-        $ret = array();
+        $ret = [];
         if ($empty != null) {
             $ret[0] = $empty;
         }

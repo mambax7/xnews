@@ -106,8 +106,8 @@ $xoopsTpl->assign('author_name_with_link', sprintf("<a href='%s'>%s</a>", XOOPS_
 $oldtopic      = -1;
 $oldtopictitle = '';
 $oldtopiccolor = '';
-$articlelist   = array();
-$articlestpl   = array();
+$articlelist   = [];
+$articlestpl   = [];
 $articlelist   = $articles->getAllPublishedByAuthor($uid, $xnews->getConfig('restrictindex'), false);
 $articlescount = count($articlelist);
 $xoopsTpl->assign('articles_count', $articlescount);
@@ -126,7 +126,7 @@ if ($articlescount > 0) {
                     $cat_path = nw_remove_accents($oldtopictitle);
                 }
                 $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $oldtopictitle . '</a>';
-                $xoopsTpl->append('topics', array(
+                $xoopsTpl->append('topics', [
                     'topic_id'             => $oldtopic,
                     'topic_count_articles' => sprintf(_AM_NW_TOTAL, $count_articles),
                     'topic_count_reads'    => $count_reads,
@@ -134,12 +134,12 @@ if ($articlescount > 0) {
                     'topic_title'          => $oldtopictitle,
                     'topic_link'           => $topic_link,
                     'news'                 => $articlestpl
-                ));
+                ]);
             }
             $oldtopic       = $article['topicid'];
             $oldtopictitle  = $article['topic_title'];
             $oldtopiccolor  = '#' . $myts->displayTarea($article['topic_color']);
-            $articlestpl    = array();
+            $articlestpl    = [];
             $count_articles = $count_reads = 0;
         }
         $htmltitle = '';
@@ -154,7 +154,7 @@ if ($articlescount > 0) {
             $story_path = nw_remove_accents($article['title']);
         }
         $storyTitle    = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $article['storyid'], $story_path) . "' " . $htmltitle . '>' . $article['title'] . '</a>';
-        $articlestpl[] = array(
+        $articlestpl[] = [
             'id'           => $article['storyid'],
             'hometext'     => $article['hometext'],
             'title'        => $article['title'],
@@ -163,7 +163,7 @@ if ($articlescount > 0) {
             'article_link' => $storyTitle,
             'published'    => formatTimestamp($article['published'], $dateformat),
             'rating'       => $article['rating']
-        );
+        ];
     }
 }
 
@@ -174,7 +174,7 @@ if ($seo_enabled != 0) {
 }
 $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $article['topic_title'] . '</a>';
 
-$xoopsTpl->append('topics', array('topic_id' => $oldtopic, 'topic_title' => $oldtopictitle, 'topic_link' => $topic_link, 'news' => $articlestpl));
+$xoopsTpl->append('topics', ['topic_id' => $oldtopic, 'topic_title' => $oldtopictitle, 'topic_link' => $topic_link, 'news' => $articlestpl]);
 $xoopsTpl->assign('xoops_pagetitle', _MI_NW_NEWSBYTHISAUTHOR . ' - ' . $authname . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
 

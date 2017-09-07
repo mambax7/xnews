@@ -45,10 +45,10 @@ $modversion['module_status']       = 'Beta 1';
 $modversion['min_php']             = '5.2';
 $modversion['min_xoops']           = '2.5.6';
 $modversion['min_admin']           = '1.1';
-$modversion['min_db']              = array(
+$modversion['min_db']              = [
     'mysql'  => '5.0.7',
     'mysqli' => '5.0.7'
-);
+];
 
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
@@ -67,7 +67,7 @@ $modversion['hasMain'] = 0;
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 // Config
 $i = 0;
@@ -81,4 +81,4 @@ $modversion['config'][$i]['description'] = '_MI_XNI_STORYCOUNTADMIN_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 10;
-$modversion['config'][$i]['options']     = array('5' => 5, '10' => 10, '15' => 15, '20' => 20, '25' => 25, '30' => 30, '35' => 35, '40' => 40);
+$modversion['config'][$i]['options']     = ['5' => 5, '10' => 10, '15' => 15, '20' => 20, '25' => 25, '30' => 30, '35' => 35, '40' => 40];

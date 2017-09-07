@@ -129,7 +129,7 @@ abstract class wiImage
             $predictedSourceType = 'File';
         }
 
-        return call_user_func(array('wiImage', 'loadFrom' . $predictedSourceType), $source, $format);
+        return call_user_func(['wiImage', 'loadFrom' . $predictedSourceType], $source, $format);
     }
 
     /**
@@ -216,7 +216,7 @@ abstract class wiImage
         $args = func_get_args();
         unset($args[1]);
         array_unshift($args, $this->getHandle());
-        call_user_func_array(array($mapper, 'save'), $args);
+        call_user_func_array([$mapper, 'save'], $args);
     }
 
     /**
@@ -232,7 +232,7 @@ abstract class wiImage
         array_unshift($args, $this->getHandle());
 
         $mapper = wiFileMapperFactory::selectMapper(null, $format);
-        call_user_func_array(array($mapper, 'save'), $args);
+        call_user_func_array([$mapper, 'save'], $args);
 
         return ob_get_clean();
     }
@@ -503,7 +503,7 @@ abstract class wiImage
         $op = $this->getOperation($name);
         array_unshift($args, $this);
 
-        return call_user_func_array(array($op, 'execute'), $args);
+        return call_user_func_array([$op, 'execute'], $args);
     }
 
     public function __toString()

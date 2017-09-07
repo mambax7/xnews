@@ -36,7 +36,7 @@ function XoSmartyPluginGetSection($section = '')
                 if (count($IniContent[$section]) == 0) {
                     XoopsErrorHandler_HandleError(E_USER_WARNING, sprintf(XOSMARTY_SECTIONNOTFOUND, $section, "/configs/$config_file.ini.php"), __FILE__, __LINE__);
 
-                    return array();
+                    return [];
                 }
 
                 return $IniContent[$section];
@@ -48,7 +48,7 @@ function XoSmartyPluginGetSection($section = '')
     }
     XoopsErrorHandler_HandleError(E_USER_WARNING, sprintf(XOSMARTY_FILENOTFOUND, "/configs/$section.ini.php"), __FILE__, __LINE__);
 
-    return array();
+    return [];
 }
 
 /**
@@ -61,7 +61,7 @@ function XoSmartyPluginGetSection($section = '')
 function XoSmartyPluginLoadGD()
 {
     if (extension_loaded('gd')) {
-        $required_functions = array('imagecreate', 'imagecreatetruecolor', 'imagecolorallocate', 'imagefilledrectangle', 'ImagePNG', 'imagedestroy', 'imageftbbox', 'ImageColorTransparent');
+        $required_functions = ['imagecreate', 'imagecreatetruecolor', 'imagecolorallocate', 'imagefilledrectangle', 'ImagePNG', 'imagedestroy', 'imageftbbox', 'ImageColorTransparent'];
         foreach ($required_functions as $func) {
             if (!function_exists($func)) {
                 XoopsErrorHandler_HandleError(E_USER_WARNING, XOSMARTY_GDNOTINSTALLED, __FILE__, __LINE__);

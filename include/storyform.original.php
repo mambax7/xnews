@@ -132,7 +132,7 @@ switch ($xnews->getConfig('uploadgroups')) {
 if ($allowupload) {
     if ($op == 'edit') {
         $sfiles   = new nw_sFiles();
-        $filesarr = array();
+        $filesarr = [];
         $filesarr = $sfiles->getAllbyStory($storyid);
         if (count($filesarr) > 0) {
             $upl_tray     = new XoopsFormElementTray(_AM_NW_UPLOAD_ATTACHFILE, '<br>');

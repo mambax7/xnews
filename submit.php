@@ -435,7 +435,7 @@ switch ($op) {
                 if (xoops_trim($fldname != '')) {
                     $sfiles         = new nw_sFiles();
                     $destname       = $sfiles->createUploadName(XNEWS_TOPICS_FILES_PATH, $fldname);
-                    $permittedTypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
+                    $permittedTypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
                     $uploader       = new XoopsMediaUploader(XNEWS_TOPICS_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
                     $uploader->setTargetFileName($destname);
                     if ($uploader->fetchMedia($_POST['xoops_upload_file'][1])) {
@@ -474,7 +474,7 @@ switch ($op) {
                 //     Notification
                 // TODO: modifier afin qu'en cas de prépublication, la notification ne se fasse pas
                 $notificationHandler = xoops_getHandler('notification');
-                $tags                = array();
+                $tags                = [];
                 $tags['STORY_NAME']  = $story->title();
                 $tags['STORY_URL']   = XNEWS_MODULE_URL . '/article.php?storyid=' . $story->storyid();
                 // If notify checkbox is set, add subscription for approve

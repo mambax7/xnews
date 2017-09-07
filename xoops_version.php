@@ -24,7 +24,7 @@ $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 // Install, update, unistall
 $modversion['onInstall']   = 'include/oninstall.php';
@@ -65,12 +65,12 @@ $modversion['search']['file'] = 'include/search.inc.php';
 $modversion['search']['func'] = 'nw_search';
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
+$modversion['helpsection'] = [
     ['name' => _MI_NW_OVERVIEW, 'link' => 'page=help'],
     ['name' => _MI_NW_DISCLAIMER, 'link' => 'page=disclaimer'],
     ['name' => _MI_NW_LICENSE, 'link' => 'page=license'],
     ['name' => _MI_NW_SUPPORT, 'link' => 'page=support'],
-);
+];
 
 // Menu
 $modversion['hasMain'] = 1;
@@ -82,7 +82,7 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
         require_once __DIR__ . '/class/xnews.php';
         $xnews = XnewsXnews::getInstance();
     }
-    $groups       = (is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+    $groups       = (is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
     $gpermHandler = xoops_getHandler('groupperm');
     //
     if ($gpermHandler->checkRight('nw_submit', 0, $groups, $xnews->getModule()->getVar('mid'))) {
@@ -266,14 +266,14 @@ $modversion['config'][$i]['description'] = '_MI_NW_STORYHOMEDSC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 5;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '5'  => 5,
     '10' => 10,
     '15' => 15,
     '20' => 20,
     '25' => 25,
     '30' => 30
-);
+];
 // Format of the date to use in the module, if you don't specify anything then the default date's format will be used
 ++$i;
 $modversion['config'][$i]['name']        = 'dateformat';
@@ -315,10 +315,10 @@ $modversion['config'][$i]['description'] = '_MI_NW_NEWSDISPLAYDESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'Classic';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '_MI_NW_NEWSCLASSIC' => 'Classic',
     '_MI_NW_NEWSBYTOPIC' => 'Bytopic'
-);
+];
 // How to display Author's name, username, full name or nothing ?
 ++$i;
 $modversion['config'][$i]['name']        = 'displayname';
@@ -327,11 +327,11 @@ $modversion['config'][$i]['description'] = '_MI_NW_ADISPLAYNAMEDSC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '_MI_NW_DISPLAYNAME1' => 1,
     '_MI_NW_DISPLAYNAME2' => 2,
     '_MI_NW_DISPLAYNAME3' => 3
-);
+];
 // Number of columns to use to display news
 ++$i;
 $modversion['config'][$i]['name']        = 'columnmode';
@@ -340,13 +340,13 @@ $modversion['config'][$i]['description'] = '_MI_NW_COLUMNMODE_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     1 => 1,
     2 => 2,
     3 => 3,
     4 => 4,
     5 => 5
-);
+];
 // Number of news and topics to display in the module's admin part
 ++$i;
 $modversion['config'][$i]['name']        = 'storycountadmin';
@@ -355,7 +355,7 @@ $modversion['config'][$i]['description'] = '_MI_NW_STORYCOUNTADMIN_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 10;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '5'  => 5,
     '10' => 10,
     '15' => 15,
@@ -364,7 +364,7 @@ $modversion['config'][$i]['options']     = array(
     '30' => 30,
     '35' => 35,
     '40' => 40
-);
+];
 // Authorized groups to upload
 ++$i;
 $modversion['config'][$i]['name']        = 'uploadgroups';
@@ -373,11 +373,11 @@ $modversion['config'][$i]['description'] = '_MI_NW_UPLOADGROUPS_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 2;
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     '_MI_NW_UPLOAD_GROUP1' => 1,
     '_MI_NW_UPLOAD_GROUP2' => 2,
     '_MI_NW_UPLOAD_GROUP3' => 3
-);
+];
 // MAX Filesize Upload in kilo bytes
 ++$i;
 $modversion['config'][$i]['name']        = 'maxuploadsize';
@@ -423,12 +423,12 @@ $modversion['config'][$i]['title']       = '_MI_NW_PREVNEX_LINK';
 $modversion['config'][$i]['description'] = '_MI_NW_PREVNEX_LINK_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_NW_NONE       => 0,
     _MI_NW_TOPONLY    => 1,
     _MI_NW_BOTTOMONLY => 2,
     _MI_NW_BOTH       => 3
-);
+];
 $modversion['config'][$i]['default']     = 0;
 // Dispay layout, view topics and link enabled
 ++$i;
@@ -469,12 +469,12 @@ $modversion['config'][$i]['title']       = '_MI_NW_DISPLAYLINKICNS';
 $modversion['config'][$i]['description'] = '_MI_NW_DISPLAYLINKICNSDESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_NW_NONE       => 0,
     _MI_NW_TOPONLY    => 1,
     _MI_NW_BOTTOMONLY => 2,
     _MI_NW_BOTH       => 3
-);
+];
 $modversion['config'][$i]['default']     = 2;
 // Seo enable
 ++$i;
@@ -483,11 +483,11 @@ $modversion['config'][$i]['title']       = '_MI_NW_SEOENABLE';
 $modversion['config'][$i]['description'] = '_MI_NW_SEOENABLEDESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_NW_NONE => 0,
     'htaccess'  => 1,
     'path-info' => 2
-);
+];
 $modversion['config'][$i]['default']     = 0;
 // Seo path
 ++$i;
@@ -528,10 +528,10 @@ $modversion['config'][$i]['title']       = '_MI_NW_SEOLEVEL';
 $modversion['config'][$i]['description'] = '_MI_NW_SEOLEVELDESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_NW_ROOT_LEVEL   => 0,
     _MI_NW_MODULE_LEVEL => 1
-);
+];
 $modversion['config'][$i]['default']     = 0;
 // Do you want to see a summary table at the bottom of each article ?
 ++$i;
@@ -639,7 +639,7 @@ $modversion['config'][$i]['title']       = '_MI_NW_TABS_SKIN';
 $modversion['config'][$i]['description'] = '_MI_NW_TABS_SKIN_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['options']     = array(
+$modversion['config'][$i]['options']     = [
     _MI_NW_SKIN_1 => 1,
     _MI_NW_SKIN_2 => 2,
     _MI_NW_SKIN_3 => 3,
@@ -648,7 +648,7 @@ $modversion['config'][$i]['options']     = array(
     _MI_NW_SKIN_6 => 6,
     _MI_NW_SKIN_7 => 7,
     _MI_NW_SKIN_8 => 8
-);
+];
 $modversion['config'][$i]['default']     = 6;
 /**
  * Display a navigation's box on the pages ?
@@ -766,12 +766,12 @@ $modversion['notification']['lookup_func'] = 'nw_notify_iteminfo';
 $modversion['notification']['category'][1]['name']           = 'global';
 $modversion['notification']['category'][1]['title']          = _MI_NW_GLOBAL_NOTIFY;
 $modversion['notification']['category'][1]['description']    = _MI_NW_GLOBAL_NOTIFYDSC;
-$modversion['notification']['category'][1]['subscribe_from'] = array('index.php', 'article.php');
+$modversion['notification']['category'][1]['subscribe_from'] = ['index.php', 'article.php'];
 
 $modversion['notification']['category'][2]['name']           = 'story';
 $modversion['notification']['category'][2]['title']          = _MI_NW_STORY_NOTIFY;
 $modversion['notification']['category'][2]['description']    = _MI_NW_STORY_NOTIFYDSC;
-$modversion['notification']['category'][2]['subscribe_from'] = array('article.php');
+$modversion['notification']['category'][2]['subscribe_from'] = ['article.php'];
 $modversion['notification']['category'][2]['item_name']      = 'storyid';
 $modversion['notification']['category'][2]['allow_bookmark'] = 1;
 
@@ -779,7 +779,7 @@ $modversion['notification']['category'][2]['allow_bookmark'] = 1;
 $modversion['notification']['category'][3]['name']           = 'category';
 $modversion['notification']['category'][3]['title']          = _MI_NW_CATEGORY_NOTIFY;
 $modversion['notification']['category'][3]['description']    = _MI_NW_CATEGORY_NOTIFYDSC;
-$modversion['notification']['category'][3]['subscribe_from'] = array('index.php', 'article.php');
+$modversion['notification']['category'][3]['subscribe_from'] = ['index.php', 'article.php'];
 $modversion['notification']['category'][3]['item_name']      = 'storytopic';
 $modversion['notification']['category'][3]['allow_bookmark'] = 1;
 

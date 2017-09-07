@@ -79,7 +79,7 @@ class nw_sFiles
 
     public function getAllbyStory($storyid)
     {
-        $ret    = array();
+        $ret    = [];
         $sql    = 'SELECT *';
         $sql    .= " FROM {$this->table}";
         $sql    .= ' WHERE storyid = ' . (int)$storyid;
@@ -305,7 +305,7 @@ class nw_sFiles
 
     public function getCountbyStories($stories)
     {
-        $ret = array();
+        $ret = [];
         if (count($stories) > 0) {
             $sql    = 'SELECT storyid, count(fileid) as cnt';
             $sql    .= " FROM {$this->db->prefix('nw_stories_files')}";

@@ -25,7 +25,7 @@ function nw_b_news_bigstory_show()
     $dateformat = $xnews->getConfig('dateformat');
     $infotips   = $xnews->getConfig('infotips');
 
-    $block    = array();
+    $block    = [];
     $onestory = new nw_NewsStory();
     $stories  = $onestory->getBigStory(1, 0, $restricted, 0, 1, true, 'counter');
     if (count($stories) == 0) {

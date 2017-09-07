@@ -433,7 +433,7 @@ function modTopicS()
             $sfiles         = new nw_sFiles();
             $dstpath        = XNEWS_TOPICS_FILES_PATH;
             $destname       = $sfiles->createUploadName($dstpath, $fldname, true);
-            $permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
+            $permittedtypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
             $uploader       = new XoopsMediaUploader($dstpath, $permittedtypes, $xnews->getConfig('maxuploadsize'));
             $uploader->setTargetFileName($destname);
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -501,7 +501,7 @@ function delTopic()
         xoops_cp_header();
         echo '<h2>' . _AM_NW_TOPICSMNGR . '</h2>';
         $xt = new XnewsDeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'), (int)$_GET['topic_id']);
-        xoops_confirm(array('op' => 'delTopic', 'topic_id' => (int)$_GET['topic_id'], 'ok' => 1), 'index.php', _AM_NW_WAYSYWTDTTAL . '<br>' . $xt->topic_title('S'));
+        xoops_confirm(['op' => 'delTopic', 'topic_id' => (int)$_GET['topic_id'], 'ok' => 1], 'index.php', _AM_NW_WAYSYWTDTTAL . '<br>' . $xt->topic_title('S'));
     } else {
         xoops_cp_header();
         $xt = new XnewsDeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'), (int)$_POST['topic_id']);
@@ -564,7 +564,7 @@ function addTopic()
                 $sfiles         = new nw_sFiles();
                 $dstpath        = XNEWS_TOPICS_FILES_PATH;
                 $destname       = $sfiles->createUploadName($dstpath, $fldname, true);
-                $permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
+                $permittedtypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
                 $uploader       = new XoopsMediaUploader($dstpath, $permittedtypes, $xnews->getConfig('maxuploadsize'));
                 $uploader->setTargetFileName($destname);
                 if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -606,7 +606,7 @@ function addTopic()
         nw_updateCache();
 
         $notificationHandler = xoops_getHandler('notification');
-        $tags                = array();
+        $tags                = [];
         $tags['TOPIC_NAME']  = $_POST['topic_title'];
         $notificationHandler->triggerEvent('global', 0, 'new_category', $tags);
         redirect_header('index.php?op=topicsmanager', 3, _AM_NW_DBUPDATED);
@@ -704,7 +704,7 @@ switch ($op) {
             $story = new nw_NewsStory($storyid);
             $story->delete();
             $sfiles   = new nw_sFiles();
-            $filesarr = array();
+            $filesarr = [];
             $filesarr = $sfiles->getAllbyStory($storyid);
             if (count($filesarr) > 0) {
                 foreach ($filesarr as $onefile) {
@@ -719,7 +719,7 @@ switch ($op) {
             $story = new nw_NewsStory($storyid);
             xoops_cp_header();
             echo '<h4>' . _AM_NW_CONFIG . '</h4>';
-            xoops_confirm(array('op' => 'delete', 'storyid' => $storyid, 'ok' => 1), 'index.php', _AM_NW_RUSUREDEL . '<br>' . $story->title());
+            xoops_confirm(['op' => 'delete', 'storyid' => $storyid, 'ok' => 1], 'index.php', _AM_NW_RUSUREDEL . '<br>' . $story->title());
         }
         break;
 
@@ -878,7 +878,7 @@ switch ($op) {
         // Topic's color
         // Code stolen to Zoullou, thank you Zoullou ;-)
         $select_color = "\n<select name='topic_color'  onchange='xoopsGetElementById(\"NewsColorSelect\").style.backgroundColor = \"#\" + this.options[this.selectedIndex].value;'>\n<option value='000000'>" . _AM_NW_COLOR . "</option>\n";
-        $color_values = array(
+        $color_values = [
             '000000',
             '000033',
             '000066',
@@ -1094,7 +1094,7 @@ switch ($op) {
             'FFFF99',
             'FFFFCC',
             'FFFFFF'
-        );
+        ];
 
         foreach ($color_values as $color_value) {
             if ($topic_color == $color_value) {
@@ -1138,7 +1138,7 @@ switch ($op) {
         $gpermHandler  = xoops_getHandler('groupperm');
         $full_list     = array_keys($group_list);
 
-        $groups_ids = array();
+        $groups_ids = [];
         if ($topic_id > 0) { // Edit mode
             $groups_ids                       = $gpermHandler->getGroupIds('nw_approve', $topic_id, $xnews->getModule()->getVar('mid'));
             $groups_ids                       = array_values($groups_ids);
@@ -1149,7 +1149,7 @@ switch ($op) {
         $groups_news_can_approve_checkbox->addOptionArray($group_list);
         $sform->addElement($groups_news_can_approve_checkbox);
 
-        $groups_ids = array();
+        $groups_ids = [];
         if ($topic_id > 0) { // Edit mode
             $groups_ids                      = $gpermHandler->getGroupIds('nw_submit', $topic_id, $xnews->getModule()->getVar('mid'));
             $groups_ids                      = array_values($groups_ids);
@@ -1160,7 +1160,7 @@ switch ($op) {
         $groups_news_can_submit_checkbox->addOptionArray($group_list);
         $sform->addElement($groups_news_can_submit_checkbox);
 
-        $groups_ids = array();
+        $groups_ids = [];
         if ($topic_id > 0) {        // Edit mode
             $groups_ids                    = $gpermHandler->getGroupIds('nw_view', $topic_id, $xnews->getModule()->getVar('mid'));
             $groups_ids                    = array_values($groups_ids);

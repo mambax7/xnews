@@ -29,7 +29,7 @@ $resultALTER = $xoopsDB->query('ALTER TABLE ' . $xoopsDB->prefix($to_module_subp
 $resultALTER = $xoopsDB->query('ALTER TABLE ' . $xoopsDB->prefix($to_module_subprefix . 'stories_files') . ' AUTO_INCREMENT = 1');
 $resultALTER = $xoopsDB->query('ALTER TABLE ' . $xoopsDB->prefix($to_module_subprefix . 'stories_votedata') . ' AUTO_INCREMENT = 1');
 
-$newArticleArray = array();
+$newArticleArray = [];
 
 while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
     $topic = new xni_NewsTopic(0, $to_module_subprefix);

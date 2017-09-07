@@ -40,7 +40,6 @@ if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
     //         $topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
     $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $topicid, false, 0, '', '');
     $sform->addElement($topic_select);
-
 } else {
     $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
     $sform->addElement(new XoopsFormLabel(_MA_NW_TOPIC, $topic_select));
@@ -127,7 +126,7 @@ switch ($xnews->getConfig('uploadgroups')) {
 if ($allowupload) {
     if ($op == 'edit') {
         $sfiles   = new nw_sFiles();
-        $filesarr = array();
+        $filesarr = [];
         $filesarr = $sfiles->getAllbyStory($storyid);
         if (count($filesarr) > 0) {
             $upl_tray     = new XoopsFormElementTray(_AM_NW_UPLOAD_ATTACHFILE, '<br>');

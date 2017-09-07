@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -78,17 +78,17 @@ $pdf->SetFont('helvetica', '', 10);
 // add a page
 $pdf->AddPage();
 
-$style = array(
+$style = [
     'position'    => 'S',
     'border'      => true,
     'padding'     => 4,
-    'fgcolor'     => array(0, 0, 0),
+    'fgcolor'     => [0, 0, 0],
     'bgcolor'     => false, //array(255,255,255),
     'text'        => true,
     'font'        => 'helvetica',
     'fontsize'    => 8,
     'stretchtext' => 4
-);
+];
 
 // PRINT VARIOUS 1D BARCODES
 

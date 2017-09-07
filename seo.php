@@ -26,12 +26,12 @@ if (empty($seoOp) && @$_SERVER['PATH_INFO']) {
     // $seoArg = substr($data[1], strlen($seoOp) +1);
 }
 
-$seoMap = array(
+$seoMap = [
     _MA_NW_SEO_TOPICS   => 'index.php',
     _MA_NW_SEO_ARTICLES => 'article.php',
     _MA_NW_SEO_PRINT    => 'print.php',
     _MA_NW_SEO_PDF      => 'makepdf.php'
-);
+];
 
 if (!empty($seoOp) && !empty($seoMap[$seoOp])) {
     //module specific dispatching logic, other module must implement as

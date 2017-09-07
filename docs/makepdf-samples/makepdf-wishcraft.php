@@ -47,7 +47,7 @@ $gpermHandler = xoops_getHandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
 } else {
-    $groups = array(XOOPS_GROUP_ANONYMOUS => XOOPS_GROUP_ANONYMOUS);
+    $groups = [XOOPS_GROUP_ANONYMOUS => XOOPS_GROUP_ANONYMOUS];
 }
 if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
@@ -88,10 +88,10 @@ $story['text'] = $article->hometext();
 $bodytext      = $article->bodytext();
 
 if (xoops_trim($bodytext) != '') {
-    $articletext = array();
+    $articletext = [];
     if ($xnews->getConfig('enhanced_pagenav')) {
         $articletext             = preg_split('/(\[pagebreak:|\[pagebreak)(.*)(\])/iU', $bodytext);
-        $arr_titles              = array();
+        $arr_titles              = [];
         $auto_summary            = $article->auto_summary($bodytext, $arr_titles);
         $bodytext                = str_replace('[summary]', $auto_summary, $bodytext);
         $articletext[$storypage] = str_replace('[summary]', $auto_summary, $articletext[$storypage]);
@@ -210,7 +210,7 @@ $GLOBALS['xoopsTpl']->assign('mail_link', 'mailto:?subject=' . sprintf(_MA_NW_IN
 $GLOBALS['xoopsTpl']->assign('lang_attached_files', _MA_NW_ATTACHEDFILES);
 
 $sfiles     = new nw_sFiles();
-$filesarr   = $newsfiles = array();
+$filesarr   = $newsfiles = [];
 $filesarr   = $sfiles->getAllbyStory($storyid);
 $filescount = count($filesarr);
 $GLOBALS['xoopsTpl']->assign('attached_files_count', $filescount);
@@ -218,17 +218,17 @@ if ($filescount > 0) {
     foreach ($filesarr as $onefile) {
         if (strstr($onefile->getMimetype(), 'image')) {
             $mime        = 'image';
-            $newsfiles[] = array('visitlink' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(), 'file_realname' => $onefile->getFileRealName(), 'file_mimetype' => $mime);
+            $newsfiles[] = ['visitlink' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(), 'file_realname' => $onefile->getFileRealName(), 'file_mimetype' => $mime];
             //trigger_error($mime, E_USER_WARNING);
         } else {
-            $newsfiles[] = array(
+            $newsfiles[] = [
                 'file_id'           => $onefile->getFileid(),
                 'visitlink'         => XNEWS_MODULE_URL . '/visit.php?fileid=' . $onefile->getFileid(),
                 'file_realname'     => $onefile->getFileRealName(),
                 'file_attacheddate' => formatTimestamp($onefile->getDate(), $dateformat),
                 'file_mimetype'     => $onefile->getMimetype(),
                 'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
-            );
+            ];
         }
     }
     $GLOBALS['xoopsTpl']->assign('attached_files', $newsfiles);
@@ -291,23 +291,23 @@ if ($xnews->getConfig('showsummarytable')) {
             if ($seo_enabled != 0) {
                 $story_path = nw_remove_accents($onearticle->title());
                 $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
-                $GLOBALS['xoopsTpl']->append('summary', array(
+                $GLOBALS['xoopsTpl']->append('summary', [
                     'story_id'        => $onearticle->storyid(),
                     'htmltitle'       => $htmltitle,
                     'infotips'        => $tooltips,
                     'story_title'     => $storyTitle,
                     'story_hits'      => $onearticle->counter(),
                     'story_published' => formatTimestamp($onearticle->published, $dateformat)
-                ));
+                ]);
             } else {
-                $GLOBALS['xoopsTpl']->append('summary', array(
+                $GLOBALS['xoopsTpl']->append('summary', [
                     'story_id'        => $onearticle->storyid(),
                     'htmltitle'       => $htmltitle,
                     'infotips'        => $tooltips,
                     'story_title'     => $onearticle->title(),
                     'story_hits'      => $onearticle->counter(),
                     'story_published' => formatTimestamp($onearticle->published, $dateformat)
-                ));
+                ]);
             }
         }
     }
@@ -329,7 +329,7 @@ if ($xnews->getConfig('showprevnextlink')) {
     $GLOBALS['xoopsTpl']->assign('nav_links', $xnews->getConfig('showprevnextlink'));
     $tmparticle = new nw_NewsStory();
     $nextId     = $previousId = -1;
-    $next       = $previous = array();
+    $next       = $previous = [];
 
     $previousTitle = $nextTitle = '';
 
@@ -547,11 +547,11 @@ $pdf->setImageScale(1); //set image scale factor
 
 //DNPROSSI ADDED FOR SCHINESE
 if (_LANGCODE == 'cn') {
-    $pdf->setHeaderFont(array('gbsn00lp', '', 10));
-    $pdf->setFooterFont(array('gbsn00lp', '', 10));
+    $pdf->setHeaderFont(['gbsn00lp', '', 10]);
+    $pdf->setFooterFont(['gbsn00lp', '', 10]);
 } else {
-    $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-    $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    $pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+    $pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 }
 
 $pdf->setLanguageArray($l); //set language items

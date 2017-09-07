@@ -23,7 +23,7 @@ class wiUnknownImageOperationException extends wiException
 
 class wiOpFactory
 {
-    protected static $cache = array();
+    protected static $cache = [];
 
     public static function get($operationName)
     {

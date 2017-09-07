@@ -40,7 +40,7 @@ function nw_b_news_top_show($options)
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //
-    $block       = array();
+    $block       = [];
     $displayname = $xnews->getConfig('displayname');
     $tabskin     = $xnews->getConfig('tabskin');
 
@@ -87,13 +87,13 @@ function nw_b_news_top_show($options)
         if (!in_array($permstory->topicid(), $permittedtopics)) {
             $usespotlight = false;
             $news_visible = false;
-            $topicstitles = array();
+            $topicstitles = [];
         }
         $options[4] == 0;
     }
     // Try to see what tabs are visibles (if we are in restricted view of course)
     if ($options[8] == 2 && $restricted && $options[14] != 0) {
-        $topics2         = array();
+        $topics2         = [];
         $permittedtopics = nw_MygetItemIds();
         $topics          = array_slice($options, 14);
         foreach ($topics as $onetopic) {
@@ -106,14 +106,14 @@ function nw_b_news_top_show($options)
     }
 
     if ($options[8] == 2) { // Tabbed view ********************************************************************************************
-        $defcolors[1] = array('#F90', '#FFFFFF', '#F90', '#C60', '#999'); // Bar Style
-        $defcolors[2] = array('#F90', '#FFFFFF', '#F90', '#AAA', '#666'); // Beveled
-        $defcolors[3] = array('#F90', '#FFFFFF', '', '#789', '#789'); // Classic
-        $defcolors[4] = array('#F90', '#FFFFFF', '', '', ''); // Folders
-        $defcolors[5] = array('#F90', '#FFFFFF', '#CCC', 'inherit', '#999'); // MacOs
-        $defcolors[6] = array('#F90', '#FFFFFF', '#FFF', '#DDD', '#999'); // Plain
-        $defcolors[7] = array('#F90', '#FFFFFF', '', '', ''); // Rounded
-        $defcolors[8] = array('#F90', '#FFFFFF', '#F90', '#930', '#C60'); // ZDnet
+        $defcolors[1] = ['#F90', '#FFFFFF', '#F90', '#C60', '#999']; // Bar Style
+        $defcolors[2] = ['#F90', '#FFFFFF', '#F90', '#AAA', '#666']; // Beveled
+        $defcolors[3] = ['#F90', '#FFFFFF', '', '#789', '#789']; // Classic
+        $defcolors[4] = ['#F90', '#FFFFFF', '', '', '']; // Folders
+        $defcolors[5] = ['#F90', '#FFFFFF', '#CCC', 'inherit', '#999']; // MacOs
+        $defcolors[6] = ['#F90', '#FFFFFF', '#FFF', '#DDD', '#999']; // Plain
+        $defcolors[7] = ['#F90', '#FFFFFF', '', '', '']; // Rounded
+        $defcolors[8] = ['#F90', '#FFFFFF', '#F90', '#930', '#C60']; // ZDnet
 
         $myurl = $_SERVER['PHP_SELF'];
         if (substr($myurl, strlen($myurl) - 1, 1) == '/') {
@@ -142,7 +142,7 @@ function nw_b_news_top_show($options)
 
         $tmpstory     = new nw_NewsStory();
         $topic        = new nw_NewsTopic();
-        $topicstitles = array();
+        $topicstitles = [];
         if ($options[4] == 1) { // Spotlight enabled
             $topicstitles[0] = _MB_NW_SPOTLIGHT_TITLE;
             $tabscount++;
@@ -155,13 +155,13 @@ function nw_b_news_top_show($options)
                 $permstory       = new nw_NewsStory($options[6]);
                 if (!in_array($permstory->topicid(), $permittedtopics)) {
                     $usespotlight = false;
-                    $topicstitles = array();
+                    $topicstitles = [];
                 }
                 //unset($permstory);
             } else {
                 if (!$news_visible) {
                     $usespotlight = false;
-                    $topicstitles = array();
+                    $topicstitles = [];
                 }
             }
         }
@@ -173,14 +173,14 @@ function nw_b_news_top_show($options)
             $tabscount    += count($topics);
             $topicstitles = $topic->getTopicTitleFromId($topics, $topicstitles);
         }
-        $tabs = array();
+        $tabs = [];
         if ($usespotlight) {
-            $tabs[] = array('id' => 0, 'title' => _MB_NW_SPOTLIGHT_TITLE);
+            $tabs[] = ['id' => 0, 'title' => _MB_NW_SPOTLIGHT_TITLE];
         }
         if (count($topics) > 0) {
             foreach ($topics as $onetopic) {
                 if (isset($topicstitles[$onetopic])) {
-                    $tabs[] = array('id' => $onetopic, 'title' => $topicstitles[$onetopic]['title'], 'picture' => $topicstitles[$onetopic]['picture']);
+                    $tabs[] = ['id' => $onetopic, 'title' => $topicstitles[$onetopic]['title'], 'picture' => $topicstitles[$onetopic]['picture']];
                 }
             }
         }
@@ -202,7 +202,7 @@ function nw_b_news_top_show($options)
                     $tmpstory = $permstory;
                 }
             } else { // Use the most recent news
-                $stories = array();
+                $stories = [];
                 $stories = $tmpstory->getAllPublished(1, 0, $restricted, 0, 1, true, $options[0]);
                 if (count($stories) > 0) {
                     $firststory = $stories[0];
@@ -211,7 +211,7 @@ function nw_b_news_top_show($options)
                     $block['use_spotlight'] = false;
                 }
             }
-            $spotlight          = array();
+            $spotlight          = [];
             $spotlight['title'] = $tmpstory->title();
             if ($options[7] != '') {
                 $spotlight['image'] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/article.php?storyid=' . $tmpstory->storyid(), $myts->displayTarea($options[7], $tmpstory->nohtml));
@@ -270,7 +270,7 @@ function nw_b_news_top_show($options)
             }
             if (count($stories) > 0) {
                 foreach ($stories as $key => $story) {
-                    $news  = array();
+                    $news  = [];
                     $title = $story->title();
                     if (strlen($title) > $options[2]) {
                         //DNPROSSI Added - xlanguage installed and active
@@ -326,14 +326,14 @@ function nw_b_news_top_show($options)
                 $block['topic_image']       = XNEWS_TOPICS_FILES_URL . '/' . $topic->topic_imgurl();
                 $block['topic_description'] = $topic->topic_description();
 
-                $smallheader   = array();
+                $smallheader   = [];
                 $stats         = $topic->getTopicMiniStats($thetopic);
                 $smallheader[] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/index.php?topic_id=' . $thetopic, _MB_NW_READMORE);
                 $smallheader[] = sprintf('%u %s', $stats['count'], _MA_NW_ARTICLES);
                 $smallheader[] = sprintf('%u %s', $stats['reads'], _READS);
                 if (count($stories) > 0) {
                     foreach ($stories as $key => $story) {
-                        $news  = array();
+                        $news  = [];
                         $title = $story->title();
                         if (strlen($title) > $options[2]) {
                             //$title = nw_truncate_tagsafe($title, $options[2]+3);
@@ -423,7 +423,7 @@ function nw_b_news_top_show($options)
         $topic = new nw_NewsTopic();
 
         foreach ($stories as $key => $story) {
-            $news  = array();
+            $news  = [];
             $title = $story->title();
             if (strlen($title) > $options[2]) {
                 //DNPROSSI Added - xlanguage installed and active
@@ -439,7 +439,7 @@ function nw_b_news_top_show($options)
 
             // if spotlight is enabled and this is either the first article or the selected one
             if (($options[5] == 0) && ($options[4] == 1) && (($options[6] > 0 && $options[6] == $story->storyid()) || ($options[6] == 0 && $key == 0))) {
-                $spotlight = array();
+                $spotlight = [];
                 $visible   = true;
                 if ($restricted) {
                     $permittedtopics = nw_MygetItemIds();
@@ -538,7 +538,7 @@ function nw_b_news_top_show($options)
                     $block['use_spotlight'] = false;
                 }
             } else { // Use the most recent news
-                $stories = array();
+                $stories = [];
                 $stories = $tmpstory->getAllPublished(1, 0, $restricted, 0, 1, true, $options[0]);
                 if (count($stories) > 0) {
                     $firststory       = $stories[0];
@@ -548,7 +548,7 @@ function nw_b_news_top_show($options)
                 }
             }
             if ($block['use_spotlight'] === true) {
-                $spotlight = array();
+                $spotlight = [];
                 //DNPROSSI Added - xlanguage installed and active
                 $spottitle = $spotlightArticle->title();
                 if ($xlang === true) {
@@ -706,7 +706,7 @@ function nw_b_news_top_edit($options)
 
     $form .= '<br><br>' . _MB_NW_SPOTLIGHT_TOPIC . "<br><select name='options[]' multiple='multiple'>";
     require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-    $topics_arr = array();
+    $topics_arr = [];
     require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
     $xt         = new XoopsTree($GLOBALS['xoopsDB']->prefix('nw_topics'), 'topic_id', 'topic_pid');
     $topics_arr = $xt->getChildTreeArray(0, 'topic_title');

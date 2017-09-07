@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -79,7 +79,7 @@ $pdf->AddPage();
 $pdf->Cell(0, 12, 'File Attachment', 1, 1, 'C');
 
 // attach an external file
-$pdf->Annotation(78, 30, 4, 4, 'text file', array('Subtype' => 'FileAttachment', 'Name' => 'PushPin', 'FS' => '../cache/utf8test.txt'));
+$pdf->Annotation(78, 30, 4, 4, 'text file', ['Subtype' => 'FileAttachment', 'Name' => 'PushPin', 'FS' => '../cache/utf8test.txt']);
 
 // ---------------------------------------------------------
 

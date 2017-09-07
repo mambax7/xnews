@@ -12,7 +12,7 @@ class nw_blacklist
     {
         $myts = MyTextSanitizer::getInstance();
         //
-        $ret      = $tbl_black_list = array();
+        $ret      = $tbl_black_list = [];
         $filename = XOOPS_UPLOAD_PATH . '/nw_black_list.php';
         if (file_exists($filename)) {
             require_once $filename;
@@ -78,7 +78,7 @@ class nw_blacklist
      */
     public function remove_blacklisted($keywords)
     {
-        $ret       = array();
+        $ret       = [];
         $tmp_array = array_values($this->keywords);
         foreach ($keywords as $onekeyword) {
             $add = true;

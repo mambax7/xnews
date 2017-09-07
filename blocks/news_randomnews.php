@@ -26,7 +26,7 @@ function nw_b_news_randomnews_show($options)
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //
-    $block         = array();
+    $block         = [];
     $block['sort'] = $options[0];
 
     //DNPROSSI Added - xlanguage installed and active
@@ -56,7 +56,7 @@ function nw_b_news_randomnews_show($options)
         return '';
     }
     foreach ($stories as $story) {
-        $news  = array();
+        $news  = [];
         $title = $story->title();
         if (strlen($title) > $options[2]) {
             //DNPROSSI Added - xlanguage installed and active

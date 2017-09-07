@@ -204,11 +204,15 @@ define('_MI_NW_DISPLAYLINKICNS', 'Afficher les ic�nes additionnelles');
 define('_MI_NW_DISPLAYLINKICNSDESC', 'Affiche les fonctions Impression, En parler � un ami et Exporter au format PDF');
 
 define('_MI_NW_SEOPATH', 'Chemin SEO ');
-define('_MI_NW_SEOPATHDESC',
-       'Cette option ajoute un titre SEO aux urls, g�n�r�es via <strong>htaccess</strong> ou <strong>path-info</strong>. <br><br>Laisser vide affiche : <br>http://your.site.com/topics.1/your-topic-title.html <br><br>Saisir <strong>news</strong> affiche : <br>http://your.site.com/<strong>news</strong>/topics.1/your-topic-title.html <br><br>Les caract�res a-z et - sont autoris�s (ex. article-du-jour)');
+define(
+    '_MI_NW_SEOPATHDESC',
+       'Cette option ajoute un titre SEO aux urls, g�n�r�es via <strong>htaccess</strong> ou <strong>path-info</strong>. <br><br>Laisser vide affiche : <br>http://your.site.com/topics.1/your-topic-title.html <br><br>Saisir <strong>news</strong> affiche : <br>http://your.site.com/<strong>news</strong>/topics.1/your-topic-title.html <br><br>Les caract�res a-z et - sont autoris�s (ex. article-du-jour)'
+);
 define('_MI_NW_SEOLEVEL', 'Niveau SEO ');
-define('_MI_NW_SEOLEVELDESC',
-       "Cette option permet de modifier l'apparence de l'url<br><br>Niveau racine : <br>http://your.site.com/news/topics.1/your-topic-title.html <br><br>Niveau module : <br> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br><br>Cette option ne peut fonctionner qu'en mode htaccess et en personnalisant le fichier .htaccess.");
+define(
+    '_MI_NW_SEOLEVELDESC',
+       "Cette option permet de modifier l'apparence de l'url<br><br>Niveau racine : <br>http://your.site.com/news/topics.1/your-topic-title.html <br><br>Niveau module : <br> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br><br>Cette option ne peut fonctionner qu'en mode htaccess et en personnalisant le fichier .htaccess."
+);
 define('_MI_NW_MODULE_LEVEL', 'Niveau module');
 define('_MI_NW_ROOT_LEVEL', 'Niveau racine');
 

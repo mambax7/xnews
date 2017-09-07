@@ -32,7 +32,7 @@ function nw_b_news_latestnews_show($options)
     // IN PROGRESS
     // IN PROGRESS
     // IN PROGRESS
-    $block = array();
+    $block = [];
     if (file_exists(XNEWS_MODULE_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/main.php')) {
         require_once XNEWS_MODULE_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/main.php';
     } else {
@@ -86,9 +86,9 @@ function nw_b_news_latestnews_show($options)
 
     $scount  = count($sarray);
     $k       = 0;
-    $columns = array();
+    $columns = [];
     if ($scount > 0) {
-        $storieslist = array();
+        $storieslist = [];
         foreach ($sarray as $storyid => $thisstory) {
             $storieslist[] = $thisstory->storyid();
         }
@@ -103,8 +103,8 @@ function nw_b_news_latestnews_show($options)
 
             $len = strlen($thisstory->hometext());
             if ($letters < $len && $letters > 0) {
-                $patterns     = array();
-                $replacements = array();
+                $patterns     = [];
+                $replacements = [];
 
                 if ($options[4] != 0) { // set height = 0 in block option for auto height
                     $height = 'height="' . $imgheight . '"';
@@ -360,7 +360,7 @@ function nw_b_news_latestnews_edit($options)
     //topics
     $form       .= $tabletag1 . _MB_NW_LATESTNEWS_TOPICSDISPLAY . $tabletag2;
     $form       .= "<select name='options[]' multiple='multiple'>";
-    $topics_arr = array();
+    $topics_arr = [];
     $xt         = new XoopsTree($GLOBALS['xoopsDB']->prefix('nw_topics'), 'topic_id', 'topic_pid');
     $topics_arr = $xt->getChildTreeArray(0, 'topic_title');
     $size       = count($options);

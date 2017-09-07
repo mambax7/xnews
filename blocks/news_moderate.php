@@ -28,7 +28,7 @@ function nw_b_news_topics_moderate()
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //
-    $block      = array();
+    $block      = [];
     $dateformat = $xnews->getConfig('dateformat');
     $infotips   = $xnews->getConfig('infotips');
 
@@ -53,7 +53,7 @@ function nw_b_news_topics_moderate()
             } else {
                 $linktitle = "<a href='" . XNEWS_MODULE_URL . '/submit.php?op=edit&amp;storyid=' . $newstory->storyid() . "' target='_blank'" . $htmltitle . '>' . $title . '</a>';
             }
-            $story                = array();
+            $story                = [];
             $story['title']       = $linktitle;
             $story['date']        = formatTimestamp($newstory->created(), $dateformat);
             $story['author']      = "<a href='" . XOOPS_URL . '/userinfo.php?uid=' . $newstory->uid() . "'>" . $newstory->uname() . '</a>';

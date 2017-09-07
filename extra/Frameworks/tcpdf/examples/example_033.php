@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -73,23 +73,53 @@ $pdf->setLanguageArray($l);
 $pdf->AddPage();
 
 $pdf->SetFont('dejavusans', '', 10);
-$pdf->MultiCell(80, 0,
+$pdf->MultiCell(
+    80,
+    0,
                 "[True Type Unicode font] : Cras eros leo, porttitor porta, accumsan fermentum, ornare ac, est. Praesent dui lorem, imperdiet at, cursus sed, facilisis aliquam, nibh. Nulla accumsan nonummy diam. Donec tempus. Etiam posuere. Proin lectus. Donec purus. Duis in sem pretium urna feugiat vehicula. Ut suscipit velit eget massa. Nam nonummy, enim commodo euismod placerat, tortor elit tempus lectus, quis suscipit metus lorem blandit turpis.\n",
-                1, 'J', 0, 1, '', '', true, 0);
+                1,
+    'J',
+    0,
+    1,
+    '',
+    '',
+    true,
+    0
+);
 
 $pdf->Ln(2);
 
 $pdf->SetFont('times', '', 10);
-$pdf->MultiCell(80, 0,
+$pdf->MultiCell(
+    80,
+    0,
                 "[Core font] : Cras eros leo, porttitor porta, accumsan fermentum, ornare ac, est. Praesent dui lorem, imperdiet at, cursus sed, facilisis aliquam, nibh. Nulla accumsan nonummy diam. Donec tempus. Etiam posuere. Proin lectus. Donec purus. Duis in sem pretium urna feugiat vehicula. Ut suscipit velit eget massa. Nam nonummy, enim commodo euismod placerat, tortor elit tempus lectus, quis suscipit metus lorem blandit turpis.\n",
-                1, 'J', 0, 1, '', '', true, 0);
+                1,
+    'J',
+    0,
+    1,
+    '',
+    '',
+    true,
+    0
+);
 
 $pdf->Ln(2);
 
 $pdf->SetFont('arialunicid0', '', 9);
-$pdf->MultiCell(80, 0,
+$pdf->MultiCell(
+    80,
+    0,
                 "[CID-0 font] : Cras eros leo, porttitor porta, accumsan fermentum, ornare ac, est. Praesent dui lorem, imperdiet at, cursus sed, facilisis aliquam, nibh. Nulla accumsan nonummy diam. Donec tempus. Etiam posuere. Proin lectus. Donec purus. Duis in sem pretium urna feugiat vehicula. Ut suscipit velit eget massa. Nam nonummy, enim commodo euismod placerat, tortor elit tempus lectus, quis suscipit metus lorem blandit turpis.\n",
-                1, 'J', 0, 1, '', '', true, 0);
+                1,
+    'J',
+    0,
+    1,
+    '',
+    '',
+    true,
+    0
+);
 
 // ---------------------------------------------------------
 

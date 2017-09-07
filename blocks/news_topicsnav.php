@@ -21,8 +21,8 @@ function nw_b_news_topicsnav_show($options)
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
     require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
     $myts             = MyTextSanitizer::getInstance();
-    $block            = array();
-    $newscountbytopic = array();
+    $block            = [];
+    $newscountbytopic = [];
     $perms            = '';
     $xt               = new nw_NewsTopic();
     $restricted       = $xnews->getConfig('restrictindex');
@@ -54,12 +54,12 @@ function nw_b_news_topicsnav_show($options)
             } else {
                 $count = '';
             }
-            $block['topics'][] = array(
+            $block['topics'][] = [
                 'id'          => $onetopic['topic_id'],
                 'nw_count'    => $count,
                 'topic_color' => '#' . $onetopic['topic_color'],
                 'title'       => $myts->displayTarea($onetopic['topic_title'])
-            );
+            ];
         }
     }
     //DNPROSSI ADDED

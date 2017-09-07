@@ -111,7 +111,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $outbuffer;
     }
 
-    public function getChildTreeArray($sel_id = 0, $order = '', $perms = '', $parray = array(), $r_prefix = '')
+    public function getChildTreeArray($sel_id = 0, $order = '', $perms = '', $parray = [], $r_prefix = '')
     {
         $sql = 'SELECT *';
         $sql .= " FROM {$this->table}";
@@ -136,7 +136,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     public function getVar($var)
     {
         if (method_exists($this, $var)) {
-            return call_user_func(array($this, $var));
+            return call_user_func([$this, $var]);
         } else {
             return $this->$var;
         }
@@ -176,13 +176,13 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         //
-        $topics_arr = array();
+        $topics_arr = [];
         $sql        = 'SELECT *';
         $sql        .= " FROM {$db->prefix('nw_topics')}";
         if ($checkRight) {
             $topics = nw_MygetItemIds($permission);
             if (count($topics) == 0) {
-                return array();
+                return [];
             }
             $sql .= ' WHERE topic_id IN (' . implode(',', $topics) . ')';
         }
@@ -205,7 +205,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         //
-        $ret    = array();
+        $ret    = [];
         $sql    = 'SELECT count(storyid) as cpt, topicid';
         $sql    .= " FROM {$db->prefix('nw_stories')}";
         $sql    .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') GROUP BY topicid';
@@ -224,7 +224,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
      */
     public function getTopicMiniStats($topicid)
     {
-        $ret          = array();
+        $ret          = [];
         $sql          = 'SELECT count(storyid) as cpt1, sum(counter) as cpt2';
         $sql          .= " FROM {$this->db->prefix('nw_stories')}";
         $sql          .= " WHERE (topicid = {$topicid}) AND (published>0 AND published <= " . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
@@ -288,11 +288,35 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         if (empty($this->topic_id)) {
             $insert         = true;
             $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
-            $sql            = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color, topic_weight) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s', %u)", $this->table, (int)$this->topic_id,
-                                      (int)$this->topic_pid, $imgurl, $title, (int)$this->menu, $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)$this->topic_weight);
+            $sql            = sprintf(
+                "INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color, topic_weight) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s', %u)",
+                $this->table,
+                (int)$this->topic_id,
+                                      (int)$this->topic_pid,
+                $imgurl,
+                $title,
+                (int)$this->menu,
+                $topic_description,
+                $topic_frontpage,
+                $topic_rssurl,
+                $topic_color,
+                (int)$this->topic_weight
+            );
         } else {
-            $sql = sprintf("UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s', topic_weight='%u' WHERE topic_id = %u", $this->table, (int)$this->topic_pid, $imgurl, $title,
-                           (int)$this->menu, $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)$this->topic_weight, (int)$this->topic_id);
+            $sql = sprintf(
+                "UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s', topic_weight='%u' WHERE topic_id = %u",
+                $this->table,
+                (int)$this->topic_pid,
+                $imgurl,
+                $title,
+                           (int)$this->menu,
+                $topic_description,
+                $topic_frontpage,
+                $topic_rssurl,
+                $topic_color,
+                (int)$this->topic_weight,
+                (int)$this->topic_id
+            );
         }
         if (!$result = $this->db->query($sql)) {
             // TODO: Replace with something else
@@ -482,7 +506,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         }
         $result = $this->db->query($sql);
         while ($row = $this->db->fetchArray($result)) {
-            $topicstitles[$row['topic_id']] = array('title' => $myts->displayTarea($row['topic_title']), 'picture' => XNEWS_TOPICS_FILES_URL . '/' . $row['topic_imgurl']);
+            $topicstitles[$row['topic_id']] = ['title' => $myts->displayTarea($row['topic_title']), 'picture' => XNEWS_TOPICS_FILES_URL . '/' . $row['topic_imgurl']];
         }
 
         return $topicstitles;
@@ -497,7 +521,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
             $sql .= ' AND topic_frontpage = 1';
         }
         if ($perms) {
-            $topicsids = array();
+            $topicsids = [];
             $topicsids = nw_MygetItemIds();
             if (count($topicsids) == 0) {
                 return '';
@@ -506,10 +530,10 @@ class nw_NewsTopic extends XnewsDeprecateTopic
             $sql    .= " AND topic_id IN ({$topics})";
         }
         $result = $this->db->query($sql);
-        $ret    = array();
+        $ret    = [];
         $myts   = MyTextSanitizer::getInstance();
         while ($myrow = $this->db->fetchArray($result)) {
-            $ret[$myrow['topic_id']] = array('title' => $myts->displayTarea($myrow['topic_title']), 'pid' => $myrow['topic_pid'], 'color' => $myrow['topic_color']);
+            $ret[$myrow['topic_id']] = ['title' => $myts->displayTarea($myrow['topic_title']), 'pid' => $myrow['topic_pid'], 'color' => $myrow['topic_color']];
         }
 
         return $ret;

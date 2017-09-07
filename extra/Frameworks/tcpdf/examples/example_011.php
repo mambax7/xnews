@@ -42,7 +42,7 @@ class MYPDF extends TCPDF
     {
         // Read file lines
         $lines = file($file);
-        $data  = array();
+        $data  = [];
         foreach ($lines as $line) {
             $data[] = explode(';', rtrim($line));
         }
@@ -60,7 +60,7 @@ class MYPDF extends TCPDF
         $this->SetLineWidth(0.3);
         $this->SetFont('', 'B');
         // Header
-        $w = array(40, 35, 40, 45);
+        $w = [40, 35, 40, 45];
         for ($i = 0; $i < count($header); $i++) {
             $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
         }
@@ -97,8 +97,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -126,7 +126,7 @@ $pdf->SetFont('helvetica', '', 12);
 $pdf->AddPage();
 
 //Column titles
-$header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
+$header = ['Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)'];
 
 //Data loading
 $data = $pdf->LoadData('../cache/table_data_demo.txt');

@@ -88,7 +88,7 @@ switch ($op) {
         $remove_tray = new XoopsFormElementTray(_AM_NW_BLACKLIST);
         $remove_tray->setDescription(_AM_NW_BLACKLIST_DESC);
         $blacklist = new XoopsFormSelect('', 'blacklist', '', 5, true);
-        $words     = array();
+        $words     = [];
 
         $metablack = new nw_blacklist();
         $words     = $metablack->getAllKeywords();

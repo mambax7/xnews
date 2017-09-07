@@ -49,11 +49,11 @@ class wioUnsharp
 
         // Gaussian blur matrix
 
-        $matrix = array(
-            array(1, 2, 1),
-            array(2, 4, 2),
-            array(1, 2, 1)
-        );
+        $matrix = [
+            [1, 2, 1],
+            [2, 4, 2],
+            [1, 2, 1]
+        ];
 
         $blurred = $image->applyConvolution($matrix, 16, 0);
 
@@ -77,7 +77,7 @@ class wioUnsharp
                     $rNew   = (abs($rOrig - $rBlur) >= $threshold) ? max(0, min(255, ($amount * ($rOrig - $rBlur)) + $rOrig)) : $rOrig;
                     $gNew   = (abs($gOrig - $gBlur) >= $threshold) ? max(0, min(255, ($amount * ($gOrig - $gBlur)) + $gOrig)) : $gOrig;
                     $bNew   = (abs($bOrig - $bBlur) >= $threshold) ? max(0, min(255, ($amount * ($bOrig - $bBlur)) + $bOrig)) : $bOrig;
-                    $rgbNew = array('red' => $rNew, 'green' => $gNew, 'blue' => $bNew, 'alpha' => 0);
+                    $rgbNew = ['red' => $rNew, 'green' => $gNew, 'blue' => $bNew, 'alpha' => 0];
 
                     if (($rOrig != $rNew) || ($gOrig != $gNew) || ($bOrig != $bNew)) {
                         $image->setRGBAt($x, $y, $rgbNew);
@@ -117,7 +117,7 @@ class wioUnsharp
                     } elseif ($bNew < 0) {
                         $bNew = 0;
                     }
-                    $rgbNew = array('red' => $rNew, 'green' => $gNew, 'blue' => $bNew, 'alpha' => 0);
+                    $rgbNew = ['red' => $rNew, 'green' => $gNew, 'blue' => $bNew, 'alpha' => 0];
 
                     $image->setRGBAt($x, $y, $rgbNew);
                 }

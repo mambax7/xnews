@@ -14,7 +14,7 @@ function adminmenu($currentoption = 0, $breadcrumb = '')
         require_once XNI_MODULE_PATH . '/language/english/modinfo.php';
     }
 
-    $tblColors = array('', '');
+    $tblColors = ['', ''];
     if ($currentoption >= 0) {
         $tblColors[$currentoption] = 'current';
     }

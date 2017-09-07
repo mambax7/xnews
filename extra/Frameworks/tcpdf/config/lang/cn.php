@@ -33,7 +33,7 @@
 // CHINESE
 
 global $l;
-$l = array();
+$l = [];
 
 // PAGE META DESCRIPTORS --------------------------------------
 

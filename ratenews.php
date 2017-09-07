@@ -164,7 +164,7 @@ if (!empty($_POST['submit'])) { // The form was submited
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
     $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
-    $xoopsTpl->assign('news', array('storyid' => $storyid, 'title' => $title));
+    $xoopsTpl->assign('news', ['storyid' => $storyid, 'title' => $title]);
     $xoopsTpl->assign('lang_voteonce', _MA_NW_VOTEONCE);
     $xoopsTpl->assign('lang_ratingscale', _MA_NW_RATINGSCALE);
     $xoopsTpl->assign('lang_beobjective', _MA_NW_BEOBJECTIVE);

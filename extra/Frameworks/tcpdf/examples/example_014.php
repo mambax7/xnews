@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -82,7 +82,7 @@ This name allows to manipulate them via JavaScript in order to perform some vali
 */
 
 // set default form properties
-$pdf->setFormDefaultProp(array('lineWidth' => 1, 'borderStyle' => 'solid', 'fillColor' => array(255, 255, 200), 'strokeColor' => array(255, 128, 128)));
+$pdf->setFormDefaultProp(['lineWidth' => 1, 'borderStyle' => 'solid', 'fillColor' => [255, 255, 200], 'strokeColor' => [255, 128, 128]]);
 
 $pdf->SetFont('helvetica', 'BI', 18);
 $pdf->Cell(0, 5, 'Subscription form', 0, 1, 'C');
@@ -103,31 +103,31 @@ $pdf->Ln(6);
 // Gender
 $pdf->Cell(35, 5, 'Gender:');
 //$pdf->ComboBox('gender', 10, 5, array('', 'M', 'F'));
-$pdf->ComboBox('gender', 30, 5, array(array('', '-'), array('M', 'Male'), array('F', 'Female')));
+$pdf->ComboBox('gender', 30, 5, [['', '-'], ['M', 'Male'], ['F', 'Female']]);
 $pdf->Ln(6);
 
 // Drink
 $pdf->Cell(35, 5, 'Drink:');
-$pdf->RadioButton('drink', 5, array(), array(), 'Water');
+$pdf->RadioButton('drink', 5, [], [], 'Water');
 $pdf->Cell(35, 5, 'Water');
 $pdf->Ln(6);
 $pdf->Cell(35, 5, '');
-$pdf->RadioButton('drink', 5, array(), array(), 'Beer', true);
+$pdf->RadioButton('drink', 5, [], [], 'Beer', true);
 $pdf->Cell(35, 5, 'Beer');
 $pdf->Ln(6);
 $pdf->Cell(35, 5, '');
-$pdf->RadioButton('drink', 5, array(), array(), 'Wine');
+$pdf->RadioButton('drink', 5, [], [], 'Wine');
 $pdf->Cell(35, 5, 'Wine');
 $pdf->Ln(10);
 
 // Listbox
 $pdf->Cell(35, 5, 'List:');
-$pdf->ListBox('listbox', 60, 15, array('', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7'), array('multipleSelection' => 'true'));
+$pdf->ListBox('listbox', 60, 15, ['', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7'], ['multipleSelection' => 'true']);
 $pdf->Ln(20);
 
 // Adress
 $pdf->Cell(35, 5, 'Address:');
-$pdf->TextField('address', 60, 18, array('multiline' => true));
+$pdf->TextField('address', 60, 18, ['multiline' => true]);
 $pdf->Ln(19);
 
 // E-mail
@@ -137,24 +137,24 @@ $pdf->Ln(6);
 
 // Newsletter
 $pdf->Cell(35, 5, 'Newsletter:');
-$pdf->CheckBox('newsletter', 5, true, array(), array(), 'OK');
+$pdf->CheckBox('newsletter', 5, true, [], [], 'OK');
 $pdf->Ln(10);
 
 // Date of the day
 $pdf->Cell(35, 5, 'Date:');
-$pdf->TextField('date', 30, 5, array(), array('v' => date('Y-m-d'), 'dv' => date('Y-m-d')));
+$pdf->TextField('date', 30, 5, [], ['v' => date('Y-m-d'), 'dv' => date('Y-m-d')]);
 $pdf->Ln(10);
 
 $pdf->SetX(50);
 
 // Button to validate and print
-$pdf->Button('print', 30, 10, 'Print', 'Print()', array('lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => array(128, 196, 255), 'strokeColor' => array(64, 64, 64)));
+$pdf->Button('print', 30, 10, 'Print', 'Print()', ['lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => [128, 196, 255], 'strokeColor' => [64, 64, 64]]);
 
 // Reset Button
-$pdf->Button('reset', 30, 10, 'Reset', array('S' => 'ResetForm'), array('lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => array(128, 196, 255), 'strokeColor' => array(64, 64, 64)));
+$pdf->Button('reset', 30, 10, 'Reset', ['S' => 'ResetForm'], ['lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => [128, 196, 255], 'strokeColor' => [64, 64, 64]]);
 
 // Submit Button
-$pdf->Button('submit', 30, 10, 'Submit', array('S' => 'SubmitForm', 'F' => 'http://localhost/printvars.php', 'Flags' => array('ExportFormat')), array('lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => array(128, 196, 255), 'strokeColor' => array(64, 64, 64)));
+$pdf->Button('submit', 30, 10, 'Submit', ['S' => 'SubmitForm', 'F' => 'http://localhost/printvars.php', 'Flags' => ['ExportFormat']], ['lineWidth' => 2, 'borderStyle' => 'beveled', 'fillColor' => [128, 196, 255], 'strokeColor' => [64, 64, 64]]);
 
 // Form validation functions
 $js = <<<EOD

@@ -43,22 +43,22 @@ function NewsImport()
     // Iterate through installed modules tables for articles, items, category,
     // topics and add them to selectlist
     // This will also find clones
-    $news_fieldsearch_array = array(
+    $news_fieldsearch_array = [
         'topic_id',
         'topic_pid',
         'banner'
-    );
+    ];
 
-    $other_fieldsearch_array = array(
+    $other_fieldsearch_array = [
         'categoryid',
         'parentid',
         'moderator'
-    );
+    ];
 
     //Get From Module Data
     $moduleHandler  = xoops_getHandler('module');
     $installed_mods = $moduleHandler->getObjects();
-    $listed_mods    = array();
+    $listed_mods    = [];
     $count          = 0;
     foreach ($installed_mods as $module) {
         if ($module->getVar('dirname') != 'system' && $module->getVar('isactive') == 1) {
@@ -283,7 +283,7 @@ function TopicSelect()
 
             $table_name = $from_topic_table;
             $topiclist  = new XoopsFormSelect(_AM_XNI_IMPORT_FROM_TOPICS, 'from_topics', '', 5, true);
-            $topics_arr = array();
+            $topics_arr = [];
             $xt         = new xni_NewsTopic();
             $allTopics  = $xt->getAllTopics($table_name, false); // The webmaster can see everything
             $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');

@@ -52,7 +52,7 @@ switch ($op) {
         $sform->addElement($dates_tray);
 
         $topiclist  = new XoopsFormSelect(_AM_NW_PRUNE_TOPICS, 'export_topics', '', 5, true);
-        $topics_arr = array();
+        $topics_arr = [];
         $xt         = new nw_NewsTopic();
         $allTopics  = $xt->getAllTopics(false);                // The webmaster can see everything
         $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
@@ -77,7 +77,7 @@ switch ($op) {
     case 'launchexport':
         $story           = new nw_NewsStory();
         $topic           = new nw_NewsTopic();
-        $exportedstories = array();
+        $exportedstories = [];
         $date1           = $_POST['date1'];
         $date2           = $_POST['date2'];
         $timestamp1      = mktime(0, 0, 0, (int)substr($date1, 5, 2), (int)substr($date1, 8, 2), (int)substr($date1, 0, 4));
@@ -87,7 +87,7 @@ switch ($op) {
             $topiclist = implode(',', $_POST['export_topics']);
         }
         $topicsexport    = (int)$_POST['includetopics'];
-        $tbltopics       = array();
+        $tbltopics       = [];
         $exportedstories = $story->NewsExport($timestamp1, $timestamp2, $topiclist, $topicsexport, $tbltopics);
         if (count($exportedstories)) {
             $xmlfile = XOOPS_ROOT_PATH . '/uploads/nw_stories.xml';

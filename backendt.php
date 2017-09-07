@@ -86,14 +86,14 @@ if (!$tpl->is_cached('db:nw_news_rss.tpl', $topicid)) {
         if ($seo_enabled != 0) {
             $item_title = nw_remove_accents($storytitle);
         }
-        $tpl->append('items', array(
+        $tpl->append('items', [
             'title'       => XoopsLocal::convert_encoding(htmlspecialchars($storytitle, ENT_QUOTES)),
             'link'        => nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $story->storyid(), $item_title),
             'guid'        => $story->nw_stripeKey(md5($story->title() . $story->topic_title), 7, 32),
             'category'    => XoopsLocal::convert_encoding(htmlspecialchars($story->topic_title, ENT_QUOTES)),
             'pubdate'     => formatTimestamp($story->published(), 'rss'),
             'description' => $description
-        ));
+        ]);
     }
 }
 

@@ -90,7 +90,7 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret   = array();
+        $ret   = [];
         $limit = $start = 0;
         $sql   = $this->_selectQuery($criteria);
         $id    = $this->_idfield;

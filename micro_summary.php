@@ -21,7 +21,7 @@ if (!$xnews->getConfig('firefox_microsummaries')) {
 }
 $story      = new nw_NewsStory();
 $restricted = $xnews->getConfig('restrictindex');
-$sarray     = array();
+$sarray     = [];
 // Get the last news from all topics according to the module's restrictions
 $sarray = $story->getAllPublished(1, 0, $restricted, 0);
 if (count($sarray) > 0) {

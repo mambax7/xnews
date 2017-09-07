@@ -18,7 +18,7 @@
  * @version      $Id $
  */
 
-$cfg = array();
+$cfg = [];
 /**
  * Use the "fun" menu for the module's administration ?
  */

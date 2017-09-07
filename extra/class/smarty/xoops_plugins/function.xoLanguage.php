@@ -27,7 +27,7 @@ function smarty_function_xoLanguage($params, &$smarty)
     $url = 'http://' . xoops_getenv('HTTP_HOST') . xoops_getenv('PHP_SELF');
     if (@!empty($params['tag']) && @!empty($params['language'])) {
         $query_array = array_filter(explode('&', xoops_getenv('QUERY_STRING')));
-        $query_new = array();
+        $query_new = [];
         foreach ($query_array as $query) {
             if (substr($query, 0, (strlen($params['tag'])+1)) != $params['tag'] . '=') {
                 $vals = explode('=', $query);

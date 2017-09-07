@@ -47,8 +47,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -79,7 +79,7 @@ $pdf->AddPage();
 $pdf->Cell(0, 12, 'Example 036', 1, 1, 'C');
 
 // text annotation
-$pdf->Annotation(124, 30, 10, 10, "Text annotation example\naccented letters test: àèéìòù", array('Subtype' => 'Text', 'Name' => 'Comment', 'T' => 'title example', 'Subj' => 'example', 'C' => array(255, 255, 0)));
+$pdf->Annotation(124, 30, 10, 10, "Text annotation example\naccented letters test: àèéìòù", ['Subtype' => 'Text', 'Name' => 'Comment', 'T' => 'title example', 'Subj' => 'example', 'C' => [255, 255, 0]]);
 
 // ---------------------------------------------------------
 

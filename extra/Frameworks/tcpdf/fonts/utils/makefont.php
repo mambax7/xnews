@@ -48,14 +48,14 @@
 */
 
 /**
- * 
+ *
  * @param string $fontfile path to font file (TTF, OTF or PFB).
  * @param string $fmfile font metrics file (UFM or AFM).
  * @param boolean $embedded Set to false to not embed the font, true otherwise (default).
  * @param string $enc Name of the encoding table to use. Omit this parameter for TrueType Unicode, OpenType Unicode and symbolic fonts like Symbol or ZapfDingBats.
  * @param array $patch Optional modification of the encoding
  */
-function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=array())
+function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch= [])
 {
     //Generate a font definition file
     set_magic_quotes_runtime(0);
@@ -67,7 +67,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
         die('Error: file not found: '.$fmfile);
     }
     $cidtogidmap = '';
-    $map = array();
+    $map = [];
     $diff = '';
     $dw = 0; // default width
     $ffext = strtolower(substr($fontfile, -3));
@@ -218,7 +218,7 @@ function ReadMap($enc)
     if (empty($a)) {
         die('Error: encoding not found: '.$enc);
     }
-    $cc2gn = array();
+    $cc2gn = [];
     foreach ($a as $l) {
         if ($l{0} == '!') {
             $e = preg_split('/[ \\t]+/', rtrim($l));
@@ -250,8 +250,8 @@ function ReadUFM($file, &$cidtogidmap)
     if (empty($a)) {
         die('File not found');
     }
-    $widths = array();
-    $fm = array();
+    $widths = [];
+    $fm = [];
     foreach ($a as $l) {
         $e = explode(' ', rtrim($l));
         if (count($e) < 2) {
@@ -271,11 +271,11 @@ function ReadUFM($file, &$cidtogidmap)
                 if ($cc == ord('X')) {
                     $fm['CapXHeight'] = $e[13];
                 }
-            // Set GID
-            if (($cc >= 0) and ($cc < 0xFFFF) and $glyph) {
-                $cidtogidmap{($cc * 2)} = chr($glyph >> 8);
-                $cidtogidmap{(($cc * 2) + 1)} = chr($glyph & 0xFF);
-            }
+                // Set GID
+                if (($cc >= 0) and ($cc < 0xFFFF) and $glyph) {
+                    $cidtogidmap{($cc * 2)} = chr($glyph >> 8);
+                    $cidtogidmap{(($cc * 2) + 1)} = chr($glyph & 0xFF);
+                }
             }
             if (($gn == '.notdef') and (!isset($fm['MissingWidth']))) {
                 $fm['MissingWidth'] = $w;
@@ -297,7 +297,7 @@ function ReadUFM($file, &$cidtogidmap)
         } elseif ($code == 'IsFixedPitch') {
             $fm['IsFixedPitch'] = ($param == 'true');
         } elseif ($code == 'FontBBox') {
-            $fm['FontBBox'] = array($e[1], $e[2], $e[3], $e[4]);
+            $fm['FontBBox'] = [$e[1], $e[2], $e[3], $e[4]];
         } elseif ($code == 'CapHeight') {
             $fm['CapHeight'] = (int)$param;
         } elseif ($code == 'StdVW') {
@@ -327,9 +327,9 @@ function ReadAFM($file, &$map)
     if (empty($a)) {
         die('File not found');
     }
-    $widths = array();
-    $fm = array();
-    $fix = array(
+    $widths = [];
+    $fm = [];
+    $fix = [
         'Edot'=>'Edotaccent',
         'edot'=>'edotaccent',
         'Idot'=>'Idotaccent',
@@ -363,7 +363,7 @@ function ReadAFM($file, &$map)
         'combiningacuteaccent'=>'acutecomb',
         'combiningdotbelow'=>'dotbelowcomb',
         'dongsign'=>'dong'
-        );
+    ];
     foreach ($a as $l) {
         $e = explode(' ', rtrim($l));
         if (count($e) < 2) {
@@ -416,7 +416,7 @@ function ReadAFM($file, &$map)
         } elseif ($code == 'IsFixedPitch') {
             $fm['IsFixedPitch'] = ($param == 'true');
         } elseif ($code == 'FontBBox') {
-            $fm['FontBBox'] = array($e[1], $e[2], $e[3], $e[4]);
+            $fm['FontBBox'] = [$e[1], $e[2], $e[3], $e[4]];
         } elseif ($code == 'CapHeight') {
             $fm['CapHeight'] = (int)$param;
         } elseif ($code == 'StdVW') {
@@ -482,7 +482,7 @@ function MakeFontDescriptor($fm, $symbolic=false)
     if (isset($fm['FontBBox'])) {
         $fbb = $fm['FontBBox'];
     } else {
-        $fbb = array(0, ($desc - 100), 1000, ($asc + 100));
+        $fbb = [0, ($desc - 100), 1000, ($asc + 100)];
     }
     $fd .= ",'FontBBox'=>'[".$fbb[0].' '.$fbb[1].' '.$fbb[2].' '.$fbb[3]."]'";
     //ItalicAngle
@@ -510,7 +510,7 @@ function MakeWidthArray($fm)
     //Make character width array
     $s = 'array(';
     $cw = $fm['Widths'];
-    $els = array();
+    $els = [];
     $c = 0;
     foreach ($cw as $i => $w) {
         if (is_numeric($i)) {
@@ -617,7 +617,7 @@ if (count($arg) >= 3) {
         }
     }
     if (!isset($arg[4])) {
-        $arg[4] = array();
+        $arg[4] = [];
     }
     MakeFont($arg[0], $arg[1], $arg[2], $arg[3], $arg[4]);
     $t = ob_get_clean();

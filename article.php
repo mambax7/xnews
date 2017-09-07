@@ -122,7 +122,7 @@ $gpermHandler = xoops_getHandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
 } else {
-    $groups = array(XOOPS_GROUP_ANONYMOUS => XOOPS_GROUP_ANONYMOUS);
+    $groups = [XOOPS_GROUP_ANONYMOUS => XOOPS_GROUP_ANONYMOUS];
 }
 if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
@@ -173,10 +173,10 @@ $story['text'] = $article->hometext();
 $bodytext      = $article->bodytext();
 
 if (xoops_trim($bodytext) != '') {
-    $articletext = array();
+    $articletext = [];
     if ($xnews->getConfig('enhanced_pagenav')) {
         $articletext             = preg_split('/(\[pagebreak:|\[pagebreak)(.*)(\])/iU', $bodytext);
-        $arr_titles              = array();
+        $arr_titles              = [];
         $auto_summary            = $article->auto_summary($bodytext, $arr_titles);
         $bodytext                = str_replace('[summary]', $auto_summary, $bodytext);
         $articletext[$storypage] = str_replace('[summary]', $auto_summary, $articletext[$storypage]);
@@ -304,12 +304,12 @@ $xoopsTpl->assign('display_images', $xnews->getConfig('images_display'));
 
 $xoopsTpl->assign('lang_attached_files', _MA_NW_ATTACHEDFILES);
 $sfiles     = new nw_sFiles();
-$filesarr   = $newsfiles = array();
+$filesarr   = $newsfiles = [];
 $filesarr   = $sfiles->getAllbyStory($storyid);
 $filescount = count($filesarr);
 //DNPROSSI - Added count variables for pdf - images columns
-$row_images       = array();
-$row_pdf          = array();
+$row_images       = [];
+$row_pdf          = [];
 $row_images_count = $article->imagerows();
 $row_pdf_count    = $article->pdfrows();
 $k                = 0;
@@ -323,40 +323,40 @@ if ($filescount > 0) {
             // IN PROGRESS
             // IN PROGRESS
             // IN PROGRESS
-            $newsfiles[]      = array(
+            $newsfiles[]      = [
                 'visitlink'         => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(),
                 'file_realname'     => $onefile->getFileRealName(),
                 'file_mimetype'     => $mime,
                 'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
-            );
-            $newsimages       = array(
+            ];
+            $newsimages       = [
                 'visitlink'     => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(),
                 'file_realname' => $onefile->getFileRealName(),
                 'file_mimetype' => $mime,
                 'thumbname'     => XNEWS_ATTACHED_FILES_URL . '/thumb_' . $onefile->getDownloadname()
-            );
+            ];
             $row_images[$j][] = $newsimages;
             $j++;
             if ($j == $row_images_count) {
                 $j = 0;
             }
         } else {
-            $newsfiles[]   = array(
+            $newsfiles[]   = [
                 'file_id'           => $onefile->getFileid(),
                 'visitlink'         => XNEWS_MODULE_URL . '/visit.php?fileid=' . $onefile->getFileid(),
                 'file_realname'     => $onefile->getFileRealName(),
                 'file_attacheddate' => formatTimestamp($onefile->getDate(), $dateformat),
                 'file_mimetype'     => $onefile->getMimetype(),
                 'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
-            );
-            $newspdf       = array(
+            ];
+            $newspdf       = [
                 'file_id'           => $onefile->getFileid(),
                 'visitlink'         => XNEWS_MODULE_URL . '/visit.php?fileid=' . $onefile->getFileid(),
                 'file_realname'     => $onefile->getFileRealName(),
                 'file_attacheddate' => formatTimestamp($onefile->getDate(), $dateformat),
                 'file_mimetype'     => $onefile->getMimetype(),
                 'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
-            );
+            ];
             $row_pdf[$k][] = $newspdf;
             $k++;
             if ($k == $row_pdf_count) {
@@ -429,23 +429,23 @@ if ($xnews->getConfig('showsummarytable')) {
             if ($seo_enabled != 0) {
                 $story_path = nw_remove_accents($onearticle->title());
                 $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
-                $xoopsTpl->append('summary', array(
+                $xoopsTpl->append('summary', [
                     'story_id'        => $onearticle->storyid(),
                     'htmltitle'       => $htmltitle,
                     'infotips'        => $tooltips,
                     'story_title'     => $storyTitle,
                     'story_hits'      => $onearticle->counter(),
                     'story_published' => formatTimestamp($onearticle->published, $dateformat)
-                ));
+                ]);
             } else {
-                $xoopsTpl->append('summary', array(
+                $xoopsTpl->append('summary', [
                     'story_id'        => $onearticle->storyid(),
                     'htmltitle'       => $htmltitle,
                     'infotips'        => $tooltips,
                     'story_title'     => $onearticle->title(),
                     'story_hits'      => $onearticle->counter(),
                     'story_published' => formatTimestamp($onearticle->published, $dateformat)
-                ));
+                ]);
             }
         }
     }
@@ -467,7 +467,7 @@ if ($xnews->getConfig('showprevnextlink')) {
     $xoopsTpl->assign('nav_links', $xnews->getConfig('showprevnextlink'));
     $tmparticle    = new nw_NewsStory();
     $nextId        = $previousId = -1;
-    $next          = $previous = array();
+    $next          = $previous = [];
     $previousTitle = $nextTitle = '';
 
     $next = $tmparticle->getNextArticle($storyid, $xnews->getConfig('restrictindex'));
@@ -673,12 +673,12 @@ if ($xnews->getConfig('com_rule') != 0) {
 </table>
 </form>';
 
-        $xoopsTpl->assign(array(
+        $xoopsTpl->assign([
                               'commentsnav'        => $navbar,
                               'editcomment_link'   => XNEWS_MODULE_URL . '/comment_edit.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
                               'deletecomment_link' => XNEWS_MODULE_URL . '/comment_delete.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
                               'replycomment_link'  => XNEWS_MODULE_URL . '/comment_reply.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra
-                          ));
+                          ]);
         $xoopsTpl->_tpl_vars['commentsnav'] = str_replace("self.location.href='", "self.location.href='" . XNEWS_MODULE_URL . '/', $xoopsTpl->_tpl_vars['commentsnav']);
     }
 }

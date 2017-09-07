@@ -51,7 +51,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 * processing time a lot. This can cause a PHP time-out in some cases,
 * especially if the document contains images or fonts.
 */
-$pdf->SetProtection(array('print'));
+$pdf->SetProtection(['print']);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -64,8 +64,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(array('helvetica', '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array('helvetica', '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont(['helvetica', '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont(['helvetica', '', PDF_FONT_SIZE_DATA]);
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);

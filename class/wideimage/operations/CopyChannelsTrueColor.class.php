@@ -31,7 +31,7 @@ class wioCopyChannelsTrueColor
 
     public function execute($img, $channels)
     {
-        $blank = array('red' => 0, 'green' => 0, 'blue' => 0, 'alpha' => 0);
+        $blank = ['red' => 0, 'green' => 0, 'blue' => 0, 'alpha' => 0];
 
         $width  = $img->getWidth();
         $height = $img->getHeight();

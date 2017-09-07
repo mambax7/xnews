@@ -62,7 +62,7 @@ if ($op == 'start') {
             $sql = 'SELECT cat.categoryid, cat.parentid, cat.name, COUNT(art.itemid) FROM ' . $xoopsDB->prefix('smartsection_categories') . ' AS cat INNER JOIN ' . $xoopsDB->prefix('smartsection_items') . ' AS art ON cat.categoryid=art.categoryid GROUP BY art.categoryid';
 
             $result           = $xoopsDB->query($sql);
-            $cat_cbox_options = array();
+            $cat_cbox_options = [];
 
             while (list($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow($result)) {
                 $cat_title              = $myts->displayTarea($cat_title);
@@ -116,12 +116,12 @@ if ($op == 'go') {
 
     $resultCat = $xoopsDB->query($sql);
 
-    $newCatArray     = array();
-    $newArticleArray = array();
+    $newCatArray     = [];
+    $newArticleArray = [];
 
-    $oldToNew = array();
+    $oldToNew = [];
     while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
-        $newCat           = array();
+        $newCat           = [];
         $newCat['oldid']  = $arrCat['categoryid'];
         $newCat['oldpid'] = $arrCat['parentid'];
 

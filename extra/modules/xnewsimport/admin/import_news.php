@@ -52,9 +52,9 @@ if ($op == 'go') {
 
     $resultCat = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('topics'));
 
-    $newCatArray     = array();
-    $newArticleArray = array();
-    $oldToNew        = array();
+    $newCatArray     = [];
+    $newArticleArray = [];
+    $oldToNew        = [];
     while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
 
         /*$newCat = array();

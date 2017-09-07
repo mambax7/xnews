@@ -23,15 +23,15 @@ class wiUnsupportedFormatException extends wiException
 
 abstract class wiFileMapperFactory
 {
-    protected static $mappers = array();
+    protected static $mappers = [];
 
-    protected static $mimeTable = array(
+    protected static $mimeTable = [
         'image/jpg'   => 'jpeg',
         'image/jpeg'  => 'jpeg',
         'image/pjpeg' => 'jpeg',
         'image/gif'   => 'gif',
         'image/png'   => 'png'
-    );
+    ];
 
     public static function selectMapper($uri, $format = null)
     {

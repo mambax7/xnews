@@ -128,7 +128,7 @@ function nw_updaterating($storyid)
 function nw_MygetItemIds($permtype = 'nw_view')
 {
     global $xoopsUser;
-    static $tblperms = array();
+    static $tblperms = [];
     $xnews = XnewsXnews::getInstance();
 
     if (is_array($tblperms) && array_key_exists($permtype, $tblperms)) {
@@ -153,7 +153,7 @@ function nw_html2text($document)
     // and white space. It will also convert some
     // common HTML entities to their text equivalent.
 
-    $search = array(
+    $search = [
         "'<script[^>]*?" . ">.*?</script>'si", // Strip out javascript
         "'<[\/\!]*?[^<>]*?" . ">'si", // Strip out HTML tags
         "'([\r\n])[\s]+'", // Strip out white space
@@ -167,9 +167,9 @@ function nw_html2text($document)
         "'&(pound|#163);'i",
         "'&(copy|#169);'i",
         "'&#(\d+);'e"
-    ); // evaluate as php
+    ]; // evaluate as php
 
-    $replace = array(
+    $replace = [
         '',
         '',
         "\\1",
@@ -183,7 +183,7 @@ function nw_html2text($document)
         chr(163),
         chr(169),
         "chr(\\1)"
-    );
+    ];
 
     $text = preg_replace($search, $replace, $document);
 
@@ -242,7 +242,7 @@ function nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $heigh
     //
     $editor_option            = strtolower($xnews->getConfig('form_options'));
     $editor                   = false;
-    $editor_configs           = array();
+    $editor_configs           = [];
     $editor_configs['name']   = $name;
     $editor_configs['value']  = $value;
     $editor_configs['rows']   = $rows;
@@ -403,7 +403,7 @@ function nw_createmeta_keywords($content)
         $keywordsorder = $cfg['meta_keywords_order'];
     }
 
-    $tmp = array();
+    $tmp = [];
     // Search for the "Minimum keyword length"
     if (isset($_SESSION['nw_keywords_limit'])) {
         $limit = $_SESSION['nw_keywords_limit'];
@@ -418,8 +418,8 @@ function nw_createmeta_keywords($content)
     $content         = $myts->undoHtmlSpecialChars($content);
     $content         = strip_tags($content);
     $content         = strtolower($content);
-    $search_pattern  = array('&nbsp;', "\t", "\r\n", "\r", "\n", ',', '.', "'", ';', ':', ')', '(', '"', '?', '!', '{', '}', '[', ']', '<', '>', '/', '+', '-', '_', '\\', '*');
-    $replace_pattern = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+    $search_pattern  = ['&nbsp;', "\t", "\r\n", "\r", "\n", ',', '.', "'", ';', ':', ')', '(', '"', '?', '!', '{', '}', '[', ']', '<', '>', '/', '+', '-', '_', '\\', '*'];
+    $replace_pattern = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
     $content         = str_replace($search_pattern, $replace_pattern, $content);
     $keywords        = explode(' ', $content);
     switch ($keywordsorder) {
@@ -476,7 +476,7 @@ function nw_updateCache()
     $xnews = XnewsXnews::getInstance();
 
     $folder  = $xoopsModule->getVar('dirname');
-    $tpllist = array();
+    $tpllist = [];
     require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
     require_once XOOPS_ROOT_PATH . '/class/template.php';
     $tplfileHandler = xoops_getHandler('tplfile');
@@ -488,7 +488,7 @@ function nw_updateCache()
     foreach ($tpllist as $onetemplate) {
         if ($onetemplate->getVar('tpl_type') == 'module') {
             // Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
-            $files_del = array();
+            $files_del = [];
             $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');
             if (count($files_del) > 0) {
                 foreach ($files_del as $one_file) {
@@ -645,7 +645,7 @@ function nw_close_tags($string)
         $start_tags = $start_tags[1];
         // match closed tags
         if (preg_match_all('/<\/([a-z]+)>/', $string, $end_tags)) {
-            $complete_tags = array();
+            $complete_tags = [];
             $end_tags      = $end_tags[1];
 
             foreach ($start_tags as $key => $val) {
@@ -782,7 +782,7 @@ function nw_latestnews_mk_select($options, $number)
 
 function nw_remove_numbers($string)
 {
-    $vowels = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' ');
+    $vowels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' '];
     $string = str_replace($vowels, '', $string);
 
     return $string;
@@ -826,7 +826,7 @@ function nw_remove_accents($chain)
 
     // Transform punctuation
     //                 Tab     Space      !        "        #        %        &        '        (        )        ,        /        :        ;        <        =        >        ?        @        [        \        ]        ^        {        |        }        ~       .
-    $pattern = array(
+    $pattern = [
         '/%09/',
         '/%20/',
         '/%21/',
@@ -856,8 +856,8 @@ function nw_remove_accents($chain)
         '/%7E/',
         '/%39/',
         "/\./"
-    );
-    $rep_pat = array('-', '-', '', '', '', '-100', '', '-', '', '', '', '-', '', '', '', '-', '', '', '-at-', '', '-', '', '-', '', '-', '', '-', '-', '');
+    ];
+    $rep_pat = ['-', '-', '', '', '', '-100', '', '-', '', '', '', '-', '', '', '', '-', '', '', '-at-', '', '-', '', '-', '', '-', '', '-', '-', ''];
     $chain   = preg_replace($pattern, $rep_pat, $chain);
 
     return $chain;
@@ -966,10 +966,10 @@ function nw_callJavascriptFile($javascriptFile, $inLanguageFolder = false, $oldW
 
 function nw_detect_utf8_lang_encoding($string)
 {
-    $pattern_array = array(
+    $pattern_array = [
         'arabic'  => '/\%D8\%([A-F0-9]{2})\%D9\%([A-F0-9]{2})/i',
         'chinese' => '/\%E5\%([A-F0-9]{2})\%([A-F0-9]{2})\%E6\%([A-F0-9]{2})\%([A-F0-9]{2})/i'
-    );
+    ];
 
     //$pattern = '/[\%D8\%([A-Z0-9]{2})-\%DB\%([A-Z0-9]{2})]/i'; //arabic
     //$pattern = '/\%D8\%([A-F0-9]{2})\%D9\%([A-F0-9]{2})/i';
@@ -1008,7 +1008,7 @@ function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $con
         // splits all html-tags to scanable lines
         preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
         $total_length = strlen($ending);
-        $open_tags    = array();
+        $open_tags    = [];
         $truncate     = '';
         foreach ($lines as $line_matchings) {
             // if there is any html-tag in this line, handle it and add it (uncounted) to the output

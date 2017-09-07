@@ -150,14 +150,14 @@ $pdf->setImageScale(1); //set image scale factor
 
 //DNPROSSI ADDED FOR SCHINESE - PERSIAN
 if (_LANGCODE == 'cn' || $multylang == 'cn') {
-    $pdf->setHeaderFont(array('gbsn00lp', '', 10));
-    $pdf->setFooterFont(array('gbsn00lp', '', 10));
+    $pdf->setHeaderFont(['gbsn00lp', '', 10]);
+    $pdf->setFooterFont(['gbsn00lp', '', 10]);
 } elseif (_LANGCODE == 'fa' || $multylang == 'fa') {
-    $pdf->setHeaderFont(array('almohanad', '', 18));
-    $pdf->setFooterFont(array('almohanad', '', 18));
+    $pdf->setHeaderFont(['almohanad', '', 18]);
+    $pdf->setFooterFont(['almohanad', '', 18]);
 } else {
-    $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-    $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    $pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+    $pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 }
 
 $pdf->setLanguageArray($l); //set language items

@@ -43,7 +43,7 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
 
     $sql    .= 'ORDER BY created DESC';
     $result = $xoopsDB->query($sql, $limit, $offset);
-    $ret    = array();
+    $ret    = [];
     $i      = 0;
     while ($myrow = $xoopsDB->fetchArray($result)) {
         $display = true;

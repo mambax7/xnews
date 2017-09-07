@@ -56,7 +56,7 @@ function Newsletter()
     $sform->addElement($dates_tray);
     //
     $topiclist  = new XoopsFormSelect(_AM_NW_PRUNE_TOPICS, 'export_topics', '', 5, true);
-    $topics_arr = array();
+    $topics_arr = [];
     $xt         = new nw_NewsTopic();
     $allTopics  = $xt->getAllTopics(false); // The webmaster can see everything
     $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
@@ -98,7 +98,7 @@ function LaunchNewsletter()
     $newslettertemplate = '';
     echo '<br>';
     $story           = new nw_NewsStory();
-    $exportedStories = array();
+    $exportedStories = [];
     $topiclist       = '';
     $removeBr        = $removehtml = false;
     $removeBr        = isset($_POST['removebr']) ? (int)$_POST['removebr'] : 0;
@@ -119,7 +119,7 @@ function LaunchNewsletter()
     if (isset($_POST['export_topics'])) {
         $topiclist = implode(',', $_POST['export_topics']);
     }
-    $tbltopics       = array();
+    $tbltopics       = [];
     $exportedStories = $story->NewsExport($timestamp1, $timestamp2, $topiclist, 0, $tbltopics);
     $newsfile        = XOOPS_ROOT_PATH . '/uploads/newsletter.txt';
     if (count($exportedStories)) {
@@ -132,7 +132,7 @@ function LaunchNewsletter()
         }
         foreach ($exportedStories as $exportedStory) {
             $content         = $newslettertemplate;
-            $search_pattern  = array(
+            $search_pattern  = [
                 '%title%',
                 '%uname%',
                 '%created%',
@@ -151,8 +151,8 @@ function LaunchNewsletter()
                 '%publisher%',
                 '%publisher_id%',
                 '%link%'
-            );
-            $replace_pattern = array(
+            ];
+            $replace_pattern = [
                 $exportedStory->title(),
                 $exportedStory->uname(),
                 formatTimestamp($exportedStory->created(), $xnews->getConfig('dateformat')),
@@ -171,7 +171,7 @@ function LaunchNewsletter()
                 $exportedStory->uname(),
                 $exportedStory->uid(),
                 XNEWS_MODULE_URL . '/article.php?storyid=' . $exportedStory->storyid()
-            );
+            ];
             $content         = str_replace($search_pattern, $replace_pattern, $content);
             if ($removeBr) {
                 $content = str_replace('<br>', "\r\n", $content);

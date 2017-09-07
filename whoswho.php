@@ -23,7 +23,7 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 
 $option  = $xnews->getConfig('displayname');
 $article = new nw_NewsStory();
-$uid_ids = array();
+$uid_ids = [];
 $uid_ids = $article->getWhosWho($xnews->getConfig('restrictindex'));
 if (count($uid_ids) > 0) {
     $lst_uid       = implode(',', $uid_ids);
@@ -44,7 +44,7 @@ if (count($uid_ids) > 0) {
                 }
                 break;
         }
-        $xoopsTpl->append('whoswho', array('uid' => $one_user->getVar('uid'), 'name' => $uname, 'user_avatarurl' => XOOPS_URL . '/uploads/' . $one_user->getVar('user_avatar')));
+        $xoopsTpl->append('whoswho', ['uid' => $one_user->getVar('uid'), 'name' => $uname, 'user_avatarurl' => XOOPS_URL . '/uploads/' . $one_user->getVar('user_avatar')]);
     }
 }
 //DNPROSSI - ADDED

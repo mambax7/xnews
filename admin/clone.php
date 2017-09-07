@@ -236,13 +236,13 @@ function NewsClonerApply()
         $new_subprefix = 'nw' . (string)$Auto_increment;
         //trigger_error($result. ' ---- ' .$count. ' ---- ' .$new_subprefix , E_USER_WARNING);
 
-        $patterns = array(
+        $patterns = [
             $old_dirname                                   => $new_dirname,
             '$modversion["original"] = 1;'                 => '$modversion["original"] = 0;',
             '$modversion["name"] = "' . 'x' . 'News' . '"' => '$modversion["name"] = "' . $new_modulename . '"',
             $old_subprefix                                 => strtolower($new_subprefix),
             strtoupper($old_subprefix)                     => strtoupper($new_subprefix)
-        );
+        ];
 
         $patKeys   = array_keys($patterns);
         $patValues = array_values($patterns);
@@ -308,13 +308,13 @@ function CloneUpgrade()
         $upg_version    = $clone_arr[0]['clone_version'];
         $upg_subprefix  = $clone_arr[0]['clone_subprefix'];
         //
-        $patterns = array(
+        $patterns = [
             $org_dirname                                   => $upg_dirname,
             '$modversion["original"] = 1;'                 => '$modversion["original"] = 0;',
             '$modversion["name"] = "' . 'x' . 'News' . '"' => '$modversion["name"] = "' . $upg_modulename . '"',
             $org_subprefix                                 => strtolower($upg_subprefix),
             strtoupper($org_subprefix)                     => strtoupper($upg_subprefix),
-        );
+        ];
         //
         $patKeys   = array_keys($patterns);
         $patValues = array_values($patterns);
@@ -371,7 +371,7 @@ function CloneDelete()
         echo '</div>';
         //echo "<div style='text-align: center;'>";
         $message = sprintf(_AM_NW_CLONER_SUREDELETE, $module_dirname);
-        xoops_confirm(array('op' => 'clonedeleteapply', 'clone_id' => $cloneid, 'ok' => 1, 'module_name' => $module_dirname), 'clone.php', $message);
+        xoops_confirm(['op' => 'clonedeleteapply', 'clone_id' => $cloneid, 'ok' => 1, 'module_name' => $module_dirname], 'clone.php', $message);
     }
 }
 

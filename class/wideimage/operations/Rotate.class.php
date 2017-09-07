@@ -35,7 +35,7 @@ class wioRotate
             if ($image->isTransparent()) {
                 $bgColor = $image->getTransparentColor();
             } else {
-                $tc = array('red' => 255, 'green' => 255, 'blue' => 255, 'alpha' => 127);
+                $tc = ['red' => 255, 'green' => 255, 'blue' => 255, 'alpha' => 127];
 
                 if ($image->isTrueColor()) {
                     $bgColor = $image->getExactColorAlpha($tc);

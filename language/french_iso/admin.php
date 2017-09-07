@@ -203,8 +203,10 @@ define('_AM_NW_CLONER_DIRFOL', 'R�pertoire');
 define('_AM_NW_CLONER_VERSION', 'Version');
 
 define('_AM_NW_CLONER_NEWNAME', 'Nom du nouveau module');
-define('_AM_NW_CLONER_NEWNAMEDESC',
-       "Cette information affecte �galement le nom du r�pertoire du module. <br>La saisie est insensible � la casse et les espaces sont automatiquement supprim�s.<br><br>Exemples :<br><strong>Library</strong> devient <strong>library</strong> dans le r�pertoire des modules<br><strong>My Library</strong> devient <strong>mylibrary</strong> dans le r�pertoire des modules<br><br> Le module d'origine est : <font color='#008400'><strong> %s </strong></font><br>");
+define(
+    '_AM_NW_CLONER_NEWNAMEDESC',
+       "Cette information affecte �galement le nom du r�pertoire du module. <br>La saisie est insensible � la casse et les espaces sont automatiquement supprim�s.<br><br>Exemples :<br><strong>Library</strong> devient <strong>library</strong> dans le r�pertoire des modules<br><strong>My Library</strong> devient <strong>mylibrary</strong> dans le r�pertoire des modules<br><br> Le module d'origine est : <font color='#008400'><strong> %s </strong></font><br>"
+);
 define('_AM_NW_CLONER_NEWNAMELABEL', 'Nouveau module :');
 
 define('_AM_NW_CLONER_DIREXISTS', "Le r�pertoire '%s' existe d�j�");
