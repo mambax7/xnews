@@ -13,11 +13,11 @@ if (empty($seoOp) && @$_SERVER['PATH_INFO']) {
     $data = explode('/', $_SERVER['PATH_INFO']);
 
     $seoParts = explode('.', $data[1]);
-    if (count($seoParts) == 2) {
+    if (2 == count($seoParts)) {
         $seoOp  = $seoParts[0];
         $seoArg = $seoParts[1];
     }
-    if (count($seoParts) == 3) {
+    if (3 == count($seoParts)) {
         $seoOp  = $seoParts[1];
         $seoArg = $seoParts[2];
     }

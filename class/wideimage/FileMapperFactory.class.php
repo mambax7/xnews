@@ -60,7 +60,7 @@ abstract class wiFileMapperFactory
 
     public static function determineFormat($uri, $format = null)
     {
-        if ($format == null) {
+        if (null == $format) {
             $format = self::extractExtension($uri);
         }
 
@@ -73,7 +73,7 @@ abstract class wiFileMapperFactory
 
         // clean the string
         $format = strtoupper(preg_replace('/[^a-z0-9_-]/i', '', $format));
-        if ($format == 'JPG') {
+        if ('JPG' == $format) {
             $format = 'JPEG';
         }
 
@@ -83,7 +83,7 @@ abstract class wiFileMapperFactory
     public static function extractExtension($uri)
     {
         $p = strrpos($uri, '.');
-        if ($p === false) {
+        if (false === $p) {
             return '';
         } else {
             return substr($uri, $p + 1);

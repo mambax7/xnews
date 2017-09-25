@@ -27,11 +27,11 @@ class wioRotate
         }
         $angle = $angle % 360;
 
-        if ($angle == 0) {
+        if (0 == $angle) {
             return $image->copy();
         }
 
-        if ($bgColor === null) {
+        if (null === $bgColor) {
             if ($image->isTransparent()) {
                 $bgColor = $image->getTransparentColor();
             } else {

@@ -43,8 +43,8 @@ if (isset($_POST['preview'])) {
     $op = 'post';
 } elseif (isset($_GET['op']) && isset($_GET['storyid'])) {
     // Verify that the user can edit or delete an article
-    if ($_GET['op'] == 'edit' || $_GET['op'] == 'delete') {
-        if ($xnews->getConfig('authoredit') == 1) {
+    if ('edit' == $_GET['op'] || 'delete' == $_GET['op']) {
+        if (1 == $xnews->getConfig('authoredit')) {
             $tmpstory = new nw_NewsStory((int)$_GET['storyid']);
             if (is_object($xoopsUser) && $xoopsUser->getVar('uid') != $tmpstory->uid() && !nw_is_admin_group()) {
                 redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
@@ -56,14 +56,14 @@ if (isset($_POST['preview'])) {
         }
     }
 
-    if ($approveprivilege && $_GET['op'] == 'edit') {
+    if ($approveprivilege && 'edit' == $_GET['op']) {
         $op      = 'edit';
         $storyid = (int)$_GET['storyid'];
-    } elseif ($approveprivilege && $_GET['op'] == 'delete') {
+    } elseif ($approveprivilege && 'delete' == $_GET['op']) {
         $op      = 'delete';
         $storyid = (int)$_GET['storyid'];
     } else {
-        if ($xnews->getConfig('authoredit') && is_object($xoopsUser) && isset($_GET['storyid']) && ($_GET['op'] == 'edit' || $_POST['op'] == 'preview' || $_POST['op'] == 'post')) {
+        if ($xnews->getConfig('authoredit') && is_object($xoopsUser) && isset($_GET['storyid']) && ('edit' == $_GET['op'] || 'preview' == $_POST['op'] || 'post' == $_POST['op'])) {
             $storyid = 0;
             $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : (int)$_POST['storyid'];
             if (!empty($storyid)) {
@@ -129,10 +129,10 @@ switch ($op) {
         if (isset($published) && $published > 0) {
             $approve = 1;
         }
-        if ($story->published() != 0) {
+        if (0 != $story->published()) {
             $published = $story->published();
         }
-        if ($story->expired() != 0) {
+        if (0 != $story->expired()) {
             $expired = $story->expired();
         } else {
             $expired = 0;
@@ -168,13 +168,13 @@ switch ($op) {
         } else {
             $story     = new nw_NewsStory();
             $published = isset($_POST['publish_date']) ? $_POST['publish_date'] : 0;
-            if (!empty($published) && isset($_POST['autodate']) && (int)($_POST['autodate'] == 1)) {
+            if (!empty($published) && isset($_POST['autodate']) && (int)(1 == $_POST['autodate'])) {
                 $published = strtotime($published['date']) + $published['time'];
             } else {
                 $published = 0;
             }
             $expired = isset($_POST['expiry_date']) ? $_POST['expiry_date'] : 0;
-            if (!empty($expired) && isset($_POST['autoexpdate']) && (int)($_POST['autoexpdate'] == 1)) {
+            if (!empty($expired) && isset($_POST['autoexpdate']) && (int)(1 == $_POST['autoexpdate'])) {
                 $expired = strtotime($expired['date']) + $expired['time'];
             } else {
                 $expired = 0;
@@ -215,7 +215,7 @@ switch ($op) {
 
         $notifypub = isset($_POST['notifypub']) ? (int)$_POST['notifypub'] : 0;
         $nosmiley  = isset($_POST['nosmiley']) ? (int)$_POST['nosmiley'] : 0;
-        if (isset($nosmiley) && ($nosmiley == 0 || $nosmiley == 1)) {
+        if (isset($nosmiley) && (0 == $nosmiley || 1 == $nosmiley)) {
             $story->setNosmiley($nosmiley);
         } else {
             $nosmiley = 0;
@@ -231,7 +231,7 @@ switch ($op) {
         }
         //DNPROSSI - dobr
         $dobr = isset($_POST['dobr']) ? (int)$_POST['dobr'] : 0;
-        if (isset($dobr) && ($dobr == 0 || $dobr == 1)) {
+        if (isset($dobr) && (0 == $dobr || 1 == $dobr)) {
             $story->setDobr($dobr);
         } else {
             $dobr = 0;
@@ -255,7 +255,7 @@ switch ($op) {
             $p_hometext .= '<br><br>' . $p_bodytext;
         }
         $topicalign2 = isset($story->topicalign) ? 'align="' . $story->topicalign() . '"' : '';
-        $p_hometext  = (($xt->topic_imgurl() != '') && $topicdisplay) ? '<img src="assets/images/topics/' . $xt->topic_imgurl() . '" ' . $topicalign2 . ' alt="">' . $p_hometext : $p_hometext;
+        $p_hometext  = (('' != $xt->topic_imgurl()) && $topicdisplay) ? '<img src="assets/images/topics/' . $xt->topic_imgurl() . '" ' . $topicalign2 . ' alt="">' . $p_hometext : $p_hometext;
         themecenterposts($p_title, $p_hometext);
 
         // Display post edit form
@@ -361,7 +361,7 @@ switch ($op) {
             if (!$approve) {
                 $story->setPublished(0);
             }
-        } elseif ($xnews->getConfig('autoapprove') == 1 && !$approveprivilege) {
+        } elseif (1 == $xnews->getConfig('autoapprove') && !$approveprivilege) {
             if (empty($storyid)) {
                 $approve = 1;
             } else {
@@ -415,9 +415,9 @@ switch ($op) {
                 break;
         }
 
-        if ($allowupload && isset($_POST['deleteimage']) && (int)$_POST['deleteimage'] == 1) {
+        if ($allowupload && isset($_POST['deleteimage']) && 1 == (int)$_POST['deleteimage']) {
             $currentPicture = $story->picture();
-            if (xoops_trim($currentPicture) != '') {
+            if ('' != xoops_trim($currentPicture)) {
                 $currentPicture = XNEWS_TOPICS_FILES_PATH . '/' . xoops_trim($story->picture());
                 if (is_file($currentPicture) && file_exists($currentPicture)) {
                     if (!unlink($currentPicture)) {
@@ -432,7 +432,7 @@ switch ($op) {
             if (isset($_POST['xoops_upload_file'])) {
                 $fldname = $_FILES[$_POST['xoops_upload_file'][1]];
                 $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-                if (xoops_trim($fldname != '')) {
+                if (xoops_trim('' != $fldname)) {
                     $sfiles         = new nw_sFiles();
                     $destname       = $sfiles->createUploadName(XNEWS_TOPICS_FILES_PATH, $fldname);
                     $permittedTypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
@@ -483,7 +483,7 @@ switch ($op) {
                     $notificationHandler->subscribe('story', $story->storyid(), 'approve', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE, $xnews->getModule()->getVar('mid'), $story->uid());
                 }
 
-                if ($approve == 1) {
+                if (1 == $approve) {
                     $notificationHandler->triggerEvent('global', 0, 'new_story', $tags);
                     $notificationHandler->triggerEvent('story', $story->storyid(), 'approve', $tags);
                     // Added by Lankford on 2007/3/23
@@ -509,7 +509,7 @@ switch ($op) {
                 if (isset($_POST['xoops_upload_file'])) {
                     $fldname = $_FILES[$_POST['xoops_upload_file'][0]];
                     $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-                    if (xoops_trim($fldname != '')) {
+                    if (xoops_trim('' != $fldname)) {
                         $sfiles   = new nw_sFiles();
                         $destname = $sfiles->createUploadName(XNEWS_ATTACHED_FILES_PATH, $fldname);
                         /**
@@ -592,7 +592,7 @@ switch ($op) {
             $expired      = 0;
             $published    = 0;
         }
-        if ($xnews->getConfig('autoapprove') == 1) {
+        if (1 == $xnews->getConfig('autoapprove')) {
             $approve = 1;
         }
         require_once XNEWS_MODULE_PATH . '/include/storyform.inc.php';

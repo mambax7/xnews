@@ -23,7 +23,7 @@ function xoops_module_uninstall_xnews(XoopsModule $xoopsModule)
         $sql        = "UPDATE {$xoopsDB->prefix('news_clonerdata')} SET clone_installed = " . 0 . " WHERE clone_id = {$cloneid}";
         $xoopsDB->query($sql);
         // if table is empty drop
-        if ($count == 1 && $module_original == 1) {
+        if (1 == $count && 1 == $module_original) {
             $sql    = "DROP TABLE {$xoopsDB->prefix('news_clonerdata')}";
             $result = $xoopsDB->query($sql);
         }

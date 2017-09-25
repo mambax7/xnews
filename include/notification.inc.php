@@ -21,7 +21,7 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 function nw_notify_iteminfo($category, $item_id)
 {
-    if ($category == 'global') {
+    if ('global' == $category) {
         $item['name'] = '';
         $item['url']  = '';
 
@@ -30,7 +30,7 @@ function nw_notify_iteminfo($category, $item_id)
 
     global $xoopsDB;
 
-    if ($category == 'story') {
+    if ('story' == $category) {
         // Assume we have a valid story id
         $sql    = 'SELECT title FROM ' . $xoopsDB->prefix('nw_stories') . ' WHERE storyid = ' . (int)$item_id;
         $result = $xoopsDB->query($sql);
@@ -46,7 +46,7 @@ function nw_notify_iteminfo($category, $item_id)
     }
 
     // Added by Lankford on 2007/3/23
-    if ($category == 'category') {
+    if ('category' == $category) {
         $sql    = 'SELECT title FROM ' . $xoopsDB->prefix('nw_topics') . ' WHERE topic_id = ' . (int)$item_id;
         $result = $xoopsDB->query($sql);
         if ($result) {

@@ -25,12 +25,12 @@ if (empty($storyid)) {
 
 $article = new nw_NewsStory($storyid);
 // Not yet published
-if ($article->published() == 0 || $article->published() > time()) {
+if (0 == $article->published() || $article->published() > time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
 }
 
 // Expired
-if ($article->expired() != 0 && $article->expired() < time()) {
+if (0 != $article->expired() && $article->expired() < time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
 }
 
@@ -70,7 +70,7 @@ $dateformat = $xnews->getConfig('dateformat');
 //DNPROSSI Added - xlanguage installed and active
 $moduleHandler = xoops_getHandler('module');
 $xlanguage     = $moduleHandler->getByDirname('xlanguage');
-if (is_object($xlanguage) && $xlanguage->getVar('isactive') === true) {
+if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {
     $xlang = true;
 } else {
     $xlang = false;
@@ -102,7 +102,7 @@ $content = str_replace('[pagebreak]', '<tcpdf method="AddPage">', $content);
 //$multylang = nw_detect_utf8_lang_encoding($content);
 
 //DNPROSSI Added - Get correct language and remove tags from text to be sent to PDF
-if ($xlang === true) {
+if (true === $xlang) {
     require_once XOOPS_ROOT_PATH . '/modules/xlanguage/include/functions.php';
     $content = xlanguage_ml($content);
 }
@@ -112,10 +112,10 @@ $doc_title    = $myts->undoHtmlSpecialChars($article->title());
 $doc_keywords = 'XOOPS';
 
 //DNPROSSI ADDED gbsn00lp chinese to tcpdf fonts dir
-if (_LANGCODE == 'cn' || $multylang == 'cn') {
+if (_LANGCODE == 'cn' || 'cn' == $multylang) {
     $pdf->SetFont('gbsn00lp', '', 10);
 }
-if (_LANGCODE == 'fa' || $multylang == 'fa') {
+if (_LANGCODE == 'fa' || 'fa' == $multylang) {
     // RTL direction for persian language
     $pdf->setRTL(true);
     //$pdf->SetFont('dejavusans', '', 12); almohanad
@@ -149,10 +149,10 @@ $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->setImageScale(1); //set image scale factor
 
 //DNPROSSI ADDED FOR SCHINESE - PERSIAN
-if (_LANGCODE == 'cn' || $multylang == 'cn') {
+if (_LANGCODE == 'cn' || 'cn' == $multylang) {
     $pdf->setHeaderFont(['gbsn00lp', '', 10]);
     $pdf->setFooterFont(['gbsn00lp', '', 10]);
-} elseif (_LANGCODE == 'fa' || $multylang == 'fa') {
+} elseif (_LANGCODE == 'fa' || 'fa' == $multylang) {
     $pdf->setHeaderFont(['almohanad', '', 18]);
     $pdf->setFooterFont(['almohanad', '', 18]);
 } else {

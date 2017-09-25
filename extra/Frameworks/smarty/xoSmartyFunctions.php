@@ -33,7 +33,7 @@ function XoSmartyPluginGetSection($section = '')
         $IniContent = parse_ini_file(XOOPS_ROOT_PATH . "/configs/$config_file.ini.php", true);
         if (!empty($section)) {
             if (array_key_exists($section, $IniContent)) {
-                if (count($IniContent[$section]) == 0) {
+                if (0 == count($IniContent[$section])) {
                     XoopsErrorHandler_HandleError(E_USER_WARNING, sprintf(XOSMARTY_SECTIONNOTFOUND, $section, "/configs/$config_file.ini.php"), __FILE__, __LINE__);
 
                     return [];
@@ -86,7 +86,7 @@ function XoSmartyPluginLoadGD()
 
 function XoSmartyPluginHTML2RGB($color = '#000000')
 {
-    if (substr($color, 0, 1) == '#') {
+    if ('#' == substr($color, 0, 1)) {
         $color = substr($color, 1, 6);
     }
 
@@ -112,7 +112,7 @@ function XoSmartyPluginHTML2RGB($color = '#000000')
  **/
 function XoSmartyPlugin_truncate($string, $length = 80, $etc = '...', $break_words = false, $middle = false)
 {
-    if ($length == 0) {
+    if (0 == $length) {
         return '';
     }
 
@@ -137,7 +137,7 @@ function XoSmartyPlugin_write_index_file($path = '')
         return false;
     }
 
-    $path     = substr($path, -1) == '/' ? substr($path, 0, -1) : $path;
+    $path     = '/' == substr($path, -1) ? substr($path, 0, -1) : $path;
     $filename = $path . '/index.html';
 
     if (file_exists($filename)) {

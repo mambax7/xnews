@@ -81,7 +81,7 @@ switch ($xnews->getConfig('displayname')) {
         $authname = $thisuser->getVar('uname');
         break;
     case 2: // Display full name (if it is not empty)
-        if (xoops_trim($thisuser->getVar('name')) == '') {
+        if ('' == xoops_trim($thisuser->getVar('name'))) {
             $authname = $thisuser->getVar('uname');
         } else {
             $authname = $thisuser->getVar('name');
@@ -122,7 +122,7 @@ if ($articlescount > 0) {
             if (count($articlestpl) > 0) {
                 // DNPROSSI SEO
                 $cat_path = '';
-                if ($seo_enabled != 0) {
+                if (0 != $seo_enabled) {
                     $cat_path = nw_remove_accents($oldtopictitle);
                 }
                 $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $oldtopictitle . '</a>';
@@ -150,7 +150,7 @@ if ($articlescount > 0) {
         $count_reads += $article['counter'];
         // DNPROSSI SEO
         $story_path = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $story_path = nw_remove_accents($article['title']);
         }
         $storyTitle    = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $article['storyid'], $story_path) . "' " . $htmltitle . '>' . $article['title'] . '</a>';
@@ -169,7 +169,7 @@ if ($articlescount > 0) {
 
 // DNPROSSI SEO
 $cat_path = '';
-if ($seo_enabled != 0) {
+if (0 != $seo_enabled) {
     $cat_path = nw_remove_accents($article['topic_title']);
 }
 $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $article['topic_title'] . '</a>';

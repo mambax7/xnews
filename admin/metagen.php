@@ -60,7 +60,7 @@ switch ($op) {
         $registry = new nw_registryfile('nw_metagen_options.txt');
         $content  = '';
         $content  = $registry->getfile();
-        if (xoops_trim($content) != '') {
+        if ('' != xoops_trim($content)) {
             list($keywordscount, $keywordsorder) = explode(',', $content);
         } else {
             $keywordscount = $cfg['meta_keywords_count'];
@@ -130,17 +130,17 @@ switch ($op) {
         $blacklist = new nw_blacklist();
         $words     = $blacklist->getAllKeywords();
 
-        if (isset($_POST['go']) && $_POST['go'] == _AM_NW_DELETE) {
+        if (isset($_POST['go']) && _AM_NW_DELETE == $_POST['go']) {
             foreach ($_POST['blacklist'] as $black_id) {
                 $blacklist->delete($black_id);
             }
             $blacklist->store();
         } else {
-            if (isset($_POST['go']) && $_POST['go'] == _AM_NW_ADD) {
+            if (isset($_POST['go']) && _AM_NW_ADD == $_POST['go']) {
                 $p_keywords = $_POST['keywords'];
                 $keywords   = explode("\n", $p_keywords);
                 foreach ($keywords as $keyword) {
-                    if (xoops_trim($keyword) != '') {
+                    if ('' != xoops_trim($keyword)) {
                         $blacklist->addkeywords(xoops_trim($keyword));
                     }
                 }

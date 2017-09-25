@@ -119,7 +119,7 @@ switch ($op) {
         if (isset($_POST['pruned_topics'])) {
             $topiclist = $_POST['pruned_topics'];
         }
-        if ((int)$_POST['ok'] == 1) {
+        if (1 == (int)$_POST['ok']) {
             $story = new nw_NewsStory();
             xoops_cp_header();
             $count = $story->GetCountStoriesPublishedBefore($timestamp, $expired, $topiclist);

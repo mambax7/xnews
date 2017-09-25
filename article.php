@@ -110,11 +110,11 @@ $myts = MyTextSanitizer::getInstance();
 
 // Not yet published
 $article = new nw_NewsStory($storyid);
-if ($article->published() == 0 || $article->published() > time()) {
+if (0 == $article->published() || $article->published() > time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOTYETSTORY);
 }
 // Expired
-if ($article->expired() != 0 && $article->expired() < time()) {
+if (0 != $article->expired() && $article->expired() < time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
 }
 
@@ -143,7 +143,7 @@ if (!preg_match('/msie[^;]*/i', $browser)) {
 /**
  * update counter only when viewing top page and when you are not the author or an admin
  */
-if (empty($_GET['com_id']) && $storypage == 0) {
+if (empty($_GET['com_id']) && 0 == $storypage) {
     if (is_object($xoopsUser)) {
         if (($xoopsUser->getVar('uid') == $article->uid()) || nw_is_admin_group()) {
             // nothing ! ;-)
@@ -167,12 +167,12 @@ $story['posttime']        = formatTimestamp($article->published(), $dateformat);
 $story['news_title']      = $article->title();
 $story['title']           = $article->textlink() . '&nbsp;:&nbsp;' . $article->title();
 $story['topic_title']     = $article->textlink();
-$story['topic_separator'] = ($article->textlink() != '') ? _MA_NW_SP : '';
+$story['topic_separator'] = ('' != $article->textlink()) ? _MA_NW_SP : '';
 
 $story['text'] = $article->hometext();
 $bodytext      = $article->bodytext();
 
-if (xoops_trim($bodytext) != '') {
+if ('' != xoops_trim($bodytext)) {
     $articletext = [];
     if ($xnews->getConfig('enhanced_pagenav')) {
         $articletext             = preg_split('/(\[pagebreak:|\[pagebreak)(.*)(\])/iU', $bodytext);
@@ -200,7 +200,7 @@ if (xoops_trim($bodytext) != '') {
             }
         }
 
-        if ($storypage == 0) {
+        if (0 == $storypage) {
             $story['text'] = $story['text'] . '<br>' . $xnews->getConfig('advertisement') . '<br>' . $articletext[$storypage];
         } else {
             $story['text'] = $articletext[$storypage];
@@ -216,7 +216,7 @@ $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
 function my_highlighter($matches)
 {
     $color = $xnews->getConfig('highlightcolor');
-    if (substr($color, 0, 1) != '#') {
+    if ('#' != substr($color, 0, 1)) {
         $color = '#' . $color;
     }
 
@@ -252,7 +252,7 @@ if ($story['poster']) {
     $story['poster_email']     = '';
     $story['poster_url']       = '';
     $story['poster_from']      = '';
-    if ($xnews->getConfig('displayname') != 3) {
+    if (3 != $xnews->getConfig('displayname')) {
         $story['poster'] = $xoopsConfig['anonymous'];
     }
 }
@@ -281,7 +281,7 @@ $xoopsTpl->assign('lang_printerpage', _MA_NW_PRINTERFRIENDLY);
 $xoopsTpl->assign('lang_sendstory', _MA_NW_SENDSTORY);
 $xoopsTpl->assign('lang_pdfstory', _MA_NW_MAKEPDF);
 
-if ($article->uname() != '') {
+if ('' != $article->uname()) {
     $xoopsTpl->assign('lang_on', _ON);
     $xoopsTpl->assign('lang_postedby', _POSTEDBY);
 } else {
@@ -293,7 +293,7 @@ $xoopsTpl->assign('lang_reads', _READS);
 $xoopsTpl->assign('mail_link', 'mailto:?subject=' . sprintf(_MA_NW_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_MA_NW_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $article->storyid());
 
 //DNPROSSI - Added -1.71 adobe reader detection - diplay_pdf - diplay_images
-if ($xnews->getConfig('pdf_detect') == 1) {
+if (1 == $xnews->getConfig('pdf_detect')) {
     $xoopsTpl->assign('has_adobe', $has_adobe);
 } else {
     $xoopsTpl->assign('has_adobe', 1);
@@ -426,7 +426,7 @@ if ($xnews->getConfig('showsummarytable')) {
             }
             //DNPROSSI SEO
             $story_path = '';
-            if ($seo_enabled != 0) {
+            if (0 != $seo_enabled) {
                 $story_path = nw_remove_accents($onearticle->title());
                 $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
                 $xoopsTpl->append('summary', [
@@ -490,7 +490,7 @@ if ($xnews->getConfig('showprevnextlink')) {
 
         //DNPROSSI SEO
         $item_path = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $item_path = nw_remove_accents($previousTitle);
         }
         $prevStory = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $previousId, $item_path) . "' title='" . _MA_NW_PREVIOUS_ARTICLE . "'>";
@@ -501,7 +501,7 @@ if ($xnews->getConfig('showprevnextlink')) {
     if ($nextId > 0) {
         //DNPROSSI SEO
         $item_path = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $item_path = nw_remove_accents($nextTitle);
         }
         $nextStory = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $nextId, $item_path) . "' title='" . _MA_NW_NEXT_ARTICLE . "'>";
@@ -554,7 +554,7 @@ if ($xnews->getConfig('ratenews') && $other_test) {
     $xoopsTpl->assign('lang_ratingc', _MA_NW_RATINGC);
     $xoopsTpl->assign('lang_ratethisnews', _MA_NW_RATETHISNEWS);
     $story['rating'] = number_format($article->rating(), 2);
-    if ($article->votes == 1) {
+    if (1 == $article->votes) {
         $story['votes'] = _MA_NW_ONEVOTE;
     } else {
         $story['votes'] = sprintf(_MA_NW_NUMVOTES, $article->votes);
@@ -570,14 +570,14 @@ $xoopsTpl->assign('display_icons', $xnews->getConfig('displaylinkicns'));
 
 //DNPROSSI SEO
 $item_path = '';
-if ($seo_enabled != 0) {
+if (0 != $seo_enabled) {
     $item_path = nw_remove_accents($article->title());
 }
 $storyURL = nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $storyid, $item_path);
 $xoopsTpl->assign('story_url', $storyURL);
 
 $print_item = '';
-if ($seo_enabled != 0) {
+if (0 != $seo_enabled) {
     $print_item = nw_remove_accents(_MA_NW_PRINTERFRIENDLY);
 }
 $printLink = "<a target='_blank' href='" . nw_seo_UrlGenerator(_MA_NW_SEO_PRINT, $storyid, $print_item) . "' title='" . _MA_NW_PRINTERFRIENDLY . "'>";
@@ -585,14 +585,14 @@ $printLink .= "<img src='" . XNEWS_MODULE_URL . "/assets/images/print.png' width
 $xoopsTpl->assign('print_link', $printLink);
 
 $pdf_item = '';
-if ($seo_enabled != 0) {
+if (0 != $seo_enabled) {
     $pdf_item = nw_remove_accents($article->title());
 }
 $pdfLink = "<a target='_blank' href='" . nw_seo_UrlGenerator(_MA_NW_SEO_PDF, $storyid, $pdf_item) . "' title='" . _MA_NW_MAKEPDF . "'>";
 $pdfLink .= "<img src='" . XNEWS_MODULE_URL . "/assets/images/acrobat.png' width='28px' height='28px' border='0' alt='" . _MA_NW_MAKEPDF . "'></a>";
 $xoopsTpl->assign('pdf_link', $pdfLink);
 
-if ($seo_enabled != 0) {
+if (0 != $seo_enabled) {
     $xoopsTpl->assign('urlrewrite', true);
 } else {
     $xoopsTpl->assign('urlrewrite', false);
@@ -609,33 +609,33 @@ if ($xnews->getConfig('tags')) {
 
 // Include the comments
 // Problem with url_rewrite and posting comments :
-if ($xnews->getConfig('com_rule') != 0) {
+if (0 != $xnews->getConfig('com_rule')) {
     require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
     require_once XOOPS_ROOT_PATH . '/class/commentrenderer.php';
 
-    if ($seo_enabled != 0) {
+    if (0 != $seo_enabled) {
         $navbar = '
 <form method="get" action="' . XNEWS_MODULE_URL . '/' . $comment_config['pageName'] . '">
 <table width="95%" class="outer" cellspacing="1">
   <tr>
     <td class="even" align="center"><select name="com_mode"><option value="flat"';
-        if ($com_mode == 'flat') {
+        if ('flat' == $com_mode) {
             $navbar .= ' selected="selected"';
         }
         $navbar .= '>' . _FLAT . '</option><option value="thread"';
-        if ($com_mode == 'thread' || $com_mode == '') {
+        if ('thread' == $com_mode || '' == $com_mode) {
             $navbar .= ' selected="selected"';
         }
         $navbar .= '>' . _THREADED . '</option><option value="nest"';
-        if ($com_mode == 'nest') {
+        if ('nest' == $com_mode) {
             $navbar .= ' selected="selected"';
         }
         $navbar .= '>' . _NESTED . '</option></select> <select name="com_order"><option value="' . XOOPS_COMMENT_OLD1ST . '"';
-        if ($com_order == XOOPS_COMMENT_OLD1ST) {
+        if (XOOPS_COMMENT_OLD1ST == $com_order) {
             $navbar .= ' selected="selected"';
         }
         $navbar .= '>' . _OLDESTFIRST . '</option><option value="' . XOOPS_COMMENT_NEW1ST . '"';
-        if ($com_order == XOOPS_COMMENT_NEW1ST) {
+        if (XOOPS_COMMENT_NEW1ST == $com_order) {
             $navbar .= ' selected="selected"';
         }
         unset($postcomment_link);

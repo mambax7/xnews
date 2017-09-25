@@ -85,7 +85,7 @@ if ($fromyear && $frommonth) {
 $infotips   = $xnews->getConfig('infotips');
 $restricted = $xnews->getConfig('restrictindex');
 $dateformat = $xnews->getConfig('dateformat');
-if ($dateformat == '') {
+if ('' == $dateformat) {
     $dateformat = 'm';
 }
 $myts = MyTextSanitizer::getInstance();
@@ -119,7 +119,7 @@ if (!$result) {
             if (empty($lastyear)) {
                 $lastyear = $this_year;
             }
-            if ($lastmonth == 0) {
+            if (0 == $lastmonth) {
                 $lastmonth                    = $this_month;
                 $months[$lastmonth]['string'] = $months_arr[$lastmonth];
                 $months[$lastmonth]['number'] = $lastmonth;
@@ -145,7 +145,7 @@ if (!$result) {
     $xoopsTpl->assign('years', $years);
 }
 
-if ($fromyear != 0 && $frommonth != 0) {
+if (0 != $fromyear && 0 != $frommonth) {
     $xoopsTpl->assign('show_articles', true);
     $xoopsTpl->assign('lang_articles', _MA_NW_ARTICLES);
     $xoopsTpl->assign('currentmonth', $months_arr[$frommonth]);
@@ -177,7 +177,7 @@ if ($fromyear != 0 && $frommonth != 0) {
             $cat_path   = '';
             $item_path  = '';
             $print_item = '';
-            if ($seo_enabled != 0) {
+            if (0 != $seo_enabled) {
                 $cat_path   = nw_remove_accents($article->topic_title());
                 $item_path  = nw_remove_accents($article->title());
                 $print_item = nw_remove_accents(_MA_NW_PRINTERFRIENDLY);

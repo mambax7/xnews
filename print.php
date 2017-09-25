@@ -26,12 +26,12 @@ if (empty($storyid)) {
 // Verify that the article is published
 $storyObj = new nw_NewsStory($storyid);
 // Not yet published
-if ($storyObj->published() == 0 || $storyObj->published() > time()) {
+if (0 == $storyObj->published() || $storyObj->published() > time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MA_NW_NOSTORY);
 }
 
 // Expired
-if ($storyObj->expired() != 0 && $storyObj->expired() < time()) {
+if (0 != $storyObj->expired() && $storyObj->expired() < time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MA_NW_NOSTORY);
 }
 
@@ -49,13 +49,13 @@ if (!$gpermHandler->checkRight('nw_view', $storyObj->topicid(), $groups, $xoopsM
 $xoops_meta_keywords    = '';
 $xoops_meta_description = '';
 
-if (trim($storyObj->keywords()) != '') {
+if ('' != trim($storyObj->keywords())) {
     $xoops_meta_keywords = $storyObj->keywords();
 } else {
     $xoops_meta_keywords = nw_createmeta_keywords($storyObj->hometext() . ' ' . $storyObj->bodytext());
 }
 
-if (trim($storyObj->description()) != '') {
+if ('' != trim($storyObj->description())) {
     $xoops_meta_description = $storyObj->description();
 } else {
     $xoops_meta_description = strip_tags($storyObj->title());
@@ -240,7 +240,7 @@ function PrintPage()
     echo '<tr valign="top" style="font:12px;"><td>' . $storyObj->hometext() . '<br>';
     $bodytext = $storyObj->bodytext();
     $bodytext = str_replace('[pagebreak]', '<br style="page-break-after:always;">', $bodytext);
-    if ($bodytext != '') {
+    if ('' != $bodytext) {
         echo $bodytext . '<br><br>';
     }
     echo '</td></tr></table></td></tr></table>

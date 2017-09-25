@@ -26,7 +26,7 @@ class wiImageFileMapper_GD
 
     public function save($handle, $uri = null)
     {
-        if ($uri == null) {
+        if (null == $uri) {
             imagegd($handle);
         } else {
             imagegd($handle, $uri);

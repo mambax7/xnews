@@ -321,12 +321,12 @@ function nw_CreateMetaDatas($story = null)
      */
     $meta_keywords = '';
     if (isset($story) && is_object($story)) {
-        if (xoops_trim($story->keywords()) != '') {
+        if ('' != xoops_trim($story->keywords())) {
             $meta_keywords = $story->keywords();
         } else {
             $meta_keywords = nw_createmeta_keywords($story->hometext() . ' ' . $story->bodytext());
         }
-        if (xoops_trim($story->description()) != '') {
+        if ('' != xoops_trim($story->description())) {
             $meta_description = strip_tags($story->description);
         } else {
             $meta_description = strip_tags($story->title);
@@ -396,7 +396,7 @@ function nw_createmeta_keywords($content)
     $registry = new nw_registryfile('nw_metagen_options.txt');
     $tcontent = '';
     $tcontent = $registry->getfile();
-    if (xoops_trim($tcontent) != '') {
+    if ('' != xoops_trim($tcontent)) {
         list($keywordscount, $keywordsorder) = explode(',', $tcontent);
     } else {
         $keywordscount = $cfg['meta_keywords_count'];
@@ -486,7 +486,7 @@ function nw_updateCache()
 
     // Remove cache for each page.
     foreach ($tpllist as $onetemplate) {
-        if ($onetemplate->getVar('tpl_type') == 'module') {
+        if ('module' == $onetemplate->getVar('tpl_type')) {
             // Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
             $files_del = [];
             $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');
@@ -690,7 +690,7 @@ function nw_close_tags($string)
  */
 function nw_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words = false)
 {
-    if ($length == 0) {
+    if (0 == $length) {
         return '';
     }
     if (strlen($string) > $length) {
@@ -751,12 +751,12 @@ function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $ke
 function nw_latestnews_mk_chkbox($options, $number)
 {
     $chk = '';
-    if ($options[$number] == 1) {
+    if (1 == $options[$number]) {
         $chk = ' checked';
     }
     $chkbox = "<input type='radio' name='options[$number]' value='1'" . $chk . '>&nbsp;' . _YES . '&nbsp;&nbsp;';
     $chk    = '';
-    if ($options[$number] == 0) {
+    if (0 == $options[$number]) {
         $chk = ' checked';
     }
     $chkbox .= "<input type='radio' name='options[$number]' value='0'" . $chk . '>&nbsp;' . _NO . '</td></tr>';
@@ -767,12 +767,12 @@ function nw_latestnews_mk_chkbox($options, $number)
 function nw_latestnews_mk_select($options, $number)
 {
     $slc = '';
-    if ($options[$number] == 1) {
+    if (1 == $options[$number]) {
         $slc = ' checked';
     }
     $select = "<input type='radio' name='options[$number]' value='1'" . $slc . '>&nbsp;' . _LEFT . '&nbsp;&nbsp;';
     $slc    = '';
-    if ($options[$number] == 0) {
+    if (0 == $options[$number]) {
         $slc = ' checked';
     }
     $select .= "<input type='radio' name='options[$number]' value='0'" . $slc . '>&nbsp;' . _RIGHT . '</td></tr>';
@@ -816,7 +816,7 @@ function nw_remove_accents($chain)
      */
     $moduleHandler = xoops_getHandler('module');
     $xlanguage     = $moduleHandler->getByDirname('xlanguage');
-    if (is_object($xlanguage) && $xlanguage->getVar('isactive') === true) {
+    if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {
         require_once XOOPS_ROOT_PATH . '/modules/xlanguage/include/functions.php';
         $chain = xlanguage_ml($chain);
     }
@@ -867,7 +867,7 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
 {
     $xnews = XnewsXnews::getInstance();
     //
-    if ($xnews->getConfig('seo_enable') != 0) {
+    if (0 != $xnews->getConfig('seo_enable')) {
         if (!empty($short_url)) {
             $short_url = $short_url;
         }
@@ -886,13 +886,13 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
                 $short_url .= $xnews->getConfig('seo_endofurl');
                 break;
         }
-        if ($xnews->getConfig('seo_enable') == 1) {
+        if (1 == $xnews->getConfig('seo_enable')) {
             // generate SEO url using htaccess
             $seo_path = '';
-            if ($xnews->getConfig('seo_path') != '') {
+            if ('' != $xnews->getConfig('seo_path')) {
                 // generate SEO url using seo path eg news, info, blog
                 $seo_path = '/' . strtolower($xnews->getConfig('seo_path'));
-                if ($xnews->getConfig('seo_level') == 0) {
+                if (0 == $xnews->getConfig('seo_level')) {
                     // generate SEO url using root level htaccess
                     $seo_path .= '.';
 
@@ -906,7 +906,7 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
             } else {
                 // generate SEO url with no seo path
                 $seo_path = '/' . strtolower($xnews->getConfig('seo_path'));
-                if ($xnews->getConfig('seo_level') == 0) {
+                if (0 == $xnews->getConfig('seo_level')) {
                     // generate SEO url using root level htaccess
                     return XOOPS_URL . '/' . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
                 } else {
@@ -914,10 +914,10 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
                     return XNEWS_MODULE_URL . $seo_path . "${op}.${id}/${short_url}";
                 }
             }
-        } elseif ($xnews->getConfig('seo_enable') == 2) {
+        } elseif (2 == $xnews->getConfig('seo_enable')) {
             // generate SEO url using path-info
             $seo_path = '';
-            if ($xnews->getConfig('seo_path') != '') {
+            if ('' != $xnews->getConfig('seo_path')) {
                 $seo_path = strtolower($xnews->getConfig('seo_path')) . '.';
             }
 
@@ -1020,7 +1020,7 @@ function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $con
                 } elseif (preg_match('/^<\s*\/([^\s]+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
                     // delete tag from $open_tags list
                     $pos = array_search($tag_matchings[1], $open_tags);
-                    if ($pos !== false) {
+                    if (false !== $pos) {
                         unset($open_tags[$pos]);
                     }
                     // if tag is an opening tag

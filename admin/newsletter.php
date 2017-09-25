@@ -127,7 +127,7 @@ function LaunchNewsletter()
         if (!$fp) {
             redirect_header('index.php', 3, sprintf(_AM_NW_EXPORT_ERROR, $newsfile));
         }
-        if (xoops_trim($header) != '') {
+        if ('' != xoops_trim($header)) {
             fwrite($fp, $header);
         }
         foreach ($exportedStories as $exportedStory) {
@@ -181,7 +181,7 @@ function LaunchNewsletter()
             }
             fwrite($fp, $content);
         }
-        if (xoops_trim($footer) != '') {
+        if ('' != xoops_trim($footer)) {
             fwrite($fp, $footer);
         }
         fclose($fp);

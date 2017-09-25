@@ -72,10 +72,10 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch= [])
     $dw = 0; // default width
     $ffext = strtolower(substr($fontfile, -3));
     $fmext = strtolower(substr($fmfile, -3));
-    if ($fmext == 'afm') {
-        if (($ffext == 'ttf') or ($ffext == 'otf')) {
+    if ('afm' == $fmext) {
+        if (('ttf' == $ffext) or ('otf' == $ffext)) {
             $type = 'TrueType';
-        } elseif ($ffext == 'pfb') {
+        } elseif ('pfb' == $ffext) {
             $type = 'Type1';
         } else {
             die('Error: unrecognized font file extension: '.$ffext);
@@ -94,9 +94,9 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch= [])
             $diff = MakeFontEncoding($map);
         }
         $fd = MakeFontDescriptor($fm, empty($map));
-    } elseif ($fmext == 'ufm') {
+    } elseif ('ufm' == $fmext) {
         $enc = '';
-        if (($ffext == 'ttf') or ($ffext == 'otf')) {
+        if (('ttf' == $ffext) or ('otf' == $ffext)) {
             $type = 'TrueTypeUnicode';
         } else {
             die('Error: not a TrueType font: '.$ffext);
@@ -134,7 +134,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch= [])
     $basename = substr(basename($fmfile), 0, -4);
     if ($embedded) {
         //Embedded font
-        if (($type == 'TrueType') or ($type == 'TrueTypeUnicode')) {
+        if (('TrueType' == $type) or ('TrueTypeUnicode' == $type)) {
             CheckTTF($fontfile);
         }
         $f = fopen($fontfile, 'rb');
@@ -143,9 +143,9 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch= [])
         }
         $file = fread($f, filesize($fontfile));
         fclose($f);
-        if ($type == 'Type1') {
+        if ('Type1' == $type) {
             //Find first two sections and discard third one
-            $header = (ord($file{0}) == 128);
+            $header = (128 == ord($file{0}));
             if ($header) {
                 //Strip first binary header
                 $file = substr($file, 6);
@@ -155,7 +155,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch= [])
                 die('Error: font file does not seem to be valid Type1');
             }
             $size1 = $pos + 6;
-            if ($header and (ord($file{$size1}) == 128)) {
+            if ($header and (128 == ord($file{$size1}))) {
                 //Strip second binary header
                 $file = substr($file, 0, $size1).substr($file, $size1+6);
             }
@@ -190,7 +190,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch= [])
                 $s .= '$ctg=\''.$cmp."';\n";
             }
         }
-        if ($type == 'Type1') {
+        if ('Type1' == $type) {
             $s .= '$size1='.$size1.";\n";
             $s .= '$size2='.$size2.";\n";
         } else {
@@ -220,7 +220,7 @@ function ReadMap($enc)
     }
     $cc2gn = [];
     foreach ($a as $l) {
-        if ($l{0} == '!') {
+        if ('!' == $l{0}) {
             $e = preg_split('/[ \\t]+/', rtrim($l));
             $cc = hexdec(substr($e[0], 1));
             $gn = $e[2];
@@ -259,7 +259,7 @@ function ReadUFM($file, &$cidtogidmap)
         }
         $code = $e[0];
         $param = $e[1];
-        if ($code == 'U') {
+        if ('U' == $code) {
             // U 827 ; WX 0 ; N squaresubnosp ; G 675 ;
             //Character metrics
             $cc = (int)$e[1];
@@ -277,30 +277,30 @@ function ReadUFM($file, &$cidtogidmap)
                     $cidtogidmap{(($cc * 2) + 1)} = chr($glyph & 0xFF);
                 }
             }
-            if (($gn == '.notdef') and (!isset($fm['MissingWidth']))) {
+            if (('.notdef' == $gn) and (!isset($fm['MissingWidth']))) {
                 $fm['MissingWidth'] = $w;
             }
-        } elseif ($code == 'FontName') {
+        } elseif ('FontName' == $code) {
             $fm['FontName'] = $param;
-        } elseif ($code == 'Weight') {
+        } elseif ('Weight' == $code) {
             $fm['Weight'] = $param;
-        } elseif ($code == 'ItalicAngle') {
+        } elseif ('ItalicAngle' == $code) {
             $fm['ItalicAngle'] = (double)$param;
-        } elseif ($code == 'Ascender') {
+        } elseif ('Ascender' == $code) {
             $fm['Ascender'] = (int)$param;
-        } elseif ($code == 'Descender') {
+        } elseif ('Descender' == $code) {
             $fm['Descender'] = (int)$param;
-        } elseif ($code == 'UnderlineThickness') {
+        } elseif ('UnderlineThickness' == $code) {
             $fm['UnderlineThickness'] = (int)$param;
-        } elseif ($code == 'UnderlinePosition') {
+        } elseif ('UnderlinePosition' == $code) {
             $fm['UnderlinePosition'] = (int)$param;
-        } elseif ($code == 'IsFixedPitch') {
-            $fm['IsFixedPitch'] = ($param == 'true');
-        } elseif ($code == 'FontBBox') {
+        } elseif ('IsFixedPitch' == $code) {
+            $fm['IsFixedPitch'] = ('true' == $param);
+        } elseif ('FontBBox' == $code) {
             $fm['FontBBox'] = [$e[1], $e[2], $e[3], $e[4]];
-        } elseif ($code == 'CapHeight') {
+        } elseif ('CapHeight' == $code) {
             $fm['CapHeight'] = (int)$param;
-        } elseif ($code == 'StdVW') {
+        } elseif ('StdVW' == $code) {
             $fm['StdVW'] = (int)$param;
         }
     }
@@ -371,12 +371,12 @@ function ReadAFM($file, &$map)
         }
         $code = $e[0];
         $param = $e[1];
-        if ($code == 'C') {
+        if ('C' == $code) {
             //Character metrics
             $cc = (int)$e[1];
             $w = $e[4];
             $gn = $e[7];
-            if (substr($gn, -4) == '20AC') {
+            if ('20AC' == substr($gn, -4)) {
                 $gn = 'Euro';
             }
             if (isset($fix[$gn])) {
@@ -392,34 +392,34 @@ function ReadAFM($file, &$map)
                 $widths[$cc] = $w;
             } else {
                 $widths[$gn] = $w;
-                if ($gn == 'X') {
+                if ('X' == $gn) {
                     $fm['CapXHeight'] = $e[13];
                 }
             }
-            if ($gn == '.notdef') {
+            if ('.notdef' == $gn) {
                 $fm['MissingWidth'] = $w;
             }
-        } elseif ($code == 'FontName') {
+        } elseif ('FontName' == $code) {
             $fm['FontName'] = $param;
-        } elseif ($code == 'Weight') {
+        } elseif ('Weight' == $code) {
             $fm['Weight'] = $param;
-        } elseif ($code == 'ItalicAngle') {
+        } elseif ('ItalicAngle' == $code) {
             $fm['ItalicAngle'] = (double)$param;
-        } elseif ($code == 'Ascender') {
+        } elseif ('Ascender' == $code) {
             $fm['Ascender'] = (int)$param;
-        } elseif ($code == 'Descender') {
+        } elseif ('Descender' == $code) {
             $fm['Descender'] = (int)$param;
-        } elseif ($code == 'UnderlineThickness') {
+        } elseif ('UnderlineThickness' == $code) {
             $fm['UnderlineThickness'] = (int)$param;
-        } elseif ($code == 'UnderlinePosition') {
+        } elseif ('UnderlinePosition' == $code) {
             $fm['UnderlinePosition'] = (int)$param;
-        } elseif ($code == 'IsFixedPitch') {
-            $fm['IsFixedPitch'] = ($param == 'true');
-        } elseif ($code == 'FontBBox') {
+        } elseif ('IsFixedPitch' == $code) {
+            $fm['IsFixedPitch'] = ('true' == $param);
+        } elseif ('FontBBox' == $code) {
             $fm['FontBBox'] = [$e[1], $e[2], $e[3], $e[4]];
-        } elseif ($code == 'CapHeight') {
+        } elseif ('CapHeight' == $code) {
             $fm['CapHeight'] = (int)$param;
-        } elseif ($code == 'StdVW') {
+        } elseif ('StdVW' == $code) {
             $fm['StdVW'] = (int)$param;
         }
     }
@@ -474,7 +474,7 @@ function MakeFontDescriptor($fm, $symbolic=false)
     } else {
         $flags += 1<<5;
     }
-    if (isset($fm['ItalicAngle']) and ($fm['ItalicAngle'] != 0)) {
+    if (isset($fm['ItalicAngle']) and (0 != $fm['ItalicAngle'])) {
         $flags += 1<<6;
     }
     $fd .= ",'Flags'=>".$flags;
@@ -514,7 +514,7 @@ function MakeWidthArray($fm)
     $c = 0;
     foreach ($cw as $i => $w) {
         if (is_numeric($i)) {
-            $els[] = (((($c++)%10) == 0) ? "\n" : '').$i.'=>'.$w;
+            $els[] = ((0 == (($c++) % 10)) ? "\n" : '') . $i . '=>' . $w;
         }
     }
     $s .= implode(',', $els);
@@ -576,7 +576,7 @@ function CheckTTF($file)
     //Seek OS/2 table
     $found = false;
     for ($i = 0; $i < $nb; $i++) {
-        if (fread($f, 4) == 'OS/2') {
+        if ('OS/2' == fread($f, 4)) {
             $found = true;
             break;
         }
@@ -592,9 +592,9 @@ function CheckTTF($file)
     //Extract fsType flags
     fseek($f, 8, SEEK_CUR);
     $fsType = ReadShort($f);
-    $rl = ($fsType & 0x02) != 0;
-    $pp = ($fsType & 0x04) != 0;
-    $e = ($fsType & 0x08) != 0;
+    $rl = 0 != ($fsType & 0x02);
+    $pp = 0 != ($fsType & 0x04);
+    $e = 0 != ($fsType & 0x08);
     fclose($f);
     if ($rl and (!$pp) and (!$e)) {
         print "Warning: font license does not allow embedding\n";
@@ -605,7 +605,7 @@ $arg = $GLOBALS['argv'];
 if (count($arg) >= 3) {
     ob_start();
     array_shift($arg);
-    if (count($arg) == 3) {
+    if (3 == count($arg)) {
         $arg[3] = $arg[2];
         $arg[2] = true;
     } else {

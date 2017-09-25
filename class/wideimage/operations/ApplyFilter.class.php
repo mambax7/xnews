@@ -27,7 +27,7 @@ class wioApplyFilter
 
         if (in_array($filter, self::$one_arg_filters)) {
             imagefilter($new->getHandle(), $filter, $arg1);
-        } elseif ($filter == IMG_FILTER_COLORIZE) {
+        } elseif (IMG_FILTER_COLORIZE == $filter) {
             imagefilter($new->getHandle(), $filter, $arg1, $arg2, $arg3);
         } else {
             imagefilter($new->getHandle(), $filter);

@@ -25,7 +25,7 @@ class wioMerge
         $result->alphaBlending(true);
         $result->saveAlpha(true);
 
-        if ($pct == 0) {
+        if (0 == $pct) {
             return $result;
         }
 

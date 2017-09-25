@@ -69,14 +69,14 @@ class wiTrueColorImage extends wiImage
             $nColors = 255;
         }
 
-        if ($dither === null) {
+        if (null === $dither) {
             $dither = $this->isTransparent();
         }
 
         $temp = $this->copy();
         imagetruecolortopalette($temp->handle, $dither, $nColors);
 
-        if ($matchPalette === true) {
+        if (true === $matchPalette) {
             imagecolormatch($this->handle, $temp->handle);
         }
 
@@ -112,7 +112,7 @@ class wiTrueColorImage extends wiImage
     public function getChannels()
     {
         $args = func_get_args();
-        if (count($args) == 1 && is_array($args[0])) {
+        if (1 == count($args) && is_array($args[0])) {
             $args = $args[0];
         }
 

@@ -61,10 +61,10 @@ function NewsImport()
     $listed_mods    = [];
     $count          = 0;
     foreach ($installed_mods as $module) {
-        if ($module->getVar('dirname') != 'system' && $module->getVar('isactive') == 1) {
+        if ('system' != $module->getVar('dirname') && 1 == $module->getVar('isactive')) {
             $module->loadInfo($module->getVar('dirname'));
             $modtables = $module->getInfo('tables');
-            if ($modtables !== false && is_array($modtables)) {
+            if (false !== $modtables && is_array($modtables)) {
                 foreach ($modtables as $table) {
                     $newscount = 0;
                     foreach ($news_fieldsearch_array as $field) {
@@ -72,7 +72,7 @@ function NewsImport()
                             ++$newscount;
                         }
                     }
-                    if ($newscount == 2) {
+                    if (2 == $newscount) {
                         $from_module_version = round($module->getVar('version') / 100, 2);
                         if (($from_module_version >= 1.64)) {
                             $importfrom_array['news/' . $module->getVar('dirname')] = $module->getVar('dirname') . ' ' . $from_module_version;
@@ -209,11 +209,11 @@ function TopicSelect()
     $from_module->loadInfo($from_module->getVar('dirname'));
 
     $from_modtables = $from_module->getInfo('tables');
-    if ($from_modtables !== false && is_array($from_modtables)) {
+    if (false !== $from_modtables && is_array($from_modtables)) {
         foreach ($from_modtables as $from_table) {
             $from_table_arr = explode('_', $from_table);
             if (count($from_table_arr) > 0) { //&& $from_import_dirname != 'news') {
-                if ($from_import_dirname != 'news') {
+                if ('news' != $from_import_dirname) {
                     $subprefix = $from_table_arr[0] . '_';
                 } else {
                     $subprefix = '';
@@ -268,13 +268,13 @@ function TopicSelect()
     $result = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix($from_topic_table));
     list($totalCat) = $xoopsDB->fetchRow($result);
 
-    if ($totalCat == 0) {
+    if (0 == $totalCat) {
         echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . _AM_XNI_IMPORT_NO_CATEGORY . '</span>';
     } else {
         $result = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix($from_story_table));
         list($totalArticles) = $xoopsDB->fetchRow($result);
 
-        if ($totalArticles == 0) {
+        if (0 == $totalArticles) {
             echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . sprintf(_AM_XNI_IMPORT_MODULE_FOUND_NO_ITEMS, $from_import_dirname, $totalArticles) . '</span>';
         } else {
             echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . sprintf(_AM_XNI_IMPORT_MODULE_FOUND, $totalArticles, $totalCat, $from_import_dirname) . '</span>';

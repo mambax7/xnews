@@ -29,11 +29,11 @@ $scriptname = 'smartsection.php';
 
 $op = 'start';
 
-if (isset($_POST['op']) && ($_POST['op'] == 'go')) {
+if (isset($_POST['op']) && ('go' == $_POST['op'])) {
     $op = $_POST['op'];
 }
 
-if ($op == 'start') {
+if ('start' == $op) {
     xoops_load('XoopsFormLoader');
 
     publisher_cpHeader();
@@ -43,7 +43,7 @@ if ($op == 'start') {
     $result = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('smartsection_categories'));
     list($totalCat) = $xoopsDB->fetchRow($result);
 
-    if ($totalCat == 0) {
+    if (0 == $totalCat) {
         echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . _AM_PUBLISHER_IMPORT_NO_CATEGORY . '</span>';
     } else {
         require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
@@ -51,7 +51,7 @@ if ($op == 'start') {
         $result = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('smartsection_items'));
         list($totalArticles) = $xoopsDB->fetchRow($result);
 
-        if ($totalArticles == 0) {
+        if (0 == $totalArticles) {
             echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . sprintf(_AM_PUBLISHER_IMPORT_MODULE_FOUND_NO_ITEMS, $importFromModuleName, $totalArticles) . '</span>';
         } else {
             echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . sprintf(_AM_PUBLISHER_IMPORT_MODULE_FOUND, $importFromModuleName, $totalArticles, $totalCat) . '</span>';
@@ -96,7 +96,7 @@ if ($op == 'start') {
     xoops_cp_footer();
 }
 
-if ($op == 'go') {
+if ('go' == $op) {
     publisher_cpHeader();
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
     publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
@@ -131,7 +131,7 @@ if ($op == 'go') {
         $categoryObj->setVar('categoryid', 0);
 
         // Copy category image
-        if (($arrCat['image'] != 'blank.gif') && ($arrCat['image'] != '')) {
+        if (('blank.gif' != $arrCat['image']) && ('' != $arrCat['image'])) {
             copy(XOOPS_ROOT_PATH . '/uploads/smartsection/images/category/' . $arrCat['image'], XOOPS_ROOT_PATH . '/uploads/publisher/images/category/' . $arrCat['image']);
         }
 
@@ -221,7 +221,7 @@ if ($op == 'go') {
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('categoryid', $newCat['newid']));
         $oldpid = $newCat['oldpid'];
-        if ($oldpid == 0) {
+        if (0 == $oldpid) {
             $newpid = $parentId;
         } else {
             $newpid = $newCatArray[$oldpid]['newid'];

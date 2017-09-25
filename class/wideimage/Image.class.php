@@ -72,7 +72,7 @@ abstract class wiImage
 
     public static function isValidImageHandle($handle)
     {
-        return (is_resource($handle) && get_resource_type($handle) == 'gd');
+        return (is_resource($handle) && 'gd' == get_resource_type($handle));
     }
 
     public static function assertValidImageHandle($handle)
@@ -531,7 +531,7 @@ abstract class wiImage
 
     public function getCanvas()
     {
-        if ($this->canvas == null) {
+        if (null == $this->canvas) {
             $this->canvas = new wiCanvas($this);
         }
 

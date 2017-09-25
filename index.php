@@ -92,7 +92,7 @@ if (isset($_GET['start'])) {
     $start = 0;
 }
 
-if ($xnews->getConfig('newsdisplay') == 'Classic' || $xoopsOption['storytopic'] > 0) {
+if ('Classic' == $xnews->getConfig('newsdisplay') || $xoopsOption['storytopic'] > 0) {
     $showclassic = 1;
 } else {
     $showclassic = 0;
@@ -128,7 +128,7 @@ if ($showclassic) {
         $topictitle = $xt->topic_title();
     }
 
-    if ($xnews->getConfig('displaynav') == 1) {
+    if (1 == $xnews->getConfig('displaynav')) {
         $xoopsTpl->assign('displaynav', true);
 
         $allTopics    = $xt->getAllTopics($xnews->getConfig('restrictindex'));
@@ -165,7 +165,7 @@ if ($showclassic) {
     } else {
         $xoopsTpl->assign('displaynav', false);
     }
-    if ($xoopsOption['storytopic'] == 0) {
+    if (0 == $xoopsOption['storytopic']) {
         $topic_frontpage = true;
     } else {
         $topic_frontpage = false;
@@ -191,9 +191,9 @@ if ($showclassic) {
             $story['news_title']      = $thisstory->storylink(); //$story['title'];
             $story['title']           = $thisstory->textlink() . '&nbsp;:&nbsp;' . $story['title'];
             $story['topic_title']     = $thisstory->textlink();
-            $story['topic_separator'] = ($thisstory->textlink() != '') ? _MA_NW_SP : '';
+            $story['topic_separator'] = ('' != $thisstory->textlink()) ? _MA_NW_SP : '';
             $story['topic_color']     = '#' . $myts->displayTarea($thisstory->topic_color);
-            if ($firsttitle == '') {
+            if ('' == $firsttitle) {
                 $firsttitle = $myts->htmlSpecialChars($thisstory->topic_title()) . ' - ' . $myts->htmlSpecialChars($thisstory->title());
             }
             $columns[$k][] = $story;
@@ -251,7 +251,7 @@ if ($showclassic) {
             $filescount               = array_key_exists($thisstory->storyid(), $filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
             $story                    = $thisstory->prepare2show($filescount);
             $story['topic_title']     = $thisstory->textlink();
-            $story['topic_separator'] = ($thisstory->textlink() != '') ? _MA_NW_SP : '';
+            $story['topic_separator'] = ('' != $thisstory->textlink()) ? _MA_NW_SP : '';
             $story['news_title']      = $story['title'];//$thisstory->storylink();
             $topicstories[$topicid][] = $story;
         }
@@ -305,10 +305,10 @@ if ($xnews->getConfig('topicsrss') && $xoopsOption['storytopic']) {
 /**
  * Assign page's title
  */
-if ($firsttitle != '') {
+if ('' != $firsttitle) {
     $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($firsttitle) . ' - ' . $myts->htmlSpecialChars($xnews->getModule()->name()));
 } else {
-    if ($topictitle != '') {
+    if ('' != $topictitle) {
         $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($topictitle));
     } else {
         $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($xnews->getModule()->name()));
@@ -317,7 +317,7 @@ if ($firsttitle != '') {
 
 $xoopsTpl->assign('lang_go', _GO);
 
-if (isset($story['poster']) && $story['poster'] != '') {
+if (isset($story['poster']) && '' != $story['poster']) {
     $xoopsTpl->assign('lang_on', _ON);
     $xoopsTpl->assign('lang_postedby', _POSTEDBY);
 } else {

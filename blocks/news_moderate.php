@@ -48,7 +48,7 @@ function nw_b_news_topics_moderate()
                 $htmltitle         = ' title="' . $story['infotips'] . '"';
             }
 
-            if (!isset($title) || ($title == '')) {
+            if (!isset($title) || ('' == $title)) {
                 $linktitle = "<a href='" . XNEWS_MODULE_URL . '/index.php?op=edit&amp;storyid=' . $newstory->storyid() . "' target='_blank'" . $htmltitle . '>' . _AD_NOSUBJECT . '</a>';
             } else {
                 $linktitle = "<a href='" . XNEWS_MODULE_URL . '/submit.php?op=edit&amp;storyid=' . $newstory->storyid() . "' target='_blank'" . $htmltitle . '>' . $title . '</a>';

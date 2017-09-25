@@ -58,9 +58,9 @@ function nw_b_news_archives_show($options)
         12 => _CAL_DECEMBER
     ];
     $block         = [];
-    $sort_order    = $options[0] == 0 ? 'ASC' : 'DESC';
+    $sort_order    = 0 == $options[0] ? 'ASC' : 'DESC';
     $starting_date = mktime(0, 0, 0, (int)$options[2], 1, (int)$options[1]);
-    if ((int)$options[5] != 1) {
+    if (1 != (int)$options[5]) {
         $ending_date = mktime(23, 59, 59, (int)$options[4], 28, (int)$options[3]);
     } else {
         $ending_date = time();
@@ -106,11 +106,11 @@ function nw_b_news_archives_edit($options)
     $eyear  = date('Y', $recent);
     $emonth = date('n', $recent);
     // Verify parameters
-    if ($selsyear == 0 && $selsmonth == 0) {
+    if (0 == $selsyear && 0 == $selsmonth) {
         $selsyear  = $syear;
         $selsmonth = $smonth;
     }
-    if ($seleyear == 0 && $selemonth == 0) {
+    if (0 == $seleyear && 0 == $selemonth) {
         $seleyear  = $eyear;
         $selemonth = $emonth;
     }
@@ -119,12 +119,12 @@ function nw_b_news_archives_edit($options)
     // (0=older first, 1=newer first)
     $form .= '<b>' . _MB_NW_ORDER . "</b>&nbsp;<select name='options[]'>";
     $form .= "<option value='0'";
-    if ($options[0] == 0) {
+    if (0 == $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_OLDER_FIRST . "</option>\n";
     $form .= "<option value='1'";
-    if ($options[0] == 1) {
+    if (1 == $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_RECENT_FIRST . '</option>';
@@ -159,7 +159,7 @@ function nw_b_news_archives_edit($options)
 
     // Or until today *********************************************************
     $form    .= '<br>';
-    $checked = $options[5] == 1 ? ' checked' : '';
+    $checked = 1 == $options[5] ? ' checked' : '';
     $form    .= "<input type='checkbox' value='1' name='options[]'" . $checked . '>';
     $form    .= ' <b>' . _MB_NW_UNTIL_TODAY . '</b>';
 

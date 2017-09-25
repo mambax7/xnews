@@ -25,7 +25,7 @@ if (!$xnews->getConfig('topicsrss')) {
 }
 
 $topicid = isset($_GET['topicid']) ? (int)($_GET['topicid']) : 0;
-if ($topicid == 0) {
+if (0 == $topicid) {
     exit();
 }
 
@@ -83,7 +83,7 @@ if (!$tpl->is_cached('db:nw_news_rss.tpl', $topicid)) {
         // DNPROSSI SEO
         $seo_enabled = $xnews->getConfig('seo_enable');
         $item_title  = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $item_title = nw_remove_accents($storytitle);
         }
         $tpl->append('items', [

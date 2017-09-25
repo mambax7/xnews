@@ -186,7 +186,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
         $sql .= ' WHERE (s.published > 0 AND s.published <= ' . time() . ') AND (s.expired = 0 OR s.expired > ' . time() . ') AND (s.topicid=t.topic_id) ';
-        if ($topic != 0) {
+        if (0 != $topic) {
             if (!is_array($topic)) {
                 if ($checkRight) {
                     $topics = nw_MygetItemIds('nw_view');
@@ -218,7 +218,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                     return null;
                 }
             }
-            if ((int)$ihome == 0) {
+            if (0 == (int)$ihome) {
                 $sql .= ' AND s.ihome=0';
             }
         }
@@ -300,7 +300,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $sql   .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
         $sql   .= " WHERE (s.topicid=t.topic_id) AND (published > {$tdate} AND published < " . time() . ') AND (expired > ' . time() . ' OR expired = 0) ';
 
-        if ((int)$topic != 0) {
+        if (0 != (int)$topic) {
             if (!is_array($topic)) {
                 $sql .= ' AND topicid=' . (int)$topic . ' AND (ihome=1 OR ihome=0)';
             } else {
@@ -319,7 +319,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                     return null;
                 }
             }
-            if ((int)$ihome == 0) {
+            if (0 == (int)$ihome) {
                 $sql .= ' AND ihome=0';
             }
         }
@@ -336,7 +336,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $ret;
         // DNPROSSI SEO
         $seo_enabled = $this->xnews->getConfig('seo_enable');
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $xoopsTpl->assign('urlrewrite', true);
         } else {
             $xoopsTpl->assign('urlrewrite', false);
@@ -363,7 +363,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if ($checkRight) {
             $topics = nw_MygetItemIds('nw_view');
             $topics = implode(',', $topics);
-            if (xoops_trim($topics) != '') {
+            if ('' != xoops_trim($topics)) {
                 $sql .= " AND topicid IN ({$topics})";
             }
         }
@@ -428,7 +428,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if (!empty($topic)) {
             $sql .= ' AND topicid = ' . (int)$topic . ' AND (ihome = 1 OR ihome = 0)';
         } else {
-            if ((int)$ihome == 0) {
+            if (0 == (int)$ihome) {
                 $sql .= ' AND ihome=0';
             }
         }
@@ -631,7 +631,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function topic_imgurl($format = 'S')
     {
-        if (trim($this->topic_imgurl) == '') {
+        if ('' == trim($this->topic_imgurl)) {
             $this->topic_imgurl = 'blank.png';
         }
         $myts = MyTextSanitizer::getInstance();
@@ -688,18 +688,18 @@ class nw_NewsStory extends XnewsDeprecateStory
         $seo_enabled = $this->xnews->getConfig('seo_enable');
         $ret         = '';
         $margin      = '';
-        if ($this->topicalign() == 'left') {
+        if ('left' == $this->topicalign()) {
             $margin = "style='padding-right: 8px;'";
         } else {
             $margin = "style='padding-left: 8px; padding-right: 5px'";
         }
 
-        if (xoops_trim($this->picture()) == '') {
-            if ($this->topic_imgurl() != '' && file_exists(XNEWS_TOPICS_FILES_PATH . '/' . $this->topic_imgurl())) {
-                if ($topic_display == 1) {
+        if ('' == xoops_trim($this->picture())) {
+            if ('' != $this->topic_imgurl() && file_exists(XNEWS_TOPICS_FILES_PATH . '/' . $this->topic_imgurl())) {
+                if (1 == $topic_display) {
                     //DNPROSSI SEO
                     $cat_path = '';
-                    if ($seo_enabled != 0) {
+                    if (0 != $seo_enabled) {
                         $cat_path = nw_remove_accents($this->topic_title());
                     }
                     $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>";
@@ -711,10 +711,10 @@ class nw_NewsStory extends XnewsDeprecateStory
                 }
             }
         } else {
-            if ($topic_display == 1) {
+            if (1 == $topic_display) {
                 //DNPROSSI SEO
                 $cat_path = '';
-                if ($seo_enabled != 0) {
+                if (0 != $seo_enabled) {
                     $cat_path = nw_remove_accents($this->topic_title());
                 }
                 $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>";
@@ -736,7 +736,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $seo_enabled = $this->xnews->getConfig('seo_enable');
         $ret         = '';
         $story_path  = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $story_path = nw_remove_accents($this->title());
         }
         $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . '</a>';
@@ -761,8 +761,8 @@ class nw_NewsStory extends XnewsDeprecateStory
         $seo_enabled = $this->xnews->getConfig('seo_enable');
         $ret         = '';
         $cat_path    = '';
-        if ($topic_display == 1) {
-            if ($seo_enabled != 0) {
+        if (1 == $topic_display) {
+            if (0 != $seo_enabled) {
                 $cat_path = nw_remove_accents($this->topic_title());
             }
             $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>" . $this->topic_title() . '</a>';
@@ -788,16 +788,16 @@ class nw_NewsStory extends XnewsDeprecateStory
         $story['poster']      = $this->uname();
         $story['author_name'] = $this->uname();
         $story['author_uid']  = $this->uid();
-        if ($story['poster'] !== false) {
+        if (false !== $story['poster']) {
             $story['poster'] = "<a href='" . XOOPS_URL . '/userinfo.php?uid=' . $this->uid() . "'>" . $story['poster'] . '</a>';
         } else {
-            if ($this->xnews->getConfig('displayname') != 3) {
+            if (3 != $this->xnews->getConfig('displayname')) {
                 $story['poster'] = $GLOBALS['xoopsConfig']['anonymous'];
             }
         }
         if ($this->xnews->getConfig('ratenews')) {
             $story['rating'] = number_format($this->rating(), 2);
-            if ($this->votes == 1) {
+            if (1 == $this->votes) {
                 $story['votes'] = _MA_NW_ONEVOTE;
             } else {
                 $story['votes'] = sprintf(_MA_NW_NUMVOTES, $this->votes);
@@ -822,7 +822,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if ($fullcount > 1) {
             $story_path = '';
             //DNPROSSI SEO
-            if ($seo_enabled != 0) {
+            if (0 != $seo_enabled) {
                 $story_path = nw_remove_accents($this->title());
             }
             $morelink .= "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>";
@@ -836,14 +836,14 @@ class nw_NewsStory extends XnewsDeprecateStory
             $ccount     = $this->comments();
             $story_path = '';
             //DNPROSSI SEO
-            if ($seo_enabled != 0) {
+            if (0 != $seo_enabled) {
                 $story_path = nw_remove_accents($this->title());
             }
-            if ($ccount == 0) {
+            if (0 == $ccount) {
                 $morelink .= _MA_NW_NO_COMMENT;
             } else {
                 $morelink .= "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path);
-                if ($ccount == 1) {
+                if (1 == $ccount) {
                     $morelink .= "'>" . _MA_NW_ONECOMMENT . '</a>';
                 } else {
                     $morelink .= "'>";
@@ -860,7 +860,7 @@ class nw_NewsStory extends XnewsDeprecateStory
             $approveprivilege = 1;
         }
 
-        if ($this->xnews->getConfig('authoredit') == 1 && (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->getVar('uid') == $this->uid())) {
+        if (1 == $this->xnews->getConfig('authoredit') && (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->getVar('uid') == $this->uid())) {
             $approveprivilege = 1;
         }
         if ($approveprivilege) {
@@ -881,7 +881,7 @@ class nw_NewsStory extends XnewsDeprecateStory
 
         //DNPROSSI SEO
         $story_path = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $story_path = nw_remove_accents($this->title());
         }
         $story['title'] = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . '</a>';
@@ -906,7 +906,7 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         static $tblusers = [];
         $option = -1;
-        if ($uid == 0) {
+        if (0 == $uid) {
             $uid = $this->uid();
         }
         if (is_array($tblusers) && array_key_exists($uid, $tblusers)) {
@@ -928,7 +928,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                 $thisuser      = $memberHandler->getUser($uid);
                 if (is_object($thisuser)) {
                     $return = $thisuser->getVar('name');
-                    if ($return == '') {
+                    if ('' == $return) {
                         $return = $thisuser->getVar('uname');
                     }
                 } else {
@@ -1018,19 +1018,19 @@ class nw_NewsStory extends XnewsDeprecateStory
         $tags        = $myts->addSlashes($this->tags);
         $votes       = (int)$this->votes;
         $rating      = (float)($this->rating);
-        if (!isset($this->nohtml) || $this->nohtml != 1) {
+        if (!isset($this->nohtml) || 1 != $this->nohtml) {
             $this->nohtml = 0;
         }
-        if (!isset($this->nosmiley) || $this->nosmiley != 1) {
+        if (!isset($this->nosmiley) || 1 != $this->nosmiley) {
             $this->nosmiley = 0;
         }
-        if (!isset($this->dobr) || $this->dobr != 1) {
+        if (!isset($this->dobr) || 1 != $this->dobr) {
             $this->dobr = 0;
         }
-        if (!isset($this->notifypub) || $this->notifypub != 1) {
+        if (!isset($this->notifypub) || 1 != $this->notifypub) {
             $this->notifypub = 0;
         }
-        if (!isset($this->topicdisplay) || $this->topicdisplay != 0) {
+        if (!isset($this->topicdisplay) || 0 != $this->topicdisplay) {
             $this->topicdisplay = 1;
         }
         $expired = !empty($this->expired) ? $this->expired : 0;
@@ -1234,7 +1234,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $sql = 'SELECT storyid';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
         $sql .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
-        if ($topic != 0) {
+        if (0 != $topic) {
             if (!is_array($topic)) {
                 if ($checkRight) {
                     $topics = nw_MygetItemIds('nw_view');
@@ -1263,7 +1263,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                     return null;
                 }
             }
-            if ((int)$ihome == 0) {
+            if (0 == (int)$ihome) {
                 $sql .= ' AND ihome=0';
             }
         }
@@ -1503,7 +1503,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                 foreach ($delimiters as $item) {
                     $cpt++;
                     $item = str_replace($arr_search, $arr_replace, $item);
-                    if (xoops_trim($item) == '') {
+                    if ('' == xoops_trim($item)) {
                         $item = $cpt;
                     }
                     $titles[]     = strip_tags(sprintf(_MA_NW_PAGE_AUTO_SUMMARY, $cpt, $item));
@@ -1651,7 +1651,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                     $ret .= substr($xoops_key, $i, 1) . '-';
                     $uu  = 0;
                 } else {
-                    if (substr($xoops_key, $i, 1) != '-') {
+                    if ('-' != substr($xoops_key, $i, 1)) {
                         $ret .= substr($xoops_key, $i, 1);
                     } else {
                         $uu--;
@@ -1660,10 +1660,10 @@ class nw_NewsStory extends XnewsDeprecateStory
             }
         }
         $ret = str_replace('--', '-', $ret);
-        if (substr($ret, 0, 1) == '-') {
+        if ('-' == substr($ret, 0, 1)) {
             $ret = substr($ret, 2, strlen($ret));
         }
-        if (substr($ret, strlen($ret) - 1, 1) == '-') {
+        if ('-' == substr($ret, strlen($ret) - 1, 1)) {
             $ret = substr($ret, 0, strlen($ret) - 1);
         }
 

@@ -98,9 +98,9 @@ function xni_MygetItemIds($permtype = 'nw_view')
 function xni_clonecopyfile($srcpath, $destpath, $filename)
 {
     if ($handle = opendir($srcpath)) {
-        if ($filename == '') {
+        if ('' == $filename) {
             while ($file = readdir($handle)) {
-                if ($file != '.' && $file != '..') {
+                if ('.' != $file && '..' != $file) {
                     @copy($srcpath . $file, $destpath . $file);
                 }
             }

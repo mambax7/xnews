@@ -37,7 +37,7 @@ class nw_sFiles
     public function createUploadName($folder, $filename, $trimname = false)
     {
         $workingfolder = $folder;
-        if (xoops_substr($workingfolder, strlen($workingfolder) - 1, 1) <> '/') {
+        if ('/' <> xoops_substr($workingfolder, strlen($workingfolder) - 1, 1)) {
             $workingfolder .= '/';
         }
         $ext  = basename($filename);
@@ -68,7 +68,7 @@ class nw_sFiles
     {
         $nw_cmimetype = new nw_cmimetype();
         $workingfile  = $this->downloadname;
-        if (xoops_trim($filename) != '') {
+        if ('' != xoops_trim($filename)) {
             $workingfile = $filename;
 
             return $nw_cmimetype->getType($workingfile);

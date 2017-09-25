@@ -190,7 +190,7 @@ class XnewsMyXoopsObjectTree
     public function makeSelBox($name, $fieldName, $prefix = '-', $selected = '', $addEmptyOption = false, $key = 0, $additional = '')
     {
         $ret = "<select id='" . $name . "' name='" . $name . "'";
-        if ($additional != '') {
+        if ('' != $additional) {
             $ret .= $additional;
         }
         $ret .= '>';
@@ -236,7 +236,7 @@ class XnewsMyXoopsObjectTree
     public function makeTreeAsArray($fieldName, $prefix = '-', $key = 0, $empty = null)
     {
         $ret = [];
-        if ($empty != null) {
+        if (null != $empty) {
             $ret[0] = $empty;
         }
         $this->_recursiveMakeTreeAsArray($fieldName, $key, $ret, $prefix);

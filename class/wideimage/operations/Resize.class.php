@@ -25,11 +25,11 @@ class wioResize
 {
     protected function prepareDimensions($img, $width, $height, $fit)
     {
-        if ($width === null) {
+        if (null === $width) {
             $width = $height;
         }
 
-        if ($height === null) {
+        if (null === $height) {
             $height = $width;
         }
 
@@ -37,14 +37,14 @@ class wioResize
         $height = wiDimension::fix($img->getHeight(), $height);
 
         $dim = [];
-        if ($fit == 'fill') {
+        if ('fill' == $fit) {
             $dim['width']  = $width;
             $dim['height'] = $height;
-        } elseif ($fit == 'inside' || $fit == 'outside') {
+        } elseif ('inside' == $fit || 'outside' == $fit) {
             $rx = $img->getWidth() / $width;
             $ry = $img->getHeight() / $height;
 
-            if ($fit == 'inside') {
+            if ('inside' == $fit) {
                 $ratio = ($rx > $ry) ? $rx : $ry;
             } else {
                 $ratio = ($rx < $ry) ? $rx : $ry;

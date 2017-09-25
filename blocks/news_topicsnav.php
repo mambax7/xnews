@@ -41,12 +41,12 @@ function nw_b_news_topicsnav_show($options)
         }
     }
     $topics_arr = $xt->getChildTreeArray(0, 'topic_title', $perms);
-    if ($options[0] == 1) {
+    if (1 == $options[0]) {
         $newscountbytopic = $xt->getnwCountByTopic();
     }
     if (is_array($topics_arr) && count($topics_arr)) {
         foreach ($topics_arr as $onetopic) {
-            if ($options[0] == 1) {
+            if (1 == $options[0]) {
                 $count = 0;
                 if (array_key_exists($onetopic['topic_id'], $newscountbytopic)) {
                     $count = $newscountbytopic[$onetopic['topic_id']];
@@ -67,7 +67,7 @@ function nw_b_news_topicsnav_show($options)
 
     // DNPROSSI SEO
     $seo_enabled = $xnews->getConfig('seo_enable');
-    if ($seo_enabled != 0) {
+    if (0 != $seo_enabled) {
         $block['urlrewrite'] = 'true';
     } else {
         $block['urlrewrite'] = 'false';
@@ -79,12 +79,12 @@ function nw_b_news_topicsnav_show($options)
 function nw_b_news_topicsnav_edit($options)
 {
     $form = _MB_NW_SHOW_NEWS_COUNT . " <input type='radio' name='options[]' value='1'";
-    if ($options[0] == 1) {
+    if (1 == $options[0]) {
         $form .= ' checked';
     }
     $form .= '>' . _YES;
     $form .= "<input type='radio' name='options[]' value='0'";
-    if ($options[0] == 0) {
+    if (0 == $options[0]) {
         $form .= ' checked';
     }
     $form .= '>' . _NO;

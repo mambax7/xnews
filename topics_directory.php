@@ -45,7 +45,7 @@ if (is_array($topics_arr) && count($topics_arr)) {
         if (array_key_exists($onetopic['topic_id'], $newscountbytopic)) {
             $count = $newscountbytopic[$onetopic['topic_id']];
         }
-        if ($onetopic['topic_pid'] != 0) {
+        if (0 != $onetopic['topic_pid']) {
             $onetopic['prefix'] = str_replace('.', '-', $onetopic['prefix']) . '&nbsp;';
         } else {
             $onetopic['prefix'] = str_replace('.', '', $onetopic['prefix']);
@@ -53,7 +53,7 @@ if (is_array($topics_arr) && count($topics_arr)) {
 
         //DNPROSSI SEO
         $cat_path = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $cat_path = nw_remove_accents($onetopic['topic_title']);
         }
         $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $onetopic['topic_id'], $cat_path) . "'>" . $onetopic['topic_title'] . '</a>';

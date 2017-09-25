@@ -19,7 +19,7 @@ function xoops_module_install_xnews(&$xoopsModule)
     // recalc original subprefix
     $sub             = nw_remove_numbers(XNEWS_SUBPREFIX);
     $module_original = $xoopsModule->getInfo('original');
-    if ($module_original == 1) {
+    if (1 == $module_original) {
         //Create Cloner table
         if (!nw_TableExists($xoopsDB->prefix('news_clonerdata'))) {
             $sql    = "CREATE TABLE IF NOT EXISTS {$xoopsDB->prefix('news_clonerdata')}";
@@ -42,7 +42,7 @@ function xoops_module_install_xnews(&$xoopsModule)
             $result = $xoopsDB->queryF($sql);
         }
     }
-    if ($module_original != 1) {
+    if (1 != $module_original) {
         //Change cloned module install attribute
         $sql = "UPDATE {$xoopsDB->prefix('news_clonerdata')} SET clone_installed = '1'";
         $sql .= " WHERE clone_dir = '{$module_dirname}'";

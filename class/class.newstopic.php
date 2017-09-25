@@ -22,7 +22,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
 
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
-        } elseif ($topicid != 0) {
+        } elseif (0 != $topicid) {
             $this->getTopic((int)$topicid);
         } else {
             $this->topic_id = $topicid;
@@ -73,14 +73,14 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $myts      = MyTextSanitizer::getInstance();
         $outbuffer = '';
         $outbuffer = "<select name='{$sel_name}'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             $outbuffer .= " onchange='{$onchange}'";
         }
         $outbuffer .= ">\n";
         $sql       = "SELECT topic_id, {$title}";
         $sql       .= " FROM {$this->table}";
         $sql       .= ' WHERE (topic_pid = 0)' . $perms;
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY {$order}";
         }
         $result = $this->db->query($sql);
@@ -116,12 +116,12 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $sql = 'SELECT *';
         $sql .= " FROM {$this->table}";
         $sql .= " WHERE (topic_pid = {$sel_id})" . $perms;
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY {$order}";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -181,7 +181,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $sql        .= " FROM {$db->prefix('nw_topics')}";
         if ($checkRight) {
             $topics = nw_MygetItemIds($permission);
-            if (count($topics) == 0) {
+            if (0 == count($topics)) {
                 return [];
             }
             $sql .= ' WHERE topic_id IN (' . implode(',', $topics) . ')';
@@ -274,10 +274,10 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $topic_rssurl      = $myts->addSlashes($this->topic_rssurl);
         $topic_color       = $myts->addSlashes($this->topic_color);
 
-        if (isset($this->topic_title) && $this->topic_title != '') {
+        if (isset($this->topic_title) && '' != $this->topic_title) {
             $title = $myts->addSlashes($this->topic_title);
         }
-        if (isset($this->topic_imgurl) && $this->topic_imgurl != '') {
+        if (isset($this->topic_imgurl) && '' != $this->topic_imgurl) {
             $imgurl = $myts->addSlashes($this->topic_imgurl);
         }
         if (!isset($this->topic_pid) || !is_numeric($this->topic_pid)) {
@@ -327,7 +327,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
             }
         }
 
-        if ($this->use_permission === true) {
+        if (true === $this->use_permission) {
             $xt            = new XoopsTree($this->table, 'topic_id', 'topic_pid');
             $parent_topics = $xt->getAllParentId($this->topic_id);
             if (!empty($this->m_groups) && is_array($this->m_groups)) {
@@ -341,7 +341,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
                             continue;
                         }
                     }
-                    if ($add === true) {
+                    if (true === $add) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('ModInTopic');
@@ -361,7 +361,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
                             continue;
                         }
                     }
-                    if ($add === true) {
+                    if (true === $add) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('SubmitInTopic');
@@ -381,7 +381,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
                             continue;
                         }
                     }
-                    if ($add === true) {
+                    if (true === $add) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('ReadInTopic');
@@ -465,7 +465,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
 
     public function topic_imgurl($format = 'S')
     {
-        if (trim($this->topic_imgurl) == '') {
+        if ('' == trim($this->topic_imgurl)) {
             $this->topic_imgurl = 'blank.png';
         }
         $myts = MyTextSanitizer::getInstance();
@@ -523,7 +523,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         if ($perms) {
             $topicsids = [];
             $topicsids = nw_MygetItemIds();
-            if (count($topicsids) == 0) {
+            if (0 == count($topicsids)) {
                 return '';
             }
             $topics = implode(',', $topicsids);

@@ -30,7 +30,7 @@ class nw_Latestnewsstory extends nw_NewsStory
         $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$db->prefix('nw_stories')} s, {$db->prefix('nw_topics')}";
         $sql .= ' t WHERE (s.published > 0 AND s.published <= ' . time() . ') AND (s.expired = 0 OR s.expired > ' . time() . ') AND (s.topicid = t.topic_id) ';
-        if ($topic != 0) {
+        if (0 != $topic) {
             if ($selected_stories) {
                 $sql .= " AND s.storyid IN ({$selected_stories})";
             }
@@ -65,7 +65,7 @@ class nw_Latestnewsstory extends nw_NewsStory
                     return null;
                 }
             }
-            if ((int)$ihome == 0) {
+            if (0 == (int)$ihome) {
                 $sql .= ' AND s.ihome = 0';
             }
         }

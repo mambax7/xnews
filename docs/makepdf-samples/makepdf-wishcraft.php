@@ -22,7 +22,7 @@ $ret = $GLOBALS['xoopsDB']->query($sql);
 $row = $GLOBALS['xoopsDB']->fetchArray($ret);
 $url = XOOPS_URL . '/' . $GLOBALS['xoopsModuleConfig']['seopath'] . '/' . xoops_sef($row['topic_title']) . '/' . xoops_sef($row['title']) . '/pdf,' . $_REQUEST['storyid'] . $GLOBALS['xoopsModuleConfig']['seo_endofurl_pdf'];
 
-if (!strpos($url, $_SERVER['REQUEST_URI']) && $GLOBALS['xoopsModuleConfig']['seo_enable'] == 1) {
+if (!strpos($url, $_SERVER['REQUEST_URI']) && 1 == $GLOBALS['xoopsModuleConfig']['seo_enable']) {
     header('HTTP/1.1 301 Moved Permanently');
     header("Location: $url");
     exit(0);
@@ -35,11 +35,11 @@ if (!isset($GLOBALS['xoopsTpl']) || !is_object($GLOBALS['xoopsTpl'])) {
 }
 
 $article = new nw_NewsStory($storyid);
-if ($article->published() == 0 || $article->published() > time()) {
+if (0 == $article->published() || $article->published() > time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOTYETSTORY);
 }
 // Expired
-if ($article->expired() != 0 && $article->expired() < time()) {
+if (0 != $article->expired() && $article->expired() < time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
 }
 
@@ -60,7 +60,7 @@ $hcontent   = '';
 /**
  * update counter only when viewing top page and when you are not the author or an admin
  */
-if (empty($_GET['com_id']) && $storypage == 0) {
+if (empty($_GET['com_id']) && 0 == $storypage) {
     if (is_object($xoopsUser)) {
         if (($xoopsUser->getVar('uid') == $article->uid()) || nw_is_admin_group()) {
             // nothing ! ;-)
@@ -82,12 +82,12 @@ $story['posttime']        = formatTimestamp($article->published(), $dateformat);
 $story['news_title']      = $article->title();
 $story['title']           = $article->textlink() . '&nbsp;:&nbsp;' . $article->title();
 $story['topic_title']     = $article->textlink();
-$story['topic_separator'] = ($article->textlink() != '') ? _MA_NW_SP : '';
+$story['topic_separator'] = ('' != $article->textlink()) ? _MA_NW_SP : '';
 
 $story['text'] = $article->hometext();
 $bodytext      = $article->bodytext();
 
-if (xoops_trim($bodytext) != '') {
+if ('' != xoops_trim($bodytext)) {
     $articletext = [];
     if ($xnews->getConfig('enhanced_pagenav')) {
         $articletext             = preg_split('/(\[pagebreak:|\[pagebreak)(.*)(\])/iU', $bodytext);
@@ -115,7 +115,7 @@ if (xoops_trim($bodytext) != '') {
             }
         }
 
-        if ($storypage == 0) {
+        if (0 == $storypage) {
             $story['text'] = $story['text'] . '<br>' . $xnews->getConfig('advertisement') . '<br>' . $articletext[$storypage];
         } else {
             $story['text'] = $articletext[$storypage];
@@ -131,7 +131,7 @@ $GLOBALS['xoopsTpl']->assign('advertisement', $xnews->getConfig('advertisement')
 function my_highlighter($matches)
 {
     $color = $xnews->getConfig('highlightcolor');
-    if (substr($color, 0, 1) != '#') {
+    if ('#' != substr($color, 0, 1)) {
         $color = '#' . $color;
     }
 
@@ -167,7 +167,7 @@ if ($story['poster']) {
     $story['poster_email']     = '';
     $story['poster_url']       = '';
     $story['poster_from']      = '';
-    if ($xnews->getConfig('displayname') != 3) {
+    if (3 != $xnews->getConfig('displayname')) {
         $story['poster'] = $xoopsConfig['anonymous'];
     }
 }
@@ -196,7 +196,7 @@ $GLOBALS['xoopsTpl']->assign('lang_printerpage', _MA_NW_PRINTERFRIENDLY);
 $GLOBALS['xoopsTpl']->assign('lang_sendstory', _MA_NW_SENDSTORY);
 $GLOBALS['xoopsTpl']->assign('lang_pdfstory', _MA_NW_MAKEPDF);
 
-if ($article->uname() != '') {
+if ('' != $article->uname()) {
     $GLOBALS['xoopsTpl']->assign('lang_on', _ON);
     $GLOBALS['xoopsTpl']->assign('lang_postedby', _POSTEDBY);
 } else {
@@ -288,7 +288,7 @@ if ($xnews->getConfig('showsummarytable')) {
             }
             //DNPROSSI SEO
             $story_path = '';
-            if ($seo_enabled != 0) {
+            if (0 != $seo_enabled) {
                 $story_path = nw_remove_accents($onearticle->title());
                 $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
                 $GLOBALS['xoopsTpl']->append('summary', [
@@ -353,7 +353,7 @@ if ($xnews->getConfig('showprevnextlink')) {
 
         //DNPROSSI SEO
         $item_path = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $item_path = nw_remove_accents($previousTitle);
         }
         $prevStory = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $previousId, $item_path) . "' title='" . _MA_NW_PREVIOUS_ARTICLE . "'>";
@@ -364,7 +364,7 @@ if ($xnews->getConfig('showprevnextlink')) {
     if ($nextId > 0) {
         //DNPROSSI SEO
         $item_path = '';
-        if ($seo_enabled != 0) {
+        if (0 != $seo_enabled) {
             $item_path = nw_remove_accents($nextTitle);
         }
         $nextStory = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $nextId, $item_path) . "' title='" . _MA_NW_NEXT_ARTICLE . "'>";
@@ -417,7 +417,7 @@ if ($xnews->getConfig('ratenews') && $other_test) {
     $GLOBALS['xoopsTpl']->assign('lang_ratingc', _MA_NW_RATINGC);
     $GLOBALS['xoopsTpl']->assign('lang_ratethisnews', _MA_NW_RATETHISNEWS);
     $story['rating'] = number_format($article->rating(), 2);
-    if ($article->votes == 1) {
+    if (1 == $article->votes) {
         $story['votes'] = _MA_NW_ONEVOTE;
     } else {
         $story['votes'] = sprintf(_MA_NW_NUMVOTES, $article->votes);
@@ -484,7 +484,7 @@ if (file_exists($filename)) {
 //DNPROSSI Added - xlanguage installed and active
 $moduleHandler = xoops_getHandler('module');
 $xlanguage     = $moduleHandler->getByDirname('xlanguage');
-if (is_object($xlanguage) && $xlanguage->getVar('isactive') === true) {
+if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {
     $xlang = true;
 } else {
     $xlang = false;
@@ -509,7 +509,7 @@ $content .= '<b><i><u>'
 $content .= $myts->undoHtmlSpecialChars($pdf_data['content']);
 
 //DNPROSSI Added - Get correct language and remove tags from text to be sent to PDF
-if ($xlang === true) {
+if (true === $xlang) {
     require_once XOOPS_ROOT_PATH . '/modules/xlanguage/include/functions.php';
     $content = xlanguage_ml($content);
 }

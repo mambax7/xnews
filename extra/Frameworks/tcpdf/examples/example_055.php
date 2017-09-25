@@ -87,7 +87,7 @@ foreach ($core_fonts as $font) {
     $html .= '<tr><td colspan="16" style="font-family:helvetica, sans-serif;font-weight:bold">' . strtoupper($font) . '</td></tr><tr>';
     // print each character
     for ($i = 0; $i < 256; ++$i) {
-        if (($i > 0) and (($i % 16) == 0)) {
+        if (($i > 0) and (0 == ($i % 16))) {
             $html .= '</tr><tr>';
         }
         $chr = $pdf->unichr($i);

@@ -28,7 +28,7 @@ function nw_b_news_bigstory_show()
     $block    = [];
     $onestory = new nw_NewsStory();
     $stories  = $onestory->getBigStory(1, 0, $restricted, 0, 1, true, 'counter');
-    if (count($stories) == 0) {
+    if (0 == count($stories)) {
         $block['message'] = _MB_NW_NOTYET;
     } else {
         foreach ($stories as $key => $story) {
@@ -55,7 +55,7 @@ function nw_b_news_bigstory_show()
     }
     // DNPROSSI SEO
     $seo_enabled = $xnews->getConfig('seo_enable');
-    if ($seo_enabled != 0) {
+    if (0 != $seo_enabled) {
         $block['urlrewrite'] = 'true';
     } else {
         $block['urlrewrite'] = 'false';

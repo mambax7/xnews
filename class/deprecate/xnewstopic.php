@@ -29,7 +29,7 @@ class XnewsDeprecateTopic
         $this->table = $table;
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
-        } elseif ($topicid != 0) {
+        } elseif (0 != $topicid) {
             $this->getTopic((int)$topicid);
         } else {
             $this->topic_id = $topicid;
@@ -98,10 +98,10 @@ class XnewsDeprecateTopic
         $myts   = MyTextSanitizer::getInstance();
         $title  = '';
         $imgurl = '';
-        if (isset($this->topic_title) && $this->topic_title != '') {
+        if (isset($this->topic_title) && '' != $this->topic_title) {
             $title = $myts->addSlashes($this->topic_title);
         }
-        if (isset($this->topic_imgurl) && $this->topic_imgurl != '') {
+        if (isset($this->topic_imgurl) && '' != $this->topic_imgurl) {
             $imgurl = $myts->addSlashes($this->topic_imgurl);
         }
         if (!isset($this->topic_pid) || !is_numeric($this->topic_pid)) {
@@ -116,7 +116,7 @@ class XnewsDeprecateTopic
         if (!$result = $this->db->query($sql)) {
             ErrorHandler::show('0022');
         }
-        if ($this->use_permission === true) {
+        if (true === $this->use_permission) {
             if (empty($this->topic_id)) {
                 $this->topic_id = $this->db->getInsertId();
             }
@@ -133,7 +133,7 @@ class XnewsDeprecateTopic
                             continue;
                         }
                     }
-                    if ($add === true) {
+                    if (true === $add) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('ModInTopic');
@@ -153,7 +153,7 @@ class XnewsDeprecateTopic
                             continue;
                         }
                     }
-                    if ($add === true) {
+                    if (true === $add) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('SubmitInTopic');
@@ -173,7 +173,7 @@ class XnewsDeprecateTopic
                             continue;
                         }
                     }
-                    if ($add === true) {
+                    if (true === $add) {
                         $xp = new XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('ReadInTopic');

@@ -64,10 +64,10 @@ function newSubmissions()
              . "</td></tr>\n";
         $class = '';
         foreach ($storyarray as $newstory) {
-            $class = ($class == 'even') ? 'odd' : 'even';
+            $class = ('even' == $class) ? 'odd' : 'even';
             echo "<tr class='" . $class . "'><td align='left'>\n";
             $title = $newstory->title();
-            if (!isset($title) || ($title == '')) {
+            if (!isset($title) || ('' == $title)) {
                 echo "<a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=edit&amp;returnside=1&amp;storyid=' . $newstory->storyid() . "'>" . _AD_NOSUBJECT . "</a>\n";
             } else {
                 echo "&nbsp;<a href='" . XNEWS_MODULE_URL . '/submit.php?returnside=1&amp;op=edit&amp;storyid=' . $newstory->storyid() . "'>" . $title . "</a>\n";
@@ -140,7 +140,7 @@ function autoStories()
         foreach ($storyarray as $autostory) {
             $topic  = $autostory->topic();
             $expire = ($autostory->expired() > 0) ? formatTimestamp($autostory->expired(), $xnews->getConfig('dateformat')) : '';
-            $class  = ($class == 'even') ? 'odd' : 'even';
+            $class  = ('even' == $class) ? 'odd' : 'even';
             echo "<tr class='" . $class . "'>";
             echo "<td align='center'><b>"
                  . $autostory->storyid()
@@ -233,7 +233,7 @@ function lastStories()
         $published = formatTimestamp($eachstory->published(), $xnews->getConfig('dateformat'));
         // $expired = ( $eachstory -> expired() > 0) ? formatTimestamp($eachstory->expired(), $xnews->getConfig('dateformat')) : '---';
         $topic = $eachstory->topic();
-        $class = ($class == 'even') ? 'odd' : 'even';
+        $class = ('even' == $class) ? 'odd' : 'even';
         echo "<tr class='" . $class . "'>";
         echo "<td align='center'><b>"
              . $eachstory->storyid()
@@ -339,7 +339,7 @@ function expStories()
             $expired = formatTimestamp($eachstory->expired(), $xnews->getConfig('dateformat'));
             $topic   = $eachstory->topic();
             // added exired value field to table
-            $class = ($class == 'even') ? 'odd' : 'even';
+            $class = ('even' == $class) ? 'odd' : 'even';
             echo "<tr class='" . $class . "'>";
             echo "<td align='center'><b>"
                  . $eachstory->storyid()
@@ -413,7 +413,7 @@ function modTopicS()
         $_SESSION['items_count'] = -1;
     }
     $xt->setTopicTitle($_POST['topic_title']);
-    if (isset($_POST['topic_imgurl']) && $_POST['topic_imgurl'] != '') {
+    if (isset($_POST['topic_imgurl']) && '' != $_POST['topic_imgurl']) {
         $xt->setTopicImgurl($_POST['topic_imgurl']);
     }
     $xt->setMenu((int)$_POST['submenu']);
@@ -429,7 +429,7 @@ function modTopicS()
     if (isset($_POST['xoops_upload_file'])) {
         $fldname = $_FILES[$_POST['xoops_upload_file'][0]];
         $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-        if (xoops_trim($fldname != '')) {
+        if (xoops_trim('' != $fldname)) {
             $sfiles         = new nw_sFiles();
             $dstpath        = XNEWS_TOPICS_FILES_PATH;
             $destname       = $sfiles->createUploadName($dstpath, $fldname, true);
@@ -543,13 +543,13 @@ function addTopic()
     $xt       = new nw_NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
         $xt->setTopicPid($topicpid);
-        if (empty($_POST['topic_title']) || xoops_trim($_POST['topic_title']) == '') {
+        if (empty($_POST['topic_title']) || '' == xoops_trim($_POST['topic_title'])) {
             redirect_header('index.php?op=topicsmanager', 3, _AM_NW_ERRORTOPICNAME);
         }
         $xt->setTopicTitle($_POST['topic_title']);
         //$xt->Settopic_rssurl($_POST['topic_rssfeed']);
         $xt->setTopic_color($_POST['topic_color']);
-        if (isset($_POST['topic_imgurl']) && $_POST['topic_imgurl'] != '') {
+        if (isset($_POST['topic_imgurl']) && '' != $_POST['topic_imgurl']) {
             $xt->setTopicImgurl($_POST['topic_imgurl']);
         }
         $xt->setMenu((int)$_POST['submenu']);
@@ -560,7 +560,7 @@ function addTopic()
         if (isset($_POST['xoops_upload_file'])) {
             $fldname = $_FILES[$_POST['xoops_upload_file'][0]];
             $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-            if (xoops_trim($fldname != '')) {
+            if (xoops_trim('' != $fldname)) {
                 $sfiles         = new nw_sFiles();
                 $dstpath        = XNEWS_TOPICS_FILES_PATH;
                 $destname       = $sfiles->createUploadName($dstpath, $fldname, true);
@@ -628,7 +628,7 @@ switch ($op) {
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
         //
-        if ($_GET['type'] == 'newsletter') {
+        if ('newsletter' == $_GET['type']) {
             $newsfile = XOOPS_ROOT_PATH . '/uploads/newsletter.txt';
             if (unlink($newsfile)) {
                 redirect_header('index.php', 3, _AM_NW_DELETED_OK);
@@ -636,7 +636,7 @@ switch ($op) {
                 redirect_header('index.php', 3, _AM_NW_DELETED_PB);
             }
         } else {
-            if ($_GET['type'] == 'xml') {
+            if ('xml' == $_GET['type']) {
                 $xmlfile = XOOPS_ROOT_PATH . '/uploads/nw_stories.xml';
                 if (unlink($xmlfile)) {
                     redirect_header('index.php', 3, _AM_NW_DELETED_OK);
@@ -683,7 +683,7 @@ switch ($op) {
         $keywords     = '';
         xoops_loadLanguage('main', 'xnews');
 
-        if ($xnews->getConfig('autoapprove') == 1) {
+        if (1 == $xnews->getConfig('autoapprove')) {
             $approve = 1;
         }
         $approveprivilege = 1;
@@ -791,13 +791,13 @@ switch ($op) {
                         $parent = $xttmp->topic_title();
                         unset($xttmp);
                     }
-                    if ($topics_arr[$tmpcpt]['topic_pid'] != 0) {
+                    if (0 != $topics_arr[$tmpcpt]['topic_pid']) {
                         $topics_arr[$tmpcpt]['prefix'] = str_replace('.', '-', $topics_arr[$tmpcpt]['prefix']) . '&nbsp;';
                     } else {
                         $topics_arr[$tmpcpt]['prefix'] = str_replace('.', '', $topics_arr[$tmpcpt]['prefix']);
                     }
                     $submenu = $topics_arr[$tmpcpt]['menu'] ? _YES : _NO;
-                    $class   = ($class == 'even') ? 'odd' : 'even';
+                    $class   = ('even' == $class) ? 'odd' : 'even';
                     $output  = $output
                                . "<tr class='"
                                . $class
@@ -835,7 +835,7 @@ switch ($op) {
             $topic_description = $xtmod->topic_description('E');
             $topic_rssfeed     = $xtmod->topic_rssurl('E');
             $op                = 'modTopicS';
-            if (xoops_trim($xtmod->topic_imgurl()) != '') {
+            if ('' != xoops_trim($xtmod->topic_imgurl())) {
                 $topicimage = $xtmod->topic_imgurl();
             } else {
                 $topicimage = 'blank.png';

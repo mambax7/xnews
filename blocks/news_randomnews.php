@@ -32,7 +32,7 @@ function nw_b_news_randomnews_show($options)
     //DNPROSSI Added - xlanguage installed and active
     $moduleHandler = xoops_getHandler('module');
     $xlanguage     = $moduleHandler->getByDirname('xlanguage');
-    if (is_object($xlanguage) && $xlanguage->getVar('isactive') === true) {
+    if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {
         $xlang = true;
     } else {
         $xlang = false;
@@ -42,17 +42,17 @@ function nw_b_news_randomnews_show($options)
     $restricted = $xnews->getConfig('restrictindex');
     $dateformat = $xnews->getConfig('dateformat');
     $infotips   = $xnews->getConfig('infotips');
-    if ($dateformat == '') {
+    if ('' == $dateformat) {
         $dateformat = 's';
     }
-    if ($options[4] == 0) {
+    if (0 == $options[4]) {
         $stories = $tmpstory->getRandomNews($options[1], 0, $restricted, 0, 1, $options[0]);
     } else {
         $topics  = array_slice($options, 4);
         $stories = $tmpstory->getRandomNews($options[1], 0, $restricted, $topics, 1, $options[0]);
     }
     unset($tmpstory);
-    if (count($stories) == 0) {
+    if (0 == count($stories)) {
         return '';
     }
     foreach ($stories as $story) {
@@ -61,7 +61,7 @@ function nw_b_news_randomnews_show($options)
         if (strlen($title) > $options[2]) {
             //DNPROSSI Added - xlanguage installed and active
             $title = $thisstory->hometext;
-            if ($xlang === true) {
+            if (true === $xlang) {
                 require_once XOOPS_ROOT_PATH . '/modules/xlanguage/include/functions.php';
                 $title = xlanguage_ml($title);
             }
@@ -79,7 +79,7 @@ function nw_b_news_randomnews_show($options)
         $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
 
         if ($options[3] > 0) {
-            $html = $story->nohtml() == 1 ? 0 : 1;
+            $html = 1 == $story->nohtml() ? 0 : 1;
             //$news['teaser'] = nw_truncate_tagsafe($myts->displayTarea($story->hometext, $html), $options[3]+3);
             //DNPROSSI New truncate function - now works correctly with html and utf-8
             $news['teaser']   = nw_truncate($story->hometext(), $options[3] + 3, '...', true, $html);
@@ -101,7 +101,7 @@ function nw_b_news_randomnews_show($options)
 
     // DNPROSSI SEO
     $seo_enabled = $xnews->getConfig('seo_enable');
-    if ($seo_enabled != 0) {
+    if (0 != $seo_enabled) {
         $block['urlrewrite'] = 'true';
     } else {
         $block['urlrewrite'] = 'false';
@@ -114,19 +114,19 @@ function nw_b_news_randomnews_edit($options)
 {
     $form = _MB_NW_ORDER . "&nbsp;<select name='options[]'>";
     $form .= "<option value='published'";
-    if ($options[0] == 'published') {
+    if ('published' == $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_DATE . "</option>\n";
 
     $form .= "<option value='counter'";
-    if ($options[0] == 'counter') {
+    if ('counter' == $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_HITS . '</option>';
 
     $form .= "<option value='rating'";
-    if ($options[0] == 'rating') {
+    if ('rating' == $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_RATE . '</option>';

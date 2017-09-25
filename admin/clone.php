@@ -100,7 +100,7 @@ function NewsCloner()
                     if ($clone_arr[$tmpcpt]['clone_version'] != $clone_arr[0]['clone_version']) {
                         $linkupgrade = XNEWS_MODULE_URL . '/admin/clone.php?op=cloneupgrade&amp;clone_id=' . $clone_arr[$tmpcpt]['clone_id'];
                         $action      = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_UPGRADE);
-                        if ($clone_arr[$tmpcpt]['clone_installed'] == 1) {
+                        if (1 == $clone_arr[$tmpcpt]['clone_installed']) {
                             $linkupgrade   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=uninstall&module=' . $clone_arr[$tmpcpt]['clone_dir'];
                             $installaction = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_UNINSTALL);
                         } else {
@@ -111,7 +111,7 @@ function NewsCloner()
                     } else {
                         $linkforce = XNEWS_MODULE_URL . '/admin/clone.php?op=cloneupgrade&amp;clone_id=' . $clone_arr[$tmpcpt]['clone_id'];
                         $action    = sprintf(_AM_NW_CLONER_CLONEUPGRADED . " - <a href='%s'>%s</a>", $linkforce, _AM_NW_CLONER_UPGRADEFORCE);
-                        if ($clone_arr[$tmpcpt]['clone_installed'] == 1) {
+                        if (1 == $clone_arr[$tmpcpt]['clone_installed']) {
                             $linkupgrade   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=uninstall&module=' . $clone_arr[$tmpcpt]['clone_dir'];
                             $installaction = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_UNINSTALL);
                         } else {
@@ -125,7 +125,7 @@ function NewsCloner()
                     $action        = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_UPDATE);
                     $installaction = '';
                 }
-                $class  = ($class == 'even') ? 'odd' : 'even';
+                $class  = ('even' == $class) ? 'odd' : 'even';
                 $output = $output
                           . "<tr class='"
                           . $class
@@ -392,14 +392,14 @@ function CloneDeleteApply()
         $delPath1    = XOOPS_ROOT_PATH . '/modules/' . $del_dirname;
         $delPath2    = XOOPS_ROOT_PATH . '/uploads/' . $del_dirname;
         if (file_exists($delPath2) && is_dir($delPath2)) {
-            if (nw_removewholeclone($delPath1) === true && nw_removewholeclone($delPath2) === true) {
+            if (true === nw_removewholeclone($delPath1) && true === nw_removewholeclone($delPath2)) {
                 $label = sprintf(_AM_NW_CLONER_CLONEDELETED, $del_dirname);
                 redirect_header('clone.php?op=cloner', 3, $label);
             } else {
                 $label = sprintf(_AM_NW_CLONER_CLONEDELETEERR, $del_dirname);
                 redirect_header('clone.php?op=cloner', 3, $label);
             }
-        } elseif (nw_removewholeclone($delPath1) === true) {
+        } elseif (true === nw_removewholeclone($delPath1)) {
             $label = sprintf(_AM_NW_CLONER_CLONEDELETED, $del_dirname);
             redirect_header('clone.php?op=cloner', 3, $label);
         } else {

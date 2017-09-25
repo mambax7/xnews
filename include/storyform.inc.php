@@ -18,7 +18,7 @@ $sform->addElement(new XoopsFormText(_MA_NW_TITLE, 'title', 50, 255, $title), tr
 if (!isset($xt)) {
     $xt = new nw_NewsTopic();
 }
-if ($xt->getAllTopicsCount() == 0) {
+if (0 == $xt->getAllTopicsCount()) {
     redirect_header('index.php', 4, _MA_NW_POST_SORRY);
 }
 
@@ -95,11 +95,11 @@ if ($approveprivilege) {
     if ($xnews->getConfig('tags')) {
         $itemIdForTag = isset($storyid) ? $storyid : 0;
         require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
-        $sform->addElement(new XoopsFormTag('item_tag', 60, 255, $itemIdForTag, 0));
+        $sform->addElement(new TagFormTag('item_tag', 60, 255, $itemIdForTag, 0));
     }
 
     if ($xnews->getConfig('metadata')) {
-        if ($xnews->getConfig('extendmetadata') == 1) {
+        if (1 == $xnews->getConfig('extendmetadata')) {
             $sform->addElement(new xoopsFormTextArea(_MA_NW_META_DESCRIPTION, 'description', $description, 4, 60), false);
             $sform->addElement(new xoopsFormTextArea(_MA_NW_META_KEYWORDS, 'keywords', $keywords, 4, 60), false);
         } else {
@@ -124,7 +124,7 @@ switch ($xnews->getConfig('uploadgroups')) {
 }
 
 if ($allowupload) {
-    if ($op == 'edit') {
+    if ('edit' == $op) {
         $sfiles   = new nw_sFiles();
         $filesarr = [];
         $filesarr = $sfiles->getAllbyStory($storyid);
@@ -143,8 +143,8 @@ if ($allowupload) {
         }
     }
     $sform->addElement(new XoopsFormFile(_AM_NW_SELFILE, 'attachedfile', $xnews->getConfig('maxuploadsize')), false);
-    if ($op == 'edit') {
-        if (isset($picture) && xoops_trim($picture) != '') {
+    if ('edit' == $op) {
+        if (isset($picture) && '' != xoops_trim($picture)) {
             $pictureTray = new XoopsFormElementTray(_MA_NW_CURENT_PICTURE, '<br>');
             $pictureTray->addElement(new XoopsFormLabel('', "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $picture . "'>"));
             $deletePicureCheckbox = new XoopsFormCheckBox('', 'deleteimage', 0);
@@ -261,7 +261,7 @@ $type_hidden = new XoopsFormHidden('type', $type);
 $sform->addElement($type_hidden);
 
 echo '<h1>' . _MA_NW_SUBMITNEWS . '</h1>';
-if (xoops_trim($xnews->getConfig('submitintromsg')) != '') {
+if ('' != xoops_trim($xnews->getConfig('submitintromsg'))) {
     echo "<div class='infotext'><br><br>" . nl2br($xnews->getConfig('submitintromsg')) . '<br><br></div>';
 }
 

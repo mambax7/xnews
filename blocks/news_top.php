@@ -63,7 +63,7 @@ function nw_b_news_top_show($options)
     //DNPROSSI Added - xlanguage installed and active
     $moduleHandler = xoops_getHandler('module');
     $xlanguage     = $moduleHandler->getByDirname('xlanguage');
-    if (is_object($xlanguage) && $xlanguage->getVar('isactive') === true) {
+    if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {
         $xlang = true;
     } else {
         $xlang = false;
@@ -73,14 +73,14 @@ function nw_b_news_top_show($options)
     $dateformat = $xnews->getConfig('dateformat');
     $infotips   = $xnews->getConfig('infotips');
     $newsrating = $xnews->getConfig('ratenews');
-    if ($dateformat == '') {
+    if ('' == $dateformat) {
         $dateformat = 's';
     }
 
     $perm_verified = false;
     $news_visible  = true;
     // Is the spotlight visible ?
-    if ($options[4] == 1 && $restricted && $options[5] == 0) {
+    if (1 == $options[4] && $restricted && 0 == $options[5]) {
         $perm_verified   = true;
         $permittedtopics = nw_MygetItemIds();
         $permstory       = new nw_NewsStory($options[6]);
@@ -89,10 +89,10 @@ function nw_b_news_top_show($options)
             $news_visible = false;
             $topicstitles = [];
         }
-        $options[4] == 0;
+        0 == $options[4];
     }
     // Try to see what tabs are visibles (if we are in restricted view of course)
-    if ($options[8] == 2 && $restricted && $options[14] != 0) {
+    if (2 == $options[8] && $restricted && 0 != $options[14]) {
         $topics2         = [];
         $permittedtopics = nw_MygetItemIds();
         $topics          = array_slice($options, 14);
@@ -105,7 +105,7 @@ function nw_b_news_top_show($options)
         $options = array_merge($before, $topics2);
     }
 
-    if ($options[8] == 2) { // Tabbed view ********************************************************************************************
+    if (2 == $options[8]) { // Tabbed view ********************************************************************************************
         $defcolors[1] = ['#F90', '#FFFFFF', '#F90', '#C60', '#999']; // Bar Style
         $defcolors[2] = ['#F90', '#FFFFFF', '#F90', '#AAA', '#666']; // Beveled
         $defcolors[3] = ['#F90', '#FFFFFF', '', '#789', '#789']; // Classic
@@ -116,13 +116,13 @@ function nw_b_news_top_show($options)
         $defcolors[8] = ['#F90', '#FFFFFF', '#F90', '#930', '#C60']; // ZDnet
 
         $myurl = $_SERVER['PHP_SELF'];
-        if (substr($myurl, strlen($myurl) - 1, 1) == '/') {
+        if ('/' == substr($myurl, strlen($myurl) - 1, 1)) {
             $myurl .= 'index.php';
         }
         $myurl .= '?';
 
         foreach ($_GET as $key => $value) {
-            if ($key != 'nwTab') {
+            if ('nwTab' != $key) {
                 $myurl .= $key . '=' . $value . '&';
             }
         }
@@ -143,13 +143,13 @@ function nw_b_news_top_show($options)
         $tmpstory     = new nw_NewsStory();
         $topic        = new nw_NewsTopic();
         $topicstitles = [];
-        if ($options[4] == 1) { // Spotlight enabled
+        if (1 == $options[4]) { // Spotlight enabled
             $topicstitles[0] = _MB_NW_SPOTLIGHT_TITLE;
             $tabscount++;
             $usespotlight = true;
         }
 
-        if ($options[5] == 0 && $restricted) { // Use a specific news and we are in restricted mode
+        if (0 == $options[5] && $restricted) { // Use a specific news and we are in restricted mode
             if (!$perm_verified) {
                 $permittedtopics = nw_MygetItemIds();
                 $permstory       = new nw_NewsStory($options[6]);
@@ -168,7 +168,7 @@ function nw_b_news_top_show($options)
 
         $block['use_spotlight'] = $usespotlight;
 
-        if (isset($options[14]) && $options[14] != 0) { // Topic to use
+        if (isset($options[14]) && 0 != $options[14]) { // Topic to use
             $topics       = array_slice($options, 14);
             $tabscount    += count($topics);
             $topicstitles = $topic->getTopicTitleFromId($topics, $topicstitles);
@@ -189,13 +189,13 @@ function nw_b_news_top_show($options)
         $block['current_tab']          = $currenttab;
         $block['use_rating']           = $newsrating;
 
-        if ($currenttab == 0 && $usespotlight) { // Spotlight or not ?
+        if (0 == $currenttab && $usespotlight) { // Spotlight or not ?
             $block['current_is_spotlight'] = true;
-            if ($options[5] == 0 && $options[6] == 0) { // If the story to use was no selected then we switch to the "recent news" mode.
+            if (0 == $options[5] && 0 == $options[6]) { // If the story to use was no selected then we switch to the "recent news" mode.
                 $options[5] = 1;
             }
 
-            if ($options[5] == 0) { // Use a specific news
+            if (0 == $options[5]) { // Use a specific news
                 if (!isset($permstory)) {
                     $tmpstory->nw_NewsStory($options[6]);
                 } else {
@@ -213,7 +213,7 @@ function nw_b_news_top_show($options)
             }
             $spotlight          = [];
             $spotlight['title'] = $tmpstory->title();
-            if ($options[7] != '') {
+            if ('' != $options[7]) {
                 $spotlight['image'] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/article.php?storyid=' . $tmpstory->storyid(), $myts->displayTarea($options[7], $tmpstory->nohtml));
             }
             $spotlight['text'] = $tmpstory->hometext();
@@ -239,7 +239,7 @@ function nw_b_news_top_show($options)
 
             $spotlight['readmore']        = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/article.php?storyid=' . $tmpstory->storyid(), _MB_NW_READMORE);
             $spotlight['title_with_link'] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/article.php?storyid=' . $tmpstory->storyid(), $tmpstory->title());
-            if ($tmpstory->votes() == 1) {
+            if (1 == $tmpstory->votes()) {
                 $spotlight['number_votes'] = _MA_NW_ONEVOTE;
             } else {
                 $spotlight['number_votes'] = sprintf(_MA_NW_NUMVOTES, $tmpstory->votes());
@@ -252,7 +252,7 @@ function nw_b_news_top_show($options)
             $spotlight['topic_image']       = XNEWS_TOPICS_FILES_URL . '/' . $tmpstory->topic_imgurl();
             $spotlight['topic_description'] = $myts->displayTarea($tmpstory->topic_description, 1);
 
-            if ($displayname != 3) {
+            if (3 != $displayname) {
                 $spotlight['author']           = sprintf('%s %s', _POSTEDBY, $tmpstory->uname());
                 $spotlight['author_with_link'] = sprintf("%s <a href='%s'>%s</a>", _POSTEDBY, XOOPS_URL . '/userinfo.php?uid=' . $tmpstory->uid(), $tmpstory->uname());
             } else {
@@ -262,7 +262,7 @@ function nw_b_news_top_show($options)
             $spotlight['author_id'] = $tmpstory->uid();
 
             // Create the summary table under the spotlight text
-            if (isset($options[14]) && $options[14] == 0) { // Use all topics
+            if (isset($options[14]) && 0 == $options[14]) { // Use all topics
                 $stories = $tmpstory->getAllPublished($options[1], 0, $restricted, 0, 1, true, $options[0]);
             } else { // Use some topics
                 $topics  = array_slice($options, 14);
@@ -274,7 +274,7 @@ function nw_b_news_top_show($options)
                     $title = $story->title();
                     if (strlen($title) > $options[2]) {
                         //DNPROSSI Added - xlanguage installed and active
-                        if ($xlang === true) {
+                        if (true === $xlang) {
                             require_once XOOPS_ROOT_PATH . '/modules/xlanguage/include/functions.php';
                             $title = xlanguage_ml($title);
                         }
@@ -290,13 +290,13 @@ function nw_b_news_top_show($options)
                     $news['topicid']     = $story->topicid();
                     $news['topic_title'] = $story->topic_title();
                     $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
-                    if ($displayname != 3) {
+                    if (3 != $displayname) {
                         $news['author'] = sprintf('%s %s', _POSTEDBY, $story->uname());
                     } else {
                         $news['author'] = '';
                     }
                     if ($options[3] > 0) {
-                        $html = $story->nohtml() == 1 ? 0 : 1;
+                        $html = 1 == $story->nohtml() ? 0 : 1;
                         //$news['teaser'] = nw_truncate_tagsafe($myts->displayTarea($story->hometext(), $html), $options[3]+3);
                         //DNPROSSI New truncate function - now works correctly with html and utf-8
                         $news['teaser'] = nw_truncate($story->hometext(), $options[3] + 3, '...', true, $html);
@@ -340,11 +340,11 @@ function nw_b_news_top_show($options)
                             //DNPROSSI New truncate function - now works correctly with html and utf-8
                             $title = nw_truncate($title, $options[2] + 3, '...', true, $html);
                         }
-                        if ($options[7] != '') {
+                        if ('' != $options[7]) {
                             $news['image'] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/article.php?storyid=' . $story->storyid(), $myts->displayTarea($options[7], $story->nohtml));
                         }
                         if ($options[3] > 0) {
-                            $html = $story->nohtml() == 1 ? 0 : 1;
+                            $html = 1 == $story->nohtml() ? 0 : 1;
                             //$news['text'] = nw_truncate_tagsafe($myts->displayTarea($story->hometext(), $html), $options[3]+3);
                             //DNPROSSI New truncate function - now works correctly with html and utf-8
                             $news['teaser'] = nw_truncate($story->hometext(), $options[3] + 3, '...', true, $html);
@@ -352,7 +352,7 @@ function nw_b_news_top_show($options)
                             $news['text'] = '';
                         }
 
-                        if ($story->votes() == 1) {
+                        if (1 == $story->votes()) {
                             $news['number_votes'] = _MA_NW_ONEVOTE;
                         } else {
                             $news['number_votes'] = sprintf(_MA_NW_NUMVOTES, $story->votes());
@@ -372,7 +372,7 @@ function nw_b_news_top_show($options)
                         $news['topic_title'] = $story->topic_title();
                         $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
 
-                        if ($displayname != 3) {
+                        if (3 != $displayname) {
                             $news['author'] = sprintf('%s %s', _POSTEDBY, $story->uname());
                         } else {
                             $news['author'] = '';
@@ -393,24 +393,24 @@ function nw_b_news_top_show($options)
         $block['color4'] = $defcolors[$tabskin][3];
         $block['color5'] = $defcolors[$tabskin][4];
 
-        if (xoops_trim($options[9]) != '') {
+        if ('' != xoops_trim($options[9])) {
             $block['color1'] = $options[9];
         }
-        if (xoops_trim($options[10]) != '') {
+        if ('' != xoops_trim($options[10])) {
             $block['color2'] = $options[10];
         }
-        if (xoops_trim($options[11]) != '') {
+        if ('' != xoops_trim($options[11])) {
             $block['color3'] = $options[11];
         }
-        if (xoops_trim($options[12]) != '') {
+        if ('' != xoops_trim($options[12])) {
             $block['color4'] = $options[12];
         }
-        if (xoops_trim($options[13]) != '') {
+        if ('' != xoops_trim($options[13])) {
             $block['color5'] = $options[13];
         }
     } else { // ************************ Classical view **************************************************************************************************************
         $tmpstory = new nw_NewsStory;
-        if (isset($options[14]) && $options[14] == 0) {
+        if (isset($options[14]) && 0 == $options[14]) {
             $stories = $tmpstory->getAllPublished($options[1], 0, $restricted, 0, 1, true, $options[0]);
         } else {
             $topics  = array_slice($options, 14);
@@ -427,7 +427,7 @@ function nw_b_news_top_show($options)
             $title = $story->title();
             if (strlen($title) > $options[2]) {
                 //DNPROSSI Added - xlanguage installed and active
-                if ($xlang === true) {
+                if (true === $xlang) {
                     require_once XOOPS_ROOT_PATH . '/modules/xlanguage/include/functions.php';
                     $title = xlanguage_ml($title);
                 }
@@ -438,7 +438,7 @@ function nw_b_news_top_show($options)
             }
 
             // if spotlight is enabled and this is either the first article or the selected one
-            if (($options[5] == 0) && ($options[4] == 1) && (($options[6] > 0 && $options[6] == $story->storyid()) || ($options[6] == 0 && $key == 0))) {
+            if ((0 == $options[5]) && (1 == $options[4]) && (($options[6] > 0 && $options[6] == $story->storyid()) || (0 == $options[6] && 0 == $key))) {
                 $spotlight = [];
                 $visible   = true;
                 if ($restricted) {
@@ -450,7 +450,7 @@ function nw_b_news_top_show($options)
 
                 if ($visible) {
                     $spotlight['title'] = $title;
-                    if ($options[7] != '') {
+                    if ('' != $options[7]) {
                         $spotlight['image'] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/article.php?storyid=' . $story->storyid(), $myts->displayTarea($options[7], $story->nohtml));
                     }
                     // Added 16 february 2007 *****************************************
@@ -478,7 +478,7 @@ function nw_b_news_top_show($options)
                         $spotlight['read_more'] = false;
                     }
 
-                    if ($displayname != 3) {
+                    if (3 != $displayname) {
                         $spotlight['author'] = sprintf('%s %s', _POSTEDBY, $story->uname());
                     } else {
                         $spotlight['author'] = '';
@@ -495,13 +495,13 @@ function nw_b_news_top_show($options)
                 $news['topicid']     = $story->topicid();
                 $news['topic_title'] = $story->topic_title();
                 $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
-                if ($displayname != 3) {
+                if (3 != $displayname) {
                     $news['author'] = sprintf('%s %s', _POSTEDBY, $story->uname());
                 } else {
                     $news['author'] = '';
                 }
                 if ($options[3] > 0) {
-                    $html = $story->nohtml() == 1 ? 0 : 1;
+                    $html = 1 == $story->nohtml() ? 0 : 1;
                     //$news['teaser'] = nw_truncate_tagsafe($myts->displayTarea($story->hometext(), $html), $options[3]+3);
                     //DNPROSSI New truncate function - now works correctly with html and utf-8
                     $news['teaser']   = nw_truncate($story->hometext(), $options[3] + 3, '...', true, $html);
@@ -522,7 +522,7 @@ function nw_b_news_top_show($options)
         if (!isset($spotlight) && $options[4]) {
             $block['use_spotlight'] = true;
             $visible                = true;
-            if ($options[5] == 0 && $restricted) { // Use a specific news and we are in restricted mode
+            if (0 == $options[5] && $restricted) { // Use a specific news and we are in restricted mode
                 $permittedtopics = nw_MygetItemIds();
                 $permstory       = new nw_NewsStory($options[6]);
                 if (!in_array($permstory->topicid(), $permittedtopics)) {
@@ -531,7 +531,7 @@ function nw_b_news_top_show($options)
                 unset($permstory);
             }
 
-            if ($options[5] == 0) { // Use a specific news
+            if (0 == $options[5]) { // Use a specific news
                 if ($visible) {
                     $spotlightArticle = new nw_NewsStory($options[6]);
                 } else {
@@ -547,18 +547,18 @@ function nw_b_news_top_show($options)
                     $block['use_spotlight'] = false;
                 }
             }
-            if ($block['use_spotlight'] === true) {
+            if (true === $block['use_spotlight']) {
                 $spotlight = [];
                 //DNPROSSI Added - xlanguage installed and active
                 $spottitle = $spotlightArticle->title();
-                if ($xlang === true) {
+                if (true === $xlang) {
                     require_once XOOPS_ROOT_PATH . '/modules/xlanguage/include/functions.php';
                     $spottitle = xlanguage_ml($spottitle);
                 }
                 //DNPROSSI changed xoops_substr to mb_substr for utf-8 support
                 $spotlight['title'] = mb_substr($spottitle, 0, ($options[2] - 1), 'UTF-8');
 
-                if ($options[7] != '') {
+                if ('' != $options[7]) {
                     $spotlight['image'] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/article.php?storyid=' . $spotlightArticle->storyid(), $myts->displayTarea($options[7], $spotlightArticle->nohtml));
                 }
                 // Added 16 february 2007 *****************************************
@@ -580,7 +580,7 @@ function nw_b_news_top_show($options)
                 // Added, topic's image and description
                 $spotlight['topic_image']       = XNEWS_TOPICS_FILES_URL . '/' . $spotlightArticle->topic_imgurl();
                 $spotlight['topic_description'] = $myts->displayTarea($spotlightArticle->topic_description, 1);
-                if ($displayname != 3) {
+                if (3 != $displayname) {
                     $spotlight['author'] = sprintf('%s %s', _POSTEDBY, $spotlightArticle->uname());
                 } else {
                     $spotlight['author'] = '';
@@ -606,7 +606,7 @@ function nw_b_news_top_show($options)
 
     // DNPROSSI SEO
     $seo_enabled = $xnews->getConfig('seo_enable');
-    if ($seo_enabled != 0) {
+    if (0 != $seo_enabled) {
         $block['urlrewrite'] = 'true';
     } else {
         $block['urlrewrite'] = 'false';
@@ -625,18 +625,18 @@ function nw_b_news_top_edit($options)
     $tmpstory = new nw_NewsStory;
     $form     = _MB_NW_ORDER . "&nbsp;<select name='options[]'>";
     $form     .= "<option value='published'";
-    if ($options[0] == 'published') {
+    if ('published' == $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_DATE . "</option>\n";
 
     $form .= "<option value='counter'";
-    if ($options[0] == 'counter') {
+    if ('counter' == $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_HITS . '</option>';
     $form .= "<option value='rating'";
-    if ($options[0] == 'rating') {
+    if ('rating' == $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_RATE . '</option>';
@@ -649,23 +649,23 @@ function nw_b_news_top_edit($options)
     $form .= '<br><br>';
 
     $form .= _MB_NW_SPOTLIGHT . " <input type='radio' name='options[]' value='1'";
-    if ($options[4] == 1) {
+    if (1 == $options[4]) {
         $form .= ' checked';
     }
     $form .= '>' . _YES;
     $form .= "<input type='radio' name='options[]' value='0'";
-    if ($options[4] == 0) {
+    if (0 == $options[4]) {
         $form .= ' checked';
     }
     $form .= '>' . _NO . '<br><br>';
 
     $form .= _MB_NW_WHAT_PUBLISH . " <select name='options[]'><option value='1'";
-    if ($options[5] == 1) {
+    if (1 == $options[5]) {
         $form .= ' selected';
     }
     $form .= '>' . _MB_NW_RECENT_NEWS;
     $form .= "</option><option value='0'";
-    if ($options[5] == 0) {
+    if (0 == $options[5]) {
         $form .= ' selected';
     }
     $form .= '>' . _MB_NW_RECENT_SPECIFIC . '</option></select>';
@@ -686,11 +686,11 @@ function nw_b_news_top_edit($options)
     $form .= _MB_NW_IMAGE . "&nbsp;<input type='text' id='spotlightimage' name='options[]' value='" . $options[7] . "' size='50'>";
     $form .= "&nbsp;<img align='middle' onmouseover='style.cursor=\"hand\"' onclick='javascript:openWithSelfMain(\"" . XOOPS_URL . "/imagemanager.php?target=spotlightimage\", \"imgmanager\", 400, 430);' src='" . XOOPS_URL . "/images/image.gif' alt='image' title='image'>";
     $form .= '<br><br>' . _MB_NW_DISP . "&nbsp;<select name='options[]'><option value='1' ";
-    if ($options[8] == 1) {
+    if (1 == $options[8]) {
         $form .= 'selected';
     }
     $form .= '>' . _MB_NW_VIEW_TYPE1 . "</option><option value='2' ";
-    if ($options[8] == 2) {
+    if (2 == $options[8]) {
         $form .= 'selected';
     }
     $form .= '>' . _MB_NW_VIEW_TYPE2 . '</option></select><br><br>';
@@ -713,7 +713,7 @@ function nw_b_news_top_edit($options)
     $size       = count($options);
     foreach ($topics_arr as $onetopic) {
         $sel = '';
-        if ($onetopic['topic_pid'] != 0) {
+        if (0 != $onetopic['topic_pid']) {
             $onetopic['prefix'] = str_replace('.', '-', $onetopic['prefix']) . '&nbsp;';
         } else {
             $onetopic['prefix'] = str_replace('.', '', $onetopic['prefix']);

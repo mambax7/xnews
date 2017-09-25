@@ -43,7 +43,7 @@ if ((!isset($_SERVER['DOCUMENT_ROOT'])) or (empty($_SERVER['DOCUMENT_ROOT']))) {
 
 // Automatic calculation for the following K_PATH_MAIN constant
 $k_path_main = str_replace('\\', '/', realpath(substr(__DIR__, 0, 0 - strlen('config'))));
-if (substr($k_path_main, -1) != '/') {
+if ('/' != substr($k_path_main, -1)) {
     $k_path_main .= '/';
 }
 
@@ -55,7 +55,7 @@ define('K_PATH_MAIN', $k_path_main);
 
 // Automatic calculation for the following K_PATH_URL constant
 if (isset($_SERVER['HTTP_HOST']) and (!empty($_SERVER['HTTP_HOST']))) {
-    if (isset($_SERVER['HTTPS']) and (!empty($_SERVER['HTTPS'])) and strtolower($_SERVER['HTTPS']) != 'off') {
+    if (isset($_SERVER['HTTPS']) and (!empty($_SERVER['HTTPS'])) and 'off' != strtolower($_SERVER['HTTPS'])) {
         $k_path_url = 'https://';
     } else {
         $k_path_url = 'http://';

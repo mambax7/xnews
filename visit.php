@@ -15,11 +15,11 @@ $sfiles = new nw_sFiles($fileid);
 // Do we have the right to see the file ?
 $article = new nw_NewsStory($sfiles->getStoryid());
 // and the news, can we see it ?
-if ($article->published() == 0 || $article->published() > time()) {
+if (0 == $article->published() || $article->published() > time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
 }
 // Expired
-if ($article->expired() != 0 && $article->expired() < time()) {
+if (0 != $article->expired() && $article->expired() < time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
 }
 
