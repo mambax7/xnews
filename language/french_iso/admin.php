@@ -170,7 +170,7 @@ define('_AM_NW_NOTHING', 'Aucune ressource ne peut �tre t�l�charg�e. Veu
 define('_AM_NW_NOTHING_PRUNE', "Aucun article ne correspond � vos crit�res, aucune suppression n'a �t� r�alis�e.");
 define('_AM_NW_TOPIC_COLOR', 'Couleur de la cat�gorie');
 define('_AM_NW_COLOR', 'Couleur');
-define('_AM_NW_REMOVE_BR', 'Convertir la balise Html &lt;br&gt; en une nouvelle ligne ?');
+define('_AM_NW_REMOVE_BR', 'Convertir la balise Html &lt;br> en une nouvelle ligne ?');
 // Added in 1.3 RC2
 define('_AM_NW_PLEASE_UPGRADE', "<a href='upgrade.php'><font color='#FF0000'>Veuillez mettre � jour le module</font></a>");
 

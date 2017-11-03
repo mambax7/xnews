@@ -531,7 +531,7 @@ $pdf->SetSubject($pdf_data['subtitle']);
 $pdf->SetKeywords($doc_keywords);
 
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+$pdf->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 //$pdf->SetHeaderData('', '', $firstLine, $secondLine);
 //$pdf->SetHeaderData('logo_example.png', '25', $firstLine, $secondLine);
 //UTF-8 char sample
@@ -541,8 +541,8 @@ $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PD
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP + 10, PDF_MARGIN_RIGHT);
 //set auto page breaks
 $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+$pdf->setHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->setFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->setImageScale(1); //set image scale factor
 
 //DNPROSSI ADDED FOR SCHINESE

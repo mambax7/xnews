@@ -18,7 +18,7 @@
  * @version      $Id $
  */
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS Root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $modversion['name']        = 'xNews Importer';
 $modversion['version']     = 1.02;

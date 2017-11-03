@@ -172,7 +172,7 @@ if ('go' == $op) {
         }
         $set_clause = is_numeric($newpid) ? "topic_id = " . $newpid : "topic_id = '" . $newpid ."'";
         $sql = 'UPDATE ' . $xoopsDB->prefix(XNI_SUBPREFIX . '_topics') . ' SET ' . $set_clause;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' '.$criteria->renderWhere();
         }
         $result = $xoopsDB->query($sql);

@@ -1,5 +1,5 @@
 <?php
-defined('XOOPS_ROOT_PATH') || exit('XOOPS Root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Returns a module's option
