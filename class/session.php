@@ -97,7 +97,7 @@ class XnewsSession
     /**
      * @return XnewsSession
      */
-    public static function &getInstance()
+    public static function getInstance()
     {
         static $_sess;
         if (!isset($_sess)) {

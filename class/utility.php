@@ -1,7 +1,9 @@
 <?php
 
+use WideImage\WideImage;
+
 /**
- * Class MyalbumUtil
+ * Class XNewsUtility
  */
 class XNewsUtility extends XoopsObject
 {

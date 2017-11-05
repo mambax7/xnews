@@ -1,4 +1,7 @@
 <?php
+
+use WideImage\WideImage;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
@@ -722,7 +725,7 @@ function nw_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words =
 function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false, $fit = 'inside')
 {
     $xnews = XnewsXnews::getInstance();
-    require_once XNEWS_MODULE_PATH . '/class/wideimage/WideImage.inc.php';
+//    require_once XNEWS_MODULE_PATH . '/class/wideimage/WideImage.inc.php';
     //
     $resize            = true;
     $pictureDimensions = getimagesize($src_path);

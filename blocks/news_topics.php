@@ -32,8 +32,13 @@ function nw_b_news_topics_show()
     $allTopics          = $xt->getAllTopics($restricted);
     $topic_tree         = new XnewsMyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
     $additional         = " onchange='location=\"" . $jump . "\"+this.options[this.selectedIndex].value'";
-    $block['selectbox'] = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', '', true, 0, $additional);
 
+    if (XNewsUtility::checkVerXoops($GLOBALS['xoopsModule'], '2.5.9')) {
+        $topicSelect = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', '', true, 0, $additional);
+        $block['selectbox'] =  $topicSelect->render();
+    } else {
+        $block['selectbox'] = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', '', true, 0, $additional);
+    }
     //DNPROSSI ADDED
     $block['newsmodule_url'] = XNEWS_MODULE_URL;
 

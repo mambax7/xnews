@@ -47,7 +47,7 @@ class XnewsXnews
      *
      * @return XnewsXnews
      */
-    public static function &getInstance($debug = false)
+    public static function getInstance($debug = false)
     {
         static $instance = false;
         if (!$instance) {
