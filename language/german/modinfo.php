@@ -188,3 +188,7 @@ define('_MI_NW_IMAGE_MAX_HEIGHT', 'Maximale Image Höhe beim anpassen');
 define('_MI_NW_CLONER', 'Klon Manager');
 
 define('_MI_NW_LATESTNEWS_BLOCK', 'Letzte Neuigkeiten Block');
+
+
+define('_MI_NW_HOME', 'Home');
+define('_MI_NW_ABOUT', 'About');

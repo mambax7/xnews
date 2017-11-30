@@ -229,3 +229,7 @@ define('_MI_NW_SEOENDOFURLPDF_DESC', 'Extension de fichier pour les Adobe Acroba
  *
  * @version         $Id $
  **/;
+
+
+define('_MI_NW_HOME', 'Home');
+define('_MI_NW_ABOUT', 'About');

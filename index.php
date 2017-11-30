@@ -137,11 +137,8 @@ if ($showclassic) {
 //        $xoopsTpl->assign('topic_select', $topic_select);
 
         $moduleDirName = basename(__DIR__);
-        if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
-        } else {
-            $moduleHelper = Xmf\Module\Helper::getHelper('system');
-        }
-        $module = $moduleHelper->getModule();
+        $helper = \Xmf\Module\Helper::getHelper($moduleDirName);
+        $module = $helper->getModule();
 
         if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
             $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $xoopsOption['storytopic'], true, 0, '', '');

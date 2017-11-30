@@ -229,3 +229,7 @@ define('_MI_NW_SEOENDOFURLRSS', 'End of URL');
 define('_MI_NW_SEOENDOFURLRSS_DESC', 'File Extension to RSS Pages');
 define('_MI_NW_SEOENDOFURLPDF', 'End of URL');
 define('_MI_NW_SEOENDOFURLPDF_DESC', 'File Extension to Adobe Acrobat (PDF) Files');
+
+
+define('_MI_NW_HOME', 'Home');
+define('_MI_NW_ABOUT', 'About');

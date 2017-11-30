@@ -226,3 +226,7 @@ define('_MI_NW_SEOENDOFURLRSS', 'Fine URL');
 define('_MI_NW_SEOENDOFURLRSS_DESC', 'Estensione file per le pagine RSS');
 define('_MI_NW_SEOENDOFURLPDF', 'Fine URL');
 define('_MI_NW_SEOENDOFURLPDF_DESC', 'Estensione file per file Adobe Acrobat (PDF)');
+
+
+define('_MI_NW_HOME', 'Home');
+define('_MI_NW_ABOUT', 'About');

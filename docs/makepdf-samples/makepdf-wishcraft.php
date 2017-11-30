@@ -472,7 +472,7 @@ define('PDF_HEADER_STRING', $pdf_data['subtitle']);
 define('PDF_HEADER_LOGO', 'logo.png');
 define('K_PATH_IMAGES', XOOPS_ROOT_PATH . '/images/');
 
-require_once XOOPS_ROOT_PATH . '/Frameworks/tcpdf/tcpdf.php';
+require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
 
 $filename = XOOPS_ROOT_PATH . '/Frameworks/tcpdf/config/lang/' . _LANGCODE . '.php';
 if (file_exists($filename)) {

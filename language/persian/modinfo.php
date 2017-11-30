@@ -229,3 +229,7 @@ define('_MI_NW_SEOENDOFURLRSS', 'انتهای URL');
 define('_MI_NW_SEOENDOFURLRSS_DESC', 'پسوند فایل ها برای صفحات RSS');
 define('_MI_NW_SEOENDOFURLPDF', 'انتهای URL');
 define('_MI_NW_SEOENDOFURLPDF_DESC', 'پسوند فایل ها برای فایل های PDF');
+
+
+define('_MI_NW_HOME', 'Home');
+define('_MI_NW_ABOUT', 'About');

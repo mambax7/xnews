@@ -250,3 +250,6 @@ define('_MI_NW_OVERVIEW', 'Overview');
 define('_MI_NW_DISCLAIMER', 'Disclaimer');
 define('_MI_NW_LICENSE', 'License');
 define('_MI_NW_SUPPORT', 'Support');
+
+define('_MI_NW_HOME', 'Home');
+define('_MI_NW_ABOUT', 'About');

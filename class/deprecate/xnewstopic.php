@@ -20,7 +20,6 @@ class XnewsDeprecateTopic
     /**
      * @param     $table
      * @param int $topicid
-     * @return \XnewsDeprecateTopic
      */
     public function __construct($table, $topicid = 0)
     {

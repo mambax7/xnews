@@ -29,11 +29,8 @@ $topic_tree   = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 
 //$module = $xnews->getModule();
 $moduleDirName = basename(dirname(__DIR__));
-if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
-} else {
-    $moduleHelper = Xmf\Module\Helper::getHelper('system');
-}
-$module = $moduleHelper->getModule();
+$helper = \Xmf\Module\Helper::getHelper($moduleDirName);
+$module = $helper->getModule();
 
 
 if (XNewsUtility::checkVerXoops($module, '2.5.9')) {

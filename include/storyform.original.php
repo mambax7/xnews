@@ -29,11 +29,8 @@ $topic_tree   = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 //$topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
 
 $moduleDirName = basename(dirname(__DIR__));
-if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
-} else {
-    $moduleHelper = Xmf\Module\Helper::getHelper('system');
-}
-$module = $moduleHelper->getModule();
+$helper = \Xmf\Module\Helper::getHelper($moduleDirName);
+$module = $helper->getModule();
 
 if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
     //         $topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
