@@ -125,7 +125,7 @@ function NewsCloner()
                     $action        = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_UPDATE);
                     $installaction = '';
                 }
-                $class  = ('even' == $class) ? 'odd' : 'even';
+                $class  = ('even' === $class) ? 'odd' : 'even';
                 $output = $output
                           . "<tr class='"
                           . $class

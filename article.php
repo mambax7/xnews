@@ -623,15 +623,15 @@ if (0 != $xnews->getConfig('com_rule')) {
 <table width="95%" class="outer" cellspacing="1">
   <tr>
     <td class="even" align="center"><select name="com_mode"><option value="flat"';
-        if ('flat' == $com_mode) {
+        if ('flat' === $com_mode) {
             $navbar .= ' selected="selected"';
         }
         $navbar .= '>' . _FLAT . '</option><option value="thread"';
-        if ('thread' == $com_mode || '' == $com_mode) {
+        if ('thread' === $com_mode || '' == $com_mode) {
             $navbar .= ' selected="selected"';
         }
         $navbar .= '>' . _THREADED . '</option><option value="nest"';
-        if ('nest' == $com_mode) {
+        if ('nest' === $com_mode) {
             $navbar .= ' selected="selected"';
         }
         $navbar .= '>' . _NESTED . '</option></select> <select name="com_order"><option value="' . XOOPS_COMMENT_OLD1ST . '"';

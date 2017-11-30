@@ -349,18 +349,18 @@ function nw_b_news_latestnews_edit($options)
     $form .= $tabletag1 . _MB_NW_LATESTNEWS_ORDERBY . $tabletag2;
     $form .= "<select name='options[]'>";
     $form .= "<option value='published'";
-    if ('published' == $options[25]) {
+    if ('published' === $options[25]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_LATESTNEWS_DATE . "</option>\n";
 
     $form .= "<option value='counter'";
-    if ('counter' == $options[25]) {
+    if ('counter' === $options[25]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_LATESTNEWS_HITS . '</option>';
     $form .= "<option value='rating'";
-    if ('rating' == $options[25]) {
+    if ('rating' === $options[25]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_LATESTNEWS_RATE . '</option>';

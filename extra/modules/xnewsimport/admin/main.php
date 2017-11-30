@@ -61,7 +61,7 @@ function NewsImport()
     $listed_mods    = [];
     $count          = 0;
     foreach ($installed_mods as $module) {
-        if ('system' != $module->getVar('dirname') && 1 == $module->getVar('isactive')) {
+        if ('system' !== $module->getVar('dirname') && 1 == $module->getVar('isactive')) {
             $module->loadInfo($module->getVar('dirname'));
             $modtables = $module->getInfo('tables');
             if (false !== $modtables && is_array($modtables)) {
@@ -213,7 +213,7 @@ function TopicSelect()
         foreach ($from_modtables as $from_table) {
             $from_table_arr = explode('_', $from_table);
             if (count($from_table_arr) > 0) { //&& $from_import_dirname != 'news') {
-                if ('news' != $from_import_dirname) {
+                if ('news' !== $from_import_dirname) {
                     $subprefix = $from_table_arr[0] . '_';
                 } else {
                     $subprefix = '';

@@ -112,10 +112,10 @@ $doc_title    = $myts->undoHtmlSpecialChars($article->title());
 $doc_keywords = 'XOOPS';
 
 //DNPROSSI ADDED gbsn00lp chinese to tcpdf fonts dir
-if (_LANGCODE == 'cn' || 'cn' == $multylang) {
+if (_LANGCODE == 'cn' || 'cn' === $multylang) {
     $pdf->SetFont('gbsn00lp', '', 10);
 }
-if (_LANGCODE == 'fa' || 'fa' == $multylang) {
+if (_LANGCODE === 'fa' || 'fa' === $multylang) {
     // RTL direction for persian language
     $pdf->setRTL(true);
     //$pdf->SetFont('dejavusans', '', 12); almohanad
@@ -149,10 +149,10 @@ $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->setImageScale(1); //set image scale factor
 
 //DNPROSSI ADDED FOR SCHINESE - PERSIAN
-if (_LANGCODE == 'cn' || 'cn' == $multylang) {
+if (_LANGCODE === 'cn' || 'cn' === $multylang) {
     $pdf->setHeaderFont(['gbsn00lp', '', 10]);
     $pdf->setFooterFont(['gbsn00lp', '', 10]);
-} elseif (_LANGCODE == 'fa' || 'fa' == $multylang) {
+} elseif (_LANGCODE === 'fa' || 'fa' === $multylang) {
     $pdf->setHeaderFont(['almohanad', '', 18]);
     $pdf->setFooterFont(['almohanad', '', 18]);
 } else {

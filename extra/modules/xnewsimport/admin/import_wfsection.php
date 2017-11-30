@@ -29,11 +29,11 @@ $scriptname = 'smartsection.php';
 
 $op = 'start';
 
-if (isset($_POST['op']) && ('go' == $_POST['op'])) {
+if (isset($_POST['op']) && ('go' === $_POST['op'])) {
     $op = $_POST['op'];
 }
 
-if ('start' == $op) {
+if ('start' === $op) {
     xoops_load('XoopsFormLoader');
 
     publisher_cpHeader();
@@ -96,7 +96,7 @@ if ('start' == $op) {
     xoops_cp_footer();
 }
 
-if ('go' == $op) {
+if ('go' === $op) {
     publisher_cpHeader();
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
     publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
@@ -131,7 +131,7 @@ if ('go' == $op) {
         $categoryObj->setVar('categoryid', 0);
 
         // Copy category image
-        if (('blank.gif' != $arrCat['image']) && ('' != $arrCat['image'])) {
+        if (('blank.gif' !== $arrCat['image']) && ('' != $arrCat['image'])) {
             copy(XOOPS_ROOT_PATH . '/uploads/smartsection/images/category/' . $arrCat['image'], XOOPS_ROOT_PATH . '/uploads/publisher/images/category/' . $arrCat['image']);
         }
 

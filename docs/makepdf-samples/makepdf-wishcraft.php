@@ -135,7 +135,7 @@ $GLOBALS['xoopsTpl']->assign('advertisement', $xnews->getConfig('advertisement')
 function my_highlighter($matches)
 {
     $color = $xnews->getConfig('highlightcolor');
-    if ('#' != substr($color, 0, 1)) {
+    if ('#' !== substr($color, 0, 1)) {
         $color = '#' . $color;
     }
 
@@ -523,7 +523,7 @@ $doc_title    = $myts->undoHtmlSpecialChars($pdf_data['title']);
 $doc_keywords = 'XOOPS';
 
 //DNPROSSI ADDED gbsn00lp chinese to tcpdf fonts dir
-if (_LANGCODE == 'cn') {
+if (_LANGCODE === 'cn') {
     $pdf->SetFont('gbsn00lp', '', 10);
 }
 
@@ -550,7 +550,7 @@ $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->setImageScale(1); //set image scale factor
 
 //DNPROSSI ADDED FOR SCHINESE
-if (_LANGCODE == 'cn') {
+if (_LANGCODE === 'cn') {
     $pdf->setHeaderFont(['gbsn00lp', '', 10]);
     $pdf->setFooterFont(['gbsn00lp', '', 10]);
 } else {

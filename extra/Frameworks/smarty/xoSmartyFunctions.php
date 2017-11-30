@@ -86,7 +86,7 @@ function XoSmartyPluginLoadGD()
 
 function XoSmartyPluginHTML2RGB($color = '#000000')
 {
-    if ('#' == substr($color, 0, 1)) {
+    if ('#' === substr($color, 0, 1)) {
         $color = substr($color, 1, 6);
     }
 
@@ -141,7 +141,7 @@ function XoSmartyPlugin_write_index_file($path = '')
         return false;
     }
 
-    $path     = '/' == substr($path, -1) ? substr($path, 0, -1) : $path;
+    $path     = '/' === substr($path, -1) ? substr($path, 0, -1) : $path;
     $filename = $path . '/index.html';
 
     if (file_exists($filename)) {

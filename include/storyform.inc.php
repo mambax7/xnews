@@ -121,7 +121,7 @@ switch ($xnews->getConfig('uploadgroups')) {
 }
 
 if ($allowupload) {
-    if ('edit' == $op) {
+    if ('edit' === $op) {
         $sfiles   = new nw_sFiles();
         $filesarr = [];
         $filesarr = $sfiles->getAllbyStory($storyid);
@@ -140,7 +140,7 @@ if ($allowupload) {
         }
     }
     $sform->addElement(new XoopsFormFile(_AM_NW_SELFILE, 'attachedfile', $xnews->getConfig('maxuploadsize')), false);
-    if ('edit' == $op) {
+    if ('edit' === $op) {
         if (isset($picture) && '' != xoops_trim($picture)) {
             $pictureTray = new XoopsFormElementTray(_MA_NW_CURENT_PICTURE, '<br>');
             $pictureTray->addElement(new XoopsFormLabel('', "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $picture . "'>"));

@@ -92,7 +92,7 @@ if (isset($_GET['start'])) {
     $start = 0;
 }
 
-if ('Classic' == $xnews->getConfig('newsdisplay') || $xoopsOption['storytopic'] > 0) {
+if ('Classic' === $xnews->getConfig('newsdisplay') || $xoopsOption['storytopic'] > 0) {
     $showclassic = 1;
 } else {
     $showclassic = 0;

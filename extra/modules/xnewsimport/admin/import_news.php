@@ -34,7 +34,7 @@ trigger_error($importToModuleDirName, E_USER_WARNING);
 trigger_error($importToCloneID, E_USER_WARNING);
 $scriptname = 'import_news.php';
 
-if ('go' == $op) {
+if ('go' === $op) {
     xoops_cp_header();
 
     adminMenu(-1, _AM_XNI_IMPORT);

@@ -43,7 +43,7 @@ if (isset($_POST['preview'])) {
     $op = 'post';
 } elseif (isset($_GET['op']) && isset($_GET['storyid'])) {
     // Verify that the user can edit or delete an article
-    if ('edit' == $_GET['op'] || 'delete' == $_GET['op']) {
+    if ('edit' === $_GET['op'] || 'delete' === $_GET['op']) {
         if (1 == $xnews->getConfig('authoredit')) {
             $tmpstory = new nw_NewsStory((int)$_GET['storyid']);
             if (is_object($xoopsUser) && $xoopsUser->getVar('uid') != $tmpstory->uid() && !nw_is_admin_group()) {
@@ -56,14 +56,14 @@ if (isset($_POST['preview'])) {
         }
     }
 
-    if ($approveprivilege && 'edit' == $_GET['op']) {
+    if ($approveprivilege && 'edit' === $_GET['op']) {
         $op      = 'edit';
         $storyid = (int)$_GET['storyid'];
-    } elseif ($approveprivilege && 'delete' == $_GET['op']) {
+    } elseif ($approveprivilege && 'delete' === $_GET['op']) {
         $op      = 'delete';
         $storyid = (int)$_GET['storyid'];
     } else {
-        if ($xnews->getConfig('authoredit') && is_object($xoopsUser) && isset($_GET['storyid']) && ('edit' == $_GET['op'] || 'preview' == $_POST['op'] || 'post' == $_POST['op'])) {
+        if ($xnews->getConfig('authoredit') && is_object($xoopsUser) && isset($_GET['storyid']) && ('edit' === $_GET['op'] || 'preview' === $_POST['op'] || 'post' === $_POST['op'])) {
             $storyid = 0;
             $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : (int)$_POST['storyid'];
             if (!empty($storyid)) {

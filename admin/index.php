@@ -64,7 +64,7 @@ function newSubmissions()
              . "</td></tr>\n";
         $class = '';
         foreach ($storyarray as $newstory) {
-            $class = ('even' == $class) ? 'odd' : 'even';
+            $class = ('even' === $class) ? 'odd' : 'even';
             echo "<tr class='" . $class . "'><td align='left'>\n";
             $title = $newstory->title();
             if (!isset($title) || ('' == $title)) {
@@ -140,7 +140,7 @@ function autoStories()
         foreach ($storyarray as $autostory) {
             $topic  = $autostory->topic();
             $expire = ($autostory->expired() > 0) ? formatTimestamp($autostory->expired(), $xnews->getConfig('dateformat')) : '';
-            $class  = ('even' == $class) ? 'odd' : 'even';
+            $class  = ('even' === $class) ? 'odd' : 'even';
             echo "<tr class='" . $class . "'>";
             echo "<td align='center'><b>"
                  . $autostory->storyid()
@@ -233,7 +233,7 @@ function lastStories()
         $published = formatTimestamp($eachstory->published(), $xnews->getConfig('dateformat'));
         // $expired = ( $eachstory -> expired() > 0) ? formatTimestamp($eachstory->expired(), $xnews->getConfig('dateformat')) : '---';
         $topic = $eachstory->topic();
-        $class = ('even' == $class) ? 'odd' : 'even';
+        $class = ('even' === $class) ? 'odd' : 'even';
         echo "<tr class='" . $class . "'>";
         echo "<td align='center'><b>"
              . $eachstory->storyid()
@@ -339,7 +339,7 @@ function expStories()
             $expired = formatTimestamp($eachstory->expired(), $xnews->getConfig('dateformat'));
             $topic   = $eachstory->topic();
             // added exired value field to table
-            $class = ('even' == $class) ? 'odd' : 'even';
+            $class = ('even' === $class) ? 'odd' : 'even';
             echo "<tr class='" . $class . "'>";
             echo "<td align='center'><b>"
                  . $eachstory->storyid()
@@ -628,7 +628,7 @@ switch ($op) {
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
         //
-        if ('newsletter' == $_GET['type']) {
+        if ('newsletter' === $_GET['type']) {
             $newsfile = XOOPS_ROOT_PATH . '/uploads/newsletter.txt';
             if (unlink($newsfile)) {
                 redirect_header('index.php', 3, _AM_NW_DELETED_OK);
@@ -636,7 +636,7 @@ switch ($op) {
                 redirect_header('index.php', 3, _AM_NW_DELETED_PB);
             }
         } else {
-            if ('xml' == $_GET['type']) {
+            if ('xml' === $_GET['type']) {
                 $xmlfile = XOOPS_ROOT_PATH . '/uploads/nw_stories.xml';
                 if (unlink($xmlfile)) {
                     redirect_header('index.php', 3, _AM_NW_DELETED_OK);
@@ -797,7 +797,7 @@ switch ($op) {
                         $topics_arr[$tmpcpt]['prefix'] = str_replace('.', '', $topics_arr[$tmpcpt]['prefix']);
                     }
                     $submenu = $topics_arr[$tmpcpt]['menu'] ? _YES : _NO;
-                    $class   = ('even' == $class) ? 'odd' : 'even';
+                    $class   = ('even' === $class) ? 'odd' : 'even';
                     $output  = $output
                                . "<tr class='"
                                . $class

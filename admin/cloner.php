@@ -48,7 +48,7 @@ function nw_cloneFileFolder($path, $patterns)
         // check all files in dir, and process them
         if ($handle = opendir($path)) {
             while ($file = readdir($handle)) {
-                if ('.' != $file && '..' != $file) {
+                if ('.' !== $file && '..' !== $file) {
                     nw_cloneFileFolder("$path/$file", $patterns);
                 }
             }
@@ -65,7 +65,7 @@ function nw_cloneFileFolder($path, $patterns)
             //trigger_error($path . " -------- " . $path_ext, E_USER_WARNING);
             //trigger_error($path , E_USER_WARNING);
             $content = file_get_contents($path);
-            if ('txt' != $path_ext) {
+            if ('txt' !== $path_ext) {
                 for ($i = 0; $i < count($patterns); ++$i) {
                     $content = str_replace($patKeys[$i], $patValues[$i], $content);
                 }
@@ -88,7 +88,7 @@ function nw_clonefilename($path, $old_subprefix, $new_subprefix)
     for ($i = 0; $i <= 1; $i++) {
         if ($handle = opendir($path[$i])) {
             while ($file = readdir($handle)) {
-                if ('.' != $file && '..' != $file) {
+                if ('.' !== $file && '..' !== $file) {
                     $newfilename = str_replace($old_subprefix, $new_subprefix, $file);
                     @rename($path[$i] . $file, $path[$i] . $newfilename);
                 }
@@ -108,7 +108,7 @@ function nw_deleteclonefile($path, $new_subprefix)
     for ($i = 0; $i <= 1; $i++) {
         if ($handle = opendir($path[$i])) {
             while ($file = readdir($handle)) {
-                if ('.' != $file && '..' != $file) {
+                if ('.' !== $file && '..' !== $file) {
                     $pos = strpos($file, $new_subprefix);
                     if (false !== $pos) {
                         //trigger_error($file. ' ---- Deleted' , E_USER_WARNING);
@@ -132,7 +132,7 @@ function nw_clonecopyfile($srcpath, $destpath, $filename)
     if ($handle = opendir($srcpath)) {
         if ('' == $filename) {
             while ($file = readdir($handle)) {
-                if ('.' != $file && '..' != $file) {
+                if ('.' !== $file && '..' !== $file) {
                     @copy($srcpath . $file, $destpath . $file);
                 }
             }
@@ -166,7 +166,7 @@ function nw_clonecopyfile($srcpath, $destpath, $filename)
 function nw_removewholeclone($directory, $empty = false)
 {
     // if the path has a slash at the end we remove it here
-    if ('/' == substr($directory, -1)) {
+    if ('/' === substr($directory, -1)) {
         $directory = substr($directory, 0, -1);
     }
 
@@ -186,7 +186,7 @@ function nw_removewholeclone($directory, $empty = false)
         while (false !== ($item = readdir($handle))) {
             // if the filepointer is not the current directory
             // or the parent directory
-            if ('.' != $item && '..' != $item) {
+            if ('.' !== $item && '..' !== $item) {
                 // we build the new path to delete
                 $path = $directory . '/' . $item;
                 // if the new path is a directory

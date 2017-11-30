@@ -122,19 +122,19 @@ function nw_b_news_randomnews_edit($options)
 {
     $form = _MB_NW_ORDER . "&nbsp;<select name='options[]'>";
     $form .= "<option value='published'";
-    if ('published' == $options[0]) {
+    if ('published' === $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_DATE . "</option>\n";
 
     $form .= "<option value='counter'";
-    if ('counter' == $options[0]) {
+    if ('counter' === $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_HITS . '</option>';
 
     $form .= "<option value='rating'";
-    if ('rating' == $options[0]) {
+    if ('rating' === $options[0]) {
         $form .= " selected='selected'";
     }
     $form .= '>' . _MB_NW_RATE . '</option>';

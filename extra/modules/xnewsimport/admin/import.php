@@ -46,7 +46,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
         $topic->topic_weight = $arrCat['topic_weigth'];
     }
 
-    if ('news' == $from_module_dirname) {
+    if ('news' === $from_module_dirname) {
         $sourcepath      = XOOPS_ROOT_PATH . '/modules/' . $from_module_dirname . '/images/topics/';
         $destinationpath = XOOPS_ROOT_PATH . '/uploads/' . $to_module_dirname . '/topics/';
     } else {
@@ -55,8 +55,8 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
     }
 
     // Category image
-    if (('blank.gif' != $arrCat['topic_imgurl']) && ('' != $arrCat['topic_imgurl'])) {
-        if ('xoops.gif' == $arrCat['topic_imgurl']) {
+    if (('blank.gif' !== $arrCat['topic_imgurl']) && ('' != $arrCat['topic_imgurl'])) {
+        if ('xoops.gif' === $arrCat['topic_imgurl']) {
             $topic->topic_imgurl = $arrCat['topic_imgurl'];
         } else {
             if (copy($sourcepath . $arrCat['topic_imgurl'], $destinationpath . $arrCat['topic_imgurl'])) {
@@ -78,7 +78,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
     }
 
     // Saving topic permissions
-    if ('news' == $from_module_dirname) {
+    if ('news' === $from_module_dirname) {
         $groupsIds = $gpermHandler->getGroupIds('news_approve', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'approve');
         $groupsIds = $gpermHandler->getGroupIds('news_view', $arrCat['topic_id'], $news_module_id);
@@ -145,7 +145,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
         }
 
         // Attached files
-        if ('news' == $from_module_dirname) {
+        if ('news' === $from_module_dirname) {
             $attached_sourcepath      = XOOPS_ROOT_PATH . '/uploads/';
             $attached_destinationpath = XOOPS_ROOT_PATH . '/uploads/' . $to_module_dirname . '/attached/';
         } else {

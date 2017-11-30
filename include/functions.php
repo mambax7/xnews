@@ -497,7 +497,7 @@ function nw_updateCache()
 
     // Remove cache for each page.
     foreach ($tpllist as $onetemplate) {
-        if ('module' == $onetemplate->getVar('tpl_type')) {
+        if ('module' === $onetemplate->getVar('tpl_type')) {
             // Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
             $files_del = [];
             $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');

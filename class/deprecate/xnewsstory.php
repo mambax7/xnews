@@ -564,7 +564,7 @@ class XnewsDeprecateStory
     public function topicalign($astext = true)
     {
         if ($astext) {
-            if ('R' == $this->topicalign) {
+            if ('R' === $this->topicalign) {
                 $ret = 'right';
             } else {
                 $ret = 'left';
