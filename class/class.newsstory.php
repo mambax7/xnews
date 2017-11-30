@@ -1627,7 +1627,7 @@ class nw_NewsStory extends XnewsDeprecateStory
             }
         }
         $sql    .= " ORDER BY s.$order DESC";
-        $result = $this->db->query($sql, (int)$limit, (int)$start);
+        $result = $this->db->query($sql, $limit, $start);
 
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
