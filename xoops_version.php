@@ -82,7 +82,7 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
         require_once __DIR__ . '/class/xnews.php';
         $xnews = XnewsXnews::getInstance();
     }
-    $groups       = (is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
+    $groups       = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
     $gpermHandler = xoops_getHandler('groupperm');
     //
     if ($gpermHandler->checkRight('nw_submit', 0, $groups, $xnews->getModule()->getVar('mid'))) {

@@ -63,7 +63,7 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
      */
     public function &get($id)
     {
-        $id = (int)($id);
+        $id = (int)$id;
         if ($id > 0) {
             $sql = $this->_selectQuery(new Criteria($this->_idfield, $id));
             if (!$result = $this->_db->query($sql)) {

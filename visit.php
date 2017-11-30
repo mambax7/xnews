@@ -5,7 +5,7 @@ require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
-$fileid = (isset($_GET['fileid'])) ? (int)($_GET['fileid']) : 0;
+$fileid = isset($_GET['fileid']) ? (int)$_GET['fileid'] : 0;
 if (empty($fileid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _ERRORS);
 }

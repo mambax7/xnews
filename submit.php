@@ -431,7 +431,7 @@ switch ($op) {
         if ($allowupload) { // L'image
             if (isset($_POST['xoops_upload_file'])) {
                 $fldname = $_FILES[$_POST['xoops_upload_file'][1]];
-                $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
+                $fldname = get_magic_quotes_gpc() ? stripslashes($fldname['name']) : $fldname['name'];
                 if (xoops_trim('' != $fldname)) {
                     $sfiles         = new nw_sFiles();
                     $destname       = $sfiles->createUploadName(XNEWS_TOPICS_FILES_PATH, $fldname);
@@ -508,7 +508,7 @@ switch ($op) {
                 }
                 if (isset($_POST['xoops_upload_file'])) {
                     $fldname = $_FILES[$_POST['xoops_upload_file'][0]];
-                    $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
+                    $fldname = get_magic_quotes_gpc() ? stripslashes($fldname['name']) : $fldname['name'];
                     if (xoops_trim('' != $fldname)) {
                         $sfiles   = new nw_sFiles();
                         $destname = $sfiles->createUploadName(XNEWS_ATTACHED_FILES_PATH, $fldname);

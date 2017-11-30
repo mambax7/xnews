@@ -136,7 +136,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
         }
 
         // Picture
-        if (('' != $arrArticle['picture'])) {
+        if ('' != $arrArticle['picture']) {
             if (copy($sourcepath . $arrArticle['picture'], $destinationpath . $arrArticle['picture'])) {
                 $story->picture = $arrArticle['picture'];
                 echo sprintf(_AM_XNI_IMPORTED_FILE, $story->picture()) . '<br>';

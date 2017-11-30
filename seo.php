@@ -55,7 +55,7 @@ if (!empty($seoOp) && !empty($seoMap[$seoOp])) {
             $_GET['storyid']        = $seoArg;
     }
 
-    include($seoMap[$seoOp]);
+    include $seoMap[$seoOp];
     exit;
     //trigger_error('out', E_USER_WARNING);
 }

@@ -48,7 +48,7 @@ class xni_NewsStory extends XoopsStory
         if (is_array($storyid)) {
             $this->makeStory($storyid);
         } elseif ($storyid != -1) {
-            $this->getStory((int)($storyid), $subprefix);
+            $this->getStory((int)$storyid, $subprefix);
         }
     }
 
@@ -59,7 +59,7 @@ class xni_NewsStory extends XoopsStory
      */
     public function getStory($storyid, $subprefix)
     {
-        $sql   = 'SELECT s.*, t.* FROM ' . $this->table . ' s, ' . $this->db->prefix($subprefix . 'topics') . ' t WHERE (storyid=' . (int)($storyid) . ') AND (s.topicid=t.topic_id)';
+        $sql   = 'SELECT s.*, t.* FROM ' . $this->table . ' s, ' . $this->db->prefix($subprefix . 'topics') . ' t WHERE (storyid=' . (int)$storyid . ') AND (s.topicid=t.topic_id)';
         $array = $this->db->fetchArray($this->db->query($sql));
         $this->makeStory($array);
     }
@@ -82,8 +82,8 @@ class xni_NewsStory extends XoopsStory
         $description = $myts->addSlashes($myts->censorString($this->description));
         $keywords    = $myts->addSlashes($myts->censorString($this->keywords));
         $picture     = $myts->addSlashes($this->picture);
-        $votes       = (int)($this->votes);
-        $rating      = (float)($this->rating);
+        $votes       = (int)$this->votes;
+        $rating      = (float)$this->rating;
         if (!isset($this->nohtml) || 1 != $this->nohtml) {
             $this->nohtml = 0;
         }
@@ -101,29 +101,29 @@ class xni_NewsStory extends XoopsStory
             //$newpost = 1;
             $newstoryid = $this->db->genId($this->table . '_storyid_seq');
             $created    = time();
-            $published  = ($this->approved) ? (int)($this->published) : 0;
+            $published  = $this->approved ? (int)$this->published : 0;
             $sql        = sprintf(
                 "INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s')",
                                   $this->table,
                 $newstoryid,
-                (int)($this->uid()),
+                (int)$this->uid(),
                 $title,
                 $created,
                 $published,
                 $expired,
                 $hostname,
-                (int)($this->nohtml()),
-                (int)($this->nosmiley()),
+                (int)$this->nohtml(),
+                (int)$this->nosmiley(),
                 $hometext,
                 $bodytext,
                 $counter,
-                (int)($this->topicid()),
-                (int)($this->ihome()),
-                (int)($this->notifypub()),
+                (int)$this->topicid(),
+                (int)$this->ihome(),
+                (int)$this->notifypub(),
                 $type,
-                                  (int)($this->topicdisplay()),
+                                  (int)$this->topicdisplay(),
                 $this->topicalign,
-                (int)($this->comments()),
+                (int)$this->comments(),
                 $rating,
                 $votes,
                 $description,
@@ -135,26 +135,26 @@ class xni_NewsStory extends XoopsStory
                 "UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s' WHERE storyid = %u",
                                   $this->table,
                 $title,
-                (int)($this->published()),
+                (int)$this->published(),
                 $expired,
-                (int)($this->nohtml()),
-                (int)($this->nosmiley()),
+                (int)$this->nohtml(),
+                (int)$this->nosmiley(),
                 $hometext,
                 $bodytext,
-                (int)($this->topicid()),
-                (int)($this->ihome()),
-                (int)($this->topicdisplay()),
+                (int)$this->topicid(),
+                (int)$this->ihome(),
+                (int)$this->topicdisplay(),
                 $this->topicalign,
-                (int)($this->comments()),
+                (int)$this->comments(),
                 $rating,
                                   $votes,
-                (int)($this->uid()),
+                (int)$this->uid(),
                 $description,
                 $keywords,
                 $picture,
-                (int)($this->storyid())
+                (int)$this->storyid()
             );
-            $newstoryid = (int)($this->storyid());
+            $newstoryid = (int)$this->storyid();
         }
         if (!$this->db->queryF($sql)) {
             return false;

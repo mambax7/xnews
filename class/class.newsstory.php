@@ -1017,7 +1017,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $picture     = $myts->addSlashes($this->picture);
         $tags        = $myts->addSlashes($this->tags);
         $votes       = (int)$this->votes;
-        $rating      = (float)($this->rating);
+        $rating      = (float)$this->rating;
         if (!isset($this->nohtml) || 1 != $this->nohtml) {
             $this->nohtml = 0;
         }
@@ -1038,7 +1038,7 @@ class nw_NewsStory extends XnewsDeprecateStory
             //$newpost = 1;
             $newstoryid = $this->db->genId($this->table . '_storyid_seq');
             $created    = time();
-            $published  = ($this->approved) ? (int)$this->published : 0;
+            $published  = $this->approved ? (int)$this->published : 0;
             //DNPROSSI - ADD TAGS FOR UPDATES - ADDED imagerows, pdfrows
             $sql = sprintf(
                 "INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture, dobr, tags, imagerows, pdfrows) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s', '%u','%s', %u, %u)",

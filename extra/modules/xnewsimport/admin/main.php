@@ -74,7 +74,7 @@ function NewsImport()
                     }
                     if (2 == $newscount) {
                         $from_module_version = round($module->getVar('version') / 100, 2);
-                        if (($from_module_version >= 1.64)) {
+                        if ($from_module_version >= 1.64) {
                             $importfrom_array['news/' . $module->getVar('dirname')] = $module->getVar('dirname') . ' ' . $from_module_version;
                         }
                     }
@@ -162,7 +162,7 @@ function TopicSelect()
     adminMenu(0, _AM_XNI_IMPORT);
     global $xoopsDB;
 
-    $begin = isset($_GET['begin']) ? (int)($_GET['begin']) : 0;
+    $begin = isset($_GET['begin']) ? (int)$_GET['begin'] : 0;
     require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
@@ -171,8 +171,8 @@ function TopicSelect()
     $myts = MyTextSanitizer::getInstance();
 
     //Detect in out modules and prepare form
-    $from_import        = (isset($_POST['importfrom'])) ? $_POST['importfrom'] : 'nonselected';
-    $to_import_clone_id = (isset($_POST['importto'])) ? $_POST['importto'] : 'nonselected';
+    $from_import        = isset($_POST['importfrom']) ? $_POST['importfrom'] : 'nonselected';
+    $to_import_clone_id = isset($_POST['importto']) ? $_POST['importto'] : 'nonselected';
 
     $options = explode('/', $from_import);
 

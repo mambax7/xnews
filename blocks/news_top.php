@@ -556,7 +556,7 @@ function nw_b_news_top_show($options)
                     $spottitle = xlanguage_ml($spottitle);
                 }
                 //DNPROSSI changed xoops_substr to mb_substr for utf-8 support
-                $spotlight['title'] = mb_substr($spottitle, 0, ($options[2] - 1), 'UTF-8');
+                $spotlight['title'] = mb_substr($spottitle, 0, $options[2] - 1, 'UTF-8');
 
                 if ('' != $options[7]) {
                     $spotlight['image'] = sprintf("<a href='%s'>%s</a>", XNEWS_MODULE_URL . '/article.php?storyid=' . $spotlightArticle->storyid(), $myts->displayTarea($options[7], $spotlightArticle->nohtml));

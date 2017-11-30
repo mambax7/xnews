@@ -29,7 +29,7 @@ function smarty_function_xoLanguage($params, &$smarty)
         $query_array = array_filter(explode('&', xoops_getenv('QUERY_STRING')));
         $query_new = [];
         foreach ($query_array as $query) {
-            if (substr($query, 0, (strlen($params['tag'])+1)) != $params['tag'] . '=') {
+            if (substr($query, 0, strlen($params['tag']) + 1) != $params['tag'] . '=') {
                 $vals = explode('=', $query);
                 foreach (array_keys($vals) as $key) {
                     if (preg_match('/^a-z0-9$/i', $vals[$key])) {

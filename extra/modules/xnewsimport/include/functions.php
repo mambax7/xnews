@@ -60,7 +60,7 @@ function xni_gettopics($subprefix)
         ++$ix;
     }
 
-    return ($topics_arr);
+    return $topics_arr;
 }
 
 function xni_getcategories($subprefix)
@@ -74,7 +74,7 @@ function xni_getcategories($subprefix)
         ++$ix;
     }
 
-    return ($topics_arr);
+    return $topics_arr;
 }
 
 function xni_MygetItemIds($permtype = 'nw_view')

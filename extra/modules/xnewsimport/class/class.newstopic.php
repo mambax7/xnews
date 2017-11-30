@@ -39,7 +39,7 @@ class xni_NewsTopic extends XoopsTopic
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
         } elseif (0 != $topicid) {
-            $this->getTopic((int)($topicid));
+            $this->getTopic((int)$topicid);
         } else {
             $this->topic_id = $topicid;
         }
@@ -181,7 +181,7 @@ class xni_NewsTopic extends XoopsTopic
         $sql   = 'SELECT count(topic_id) AS cpt FROM ' . $this->table . $perms;
         $array = $this->db->fetchArray($this->db->query($sql));
 
-        return ($array['cpt']);
+        return $array['cpt'];
     }
 
     public function getAllTopics($table_name = 'nw_topics', $checkRight = true, $permission = 'xni_view')
@@ -287,7 +287,7 @@ class xni_NewsTopic extends XoopsTopic
         if (!isset($this->topic_pid) || !is_numeric($this->topic_pid)) {
             $this->topic_pid = 0;
         }
-        $topic_frontpage = (int)($this->topic_frontpage);
+        $topic_frontpage = (int)$this->topic_frontpage;
         $insert          = false;
         if (empty($this->topic_id)) {
             $insert         = true;
@@ -295,11 +295,11 @@ class xni_NewsTopic extends XoopsTopic
             $sql            = sprintf(
                 "INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s')",
                 $this->table,
-                (int)($this->topic_id),
-                (int)($this->topic_pid),
+                (int)$this->topic_id,
+                (int)$this->topic_pid,
                 $imgurl,
                                       $title,
-                (int)($this->menu),
+                (int)$this->menu,
                 $topic_description,
                 $topic_frontpage,
                 $topic_rssurl,
@@ -309,15 +309,15 @@ class xni_NewsTopic extends XoopsTopic
             $sql = sprintf(
                 "UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s' WHERE topic_id = %u",
                 $this->table,
-                (int)($this->topic_pid),
+                (int)$this->topic_pid,
                 $imgurl,
                 $title,
-                (int)($this->menu),
+                (int)$this->menu,
                            $topic_description,
                 $topic_frontpage,
                 $topic_rssurl,
                 $topic_color,
-                (int)($this->topic_id)
+                (int)$this->topic_id
             );
         }
         if (!$result = $this->db->query($sql)) {
@@ -497,7 +497,7 @@ class xni_NewsTopic extends XoopsTopic
         $myts = MyTextSanitizer::getInstance();
         $sql  = 'SELECT topic_id, topic_title, topic_imgurl FROM ' . $this->table . ' WHERE ';
         if (!is_array($topic)) {
-            $sql .= ' topic_id=' . (int)($topic);
+            $sql .= ' topic_id=' . (int)$topic;
         } else {
             if (count($topic) > 0) {
                 $sql .= ' topic_id IN (' . implode(',', $topic) . ')';
@@ -550,7 +550,7 @@ class xni_NewsTopic extends XoopsTopic
 
     public function setTopicFrontpage($value)
     {
-        $this->topic_frontpage = (int)($value);
+        $this->topic_frontpage = (int)$value;
     }
 
     /**

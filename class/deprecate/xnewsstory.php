@@ -225,7 +225,7 @@ class XnewsDeprecateStory
             //$newpost = 1;
             $newstoryid = $this->db->genId($this->table . '_storyid_seq');
             $created    = time();
-            $published  = ($this->approved) ? $this->published : 0;
+            $published  = $this->approved ? $this->published : 0;
 
             $sql = sprintf(
                 "INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u)",

@@ -169,7 +169,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $sql   .= " FROM {$this->table}" . $perms;
         $array = $db->fetchArray($db->query($sql));
 
-        return ($array['cpt']);
+        return $array['cpt'];
     }
 
     public function getAllTopics($checkRight = true, $permission = 'nw_view')

@@ -428,7 +428,7 @@ function modTopicS()
 
     if (isset($_POST['xoops_upload_file'])) {
         $fldname = $_FILES[$_POST['xoops_upload_file'][0]];
-        $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
+        $fldname = get_magic_quotes_gpc() ? stripslashes($fldname['name']) : $fldname['name'];
         if (xoops_trim('' != $fldname)) {
             $sfiles         = new nw_sFiles();
             $dstpath        = XNEWS_TOPICS_FILES_PATH;
@@ -559,7 +559,7 @@ function addTopic()
         }
         if (isset($_POST['xoops_upload_file'])) {
             $fldname = $_FILES[$_POST['xoops_upload_file'][0]];
-            $fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
+            $fldname = get_magic_quotes_gpc() ? stripslashes($fldname['name']) : $fldname['name'];
             if (xoops_trim('' != $fldname)) {
                 $sfiles         = new nw_sFiles();
                 $dstpath        = XNEWS_TOPICS_FILES_PATH;

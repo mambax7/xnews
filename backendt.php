@@ -24,7 +24,7 @@ if (!$xnews->getConfig('topicsrss')) {
     exit();
 }
 
-$topicid = isset($_GET['topicid']) ? (int)($_GET['topicid']) : 0;
+$topicid = isset($_GET['topicid']) ? (int)$_GET['topicid'] : 0;
 if (0 == $topicid) {
     exit();
 }
