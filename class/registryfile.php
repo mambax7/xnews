@@ -1,15 +1,24 @@
 <?php
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
+/**
+ * Class nw_registryfile
+ */
 class nw_registryfile
 {
     public $filename; // filename to manage
 
+    /**
+     * @param null $file
+     */
     public function __constructor($file = null)
     {
         $this->setfile($file);
     }
 
+    /**
+     * @param null $file
+     */
     public function setfile($file = null)
     {
         if ($file) {
@@ -17,6 +26,10 @@ class nw_registryfile
         }
     }
 
+    /**
+     * @param null $file
+     * @return bool|string
+     */
     public function getfile($file = null)
     {
         $fw = '';
@@ -32,6 +45,11 @@ class nw_registryfile
         }
     }
 
+    /**
+     * @param      $content
+     * @param null $file
+     * @return bool
+     */
     public function savefile($content, $file = null)
     {
         $fw = '';

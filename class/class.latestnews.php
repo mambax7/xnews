@@ -1,8 +1,15 @@
 <?php
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
+/**
+ * Class nw_Latestnewsstory
+ */
 class nw_Latestnewsstory extends nw_NewsStory
 {
+    /**
+     * nw_Latestnewsstory constructor.
+     * @param int $id
+     */
     public function __construct($id = -1)
     {
         parent::nw_NewsStory($id);

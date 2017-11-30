@@ -24,6 +24,10 @@ function xnews_userIsAdmin()
     return $xnews_isAdmin;
 }
 
+/**
+ * @param string $tablename
+ * @param string $iconname
+ */
 function xnews_collapsableBar($tablename = '', $iconname = '')
 {
     $xnews = XnewsXnews::getInstance(); ?>
@@ -148,6 +152,10 @@ function nw_MygetItemIds($permtype = 'nw_view')
     return $topics;
 }
 
+/**
+ * @param $document
+ * @return null|string|string[]
+ */
 function nw_html2text($document)
 {
     // PHP Manual:: function preg_replace
@@ -751,6 +759,11 @@ function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $ke
     return true;
 }
 
+/**
+ * @param $options
+ * @param $number
+ * @return string
+ */
 function nw_latestnews_mk_chkbox($options, $number)
 {
     $chk = '';
@@ -767,6 +780,11 @@ function nw_latestnews_mk_chkbox($options, $number)
     return $chkbox;
 }
 
+/**
+ * @param $options
+ * @param $number
+ * @return string
+ */
 function nw_latestnews_mk_select($options, $number)
 {
     $slc = '';
@@ -783,6 +801,10 @@ function nw_latestnews_mk_select($options, $number)
     return $select;
 }
 
+/**
+ * @param $string
+ * @return mixed
+ */
 function nw_remove_numbers($string)
 {
     $vowels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' '];
@@ -791,6 +813,9 @@ function nw_remove_numbers($string)
     return $string;
 }
 
+/**
+ * @param $folder
+ */
 function nw_prepareFolder($folder)
 {
     if (!is_dir($folder)) {
@@ -866,6 +891,12 @@ function nw_remove_accents($chain)
     return $chain;
 }
 
+/**
+ * @param        $op
+ * @param        $id
+ * @param string $short_url
+ * @return string
+ */
 function nw_seo_UrlGenerator($op, $id, $short_url = '')
 {
     $xnews = XnewsXnews::getInstance();
@@ -945,6 +976,11 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
     }
 }
 
+/**
+ * @param      $javascriptFile
+ * @param bool $inLanguageFolder
+ * @param bool $oldWay
+ */
 function nw_callJavascriptFile($javascriptFile, $inLanguageFolder = false, $oldWay = false)
 {
     global $xoopsConfig, $xoTheme;
@@ -967,6 +1003,10 @@ function nw_callJavascriptFile($javascriptFile, $inLanguageFolder = false, $oldW
     }
 }
 
+/**
+ * @param $string
+ * @return string
+ */
 function nw_detect_utf8_lang_encoding($string)
 {
     $pattern_array = [
@@ -999,6 +1039,14 @@ function nw_detect_utf8_lang_encoding($string)
 //@param boolean $exact If false, $text will not be cut mid-word
 //@param boolean $considerHtml If true, HTML tags would be handled correctly
 //@return string Trimmed string.
+/**
+ * @param        $text
+ * @param int    $length
+ * @param string $ending
+ * @param bool   $exact
+ * @param bool   $considerHtml
+ * @return bool|string
+ */
 function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
 {
     $xnews = XnewsXnews::getInstance();
@@ -1096,6 +1144,9 @@ function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $con
 //DNPROSSI - Added 1.71
 //Use Javascript to detect adobe pdf plugin used to view
 //attached pdf in articles view
+/**
+ * @return string
+ */
 function nw_detect_adobe()
 {
     $has_adobe = '';

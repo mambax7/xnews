@@ -5,6 +5,9 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
 require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
+/**
+ * Class nw_NewsTopic
+ */
 class nw_NewsTopic extends XnewsDeprecateTopic
 {
     public $menu;
@@ -15,6 +18,10 @@ class nw_NewsTopic extends XnewsDeprecateTopic
     public $topic_rssurl;
     public $topic_color;
 
+    /**
+     * nw_NewsTopic constructor.
+     * @param int $topicid
+     */
     public function __construct($topicid = 0)
     {
         $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
@@ -29,6 +36,15 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         }
     }
 
+    /**
+     * @param int    $none
+     * @param int    $seltopic
+     * @param string $selname
+     * @param string $onchange
+     * @param bool   $checkRight
+     * @param string $perm_type
+     * @return null|string
+     */
     public function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = '', $onchange = '', $checkRight = false, $perm_type = 'nw_view')
     {
         global $xoopsUser;
@@ -111,6 +127,14 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $outbuffer;
     }
 
+    /**
+     * @param int    $sel_id
+     * @param string $order
+     * @param string $perms
+     * @param array  $parray
+     * @param string $r_prefix
+     * @return array
+     */
     public function getChildTreeArray($sel_id = 0, $order = '', $perms = '', $parray = [], $r_prefix = '')
     {
         $sql = 'SELECT *';
@@ -133,6 +157,10 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $parray;
     }
 
+    /**
+     * @param $var
+     * @return mixed
+     */
     public function getVar($var)
     {
         if (method_exists($this, $var)) {
@@ -172,6 +200,11 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $array['cpt'];
     }
 
+    /**
+     * @param bool   $checkRight
+     * @param string $permission
+     * @return array
+     */
     public function getAllTopics($checkRight = true, $permission = 'nw_view')
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
@@ -236,16 +269,25 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $ret;
     }
 
+    /**
+     * @param $value
+     */
     public function setMenu($value)
     {
         $this->menu = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function setTopic_color($value)
     {
         $this->topic_color = $value;
     }
 
+    /**
+     * @param $topicid
+     */
     public function getTopic($topicid)
     {
         $sql   = 'SELECT *';
@@ -255,6 +297,9 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $this->makeTopic($array);
     }
 
+    /**
+     * @param $array
+     */
     public function makeTopic($array)
     {
         if (is_array($array)) {
@@ -264,6 +309,9 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         }
     }
 
+    /**
+     * @return bool
+     */
     public function store()
     {
         $myts              = MyTextSanitizer::getInstance();
@@ -396,11 +444,18 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return true;
     }
 
+    /**
+     * @param $value
+     */
     public function Settopic_rssurl($value)
     {
         $this->topic_rssurl = $value;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_rssurl($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -420,6 +475,10 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $topic_rssurl;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_color($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -439,11 +498,18 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $topic_color;
     }
 
+    /**
+     * @return mixed
+     */
     public function menu()
     {
         return $this->menu;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_description($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -463,6 +529,10 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $topic_description;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_imgurl($format = 'S')
     {
         if ('' == trim($this->topic_imgurl)) {
@@ -489,6 +559,11 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $imgurl;
     }
 
+    /**
+     * @param $topic
+     * @param $topicstitles
+     * @return null
+     */
     public function getTopicTitleFromId($topic, &$topicstitles)
     {
         $myts = MyTextSanitizer::getInstance();
@@ -512,6 +587,11 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $topicstitles;
     }
 
+    /**
+     * @param bool $frontpage
+     * @param bool $perms
+     * @return array|string
+     */
     public function &getTopicsList($frontpage = false, $perms = false)
     {
         $sql = 'SELECT topic_id, topic_pid, topic_title, topic_color';
@@ -539,16 +619,25 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         return $ret;
     }
 
+    /**
+     * @param $value
+     */
     public function setTopicDescription($value)
     {
         $this->topic_description = $value;
     }
 
+    /**
+     * @return mixed
+     */
     public function topic_frontpage()
     {
         return $this->topic_frontpage;
     }
 
+    /**
+     * @param $value
+     */
     public function setTopicFrontpage($value)
     {
         $this->topic_frontpage = (int)$value;

@@ -131,6 +131,10 @@ function XoSmartyPlugin_truncate($string, $length = 80, $etc = '...', $break_wor
     }
 }
 
+/**
+ * @param string $path
+ * @return bool
+ */
 function XoSmartyPlugin_write_index_file($path = '')
 {
     if (empty($path)) {

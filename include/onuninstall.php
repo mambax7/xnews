@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/functions.php';
 
+/**
+ * @param \XoopsModule $xoopsModule
+ * @return bool
+ */
 function xoops_module_uninstall_xnews(XoopsModule $xoopsModule)
 {
     global $xoopsDB;

@@ -22,6 +22,11 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
+/**
+ * @param $story_id
+ * @param $total_num
+ * @return bool
+ */
 function nw_com_update($story_id, $total_num)
 {
     $story_id  = (int)$story_id;
@@ -34,6 +39,9 @@ function nw_com_update($story_id, $total_num)
     return true;
 }
 
+/**
+ * @param $comment
+ */
 function nw_com_approve(&$comment)
 {
     // notification mail here

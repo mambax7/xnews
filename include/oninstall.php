@@ -1,4 +1,8 @@
 <?php
+/**
+ * @param $xoopsModule
+ * @return bool
+ */
 function xoops_module_install_xnews(&$xoopsModule)
 {
     require_once __DIR__ . '/common.php';

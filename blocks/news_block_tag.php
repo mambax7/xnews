@@ -17,6 +17,10 @@ if (!defined('XNEWS_MODULE_PATH')) {
     define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
+/**
+ * @param $options
+ * @return array
+ */
 function nw_news_tag_block_cloud_show($options)
 {
     require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
@@ -27,6 +31,10 @@ function nw_news_tag_block_cloud_show($options)
     return tag_block_cloud_show($options, $module_dirname);
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function nw_news_tag_block_cloud_edit($options)
 {
     require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
@@ -34,6 +42,10 @@ function nw_news_tag_block_cloud_edit($options)
     return tag_block_cloud_edit($options);
 }
 
+/**
+ * @param $options
+ * @return array
+ */
 function nw_news_tag_block_top_show($options)
 {
     require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';
@@ -44,6 +56,10 @@ function nw_news_tag_block_top_show($options)
     return tag_block_top_show($options, $module_dirname);
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function nw_news_tag_block_top_edit($options)
 {
     require_once XOOPS_ROOT_PATH . '/modules/tag/blocks/block.php';

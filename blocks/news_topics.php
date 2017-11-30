@@ -17,6 +17,9 @@ if (!defined('XNEWS_MODULE_PATH')) {
     define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
+/**
+ * @return mixed
+ */
 function nw_b_news_topics_show()
 {
     global $topic_id; // Don't know why this is used and where it's coming from ....
@@ -45,6 +48,9 @@ function nw_b_news_topics_show()
     return $block;
 }
 
+/**
+ * @param $options
+ */
 function nw_b_news_topics_onthefly($options)
 {
     $options = explode('|', $options);

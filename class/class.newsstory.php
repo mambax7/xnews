@@ -5,6 +5,9 @@ require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
 require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
 
+/**
+ * Class nw_NewsStory
+ */
 class nw_NewsStory extends XnewsDeprecateStory
 {
     public $xnews;
@@ -21,6 +24,10 @@ class nw_NewsStory extends XnewsDeprecateStory
     //var $imagerows;
     //var $pdfrows;
 
+    /**
+     * nw_NewsStory constructor.
+     * @param int $storyid
+     */
     public function __construct($storyid = -1)
     {
         $this->xnews       = XnewsXnews::getInstance();
@@ -118,6 +125,12 @@ class nw_NewsStory extends XnewsDeprecateStory
         return true;
     }
 
+    /**
+     * @param      $storyid
+     * @param bool $next
+     * @param bool $checkRight
+     * @return array|null
+     */
     public function _searchPreviousOrNextArticle($storyid, $next = true, $checkRight = false)
     {
         $myts = MyTextSanitizer::getInstance();
@@ -156,11 +169,21 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $ret;
     }
 
+    /**
+     * @param      $storyid
+     * @param bool $checkRight
+     * @return array|null
+     */
     public function getNextArticle($storyid, $checkRight = false)
     {
         return $this->_searchPreviousOrNextArticle($storyid, true, $checkRight);
     }
 
+    /**
+     * @param      $storyid
+     * @param bool $checkRight
+     * @return array|null
+     */
     public function getPreviousArticle($storyid, $checkRight = false)
     {
         return $this->_searchPreviousOrNextArticle($storyid, false, $checkRight);
@@ -655,6 +678,10 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $imgurl;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_title($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -679,6 +706,10 @@ class nw_NewsStory extends XnewsDeprecateStory
     }
 
     //DNPROSSI - Added picture substitute for topic images with article image
+
+    /**
+     * @return string
+     */
     public function imglink()
     {
         $myts = MyTextSanitizer::getInstance();
@@ -729,6 +760,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $ret;
     }
 
+    /**
+     * @return string
+     */
     public function storylink()
     {
         $myts = MyTextSanitizer::getInstance();
@@ -744,16 +778,25 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $ret;
     }
 
+    /**
+     * @return mixed
+     */
     public function dobr()
     {
         return $this->dobr;
     }
 
+    /**
+     * @param int $value
+     */
     public function setDobr($value = 0)
     {
         $this->dobr = $value;
     }
 
+    /**
+     * @return string
+     */
     public function textlink()
     {
         $topic_display = $this->xnews->getConfig('topicdisplay');
@@ -1113,68 +1156,110 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $newstoryid;
     }
 
+    /**
+     * @return mixed
+     */
     public function picture()
     {
         return $this->picture;
     }
 
     //DNPROSSI - 1.71
+
+    /**
+     * @return mixed
+     */
     public function imagerows()
     {
         return $this->imagerows;
     }
 
+    /**
+     * @param $imagerows
+     */
     public function Setimagerows($imagerows)
     {
         $this->imagerows = $imagerows;
     }
 
     //DNPROSSI - 1.71
+
+    /**
+     * @return mixed
+     */
     public function pdfrows()
     {
         return $this->pdfrows;
     }
 
+    /**
+     * @param $pdfrows
+     */
     public function Setpdfrows($pdfrows)
     {
         $this->pdfrows = $pdfrows;
     }
 
+    /**
+     * @return mixed
+     */
     public function rating()
     {
         return $this->rating;
     }
 
+    /**
+     * @return mixed
+     */
     public function votes()
     {
         return $this->votes;
     }
 
+    /**
+     * @return mixed
+     */
     public function tags()
     {
         return $this->tags;
     }
 
+    /**
+     * @param $tags
+     */
     public function Settags($tags)
     {
         $this->tags = $tags;
     }
 
+    /**
+     * @param $data
+     */
     public function Setpicture($data)
     {
         $this->picture = $data;
     }
 
+    /**
+     * @param $data
+     */
     public function Setdescription($data)
     {
         $this->description = $data;
     }
 
+    /**
+     * @param $data
+     */
     public function Setkeywords($data)
     {
         $this->keywords = $data;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function description($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -1195,6 +1280,10 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $description;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function keywords($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -1450,6 +1539,12 @@ class nw_NewsStory extends XnewsDeprecateStory
     /*
      * Returns the author's IDs for the Who's who page
      */
+    /**
+     * @param bool $checkRight
+     * @param int  $limit
+     * @param int  $start
+     * @return array|null
+     */
     public function getWhosWho($checkRight = false, $limit = 0, $start = 0)
     {
         $myts = MyTextSanitizer::getInstance();
@@ -1516,6 +1611,10 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $auto_summary;
     }
 
+    /**
+     * @param string $format
+     * @return mixed|string
+     */
     public function hometext($format = 'Show')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -1553,6 +1652,10 @@ class nw_NewsStory extends XnewsDeprecateStory
         return $hometext;
     }
 
+    /**
+     * @param string $format
+     * @return mixed|string
+     */
     public function bodytext($format = 'Show')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -1641,6 +1744,14 @@ class nw_NewsStory extends XnewsDeprecateStory
     }
 
     //ADDED by wishcraft ver 1.89
+
+    /**
+     * @param     $xoops_key
+     * @param int $num
+     * @param int $length
+     * @param int $uu
+     * @return bool|mixed|string
+     */
     public function nw_stripeKey($xoops_key, $num = 7, $length = 32, $uu = 0)
     {
         $strip = floor(strlen($xoops_key) / $num);

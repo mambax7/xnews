@@ -1,6 +1,14 @@
 <?php
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
+/**
+ * @param $queryarray
+ * @param $andor
+ * @param $limit
+ * @param $offset
+ * @param $userid
+ * @return array
+ */
 function nw_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB, $xoopsUser;

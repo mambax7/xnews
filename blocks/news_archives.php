@@ -84,6 +84,10 @@ function nw_b_news_archives_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function nw_b_news_archives_edit($options)
 {
     global $xoopsDB;
@@ -166,6 +170,9 @@ function nw_b_news_archives_edit($options)
     return $form;
 }
 
+/**
+ * @param $options
+ */
 function nw_b_news_archives_onthefly($options)
 {
     $options = explode('|', $options);

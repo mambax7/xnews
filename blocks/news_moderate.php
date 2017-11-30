@@ -68,6 +68,9 @@ function nw_b_news_topics_moderate()
     return $block;
 }
 
+/**
+ * @param $options
+ */
 function nw_b_news_topics_moderate_onthefly($options)
 {
     $options = explode('|', $options);

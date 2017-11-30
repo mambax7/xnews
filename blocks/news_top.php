@@ -730,6 +730,9 @@ function nw_b_news_top_edit($options)
     return $form;
 }
 
+/**
+ * @param $options
+ */
 function nw_b_news_top_onthefly($options)
 {
     $options = explode('|', $options);

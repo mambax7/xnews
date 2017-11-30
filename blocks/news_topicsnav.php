@@ -16,6 +16,10 @@ if (!defined('XNEWS_MODULE_PATH')) {
     define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
+/**
+ * @param $options
+ * @return array
+ */
 function nw_b_news_topicsnav_show($options)
 {
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
@@ -76,6 +80,10 @@ function nw_b_news_topicsnav_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function nw_b_news_topicsnav_edit($options)
 {
     $form = _MB_NW_SHOW_NEWS_COUNT . " <input type='radio' name='options[]' value='1'";
@@ -92,6 +100,9 @@ function nw_b_news_topicsnav_edit($options)
     return $form;
 }
 
+/**
+ * @param $options
+ */
 function nw_b_news_topicsnav_onthefly($options)
 {
     $options = explode('|', $options);

@@ -68,8 +68,15 @@
  **/
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
+/**
+ * Class nw_cmimetype
+ */
 class nw_cmimetype
 {
+    /**
+     * @param $filename
+     * @return mixed|string
+     */
     public function getType($filename)
     {
         // get base name of the filename provided by user
@@ -85,6 +92,10 @@ class nw_cmimetype
         return $this->privFindType($filename);
     }
 
+    /**
+     * @param $ext
+     * @return mixed|string
+     */
     public function privFindType($ext)
     {
         // create mimetypes array
@@ -99,6 +110,9 @@ class nw_cmimetype
         }
     }
 
+    /**
+     * @return array
+     */
     public function privBuildMimeArray()
     {
         return [

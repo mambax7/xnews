@@ -16,6 +16,9 @@ if (!defined('XNEWS_MODULE_PATH')) {
     define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
+/**
+ * @return array
+ */
 function nw_b_news_bigstory_show()
 {
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
@@ -64,6 +67,9 @@ function nw_b_news_bigstory_show()
     return $block;
 }
 
+/**
+ * @param $options
+ */
 function nw_b_news_bigstory_onthefly($options)
 {
     $options = explode('|', $options);

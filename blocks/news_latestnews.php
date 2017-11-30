@@ -24,6 +24,10 @@ require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
 require_once XNEWS_MODULE_PATH . '/class/class.latestnews.php'; //Bandit-X
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
+/**
+ * @param $options
+ * @return array
+ */
 function nw_b_news_latestnews_show($options)
 {
     $xnews               = XnewsXnews::getInstance();
@@ -280,6 +284,10 @@ function nw_b_news_latestnews_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function nw_b_news_latestnews_edit($options)
 {
     $tabletag1 = '<tr><td>';

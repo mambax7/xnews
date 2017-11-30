@@ -24,6 +24,9 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 require_once XNI_MODULE_PATH . '/include/functions.php';
 
+/**
+ * Class xni_NewsTopic
+ */
 class xni_NewsTopic extends XoopsTopic
 {
     public $menu;
@@ -32,6 +35,11 @@ class xni_NewsTopic extends XoopsTopic
     public $topic_rssurl;
     public $topic_color;
 
+    /**
+     * xni_NewsTopic constructor.
+     * @param int    $topicid
+     * @param string $subprefix
+     */
     public function __construct($topicid = 0, $subprefix = '')
     {
         $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
@@ -45,6 +53,15 @@ class xni_NewsTopic extends XoopsTopic
         }
     }
 
+    /**
+     * @param int    $none
+     * @param int    $seltopic
+     * @param string $selname
+     * @param string $onchange
+     * @param bool   $checkRight
+     * @param string $perm_type
+     * @return null|string
+     */
     public function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = '', $onchange = '', $checkRight = false, $perm_type = 'xni_view')
     {
         $perms = '';
@@ -126,6 +143,14 @@ class xni_NewsTopic extends XoopsTopic
         return $outbuffer;
     }
 
+    /**
+     * @param int    $sel_id
+     * @param string $order
+     * @param string $perms
+     * @param array  $parray
+     * @param string $r_prefix
+     * @return array
+     */
     public function getChildTreeArray($sel_id = 0, $order = '', $perms = '', $parray = [], $r_prefix = '')
     {
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE (topic_pid=' . $sel_id . ')' . $perms;
@@ -146,6 +171,10 @@ class xni_NewsTopic extends XoopsTopic
         return $parray;
     }
 
+    /**
+     * @param $var
+     * @return mixed
+     */
     public function getVar($var)
     {
         if (method_exists($this, $var)) {
@@ -184,6 +213,12 @@ class xni_NewsTopic extends XoopsTopic
         return $array['cpt'];
     }
 
+    /**
+     * @param string $table_name
+     * @param bool   $checkRight
+     * @param string $permission
+     * @return array
+     */
     public function getAllTopics($table_name = 'nw_topics', $checkRight = true, $permission = 'xni_view')
     {
         $topics_arr = [];
@@ -242,16 +277,25 @@ class xni_NewsTopic extends XoopsTopic
         return $ret;
     }
 
+    /**
+     * @param $value
+     */
     public function setMenu($value)
     {
         $this->menu = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function setTopic_color($value)
     {
         $this->topic_color = $value;
     }
 
+    /**
+     * @param $topicid
+     */
     public function getTopic($topicid)
     {
         $sql   = 'SELECT * FROM ' . $this->table . ' WHERE topic_id=' . $topicid . '';
@@ -259,6 +303,9 @@ class xni_NewsTopic extends XoopsTopic
         $this->makeTopic($array);
     }
 
+    /**
+     * @param $array
+     */
     public function makeTopic($array)
     {
         if (is_array($array)) {
@@ -268,6 +315,9 @@ class xni_NewsTopic extends XoopsTopic
         }
     }
 
+    /**
+     * @return bool
+     */
     public function store()
     {
         $myts              = MyTextSanitizer::getInstance();
@@ -399,11 +449,18 @@ class xni_NewsTopic extends XoopsTopic
         return true;
     }
 
+    /**
+     * @param $value
+     */
     public function Settopic_rssurl($value)
     {
         $this->topic_rssurl = $value;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_rssurl($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -423,6 +480,10 @@ class xni_NewsTopic extends XoopsTopic
         return $topic_rssurl;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_color($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -442,11 +503,18 @@ class xni_NewsTopic extends XoopsTopic
         return $topic_color;
     }
 
+    /**
+     * @return mixed
+     */
     public function menu()
     {
         return $this->menu;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_description($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -466,6 +534,10 @@ class xni_NewsTopic extends XoopsTopic
         return $topic_description;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function topic_imgurl($format = 'S')
     {
         if ('' == trim($this->topic_imgurl)) {
@@ -492,6 +564,11 @@ class xni_NewsTopic extends XoopsTopic
         return $imgurl;
     }
 
+    /**
+     * @param $topic
+     * @param $topicstitles
+     * @return null
+     */
     public function getTopicTitleFromId($topic, &$topicstitles)
     {
         $myts = MyTextSanitizer::getInstance();
@@ -513,6 +590,11 @@ class xni_NewsTopic extends XoopsTopic
         return $topicstitles;
     }
 
+    /**
+     * @param bool $frontpage
+     * @param bool $perms
+     * @return array|string
+     */
     public function &getTopicsList($frontpage = false, $perms = false)
     {
         $sql = 'SELECT topic_id, topic_pid, topic_title, topic_color FROM ' . $this->table . ' WHERE 1 ';
@@ -538,16 +620,25 @@ class xni_NewsTopic extends XoopsTopic
         return $ret;
     }
 
+    /**
+     * @param $value
+     */
     public function setTopicDescription($value)
     {
         $this->topic_description = $value;
     }
 
+    /**
+     * @return mixed
+     */
     public function topic_frontpage()
     {
         return $this->topic_frontpage;
     }
 
+    /**
+     * @param $value
+     */
     public function setTopicFrontpage($value)
     {
         $this->topic_frontpage = (int)$value;

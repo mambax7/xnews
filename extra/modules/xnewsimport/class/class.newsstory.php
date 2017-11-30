@@ -24,6 +24,9 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
 require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
 require_once XNI_MODULE_PATH . '/include/functions.php';
 
+/**
+ * Class xni_NewsStory
+ */
 class xni_NewsStory extends XoopsStory
 {
     public $newstopic;    // XoopsTopic object
@@ -167,36 +170,58 @@ class xni_NewsStory extends XoopsStory
         return $newstoryid;
     }
 
+    /**
+     * @return mixed
+     */
     public function picture()
     {
         return $this->picture;
     }
 
+    /**
+     * @return mixed
+     */
     public function rating()
     {
         return $this->rating;
     }
 
+    /**
+     * @return mixed
+     */
     public function votes()
     {
         return $this->votes;
     }
 
+    /**
+     * @param $data
+     */
     public function Setpicture($data)
     {
         $this->picture = $data;
     }
 
+    /**
+     * @param $data
+     */
     public function Setdescription($data)
     {
         $this->description = $data;
     }
 
+    /**
+     * @param $data
+     */
     public function Setkeywords($data)
     {
         $this->keywords = $data;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function description($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -216,6 +241,10 @@ class xni_NewsStory extends XoopsStory
         return $description;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function keywords($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();

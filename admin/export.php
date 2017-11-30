@@ -32,6 +32,10 @@ $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation($currentFile);
 //
 
+/**
+ * @param $text
+ * @return string
+ */
 function nw_utf8_encode($text)
 {
     return xoops_utf8_encode($text);

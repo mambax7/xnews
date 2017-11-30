@@ -20,6 +20,11 @@ function nw_cloneFileFolder($path, $patterns)
 
     // work around for PHP < 5.0.x
     if (!function_exists('file_put_contents')) {
+        /**
+         * @param      $filename
+         * @param      $data
+         * @param bool $file_append
+         */
         function file_put_contents($filename, $data, $file_append = false)
         {
             $fp = fopen($filename, (!$file_append ? 'w+' : 'a+'));
@@ -73,6 +78,11 @@ function nw_cloneFileFolder($path, $patterns)
 }
 
 //DNPROSSI
+/**
+ * @param $path
+ * @param $old_subprefix
+ * @param $new_subprefix
+ */
 function nw_clonefilename($path, $old_subprefix, $new_subprefix)
 {
     for ($i = 0; $i <= 1; $i++) {
@@ -89,6 +99,10 @@ function nw_clonefilename($path, $old_subprefix, $new_subprefix)
 }
 
 //DNPROSSI
+/**
+ * @param $path
+ * @param $new_subprefix
+ */
 function nw_deleteclonefile($path, $new_subprefix)
 {
     for ($i = 0; $i <= 1; $i++) {
@@ -108,6 +122,11 @@ function nw_deleteclonefile($path, $new_subprefix)
 }
 
 //DNPROSSI
+/**
+ * @param $srcpath
+ * @param $destpath
+ * @param $filename
+ */
 function nw_clonecopyfile($srcpath, $destpath, $filename)
 {
     if ($handle = opendir($srcpath)) {
@@ -139,6 +158,11 @@ function nw_clonecopyfile($srcpath, $destpath, $filename)
 // to use this function to empty a directory, write:
 // nw_removewholeclone('path/to/full_directory', true);
 
+/**
+ * @param      $directory
+ * @param bool $empty
+ * @return bool
+ */
 function nw_removewholeclone($directory, $empty = false)
 {
     // if the path has a slash at the end we remove it here

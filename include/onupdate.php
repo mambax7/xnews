@@ -2,6 +2,10 @@
 require_once __DIR__ . '/functions.php';
 
 //Default Permission Settings
+/**
+ * @param $xoopsModule
+ * @return bool
+ */
 function xoops_module_update_xnews($xoopsModule)
 {
     global $xoopsDB;

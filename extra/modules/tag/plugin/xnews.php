@@ -1,4 +1,8 @@
 <?php
+/**
+ * @param $items
+ * @return bool
+ */
 function xnews_tag_iteminfo(&$items)
 {
     if (empty($items) || !is_array($items)) {
@@ -33,6 +37,9 @@ function xnews_tag_iteminfo(&$items)
     unset($items_obj);
 }
 
+/**
+ * @param $mid
+ */
 function xnews_tag_synchronization($mid)
 {
     global $xoopsDB;

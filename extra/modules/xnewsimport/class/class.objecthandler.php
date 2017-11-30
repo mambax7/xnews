@@ -120,6 +120,11 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
         return $ret;
     }
 
+    /**
+     * @param \XoopsObject $obj
+     * @param bool         $force
+     * @return bool|void
+     */
     public function insert(XoopsObject $obj, $force = false)
     {
         // Make sure object is of correct type
@@ -279,16 +284,28 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
         return true;
     }
 
+    /**
+     * @param $obj
+     * @return bool
+     */
     public function _insertQuery(&$obj)
     {
         return false;
     }
 
+    /**
+     * @param $obj
+     * @return bool
+     */
     public function _updateQuery(&$obj)
     {
         return false;
     }
 
+    /**
+     * @param $obj
+     * @return bool
+     */
     public function _deleteQuery(&$obj)
     {
         return false;

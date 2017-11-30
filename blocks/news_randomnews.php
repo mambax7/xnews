@@ -20,6 +20,10 @@ if (!defined('XNEWS_MODULE_PATH')) {
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
 
+/**
+ * @param $options
+ * @return array
+ */
 function nw_b_news_randomnews_show($options)
 {
     $myts                = MyTextSanitizer::getInstance();
@@ -110,6 +114,10 @@ function nw_b_news_randomnews_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function nw_b_news_randomnews_edit($options)
 {
     $form = _MB_NW_ORDER . "&nbsp;<select name='options[]'>";
@@ -156,6 +164,9 @@ function nw_b_news_randomnews_edit($options)
     return $form;
 }
 
+/**
+ * @param $options
+ */
 function nw_b_news_randomnews_onthefly($options)
 {
     $options = explode('|', $options);

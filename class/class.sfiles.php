@@ -3,6 +3,9 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once XNEWS_MODULE_PATH . '/class/class.mimetype.php';
 
+/**
+ * Class nw_sFiles
+ */
 class nw_sFiles
 {
     public $xnews;
@@ -16,6 +19,10 @@ class nw_sFiles
     public $downloadname;
     public $counter;
 
+    /**
+     * nw_sFiles constructor.
+     * @param int $fileid
+     */
     public function __construct($fileid = -1)
     {
         $this->xnews        = XnewsXnews::getInstance();
@@ -34,6 +41,12 @@ class nw_sFiles
         }
     }
 
+    /**
+     * @param      $folder
+     * @param      $filename
+     * @param bool $trimname
+     * @return string
+     */
     public function createUploadName($folder, $filename, $trimname = false)
     {
         $workingfolder = $folder;
@@ -64,6 +77,10 @@ class nw_sFiles
         return $uid . $ext;
     }
 
+    /**
+     * @param string $filename
+     * @return mixed|string
+     */
     public function giveMimetype($filename = '')
     {
         $nw_cmimetype = new nw_cmimetype();
@@ -77,6 +94,10 @@ class nw_sFiles
         }
     }
 
+    /**
+     * @param $storyid
+     * @return array
+     */
     public function getAllbyStory($storyid)
     {
         $ret    = [];
@@ -91,6 +112,9 @@ class nw_sFiles
         return $ret;
     }
 
+    /**
+     * @param $id
+     */
     public function getFile($id)
     {
         $sql   = 'SELECT *';
@@ -100,6 +124,9 @@ class nw_sFiles
         $this->makeFile($array);
     }
 
+    /**
+     * @param $array
+     */
     public function makeFile($array)
     {
         foreach ($array as $key => $value) {
@@ -107,6 +134,9 @@ class nw_sFiles
         }
     }
 
+    /**
+     * @return bool
+     */
     public function store()
     {
         $myts = MyTextSanitizer::getInstance();
@@ -134,6 +164,10 @@ class nw_sFiles
         return true;
     }
 
+    /**
+     * @param string $workdir
+     * @return bool
+     */
     public function delete($workdir = XNEWS_ATTACHED_FILES_PATH)
     {
         $sql = 'DELETE';
@@ -156,6 +190,9 @@ class nw_sFiles
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function updateCounter()
     {
         $sql = "UPDATE {$this->table} SET counter = counter + 1";
@@ -170,21 +207,33 @@ class nw_sFiles
     // ****************************************************************************************************************
     // All the Sets
     // ****************************************************************************************************************
+    /**
+     * @param $filename
+     */
     public function setFileRealName($filename)
     {
         $this->filerealname = $filename;
     }
 
+    /**
+     * @param $id
+     */
     public function setStoryid($id)
     {
         $this->storyid = (int)$id;
     }
 
+    /**
+     * @param $value
+     */
     public function setMimetype($value)
     {
         $this->mimetype = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function setDownloadname($value)
     {
         $this->downloadname = $value;
@@ -193,26 +242,42 @@ class nw_sFiles
     // ****************************************************************************************************************
     // All the Gets
     // ****************************************************************************************************************
+    /**
+     * @return int
+     */
     public function getFileid()
     {
         return (int)$this->fileid;
     }
 
+    /**
+     * @return int
+     */
     public function getStoryid()
     {
         return (int)$this->storyid;
     }
 
+    /**
+     * @return int
+     */
     public function getCounter()
     {
         return (int)$this->counter;
     }
 
+    /**
+     * @return int
+     */
     public function getDate()
     {
         return (int)$this->date;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function getFileRealName($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -239,6 +304,10 @@ class nw_sFiles
         return $filerealname;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function getMimetype($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -265,6 +334,10 @@ class nw_sFiles
         return $filemimetype;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function getDownloadname($format = 'S')
     {
         $myts = MyTextSanitizer::getInstance();
@@ -292,6 +365,11 @@ class nw_sFiles
     }
 
     // Deprecated
+
+    /**
+     * @param $storyid
+     * @return mixed
+     */
     public function getCountbyStory($storyid)
     {
         $sql    = 'SELECT count(fileid) as cnt';
@@ -303,6 +381,10 @@ class nw_sFiles
         return $myrow['cnt'];
     }
 
+    /**
+     * @param $stories
+     * @return array
+     */
     public function getCountbyStories($stories)
     {
         $ret = [];

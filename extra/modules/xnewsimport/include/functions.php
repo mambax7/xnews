@@ -37,6 +37,11 @@ function xni_getmoduleoption($option, $repmodule)
     return $retval;
 }
 
+/**
+ * @param $fieldname
+ * @param $table
+ * @return bool
+ */
 function xni_fieldexists($fieldname, $table)
 {
     global $xoopsDB;
@@ -45,6 +50,10 @@ function xni_fieldexists($fieldname, $table)
     return ($xoopsDB->getRowsNum($result) > 0);
 }
 
+/**
+ * @param $subprefix
+ * @return string
+ */
 function xni_gettopics($subprefix)
 {
     global $xoopsDB;
@@ -63,6 +72,10 @@ function xni_gettopics($subprefix)
     return $topics_arr;
 }
 
+/**
+ * @param $subprefix
+ * @return string
+ */
 function xni_getcategories($subprefix)
 {
     global $xoopsDB;
@@ -77,6 +90,10 @@ function xni_getcategories($subprefix)
     return $topics_arr;
 }
 
+/**
+ * @param string $permtype
+ * @return mixed
+ */
 function xni_MygetItemIds($permtype = 'nw_view')
 {
     global $xoopsUser;
@@ -95,6 +112,11 @@ function xni_MygetItemIds($permtype = 'nw_view')
     return $topics;
 }
 
+/**
+ * @param $srcpath
+ * @param $destpath
+ * @param $filename
+ */
 function xni_clonecopyfile($srcpath, $destpath, $filename)
 {
     if ($handle = opendir($srcpath)) {
@@ -113,6 +135,13 @@ function xni_clonecopyfile($srcpath, $destpath, $filename)
     }
 }
 
+/**
+ * @param $dirname
+ * @param $groups
+ * @param $itemid
+ * @param $permname
+ * @return bool
+ */
 function xni_savePermissions($dirname, $groups, $itemid, $permname)
 {
     global $xoopsModule;

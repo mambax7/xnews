@@ -22,6 +22,10 @@
 **/
 include_once XOOPS_ROOT_PATH . '/Frameworks/smarty/xoSmartyFunctions.php';
 
+/**
+ * @param $params
+ * @param $smarty
+ */
 function smarty_function_xoLanguage($params, &$smarty)
 {
     $url = 'http://' . xoops_getenv('HTTP_HOST') . xoops_getenv('PHP_SELF');

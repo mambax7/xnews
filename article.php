@@ -213,6 +213,10 @@ if ('' != xoops_trim($bodytext)) {
 $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
 
 // ****************************************************************************************************************
+/**
+ * @param $matches
+ * @return string
+ */
 function my_highlighter($matches)
 {
     $color = $xnews->getConfig('highlightcolor');

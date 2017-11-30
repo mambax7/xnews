@@ -19,6 +19,11 @@
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
+/**
+ * @param $category
+ * @param $item_id
+ * @return null
+ */
 function nw_notify_iteminfo($category, $item_id)
 {
     if ('global' == $category) {
