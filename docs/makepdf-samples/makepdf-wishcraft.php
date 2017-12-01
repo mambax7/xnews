@@ -1,4 +1,22 @@
 <?php
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
+ * @since
+ * @author     XOOPS Development Team
+ */
+
 error_reporting(0);
 require_once __DIR__ . '/header.php';
 $myts = MyTextSanitizer::getInstance();
@@ -439,6 +457,37 @@ $GLOBALS['xoopsTpl']->assign('display_icons', $temp);
 // IN PROGRESS
 // IN PROGRESS
 // IN PORGRESS
+//-------------------- DNPROSSI SEO ---------------------------
+$item_path = '';
+if (0 != $seo_enabled) {
+    $item_path = nw_remove_accents($article->title());
+}
+$storyURL = nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $storyid, $item_path);
+$GLOBALS['xoopsTpl']->assign('story_url', $storyURL);
+
+$print_item = '';
+if (0 != $seo_enabled) {
+    $print_item = nw_remove_accents(_MA_NW_PRINTERFRIENDLY);
+}
+$printLink = "<a target='_blank' href='" . nw_seo_UrlGenerator(_MA_NW_SEO_PRINT, $storyid, $print_item) . "' title='" . _MA_NW_PRINTERFRIENDLY . "'>";
+$printLink .= "<img src='" . NW_MODULE_URL . "/images/print.png' width='28px' height='28px' border='0' alt='" . _MA_NW_PRINTERFRIENDLY . "'></a>";
+$GLOBALS['xoopsTpl']->assign('print_link', $printLink);
+
+$pdf_item = '';
+if (0 != $seo_enabled) {
+    $pdf_item = nw_remove_accents($article->title());
+}
+$pdfLink = "<a target='_blank' href='" . nw_seo_UrlGenerator(_MA_NW_SEO_PDF, $storyid, $pdf_item) . "' title='" . _MA_NW_MAKEPDF . "'>";
+$pdfLink .= "<img src='" . NW_MODULE_URL . "/images/acrobat.png' width='28px' height='28px' border='0' alt='" . _MA_NW_MAKEPDF . "'></a>";
+$GLOBALS['xoopsTpl']->assign('pdf_link', $pdfLink);
+
+if (0 != $seo_enabled) {
+    $GLOBALS['xoopsTpl']->assign('urlrewrite', true);
+} else {
+    $GLOBALS['xoopsTpl']->assign('urlrewrite', false);
+}
+
+//-------------------- DNPROSSI SEO ---------------------------
 
 // Added in version 1.63, TAGS
 if ($xnews->getConfig('tags')) {
@@ -478,12 +527,12 @@ define('K_PATH_IMAGES', XOOPS_ROOT_PATH . '/images/');
 
 require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
 
-$filename = XOOPS_ROOT_PATH . '/Frameworks/tcpdf/config/lang/' . _LANGCODE . '.php';
-if (file_exists($filename)) {
-    require_once $filename;
-} else {
-    require_once XOOPS_ROOT_PATH . '/Frameworks/tcpdf/config/lang/en.php';
-}
+//$filename = XOOPS_ROOT_PATH . '/Frameworks/tcpdf/config/lang/' . _LANGCODE . '.php';
+//if (file_exists($filename)) {
+//    require_once $filename;
+//} else {
+//    require_once XOOPS_ROOT_PATH . '/Frameworks/tcpdf/config/lang/en.php';
+//}
 
 //DNPROSSI Added - xlanguage installed and active
 $moduleHandler = xoops_getHandler('module');

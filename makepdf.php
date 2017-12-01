@@ -1,4 +1,23 @@
 <?php
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
+ * @since
+ * @author     XOOPS Development Team
+ */
+
+
 // 19-12-2008
 // DNPROSSI - Made a few changes to 1.63
 // Corrected UTF-8 problems
@@ -14,8 +33,14 @@
 error_reporting(0);
 require_once __DIR__ . '/header.php';
 
+if (!is_file(XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php')) {
+    redirect_header(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/viewtopic.php?topic_id=' . $topic_id, 3, 'TCPDF for Xoops not installed');
+} else {
+    require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
+}
+
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
+
 
 // Verifications on the article
 $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
@@ -57,6 +82,44 @@ if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsMo
 //    require_once XNEWS_MODULE_PATH . '/language/english/main.php';
 //}
 //
+
+$storypage  = isset($_GET['page']) ? (int)$_GET['page'] : 0;
+$dateformat = nw_getmoduleoption('dateformat', NW_MODULE_DIR_NAME);
+$hcontent   = '';
+
+
+
+
+
+
+$pdf_data['title']    = $article->title();
+$pdf_data['subtitle'] = $article->topic_title();
+
+$pdf_data['subsubtitle'] = $xoopsModule->name();
+$pdf_data['date']        = ': ' . date(_DATESTRING, $article->published());
+
+$memberHandler = xoops_getHandler('member');
+$author        = $memberHandler->getUser($article->uid());
+if ($author->getVar('name')) {
+    $pdf_data['author'] = $author->getVar('name') . '(' . $author->getVar('uname') . ')';
+} else {
+    $pdf_data['author'] = $author->getVar('uname');
+}
+
+ob_start();
+$GLOBALS['xoopsTpl']->display('db:nw_news_article_pdf.tpl');
+$content = ob_get_contents();
+ob_end_clean();
+
+$pdf_data['content'] = $content;
+
+define('PDF_CREATOR', $GLOBALS['xoopsConfig']['sitename']);
+define('PDF_AUTHOR', $pdf_data['author']);
+define('PDF_HEADER_TITLE', $pdf_data['title']);
+define('PDF_HEADER_STRING', $pdf_data['subtitle']);
+define('PDF_HEADER_LOGO', 'logo.png');
+define('K_PATH_IMAGES', XOOPS_ROOT_PATH . '/images/');
+
 //$filename = XOOPS_ROOT_PATH . '/Frameworks/tcpdf/config/lang/' . _LANGCODE . '.php';
 //if (file_exists($filename)) {
 //    require_once $filename;
@@ -122,6 +185,10 @@ if (_LANGCODE === 'fa' || 'fa' === $multylang) {
 }
 
 // set document information
+//$pdf->SetCreator($pdf_data['author']);
+//$pdf->SetAuthor($pdf_data['author']);
+//$pdf->SetTitle($pdf_data['title']);
+//$pdf->SetSubject($pdf_data['subtitle']);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor(PDF_AUTHOR);
 $pdf->SetTitle($doc_title);
@@ -164,6 +231,7 @@ $pdf->setLanguageArray($l); //set language items
 //initialize document
 $pdf->AliasNbPages();
 
+// ***** For Testing Purposes
 /*$pdf->AddPage();
 
 // print a line using Cell()
@@ -172,6 +240,8 @@ $pdf->Cell(0, 10, K_PATH_MAIN. '  ---- Path Main', 1, 1, 'C');
 $pdf->Cell(0, 10, K_PATH_FONTS. '  ---- Path Fonts', 1, 1, 'C');
 $pdf->Cell(0, 10, K_PATH_IMAGES. '  ---- Path Images', 1, 1, 'C');
 */
+// ***** End Test
+
 $pdf->AddPage();
 $pdf->writeHTML($content, true, 0);
 //Added for buffer error in TCPDF when using chinese charset

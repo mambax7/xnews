@@ -20,7 +20,7 @@
  *
  * -------------------------------------------------------------------------------------
  **/
-include_once XOOPS_ROOT_PATH . '/Frameworks/smarty/xoSmartyFunctions.php';
+require_once XOOPS_ROOT_PATH . '/Frameworks/smarty/xoSmartyFunctions.php';
 
 /**
  * @param $params

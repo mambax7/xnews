@@ -1,4 +1,22 @@
 <?php
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
+ * @since
+ * @author     XOOPS Development Team
+ */
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once XNEWS_MODULE_PATH . '/class/class.mimetype.php';
@@ -372,7 +390,7 @@ class nw_sFiles
      */
     public function getCountbyStory($storyid)
     {
-        $sql    = 'SELECT count(fileid) as cnt';
+        $sql    = 'SELECT count(fileid) AS cnt';
         $sql    .= " FROM {$this->table}";
         $sql    .= ' WHERE storyid = ' . (int)$storyid . '';
         $result = $this->db->query($sql);
@@ -389,7 +407,7 @@ class nw_sFiles
     {
         $ret = [];
         if (count($stories) > 0) {
-            $sql    = 'SELECT storyid, count(fileid) as cnt';
+            $sql    = 'SELECT storyid, count(fileid) AS cnt';
             $sql    .= " FROM {$this->db->prefix('nw_stories_files')}";
             $sql    .= ' WHERE storyid IN (' . implode(',', $stories) . ') GROUP BY storyid';
             $result = $this->db->query($sql);

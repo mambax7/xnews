@@ -1,5 +1,4 @@
 <?php
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
  * This file contains the keyhighlighter class that highlight the chosen keyword in the current output buffer.
@@ -20,6 +19,9 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
  * @example   sample.php A sample code.
  * @link      http://setecastronomy.stufftoread.com
  */
+
+defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+
 class nw_keyhighlighter
 {
 
@@ -72,7 +74,7 @@ class nw_keyhighlighter
     /**
      * @access private
      * @param $replace_matches
-     * @return mixed
+     * @return null|string|string[]
      */
     public function replace($replace_matches)
     {
@@ -89,7 +91,7 @@ class nw_keyhighlighter
         $result = $replace_matches[0];
 
         foreach ($patterns as $pattern) {
-            if (!is_null($this->replace_callback)) {
+            if (null !== $this->replace_callback) {
                 $result = preg_replace_callback($pattern, $this->replace_callback, $result);
             } else {
                 $result = preg_replace($pattern, '<span class="highlightedkey">\\0</span>', $result);
@@ -102,7 +104,7 @@ class nw_keyhighlighter
     /**
      * @access private
      * @param $buffer
-     * @return mixed|string
+     * @return null|string|string[]
      */
     public function highlight($buffer)
     {

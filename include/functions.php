@@ -1,4 +1,22 @@
 <?php
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
+ * @since
+ * @author     XOOPS Development Team, Herve Thouzard, Instant Zero
+ *
+ */
 
 use WideImage\WideImage;
 
@@ -74,6 +92,109 @@ function xnews_collapsableBar($tablename = '', $iconname = '')
     </script>
     <?php
     echo "<h4 style=\"color: #2F5376; margin: 6px 0 0 0; \"><a href='#' onClick=\"toggle('" . $tablename . "'); toggleIcon('" . $iconname . "');\">";
+}
+
+if (!function_exists('xoops_sef')) {
+    /**
+     * @param        $datab
+     * @param string $char
+     * @return string
+     */
+    function xoops_sef($datab, $char = '-')
+    {
+        $datab             = urldecode(strtolower($datab));
+        $datab             = urlencode($datab);
+        $datab             = str_replace(urlencode('æ'), 'ae', $datab);
+        $datab             = str_replace(urlencode('ø'), 'oe', $datab);
+        $datab             = str_replace(urlencode('å'), 'aa', $datab);
+        $replacement_chars = [
+            ' ',
+            '|',
+            '=',
+            '\\',
+            '/',
+            '+',
+            '-',
+            '_',
+            '{',
+            '}',
+            ']',
+            '[',
+            '\'',
+            '"',
+            ';',
+            ':',
+            '?',
+            '>',
+            '<',
+            '.',
+            ',',
+            ')',
+            '(',
+            '*',
+            '&',
+            '^',
+            '%',
+            '$',
+            '#',
+            '@',
+            '!',
+            '`',
+            '~',
+            ' ',
+            '',
+            '¡',
+            '¦',
+            '§',
+            '¨',
+            '©',
+            'ª',
+            '«',
+            '¬',
+            '®',
+            '­',
+            '¯',
+            '°',
+            '±',
+            '²',
+            '³',
+            '´',
+            'µ',
+            '¶',
+            '·',
+            '¸',
+            '¹',
+            'º',
+            '»',
+            '¼',
+            '½',
+            '¾',
+            '¿'
+        ];
+        $return_data       = str_replace($replacement_chars, $char, urldecode($datab));
+        #print $return_data."<BR><BR>";
+        switch ($char) {
+            default:
+                return urldecode($return_data);
+                break;
+            case '-':
+
+                return urlencode($return_data);
+                break;
+        }
+    }
+}
+
+if (!function_exists('sef')) {
+    /**
+     * @param        $datab
+     * @param string $char
+     * @return string
+     */
+    function sef($datab, $char = '-')
+    {
+        return xoops_sef($datab, $char);
+    }
 }
 
 /**
@@ -722,14 +843,13 @@ function nw_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words =
  * Resize a Picture to some given dimensions (using the wideImage library)
  *
  * @param string  $src_path      Picture's source
- * @param         $dst_path
+ * @param string  $dst_path      Picture's destination
  * @param integer $param_width   Maximum picture's width
  * @param integer $param_height  Maximum picture's height
  * @param boolean $keep_original Do we have to keep the original picture ?
  * @param string  $fit           Resize mode (see the wideImage library for more information)
  * @return bool
- * @internal param $string $              dst_path Picture's destination
- */
+  */
 function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false, $fit = 'inside')
 {
     $xnews = XnewsXnews::getInstance();
@@ -745,7 +865,7 @@ function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $ke
         }
     }
 
-    $img = wiImage::load($src_path);
+    $img = WideImage::load($src_path);
     if ($resize) {
         $result = $img->resize($param_width, $param_height, $fit);
         $result->saveToFile($dst_path);
@@ -854,38 +974,8 @@ function nw_remove_accents($chain)
 
     // Transform punctuation
     //                 Tab     Space      !        "        #        %        &        '        (        )        ,        /        :        ;        <        =        >        ?        @        [        \        ]        ^        {        |        }        ~       .
-    $pattern = [
-        '/%09/',
-        '/%20/',
-        '/%21/',
-        '/%22/',
-        '/%23/',
-        '/%25/',
-        '/%26/',
-        '/%27/',
-        '/%28/',
-        '/%29/',
-        '/%2C/',
-        '/%2F/',
-        '/%3A/',
-        '/%3B/',
-        '/%3C/',
-        '/%3D/',
-        '/%3E/',
-        '/%3F/',
-        '/%40/',
-        '/%5B/',
-        '/%5C/',
-        '/%5D/',
-        '/%5E/',
-        '/%7B/',
-        '/%7C/',
-        '/%7D/',
-        '/%7E/',
-        '/%39/',
-        "/\./"
-    ];
-    $rep_pat = ['-', '-', '', '', '', '-100', '', '-', '', '', '', '-', '', '', '', '-', '', '', '-at-', '', '-', '', '-', '', '-', '', '-', '-', ''];
+    $pattern = ['/%09/', '/%20/', '/%21/', '/%22/', '/%23/', '/%25/', '/%26/', '/%27/', '/%28/', '/%29/', '/%2C/', '/%2F/', '/%3A/', '/%3B/', '/%3C/', '/%3D/', '/%3E/', '/%3F/', '/%40/', '/%5B/', '/%5C/', '/%5D/', '/%5E/', '/%7B/', '/%7C/', '/%7D/', '/%7E/', "/\./"];
+    $rep_pat = ['-', '-', '', '', '', '-100', '', '-', '', '', '', '-', '', '', '', '-', '', '', '-at-', '', '-', '', '-', '', '-', '', '-', ''];
     $chain   = preg_replace($pattern, $rep_pat, $chain);
 
     return $chain;
