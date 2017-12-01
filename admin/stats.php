@@ -97,19 +97,11 @@ foreach ($storiesPerTopic as $topicid => $data) {
     $totals[1] += $views;
     $totals[2] += $attachedFiles;
     $totals[3] += $expired;
-    $class     = ('even' == $class) ? 'odd' : 'even';
-    printf(
-        "<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td></tr>\n",
-        $url,
-        $myts->displayTarea($data['topic_title']),
-        $articles,
-        $views,
-           $attachedFiles,
-        $expired,
-        $authors
-    );
+    $class     = ('even' === $class) ? 'odd' : 'even';
+    printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td></tr>\n", $url, $myts->displayTarea($data['topic_title']), $articles, $views,
+           $attachedFiles, $expired, $authors);
 }
-$class = ('even' == $class) ? 'odd' : 'even';
+$class = ('even' === $class) ? 'odd' : 'even';
 printf("<tr class='{$class}'><td align='center'><b>%s</b></td><td align='right'><b>%u</b></td><td align='right'><b>%u</b></td><td align='right'><b>%u</b></td><td align='right'><b>%u</b></td><td>&nbsp;</td>\n", _AM_NW_STATS2, $totals[0], $totals[1], $totals[2], $totals[3]);
 echo '</table></div><br><br><br>';
 
@@ -122,17 +114,9 @@ foreach ($mostReadNews as $storyid => $data) {
     $url1  = XNEWS_MODULE_URL . '/index.php?topic_id=' . $data['topicid'];
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
     $url3  = XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
-    $class = ('even' == $class) ? 'odd' : 'even';
-    printf(
-        "<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",
-        $url1,
-        $myts->displayTarea($data['topic_title']),
-        $url2,
-           $myts->displayTarea($data['title']),
-        $url3,
-        $myts->htmlSpecialChars($news->uname($data['uid'])),
-        $data['counter']
-    );
+    $class = ('even' === $class) ? 'odd' : 'even';
+    printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n", $url1, $myts->displayTarea($data['topic_title']), $url2,
+           $myts->displayTarea($data['title']), $url3, $myts->htmlSpecialChars($news->uname($data['uid'])), $data['counter']);
 }
 echo '</table>';
 
@@ -144,17 +128,9 @@ foreach ($lessReadNews as $storyid => $data) {
     $url1  = XNEWS_MODULE_URL . '/index.php?topic_id=' . $data['topicid'];
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
     $url3  = XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
-    $class = ('even' == $class) ? 'odd' : 'even';
-    printf(
-        "<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",
-        $url1,
-        $myts->displayTarea($data['topic_title']),
-        $url2,
-           $myts->displayTarea($data['title']),
-        $url3,
-        $myts->htmlSpecialChars($news->uname($data['uid'])),
-        $data['counter']
-    );
+    $class = ('even' === $class) ? 'odd' : 'even';
+    printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n", $url1, $myts->displayTarea($data['topic_title']), $url2,
+           $myts->displayTarea($data['title']), $url3, $myts->htmlSpecialChars($news->uname($data['uid'])), $data['counter']);
 }
 echo '</table>';
 
@@ -166,17 +142,9 @@ foreach ($bestRatedNews as $storyid => $data) {
     $url1  = XNEWS_MODULE_URL . '/index.php?topic_id=' . $data['topicid'];
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
     $url3  = XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
-    $class = ('even' == $class) ? 'odd' : 'even';
-    printf(
-        "<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",
-        $url1,
-        $myts->displayTarea($data['topic_title']),
-        $url2,
-           $myts->displayTarea($data['title']),
-        $url3,
-        $myts->htmlSpecialChars($news->uname($data['uid'])),
-        number_format($data['rating'], 2)
-    );
+    $class = ('even' === $class) ? 'odd' : 'even';
+    printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n", $url1, $myts->displayTarea($data['topic_title']), $url2,
+           $myts->displayTarea($data['title']), $url3, $myts->htmlSpecialChars($news->uname($data['uid'])), number_format($data['rating'], 2));
 }
 echo '</table></div><br><br><br>';
 
@@ -187,7 +155,7 @@ echo "<div style='text-align: center;'><b>" . _AM_NW_STATS10 . '</b><br><br>' . 
 echo "<table border='0' width='100%'><tr class='bg3'><td>" . _AM_NW_POSTER . '</td><td>' . _MA_NW_VIEWS . "</td></tr>\n";
 foreach ($mostReadedAuthors as $uid => $reads) {
     $url   = XOOPS_URL . '/userinfo.php?uid=' . $uid;
-    $class = ('even' == $class) ? 'odd' : 'even';
+    $class = ('even' === $class) ? 'odd' : 'even';
     printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n", $url, $myts->htmlSpecialChars($news->uname($uid)), $reads);
 }
 echo '</table>';
@@ -198,7 +166,7 @@ echo '<br><br>' . _AM_NW_STATS8;
 echo "<table border='0' width='100%'><tr class='bg3'><td>" . _AM_NW_POSTER . '</td><td>' . _MA_NW_RATING . "</td></tr>\n";
 foreach ($bestRatedAuthors as $uid => $rating) {
     $url   = XOOPS_URL . '/userinfo.php?uid=' . $uid;
-    $class = ('even' == $class) ? 'odd' : 'even';
+    $class = ('even' === $class) ? 'odd' : 'even';
     printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n", $url, $myts->htmlSpecialChars($news->uname($uid)), $rating);
 }
 echo '</table>';
@@ -209,7 +177,7 @@ echo '<br><br>' . _AM_NW_STATS9;
 echo "<table border='0' width='100%'><tr class='bg3'><td>" . _AM_NW_POSTER . '</td><td>' . _AM_NW_STATS11 . "</td></tr>\n";
 foreach ($biggestContributors as $uid => $count) {
     $url   = XOOPS_URL . '/userinfo.php?uid=' . $uid;
-    $class = ('even' == $class) ? 'odd' : 'even';
+    $class = ('even' === $class) ? 'odd' : 'even';
     printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n", $url, $myts->htmlSpecialChars($news->uname($uid)), $count);
 }
 echo '</table></div><br>';

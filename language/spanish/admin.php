@@ -203,10 +203,8 @@ define('_AM_NW_CLONER_DIRFOL', 'Directorio/Carpeta');
 define('_AM_NW_CLONER_VERSION', 'Versión');
 
 define('_AM_NW_CLONER_NEWNAME', 'Nombre del Módulo');
-define(
-    '_AM_NW_CLONER_NEWNAMEDESC',
-       "Esto también afectará a la creación de la carpeta del módulo nuevo. <br> mayúsculas, minúsculas y los espacios son ignorados y se auto corrigen. <br> ej. nuevo nombre = <b>Biblioteca</b> nuevo dir  = <b>biblioteca</b>, <br> nuevo nombre <b>Mi Biblioteca</b> new dir = <b>mibiblioteca</b>. <br><br> módulo de inicio es: <font color='#008400'><b> %s </b></font><br>"
-);
+define('_AM_NW_CLONER_NEWNAMEDESC',
+       "Esto también afectará a la creación de la carpeta del módulo nuevo. <br> mayúsculas, minúsculas y los espacios son ignorados y se auto corrigen. <br> ej. nuevo nombre = <b>Biblioteca</b> nuevo dir  = <b>biblioteca</b>, <br> nuevo nombre <b>Mi Biblioteca</b> new dir = <b>mibiblioteca</b>. <br><br> módulo de inicio es: <font color='#008400'><b> %s </b></font><br>");
 define('_AM_NW_CLONER_NEWNAMELABEL', 'Nuevo Módulo:');
 
 define('_AM_NW_CLONER_DIREXISTS', "Directorio/Carpeta '%s' ya exíste!!");

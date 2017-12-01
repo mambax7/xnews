@@ -285,7 +285,7 @@ function CloneUpgrade()
 {
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
-    require_once 'cloner.php';
+    require_once __DIR__ . '/cloner.php';
     //
     if (!isset($_GET['clone_id'])) {
         //trigger_error("Not set", E_USER_WARNING);
@@ -382,7 +382,7 @@ function CloneDeleteApply()
 {
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
-    require_once 'cloner.php';
+    require_once __DIR__ . '/cloner.php';
     //
     //trigger_error("Not set", E_USER_WARNING);
     if (!isset($_POST['clone_id'])) {

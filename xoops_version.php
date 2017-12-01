@@ -38,10 +38,10 @@ $i = 0;
 // IN PROGRESS
 
 // Admin things
-$modversion['hasAdmin']   = true;
-$modversion['system_admin']   = true;
-$modversion['adminindex'] = 'admin/index.php';
-$modversion['adminmenu']  = 'admin/menu.php';
+$modversion['hasAdmin']     = true;
+$modversion['system_admin'] = true;
+$modversion['adminindex']   = 'admin/index.php';
+$modversion['adminmenu']    = 'admin/menu.php';
 // If you want your module has a sub menu in system menu set it to 1
 $modversion['system_menu'] = true;
 

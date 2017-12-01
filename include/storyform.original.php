@@ -24,13 +24,13 @@ if (0 == $xt->getAllTopicsCount()) {
 }
 
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
-$allTopics    = $xt->getAllTopics($xnews->getConfig('restrictindex'), 'nw_submit');
-$topic_tree   = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+$allTopics  = $xt->getAllTopics($xnews->getConfig('restrictindex'), 'nw_submit');
+$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 //$topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
 
 $moduleDirName = basename(dirname(__DIR__));
-$helper = \Xmf\Module\Helper::getHelper($moduleDirName);
-$module = $helper->getModule();
+$helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
+$module        = $helper->getModule();
 
 if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
     //         $topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
@@ -40,8 +40,6 @@ if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
     $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
     $sform->addElement(new XoopsFormLabel(_MA_NW_TOPIC, $topic_select));
 }
-
-
 
 //If admin - show admin form
 //TODO: Change to "If submit privilege"

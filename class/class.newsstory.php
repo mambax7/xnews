@@ -719,7 +719,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $seo_enabled = $this->xnews->getConfig('seo_enable');
         $ret         = '';
         $margin      = '';
-        if ('left' == $this->topicalign()) {
+        if ('left' === $this->topicalign()) {
             $margin = "style='padding-right: 8px;'";
         } else {
             $margin = "style='padding-left: 8px; padding-right: 5px'";
@@ -1083,66 +1083,13 @@ class nw_NewsStory extends XnewsDeprecateStory
             $created    = time();
             $published  = $this->approved ? (int)$this->published : 0;
             //DNPROSSI - ADD TAGS FOR UPDATES - ADDED imagerows, pdfrows
-            $sql = sprintf(
-                "INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture, dobr, tags, imagerows, pdfrows) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s', '%u','%s', %u, %u)",
-                           $this->table,
-                $newstoryid,
-                (int)$this->uid(),
-                $title,
-                $created,
-                $published,
-                $expired,
-                $hostname,
-                (int)$this->nohtml(),
-                (int)$this->nosmiley(),
-                $hometext,
-                $bodytext,
-                $counter,
-                (int)$this->topicid(),
-                (int)$this->ihome(),
-                (int)$this->notifypub(),
-                $type,
-                           (int)$this->topicdisplay(),
-                $this->topicalign,
-                (int)$this->comments(),
-                $rating,
-                $votes,
-                $description,
-                $keywords,
-                $picture,
-                (int)$this->dobr(),
-                $tags,
-                (int)$this->imagerows(),
-                (int)$this->pdfrows()
-            );
+            $sql = sprintf("INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture, dobr, tags, imagerows, pdfrows) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s', '%u','%s', %u, %u)",
+                           $this->table, $newstoryid, (int)$this->uid(), $title, $created, $published, $expired, $hostname, (int)$this->nohtml(), (int)$this->nosmiley(), $hometext, $bodytext, $counter, (int)$this->topicid(), (int)$this->ihome(), (int)$this->notifypub(), $type,
+                           (int)$this->topicdisplay(), $this->topicalign, (int)$this->comments(), $rating, $votes, $description, $keywords, $picture, (int)$this->dobr(), $tags, (int)$this->imagerows(), (int)$this->pdfrows());
         } else {
-            $sql        = sprintf(
-                "UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s', dobr='%u', tags='%s', imagerows='%u', pdfrows='%u' WHERE storyid = %u",
-                                  $this->table,
-                $title,
-                (int)$this->published(),
-                $expired,
-                (int)$this->nohtml(),
-                (int)$this->nosmiley(),
-                $hometext,
-                $bodytext,
-                (int)$this->topicid(),
-                (int)$this->ihome(),
-                (int)$this->topicdisplay(),
-                $this->topicalign,
-                (int)$this->comments(),
-                                  $rating,
-                $votes,
-                (int)$this->uid(),
-                $description,
-                $keywords,
-                $picture,
-                (int)$this->dobr(),
-                $tags,
-                (int)$this->imagerows(),
-                (int)$this->pdfrows(),
-                (int)$this->storyid()
-            );
+            $sql        = sprintf("UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s', dobr='%u', tags='%s', imagerows='%u', pdfrows='%u' WHERE storyid = %u",
+                                  $this->table, $title, (int)$this->published(), $expired, (int)$this->nohtml(), (int)$this->nosmiley(), $hometext, $bodytext, (int)$this->topicid(), (int)$this->ihome(), (int)$this->topicdisplay(), $this->topicalign, (int)$this->comments(), $rating, $votes,
+                                  (int)$this->uid(), $description, $keywords, $picture, (int)$this->dobr(), $tags, (int)$this->imagerows(), (int)$this->pdfrows(), (int)$this->storyid());
             $newstoryid = (int)$this->storyid();
         }
         if (!$this->db->queryF($sql)) {

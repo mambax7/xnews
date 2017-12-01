@@ -34,7 +34,8 @@ class XNewsUtility extends XoopsObject
                     file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
                 }
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
@@ -101,10 +102,10 @@ class XNewsUtility extends XoopsObject
         if (null === $requiredVer) {
             $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
         }
-        $success     = true;
+        $success = true;
 
         if (version_compare($currentVer, $requiredVer, '<')) {
-            $success     = false;
+            $success = false;
             $module->setErrors(sprintf(_AM_NW_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
         }
 

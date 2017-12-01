@@ -131,14 +131,14 @@ if ($showclassic) {
     if (1 == $xnews->getConfig('displaynav')) {
         $xoopsTpl->assign('displaynav', true);
 
-        $allTopics    = $xt->getAllTopics($xnews->getConfig('restrictindex'));
-        $topic_tree   = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
-//        $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
-//        $xoopsTpl->assign('topic_select', $topic_select);
+        $allTopics  = $xt->getAllTopics($xnews->getConfig('restrictindex'));
+        $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+        //        $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
+        //        $xoopsTpl->assign('topic_select', $topic_select);
 
         $moduleDirName = basename(__DIR__);
-        $helper = \Xmf\Module\Helper::getHelper($moduleDirName);
-        $module = $helper->getModule();
+        $helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
+        $module        = $helper->getModule();
 
         if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
             $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $xoopsOption['storytopic'], true, 0, '', '');
@@ -147,8 +147,6 @@ if ($showclassic) {
             $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
             $xoopsTpl->assign('topic_select', $topic_select);
         }
-
-
 
         $storynum_options = '';
         for ($i = 5; $i <= 30; $i = $i + 5) {

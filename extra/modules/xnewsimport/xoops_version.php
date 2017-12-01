@@ -64,10 +64,10 @@ $modversion['adminmenu']   = 'admin/menu.php';
 // Menu
 $modversion['hasMain'] = 0;
 
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.9';
-$modversion['min_admin']           = '1.2';
-$modversion['min_db']              = ['mysql' => '5.5'];
+$modversion['min_php']   = '5.5';
+$modversion['min_xoops'] = '2.5.9';
+$modversion['min_admin'] = '1.2';
+$modversion['min_db']    = ['mysql' => '5.5'];
 
 // Config
 $i = 0;

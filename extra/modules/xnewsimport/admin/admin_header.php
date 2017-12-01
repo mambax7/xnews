@@ -25,8 +25,8 @@ require_once __DIR__ . '/../../../include/cp_header.php';
 //require_once __DIR__ . '/../include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-$helper = \Xmf\Module\Helper::getHelper($moduleDirName);
-$adminObject = \Xmf\Module\Admin::getInstance();
+$helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
+$adminObject   = \Xmf\Module\Admin::getInstance();
 
 $pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);

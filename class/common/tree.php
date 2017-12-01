@@ -193,7 +193,7 @@ class XnewsMyXoopsObjectTree
             $ret .= $additional;
         }
         $ret .= '>';
-        if (false != $addEmptyOption) {
+        if (false !== $addEmptyOption) {
             $ret .= '<option value=\'0\'>----</option>';
         }
         $this->_makeSelBoxOptions($fieldName, $selected, $key, $ret, $prefix);

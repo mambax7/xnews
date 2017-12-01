@@ -50,7 +50,6 @@ if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsMo
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
 }
 
-
 //$filename = XNEWS_MODULE_PATH . '/language/' . $xoopsConfig['language'] . '/main.php';
 //if (file_exists($filename)) {
 //    require_once $filename;

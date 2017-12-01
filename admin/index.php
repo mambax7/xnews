@@ -515,7 +515,7 @@ function delTopic()
             // get all stories in each topic
             $story_arr = nw_NewsStory:: getByTopic($eachtopic->topic_id());
             foreach ($story_arr as $eachstory) {
-                if (false != $eachstory->delete()) {
+                if (false !== $eachstory->delete()) {
                     xoops_comment_delete($xnews->getModule()->getVar('mid'), $eachstory->storyid());
                     xoops_notification_deletebyitem($xnews->getModule()->getVar('mid'), 'story', $eachstory->storyid());
                 }

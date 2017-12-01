@@ -203,10 +203,8 @@ define('_AM_NW_CLONER_DIRFOL', 'Directory/Folder');
 define('_AM_NW_CLONER_VERSION', 'Version');
 
 define('_AM_NW_CLONER_NEWNAME', 'New module name');
-define(
-    '_AM_NW_CLONER_NEWNAMEDESC',
-       "This will also affect the creation of the new module folder. <br> Case sensitivity and spaces are ignored and will be auto corrected. <br> eg. new name = <b>Library</b> new dir  = <b>library</b>, <br> new name <b>My Library</b> new dir = <b>mylibrary</b>. <br><br> Start module is: <font color='#008400'><b> %s </b></font><br>"
-);
+define('_AM_NW_CLONER_NEWNAMEDESC',
+       "This will also affect the creation of the new module folder. <br> Case sensitivity and spaces are ignored and will be auto corrected. <br> eg. new name = <b>Library</b> new dir  = <b>library</b>, <br> new name <b>My Library</b> new dir = <b>mylibrary</b>. <br><br> Start module is: <font color='#008400'><b> %s </b></font><br>");
 define('_AM_NW_CLONER_NEWNAMELABEL', 'New Module:');
 
 define('_AM_NW_CLONER_DIREXISTS', "Directory/Folder '%s' already exists!!");

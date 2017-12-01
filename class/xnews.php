@@ -59,7 +59,7 @@ class XnewsXnews
 
     public function &getModule()
     {
-        if (null == $this->module) {
+        if (null === $this->module) {
             $this->initModule();
         }
 
@@ -73,7 +73,7 @@ class XnewsXnews
      */
     public function getConfig($name = null)
     {
-        if (null == $this->config) {
+        if (null === $this->config) {
             $this->initConfig();
         }
         if (!$name) {
@@ -99,7 +99,7 @@ class XnewsXnews
      */
     public function setConfig($name = null, $value = null)
     {
-        if (null == $this->config) {
+        if (null === $this->config) {
             $this->initConfig();
         }
         $this->config[$name] = $value;
