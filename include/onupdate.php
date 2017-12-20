@@ -9,6 +9,7 @@ require_once __DIR__ . '/functions.php';
 function xoops_module_update_xnews($xoopsModule)
 {
     global $xoopsDB;
+    require_once __DIR__ . '/common.php';
     require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
     //
     $module_id      = $xoopsModule->getVar('mid');
