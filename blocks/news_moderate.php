@@ -44,7 +44,7 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
 function nw_b_news_topics_moderate()
 {
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
     //
     $block      = [];
     $dateformat = $xnews->getConfig('dateformat');
@@ -52,11 +52,11 @@ function nw_b_news_topics_moderate()
 
     $storyarray = $nw_NewsStoryHandler->getAllSubmitted(0, true, $xnews->getConfig('restrictindex'));
     if (count($storyarray) > 0) {
-        $block['lang_story_title']  = _MB_NW_TITLE;
-        $block['lang_story_date']   = _MB_NW_POSTED;
-        $block['lang_story_author'] = _MB_NW_POSTER;
-        $block['lang_story_action'] = _MB_NW_ACTION;
-        $block['lang_story_topic']  = _MB_NW_TOPIC;
+        $block['lang_story_title']  = _MB_XNEWS_TITLE;
+        $block['lang_story_date']   = _MB_XNEWS_POSTED;
+        $block['lang_story_author'] = _MB_XNEWS_POSTER;
+        $block['lang_story_action'] = _MB_XNEWS_ACTION;
+        $block['lang_story_topic']  = _MB_XNEWS_TOPIC;
         $myts                       = \MyTextSanitizer::getInstance();
         foreach ($storyarray as $newstory) {
             $title     = $newstory->title();
@@ -75,7 +75,7 @@ function nw_b_news_topics_moderate()
             $story['title']       = $linktitle;
             $story['date']        = formatTimestamp($newstory->created(), $dateformat);
             $story['author']      = "<a href='" . XOOPS_URL . '/userinfo.php?uid=' . $newstory->uid() . "'>" . $newstory->uname() . '</a>';
-            $story['action']      = "<a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=edit&amp;storyid=' . $newstory->storyid() . "'>" . _EDIT . "</a> - <a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=delete&amp;storyid=' . $newstory->storyid() . "'>" . _MB_NW_DELETE . '</a>';
+            $story['action']      = "<a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=edit&amp;storyid=' . $newstory->storyid() . "'>" . _EDIT . "</a> - <a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=delete&amp;storyid=' . $newstory->storyid() . "'>" . _MB_XNEWS_DELETE . '</a>';
             $story['topic_title'] = $newstory->topic_title();
             $story['topic_color'] = '#' . $myts->displayTarea($newstory->topic_color);
             $block['stories'][]   =& $story;

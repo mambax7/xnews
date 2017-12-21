@@ -19,6 +19,7 @@
 
 
 use Xmf\Request;
+use Xoopsmodules\xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -50,8 +51,9 @@ if (!nw_FieldExists('picture', $storiesTableName)) {
 function NewsCloner()
 {
     global $myts;
+    $currentFile = basename(__FILE__);
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
 
     //  admin navigation
     xoops_cp_header();
@@ -88,22 +90,22 @@ function NewsCloner()
     $class       = '';
 
     xnews_collapsableBar('NewsCloner', 'topNewsCloner');
-    echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topNewsCloner' name='topNewsCloner' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_NW_CLONER_CLONES . ' (' . $totalclones . ')' . '</h4>';
+    echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topNewsCloner' name='topNewsCloner' src='" . XNEWS_MODULE_URL . "/assets/images/close12.gif' alt=''></a>&nbsp;" . _AM_XNEWS_CLONER_CLONES . ' (' . $totalclones . ')' . '</h4>';
     echo "<div id='NewsCloner'>";
     echo '<br>';
     echo "<div style='text-align: center;'>";
     echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'><tr class='bg3'><td align='center'>"
-         . _AM_NW_CLONER_NAME
+         . _AM_XNEWS_CLONER_NAME
          . "</td><td align='center'>"
-         . _AM_NW_CLONER_DIRFOL
+         . _AM_XNEWS_CLONER_DIRFOL
          . "</td><td align='center'>"
          . _AM_XNEWS_SUBPREFIX
          . "</td><td align='center'>"
-         . _AM_NW_CLONER_VERSION
+         . _AM_XNEWS_CLONER_VERSION
          . "</td><td align='center'>"
-         . _AM_NW_ACTION
+         . _AM_XNEWS_ACTION
          . "</td><td align='center'>"
-         . _AM_NW_CLONER_ACTION_INSTALL
+         . _AM_XNEWS_CLONER_ACTION_INSTALL
          . '</td></tr>';
     if (is_array($clone_arr) && $totalclones) {
         $cpt    = 1;
@@ -117,30 +119,30 @@ function NewsCloner()
                 if ($clone_arr[$tmpcpt]['clone_dir'] != $clone_arr[0]['clone_dir']) {
                     if ($clone_arr[$tmpcpt]['clone_version'] != $clone_arr[0]['clone_version']) {
                         $linkupgrade = XNEWS_MODULE_URL . '/admin/clone.php?op=cloneupgrade&amp;clone_id=' . $clone_arr[$tmpcpt]['clone_id'];
-                        $action      = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_UPGRADE);
+                        $action      = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_XNEWS_UPGRADE);
                         if (1 == $clone_arr[$tmpcpt]['clone_installed']) {
                             $linkupgrade   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=uninstall&module=' . $clone_arr[$tmpcpt]['clone_dir'];
-                            $installaction = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_UNINSTALL);
+                            $installaction = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_XNEWS_CLONER_UNINSTALL);
                         } else {
                             $linkupgrade   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=install&module=' . $clone_arr[$tmpcpt]['clone_dir'];
                             $linkdelete    = XNEWS_MODULE_URL . '/admin/clone.php?op=clonedelete&amp;clone_id=' . $clone_arr[$tmpcpt]['clone_id'];
-                            $installaction = sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_INSTALL, $linkdelete, _AM_NW_DELETE);
+                            $installaction = sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>", $linkupgrade, _AM_XNEWS_CLONER_INSTALL, $linkdelete, _AM_XNEWS_DELETE);
                         }
                     } else {
                         $linkforce = XNEWS_MODULE_URL . '/admin/clone.php?op=cloneupgrade&amp;clone_id=' . $clone_arr[$tmpcpt]['clone_id'];
-                        $action    = sprintf(_AM_NW_CLONER_CLONEUPGRADED . " - <a href='%s'>%s</a>", $linkforce, _AM_NW_CLONER_UPGRADEFORCE);
+                        $action    = sprintf(_AM_XNEWS_CLONER_CLONEUPGRADED . " - <a href='%s'>%s</a>", $linkforce, _AM_XNEWS_CLONER_UPGRADEFORCE);
                         if (1 == $clone_arr[$tmpcpt]['clone_installed']) {
                             $linkupgrade   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=uninstall&module=' . $clone_arr[$tmpcpt]['clone_dir'];
-                            $installaction = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_UNINSTALL);
+                            $installaction = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_XNEWS_CLONER_UNINSTALL);
                         } else {
                             $linkupgrade   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=install&module=' . $clone_arr[$tmpcpt]['clone_dir'];
                             $linkdelete    = XNEWS_MODULE_URL . '/admin/clone.php?op=clonedelete&amp;clone_id=' . $clone_arr[$tmpcpt]['clone_id'];
-                            $installaction = sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_INSTALL, $linkdelete, _AM_NW_DELETE);
+                            $installaction = sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>", $linkupgrade, _AM_XNEWS_CLONER_INSTALL, $linkdelete, _AM_XNEWS_DELETE);
                         }
                     }
                 } else {
                     $linkupgrade   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=update&module=' . $clone_arr[$tmpcpt]['clone_dir'];
-                    $action        = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_NW_CLONER_UPDATE);
+                    $action        = sprintf("<a href='%s'>%s</a>", $linkupgrade, _AM_XNEWS_CLONER_UPDATE);
                     $installaction = '';
                 }
                 $class  = ('even' === $class) ? 'odd' : 'even';
@@ -177,14 +179,14 @@ function NewsCloner()
 
     $clone_id = isset($_GET['clone_id']) ? (int)$_GET['clone_id'] : 0;
     if ($clone_id > 0) {
-        $xtmod           = new nw_NewsTopic($clone_id);
+        $xtmod           = new XNewsTopic($clone_id);
         $clone_name      = $xtmod->clone_name('E');
         $clone_dir       = $xtmod->clone_dir('E');
         $clone_version   = $xtmod->clone_version('E');
         $op              = 'modClone';
-        $btnlabel        = _AM_NW_MODIFY;
+        $btnlabel        = _AM_XNEWS_MODIFY;
         $parent          = $xtmod->topic_pid();
-        $formlabel       = _AM_NW_MODIFYTOPIC;
+        $formlabel       = _AM_XNEWS_MODIFYTOPIC;
         $oldnewsimport   = $xtmod->menu();
         $topic_frontpage = $xtmod->topic_frontpage();
         $topic_color     = $xtmod->topic_color();
@@ -194,20 +196,20 @@ function NewsCloner()
         $clone_frontpage = 1;
         $clone_dir       = '';
         $op              = 'addTopic';
-        $btnlabel        = _AM_NW_ADD;
+        $btnlabel        = _AM_XNEWS_ADD;
         $parent          = -1;
         $oldnewsimport   = 0;
         $clone_version   = '';
-        $formlabel       = _AM_NW_ADD_TOPIC;
+        $formlabel       = _AM_XNEWS_ADD_TOPIC;
     }
 
     //Draw Form
-    $sform = new XoopsThemeForm(_AM_NW_CLONER_ADD, 'clonerform', XNEWS_MODULE_URL . '/admin/clone.php', 'post', true);
+    $sform = new XoopsThemeForm(_AM_XNEWS_CLONER_ADD, 'clonerform', XNEWS_MODULE_URL . '/admin/clone.php', 'post', true);
 
-    $filedir_tray = new XoopsFormElementTray(_AM_NW_CLONER_NEWNAME, '');
-    $label        = sprintf(_AM_NW_CLONER_NEWNAMEDESC, $xnews->getModule()->name());
+    $filedir_tray = new XoopsFormElementTray(_AM_XNEWS_CLONER_NEWNAME, '');
+    $label        = sprintf(_AM_XNEWS_CLONER_NEWNAMEDESC, $xnews->getModule()->name());
     $filedir_tray->addElement(new XoopsFormLabel($label), false);
-    $filedir_tray->addElement(new XoopsFormText(_AM_NW_CLONER_NEWNAMELABEL, 'clone_modulename', 50, 255, $clone_modulename), true);
+    $filedir_tray->addElement(new XoopsFormText(_AM_XNEWS_CLONER_NEWNAMELABEL, 'clone_modulename', 50, 255, $clone_modulename), true);
     $sform->addElement($filedir_tray);
 
     $sform->addElement(new XoopsFormHidden('op', 'clonerapply'), false);
@@ -232,7 +234,7 @@ function NewsCloner()
 function NewsClonerApply()
 {
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
 
     require_once __DIR__ . '/cloner.php';
     if (!empty($_POST['clone_modulename'])) {
@@ -287,10 +289,10 @@ function NewsClonerApply()
             $sql    .= " VALUES ('" . $new_modulename . "', '" . $new_dirname . "', '" . $module_version . "', '" . $new_subprefix . "', 0);";
             $result = $GLOBALS['xoopsDB']->query($sql);
 
-            $label = sprintf(_AM_NW_CLONER_CREATED, $new_modulename);
+            $label = sprintf(_AM_XNEWS_CLONER_CREATED, $new_modulename);
             redirect_header('clone.php?op=cloner', 3, $label);
         } else {
-            $label = sprintf(_AM_NW_CLONER_DIREXISTS, $new_dirname);
+            $label = sprintf(_AM_XNEWS_CLONER_DIREXISTS, $new_dirname);
             redirect_header('clone.php?op=cloner', 3, $label);
         }
     }
@@ -302,12 +304,12 @@ function NewsClonerApply()
 function CloneUpgrade()
 {
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
     require_once __DIR__ . '/cloner.php';
     //
     if (!isset($_GET['clone_id'])) {
         //trigger_error("Not set", E_USER_WARNING);
-        redirect_header('clone.php?op=cloner', 3, _AM_NW_CLONER_NOMODULEID);
+        redirect_header('clone.php?op=cloner', 3, _AM_XNEWS_CLONER_NOMODULEID);
     } else {
         $cloneid = $_GET['clone_id'];
         $result  = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' WHERE clone_id = ' . $cloneid);
@@ -354,7 +356,7 @@ function CloneUpgrade()
         nw_clonefilename($path_array, $org_subprefix, $upg_subprefix);
         //Update module dtb
         $GLOBALS['xoopsDB']->queryF('UPDATE ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' SET clone_version  = ' . $org_version . ' WHERE clone_id = ' . $cloneid);
-        $label = sprintf(_AM_NW_CLONER_UPRADED, $upg_modulename);
+        $label = sprintf(_AM_XNEWS_CLONER_UPRADED, $upg_modulename);
         redirect_header('clone.php?op=cloner', 3, $label);
     }
 }
@@ -365,7 +367,7 @@ function CloneUpgrade()
 function CloneDelete()
 {
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
     //  admin navigation
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
@@ -374,7 +376,7 @@ function CloneDelete()
     xoops_load('XoopsFormLoader');
     //
     if (!isset($_GET['clone_id'])) {
-        redirect_header('clone.php?op=cloner', 3, _AM_NW_CLONER_CLONEID);
+        redirect_header('clone.php?op=cloner', 3, _AM_XNEWS_CLONER_CLONEID);
     } else {
         $cloneid = $_GET['clone_id'];
         $result  = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' WHERE clone_id = ' . $cloneid);
@@ -385,10 +387,10 @@ function CloneDelete()
         }
         $module_dirname = $clone_arr[0]['clone_dir'];
         echo "<div id='NewsCloner' style='text-align: center;'>";
-        echo '<h2>' . _AM_NW_CLONER_CLONEDELETION . '</h2>';
+        echo '<h2>' . _AM_XNEWS_CLONER_CLONEDELETION . '</h2>';
         echo '</div>';
         //echo "<div style='text-align: center;'>";
-        $message = sprintf(_AM_NW_CLONER_SUREDELETE, $module_dirname);
+        $message = sprintf(_AM_XNEWS_CLONER_SUREDELETE, $module_dirname);
         xoops_confirm(['op' => 'clonedeleteapply', 'clone_id' => $cloneid, 'ok' => 1, 'module_name' => $module_dirname], 'clone.php', $message);
     }
 }
@@ -399,29 +401,29 @@ function CloneDelete()
 function CloneDeleteApply()
 {
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
     require_once __DIR__ . '/cloner.php';
     //
     //trigger_error("Not set", E_USER_WARNING);
     if (!isset($_POST['clone_id'])) {
-        redirect_header('clone.php?op=cloner', 3, _AM_NW_CLONER_CLONEID);
+        redirect_header('clone.php?op=cloner', 3, _AM_XNEWS_CLONER_CLONEID);
     } else {
         $del_dirname = $_POST['module_name'];
         $delPath1    = XOOPS_ROOT_PATH . '/modules/' . $del_dirname;
         $delPath2    = XOOPS_ROOT_PATH . '/uploads/' . $del_dirname;
         if (file_exists($delPath2) && is_dir($delPath2)) {
             if (true === nw_removewholeclone($delPath1) && true === nw_removewholeclone($delPath2)) {
-                $label = sprintf(_AM_NW_CLONER_CLONEDELETED, $del_dirname);
+                $label = sprintf(_AM_XNEWS_CLONER_CLONEDELETED, $del_dirname);
                 redirect_header('clone.php?op=cloner', 3, $label);
             } else {
-                $label = sprintf(_AM_NW_CLONER_CLONEDELETEERR, $del_dirname);
+                $label = sprintf(_AM_XNEWS_CLONER_CLONEDELETEERR, $del_dirname);
                 redirect_header('clone.php?op=cloner', 3, $label);
             }
         } elseif (true === nw_removewholeclone($delPath1)) {
-            $label = sprintf(_AM_NW_CLONER_CLONEDELETED, $del_dirname);
+            $label = sprintf(_AM_XNEWS_CLONER_CLONEDELETED, $del_dirname);
             redirect_header('clone.php?op=cloner', 3, $label);
         } else {
-            $label = sprintf(_AM_NW_CLONER_CLONEDELETEERR, $del_dirname);
+            $label = sprintf(_AM_XNEWS_CLONER_CLONEDELETEERR, $del_dirname);
             redirect_header('clone.php?op=cloner', 3, $label);
         }
     }

@@ -37,7 +37,7 @@ require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 if (!$xnews->getConfig('firefox_microsummaries')) {
     exit();
 }
-$story      = new nw_NewsStory();
+$story      = new XNewsStory();
 $restricted = $xnews->getConfig('restrictindex');
 $sarray     = [];
 // Get the last news from all topics according to the module's restrictions

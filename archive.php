@@ -27,41 +27,41 @@
  *
  * @package News
  * @author Xoops Modules Dev Team
- * @copyright	(c) The Xoops Project - www.xoops.org
+ * @copyright    (c) The Xoops Project - www.xoops.org
  *
  * Parameters received by this page :
- * @page_param int              year Optional, the starting year
- * @page_param int              month Optional, the starting month
+ * @page_param     int        year    Optional, the starting year
+ * @page_param     int        month    Optional, the starting month
  *
- * @page_title                  "news Archives" - Year - Month - Module's name
+ * @page_title            "news Archives" - Year - Month - Module's name
  *
- * @template_name               nw_news_archive.tpl
+ * @template_name        nw_news_archive.tpl
  *
  * Template's variables :
- * @template_var array          years Contains all the years we have information for
- *                                  Structure :
- *                                  number int Year (2004 for example)
- *                                  months array moths in the year (months when we have some articles)
- *                                  Structure :
- *                                  string string Month's name
- *                                  number int Month's number (between 1 and 12)
- * @template_var boolean        show_articles true or false
- * @template_var string         lang_articles Fixed text "Articles"
- * @template_var array          currentmonth Label of each month (from january to december)
- * @template_var int            currentyear Starting year
- * @template_var string         lang_actions Fixed text "Actions"
- * @template_var string         lang_date Fixed text "Date"
- * @template_var string         lang_views Fixed text "Views"
- * @template_var array          stories Contains all the stories to display
- *                                  Structure :
- *                                  title string Contains a link to see the topic and a link (with the story's title) to read the full story
- *                                  counter int Number of views for this article
- *                                  date string Article's publish date
- *                                  print_link string A link to the story's printable version
- *                                  mail_link string A mailto link to mail the story to a friend
- * @template_var string         lang_printer Fixed text "Printer Friendly Page"
- * @template_var string         lang_sendstory Fixed text "Send this Story to a Friend"
- * @template_var string         lang_storytotal Text "There are xx article(s) in total"
+ * @template_var     array     years            Contains all the years we have information for
+ *                                            Structure :
+ *                                                number    int        Year (2004 for example)
+ *                                                months    array    moths in the year (months when we have some articles)
+ *                                                    Structure :
+ *                                                    string    string    Month's name
+ *                                                    number    int        Month's number (between 1 and 12)
+ * @template_var     boolean    show_articles    true or false
+ * @template_var    string    lang_articles    Fixed text "Articles"
+ * @template_var    array    currentmonth    Label of each month (from january to december)
+ * @template_var    int        currentyear        Starting year
+ * @template_var    string    lang_actions     Fixed text "Actions"
+ * @template_var    string    lang_date        Fixed text "Date"
+ * @template_var    string    lang_views         Fixed text "Views"
+ * @template_var    array    stories            Contains all the stories to display
+ *                                            Structure :
+ *                                            title        string    Contains a link to see the topic and a link (with the story's title) to read the full story
+ *                                            counter        int        Number of views for this article
+ *                                            date        string    Article's publish date
+ *                                            print_link    string    A link to the story's printable version
+ *                                            mail_link    string    A mailto link to mail the story to a friend
+ * @template_var    string    lang_printer    Fixed text "Printer Friendly Page"
+ * @template_var    string    lang_sendstory    Fixed text "Send this Story to a Friend"
+ * @template_var    string  lang_storytotal    Text "There are xx article(s) in total"
  */
 ######################################################################
 # Original version:
@@ -107,7 +107,7 @@ if ('' == $dateformat) {
     $dateformat = 'm';
 }
 $myts = \MyTextSanitizer::getInstance();
-$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_MA_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
+$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_MD_XNEWS_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 
 //DNPROSSI - ADDED
 $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
@@ -165,12 +165,12 @@ if (!$result) {
 
 if (0 != $fromyear && 0 != $frommonth) {
     $xoopsTpl->assign('show_articles', true);
-    $xoopsTpl->assign('lang_articles', _MA_NW_ARTICLES);
+    $xoopsTpl->assign('lang_articles', _MD_XNEWS_ARTICLES);
     $xoopsTpl->assign('currentmonth', $months_arr[$frommonth]);
     $xoopsTpl->assign('currentyear', $fromyear);
-    $xoopsTpl->assign('lang_actions', _MA_NW_ACTIONS);
-    $xoopsTpl->assign('lang_date', _MA_NW_DATE);
-    $xoopsTpl->assign('lang_views', _MA_NW_VIEWS);
+    $xoopsTpl->assign('lang_actions', _MD_XNEWS_ACTIONS);
+    $xoopsTpl->assign('lang_date', _MD_XNEWS_DATE);
+    $xoopsTpl->assign('lang_views', _MD_XNEWS_VIEWS);
 
     // must adjust the selected time to server timestamp
     $timeoffset = $useroffset - $xoopsConfig['server_TZ'];
@@ -179,7 +179,7 @@ if (0 != $fromyear && 0 != $frommonth) {
     $monthend   = ($monthend > time()) ? time() : $monthend;
 
     $count      = 0;
-    $news       = new nw_NewsStory();
+    $news       = new XNewsStory();
     $storyarray = $news->getArchive($monthstart, $monthend, $restricted);
     $count      = count($storyarray);
     if (is_array($storyarray) && $count > 0) {
@@ -198,26 +198,26 @@ if (0 != $fromyear && 0 != $frommonth) {
             if (0 != $seo_enabled) {
                 $cat_path   = nw_remove_accents($article->topic_title());
                 $item_path  = nw_remove_accents($article->title());
-                $print_item = nw_remove_accents(_MA_NW_PRINTERFRIENDLY);
+                $print_item = nw_remove_accents(_MD_XNEWS_PRINTERFRIENDLY);
             }
-            $story['title']      = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $article->topicid(), $cat_path) . "'>" . $article->topic_title() . '</a>';
-            $story['title']      .= ": <a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $article->storyid(), $item_path) . "'" . $htmltitle . '>' . $article->title() . '</a>';
-            $story['print_link'] = nw_seo_UrlGenerator(_MA_NW_SEO_PRINT, $article->storyid(), $print_item);
+            $story['title']      = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $article->topicid(), $cat_path) . "'>" . $article->topic_title() . '</a>';
+            $story['title']      .= ": <a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $article->storyid(), $item_path) . "'" . $htmltitle . '>' . $article->title() . '</a>';
+            $story['print_link'] = nw_seo_UrlGenerator(_MD_XNEWS_SEO_PRINT, $article->storyid(), $print_item);
 
             $story['counter']   = $article->counter();
             $story['date']      = formatTimestamp($article->published(), $dateformat, $useroffset);
-            $story['mail_link'] = 'mailto:?subject=' . sprintf(_MA_NW_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_MA_NW_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $article->storyid();
+            $story['mail_link'] = 'mailto:?subject=' . sprintf(_MD_XNEWS_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_MD_XNEWS_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $article->storyid();
             $xoopsTpl->append('stories', $story);
         }
     }
-    $xoopsTpl->assign('lang_printer', _MA_NW_PRINTERFRIENDLY);
-    $xoopsTpl->assign('lang_sendstory', _MA_NW_SENDSTORY);
-    $xoopsTpl->assign('lang_storytotal', sprintf(_MA_NW_THEREAREINTOTAL, $count));
+    $xoopsTpl->assign('lang_printer', _MD_XNEWS_PRINTERFRIENDLY);
+    $xoopsTpl->assign('lang_sendstory', _MD_XNEWS_SENDSTORY);
+    $xoopsTpl->assign('lang_storytotal', sprintf(_MD_XNEWS_THEREAREINTOTAL, $count));
 } else {
     $xoopsTpl->assign('show_articles', false);
 }
 
-$xoopsTpl->assign('lang_newsarchives', _MA_NW_NEWSARCHIVES);
+$xoopsTpl->assign('lang_newsarchives', _MD_XNEWS_NEWSARCHIVES);
 
 /**
  * Create the meta datas

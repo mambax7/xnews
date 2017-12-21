@@ -1,5 +1,5 @@
 <{if $pagenav}>
-<div style="text-align: left; margin: 10px;"><{$smarty.const._MA_NW_PAGE}> <{$pagenav}></div>
+<div style="text-align: left; margin: 10px;"><{$smarty.const._MD_XNEWS_PAGE}> <{$pagenav}></div>
 <{/if}>
 <table width="100%" border="0" style="padding: 5px;">
     <tr>
@@ -70,7 +70,7 @@
 
 
 
-<{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._MA_NW_PAGE}> <{$pagenav}></div><{/if}>
+<{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._MD_XNEWS_PAGE}> <{$pagenav}></div><{/if}>
 
 
 
@@ -151,33 +151,33 @@
 <br>
 <table width='50%' cellspacing='0' cellpadding='1'>
     <tr>
-        <th><{$smarty.const._MA_NW_BOOKMARK_ME}></th>
+        <th><{$smarty.const._MD_XNEWS_BOOKMARK_ME}></th>
     </tr>
     <tr>
         <td>
             <br>
         <{if $urlrewrite == true}>
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_BLINKLIST}>" href="http://www.blinklist.com/index.php?Action=Blink/addblink.php&Description=&Url=<{$story_url}>&Title=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/blinklist.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_DELICIOUS}>" href="http://del.icio.us/post?url=<{$story_url}>&title=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/delicious.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_DIGG}>" href="http://digg.com/submit?phase=2&url=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/diggman.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_FARK}>" href="http://cgi.fark.com/cgi/fark/edit.pl?new_url=<{$story_url}>&new_comment=<{$encoded_title}>&new_link_other=<{$encoded_title}>&linktype=Misc" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/fark.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_FURL}>" href="http://www.furl.net/storeIt.jsp?t=<{$encoded_title}>&u=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/furl.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_NEWSVINE}>" href="http://www.newsvine.com/_tools/seed&save?u=<{$story_url}>&h=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/newsvine.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_REDDIT}>" href="http://reddit.com/submit?url=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/reddit.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_SIMPY}>" href="http://www.simpy.com/simpy/LinkAdd.do?href=<{$story_url}>&title=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/simpy.png"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_SPURL}>" href="http://www.spurl.net/spurl.php?title=<{$encoded_title}>&url=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/spurl.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_YAHOO}>" href="http://myweb2.search.yahoo.com/myresults/bookmarklet?t=<{$encoded_title}>&u=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/yahoomyweb.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_BLINKLIST}>" href="http://www.blinklist.com/index.php?Action=Blink/addblink.php&Description=&Url=<{$story_url}>&Title=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/blinklist.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_DELICIOUS}>" href="http://del.icio.us/post?url=<{$story_url}>&title=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/delicious.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_DIGG}>" href="http://digg.com/submit?phase=2&url=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/diggman.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_FARK}>" href="http://cgi.fark.com/cgi/fark/edit.pl?new_url=<{$story_url}>&new_comment=<{$encoded_title}>&new_link_other=<{$encoded_title}>&linktype=Misc" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/fark.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_FURL}>" href="http://www.furl.net/storeIt.jsp?t=<{$encoded_title}>&u=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/furl.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_NEWSVINE}>" href="http://www.newsvine.com/_tools/seed&save?u=<{$story_url}>&h=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/newsvine.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_REDDIT}>" href="http://reddit.com/submit?url=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/reddit.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_SIMPY}>" href="http://www.simpy.com/simpy/LinkAdd.do?href=<{$story_url}>&title=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/simpy.png"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_SPURL}>" href="http://www.spurl.net/spurl.php?title=<{$encoded_title}>&url=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/spurl.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_YAHOO}>" href="http://myweb2.search.yahoo.com/myresults/bookmarklet?t=<{$encoded_title}>&u=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/yahoomyweb.gif"></a>&nbsp;
         <{else}>
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_BLINKLIST}>" href="http://www.blinklist.com/index.php?Action=Blink/addblink.php&Description=&Url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&Title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/blinklist.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_DELICIOUS}>" href="http://del.icio.us/post?url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/delicious.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_DIGG}>" href="http://digg.com/submit?phase=2&url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/diggman.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_FARK}>" href="http://cgi.fark.com/cgi/fark/edit.pl?new_url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&new_comment=<{$encoded_title}>&new_link_other=<{$encoded_title}>&linktype=Misc" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/fark.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_FURL}>" href="http://www.furl.net/storeIt.jsp?t=<{$encoded_title}>&u=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/furl.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_NEWSVINE}>" href="http://www.nwvine.com/_tools/seed&save?u=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&h=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/nwvine.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_REDDIT}>" href="http://reddit.com/submit?url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/reddit.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_SIMPY}>" href="http://www.simpy.com/simpy/LinkAdd.do?href=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/simpy.png"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_SPURL}>" href="http://www.spurl.net/spurl.php?title=<{$encoded_title}>&url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/spurl.gif"></a>&nbsp;
-            <a target="_blank" title="<{$smarty.const._MA_NW_BOOKMARK_TO_YAHOO}>" href="http://myweb2.search.yahoo.com/myresults/bookmarklet?t=<{$encoded_title}>&u=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/yahoomyweb.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_BLINKLIST}>" href="http://www.blinklist.com/index.php?Action=Blink/addblink.php&Description=&Url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&Title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/blinklist.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_DELICIOUS}>" href="http://del.icio.us/post?url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/delicious.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_DIGG}>" href="http://digg.com/submit?phase=2&url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/diggman.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_FARK}>" href="http://cgi.fark.com/cgi/fark/edit.pl?new_url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&new_comment=<{$encoded_title}>&new_link_other=<{$encoded_title}>&linktype=Misc" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/fark.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_FURL}>" href="http://www.furl.net/storeIt.jsp?t=<{$encoded_title}>&u=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/furl.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_NEWSVINE}>" href="http://www.nwvine.com/_tools/seed&save?u=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&h=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/nwvine.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_REDDIT}>" href="http://reddit.com/submit?url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/reddit.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_SIMPY}>" href="http://www.simpy.com/simpy/LinkAdd.do?href=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/simpy.png"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_SPURL}>" href="http://www.spurl.net/spurl.php?title=<{$encoded_title}>&url=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/spurl.gif"></a>&nbsp;
+            <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_YAHOO}>" href="http://myweb2.search.yahoo.com/myresults/bookmarklet?t=<{$encoded_title}>&u=<{$newsmodule_url}>/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/yahoomyweb.gif"></a>&nbsp;
            <{/if}>
         </td>
     </tr>

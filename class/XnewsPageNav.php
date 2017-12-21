@@ -93,5 +93,4 @@ class XnewsPageNav extends XoopsPageNav
 
         return $ret;
     }
-
 }

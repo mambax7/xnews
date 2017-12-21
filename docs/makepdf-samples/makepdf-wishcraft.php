@@ -19,6 +19,13 @@
 
 error_reporting(0);
 require_once __DIR__ . '/header.php';
+
+if (!is_file(XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php')) {
+    redirect_header(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/viewtopic.php?topic_id=' . $topic_id, 3, 'TCPDF for Xoops not installed');
+} else {
+    require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
+}
+
 $myts = \MyTextSanitizer::getInstance();
 
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
@@ -32,7 +39,7 @@ require_once XNEWS_MODULE_PATH . '/class/keyhighlighter.class.php';
 $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
 
 if (empty($storyid)) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
 $sql = 'SELECT a.topic_title, b.title FROM ' . $GLOBALS['xoopsDB']->prefix('nw_stories') . ' b INNER JOIN ' . $GLOBALS['xoopsDB']->prefix('nw_topics') . " a on b.topicid = a.topic_id where b.storyid = $storyid";
@@ -52,13 +59,13 @@ if (!isset($GLOBALS['xoopsTpl']) || !is_object($GLOBALS['xoopsTpl'])) {
     $GLOBALS['xoopsTpl'] = new xoopsTpl();
 }
 
-$article = new nw_NewsStory($storyid);
+$article = new XNewsStory($storyid);
 if (0 == $article->published() || $article->published() > time()) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOTYETSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOTYETSTORY);
 }
 // Expired
 if (0 != $article->expired() && $article->expired() < time()) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
 $gpermHandler = xoops_getHandler('groupperm');
@@ -100,7 +107,7 @@ $story['posttime']        = formatTimestamp($article->published(), $dateformat);
 $story['news_title']      = $article->title();
 $story['title']           = $article->textlink() . '&nbsp;:&nbsp;' . $article->title();
 $story['topic_title']     = $article->textlink();
-$story['topic_separator'] = ('' != $article->textlink()) ? _MA_NW_SP : '';
+$story['topic_separator'] = ('' != $article->textlink()) ? _MD_XNEWS_SP : '';
 
 $story['text'] = $article->hometext();
 $bodytext      = $article->bodytext();
@@ -123,7 +130,7 @@ if ('' != xoops_trim($bodytext)) {
     if ($story_pages > 1) {
         xoops_load('xoopspagenav');
         $pagenav = new XoopsPageNav($story_pages, 1, $storypage, 'page', 'storyid=' . $storyid);
-        if (nw_isbot()) { // A bot is reading the articles, we are going to show him all the links to the pages
+        if (nw_isbot()) {         // A bot is reading the articles, we are going to show him all the links to the pages
             $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav($story_pages));
         } else {
             if ($xnews->getConfig('enhanced_pagenav')) {
@@ -153,7 +160,7 @@ $GLOBALS['xoopsTpl']->assign('advertisement', $xnews->getConfig('advertisement')
 function my_highlighter($matches)
 {
     $color = $xnews->getConfig('highlightcolor');
-    if ('#' !== substr($color, 0, 1)) {
+    if (0 !== strpos($color, '#')) {
         $color = '#' . $color;
     }
 
@@ -213,23 +220,23 @@ if ($article->topicdisplay()) {
     $story['align']   = $article->topicalign();
 }
 $story['hits']      = $article->counter();
-$story['mail_link'] = 'mailto:?subject=' . sprintf(_MA_NW_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_MA_NW_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $article->storyid();
-$GLOBALS['xoopsTpl']->assign('lang_printerpage', _MA_NW_PRINTERFRIENDLY);
-$GLOBALS['xoopsTpl']->assign('lang_sendstory', _MA_NW_SENDSTORY);
-$GLOBALS['xoopsTpl']->assign('lang_pdfstory', _MA_NW_MAKEPDF);
+$story['mail_link'] = 'mailto:?subject=' . sprintf(_MD_XNEWS_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_MD_XNEWS_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $article->storyid();
+$GLOBALS['xoopsTpl']->assign('lang_printerpage', _MD_XNEWS_PRINTERFRIENDLY);
+$GLOBALS['xoopsTpl']->assign('lang_sendstory', _MD_XNEWS_SENDSTORY);
+$GLOBALS['xoopsTpl']->assign('lang_pdfstory', _MD_XNEWS_MAKEPDF);
 
 if ('' != $article->uname()) {
     $GLOBALS['xoopsTpl']->assign('lang_on', _ON);
     $GLOBALS['xoopsTpl']->assign('lang_postedby', _POSTEDBY);
 } else {
-    $GLOBALS['xoopsTpl']->assign('lang_on', '' . _MA_NW_POSTED . ' ' . _ON . ' ');
+    $GLOBALS['xoopsTpl']->assign('lang_on', '' . _MD_XNEWS_POSTED . ' ' . _ON . ' ');
     $GLOBALS['xoopsTpl']->assign('lang_postedby', '');
 }
 
 $GLOBALS['xoopsTpl']->assign('lang_reads', _READS);
-$GLOBALS['xoopsTpl']->assign('mail_link', 'mailto:?subject=' . sprintf(_MA_NW_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_MA_NW_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $article->storyid());
+$GLOBALS['xoopsTpl']->assign('mail_link', 'mailto:?subject=' . sprintf(_MD_XNEWS_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_MD_XNEWS_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $article->storyid());
 
-$GLOBALS['xoopsTpl']->assign('lang_attached_files', _MA_NW_ATTACHEDFILES);
+$GLOBALS['xoopsTpl']->assign('lang_attached_files', _MD_XNEWS_ATTACHEDFILES);
 
 $sfiles     = new nw_sFiles();
 $filesarr   = $newsfiles = [];
@@ -238,7 +245,7 @@ $filescount = count($filesarr);
 $GLOBALS['xoopsTpl']->assign('attached_files_count', $filescount);
 if ($filescount > 0) {
     foreach ($filesarr as $onefile) {
-        if (strstr($onefile->getMimetype(), 'image')) {
+        if (false !== strpos($onefile->getMimetype(), 'image')) {
             $mime        = 'image';
             $newsfiles[] = ['visitlink' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(), 'file_realname' => $onefile->getFileRealName(), 'file_mimetype' => $mime];
             //trigger_error($mime, E_USER_WARNING);
@@ -246,9 +253,9 @@ if ($filescount > 0) {
             $newsfiles[] = [
                 'file_id'           => $onefile->getFileid(),
                 'visitlink'         => XNEWS_MODULE_URL . '/visit.php?fileid=' . $onefile->getFileid(),
-                'file_realname'     => $onefile->getFileRealName(),
-                'file_attacheddate' => formatTimestamp($onefile->getDate(), $dateformat),
-                'file_mimetype'     => $onefile->getMimetype(),
+                            'file_realname'     => $onefile->getFileRealName(),
+                            'file_attacheddate' => formatTimestamp($onefile->getDate(), $dateformat),
+                            'file_mimetype'     => $onefile->getMimetype(),
                 'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
             ];
         }
@@ -265,7 +272,7 @@ if ($xnews->getConfig('enhanced_pagenav') && (isset($arr_titles) && is_array($ar
 }
 
 if ($xnews->getConfig('newsbythisauthor')) {
-    $GLOBALS['xoopsTpl']->assign('news_by_the_same_author_link', sprintf("<a href='%s?uid=%d'>%s</a>", XNEWS_MODULE_URL . '/newsbythisauthor.php', $article->uid(), _MA_NW_NEWSSAMEAUTHORLINK));
+    $GLOBALS['xoopsTpl']->assign('news_by_the_same_author_link', sprintf("<a href='%s?uid=%d'>%s</a>", XNEWS_MODULE_URL . '/newsbythisauthor.php', $article->uid(), _MD_XNEWS_NEWSSAMEAUTHORLINK));
 }
 
 /**
@@ -293,9 +300,9 @@ if ($cfg['create_clickable_path']) {
  */
 if ($xnews->getConfig('showsummarytable')) {
     $GLOBALS['xoopsTpl']->assign('showsummary', true);
-    $GLOBALS['xoopsTpl']->assign('lang_other_story', _MA_NW_OTHER_ARTICLES);
+    $GLOBALS['xoopsTpl']->assign('lang_other_story', _MD_XNEWS_OTHER_ARTICLES);
     $count      = 0;
-    $tmparticle = new nw_NewsStory();
+    $tmparticle = new XNewsStory();
     $infotips   = $xnews->getConfig('infotips');
     $sarray     = $tmparticle->getAllPublished($cfg['article_summary_items_count'], 0, $xnews->getConfig('restrictindex'));
     if (count($sarray) > 0) {
@@ -312,7 +319,7 @@ if ($xnews->getConfig('showsummarytable')) {
             $story_path = '';
             if (0 != $seo_enabled) {
                 $story_path = nw_remove_accents($onearticle->title());
-                $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
+                $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
                 $GLOBALS['xoopsTpl']->append('summary', [
                     'story_id'        => $onearticle->storyid(),
                     'htmltitle'       => $htmltitle,
@@ -349,7 +356,7 @@ if ($xnews->getConfig('showsummarytable')) {
  */
 if ($xnews->getConfig('showprevnextlink')) {
     $GLOBALS['xoopsTpl']->assign('nav_links', $xnews->getConfig('showprevnextlink'));
-    $tmparticle = new nw_NewsStory();
+    $tmparticle = new XNewsStory();
     $nextId     = $previousId = -1;
     $next       = $previous = [];
 
@@ -378,8 +385,8 @@ if ($xnews->getConfig('showprevnextlink')) {
         if (0 != $seo_enabled) {
             $item_path = nw_remove_accents($previousTitle);
         }
-        $prevStory = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $previousId, $item_path) . "' title='" . _MA_NW_PREVIOUS_ARTICLE . "'>";
-        $prevStory .= "<img src='" . XNEWS_MODULE_URL . "/assets/images/leftarrow22.png' border='0' alt='" . _MA_NW_PREVIOUS_ARTICLE . "'></a>";
+        $prevStory = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $previousId, $item_path) . "' title='" . _MD_XNEWS_PREVIOUS_ARTICLE . "'>";
+        $prevStory .= "<img src='" . XNEWS_MODULE_URL . "/assets/images/leftarrow22.png' border='0' alt='" . _MD_XNEWS_PREVIOUS_ARTICLE . "'></a>";
         $GLOBALS['xoopsTpl']->assign('previous_story', $prevStory);
     }
 
@@ -389,15 +396,15 @@ if ($xnews->getConfig('showprevnextlink')) {
         if (0 != $seo_enabled) {
             $item_path = nw_remove_accents($nextTitle);
         }
-        $nextStory = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $nextId, $item_path) . "' title='" . _MA_NW_NEXT_ARTICLE . "'>";
-        $nextStory .= "<img src='" . XNEWS_MODULE_URL . "/images/rightarrow22.png' border='0' alt='" . _MA_NW_NEXT_ARTICLE . "'></a>";
+        $nextStory = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $nextId, $item_path) . "' title='" . _MD_XNEWS_NEXT_ARTICLE . "'>";
+        $nextStory .= "<img src='" . XNEWS_MODULE_URL . "/images/rightarrow22.png' border='0' alt='" . _MD_XNEWS_NEXT_ARTICLE . "'></a>";
         $GLOBALS['xoopsTpl']->assign('next_story', $nextStory);
 
         $hcontent .= sprintf("<link rel=\"Next\" title=\"%s\" href=\"%s/\">\n", $nextTitle, XNEWS_MODULE_URL . '/article.php?storyid=' . $nextId);
     }
 
-    $GLOBALS['xoopsTpl']->assign('lang_previous_story', _MA_NW_PREVIOUS_ARTICLE);
-    $GLOBALS['xoopsTpl']->assign('lang_next_story', _MA_NW_NEXT_ARTICLE);
+    $GLOBALS['xoopsTpl']->assign('lang_previous_story', _MD_XNEWS_PREVIOUS_ARTICLE);
+    $GLOBALS['xoopsTpl']->assign('lang_next_story', _MD_XNEWS_NEXT_ARTICLE);
     unset($tmparticle);
 } else {
     $GLOBALS['xoopsTpl']->assign('nav_links', 0);
@@ -436,13 +443,13 @@ if ($cfg['config_rating_registred_only']) {
 
 if ($xnews->getConfig('ratenews') && $other_test) {
     $GLOBALS['xoopsTpl']->assign('rates', true);
-    $GLOBALS['xoopsTpl']->assign('lang_ratingc', _MA_NW_RATINGC);
-    $GLOBALS['xoopsTpl']->assign('lang_ratethisnews', _MA_NW_RATETHISNEWS);
+    $GLOBALS['xoopsTpl']->assign('lang_ratingc', _MD_XNEWS_RATINGC);
+    $GLOBALS['xoopsTpl']->assign('lang_ratethisnews', _MD_XNEWS_RATETHISNEWS);
     $story['rating'] = number_format($article->rating(), 2);
     if (1 == $article->votes) {
-        $story['votes'] = _MA_NW_ONEVOTE;
+        $story['votes'] = _MD_XNEWS_ONEVOTE;
     } else {
-        $story['votes'] = sprintf(_MA_NW_NUMVOTES, $article->votes);
+        $story['votes'] = sprintf(_MD_XNEWS_NUMVOTES, $article->votes);
     }
 } else {
     $GLOBALS['xoopsTpl']->assign('rates', false);
@@ -462,23 +469,23 @@ $item_path = '';
 if (0 != $seo_enabled) {
     $item_path = nw_remove_accents($article->title());
 }
-$storyURL = nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $storyid, $item_path);
+$storyURL = nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $storyid, $item_path);
 $GLOBALS['xoopsTpl']->assign('story_url', $storyURL);
 
 $print_item = '';
 if (0 != $seo_enabled) {
-    $print_item = nw_remove_accents(_MA_NW_PRINTERFRIENDLY);
+    $print_item = nw_remove_accents(_MD_XNEWS_PRINTERFRIENDLY);
 }
-$printLink = "<a target='_blank' href='" . nw_seo_UrlGenerator(_MA_NW_SEO_PRINT, $storyid, $print_item) . "' title='" . _MA_NW_PRINTERFRIENDLY . "'>";
-$printLink .= "<img src='" . NW_MODULE_URL . "/images/print.png' width='28px' height='28px' border='0' alt='" . _MA_NW_PRINTERFRIENDLY . "'></a>";
+$printLink = "<a target='_blank' href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_PRINT, $storyid, $print_item) . "' title='" . _MD_XNEWS_PRINTERFRIENDLY . "'>";
+$printLink .= "<img src='" . XNEWS_MODULE_URL . "/images/print.png' width='28px' height='28px' border='0' alt='" . _MD_XNEWS_PRINTERFRIENDLY . "'></a>";
 $GLOBALS['xoopsTpl']->assign('print_link', $printLink);
 
 $pdf_item = '';
 if (0 != $seo_enabled) {
     $pdf_item = nw_remove_accents($article->title());
 }
-$pdfLink = "<a target='_blank' href='" . nw_seo_UrlGenerator(_MA_NW_SEO_PDF, $storyid, $pdf_item) . "' title='" . _MA_NW_MAKEPDF . "'>";
-$pdfLink .= "<img src='" . NW_MODULE_URL . "/images/acrobat.png' width='28px' height='28px' border='0' alt='" . _MA_NW_MAKEPDF . "'></a>";
+$pdfLink = "<a target='_blank' href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_PDF, $storyid, $pdf_item) . "' title='" . _MD_XNEWS_MAKEPDF . "'>";
+$pdfLink .= "<img src='" . XNEWS_MODULE_URL . "/images/acrobat.png' width='28px' height='28px' border='0' alt='" . _MD_XNEWS_MAKEPDF . "'></a>";
 $GLOBALS['xoopsTpl']->assign('pdf_link', $pdfLink);
 
 if (0 != $seo_enabled) {
@@ -506,7 +513,7 @@ $pdf_data['date']        = ': ' . date(_DATESTRING, $article->published());
 $memberHandler = xoops_getHandler('member');
 $author        = $memberHandler->getUser($article->uid());
 if ($author->getVar('name')) {
-    $pdf_data['author'] = $author->getVar('name') . '( ' . $author->getVar('uname') . ')';
+    $pdf_data['author'] = $author->getVar('name') . '(' . $author->getVar('uname') . ')';
 } else {
     $pdf_data['author'] = $author->getVar('uname');
 }
@@ -525,7 +532,6 @@ define('PDF_HEADER_STRING', $pdf_data['subtitle']);
 define('PDF_HEADER_LOGO', 'logo.png');
 define('K_PATH_IMAGES', XOOPS_ROOT_PATH . '/images/');
 
-require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
 
 //$filename = XOOPS_ROOT_PATH . '/Frameworks/tcpdf/config/lang/' . _LANGCODE . '.php';
 //if (file_exists($filename)) {

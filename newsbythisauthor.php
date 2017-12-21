@@ -86,7 +86,7 @@ if (!$xnews->getConfig('newsbythisauthor')) {
 }
 
 $myts                                    = \MyTextSanitizer::getInstance();
-$articles                                = new nw_NewsStory();
+$articles                                = new XNewsStory();
 $GLOBALS['xoopsOption']['template_main'] = 'nw_news_by_this_author.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
@@ -109,16 +109,16 @@ switch ($xnews->getConfig('displayname')) {
         $authname = '';
         break;
 }
-$xoopsTpl->assign('lang_page_title', _MI_NW_NEWSBYTHISAUTHOR . ' - ' . $authname);
-$xoopsTpl->assign('lang_nw_by_this_author', _MI_NW_NEWSBYTHISAUTHOR);
+$xoopsTpl->assign('lang_page_title', _MI_XNEWS_NEWSBYTHISAUTHOR . ' - ' . $authname);
+$xoopsTpl->assign('lang_nw_by_this_author', _MI_XNEWS_NEWSBYTHISAUTHOR);
 $xoopsTpl->assign('author_id', $uid);
 $xoopsTpl->assign('user_avatarurl', XOOPS_URL . '/uploads/' . $thisuser->getVar('user_avatar'));
 $xoopsTpl->assign('author_name', $authname);
-$xoopsTpl->assign('lang_date', _MA_NW_DATE);
-$xoopsTpl->assign('lang_hits', _MA_NW_VIEWS);
-$xoopsTpl->assign('lang_title', _MA_NW_TITLE);
+$xoopsTpl->assign('lang_date', _MD_XNEWS_DATE);
+$xoopsTpl->assign('lang_hits', _MD_XNEWS_VIEWS);
+$xoopsTpl->assign('lang_title', _MD_XNEWS_TITLE);
 $xoopsTpl->assign('nw_rating', $xnews->getConfig('ratenews'));
-$xoopsTpl->assign('lang_rating', _MA_NW_RATING);
+$xoopsTpl->assign('lang_rating', _MD_XNEWS_RATING);
 $xoopsTpl->assign('author_name_with_link', sprintf("<a href='%s'>%s</a>", XOOPS_URL . '/userinfo.php?uid=' . $uid, $authname));
 
 $oldtopic      = -1;
@@ -143,10 +143,10 @@ if ($articlescount > 0) {
                 if (0 != $seo_enabled) {
                     $cat_path = nw_remove_accents($oldtopictitle);
                 }
-                $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $oldtopictitle . '</a>';
+                $topic_link = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $oldtopictitle . '</a>';
                 $xoopsTpl->append('topics', [
                     'topic_id'             => $oldtopic,
-                    'topic_count_articles' => sprintf(_AM_NW_TOTAL, $count_articles),
+                    'topic_count_articles' => sprintf(_AM_XNEWS_TOTAL, $count_articles),
                     'topic_count_reads'    => $count_reads,
                     'topic_color'          => $oldtopiccolor,
                     'topic_title'          => $oldtopictitle,
@@ -171,7 +171,7 @@ if ($articlescount > 0) {
         if (0 != $seo_enabled) {
             $story_path = nw_remove_accents($article['title']);
         }
-        $storyTitle    = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $article['storyid'], $story_path) . "' " . $htmltitle . '>' . $article['title'] . '</a>';
+        $storyTitle    = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $article['storyid'], $story_path) . "' " . $htmltitle . '>' . $article['title'] . '</a>';
         $articlestpl[] = [
             'id'           => $article['storyid'],
             'hometext'     => $article['hometext'],
@@ -190,10 +190,10 @@ $cat_path = '';
 if (0 != $seo_enabled) {
     $cat_path = nw_remove_accents($article['topic_title']);
 }
-$topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $article['topic_title'] . '</a>';
+$topic_link = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $article['topic_title'] . '</a>';
 
 $xoopsTpl->append('topics', ['topic_id' => $oldtopic, 'topic_title' => $oldtopictitle, 'topic_link' => $topic_link, 'news' => $articlestpl]);
-$xoopsTpl->assign('xoops_pagetitle', _MI_NW_NEWSBYTHISAUTHOR . ' - ' . $authname . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
+$xoopsTpl->assign('xoops_pagetitle', _MI_XNEWS_NEWSBYTHISAUTHOR . ' - ' . $authname . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
 
 /**
@@ -201,7 +201,7 @@ $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
  */
 nw_CreateMetaDatas();
 
-$meta_description = _MI_NW_NEWSBYTHISAUTHOR . ' - ' . $authname . ' - ' . $myts->htmlSpecialChars($xoopsModule->name());
+$meta_description = _MI_XNEWS_NEWSBYTHISAUTHOR . ' - ' . $authname . ' - ' . $myts->htmlSpecialChars($xoopsModule->name());
 if (isset($xoTheme) && is_object($xoTheme)) {
     $xoTheme->addMeta('meta', 'description', $meta_description);
 } else { // Compatibility for old Xoops versions

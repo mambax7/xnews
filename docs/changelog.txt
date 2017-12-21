@@ -89,7 +89,7 @@ o Upgraded to Xoops 2.5.7 directory structure.
 <h5>1.68 (RC2) UTF-8 SEO</h5>
 <hr>
 - Added Index link in admin menu
-- Added define("_AM_NW_INDEX", "Index"); in language - admin.php
+- Added define("_AM_XNEWS_INDEX", "Index"); in language - admin.php
 - Fixed issue with "blocks" blank page
 - Modified all xNews words appearing in language files to x"."News (cloner should not change this to clone name)
 - Removed txt files from parser these remain unchanged by cloner.
@@ -160,14 +160,14 @@ Upgrading clones Beta to RC1:
   from header title and also disable topic image clicking.
 - Language file changes
     main.php 
-      changed define("_AM_NW_GROUPPERM", "Permissions");     
-      added   define("_MA_NW_SP", ":");
-      added   define("_MA_NW_POSTED", "Posted");
+      changed define("_AM_XNEWS_GROUPPERM", "Permissions");
+      added   define("_MD_XNEWS_SP", ":");
+      added   define("_MD_XNEWS_POSTED", "Posted");
     modinfo.php 
-      added   define("_MI_NW_TOPICDISPLAY", "Display Topics");
-      added   define("_MI_NW_TOPICDISPLAYDESC", "This will enable/disable Topics title in block headers");
-      added   define("_MI_NW_SEOENABLE", "SEO enable");
-      added   define("_MI_NW_SEOENABLEDESC", "This will enable/disable SEO activity");
+      added   define("_MI_XNEWS_TOPICDISPLAY", "Display Topics");
+      added   define("_MI_XNEWS_TOPICDISPLAYDESC", "This will enable/disable Topics title in block headers");
+      added   define("_MI_XNEWS_SEOENABLE", "SEO enable");
+      added   define("_MI_XNEWS_SEOENABLEDESC", "This will enable/disable SEO activity");
 - Fixed item width to 100% when short scoop and extended item block shrunk on some themes
 - Fixed topic image alignment
 - Many other small fixes
@@ -195,10 +195,10 @@ I am writing a short help file eventhough changes are self explanatory and modul
 - Complete 2.4.x and 2.5.0 alpha 2 compatability 
 - Modified all files and code for multiple news module install and easy cloning
 - Fixed all english, italian, french language prefixes to: 
-	- _AM_NW_ for admin
-	- _MA_NW_ for main
-	- _MI_NW_ for modinfo
-	- _MB_NW_ for blocks
+	- _AM_XNEWS_ for admin
+	- _MD_XNEWS_ for main
+	- _MI_XNEWS_ for modinfo
+	- _MB_XNEWS_ for blocks
 	- Other languages can be added after canging incomplete prefixes 
 	  on standard news modules and adding the last added lines language defines
 	  using notepad++, geany - search/replace functions.

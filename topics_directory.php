@@ -40,7 +40,7 @@ $seo_enabled = $xnews->getConfig('seo_enable');
 
 $newscountbytopic = $tbl_topics = [];
 $perms            = '';
-$xt               = new nw_NewsTopic();
+$xt               = new XNewsTopic();
 $restricted       = $xnews->getConfig('restrictindex');
 if ($restricted) {
     global $xoopsUser;
@@ -75,7 +75,7 @@ if (is_array($topics_arr) && count($topics_arr)) {
         if (0 != $seo_enabled) {
             $cat_path = nw_remove_accents($onetopic['topic_title']);
         }
-        $topic_link = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $onetopic['topic_id'], $cat_path) . "'>" . $onetopic['topic_title'] . '</a>';
+        $topic_link = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $onetopic['topic_id'], $cat_path) . "'>" . $onetopic['topic_title'] . '</a>';
 
         $tbl_topics[] = [
             'id'          => $onetopic['topic_id'],
@@ -96,11 +96,11 @@ $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
  */
 nw_CreateMetaDatas();
 
-$xoopsTpl->assign('xoops_pagetitle', _AM_NW_TOPICS_DIRECTORY);
-$meta_description = _AM_NW_TOPICS_DIRECTORY . ' - ' . $myts->htmlSpecialChars($xoopsModule->name());
+$xoopsTpl->assign('xoops_pagetitle', _AM_XNEWS_TOPICS_DIRECTORY);
+$meta_description = _AM_XNEWS_TOPICS_DIRECTORY . ' - ' . $myts->htmlSpecialChars($xoopsModule->name());
 if (isset($xoTheme) && is_object($xoTheme)) {
     $xoTheme->addMeta('meta', 'description', $meta_description);
-} else { // Compatibility for old Xoops versions
+} else {    // Compatibility for old Xoops versions
     $xoopsTpl->assign('xoops_meta_description', $meta_description);
 }
 

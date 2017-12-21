@@ -1,4 +1,4 @@
-<h2><{$smarty.const._AM_NW_TOPICS_DIRECTORY}></h2>
+<h2><{$smarty.const._AM_XNEWS_TOPICS_DIRECTORY}></h2>
 <br>
 <ul>
 <{foreach item=topic from=$topics}>

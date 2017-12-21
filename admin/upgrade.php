@@ -17,14 +17,18 @@
  * @author     XOOPS Development Team
  */
 
-require_once __DIR__ . '/header.php';
+use Xoopsmodules\xnews;
+
+require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
 xoops_cp_header();
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
 
 if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     $errors = 0;
+
     //DNPROSSI - Upgrade if clone version is different from original's version
+
     //DNPROSSI - Import data from old news database files
     if (nw_TableExists($xoopsDB->prefix('stories'))) {
         $sql    = sprintf('INSERT INTO ' . $xoopsDB->prefix('nw_stories') . ' SELECT * FROM ' . $xoopsDB->prefix('stories') . ';');
@@ -39,21 +43,22 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
         $sql    = sprintf('INSERT INTO ' . $xoopsDB->prefix('nw_stories_votedata') . ' SELECT * FROM ' . $xoopsDB->prefix('stories_votedata') . ';');
         $result = $xoopsDB->queryF($sql);
     }
+
     // 1) Create, if it does not exists, the nw_stories_files table
     if (!nw_TableExists($xoopsDB->prefix('nw_stories_files'))) {
         $sql = 'CREATE TABLE ' . $xoopsDB->prefix('nw_stories_files') . " (
-            fileid INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-            filerealname VARCHAR(255) NOT NULL DEFAULT '',
-            storyid INT(8) UNSIGNED NOT NULL DEFAULT '0',
-            date INT(10) NOT NULL DEFAULT '0',
-            mimetype VARCHAR(64) NOT NULL DEFAULT '',
-            downloadname VARCHAR(255) NOT NULL DEFAULT '',
-            counter INT(8) UNSIGNED NOT NULL DEFAULT '0',
-            PRIMARY KEY  (fileid),
-            KEY storyid (storyid)
+              fileid INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+              filerealname VARCHAR(255) NOT NULL DEFAULT '',
+              storyid INT(8) UNSIGNED NOT NULL DEFAULT '0',
+              date INT(10) NOT NULL DEFAULT '0',
+              mimetype VARCHAR(64) NOT NULL DEFAULT '',
+              downloadname VARCHAR(255) NOT NULL DEFAULT '',
+              counter INT(8) UNSIGNED NOT NULL DEFAULT '0',
+              PRIMARY KEY  (fileid),
+              KEY storyid (storyid)
             ) ENGINE=MyISAM;";
         if (!$xoopsDB->queryF($sql)) {
-            echo '<br>' . _AM_NW_UPGRADEFAILED . ' ' . _AM_NW_UPGRADEFAILED1;
+            echo '<br>' . _AM_XNEWS_UPGRADEFAILED . ' ' . _AM_XNEWS_UPGRADEFAILED1;
             $errors++;
         }
     }
@@ -62,7 +67,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     $sql    = sprintf('ALTER TABLE ' . $xoopsDB->prefix('nw_topics') . ' CHANGE topic_title topic_title VARCHAR( 255 ) NOT NULL;');
     $result = $xoopsDB->queryF($sql);
     if (!$result) {
-        echo '<br>' . _AM_NW_UPGRADEFAILED . ' ' . _AM_NW_UPGRADEFAILED2;
+        echo '<br>' . _AM_XNEWS_UPGRADEFAILED . ' ' . _AM_XNEWS_UPGRADEFAILED2;
         $errors++;
     }
 
@@ -80,7 +85,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
         nw_AddField('topic_description TEXT NOT NULL', $xoopsDB->prefix('nw_topics'));
     }
     if (!nw_FieldExists('topic_color', $xoopsDB->prefix('nw_topics'))) {
-        nw_AddField("topic_color varchar( 6 ) NOT NULL default '000000'", $xoopsDB->prefix('nw_topics'));
+        nw_AddField("topic_color varchar(6) NOT NULL default '000000'", $xoopsDB->prefix('nw_topics'));
     }
     if (!nw_FieldExists('topic_weight', $xoopsDB->prefix('nw_topics'))) {
         nw_AddField("topic_weight int( 11 ) NOT NULL default '0'", $xoopsDB->prefix('nw_topics'));
@@ -89,19 +94,19 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     // 3) If it does not exists, create the table nw_stories_votedata
     if (!nw_TableExists($xoopsDB->prefix('nw_stories_votedata'))) {
         $sql = 'CREATE TABLE ' . $xoopsDB->prefix('nw_stories_votedata') . " (
-            ratingid INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-            storyid INT(8) UNSIGNED NOT NULL DEFAULT '0',
-            ratinguser INT(11) NOT NULL DEFAULT '0',
-            rating TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
-            ratinghostname VARCHAR(60) NOT NULL DEFAULT '',
-            ratingtimestamp INT(10) NOT NULL DEFAULT '0',
-            PRIMARY KEY  (ratingid),
-            KEY ratinguser (ratinguser),
-            KEY ratinghostname (ratinghostname),
-            KEY storyid (storyid)
+              ratingid INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+              storyid INT(8) UNSIGNED NOT NULL DEFAULT '0',
+              ratinguser INT(11) NOT NULL DEFAULT '0',
+              rating TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+              ratinghostname VARCHAR(60) NOT NULL DEFAULT '',
+              ratingtimestamp INT(10) NOT NULL DEFAULT '0',
+              PRIMARY KEY  (ratingid),
+              KEY ratinguser (ratinguser),
+              KEY ratinghostname (ratinghostname),
+              KEY storyid (storyid)
             ) ENGINE=MyISAM;";
         if (!$xoopsDB->queryF($sql)) {
-            echo '<br>' . _AM_NW_UPGRADEFAILED . ' ' . _AM_NW_UPGRADEFAILED3;
+            echo '<br>' . _AM_XNEWS_UPGRADEFAILED . ' ' . _AM_XNEWS_UPGRADEFAILED3;
             $errors++;
         }
     }
@@ -114,10 +119,10 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
         nw_AddField("votes INT( 11 ) UNSIGNED DEFAULT '0' NOT NULL", $xoopsDB->prefix('nw_stories'));
     }
     if (!nw_FieldExists('keywords', $xoopsDB->prefix('nw_stories'))) {
-        nw_AddField('keywords VARCHAR( 255 ) NOT NULL', $xoopsDB->prefix('nw_stories'));
+        nw_AddField('keywords VARCHAR(255) NOT NULL', $xoopsDB->prefix('nw_stories'));
     }
     if (!nw_FieldExists('description', $xoopsDB->prefix('nw_stories'))) {
-        nw_AddField('description VARCHAR( 255 ) NOT NULL', $xoopsDB->prefix('nw_stories'));
+        nw_AddField('description VARCHAR(255) NOT NULL', $xoopsDB->prefix('nw_stories'));
     }
     if (!nw_FieldExists('dobr', $xoopsDB->prefix('nw_stories'))) {
         nw_AddField("dobr TINYINT( 1 ) NOT NULL DEFAULT '1'", $xoopsDB->prefix('nw_stories'));
@@ -142,12 +147,12 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 
     // At the end, if there was errors, show them or redirect user to the module's upgrade page
     if ($errors) {
-        echo '<H1>' . _AM_NW_UPGRADEFAILED . '</H1>';
-        echo '<br>' . _AM_NW_UPGRADEFAILED0;
+        echo '<H1>' . _AM_XNEWS_UPGRADEFAILED . '</H1>';
+        echo '<br>' . _AM_XNEWS_UPGRADEFAILED0;
     } else {
-        echo _AM_NW_UPGRADECOMPLETE . " - <a href='" . XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=update&module=' . $moduledirname . "'>" . _AM_NW_UPDATEMODULE . '</a>';
+        echo _AM_XNEWS_UPGRADECOMPLETE . " - <a href='" . XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=update&module=' . $moduledirname . "'>" . _AM_XNEWS_UPDATEMODULE . '</a>';
     }
 } else {
-    printf("<h2>%s</h2>\n", _AM_NW_UPGR_ACCESS_ERROR);
+    printf("<h2>%s</h2>\n", _AM_XNEWS_UPGR_ACCESS_ERROR);
 }
 xoops_cp_footer();

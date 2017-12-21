@@ -23,7 +23,7 @@ $modversion['version']             = 2.00;
 $modversion['module_status']       = 'Alpha';
 $modversion['release_date']        = '2017/12/14'; // YYYY/mm/dd
 $modversion['name']                = 'xNews';
-$modversion['description']         = _MI_NW_DESC;
+$modversion['description']         = _MI_XNEWS_DESC;
 $modversion['author']              = 'The XOOPS Project Module Dev Team & Instant Zero';
 $modversion['credits']             = 'The XOOPS Project, Christian, Pilou, Marco, ALL the members of the Newbb Team, GIJOE, Zoullou, Mithrandir, Setec Astronomy, Marcan, 5vision, Anne, Wishcraft, DNPROSSI';
 $modversion['help']                = '';
@@ -79,10 +79,10 @@ $modversion['search']['func'] = 'nw_search';
 
 // ------------------- Help files ------------------- //
 $modversion['helpsection'] = [
-    ['name' => _MI_NW_OVERVIEW, 'link' => 'page=help'],
-    ['name' => _MI_NW_DISCLAIMER, 'link' => 'page=disclaimer'],
-    ['name' => _MI_NW_LICENSE, 'link' => 'page=license'],
-    ['name' => _MI_NW_SUPPORT, 'link' => 'page=support'],
+    ['name' => _MI_XNEWS_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_XNEWS_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_XNEWS_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_XNEWS_SUPPORT, 'link' => 'page=support'],
 ];
 
 // Menu
@@ -115,7 +115,7 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
     if ($count > 0) {
         require_once XOOPS_ROOT_PATH . '/class/tree.php';
         require_once __DIR__ . '/class/class.newstopic.php';
-        $xt             = new nw_NewsTopic();
+        $xt             = new XNewsTopic();
         $topicObjs      = $xt->getAllTopics($xnews->getConfig('restrictindex'));
         $topicObjsTree  = new XoopsObjectTree($topicObjs, 'topic_id', 'topic_pid');
         $topicChildObjs = $topicObjsTree->getAllChild(0);
@@ -128,22 +128,22 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
         }
         unset($xt);
     }
-    $modversion['sub'][$i]['name'] = _MI_NW_SMNAME2;
+    $modversion['sub'][$i]['name'] = _MI_XNEWS_SMNAME2;
     $modversion['sub'][$i]['url']  = 'archive.php';
     ++$i;
     if ($isSubmissionAllowed) {
-        $modversion['sub'][$i]['name'] = _MI_NW_SMNAME1;
+        $modversion['sub'][$i]['name'] = _MI_XNEWS_SMNAME1;
         $modversion['sub'][$i]['url']  = 'submit.php';
         ++$i;
     }
     unset($isSubmissionAllowed);
     if ($xnews->getConfig('newsbythisauthor')) {
-        $modversion['sub'][$i]['name'] = _MI_NW_WHOS_WHO;
+        $modversion['sub'][$i]['name'] = _MI_XNEWS_WHOS_WHO;
         $modversion['sub'][$i]['url']  = 'whoswho.php';
         ++$i;
     }
 }
-$modversion['sub'][$i]['name'] = _MI_NW_TOPICS_DIRECTORY;
+$modversion['sub'][$i]['name'] = _MI_XNEWS_TOPICS_DIRECTORY;
 $modversion['sub'][$i]['url']  = 'topics_directory.php';
 ++$i;
 
@@ -178,19 +178,19 @@ $i = 0;
 ++$i;
 // Blocks
 $modversion['blocks'][$i]['file']        = 'news_topics.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME1;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME1;
 $modversion['blocks'][$i]['description'] = 'Shows news topics';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_topics_show';
 $modversion['blocks'][$i]['template']    = 'nw_news_block_topics.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_bigstory.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME3;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME3;
 $modversion['blocks'][$i]['description'] = 'Shows most read story of the day';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_bigstory_show';
 $modversion['blocks'][$i]['template']    = 'nw_news_block_bigstory.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_top.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME4;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME4;
 $modversion['blocks'][$i]['description'] = 'Shows top read news articles';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_top_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_top_edit';
@@ -198,7 +198,7 @@ $modversion['blocks'][$i]['options']     = 'counter|10|25|0|0|0|0||1||||||';
 $modversion['blocks'][$i]['template']    = 'nw_news_block_top.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_top.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME5;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME5;
 $modversion['blocks'][$i]['description'] = 'Shows recent articles';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_top_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_top_edit';
@@ -206,13 +206,13 @@ $modversion['blocks'][$i]['options']     = 'published|10|25|0|0|0|0||1||||||';
 $modversion['blocks'][$i]['template']    = 'nw_news_block_top.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_moderate.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME6;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME6;
 $modversion['blocks'][$i]['description'] = 'Shows a block to moderate articles';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_topics_moderate';
 $modversion['blocks'][$i]['template']    = 'nw_news_block_moderate.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_topicsnav.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME7;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME7;
 $modversion['blocks'][$i]['description'] = 'Shows a block to navigate topics';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_topicsnav_show';
 $modversion['blocks'][$i]['template']    = 'nw_news_block_topicnav.tpl';
@@ -220,7 +220,7 @@ $modversion['blocks'][$i]['options']     = '0';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_topicsnav_edit';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_randomnews.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME8;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME8;
 $modversion['blocks'][$i]['description'] = 'Shows a block where news appears randomly';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_randomnews_show';
 $modversion['blocks'][$i]['template']    = 'nw_news_block_randomnews.tpl';
@@ -228,7 +228,7 @@ $modversion['blocks'][$i]['options']     = 'published|10|25|0|0';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_randomnews_edit';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_ratenews.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME9;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME9;
 $modversion['blocks'][$i]['description'] = 'Shows a block where you can see archives';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_archives_show';
 $modversion['blocks'][$i]['template']    = 'nw_news_block_archives.tpl';
@@ -237,7 +237,7 @@ $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_archives_edit';
 ++$i;
 // Added in v2.00
 $modversion['blocks'][$i]['file']        = 'news_latestnews.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_LATESTNEWS_BLOCK;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_LATESTNEWS_BLOCK;
 $modversion['blocks'][$i]['description'] = 'Show latest news';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_latestnews_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_latestnews_edit';
@@ -246,7 +246,7 @@ $modversion['blocks'][$i]['options']     = '6|2|200|100|100|2|dcdcdc|0|0|1|1|1|1
 ++$i;
 // Added in v1.63
 $modversion['blocks'][$i]['file']        = 'news_block_tag.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME11;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME11;
 $modversion['blocks'][$i]['description'] = 'Show top tags';
 $modversion['blocks'][$i]['show_func']   = 'nw_news_tag_block_top_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_news_tag_block_top_edit';
@@ -254,7 +254,7 @@ $modversion['blocks'][$i]['options']     = '50|30|c';
 $modversion['blocks'][$i]['template']    = 'nw_news_tag_block_top.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_block_tag.php';
-$modversion['blocks'][$i]['name']        = _MI_NW_BNAME10;
+$modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME10;
 $modversion['blocks'][$i]['description'] = 'Show tag cloud';
 $modversion['blocks'][$i]['show_func']   = 'nw_news_tag_block_cloud_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_news_tag_block_cloud_edit';
@@ -274,8 +274,8 @@ $i = 0;
 // Select the number of news items to display on top page
 ++$i;
 $modversion['config'][$i]['name']        = 'storyhome';
-$modversion['config'][$i]['title']       = '_MI_NW_STORYHOME';
-$modversion['config'][$i]['description'] = '_MI_NW_STORYHOMEDSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_STORYHOME';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_STORYHOMEDSC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 5;
@@ -290,23 +290,23 @@ $modversion['config'][$i]['options']     = [
 // Format of the date to use in the module, if you don't specify anything then the default date's format will be used
 ++$i;
 $modversion['config'][$i]['name']        = 'dateformat';
-$modversion['config'][$i]['title']       = '_MI_NW_DATEFORMAT';
-$modversion['config'][$i]['description'] = '_MI_NW_DATEFORMAT_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_DATEFORMAT';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_DATEFORMAT_DESC';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = '';
 // Display a navigation's box on the pages ? This navigation's box enable you to jump from one topic to another
 ++$i;
 $modversion['config'][$i]['name']        = 'displaynav';
-$modversion['config'][$i]['title']       = '_MI_NW_DISPLAYNAV';
-$modversion['config'][$i]['description'] = '_MI_NW_DISPLAYNAVDSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_DISPLAYNAV';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_DISPLAYNAVDSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
 /*
 ++$i;
 $modversion['config'][$i]['name'] = 'anonpost';
-$modversion['config'][$i]['title'] = '_MI_NW_ANONPOST';
+$modversion['config'][$i]['title'] = '_MI_XNEWS_ANONPOST';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
@@ -315,41 +315,41 @@ $modversion['config'][$i]['default'] = 0;
 // Auto approuve submited stories
 ++$i;
 $modversion['config'][$i]['name']        = 'autoapprove';
-$modversion['config'][$i]['title']       = '_MI_NW_AUTOAPPROVE';
-$modversion['config'][$i]['description'] = '_MI_NW_AUTOAPPROVEDSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_AUTOAPPROVE';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_AUTOAPPROVEDSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Dispay layout, classic or by topics
 ++$i;
 $modversion['config'][$i]['name']        = 'newsdisplay';
-$modversion['config'][$i]['title']       = '_MI_NW_NEWSDISPLAY';
-$modversion['config'][$i]['description'] = '_MI_NW_NEWSDISPLAYDESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_NEWSDISPLAY';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_NEWSDISPLAYDESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'Classic';
 $modversion['config'][$i]['options']     = [
-    '_MI_NW_NEWSCLASSIC' => 'Classic',
-    '_MI_NW_NEWSBYTOPIC' => 'Bytopic'
+    '_MI_XNEWS_NEWSCLASSIC' => 'Classic',
+    '_MI_XNEWS_NEWSBYTOPIC' => 'Bytopic'
 ];
 // How to display Author's name, username, full name or nothing ?
 ++$i;
 $modversion['config'][$i]['name']        = 'displayname';
-$modversion['config'][$i]['title']       = '_MI_NW_NAMEDISPLAY';
-$modversion['config'][$i]['description'] = '_MI_NW_ADISPLAYNAMEDSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_NAMEDISPLAY';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_ADISPLAYNAMEDSC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
 $modversion['config'][$i]['options']     = [
-    '_MI_NW_DISPLAYNAME1' => 1,
-    '_MI_NW_DISPLAYNAME2' => 2,
-    '_MI_NW_DISPLAYNAME3' => 3
+    '_MI_XNEWS_DISPLAYNAME1' => 1,
+    '_MI_XNEWS_DISPLAYNAME2' => 2,
+    '_MI_XNEWS_DISPLAYNAME3' => 3
 ];
 // Number of columns to use to display news
 ++$i;
 $modversion['config'][$i]['name']        = 'columnmode';
-$modversion['config'][$i]['title']       = '_MI_NW_COLUMNMODE';
-$modversion['config'][$i]['description'] = '_MI_NW_COLUMNMODE_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_COLUMNMODE';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_COLUMNMODE_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
@@ -363,8 +363,8 @@ $modversion['config'][$i]['options']     = [
 // Number of news and topics to display in the module's admin part
 ++$i;
 $modversion['config'][$i]['name']        = 'storycountadmin';
-$modversion['config'][$i]['title']       = '_MI_NW_STORYCOUNTADMIN';
-$modversion['config'][$i]['description'] = '_MI_NW_STORYCOUNTADMIN_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_STORYCOUNTADMIN';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_STORYCOUNTADMIN_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 10;
@@ -381,21 +381,21 @@ $modversion['config'][$i]['options']     = [
 // Authorized groups to upload
 ++$i;
 $modversion['config'][$i]['name']        = 'uploadgroups';
-$modversion['config'][$i]['title']       = '_MI_NW_UPLOADGROUPS';
-$modversion['config'][$i]['description'] = '_MI_NW_UPLOADGROUPS_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_UPLOADGROUPS';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_UPLOADGROUPS_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 2;
 $modversion['config'][$i]['options']     = [
-    '_MI_NW_UPLOAD_GROUP1' => 1,
-    '_MI_NW_UPLOAD_GROUP2' => 2,
-    '_MI_NW_UPLOAD_GROUP3' => 3
+    '_MI_XNEWS_UPLOAD_GROUP1' => 1,
+    '_MI_XNEWS_UPLOAD_GROUP2' => 2,
+    '_MI_XNEWS_UPLOAD_GROUP3' => 3
 ];
 // MAX Filesize Upload in kilo bytes
 ++$i;
 $modversion['config'][$i]['name']        = 'maxuploadsize';
-$modversion['config'][$i]['title']       = '_MI_NW_UPLOADFILESIZE';
-$modversion['config'][$i]['description'] = '_MI_NW_UPLOADFILESIZE_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_UPLOADFILESIZE';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_UPLOADFILESIZE_DESC';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1048576;
@@ -411,16 +411,16 @@ $modversion['config'][$i]['default']     = 1048576;
  */
 ++$i;
 $modversion['config'][$i]['name']        = 'restrictindex';
-$modversion['config'][$i]['title']       = '_MI_NW_RESTRICTINDEX';
-$modversion['config'][$i]['description'] = '_MI_NW_RESTRICTINDEXDSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_RESTRICTINDEX';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_RESTRICTINDEXDSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Do you want to enable your visitors to see all the other articles created by the author they are currently reading ?
 ++$i;
 $modversion['config'][$i]['name']        = 'newsbythisauthor';
-$modversion['config'][$i]['title']       = '_MI_NW_NEWSBYTHISAUTHOR';
-$modversion['config'][$i]['description'] = '_MI_NW_NEWSBYTHISAUTHORDSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_NEWSBYTHISAUTHOR';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_NEWSBYTHISAUTHORDSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
@@ -432,72 +432,72 @@ $modversion['config'][$i]['default']     = 0;
  */
 ++$i;
 $modversion['config'][$i]['name']        = 'showprevnextlink';
-$modversion['config'][$i]['title']       = '_MI_NW_PREVNEX_LINK';
-$modversion['config'][$i]['description'] = '_MI_NW_PREVNEX_LINK_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_PREVNEX_LINK';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_PREVNEX_LINK_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['options']     = [
-    _MI_NW_NONE       => 0,
-    _MI_NW_TOPONLY    => 1,
-    _MI_NW_BOTTOMONLY => 2,
-    _MI_NW_BOTH       => 3
+    _MI_XNEWS_NONE       => 0,
+    _MI_XNEWS_TOPONLY    => 1,
+    _MI_XNEWS_BOTTOMONLY => 2,
+    _MI_XNEWS_BOTH       => 3
 ];
 $modversion['config'][$i]['default']     = 0;
 // Dispay layout, view topics and link enabled
 ++$i;
 $modversion['config'][$i]['name']        = 'topicdisplay';
-$modversion['config'][$i]['title']       = '_MI_NW_TOPICDISPLAY';
-$modversion['config'][$i]['description'] = '_MI_NW_TOPICDISPLAYDESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_TOPICDISPLAY';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_TOPICDISPLAYDESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
 // Display attached PDF - 1.71
 ++$i;
 $modversion['config'][$i]['name']        = 'pdf_display';
-$modversion['config'][$i]['title']       = '_MI_NW_PDF_DISPLAY';
-$modversion['config'][$i]['description'] = '_MI_NW_PDF_DISPLAY_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_PDF_DISPLAY';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_PDF_DISPLAY_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Display attached images - 1.71
 ++$i;
 $modversion['config'][$i]['name']        = 'images_display';
-$modversion['config'][$i]['title']       = '_MI_NW_IMAGES_DISPLAY';
-$modversion['config'][$i]['description'] = '_MI_NW_IMAGES_DISPLAY_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_IMAGES_DISPLAY';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_IMAGES_DISPLAY_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Actvate PDF plugin detection - 1.71
 ++$i;
 $modversion['config'][$i]['name']        = 'pdf_detect';
-$modversion['config'][$i]['title']       = '_MI_NW_PDF_DETECT';
-$modversion['config'][$i]['description'] = '_MI_NW_PDF_DETECT_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_PDF_DETECT';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_PDF_DETECT_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Display print, friend and pdf icons top-bottom-both-none
 ++$i;
 $modversion['config'][$i]['name']        = 'displaylinkicns';
-$modversion['config'][$i]['title']       = '_MI_NW_DISPLAYLINKICNS';
-$modversion['config'][$i]['description'] = '_MI_NW_DISPLAYLINKICNSDESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_DISPLAYLINKICNS';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_DISPLAYLINKICNSDESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['options']     = [
-    _MI_NW_NONE       => 0,
-    _MI_NW_TOPONLY    => 1,
-    _MI_NW_BOTTOMONLY => 2,
-    _MI_NW_BOTH       => 3
+    _MI_XNEWS_NONE       => 0,
+    _MI_XNEWS_TOPONLY    => 1,
+    _MI_XNEWS_BOTTOMONLY => 2,
+    _MI_XNEWS_BOTH       => 3
 ];
 $modversion['config'][$i]['default']     = 2;
 // Seo enable
 ++$i;
 $modversion['config'][$i]['name']        = 'seo_enable';
-$modversion['config'][$i]['title']       = '_MI_NW_SEOENABLE';
-$modversion['config'][$i]['description'] = '_MI_NW_SEOENABLEDESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_SEOENABLE';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_SEOENABLEDESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['options']     = [
-    _MI_NW_NONE => 0,
+    _MI_XNEWS_NONE => 0,
     'htaccess'  => 1,
     'path-info' => 2
 ];
@@ -505,67 +505,67 @@ $modversion['config'][$i]['default']     = 0;
 // Seo path
 ++$i;
 $modversion['config'][$i]['name']        = 'seo_path';
-$modversion['config'][$i]['title']       = '_MI_NW_SEOPATH';
-$modversion['config'][$i]['description'] = '_MI_NW_SEOPATHDESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_SEOPATH';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_SEOPATHDESC';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'news';
 // Seo end of URL for Standard WISHCRAFT
 ++$i;
 $modversion['config'][$i]['name']        = 'seo_endofurl';
-$modversion['config'][$i]['title']       = '_MI_NW_SEOENDOFURL';
-$modversion['config'][$i]['description'] = '_MI_NW_SEOENDOFURL_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_SEOENDOFURL';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_SEOENDOFURL_DESC';
 $modversion['config'][$i]['formtype']    = 'text';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = '.tpl';
 // Seo end of URL for RSS
 ++$i;
 $modversion['config'][$i]['name']        = 'seo_endofurl_rss';
-$modversion['config'][$i]['title']       = '_MI_NW_SEOENDOFURLRSS';
-$modversion['config'][$i]['description'] = '_MI_NW_SEOENDOFURLRSS_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_SEOENDOFURLRSS';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_SEOENDOFURLRSS_DESC';
 $modversion['config'][$i]['formtype']    = 'text';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = '.rss';
 // Seo end of URL for PDF
 ++$i;
 $modversion['config'][$i]['name']        = 'seo_endofurl_pdf';
-$modversion['config'][$i]['title']       = '_MI_NW_SEOENDOFURLPDF';
-$modversion['config'][$i]['description'] = '_MI_NW_SEOENDOFURLPDF_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_SEOENDOFURLPDF';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_SEOENDOFURLPDF_DESC';
 $modversion['config'][$i]['formtype']    = 'text';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = '.pdf';
 // Seo level
 ++$i;
 $modversion['config'][$i]['name']        = 'seo_level';
-$modversion['config'][$i]['title']       = '_MI_NW_SEOLEVEL';
-$modversion['config'][$i]['description'] = '_MI_NW_SEOLEVELDESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_SEOLEVEL';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_SEOLEVELDESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['options']     = [
-    _MI_NW_ROOT_LEVEL   => 0,
-    _MI_NW_MODULE_LEVEL => 1
+    _MI_XNEWS_ROOT_LEVEL   => 0,
+    _MI_XNEWS_MODULE_LEVEL => 1
 ];
 $modversion['config'][$i]['default']     = 0;
 // Do you want to see a summary table at the bottom of each article ?
 ++$i;
 $modversion['config'][$i]['name']        = 'showsummarytable';
-$modversion['config'][$i]['title']       = '_MI_NW_SUMMARY_SHOW';
-$modversion['config'][$i]['description'] = '_MI_NW_SUMMARY_SHOW_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_SUMMARY_SHOW';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_SUMMARY_SHOW_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Do you enable author's to edit their posts ?
 ++$i;
 $modversion['config'][$i]['name']        = 'authoredit';
-$modversion['config'][$i]['title']       = '_MI_NW_AUTHOR_EDIT';
-$modversion['config'][$i]['description'] = '_MI_NW_AUTHOR_EDIT_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_AUTHOR_EDIT';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_AUTHOR_EDIT_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 1;
 // Do you want to enable your visitors to rate news ?
 ++$i;
 $modversion['config'][$i]['name']        = 'ratenews';
-$modversion['config'][$i]['title']       = '_MI_NW_RATE_NEWS';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_RATE_NEWS';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
@@ -573,32 +573,32 @@ $modversion['config'][$i]['default']     = 0;
 // You can set RSS feeds per topic
 ++$i;
 $modversion['config'][$i]['name']        = 'topicsrss';
-$modversion['config'][$i]['title']       = '_MI_NW_TOPICS_RSS';
-$modversion['config'][$i]['description'] = '_MI_NW_TOPICS_RSS_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_TOPICS_RSS';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_TOPICS_RSS_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // If you set this option to yes then the approvers can type the keyword and description's meta datas
 ++$i;
 $modversion['config'][$i]['name']        = 'metadata';
-$modversion['config'][$i]['title']       = '_MI_NW_META_DATA';
-$modversion['config'][$i]['description'] = '_MI_NW_META_DATA_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_META_DATA';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_META_DATA_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // If you set this option to yes one line meta data textbox input will be extended
 ++$i;
 $modversion['config'][$i]['name']        = 'extendmetadata';
-$modversion['config'][$i]['title']       = '_MI_NW_EXTEND_META_DATA';
-$modversion['config'][$i]['description'] = '_MI_NW_EXTEND_META_DATA_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_EXTEND_META_DATA';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_EXTEND_META_DATA_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Editor to use
 ++$i;
 $modversion['config'][$i]['name']        = 'form_options';
-$modversion['config'][$i]['title']       = '_MI_NW_FORM_OPTIONS';
-$modversion['config'][$i]['description'] = '_MI_NW_FORM_OPTIONS_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_FORM_OPTIONS';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_FORM_OPTIONS_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'dhtml';
@@ -608,16 +608,16 @@ $modversion['config'][$i]['options'] = array_flip($editorHandler->getList());
 // If you set this option to Yes then the keywords entered in the search will be highlighted in the articles.
 ++$i;
 $modversion['config'][$i]['name']        = 'keywordshighlight';
-$modversion['config'][$i]['title']       = '_MI_NW_KEYWORDS_HIGH';
-$modversion['config'][$i]['description'] = '_MI_NW_KEYWORDS_HIGH_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_KEYWORDS_HIGH';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_KEYWORDS_HIGH_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // If you have enabled the previous option then with this one you can select the color to use to highlight words
 ++$i;
 $modversion['config'][$i]['name']        = 'highlightcolor';
-$modversion['config'][$i]['title']       = '_MI_NW_HIGH_COLOR';
-$modversion['config'][$i]['description'] = '_MI_NW_HIGH_COLOR_DES';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_HIGH_COLOR';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_HIGH_COLOR_DES';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = '#FFFF80';
@@ -628,8 +628,8 @@ $modversion['config'][$i]['default']     = '#FFFF80';
  */
 ++$i;
 $modversion['config'][$i]['name']        = 'infotips';
-$modversion['config'][$i]['title']       = '_MI_NW_INFOTIPS';
-$modversion['config'][$i]['description'] = '_MI_NW_INFOTIPS_DES';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_INFOTIPS';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_INFOTIPS_DES';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = '0';
@@ -640,27 +640,27 @@ $modversion['config'][$i]['default']     = '0';
  */
 ++$i;
 $modversion['config'][$i]['name']        = 'sitenavbar';
-$modversion['config'][$i]['title']       = '_MI_NW_SITE_NAVBAR';
-$modversion['config'][$i]['description'] = '_MI_NW_SITE_NAVBAR_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_SITE_NAVBAR';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_SITE_NAVBAR_DESC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // With this option you can select the skin (apparence) to use for the blocks containing tabs
 ++$i;
 $modversion['config'][$i]['name']        = 'tabskin';
-$modversion['config'][$i]['title']       = '_MI_NW_TABS_SKIN';
-$modversion['config'][$i]['description'] = '_MI_NW_TABS_SKIN_DESC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_TABS_SKIN';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_TABS_SKIN_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['options']     = [
-    _MI_NW_SKIN_1 => 1,
-    _MI_NW_SKIN_2 => 2,
-    _MI_NW_SKIN_3 => 3,
-    _MI_NW_SKIN_4 => 4,
-    _MI_NW_SKIN_5 => 5,
-    _MI_NW_SKIN_6 => 6,
-    _MI_NW_SKIN_7 => 7,
-    _MI_NW_SKIN_8 => 8
+    _MI_XNEWS_SKIN_1 => 1,
+    _MI_XNEWS_SKIN_2 => 2,
+    _MI_XNEWS_SKIN_3 => 3,
+    _MI_XNEWS_SKIN_4 => 4,
+    _MI_XNEWS_SKIN_5 => 5,
+    _MI_XNEWS_SKIN_6 => 6,
+    _MI_XNEWS_SKIN_7 => 7,
+    _MI_XNEWS_SKIN_8 => 8
 ];
 $modversion['config'][$i]['default']     = 6;
 /**
@@ -669,7 +669,7 @@ $modversion['config'][$i]['default']     = 6;
  */
 ++$i;
 $modversion['config'][$i]['name']        = 'footNoteLinks';
-$modversion['config'][$i]['title']       = '_MI_NW_FOOTNOTES';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_FOOTNOTES';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
@@ -677,39 +677,39 @@ $modversion['config'][$i]['default']     = 1;
 // Activate Dublin Core Metadata ?
 ++$i;
 $modversion['config'][$i]['name']        = 'dublincore';
-$modversion['config'][$i]['title']       = '_MI_NW_DUBLINCORE';
-$modversion['config'][$i]['description'] = '_MI_NW_DUBLINCORE_DSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_DUBLINCORE';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_DUBLINCORE_DSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Display a "Bookmark this article at these sites" block ?
 ++$i;
 $modversion['config'][$i]['name']        = 'bookmarkme';
-$modversion['config'][$i]['title']       = '_MI_NW_BOOKMARK_ME';
-$modversion['config'][$i]['description'] = '_MI_NW_BOOKMARK_ME_DSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_BOOKMARK_ME';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_BOOKMARK_ME_DSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Activate Firefox 2 microformats ?
 ++$i;
 $modversion['config'][$i]['name']        = 'firefox_microsummaries';
-$modversion['config'][$i]['title']       = '_MI_NW_FF_MICROFORMAT';
-$modversion['config'][$i]['description'] = '_MI_NW_FF_MICROFORMAT_DSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_FF_MICROFORMAT';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_FF_MICROFORMAT_DSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Advertisement
 ++$i;
 $modversion['config'][$i]['name']        = 'advertisement';
-$modversion['config'][$i]['title']       = '_MI_NW_ADVERTISEMENT';
-$modversion['config'][$i]['description'] = '_MI_NW_ADV_DESCR';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_ADVERTISEMENT';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_ADV_DESCR';
 $modversion['config'][$i]['formtype']    = 'textarea';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = '';
 // Mime Types: default values : Web pictures (png, gif, jpeg), zip, pdf, gtar, tar, pdf
 ++$i;
 $modversion['config'][$i]['name']        = 'mimetypes';
-$modversion['config'][$i]['title']       = '_MI_NW_MIME_TYPES';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_MIME_TYPES';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'textarea';
 $modversion['config'][$i]['valuetype']   = 'text';
@@ -717,23 +717,23 @@ $modversion['config'][$i]['default']     = "image/gif\nimage/jpeg\nimage/pjpeg\n
 // Use enhanced page separator ?
 ++$i;
 $modversion['config'][$i]['name']        = 'enhanced_pagenav';
-$modversion['config'][$i]['title']       = '_MI_NW_ENHANCED_PAGENAV';
-$modversion['config'][$i]['description'] = '_MI_NW_ENHANCED_PAGENAV_DSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_ENHANCED_PAGENAV';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_ENHANCED_PAGENAV_DSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Use the TAGS system ?
 ++$i;
 $modversion['config'][$i]['name']        = 'tags';
-$modversion['config'][$i]['title']       = '_MI_NW_TAGS';
-$modversion['config'][$i]['description'] = '_MI_NW_TAGS_DSC';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_TAGS';
+$modversion['config'][$i]['description'] = '_MI_XNEWS_TAGS_DSC';
 $modversion['config'][$i]['formtype']    = 'yesno';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['default']     = 0;
 // Introduction text to show on the submit page
 ++$i;
 $modversion['config'][$i]['name']        = 'submitintromsg';
-$modversion['config'][$i]['title']       = '_MI_NW_INTRO_TEXT';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_INTRO_TEXT';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'textarea';
 $modversion['config'][$i]['valuetype']   = 'text';
@@ -741,7 +741,7 @@ $modversion['config'][$i]['default']     = '';
 // Image max width
 ++$i;
 $modversion['config'][$i]['name']        = 'maxwidth';
-$modversion['config'][$i]['title']       = '_MI_NW_IMAGE_MAX_WIDTH';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_IMAGE_MAX_WIDTH';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'int';
@@ -749,7 +749,7 @@ $modversion['config'][$i]['default']     = 640;
 // Image max height
 ++$i;
 $modversion['config'][$i]['name']        = 'maxheight';
-$modversion['config'][$i]['title']       = '_MI_NW_IMAGE_MAX_HEIGHT';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_IMAGE_MAX_HEIGHT';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'int';
@@ -757,7 +757,7 @@ $modversion['config'][$i]['default']     = 480;
 // Thumb max width
 ++$i;
 $modversion['config'][$i]['name']        = 'thumb_maxwidth';
-$modversion['config'][$i]['title']       = '_MI_NW_THUMB_MAX_WIDTH';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_THUMB_MAX_WIDTH';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'int';
@@ -765,7 +765,7 @@ $modversion['config'][$i]['default']     = 150;
 // Thumb max max height
 ++$i;
 $modversion['config'][$i]['name']        = 'thumb_maxheight';
-$modversion['config'][$i]['title']       = '_MI_NW_THUMB_MAX_HEIGHT';
+$modversion['config'][$i]['title']       = '_MI_XNEWS_THUMB_MAX_HEIGHT';
 $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'int';
@@ -777,64 +777,64 @@ $modversion['notification']['lookup_file'] = 'include/notification.inc.php';
 $modversion['notification']['lookup_func'] = 'nw_notify_iteminfo';
 
 $modversion['notification']['category'][1]['name']           = 'global';
-$modversion['notification']['category'][1]['title']          = _MI_NW_GLOBAL_NOTIFY;
-$modversion['notification']['category'][1]['description']    = _MI_NW_GLOBAL_NOTIFYDSC;
+$modversion['notification']['category'][1]['title']          = _MI_XNEWS_GLOBAL_NOTIFY;
+$modversion['notification']['category'][1]['description']    = _MI_XNEWS_GLOBAL_NOTIFYDSC;
 $modversion['notification']['category'][1]['subscribe_from'] = ['index.php', 'article.php'];
 
 $modversion['notification']['category'][2]['name']           = 'story';
-$modversion['notification']['category'][2]['title']          = _MI_NW_STORY_NOTIFY;
-$modversion['notification']['category'][2]['description']    = _MI_NW_STORY_NOTIFYDSC;
+$modversion['notification']['category'][2]['title']          = _MI_XNEWS_STORY_NOTIFY;
+$modversion['notification']['category'][2]['description']    = _MI_XNEWS_STORY_NOTIFYDSC;
 $modversion['notification']['category'][2]['subscribe_from'] = ['article.php'];
 $modversion['notification']['category'][2]['item_name']      = 'storyid';
 $modversion['notification']['category'][2]['allow_bookmark'] = 1;
 
 // Added by Lankford on 2007/3/23
 $modversion['notification']['category'][3]['name']           = 'category';
-$modversion['notification']['category'][3]['title']          = _MI_NW_CATEGORY_NOTIFY;
-$modversion['notification']['category'][3]['description']    = _MI_NW_CATEGORY_NOTIFYDSC;
+$modversion['notification']['category'][3]['title']          = _MI_XNEWS_CATEGORY_NOTIFY;
+$modversion['notification']['category'][3]['description']    = _MI_XNEWS_CATEGORY_NOTIFYDSC;
 $modversion['notification']['category'][3]['subscribe_from'] = ['index.php', 'article.php'];
 $modversion['notification']['category'][3]['item_name']      = 'storytopic';
 $modversion['notification']['category'][3]['allow_bookmark'] = 1;
 
 $modversion['notification']['event'][1]['name']          = 'new_category';
 $modversion['notification']['event'][1]['category']      = 'global';
-$modversion['notification']['event'][1]['title']         = _MI_NW_GLOBAL_NEWCATEGORY_NOTIFY;
-$modversion['notification']['event'][1]['caption']       = _MI_NW_GLOBAL_NEWCATEGORY_NOTIFYCAP;
-$modversion['notification']['event'][1]['description']   = _MI_NW_GLOBAL_NEWCATEGORY_NOTIFYDSC;
+$modversion['notification']['event'][1]['title']         = _MI_XNEWS_GLOBAL_NEWCATEGORY_NOTIFY;
+$modversion['notification']['event'][1]['caption']       = _MI_XNEWS_GLOBAL_NEWCATEGORY_NOTIFYCAP;
+$modversion['notification']['event'][1]['description']   = _MI_XNEWS_GLOBAL_NEWCATEGORY_NOTIFYDSC;
 $modversion['notification']['event'][1]['mail_template'] = 'global_newcategory_notify';
-$modversion['notification']['event'][1]['mail_subject']  = _MI_NW_GLOBAL_NEWCATEGORY_NOTIFYSBJ;
+$modversion['notification']['event'][1]['mail_subject']  = _MI_XNEWS_GLOBAL_NEWCATEGORY_NOTIFYSBJ;
 
 $modversion['notification']['event'][2]['name']          = 'story_submit';
 $modversion['notification']['event'][2]['category']      = 'global';
 $modversion['notification']['event'][2]['admin_only']    = 1;
-$modversion['notification']['event'][2]['title']         = _MI_NW_GLOBAL_STORYSUBMIT_NOTIFY;
-$modversion['notification']['event'][2]['caption']       = _MI_NW_GLOBAL_STORYSUBMIT_NOTIFYCAP;
-$modversion['notification']['event'][2]['description']   = _MI_NW_GLOBAL_STORYSUBMIT_NOTIFYDSC;
+$modversion['notification']['event'][2]['title']         = _MI_XNEWS_GLOBAL_STORYSUBMIT_NOTIFY;
+$modversion['notification']['event'][2]['caption']       = _MI_XNEWS_GLOBAL_STORYSUBMIT_NOTIFYCAP;
+$modversion['notification']['event'][2]['description']   = _MI_XNEWS_GLOBAL_STORYSUBMIT_NOTIFYDSC;
 $modversion['notification']['event'][2]['mail_template'] = 'global_storysubmit_notify';
-$modversion['notification']['event'][2]['mail_subject']  = _MI_NW_GLOBAL_STORYSUBMIT_NOTIFYSBJ;
+$modversion['notification']['event'][2]['mail_subject']  = _MI_XNEWS_GLOBAL_STORYSUBMIT_NOTIFYSBJ;
 
 $modversion['notification']['event'][3]['name']          = 'new_story';
 $modversion['notification']['event'][3]['category']      = 'global';
-$modversion['notification']['event'][3]['title']         = _MI_NW_GLOBAL_NEWSTORY_NOTIFY;
-$modversion['notification']['event'][3]['caption']       = _MI_NW_GLOBAL_NEWSTORY_NOTIFYCAP;
-$modversion['notification']['event'][3]['description']   = _MI_NW_GLOBAL_NEWSTORY_NOTIFYDSC;
+$modversion['notification']['event'][3]['title']         = _MI_XNEWS_GLOBAL_NEWSTORY_NOTIFY;
+$modversion['notification']['event'][3]['caption']       = _MI_XNEWS_GLOBAL_NEWSTORY_NOTIFYCAP;
+$modversion['notification']['event'][3]['description']   = _MI_XNEWS_GLOBAL_NEWSTORY_NOTIFYDSC;
 $modversion['notification']['event'][3]['mail_template'] = 'global_newstory_notify';
-$modversion['notification']['event'][3]['mail_subject']  = _MI_NW_GLOBAL_NEWSTORY_NOTIFYSBJ;
+$modversion['notification']['event'][3]['mail_subject']  = _MI_XNEWS_GLOBAL_NEWSTORY_NOTIFYSBJ;
 
 $modversion['notification']['event'][4]['name']          = 'approve';
 $modversion['notification']['event'][4]['category']      = 'story';
 $modversion['notification']['event'][4]['invisible']     = 1;
-$modversion['notification']['event'][4]['title']         = _MI_NW_STORY_APPROVE_NOTIFY;
-$modversion['notification']['event'][4]['caption']       = _MI_NW_STORY_APPROVE_NOTIFYCAP;
-$modversion['notification']['event'][4]['description']   = _MI_NW_STORY_APPROVE_NOTIFYDSC;
+$modversion['notification']['event'][4]['title']         = _MI_XNEWS_STORY_APPROVE_NOTIFY;
+$modversion['notification']['event'][4]['caption']       = _MI_XNEWS_STORY_APPROVE_NOTIFYCAP;
+$modversion['notification']['event'][4]['description']   = _MI_XNEWS_STORY_APPROVE_NOTIFYDSC;
 $modversion['notification']['event'][4]['mail_template'] = 'story_approve_notify';
-$modversion['notification']['event'][4]['mail_subject']  = _MI_NW_STORY_APPROVE_NOTIFYSBJ;
+$modversion['notification']['event'][4]['mail_subject']  = _MI_XNEWS_STORY_APPROVE_NOTIFYSBJ;
 
 // Added by Lankford on 2007/3/23
 $modversion['notification']['event'][5]['name']          = 'new_story';
 $modversion['notification']['event'][5]['category']      = 'category';
-$modversion['notification']['event'][5]['title']         = _MI_NW_CATEGORY_STORYPOSTED_NOTIFY;
-$modversion['notification']['event'][5]['caption']       = _MI_NW_CATEGORY_STORYPOSTED_NOTIFYCAP;
-$modversion['notification']['event'][5]['description']   = _MI_NW_CATEGORY_STORYPOSTED_NOTIFYDSC;
+$modversion['notification']['event'][5]['title']         = _MI_XNEWS_CATEGORY_STORYPOSTED_NOTIFY;
+$modversion['notification']['event'][5]['caption']       = _MI_XNEWS_CATEGORY_STORYPOSTED_NOTIFYCAP;
+$modversion['notification']['event'][5]['description']   = _MI_XNEWS_CATEGORY_STORYPOSTED_NOTIFYDSC;
 $modversion['notification']['event'][5]['mail_template'] = 'category_newstory_notify';
-$modversion['notification']['event'][5]['mail_subject']  = _MI_NW_CATEGORY_STORYPOSTED_NOTIFYSBJ;
+$modversion['notification']['event'][5]['mail_subject']  = _MI_XNEWS_CATEGORY_STORYPOSTED_NOTIFYSBJ;

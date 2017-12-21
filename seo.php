@@ -23,10 +23,10 @@ $seoOp  = @$_GET['seoOp'];
 $seoArg = @$_GET['seoArg'];
 //trigger_error('out', E_USER_ERROR);
 if (empty($seoOp) && @$_SERVER['PATH_INFO']) {
-    // SEO mode is path-info
+    //SEO mode is path-info
     //
-    // Sample URL for path-info
-    // http://localhost/modules/xnews/index.php/articles.1/seo-is-active.html
+    //    Sample URL for path-info
+    //    http://localhost/modules/xnews/index.php/articles.1/seo-is-active.html
     //
     $data = explode('/', $_SERVER['PATH_INFO']);
 
@@ -45,10 +45,10 @@ if (empty($seoOp) && @$_SERVER['PATH_INFO']) {
 }
 
 $seoMap = [
-    _MA_NW_SEO_TOPICS   => 'index.php',
-    _MA_NW_SEO_ARTICLES => 'article.php',
-    _MA_NW_SEO_PRINT    => 'print.php',
-    _MA_NW_SEO_PDF      => 'makepdf.php'
+    _MD_XNEWS_SEO_TOPICS   => 'index.php',
+    _MD_XNEWS_SEO_ARTICLES => 'article.php',
+    _MD_XNEWS_SEO_PRINT    => 'print.php',
+    _MD_XNEWS_SEO_PDF      => 'makepdf.php'
 ];
 
 if (!empty($seoOp) && !empty($seoMap[$seoOp])) {
@@ -61,13 +61,13 @@ if (!empty($seoOp) && !empty($seoMap[$seoOp])) {
     $_SERVER['SCRIPT_NAME'] = $newUrl;
     $_SERVER['PHP_SELF']    = $newUrl;
     switch ($seoOp) {
-        case _MA_NW_SEO_TOPICS:
+        case _MD_XNEWS_SEO_TOPICS:
             $_SERVER['REQUEST_URI'] = $newUrl . '?topic_id=' . $seoArg;
             $_GET['topic_id']       = $seoArg;
             break;
-        case _MA_NW_SEO_ARTICLES:
-        case _MA_NW_SEO_PRINT:
-        case _MA_NW_SEO_PDF:
+        case _MD_XNEWS_SEO_ARTICLES:
+        case _MD_XNEWS_SEO_PRINT:
+        case _MD_XNEWS_SEO_PDF:
         default:
             $_SERVER['REQUEST_URI'] = $newUrl . '?storyid=' . $seoArg;
             $_GET['storyid']        = $seoArg;

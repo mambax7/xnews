@@ -44,9 +44,9 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
  */
 function nw_b_news_randomnews_show($options)
 {
-    $myts                = \MyTextSanitizer::getInstance();
+    $myts          = \MyTextSanitizer::getInstance();
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
     //
     $block         = [];
     $block['sort'] = $options[0];
@@ -60,7 +60,7 @@ function nw_b_news_randomnews_show($options)
         $xlang = false;
     }
 
-    $tmpstory   = new nw_NewsStory;
+    $tmpstory   = new XNewsStory;
     $restricted = $xnews->getConfig('restrictindex');
     $dateformat = $xnews->getConfig('dateformat');
     $infotips   = $xnews->getConfig('infotips');
@@ -101,7 +101,7 @@ function nw_b_news_randomnews_show($options)
         $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
 
         if ($options[3] > 0) {
-            $html = 1 == $story->nohtml() ? 0 : 1;
+            $html             = 1 == $story->nohtml() ? 0 : 1;
             //$news['teaser'] = nw_truncate_tagsafe($myts->displayTarea($story->hometext, $html), $options[3]+3);
             //DNPROSSI New truncate function - now works correctly with html and utf-8
             $news['teaser']   = nw_truncate($story->hometext(), $options[3] + 3, '...', true, $html);
@@ -119,7 +119,7 @@ function nw_b_news_randomnews_show($options)
     //DNPROSSI ADDED
     $block['newsmodule_url'] = XNEWS_MODULE_URL;
 
-    $block['lang_read_more'] = _MB_NW_READMORE;
+    $block['lang_read_more'] = _MB_XNEWS_READMORE;
 
     // DNPROSSI SEO
     $seo_enabled = $xnews->getConfig('seo_enable');
@@ -138,34 +138,36 @@ function nw_b_news_randomnews_show($options)
  */
 function nw_b_news_randomnews_edit($options)
 {
-    $form = _MB_NW_ORDER . "&nbsp;<select name='options[]'>";
+    $form = _MB_XNEWS_ORDER . "&nbsp;<select name='options[]'>";
     $form .= "<option value='published'";
     if ('published' === $options[0]) {
         $form .= " selected='selected'";
     }
-    $form .= '>' . _MB_NW_DATE . "</option>\n";
+    $form .= '>' . _MB_XNEWS_DATE . "</option>\n";
 
     $form .= "<option value='counter'";
     if ('counter' === $options[0]) {
         $form .= " selected='selected'";
     }
-    $form .= '>' . _MB_NW_HITS . '</option>';
+    $form .= '>' . _MB_XNEWS_HITS . '</option>';
 
     $form .= "<option value='rating'";
     if ('rating' === $options[0]) {
         $form .= " selected='selected'";
     }
-    $form .= '>' . _MB_NW_RATE . '</option>';
+    $form .= '>' . _MB_XNEWS_RATE . '</option>';
+
     $form .= "</select>\n";
-    $form .= '&nbsp;' . _MB_NW_DISP . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'>&nbsp;" . _MB_NW_ARTCLS;
-    $form .= '&nbsp;<br><br>' . _MB_NW_CHARS . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'>&nbsp;" . _MB_NW_LENGTH . '<br><br>';
-    $form .= _MB_NW_TEASER . " <input type='text' name='options[]' value='" . $options[3] . "'>" . _MB_NW_LENGTH;
-    $form .= '<br><br>' . _MB_NW_SPOTLIGHT_TOPIC . "<br><select id='options[4]' name='options[]' multiple='multiple'>";
+    $form .= '&nbsp;' . _MB_XNEWS_DISP . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'>&nbsp;" . _MB_XNEWS_ARTCLS;
+    $form .= '&nbsp;<br><br>' . _MB_XNEWS_CHARS . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'>&nbsp;" . _MB_XNEWS_LENGTH . '<br><br>';
+
+    $form .= _MB_XNEWS_TEASER . " <input type='text' name='options[]' value='" . $options[3] . "' >" . _MB_XNEWS_LENGTH;
+    $form .= '<br><br>' . _MB_XNEWS_SPOTLIGHT_TOPIC . "<br><select id='options[4]' name='options[]' multiple='multiple'>";
 
     require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
     $xt                    = new XnewsDeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'));
     $alltopics             = $xt->getTopicsList();
-    $alltopics[0]['title'] = _MB_NW_SPOTLIGHT_ALL_TOPICS;
+    $alltopics[0]['title'] = _MB_XNEWS_SPOTLIGHT_ALL_TOPICS;
     ksort($alltopics);
     $size = count($options);
     foreach ($alltopics as $topicid => $topic) {
@@ -188,7 +190,7 @@ function nw_b_news_randomnews_edit($options)
 function nw_b_news_randomnews_onthefly($options)
 {
     $options = explode('|', $options);
-    $block   =& nw_b_news_randomnews_show($options);
+    $block   = &nw_b_news_randomnews_show($options);
 
     $tpl = new XoopsTpl();
     $tpl->assign('block', $block);

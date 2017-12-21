@@ -61,7 +61,7 @@ if ('go' === $op) {
         $newCat['oldid'] = $arrCat['topic_id'];
         $newCat['oldpid'] = $arrCat['topic_pid'];
 
-        $topic = new nw_NewsTopic;
+        $topic = new XNewsTopic;
 
         $result = $xoopsDB->query("SELECT * FROM " . $xoopsDB->prefix(XNI_SUBPREFIX . '_topics') . " WHERE topic_title = '" . $arrCat['topic_title'] . "'");
         $title_arr = $xoopsDB->fetchArray($result);
@@ -105,7 +105,7 @@ if ('go' === $op) {
         $resultArticles = $xoopsDB->query($sql);
         while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
             // insert article
-            $story =new nw_NewsStory;
+            $story =new XNewsStory;
 
             $story->uid = $arrArticle['uid'];
             $story->title = $arrArticle['title'];

@@ -97,7 +97,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
                     $topicpid = $ams_news_topics[$one_amstopic['topic_pid']];
                 }
             }
-            $news_topic = new nw_NewsTopic();
+            $news_topic = new XNewsTopic();
             $news_topic->setTopicPid($topicpid);
             $news_topic->setTopicTitle($one_amstopic['topic_title']);
             $news_topic->setTopicImgurl($one_amstopic['topic_imgurl']);
@@ -131,20 +131,20 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
                     $result7 = $db->query('SELECT * FROM ' . $ams_links . ' WHERE storyid=' . $ams_newsid . ' ORDER BY linkid');
                     while ($link = $db->fetchArray($result7)) {
                         if ('' == trim($links)) {
-                            $links = "\n\n" . _AMS_MA_NW_RELATEDARTICLES . "\n\n";
+                            $links = "\n\n" . _AMS_MD_XNEWS_RELATEDARTICLES . "\n\n";
                         }
-                        $links .= _AMS_MA_NW_EXTERNALLINK . ' [url=' . $link['link_link'] . ']' . $link['link_title'] . '[/url]' . "\n";
+                        $links .= _AMS_MD_XNEWS_EXTERNALLINK . ' [url=' . $link['link_link'] . ']' . $link['link_title'] . '[/url]' . "\n";
                     }
                 }
 
                 // The forum
                 $forum = '';
                 if ($use_forum && 0 != $one_amstopic['forum_id']) {
-                    $forum = "\n\n" . '[url=' . XOOPS_URL . '/modules/newbb/viewforum.php?forum=' . $one_amstopic['forum_id'] . ']' . _AMS_AM_NW_LINKEDFORUM . '[/url]' . "\n";
+                    $forum = "\n\n" . '[url=' . XOOPS_URL . '/modules/newbb/viewforum.php?forum=' . $one_amstopic['forum_id'] . ']' . _AMS_AM_XNEWS_LINKEDFORUM . '[/url]' . "\n";
                 }
 
                 // We create the story
-                $news = new nw_NewsStory();
+                $news = new XNewsStory();
                 $news->setUid($text_lastversion['uid']);
                 $news->setTitle($article['title']);
                 $news->created = $article['created'];

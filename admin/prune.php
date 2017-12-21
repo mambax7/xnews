@@ -19,6 +19,7 @@
 
 
 use Xmf\Request;
+use Xoopsmodules\xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -44,7 +45,7 @@ if (!nw_FieldExists('picture', $storiesTableName)) {
     nw_AddField('`picture` VARCHAR( 50 ) NOT NULL', $storiesTableName);
 }
 
-$nw_NewsStoryHandler = new nw_NewsStory();
+$nw_NewsStoryHandler = new XNewsStory();
 
 /**
  * Delete (purge/prune) old stories
@@ -72,15 +73,15 @@ switch ($op) {
         $adminObject->displayNavigation($currentFile);
         //
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-        $sform = new XoopsThemeForm(_AM_NW_PRUNENEWS, 'pruneform', $currentFile, 'post', true);
-        $sform->addElement(new XoopsFormTextDateSelect(_AM_NW_PRUNE_BEFORE, 'prune_date', 15, time()), true);
+        $sform = new XoopsThemeForm(_AM_XNEWS_PRUNENEWS, 'pruneform', $currentFile, 'post', true);
+        $sform->addElement(new XoopsFormTextDateSelect(_AM_XNEWS_PRUNE_BEFORE, 'prune_date', 15, time()), true);
         $onlyexpired = new xoopsFormCheckBox('', 'onlyexpired');
-        $onlyexpired->addOption(1, _AM_NW_PRUNE_EXPIREDONLY);
+        $onlyexpired->addOption(1, _AM_XNEWS_PRUNE_EXPIREDONLY);
         $sform->addElement($onlyexpired, false);
         $sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
-        $topiclist  = new XoopsFormSelect(_AM_NW_PRUNE_TOPICS, 'pruned_topics', '', 5, true);
+        $topiclist  = new XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'pruned_topics', '', 5, true);
         $topics_arr = [];
-        $xt         = new nw_NewsTopic();
+        $xt         = new XNewsTopic();
         $allTopics  = $xt->getAllTopics(false); // The webmaster can see everything
         $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topics_arr = $topic_tree->getAllChild(0);
@@ -89,7 +90,7 @@ switch ($op) {
                 $topiclist->addOption($onetopic->topic_id(), $onetopic->topic_title());
             }
         }
-        $topiclist->setDescription(_AM_NW_EXPORT_PRUNE_DSC);
+        $topiclist->setDescription(_AM_XNEWS_EXPORT_PRUNE_DSC);
         $sform->addElement($topiclist, false);
         $button_tray = new XoopsFormElementTray('', '');
         $submit_btn  = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
@@ -104,7 +105,7 @@ switch ($op) {
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
         //
-        $story     = new nw_NewsStory();
+        $story     = new XNewsStory();
         $topiclist = '';
         if (isset($_POST['pruned_topics'])) {
             $topiclist = implode(',', $_POST['pruned_topics']);
@@ -120,17 +121,17 @@ switch ($op) {
         $count = $story->GetCountStoriesPublishedBefore($timestamp, $expired, $topiclist);
         if ($count) {
             $displaydate = formatTimestamp($timestamp, $xnews->getConfig('dateformat'));
-            $msg         = sprintf(_AM_NW_PRUNE_CONFIRM, $displaydate, $count);
+            $msg         = sprintf(_AM_XNEWS_PRUNE_CONFIRM, $displaydate, $count);
             xoops_confirm(['op' => 'prunenews', 'expired' => $expired, 'pruned_topics' => $topiclist, 'prune_date' => $timestamp, 'ok' => 1], 'index.php', $msg);
         } else {
-            printf(_AM_NW_NOTHING_PRUNE);
+            printf(_AM_XNEWS_NOTHING_PRUNE);
         }
         unset($story);
         xoops_cp_footer();
         break;
 
     case 'prunenews':
-        $story     = new nw_NewsStory();
+        $story     = new XNewsStory();
         $timestamp = (int)$_POST['prune_date'];
         $expired   = (int)$_POST['expired'];
         $topiclist = '';
@@ -138,10 +139,10 @@ switch ($op) {
             $topiclist = $_POST['pruned_topics'];
         }
         if (1 == (int)$_POST['ok']) {
-            $story = new nw_NewsStory();
+            $story = new XNewsStory();
             xoops_cp_header();
             $count = $story->GetCountStoriesPublishedBefore($timestamp, $expired, $topiclist);
-            $msg   = sprintf(_AM_NW_PRUNE_DELETED, $count);
+            $msg   = sprintf(_AM_XNEWS_PRUNE_DELETED, $count);
             $story->DeleteBeforeDate($timestamp, $expired, $topiclist);
             unset($story);
             nw_updateCache();

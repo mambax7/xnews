@@ -17,6 +17,8 @@
  * @author     XOOPS Development Team
  */
 
+use Xoopsmodules\xnews;
+
 /**
  * Module Cloner file
  *
@@ -207,10 +209,12 @@ function nw_removewholeclone($directory, $empty = false)
             if ('.' !== $item && '..' !== $item) {
                 // we build the new path to delete
                 $path = $directory . '/' . $item;
+
                 // if the new path is a directory
                 if (is_dir($path)) {
                     // we call this function with the new path
                     nw_removewholeclone($path);
+
                     // if the new path is a file
                 } else {
                     // we remove the file
@@ -220,6 +224,7 @@ function nw_removewholeclone($directory, $empty = false)
         }
         // close the directory
         closedir($handle);
+
         // if the option to empty is not set to true
         if (false === $empty) {
             // try to delete the now empty directory
@@ -228,7 +233,6 @@ function nw_removewholeclone($directory, $empty = false)
                 return false;
             }
         }
-
         // return success
         return true;
     }

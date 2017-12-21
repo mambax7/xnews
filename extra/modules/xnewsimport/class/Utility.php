@@ -3,7 +3,7 @@
 /**
  * Class Utility
  */
-class XNewsImportUtility extends XoopsObject
+class Utility extends XoopsObject
 {
     /**
      * Function responsible for checking if a directory exists, we can also write in and create an index.html file
@@ -32,8 +32,7 @@ class XNewsImportUtility extends XoopsObject
                     file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
                 }
             }
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }

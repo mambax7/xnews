@@ -8,6 +8,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * @copyright    XOOPS Project https://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -17,7 +18,6 @@
  */
 
 require_once __DIR__ . '/header.php';
-
 require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
@@ -29,14 +29,14 @@ $myts   = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 $sfiles = new nw_sFiles($fileid);
 
 // Do we have the right to see the file ?
-$article = new nw_NewsStory($sfiles->getStoryid());
+$article = new XNewsStory($sfiles->getStoryid());
 // and the news, can we see it ?
 if (0 == $article->published() || $article->published() > time()) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 // Expired
 if (0 != $article->expired() && $article->expired() < time()) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
 $gpermHandler = xoops_getHandler('groupperm');

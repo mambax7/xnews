@@ -17,7 +17,7 @@
  * @author     XOOPS Development Team
  */
 
-use XoopsModules\xnews;
+use Xoopsmodules\xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
@@ -51,7 +51,7 @@ function nw_b_news_topics_show()
     $topic_id   = !empty($topic_id) ? (int)$topic_id : 0;
     $restricted = $xnews->getConfig('restrictindex');
 
-    $xt         = new nw_NewsTopic();
+    $xt         = new XNewsTopic();
     $allTopics  = $xt->getAllTopics($restricted);
     $topic_tree = new XnewsMyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
     $additional = " onchange='location=\"" . $jump . "\"+this.options[this.selectedIndex].value'";

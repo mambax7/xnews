@@ -17,6 +17,8 @@
  * @author     XOOPS Development Team
  */
 
+use Xoopsmodules\xnews;
+
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
 require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
@@ -31,27 +33,27 @@ xoops_load('XoopsFormLoader');
 $opForm   = new XoopsSimpleForm('', 'opform', $currentFile, 'get');
 $opSelect = new XoopsFormSelect('', 'permToSet', $permToSet, 1, false);
 $opSelect->setExtra('onchange="document.forms.opform.submit()"');
-$opSelect->addOption('nw_approve', _AM_NW_APPROVEFORM);
-$opSelect->addOption('nw_submit', _AM_NW_SUBMITFORM);
-$opSelect->addOption('nw_view', _AM_NW_VIEWFORM);
+$opSelect->addOption('nw_approve', _AM_XNEWS_APPROVEFORM);
+$opSelect->addOption('nw_submit', _AM_XNEWS_SUBMITFORM);
+$opSelect->addOption('nw_view', _AM_XNEWS_VIEWFORM);
 $opForm->addElement($opSelect);
 $opForm->display();
 // switch permission
 switch ($permToSet) {
     case 'nw_approve':
-        $titleOfForm = _AM_NW_APPROVEFORM;
+        $titleOfForm = _AM_XNEWS_APPROVEFORM;
         $permName    = 'nw_approve';
-        $permDesc    = _AM_NW_APPROVEFORM_DESC;
+        $permDesc    = _AM_XNEWS_APPROVEFORM_DESC;
         break;
     case 'nw_submit':
-        $titleOfForm = _AM_NW_SUBMITFORM;
+        $titleOfForm = _AM_XNEWS_SUBMITFORM;
         $permName    = 'nw_submit';
-        $permDesc    = _AM_NW_SUBMITFORM_DESC;
+        $permDesc    = _AM_XNEWS_SUBMITFORM_DESC;
         break;
     case 'nw_view':
-        $titleOfForm = _AM_NW_VIEWFORM;
+        $titleOfForm = _AM_XNEWS_VIEWFORM;
         $permName    = 'nw_view';
-        $permDesc    = _AM_NW_VIEWFORM_DESC;
+        $permDesc    = _AM_XNEWS_VIEWFORM_DESC;
         break;
 }
 // render permissions grid

@@ -19,6 +19,7 @@
 
 
 use Xmf\Request;
+use Xoopsmodules\xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -72,7 +73,7 @@ switch ($op) {
         $myts = \MyTextSanitizer::getInstance();
         xoops_loadLanguage('main', XNEWS_MODULE_DIRNAME);
 
-        echo _AM_NW_METAGEN_DESC . '<br>';
+        echo _AM_XNEWS_METAGEN_DESC . '<br>';
 
         // Metagen Options
         $registry = new nw_registryfile('nw_metagen_options.txt');
@@ -86,25 +87,25 @@ switch ($op) {
         }
         $sform = new XoopsThemeForm(_OPTIONS, 'metagenoptions', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
         $sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
-        $sform->addElement(new XoopsFormText(_AM_NW_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
-        $keywordsorder = new XoopsFormRadio(_AM_NW_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
-        $keywordsorder->addOption(0, _AM_NW_META_KEYWORDS_INTEXT);
-        $keywordsorder->addOption(1, _AM_NW_META_KEYWORDS_FREQ1);
-        $keywordsorder->addOption(2, _AM_NW_META_KEYWORDS_FREQ2);
+        $sform->addElement(new XoopsFormText(_AM_XNEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
+        $keywordsorder = new XoopsFormRadio(_AM_XNEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
+        $keywordsorder->addOption(0, _AM_XNEWS_META_KEYWORDS_INTEXT);
+        $keywordsorder->addOption(1, _AM_XNEWS_META_KEYWORDS_FREQ1);
+        $keywordsorder->addOption(2, _AM_XNEWS_META_KEYWORDS_FREQ2);
         $sform->addElement($keywordsorder, false);
         $button_tray = new XoopsFormElementTray('', '');
-        $submit_btn  = new XoopsFormButton('', 'post', _AM_NW_MODIFY, 'submit');
+        $submit_btn  = new XoopsFormButton('', 'post', _AM_XNEWS_MODIFY, 'submit');
         $button_tray->addElement($submit_btn);
         $sform->addElement($button_tray);
         $sform->display();
 
         // Blacklist
-        $sform = new XoopsThemeForm(_AM_NW_BLACKLIST, 'metagenblacklist', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
+        $sform = new XoopsThemeForm(_AM_XNEWS_BLACKLIST, 'metagenblacklist', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
         $sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
 
         // Remove words
-        $remove_tray = new XoopsFormElementTray(_AM_NW_BLACKLIST);
-        $remove_tray->setDescription(_AM_NW_BLACKLIST_DESC);
+        $remove_tray = new XoopsFormElementTray(_AM_XNEWS_BLACKLIST);
+        $remove_tray->setDescription(_AM_XNEWS_BLACKLIST_DESC);
         $blacklist = new XoopsFormSelect('', 'blacklist', '', 5, true);
         $words     = [];
 
@@ -116,18 +117,18 @@ switch ($op) {
             }
         }
 
-        $blacklist->setDescription(_AM_NW_BLACKLIST_DESC);
+        $blacklist->setDescription(_AM_XNEWS_BLACKLIST_DESC);
         $remove_tray->addElement($blacklist, false);
-        $remove_btn = new XoopsFormButton('', 'go', _AM_NW_DELETE, 'submit');
+        $remove_btn = new XoopsFormButton('', 'go', _AM_XNEWS_DELETE, 'submit');
         $remove_tray->addElement($remove_btn, false);
         $sform->addElement($remove_tray);
 
         // Add some words
-        $add_tray = new XoopsFormElementTray(_AM_NW_BLACKLIST_ADD);
-        $add_tray->setDescription(_AM_NW_BLACKLIST_ADD_DSC);
+        $add_tray = new XoopsFormElementTray(_AM_XNEWS_BLACKLIST_ADD);
+        $add_tray->setDescription(_AM_XNEWS_BLACKLIST_ADD_DSC);
         $add_field = new XoopsFormTextArea('', 'keywords', '', 5, 70);
         $add_tray->addElement($add_field, false);
-        $add_btn = new XoopsFormButton('', 'go', _AM_NW_ADD, 'submit');
+        $add_btn = new XoopsFormButton('', 'go', _AM_XNEWS_ADD, 'submit');
         $add_tray->addElement($add_btn, false);
         $sform->addElement($add_tray);
         $sform->display();
@@ -139,7 +140,7 @@ switch ($op) {
         // Save Metagen Options
         $registry = new nw_registryfile('nw_metagen_options.txt');
         $registry->savefile((int)$_POST['keywordscount'] . ',' . (int)$_POST['keywordsorder']);
-        redirect_header('index.php?op=metagen', 3, _AM_NW_DBUPDATED);
+        redirect_header('index.php?op=metagen', 3, _AM_XNEWS_DBUPDATED);
         xoops_cp_footer();
         break;
 
@@ -148,13 +149,13 @@ switch ($op) {
         $blacklist = new nw_blacklist();
         $words     = $blacklist->getAllKeywords();
 
-        if (isset($_POST['go']) && _AM_NW_DELETE == $_POST['go']) {
+        if (isset($_POST['go']) && _AM_XNEWS_DELETE == $_POST['go']) {
             foreach ($_POST['blacklist'] as $black_id) {
                 $blacklist->delete($black_id);
             }
             $blacklist->store();
         } else {
-            if (isset($_POST['go']) && _AM_NW_ADD == $_POST['go']) {
+            if (isset($_POST['go']) && _AM_XNEWS_ADD == $_POST['go']) {
                 $p_keywords = $_POST['keywords'];
                 $keywords   = explode("\n", $p_keywords);
                 foreach ($keywords as $keyword) {
@@ -165,7 +166,7 @@ switch ($op) {
                 $blacklist->store();
             }
         }
-        redirect_header('index.php?op=metagen', 3, _AM_NW_DBUPDATED);
+        redirect_header('index.php?op=metagen', 3, _AM_XNEWS_DBUPDATED);
         xoops_cp_footer();
         break;
 }

@@ -24,20 +24,20 @@ require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
 /**
- * Class nw_NewsTopic
+ * Class XNewsTopic
  */
-class nw_NewsTopic extends XnewsDeprecateTopic
+class XNewsTopic extends XnewsDeprecateTopic
 {
     public $menu;
-    public $db;
-    public $table;
+//    public $db;
+//    public $table;
     public $topic_description;
     public $topic_frontpage;
     public $topic_rssurl;
     public $topic_color;
 
     /**
-     * nw_NewsTopic constructor.
+     * XNewsTopic constructor.
      * @param int $topicid
      */
     public function __construct($topicid = 0)
@@ -240,7 +240,7 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         $sql    .= ' ORDER BY topic_title';
         $result = $db->query($sql);
         while ($array = $db->fetchArray($result)) {
-            $topic = new nw_NewsTopic();
+            $topic = new XNewsTopic();
             $topic->makeTopic($array);
             $topics_arr[$array['topic_id']] = $topic;
             unset($topic);
@@ -354,11 +354,35 @@ class nw_NewsTopic extends XnewsDeprecateTopic
         if (empty($this->topic_id)) {
             $insert         = true;
             $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
-            $sql            = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color, topic_weight) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s', %u)", $this->table, (int)$this->topic_id,
-                                      (int)$this->topic_pid, $imgurl, $title, (int)$this->menu, $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)$this->topic_weight);
+            $sql            = sprintf(
+                "INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color, topic_weight) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s', %u)",
+                $this->table,
+                (int)$this->topic_id,
+                                      (int)$this->topic_pid,
+                $imgurl,
+                $title,
+                (int)$this->menu,
+                $topic_description,
+                $topic_frontpage,
+                $topic_rssurl,
+                $topic_color,
+                (int)$this->topic_weight
+            );
         } else {
-            $sql = sprintf("UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s', topic_weight='%u' WHERE topic_id = %u", $this->table, (int)$this->topic_pid, $imgurl, $title, (int)$this->menu,
-                           $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)$this->topic_weight, (int)$this->topic_id);
+            $sql = sprintf(
+                "UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s', topic_weight='%u' WHERE topic_id = %u",
+                $this->table,
+                (int)$this->topic_pid,
+                $imgurl,
+                $title,
+                (int)$this->menu,
+                           $topic_description,
+                $topic_frontpage,
+                $topic_rssurl,
+                $topic_color,
+                (int)$this->topic_weight,
+                (int)$this->topic_id
+            );
         }
         if (!$result = $this->db->query($sql)) {
             // TODO: Replace with something else

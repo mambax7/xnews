@@ -35,7 +35,7 @@ function xnews_tag_iteminfo(&$items)
         }
     }
     require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-    $tempnw    = new nw_NewsStory();
+    $tempnw    = new XNewsStory();
     $items_obj = $tempnw->getStoriesByIds($items_id);
 
     foreach (array_keys($items) as $cat_id) {

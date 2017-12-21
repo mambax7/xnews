@@ -64,7 +64,7 @@ if (isset($_POST['preview'])) {
     // Verify that the user can edit or delete an article
     if ('edit' === $_GET['op'] || 'delete' === $_GET['op']) {
         if (1 == $xnews->getConfig('authoredit')) {
-            $tmpstory = new nw_NewsStory((int)$_GET['storyid']);
+            $tmpstory = new XNewsStory((int)$_GET['storyid']);
             if (is_object($xoopsUser) && $xoopsUser->getVar('uid') != $tmpstory->uid() && !nw_is_admin_group()) {
                 redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
             }
@@ -86,7 +86,7 @@ if (isset($_POST['preview'])) {
             $storyid = 0;
             $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : (int)$_POST['storyid'];
             if (!empty($storyid)) {
-                $tmpstory = new nw_NewsStory($storyid);
+                $tmpstory = new XNewsStory($storyid);
                 if ($tmpstory->uid() == $xoopsUser->getVar('uid')) {
                     $op = isset($_GET['op']) ? $_GET['op'] : $_POST['post'];
                     unset($tmpstory);
@@ -120,12 +120,12 @@ switch ($op) {
         //if($storyid==0 && isset($_POST['storyid'])) {
         //    $storyid=intval($_POST['storyid']);
         //}
-        $story = new nw_NewsStory($storyid);
+        $story = new XNewsStory($storyid);
         if (!$gpermHandler->checkRight('nw_view', $story->topicid(), $groups, $xnews->getModule()->getVar('mid'))) {
             redirect_header(XNEWS_MODULE_URL . '/index.php', 0, _NOPERM);
         }
         echo "<table width='100%' border='0' cellspacing='1' class='outer'><tr><td class=\"odd\">";
-        echo '<h4>' . _AM_NW_EDITARTICLE . '</h4>';
+        echo '<h4>' . _AM_XNEWS_EDITARTICLE . '</h4>';
         $title       = $story->title('Edit');
         $hometext    = $story->hometext('Edit');
         $bodytext    = $story->bodytext('Edit');
@@ -169,7 +169,7 @@ switch ($op) {
 
     case 'preview':
         $topic_id = (int)$_POST['topic_id'];
-        $xt       = new nw_NewsTopic($topic_id);
+        $xt       = new XNewsTopic($topic_id);
         if (isset($_GET['storyid'])) {
             $storyid = (int)$_GET['storyid'];
         } else {
@@ -181,11 +181,11 @@ switch ($op) {
         }
 
         if (!empty($storyid)) {
-            $story     = new nw_NewsStory($storyid);
+            $story     = new XNewsStory($storyid);
             $published = $story->published();
             $expired   = $story->expired();
         } else {
-            $story     = new nw_NewsStory();
+            $story     = new XNewsStory();
             $published = isset($_POST['publish_date']) ? $_POST['publish_date'] : 0;
             if (!empty($published) && isset($_POST['autodate']) && (int)(1 == $_POST['autodate'])) {
                 $published = strtotime($published['date']) + $published['time'];
@@ -307,10 +307,10 @@ switch ($op) {
         }
 
         if (empty($storyid)) {
-            $story    = new nw_NewsStory();
+            $story    = new XNewsStory();
             $editmode = false;
         } else {
-            $story    = new nw_NewsStory($storyid);
+            $story    = new XNewsStory($storyid);
             $editmode = true;
         }
         $story->setUid($uid);
@@ -412,7 +412,7 @@ switch ($op) {
 
         // Second case, it's not an anonymous, the story is NOT approved and it's NOT a new story (typical when someone is approving a submited story)
         if (is_object($xoopsUser) && $approve && !empty($storyid)) {
-            $storytemp = new nw_NewsStory($storyid);
+            $storytemp = new XNewsStory($storyid);
             if (!$storytemp->published() && $storytemp->uid() > 0) { // the article has been submited but not approved
                 $tmpuser       = new xoopsUser($storytemp->uid());
                 $memberHandler = xoops_getHandler('member');
@@ -468,7 +468,7 @@ switch ($op) {
                             }
                             $story->Setpicture(basename($destname));
                         } else {
-                            echo _AM_NW_UPLOAD_ERROR . ' ' . $uploader->getErrors();
+                            echo _AM_XNEWS_UPLOAD_ERROR . ' ' . $uploader->getErrors();
                         }
                     } else {
                         echo $uploader->getErrors();
@@ -545,7 +545,7 @@ switch ($op) {
                                 $sfiles->setMimetype($sfiles->giveMimetype(XNEWS_ATTACHED_FILES_PATH . '/' . $uploader->getMediaName()));
                                 $sfiles->setDownloadname($destname);
                                 if (!$sfiles->store()) {
-                                    echo _AM_NW_UPLOAD_DBERROR_SAVE;
+                                    echo _AM_XNEWS_UPLOAD_DBERROR_SAVE;
                                 }
                                 //DNPROSSI - 1.71 - creates attached image maxsize
                                 if (strstr($sfiles->getMimetype(), 'image')) {
@@ -570,7 +570,7 @@ switch ($op) {
                                     nw_resizePicture($fullPictureName, $thumbName, $xnews->getConfig('thumb_maxwidth'), $xnews->getConfig('thumb_maxheight'), true);
                                 }
                             } else {
-                                echo _AM_NW_UPLOAD_ERROR . ' ' . $uploader->getErrors();
+                                echo _AM_XNEWS_UPLOAD_ERROR . ' ' . $uploader->getErrors();
                             }
                         } else {
                             echo $uploader->getErrors();
@@ -583,14 +583,14 @@ switch ($op) {
         }
         $returnside = isset($_POST['returnside']) ? (int)$_POST['returnside'] : 0;
         if (!$returnside) {
-            redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MA_NW_THANKS);
+            redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MD_XNEWS_THANKS);
         } else {
-            redirect_header(XNEWS_MODULE_URL . '/admin/index.php?op=newarticle', 2, _MA_NW_THANKS);
+            redirect_header(XNEWS_MODULE_URL . '/admin/index.php?op=newarticle', 2, _MD_XNEWS_THANKS);
         }
         break;
 
     case 'form':
-        $xt        = new nw_NewsTopic();
+        $xt        = new XNewsTopic();
         $title     = '';
         $hometext  = '';
         $noname    = 0;

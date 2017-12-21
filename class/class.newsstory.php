@@ -28,15 +28,15 @@ require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
 /**
  * Class nw_NewsStory
  */
-class nw_NewsStory extends XnewsDeprecateStory
+class XNewsStory extends XnewsDeprecateStory
 {
     public $xnews;
-    public $db;
+//    public $db;
     public $newstopic; // XnewsDeprecateTopic object
-    public $rating; // news rating
-    public $votes; // Number of votes
-    public $description; // META, desciption
-    public $keywords; // META, keywords
+    public $rating;        // news rating
+    public $votes;            // Number of votes
+    public $description;    // META, desciption
+    public $keywords;        // META, keywords
     public $picture;
     public $topic_imgurl;
     public $topic_title;
@@ -76,7 +76,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
         $sql .= ' WHERE published <= ' . $timestamp;
         if ($expired) {
-            $sql .= ' AND (expired > 0 AND expired <= ' . time() . ')';
+            $sql .= ' AND (expired>0 AND expired<=' . time() . ')';
         }
         if (strlen(trim($topicsList)) > 0) {
             $sql .= " AND topicid IN ({$topicsList})";
@@ -176,7 +176,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                 return null;
             }
         }
-        $sql .= $orderBy;
+        $sql    .= $orderBy;
 
         $result = $this->db->query($sql, 1);
         if ($result) {
@@ -225,7 +225,7 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = \MyTextSanitizer::getInstance();
         //
-        $ret = [];
+        $ret  = [];
         $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
         $sql .= ' WHERE (s.published > 0 AND s.published <= ' . time() . ') AND (s.expired = 0 OR s.expired > ' . time() . ') AND (s.topicid=t.topic_id) ';
@@ -268,12 +268,12 @@ class nw_NewsStory extends XnewsDeprecateStory
         if ($topic_frontpage) {
             $sql .= ' AND t.topic_frontpage=1';
         }
-        $sql    .= " ORDER BY s.$order DESC";
+        $sql .= " ORDER BY s.$order DESC";
         $result = $this->db->query($sql, (int)$limit, (int)$start);
 
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_NewsStory($myrow);
+                $ret[] = new XNewsStory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
@@ -295,7 +295,7 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = \MyTextSanitizer::getInstance();
         //
-        $ret = [];
+        $ret  = [];
         $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
         $sql .= " WHERE (s.topicid = t.topic_id) AND (s.published > {$publish_start} AND s.published <= {$publish_end}) AND (expired = 0 OR expired > " . time() . ') ';
@@ -312,7 +312,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_NewsStory($myrow);
+                $ret[] = new XNewsStory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
@@ -335,7 +335,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getBigStory($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'counter')
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts  = \MyTextSanitizer::getInstance();
         //
         $ret   = [];
         $tdate = mktime(0, 0, 0, date('n'), date('j'), date('Y'));
@@ -370,7 +370,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $result = $this->db->query($sql, (int)$limit, (int)$start);
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_NewsStory($myrow);
+                $ret[] = new XNewsStory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
@@ -396,13 +396,13 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllPublishedByAuthor($uid, $checkRight = false, $asObject = true)
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts      = \MyTextSanitizer::getInstance();
         //
-        $ret = [];
+        $ret       = [];
         $sql = "SELECT {$this->db->prefix('nw_stories')}.*, {$this->db->prefix('nw_topics')}.topic_title, {$this->db->prefix('nw_topics')}.topic_color";
         $sql .= " FROM {$this->db->prefix('nw_stories')}, {$this->db->prefix('nw_topics')}";
         $sql .= " WHERE ({$this->db->prefix('nw_stories')}.topicid = {$this->db->prefix('nw_topics')}.topic_id) AND (published > 0 AND published <= " . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
-        $sql .= ' AND uid = ' . (int)$uid;
+        $sql .= ' AND uid=' . (int)$uid;
         if ($checkRight) {
             $topics = nw_MygetItemIds('nw_view');
             $topics = implode(',', $topics);
@@ -414,7 +414,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_NewsStory($myrow);
+                $ret[] = new XNewsStory($myrow);
             } else {
                 if ($myrow['nohtml']) {
                     $html = 0;
@@ -442,7 +442,7 @@ class nw_NewsStory extends XnewsDeprecateStory
                     'topic_title' => $myts->displayTarea($myrow['topic_title'], $html, $smiley, 1),
                     'topic_color' => $myts->displayTarea($myrow['topic_color']),
                     'published'   => (int)$myrow['published'],
-                    'rating'      => (float )$myrow['rating'],
+                    'rating'      => (float)$myrow['rating'],
                     'votes'       => (int)$myrow['votes']
                 ];
             }
@@ -464,22 +464,23 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = \MyTextSanitizer::getInstance();
         //
-        $ret = [];
+        $ret  = [];
         $sql = 'SELECT *';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
         $sql .= ' WHERE expired <= ' . time() . ' AND expired > 0';
         if (!empty($topic)) {
-            $sql .= ' AND topicid = ' . (int)$topic . ' AND (ihome = 1 OR ihome = 0)';
+            $sql .= ' AND topicid=' . (int)$topic . ' AND (ihome=1 OR ihome=0)';
         } else {
             if (0 == (int)$ihome) {
                 $sql .= ' AND ihome=0';
             }
         }
+
         $sql    .= ' ORDER BY expired DESC';
         $result = $this->db->query($sql, (int)$limit, (int)$start);
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_NewsStory($myrow);
+                $ret[] = new XNewsStory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
@@ -497,7 +498,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllAutoStory($limit = 0, $asObject = true, $start = 0)
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts   = \MyTextSanitizer::getInstance();
         //
         $ret    = [];
         $sql    = 'SELECT *';
@@ -506,7 +507,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $result = $this->db->query($sql, (int)$limit, (int)$start);
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_NewsStory($myrow);
+                $ret[] = new XNewsStory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
@@ -526,7 +527,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllSubmitted($limit = 0, $asObject = true, $checkRight = false, $start = 0)
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts     = \MyTextSanitizer::getInstance();
         //
         $ret      = [];
         $criteria = new CriteriaCompo(new Criteria('published', 0));
@@ -547,7 +548,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $result = $this->db->query($sql, (int)$limit, (int)$start);
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_NewsStory($myrow);
+                $ret[] = new XNewsStory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
@@ -564,7 +565,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      *                               2 = Automated
      *                               3 = New submissions
      *                               4 = Last published stories
-     * @param bool $checkRight       verify permissions or not ?
+     * @param bool $checkRight verify permissions or not ?
      * @return int
      */
     public function getAllStoriesCount($storyType = 1, $checkRight = false)
@@ -575,16 +576,16 @@ class nw_NewsStory extends XnewsDeprecateStory
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
         $sql .= ' WHERE ';
         switch ($storyType) {
-            case 1: // Expired
+            case 1:    // Expired
                 $sql .= '(expired <= ' . time() . ' AND expired >0)';
                 break;
-            case 2: // Automated
+            case 2:    // Automated
                 $sql .= '(published > ' . time() . ')';
                 break;
-            case 3: // New submissions
+            case 3:    // New submissions
                 $sql .= '(published = 0)';
                 break;
-            case 4: // Last published stories
+            case 4:    // Last published stories
                 $sql .= '(published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
                 break;
         }
@@ -616,7 +617,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $sql    .= 'WHERE topicid = ' . (int)$topicid . ' ORDER BY published DESC';
         $result = $this->db->query($sql, (int)$limit, 0);
         while ($myrow = $this->db->fetchArray($result)) {
-            $ret[] = new nw_NewsStory($myrow);
+            $ret[] = new XNewsStory($myrow);
         }
 
         return $ret;
@@ -634,9 +635,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
         $sql .= ' WHERE published > 0 AND published <= ' . time() . ' AND (expired = 0 OR expired > ' . time() . ')';
         if (!empty($topicid)) {
-            $sql .= ' AND topicid = ' . (int)$topicid;
+            $sql .= ' AND topicid=' . (int)$topicid;
         } else {
-            $sql .= ' AND ihome = 0';
+            $sql .= ' AND ihome=0';
             if ($checkRight) {
                 $topics = nw_MygetItemIds('nw_view');
                 if (count($topics) > 0) {
@@ -657,7 +658,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function adminlink()
     {
-        //<img src='" . XNEWS_MODULE_URL . "/assets/images/leftarrow22.png' border='0' alt='" . _MA_NW_PREVIOUS_ARTICLE . "'></a>";
+        //<img src='" . XNEWS_MODULE_URL . "/assets/images/leftarrow22.png' border='0' alt='" . _MD_XNEWS_PREVIOUS_ARTICLE . "'></a>";
         $ret2 = "<a href='" . XNEWS_MODULE_URL . '/submit.php?op=edit&amp;storyid=' . $this->storyid() . "' title='" . _EDIT . "'>";
         $ret2 .= "<img src='" . XNEWS_MODULE_URL . "/assets/images/edit_block.png' width='22px' height='22px' border='0' alt='" . _EDIT . "'></a>&nbsp;&nbsp;&nbsp;";
         $ret2 .= "<a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=delete&amp;storyid=' . $this->storyid() . "' title='" . _DELETE . "'>";
@@ -753,10 +754,10 @@ class nw_NewsStory extends XnewsDeprecateStory
                     if (0 != $seo_enabled) {
                         $cat_path = nw_remove_accents($this->topic_title());
                     }
-                    $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>";
+                    $ret = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $this->topicid(), $cat_path) . "'>";
                     $ret .= "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $this->topic_imgurl() . "' alt='";
                     $ret .= $this->topic_title() . "' hspace='10' vspace='10' align='";
-                    $ret .= $this->topicalign() . "'" . $margin . '></a>';
+                    $ret .= $this->topicalign() . "'" . $margin . ' ></a>';
                 } else {
                     $ret = "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $this->topic_imgurl() . "' alt='" . $this->topic_title() . "' hspace='10' vspace='10' align='" . $this->topicalign() . "'" . $margin . '>';
                 }
@@ -768,10 +769,10 @@ class nw_NewsStory extends XnewsDeprecateStory
                 if (0 != $seo_enabled) {
                     $cat_path = nw_remove_accents($this->topic_title());
                 }
-                $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>";
+                $ret = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $this->topicid(), $cat_path) . "'>";
                 $ret .= "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $this->picture() . "' alt='";
                 $ret .= $this->topic_title() . "' hspace='10' vspace='10' align='";
-                $ret .= $this->topicalign() . "'" . $margin . '></a>';
+                $ret .= $this->topicalign() . "'" . $margin . ' ></a>';
             } else {
                 $ret = "<img src='" . XNEWS_TOPICS_FILES_URL . '/' . $this->picture() . "' alt='" . $this->topic_title() . "' hspace='10' vspace='10' align='" . $this->topicalign() . "'" . $margin . '>';
             }
@@ -793,7 +794,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if (0 != $seo_enabled) {
             $story_path = nw_remove_accents($this->title());
         }
-        $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . '</a>';
+        $ret = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . '</a>';
 
         return $ret;
     }
@@ -828,7 +829,7 @@ class nw_NewsStory extends XnewsDeprecateStory
             if (0 != $seo_enabled) {
                 $cat_path = nw_remove_accents($this->topic_title());
             }
-            $ret = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_TOPICS, $this->topicid(), $cat_path) . "'>" . $this->topic_title() . '</a>';
+            $ret = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $this->topicid(), $cat_path) . "'>" . $this->topic_title() . '</a>';
         }
 
         return $ret;
@@ -841,7 +842,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function prepare2show($filescount)
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts     = \MyTextSanitizer::getInstance();
         //
         $infotips = $this->xnews->getConfig('infotips');
         //DNPROSSI SEO
@@ -861,9 +862,9 @@ class nw_NewsStory extends XnewsDeprecateStory
         if ($this->xnews->getConfig('ratenews')) {
             $story['rating'] = number_format($this->rating(), 2);
             if (1 == $this->votes) {
-                $story['votes'] = _MA_NW_ONEVOTE;
+                $story['votes'] = _MD_XNEWS_ONEVOTE;
             } else {
-                $story['votes'] = sprintf(_MA_NW_NUMVOTES, $this->votes);
+                $story['votes'] = sprintf(_MD_XNEWS_NUMVOTES, $this->votes);
             }
         }
         $story['posttimestamp']     = $this->published();
@@ -888,9 +889,9 @@ class nw_NewsStory extends XnewsDeprecateStory
             if (0 != $seo_enabled) {
                 $story_path = nw_remove_accents($this->title());
             }
-            $morelink .= "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>";
-            $morelink .= _MA_NW_READMORE . '</a>';
-            //$morelink .= " | ".sprintf(_MA_NW_BYTESMORE, $totalcount);
+            $morelink .= "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $this->storyid(), $story_path) . "'>";
+            $morelink .= _MD_XNEWS_READMORE . '</a>';
+            //$morelink .= " | ".sprintf(_MD_XNEWS_BYTESMORE, $totalcount);
             if (XOOPS_COMMENT_APPROVENONE != $this->xnews->getConfig('com_rule')) {
                 $morelink .= ' | ';
             }
@@ -903,14 +904,14 @@ class nw_NewsStory extends XnewsDeprecateStory
                 $story_path = nw_remove_accents($this->title());
             }
             if (0 == $ccount) {
-                $morelink .= _MA_NW_NO_COMMENT;
+                $morelink .= _MD_XNEWS_NO_COMMENT;
             } else {
-                $morelink .= "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path);
+                $morelink .= "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $this->storyid(), $story_path);
                 if (1 == $ccount) {
-                    $morelink .= "'>" . _MA_NW_ONECOMMENT . '</a>';
+                    $morelink .= "'>" . _MD_XNEWS_ONECOMMENT . '</a>';
                 } else {
                     $morelink .= "'>";
-                    $morelink .= sprintf(_MA_NW_NUMCOMMENTS, $ccount);
+                    $morelink .= sprintf(_MD_XNEWS_NUMCOMMENTS, $ccount);
                     $morelink .= '</a>';
                 }
             }
@@ -929,7 +930,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if ($approveprivilege) {
             $story['adminlink'] = $this->adminlink();
         }
-        $story['mail_link'] = 'mailto:?subject=' . sprintf(_MA_NW_INTARTICLE, $GLOBALS['xoopsConfig']['sitename']) . '&amp;body=' . sprintf(_MA_NW_INTARTFOUND, $GLOBALS['xoopsConfig']['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $this->storyid();
+        $story['mail_link'] = 'mailto:?subject=' . sprintf(_MD_XNEWS_INTARTICLE, $GLOBALS['xoopsConfig']['sitename']) . '&amp;body=' . sprintf(_MD_XNEWS_INTARTFOUND, $GLOBALS['xoopsConfig']['sitename']) . ':  ' . XNEWS_MODULE_URL . '/article.php?storyid=' . $this->storyid();
         $story['imglink']   = '';
         $story['align']     = '';
         if ($this->topicdisplay()) {
@@ -947,11 +948,11 @@ class nw_NewsStory extends XnewsDeprecateStory
         if (0 != $seo_enabled) {
             $story_path = nw_remove_accents($this->title());
         }
-        $story['title'] = "<a href='" . nw_seo_UrlGenerator(_MA_NW_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . '</a>';
+        $story['title'] = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $this->storyid(), $story_path) . "'>" . $this->title() . '</a>';
         $story['hits']  = $this->counter();
         if ($filescount > 0) {
             $story['files_attached'] = true;
-            $story['attached_link']  = "<a href='" . XNEWS_MODULE_URL . "/article.php?storyid={$this->storyid()}' title='" . _MA_NW_ATTACHEDLIB . "'><img src='" . XNEWS_MODULE_URL . "/assets/images/attach.png' title='" . _MA_NW_ATTACHEDLIB . "'></a>";
+            $story['attached_link']  = "<a href='" . XNEWS_MODULE_URL . "/article.php?storyid={$this->storyid()}' title='" . _MD_XNEWS_ATTACHEDLIB . "'><img src='" . XNEWS_MODULE_URL . "/assets/images/attach.png' title='" . _MD_XNEWS_ATTACHEDLIB . "'></a>";
         } else {
             $story['files_attached'] = false;
             $story['attached_link']  = '';
@@ -972,6 +973,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if (0 == $uid) {
             $uid = $this->uid();
         }
+
         if (is_array($tblusers) && array_key_exists($uid, $tblusers)) {
             return $tblusers[$uid];
         }
@@ -981,12 +983,12 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
 
         switch ($option) {
-            case 1: // Username
+            case 1:        // Username
                 $tblusers[$uid] = XoopsUser::getUnameFromId($uid);
 
                 return $tblusers[$uid];
 
-            case 2: // Display full name (if it is not empty)
+            case 2:        // Display full name (if it is not empty)
                 $memberHandler = xoops_getHandler('member');
                 $thisuser      = $memberHandler->getUser($uid);
                 if (is_object($thisuser)) {
@@ -1000,7 +1002,8 @@ class nw_NewsStory extends XnewsDeprecateStory
                 $tblusers[$uid] = $return;
 
                 return $return;
-            case 3: // Nothing
+
+            case 3:        // Nothing
                 $tblusers[$uid] = '';
 
                 return '';
@@ -1016,7 +1019,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      * @param bool|int $usetopicsdef Should we also export topics definitions ?
      * @param          $topicsTable
      * @param boolean  $asObject     Return values as an object or not ?
-     * @param string   $order
+     * @param string  $order
      * @return array
      * @internal param string $topiclist If not empty, a list of topics to limit to
      */
@@ -1025,7 +1028,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $myts = \MyTextSanitizer::getInstance();
         //
         $ret = [];
-        if ($usetopicsdef) { // We firt begin by exporting topics definitions
+        if ($usetopicsdef) {    // We firt begin by exporting topics definitions
             // Before all we must know wich topics to export
             $sql = 'SELECT distinct topicid';
             $sql .= " FROM {$this->db->prefix('nw_stories')}";
@@ -1050,7 +1053,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         $result = $this->db->query($sql);
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_NewsStory($myrow);
+                $ret[] = new XNewsStory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
@@ -1066,7 +1069,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function store($approved = false)
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts        = \MyTextSanitizer::getInstance();
         //
         $counter     = isset($this->counter) ? $this->counter : 0;
         $title       = $myts->censorString($this->title);
@@ -1103,13 +1106,66 @@ class nw_NewsStory extends XnewsDeprecateStory
             $created    = time();
             $published  = $this->approved ? (int)$this->published : 0;
             //DNPROSSI - ADD TAGS FOR UPDATES - ADDED imagerows, pdfrows
-            $sql = sprintf("INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture, dobr, tags, imagerows, pdfrows) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s', '%u','%s', %u, %u)",
-                           $this->table, $newstoryid, (int)$this->uid(), $title, $created, $published, $expired, $hostname, (int)$this->nohtml(), (int)$this->nosmiley(), $hometext, $bodytext, $counter, (int)$this->topicid(), (int)$this->ihome(), (int)$this->notifypub(), $type,
-                           (int)$this->topicdisplay(), $this->topicalign, (int)$this->comments(), $rating, $votes, $description, $keywords, $picture, (int)$this->dobr(), $tags, (int)$this->imagerows(), (int)$this->pdfrows());
+            $sql = sprintf(
+                "INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture, dobr, tags, imagerows, pdfrows) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s', '%u','%s', %u, %u)",
+                           $this->table,
+                $newstoryid,
+                (int)$this->uid(),
+                $title,
+                $created,
+                $published,
+                $expired,
+                $hostname,
+                (int)$this->nohtml(),
+                (int)$this->nosmiley(),
+                $hometext,
+                $bodytext,
+                $counter,
+                (int)$this->topicid(),
+                (int)$this->ihome(),
+                (int)$this->notifypub(),
+                $type,
+                           (int)$this->topicdisplay(),
+                $this->topicalign,
+                (int)$this->comments(),
+                $rating,
+                $votes,
+                $description,
+                $keywords,
+                $picture,
+                (int)$this->dobr(),
+                $tags,
+                (int)$this->imagerows(),
+                (int)$this->pdfrows()
+            );
         } else {
-            $sql        = sprintf("UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s', dobr='%u', tags='%s', imagerows='%u', pdfrows='%u' WHERE storyid = %u",
-                                  $this->table, $title, (int)$this->published(), $expired, (int)$this->nohtml(), (int)$this->nosmiley(), $hometext, $bodytext, (int)$this->topicid(), (int)$this->ihome(), (int)$this->topicdisplay(), $this->topicalign, (int)$this->comments(), $rating, $votes,
-                                  (int)$this->uid(), $description, $keywords, $picture, (int)$this->dobr(), $tags, (int)$this->imagerows(), (int)$this->pdfrows(), (int)$this->storyid());
+            $sql        = sprintf(
+                "UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s', dobr='%u', tags='%s', imagerows='%u', pdfrows='%u' WHERE storyid = %u",
+                                  $this->table,
+                $title,
+                (int)$this->published(),
+                $expired,
+                (int)$this->nohtml(),
+                (int)$this->nosmiley(),
+                $hometext,
+                $bodytext,
+                (int)$this->topicid(),
+                (int)$this->ihome(),
+                (int)$this->topicdisplay(),
+                $this->topicalign,
+                (int)$this->comments(),
+                $rating,
+                $votes,
+                                  (int)$this->uid(),
+                $description,
+                $keywords,
+                $picture,
+                (int)$this->dobr(),
+                $tags,
+                (int)$this->imagerows(),
+                (int)$this->pdfrows(),
+                (int)$this->storyid()
+            );
             $newstoryid = (int)$this->storyid();
         }
         if (!$this->db->queryF($sql)) {
@@ -1342,10 +1398,10 @@ class nw_NewsStory extends XnewsDeprecateStory
             if ($limit > 1) {
                 for ($i = 0; $i < $limit; $i++) {
                     $onestory = $ret[$rand_keys[$i]];
-                    $ret3[]   = new nw_NewsStory($onestory);
+                    $ret3[]   = new XNewsStory($onestory);
                 }
             } else {
-                $ret3[] = new nw_NewsStory($ret[$rand_keys]);
+                $ret3[] = new XNewsStory($ret[$rand_keys]);
             }
         }
 
@@ -1361,7 +1417,7 @@ class nw_NewsStory extends XnewsDeprecateStory
     {
         $myts = \MyTextSanitizer::getInstance();
         //
-        $ret = [];
+        $ret  = [];
         // Number of stories per topic, including expired and non published stories
         $ret2   = [];
         $sql    = 'SELECT count(s.storyid) as cpt, s.topicid, t.topic_title';
@@ -1373,6 +1429,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['storiespertopic'] = $ret2;
         unset($ret2);
+
         // Total of reads per topic
         $ret2   = [];
         $sql    = 'SELECT Sum(counter) as cpt, topicid';
@@ -1383,6 +1440,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['readspertopic'] = $ret2;
         unset($ret2);
+
         // Attached files per topic
         $ret2   = [];
         $sql    = 'SELECT Count(*) as cpt, s.topicid';
@@ -1394,6 +1452,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['filespertopic'] = $ret2;
         unset($ret2);
+
         // Expired articles per topic
         $ret2   = [];
         $sql    = 'SELECT Count(storyid) as cpt, topicid';
@@ -1405,6 +1464,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['expiredpertopic'] = $ret2;
         unset($ret2);
+
         // Number of unique authors per topic
         $ret2   = [];
         $sql    = 'SELECT Count(Distinct(uid)) as cpt, topicid';
@@ -1415,6 +1475,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['authorspertopic'] = $ret2;
         unset($ret2);
+
         // Most readed articles
         $ret2   = [];
         $sql    = 'SELECT s.storyid, s.uid, s.title, s.counter, s.topicid, t.topic_title';
@@ -1426,6 +1487,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['mostreadnews'] = $ret2;
         unset($ret2);
+
         // Less readed articles
         $ret2   = [];
         $sql    = 'SELECT s.storyid, s.uid, s.title, s.counter, s.topicid, t.topic_title';
@@ -1449,6 +1511,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['besratednw'] = $ret2;
         unset($ret2);
+
         // Most readed authors
         $ret2   = [];
         $sql    = 'SELECT Sum(counter) as cpt, uid';
@@ -1459,6 +1522,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['mostreadedauthors'] = $ret2;
         unset($ret2);
+
         // Best rated authors
         $ret2   = [];
         $sql    = 'SELECT Avg(rating) as cpt, uid';
@@ -1470,6 +1534,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         }
         $ret['bestratedauthors'] = $ret2;
         unset($ret2);
+
         // Biggest contributors
         $ret2   = [];
         $sql    = 'SELECT Count(*) as cpt, uid';
@@ -1557,9 +1622,9 @@ class nw_NewsStory extends XnewsDeprecateStory
                 $arr_replace = ['', '', ''];
                 $cpt         = 1;
                 if (isset($titles) && is_array($titles)) {
-                    $titles[] = strip_tags(sprintf(_MA_NW_PAGE_AUTO_SUMMARY, 1, $this->title()));
+                    $titles[] = strip_tags(sprintf(_MD_XNEWS_PAGE_AUTO_SUMMARY, 1, $this->title()));
                 }
-                $item         = "<a href='" . XNEWS_MODULE_URL . '/article.php?storyid=' . $this->storyid() . "&page=0'>" . sprintf(_MA_NW_PAGE_AUTO_SUMMARY, 1, $this->title()) . '</a><br>';
+                $item         = "<a href='" . XNEWS_MODULE_URL . '/article.php?storyid=' . $this->storyid() . "&page=0'>" . sprintf(_MD_XNEWS_PAGE_AUTO_SUMMARY, 1, $this->title()) . '</a><br>';
                 $auto_summary .= $item;
 
                 foreach ($delimiters as $item) {
@@ -1568,8 +1633,8 @@ class nw_NewsStory extends XnewsDeprecateStory
                     if ('' == xoops_trim($item)) {
                         $item = $cpt;
                     }
-                    $titles[]     = strip_tags(sprintf(_MA_NW_PAGE_AUTO_SUMMARY, $cpt, $item));
-                    $item         = "<a href='" . XNEWS_MODULE_URL . '/article.php?storyid=' . $this->storyid() . '&page=' . ($cpt - 1) . "'>" . sprintf(_MA_NW_PAGE_AUTO_SUMMARY, $cpt, $item) . '</a><br>';
+                    $titles[]     = strip_tags(sprintf(_MD_XNEWS_PAGE_AUTO_SUMMARY, $cpt, $item));
+                    $item         = "<a href='" . XNEWS_MODULE_URL . '/article.php?storyid=' . $this->storyid() . '&page=' . ($cpt - 1) . "'>" . sprintf(_MD_XNEWS_PAGE_AUTO_SUMMARY, $cpt, $item) . '</a><br>';
                     $auto_summary .= $item;
                 }
             }
@@ -1625,7 +1690,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function bodytext($format = 'Show')
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts   = \MyTextSanitizer::getInstance();
         //
         $html   = 1;
         $smiley = 1;
@@ -1673,7 +1738,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getStoriesByIds($ids, $checkRight = true, $asObject = true, $order = 'published', $onlyOnline = true)
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts  = \MyTextSanitizer::getInstance();
         //
         $limit = $start = 0;
         $ret   = [];
@@ -1701,7 +1766,7 @@ class nw_NewsStory extends XnewsDeprecateStory
 
         while ($myrow = $this->db->fetchArray($result)) {
             if ($asObject) {
-                $ret[$myrow['storyid']] = new nw_NewsStory($myrow);
+                $ret[$myrow['storyid']] = new XNewsStory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }
@@ -1738,11 +1803,11 @@ class nw_NewsStory extends XnewsDeprecateStory
             }
         }
         $ret = str_replace('--', '-', $ret);
-        if ('-' == substr($ret, 0, 1)) {
+        if (0 === strpos($ret, '-')) {
             $ret = substr($ret, 2, strlen($ret));
         }
         if ('-' == substr($ret, strlen($ret) - 1, 1)) {
-            $ret = substr($ret, 0, strlen($ret) - 1);
+            $ret = substr($ret, 0, -1);
         }
 
         return $ret;

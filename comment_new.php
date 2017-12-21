@@ -33,7 +33,7 @@ if (0 == $xnews->getConfig('com_anonpost') && !is_object($xoopsUser)) { // Anony
 
 $com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
 if ($com_itemid > 0) {
-    $article = new nw_NewsStory($com_itemid);
+    $article = new XNewsStory($com_itemid);
     if ($article->storyid > 0) {
         $com_replytext = _POSTEDBY . '&nbsp;<b>' . $article->uname() . '</b>&nbsp;' . _DATE . '&nbsp;<b>' . formatTimestamp($article->published(), $xnews->getConfig('dateformat')) . '</b><br><br>' . $article->hometext();
         $bodytext      = $article->bodytext();

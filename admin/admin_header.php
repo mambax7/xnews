@@ -1,5 +1,7 @@
 <?php
 
+use Xoopsmodules\xnews;
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 //require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 //require_once __DIR__ . '/../class/Utility.php';

@@ -31,7 +31,7 @@ function nw_com_update($story_id, $total_num)
 {
     $story_id  = (int)$story_id;
     $total_num = (int)$total_num;
-    $article   = new nw_NewsStory($story_id);
+    $article   = new XNewsStory($story_id);
     if (!$article->updateComments($total_num)) {
         return false;
     }

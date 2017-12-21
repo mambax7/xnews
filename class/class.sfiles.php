@@ -157,7 +157,7 @@ class nw_sFiles
      */
     public function store()
     {
-        $myts = \MyTextSanitizer::getInstance();
+        $myts         = \MyTextSanitizer::getInstance();
         //
         $fileRealName = $myts->addSlashes($this->filerealname);
         $downloadname = $myts->addSlashes($this->downloadname);
@@ -197,7 +197,7 @@ class nw_sFiles
         if (file_exists($workdir . '/' . $this->downloadname)) {
             unlink($workdir . '/' . $this->downloadname);
             //DNPROSSI - Added thumb deletion
-            if (strstr($this->getMimetype(), 'image')) {
+            if (false !== strpos($this->getMimetype(), 'image')) {
                 // IN PROGRESS
                 // IN PROGRESS
                 // IN PROGRESS

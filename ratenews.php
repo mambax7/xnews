@@ -26,38 +26,36 @@
  * the mydownloads module.
  * Possible hack : Enable only registred users to vote
  * Notes :
- *      Anonymous users can only vote 1 time per day (except if their IP change)
- *      Author's can't vote for their own news
- *      Registred users can only vote one time
+ *            Anonymous users can only vote 1 time per day (except if their IP change)
+ *            Author's can't vote for their own news
+ *            Registred users can only vote one time
  *
  * @package News
  * @author Xoops Modules Dev Team
- * @copyright (c) The Xoops Project - www.xoops.org
+ * @copyright    (c) The Xoops Project - www.xoops.org
  *
  * Parameters received by this page :
- * @page_param int              storyid Id of the story we are going to vote for
- * @page_param string           submit The submit button of the rating form
- * @page_param int              rating User's rating
+ * @page_param     int        storyid    Id of the story we are going to vote for
+ * @page_param     string    submit    The submit button of the rating form
+ * @page_param     int        rating    User's rating
  *
- * @page_title                  Story's title - "Rate this news" - Module's name
+ * @page_title            Story's title - "Rate this news" - Module's name
  *
  * @template_name        nw_news_ratenews.tpl
  *
  * Template's variables :
- * @template_var string         lang_voteonce Fixed text "Please do not vote for the same resource more than once."
- * @template_var string         lang_ratingscale Fixed text "The scale is 1 - 10, with 1 being poor and 10 being excellent."
- * @template_var string         lang_beobjective Fixed text "Please be objective, if everyone receives a 1 or a 10, the ratings aren't very useful."
- * @template_var string         lang_donotvote Fixed text "Do not vote for your own resource."
- * @template_var string         lang_rateit Fixed text "Rate It!"
- * @template_var string         lang_cancel Fixed text "Cancel"
- * @template_var array          news Contains some information about the story
- *                                  Structure :
- * @template_var                    int storyid Story's ID
- * @template_var                    string title story's title
+ * @template_var    string    lang_voteonce    Fixed text "Please do not vote for the same resource more than once."
+ * @template_var    string    lang_ratingscale    Fixed text "The scale is 1 - 10, with 1 being poor and 10 being excellent."
+ * @template_var    string    lang_beobjective    Fixed text "Please be objective, if everyone receives a 1 or a 10, the ratings aren't very useful."
+ * @template_var    string    lang_donotvote        Fixed text "Do not vote for your own resource."
+ * @template_var    string    lang_rateit            Fixed text "Rate It!"
+ * @template_var    string    lang_cancel            Fixed text "Cancel"
+ * @template_var    array    news                Contains some information about the story
+ *                                    Structure :
+ * @template_var                    int        storyid        Story's ID
+ * @template_var                    string    title        story's title
  */
-
 require_once __DIR__ . '/header.php';
-
 require_once XOOPS_ROOT_PATH . '/class/module.errorhandler.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
@@ -86,17 +84,17 @@ if (isset($_GET['storyid'])) {
 }
 
 if (!empty($storyid)) {
-    $article = new nw_NewsStory($storyid);
+    $article = new XNewsStory($storyid);
     if (0 == $article->published() || $article->published() > time()) {
-        redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+        redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
     }
 
     // Expired
     if (0 != $article->expired() && $article->expired() < time()) {
-        redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+        redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
     }
 } else {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
 // 3) Does the user can see this news ? If he can't see it, he can't vote for
@@ -110,15 +108,15 @@ if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsMo
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
 }
 
-if (!empty($_POST['submit'])) { // The form was submited
-    $eh = new ErrorHandler; // ErrorHandler object
+if (!empty($_POST['submit'])) {            // The form was submited
+    $eh = new ErrorHandler;             //ErrorHandler object
     if (!is_object($xoopsUser)) {
         $ratinguser = 0;
     } else {
         $ratinguser = $xoopsUser->getVar('uid');
     }
 
-    // Make sure only 1 anonymous from an IP in a single day.
+    //Make sure only 1 anonymous from an IP in a single day.
     $anonwaitdays = 1;
     $ip           = getenv('REMOTE_ADDR');
     $storyid      = (int)$_POST['storyid'];
@@ -126,7 +124,7 @@ if (!empty($_POST['submit'])) { // The form was submited
 
     // Check if Rating is Null
     if ('--' == $rating) {
-        redirect_header(XNEWS_MODULE_URL . '/ratenews.php?storyid=' . $storyid, 3, _MA_NW_NORATING);
+        redirect_header(XNEWS_MODULE_URL . '/ratenews.php?storyid=' . $storyid, 3, _MD_XNEWS_NORATING);
     }
 
     if ($rating < 1 || $rating > 10) {
@@ -138,7 +136,7 @@ if (!empty($_POST['submit'])) { // The form was submited
         $result = $xoopsDB->query('SELECT uid FROM ' . $xoopsDB->prefix('nw_stories') . " WHERE storyid={$storyid}");
         while (list($ratinguserDB) = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB == $ratinguser) {
-                redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MA_NW_CANTVOTEOWN);
+                redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MD_XNEWS_CANTVOTEOWN);
             }
         }
 
@@ -146,7 +144,7 @@ if (!empty($_POST['submit'])) { // The form was submited
         $result = $xoopsDB->query('SELECT ratinguser FROM ' . $xoopsDB->prefix('nw_stories_votedata') . " WHERE storyid={$storyid}");
         while (list($ratinguserDB) = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB == $ratinguser) {
-                redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MA_NW_VOTEONCE);
+                redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MD_XNEWS_VOTEONCE);
             }
         }
     } else {
@@ -155,7 +153,7 @@ if (!empty($_POST['submit'])) { // The form was submited
         $result    = $xoopsDB->query("SELECT COUNT(*) FROM {$xoopsDB->prefix('nw_stories_votedata')} WHERE storyid={$storyid} AND ratinguser=0 AND ratinghostname = '{$ip}' AND ratingtimestamp > {$yesterday}");
         list($anonvotecount) = $xoopsDB->fetchRow($result);
         if ($anonvotecount >= 1) {
-            redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MA_NW_VOTEONCE);
+            redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MD_XNEWS_VOTEONCE);
         }
     }
 
@@ -167,13 +165,13 @@ if (!empty($_POST['submit'])) { // The form was submited
 
     //All is well.  Calculate Score & Add to Summary (for quick retrieval & sorting) to DB.
     nw_updaterating($storyid);
-    $ratemessage = _MA_NW_VOTEAPPRE . '<br>' . sprintf(_MA_NW_THANKYOU, $xoopsConfig['sitename']);
+    $ratemessage = _MD_XNEWS_VOTEAPPRE . '<br>' . sprintf(_MD_XNEWS_THANKYOU, $xoopsConfig['sitename']);
     redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, $ratemessage);
-} else { // Display the form to vote
+} else {        // Display the form to vote
     $GLOBALS['xoopsOption']['template_main'] = 'nw_news_ratenews.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
     $news = null;
-    $news = new nw_NewsStory($storyid);
+    $news = new XNewsStory($storyid);
     if (is_object($news)) {
         $title = $news->title('Show');
     } else {
@@ -184,13 +182,13 @@ if (!empty($_POST['submit'])) { // The form was submited
 
     $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
     $xoopsTpl->assign('news', ['storyid' => $storyid, 'title' => $title]);
-    $xoopsTpl->assign('lang_voteonce', _MA_NW_VOTEONCE);
-    $xoopsTpl->assign('lang_ratingscale', _MA_NW_RATINGSCALE);
-    $xoopsTpl->assign('lang_beobjective', _MA_NW_BEOBJECTIVE);
-    $xoopsTpl->assign('lang_donotvote', _MA_NW_DONOTVOTE);
-    $xoopsTpl->assign('lang_rateit', _MA_NW_RATEIT);
+    $xoopsTpl->assign('lang_voteonce', _MD_XNEWS_VOTEONCE);
+    $xoopsTpl->assign('lang_ratingscale', _MD_XNEWS_RATINGSCALE);
+    $xoopsTpl->assign('lang_beobjective', _MD_XNEWS_BEOBJECTIVE);
+    $xoopsTpl->assign('lang_donotvote', _MD_XNEWS_DONOTVOTE);
+    $xoopsTpl->assign('lang_rateit', _MD_XNEWS_RATEIT);
     $xoopsTpl->assign('lang_cancel', _CANCEL);
-    $xoopsTpl->assign('xoops_pagetitle', $title . ' - ' . _MA_NW_RATETHISNEWS . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
+    $xoopsTpl->assign('xoops_pagetitle', $title . ' - ' . _MD_XNEWS_RATETHISNEWS . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
     nw_CreateMetaDatas();
     require_once XOOPS_ROOT_PATH . '/footer.php';
 }

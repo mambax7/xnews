@@ -1,7 +1,7 @@
-<h2><{$smarty.const._AM_NW_WHOS_WHO}></h2>
+<h2><{$smarty.const._AM_XNEWS_WHOS_WHO}></h2>
 <br>
 <br>
-<h3><{$smarty.const._MA_NW_LIST_OF_AUTHORS}></h3>
+<h3><{$smarty.const._MD_XNEWS_LIST_OF_AUTHORS}></h3>
 <br>
 <ul>
 <{foreach item=who from=$whoswho}>

@@ -19,6 +19,7 @@
 
 
 use Xmf\Request;
+use Xoopsmodules\xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -57,25 +58,25 @@ if (!nw_FieldExists('picture', $storiesTableName)) {
 function Newsletter()
 {
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
     //
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
     $adminObject->displayNavigation('newsletter.php');
     //
     xoops_load('XoopsFormLoader');
-    $sform = new XoopsThemeForm(_AM_NW_NEWSLETTER, 'newsletterform', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
+    $sform = new XoopsThemeForm(_AM_XNEWS_NEWSLETTER, 'newsletterform', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
     //
-    $dates_tray = new XoopsFormElementTray(_AM_NW_NEWSLETTER_BETWEEN);
+    $dates_tray = new XoopsFormElementTray(_AM_XNEWS_NEWSLETTER_BETWEEN);
     $date1      = new XoopsFormTextDateSelect('', 'date1', 15, time());
     $dates_tray->addElement($date1);
-    $date2 = new XoopsFormTextDateSelect(_AM_NW_EXPORT_AND, 'date2', 15, time());
+    $date2 = new XoopsFormTextDateSelect(_AM_XNEWS_EXPORT_AND, 'date2', 15, time());
     $dates_tray->addElement($date2);
     $sform->addElement($dates_tray);
     //
-    $topiclist  = new XoopsFormSelect(_AM_NW_PRUNE_TOPICS, 'export_topics', '', 5, true);
+    $topiclist  = new XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'export_topics', '', 5, true);
     $topics_arr = [];
-    $xt         = new nw_NewsTopic();
+    $xt         = new XNewsTopic();
     $allTopics  = $xt->getAllTopics(false); // The webmaster can see everything
     $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
     $topics_arr = $topic_tree->getAllChild(0);
@@ -84,14 +85,14 @@ function Newsletter()
             $topiclist->addOption($onetopic->topic_id(), $onetopic->topic_title());
         }
     }
-    $topiclist->setDescription(_AM_NW_EXPORT_PRUNE_DSC);
+    $topiclist->setDescription(_AM_XNEWS_EXPORT_PRUNE_DSC);
     $sform->addElement($topiclist, false);
     //
     $sform->addElement(new XoopsFormHidden('op', 'launchnewsletter'), false);
-    $sform->addElement(new XoopsFormRadioYN(_AM_NW_REMOVE_BR, 'removebr', 1), false);
-    $sform->addElement(new XoopsFormRadioYN(_AM_NW_NEWSLETTER_HTML_TAGS, 'removehtml', 0), false);
-    $sform->addElement(new XoopsFormTextArea(_AM_NW_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
-    $sform->addElement(new XoopsFormTextArea(_AM_NW_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
+    $sform->addElement(new XoopsFormRadioYN(_AM_XNEWS_REMOVE_BR, 'removebr', 1), false);
+    $sform->addElement(new XoopsFormRadioYN(_AM_XNEWS_NEWSLETTER_HTML_TAGS, 'removehtml', 0), false);
+    $sform->addElement(new XoopsFormTextArea(_AM_XNEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
+    $sform->addElement(new XoopsFormTextArea(_AM_XNEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
     $button_tray = new XoopsFormElementTray('', '');
     $submit_btn  = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
     $button_tray->addElement($submit_btn);
@@ -105,7 +106,7 @@ function Newsletter()
 function LaunchNewsletter()
 {
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
     //
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
@@ -115,7 +116,7 @@ function LaunchNewsletter()
 
     $newslettertemplate = '';
     echo '<br>';
-    $story           = new nw_NewsStory();
+    $story           = new XNewsStory();
     $exportedStories = [];
     $topiclist       = '';
     $removeBr        = $removehtml = false;
@@ -143,7 +144,7 @@ function LaunchNewsletter()
     if (count($exportedStories)) {
         $fp = fopen($newsfile, 'w');
         if (!$fp) {
-            redirect_header('index.php', 3, sprintf(_AM_NW_EXPORT_ERROR, $newsfile));
+            redirect_header('index.php', 3, sprintf(_AM_XNEWS_EXPORT_ERROR, $newsfile));
         }
         if ('' != xoops_trim($header)) {
             fwrite($fp, $header);
@@ -204,9 +205,9 @@ function LaunchNewsletter()
         }
         fclose($fp);
         $newsfile = XOOPS_URL . '/uploads/newsletter.txt';
-        printf(_AM_NW_NEWSLETTER_READY, $newsfile, XNEWS_MODULE_URL . '/admin/index.php?op=deletefile&amp;type=newsletter');
+        printf(_AM_XNEWS_NEWSLETTER_READY, $newsfile, XNEWS_MODULE_URL . '/admin/index.php?op=deletefile&amp;type=newsletter');
     } else {
-        printf(_AM_NW_NOTHING);
+        printf(_AM_XNEWS_NOTHING);
     }
 }
 

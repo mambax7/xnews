@@ -71,7 +71,7 @@
  * @template_var                string         topic_select contains the topics selector
  */
 
-use XoopsModules\xnews;
+use Xoopsmodules\xnews;
 
 require_once __DIR__ . '/header.php';
 
@@ -81,7 +81,7 @@ require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
 require_once XNEWS_MODULE_PATH . '/class/Utility.php';
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-$nw_NewsStoryHandler = new nw_NewsStory();
+$nw_NewsStoryHandler = new XNewsStory();
 
 $topic_id = 0;
 if (isset($_GET['topic_id'])) {
@@ -129,15 +129,15 @@ $column_count = $xnews->getConfig('columnmode');
 if ($showclassic) {
     $GLOBALS['xoopsOption']['template_main'] = 'nw_news_index.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
-    $xt = new nw_NewsTopic();
+    $xt = new XNewsTopic();
     //DNPROSSI - ADDED
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
     $xoopsTpl->assign('column_width', (int)(1 / $column_count * 100));
     if ($xnews->getConfig('ratenews')) {
         $xoopsTpl->assign('rates', true);
-        $xoopsTpl->assign('lang_ratingc', _MA_NW_RATINGC);
-        $xoopsTpl->assign('lang_ratethisnews', _MA_NW_RATETHISNEWS);
+        $xoopsTpl->assign('lang_ratingc', _MD_XNEWS_RATINGC);
+        $xoopsTpl->assign('lang_ratethisnews', _MD_XNEWS_RATETHISNEWS);
     } else {
         $xoopsTpl->assign('rates', false);
     }
@@ -207,7 +207,7 @@ if ($showclassic) {
             $story['news_title']      = $thisstory->storylink(); //$story['title'];
             $story['title']           = $thisstory->textlink() . '&nbsp;:&nbsp;' . $story['title'];
             $story['topic_title']     = $thisstory->textlink();
-            $story['topic_separator'] = ('' != $thisstory->textlink()) ? _MA_NW_SP : '';
+            $story['topic_separator'] = ('' != $thisstory->textlink()) ? _MD_XNEWS_SP : '';
             $story['topic_color']     = '#' . $myts->displayTarea($thisstory->topic_color);
             if ('' == $firsttitle) {
                 $firsttitle = $myts->htmlSpecialChars($thisstory->topic_title()) . ' - ' . $myts->htmlSpecialChars($thisstory->title());
@@ -245,13 +245,13 @@ if ($showclassic) {
     $xoopsTpl->assign('column_width', (int)(1 / $column_count * 100));
     if ($xnews->getConfig('ratenews')) {
         $xoopsTpl->assign('rates', true);
-        $xoopsTpl->assign('lang_ratingc', _MA_NW_RATINGC);
-        $xoopsTpl->assign('lang_ratethisnews', _MA_NW_RATETHISNEWS);
+        $xoopsTpl->assign('lang_ratingc', _MD_XNEWS_RATINGC);
+        $xoopsTpl->assign('lang_ratethisnews', _MD_XNEWS_RATETHISNEWS);
     } else {
         $xoopsTpl->assign('rates', false);
     }
 
-    $xt            = new nw_NewsTopic();
+    $xt            = new XNewsTopic();
     $alltopics     =& $xt->getTopicsList(true, $xnews->getConfig('restrictindex'));
     $smarty_topics = [];
     $topicstories  = [];
@@ -267,7 +267,7 @@ if ($showclassic) {
             $filescount               = array_key_exists($thisstory->storyid(), $filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
             $story                    = $thisstory->prepare2show($filescount);
             $story['topic_title']     = $thisstory->textlink();
-            $story['topic_separator'] = ('' != $thisstory->textlink()) ? _MA_NW_SP : '';
+            $story['topic_separator'] = ('' != $thisstory->textlink()) ? _MD_XNEWS_SP : '';
             $story['news_title']      = $story['title'];//$thisstory->storylink();
             $topicstories[$topicid][] = $story;
         }
@@ -314,7 +314,7 @@ if ($xoopsOption['storytopic']) {
  * Create a link for the RSS feed (if the module's option is activated)
  */
 if ($xnews->getConfig('topicsrss') && $xoopsOption['storytopic']) {
-    $link = sprintf("<a href='%s' title='%s'><img src='%s' border='0' alt='%s'></a>", XNEWS_MODULE_URL . '/backendt.php?topicid=' . $xoopsOption['storytopic'], _MA_NW_RSSFEED, XNEWS_MODULE_URL . '/assets/images/rss.gif', _MA_NW_RSSFEED);
+    $link = sprintf("<a href='%s' title='%s'><img src='%s' border='0' alt='%s'></a>", XNEWS_MODULE_URL . '/backendt.php?topicid=' . $xoopsOption['storytopic'], _MD_XNEWS_RSSFEED, XNEWS_MODULE_URL . '/assets/images/rss.gif', _MD_XNEWS_RSSFEED);
     $xoopsTpl->assign('topic_rssfeed_link', $link);
 }
 
@@ -337,13 +337,13 @@ if (isset($story['poster']) && '' != $story['poster']) {
     $xoopsTpl->assign('lang_on', _ON);
     $xoopsTpl->assign('lang_postedby', _POSTEDBY);
 } else {
-    $xoopsTpl->assign('lang_on', '' . _MA_NW_POSTED . ' ' . _ON . ' ');
+    $xoopsTpl->assign('lang_on', '' . _MD_XNEWS_POSTED . ' ' . _ON . ' ');
     $xoopsTpl->assign('lang_postedby', '');
 }
 
-$xoopsTpl->assign('lang_printerpage', _MA_NW_PRINTERFRIENDLY);
-$xoopsTpl->assign('lang_sendstory', _MA_NW_SENDSTORY);
+$xoopsTpl->assign('lang_printerpage', _MD_XNEWS_PRINTERFRIENDLY);
+$xoopsTpl->assign('lang_sendstory', _MD_XNEWS_SENDSTORY);
 $xoopsTpl->assign('lang_reads', _READS);
-$xoopsTpl->assign('lang_morereleases', _MA_NW_MORERELEASES);
+$xoopsTpl->assign('lang_morereleases', _MD_XNEWS_MORERELEASES);
 
 require_once XOOPS_ROOT_PATH . '/footer.php';

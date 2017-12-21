@@ -36,26 +36,26 @@
  *
  */
 
-use XoopsModules\xnews;
+use Xoopsmodules\xnews;
 
 require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
 $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
 if (empty($storyid)) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MD_XNEWS_NOSTORY);
 }
 
 // Verify that the article is published
-$storyObj = new nw_NewsStory($storyid);
+$storyObj = new XNewsStory($storyid);
 // Not yet published
 if (0 == $storyObj->published() || $storyObj->published() > time()) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MD_XNEWS_NOSTORY);
 }
 
 // Expired
 if (0 != $storyObj->expired() && $storyObj->expired() < time()) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MD_XNEWS_NOSTORY);
 }
 
 // Verify permissions
@@ -89,8 +89,8 @@ function PrintPage()
     global $xoopsConfig, $xoopsModule, $storyObj, $xoops_meta_keywords, $xoops_meta_description;
     $myts     = \MyTextSanitizer::getInstance();
 
-    /** @var \XoopsModules\xnews\Helper $helper */
-    $helper = \XoopsModules\xnews\Helper::getInstance();
+    /** @var \Xoopsmodules\xnews\Helper $helper */
+    $helper = \Xoopsmodules\xnews\Helper::getInstance();
 
     $dateformat = $helper->getConfig('dateformat');
 
@@ -99,7 +99,7 @@ function PrintPage()
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">
     <?php
     echo "<head>\n";
-    echo '<title>' . $myts->htmlSpecialChars($storyObj->title()) . ' - ' . _MA_NW_PRINTER . ' - ' . $myts->htmlSpecialChars($storyObj->topic_title()) . ' - ' . $xoopsConfig['sitename'] . '</title>';
+    echo '<title>' . $myts->htmlSpecialChars($storyObj->title()) . ' - ' . _MD_XNEWS_PRINTER . ' - ' . $myts->htmlSpecialChars($storyObj->topic_title()) . ' - ' . $xoopsConfig['sitename'] . '</title>';
     echo '<meta http-equiv="Content-Type" content="text/html; charset=' . _CHARSET . '">';
     echo '<meta name="AUTHOR" content="' . $xoopsConfig['sitename'] . '">';
     echo '<meta name="keywords" content="' . $xoops_meta_keywords . '">';
@@ -132,7 +132,7 @@ function PrintPage()
                 var target = document.getElementById(targetID);
                 var h2 = document.createElement('h2');
                 addClass.apply(h2, ['printOnly']);
-                var h2_txt = document.createTextNode('<?php echo _MA_NW_LINKS; ?>');
+                var h2_txt = document.createTextNode('<?php echo _MD_XNEWS_LINKS; ?>');
                 h2.appendChild(h2_txt);
                 var coll = container.getElementsByTagName('*');
                 var ol = document.createElement('ol');
@@ -265,7 +265,7 @@ function PrintPage()
         <table border="0" width="100%" cellpadding="20" cellspacing="1" bgcolor="#ffffff"><tr><td align="center">
         <img src="' . XOOPS_URL . '/images/logo.gif" border="0" alt=""><br><br>
         <h3>' . $storyObj->title() . '</h3>
-        <small><b>' . _MA_NW_DATE . '</b>&nbsp;' . $datetime . ' | <b>' . _MA_NW_TOPICC . '</b>&nbsp;' . $myts->htmlSpecialChars($storyObj->topic_title()) . '</small><br><br></td></tr>';
+        <small><b>' . _MD_XNEWS_DATE . '</b>&nbsp;' . $datetime . ' | <b>' . _MD_XNEWS_TOPICC . '</b>&nbsp;' . $myts->htmlSpecialChars($storyObj->topic_title()) . '</small><br><br></td></tr>';
     echo '<tr valign="top" style="font:12px;"><td>' . $storyObj->hometext() . '<br>';
     $bodytext = $storyObj->bodytext();
     $bodytext = str_replace('[pagebreak]', '<br style="page-break-after:always;">', $bodytext);
@@ -274,9 +274,9 @@ function PrintPage()
     }
     echo '</td></tr></table></td></tr></table>
         <br><br>';
-    printf(_MA_NW_THISCOMESFROM, htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES));
+    printf(_MD_XNEWS_THISCOMESFROM, htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES));
     echo '<br><a href="' . XOOPS_URL . '/">' . XOOPS_URL . '</a><br><br>';
-    echo _MA_NW_URLFORSTORY . ' <!-- Tag below can be used to display Permalink image --><!--img src="' . XNEWS_MODULE_URL . '/images/x.gif" /--><br>
+    echo _MD_XNEWS_URLFORSTORY . ' <!-- Tag below can be used to display Permalink image --><!--img src="' . XNEWS_MODULE_URL . '/images/x.gif" /--><br>
         <a class="ignore" href="' . XNEWS_MODULE_URL . '/article.php?storyid=' . $storyObj->storyid() . '">' . XNEWS_MODULE_URL . '/article.php?storyid=' . $storyObj->storyid() . '</a>
         </td></tr></table></div>
         </body>

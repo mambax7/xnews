@@ -18,12 +18,12 @@
  * @author       Nazar Aziz <nazar@panthersoftware.com>
  * @version      $Id $
  */
-class nw_NewsObjectHandler extends XoopsObjectHandler
+class XNewsObjectHandler extends XoopsObjectHandler
 {
     /**
      * Database connection
      *
-     * @var object
+     * @var \XoopsDatabase
      * @access    private
      */
     public $_db;
@@ -38,7 +38,7 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
     /**
      * Constructor
      *
-     * @param object $db reference to a xoopsDB object
+     * @param \XoopsDatabase $db reference to a xoopsDB object
      */
     public function init($db)
     {
@@ -83,12 +83,12 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
     /**
      * retrieve objects from the database
      *
-     * @param  object $criteria  {@link CriteriaElement} conditions to be met
+     * @param  \CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
      * @param  bool   $id_as_key Should the department ID be used as array key
      * @return array  array of objects
      * @access  public
      */
-    public function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -174,11 +174,11 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
 
     /**
      * Create a "select" SQL query
-     * @param  object $criteria {@link CriteriaElement} to match
+     * @param  \CriteriaElement $criteria {@link CriteriaElement} to match
      * @return string SQL query
      * @access private
      */
-    public function _selectQuery($criteria = null)
+    public function _selectQuery(\CriteriaElement $criteria = null)
     {
         $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
@@ -195,11 +195,11 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
     /**
      * count objects matching a criteria
      *
-     * @param  object $criteria {@link CriteriaElement} to match
+     * @param  \CriteriaElement $criteria {@link CriteriaElement} to match
      * @return int    count of objects
      * @access public
      */
-    public function getCount($criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
@@ -244,11 +244,11 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
     /**
      * delete department matching a set of conditions
      *
-     * @param  object $criteria {@link CriteriaElement}
+     * @param  \CriteriaElement $criteria {@link CriteriaElement}
      * @return bool   FALSE if deletion failed
      * @access    public
      */
-    public function deleteAll($criteria = null)
+    public function deleteAll(\CriteriaElement$criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
@@ -266,7 +266,7 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
      *
      * @param         $fieldname
      * @param         $fieldvalue
-     * @param  object $criteria {@link CriteriaElement}
+     * @param  \CriteriaElement $criteria {@link CriteriaElement}
      * @return bool FALSE if update failed
      * @access    public
      */
@@ -314,11 +314,11 @@ class nw_NewsObjectHandler extends XoopsObjectHandler
     /**
      * Singleton - prevent multiple instances of this class
      *
-     * @param  object &$db {@link XoopsHandlerFactory}
-     * @return object {@link pagesCategoryHandler}
+     * @param  \XoopsDatabase &$db {@link XoopsHandlerFactory}
+     * @return \XoopsObject {@link pagesCategoryHandler}
      * @access public
      */
-    public static function getInstance($db)
+    public static function getInstance(\XoopsDatabase $db)
     {
         static $instance;
         if (!isset($instance)) {

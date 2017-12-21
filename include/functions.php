@@ -196,7 +196,6 @@ if (!function_exists('sef')) {
         return xoops_sef($datab, $char);
     }
 }
-
 /**
  * Check if a module exist and return module verision
  * @author luciorota
@@ -288,8 +287,8 @@ function nw_html2text($document)
     $search = [
         "'<script[^>]*?" . ">.*?</script>'si", // Strip out javascript
         "'<[\/\!]*?[^<>]*?" . ">'si", // Strip out HTML tags
-        "'([\r\n])[\s]+'", // Strip out white space
-        "'&(quot|#34);'i", // Replace HTML entities
+        "'([\r\n])[\s]+'",                // Strip out white space
+        "'&(quot|#34);'i",                // Replace HTML entities
         "'&(amp|#38);'i",
         "'&(lt|#60);'i",
         "'&(gt|#62);'i",
@@ -299,7 +298,7 @@ function nw_html2text($document)
         "'&(pound|#163);'i",
         "'&(copy|#169);'i",
         "'&#(\d+);'e"
-    ]; // evaluate as php
+    ];                    // evaluate as php
 
     $replace = [
         '',
@@ -428,17 +427,17 @@ function nw_CreateMetaDatas($story = null)
      * Firefox and Opera Navigation's Bar
      */
     if ($xnews->getConfig('sitenavbar')) {
-        $content .= sprintf("<link rel=\"Home\" title=\"%s\" href=\"%s/\">\n", $xoopsConfig['sitename'], XOOPS_URL);
+        $content .= sprintf("<link rel=\"Home\" title=\"%s\" href=\"%s/\" >\n", $xoopsConfig['sitename'], XOOPS_URL);
         $content .= sprintf("<link rel=\"Contents\" href=\"%s\">\n", XNEWS_MODULE_URL . '/index.php');
-        $content .= sprintf("<link rel=\"Search\" href=\"%s\">\n", XOOPS_URL . '/search.php');
+        $content .= sprintf("<link rel=\"Search\" href=\"%s\" >\n", XOOPS_URL . '/search.php');
         $content .= sprintf("<link rel=\"Glossary\" href=\"%s\">\n", XNEWS_MODULE_URL . '/archive.php');
-        $content .= sprintf("<link rel=\"%s\" href=\"%s\">\n", $myts->htmlSpecialChars(_MA_NW_SUBMITNEWS), XNEWS_MODULE_URL . '/submit.php');
-        $content .= sprintf("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"%s\" href=\"%s/\">\n", $xoopsConfig['sitename'], XOOPS_URL . '/backend.php');
+        $content .= sprintf("<link rel=\"%s\" href=\"%s\">\n", $myts->htmlSpecialChars(_MD_XNEWS_SUBMITNEWS), XNEWS_MODULE_URL . '/submit.php');
+        $content .= sprintf("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"%s\" href=\"%s/\" >\n", $xoopsConfig['sitename'], XOOPS_URL . '/backend.php');
 
         // Create chapters
         require_once XOOPS_ROOT_PATH . '/class/tree.php';
         require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-        $xt         = new nw_NewsTopic();
+        $xt         = new XNewsTopic();
         $allTopics  = $xt->getAllTopics($xnews->getConfig('restrictindex'));
         $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topics_arr = $topic_tree->getAllChild(0);
@@ -466,7 +465,7 @@ function nw_CreateMetaDatas($story = null)
         if (isset($xoTheme) && is_object($xoTheme)) {
             $xoTheme->addMeta('meta', 'keywords', $meta_keywords);
             $xoTheme->addMeta('meta', 'description', $meta_description);
-        } elseif (isset($xoopsTpl) && is_object($xoopsTpl)) { // Compatibility for old Xoops versions
+        } elseif (isset($xoopsTpl) && is_object($xoopsTpl)) {    // Compatibility for old Xoops versions
             $xoopsTpl->assign('xoops_meta_keywords', $meta_keywords);
             $xoopsTpl->assign('xoops_meta_description', $meta_description);
         }
@@ -478,19 +477,19 @@ function nw_CreateMetaDatas($story = null)
     if ($xnews->getConfig('dublincore') && isset($story) && is_object($story)) {
         $configHandler         = xoops_getHandler('config');
         $xoopsConfigMetaFooter = $configHandler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
-        $content               .= '<meta name="DC.Title" content="' . nw_DublinQuotes($story->title()) . "\">\n";
-        $content               .= '<meta name="DC.Creator" content="' . nw_DublinQuotes($story->uname()) . "\">\n";
-        $content               .= '<meta name="DC.Subject" content="' . nw_DublinQuotes($meta_keywords) . "\">\n";
-        $content               .= '<meta name="DC.Description" content="' . nw_DublinQuotes($story->title()) . "\">\n";
-        $content               .= '<meta name="DC.Publisher" content="' . nw_DublinQuotes($xoopsConfig['sitename']) . "\">\n";
-        $content               .= '<meta name="DC.Date.created" scheme="W3CDTF" content="' . date('Y-m-d', $story->created) . "\">\n";
-        $content               .= '<meta name="DC.Date.issued" scheme="W3CDTF" content="' . date('Y-m-d', $story->published) . "\">\n";
+        $content               .= '<meta name="DC.Title" content="' . nw_DublinQuotes($story->title()) . "\" >\n";
+        $content               .= '<meta name="DC.Creator" content="' . nw_DublinQuotes($story->uname()) . "\" >\n";
+        $content               .= '<meta name="DC.Subject" content="' . nw_DublinQuotes($meta_keywords) . "\" >\n";
+        $content               .= '<meta name="DC.Description" content="' . nw_DublinQuotes($story->title()) . "\" >\n";
+        $content               .= '<meta name="DC.Publisher" content="' . nw_DublinQuotes($xoopsConfig['sitename']) . "\" >\n";
+        $content               .= '<meta name="DC.Date.created" scheme="W3CDTF" content="' . date('Y-m-d', $story->created) . "\" >\n";
+        $content               .= '<meta name="DC.Date.issued" scheme="W3CDTF" content="' . date('Y-m-d', $story->published) . "\" >\n";
         $content               .= '<meta name="DC.Identifier" content="' . XNEWS_MODULE_URL . '/article.php?storyid=' . $story->storyid() . "\">\n";
-        $content               .= '<meta name="DC.Source" content="' . XOOPS_URL . "\">\n";
-        $content               .= '<meta name="DC.Language" content="' . _LANGCODE . "\">\n";
+        $content               .= '<meta name="DC.Source" content="' . XOOPS_URL . "\" >\n";
+        $content               .= '<meta name="DC.Language" content="' . _LANGCODE . "\" >\n";
         $content               .= '<meta name="DC.Relation.isReferencedBy" content="' . XNEWS_MODULE_URL . '/index.php?topic_id=' . $story->topicid() . "\">\n";
         if (isset($xoopsConfigMetaFooter['meta_copyright'])) {
-            $content .= '<meta name="DC.Rights" content="' . nw_DublinQuotes($xoopsConfigMetaFooter['meta_copyright']) . "\">\n";
+            $content .= '<meta name="DC.Rights" content="' . nw_DublinQuotes($xoopsConfigMetaFooter['meta_copyright']) . "\" >\n";
         }
     }
 
@@ -555,15 +554,15 @@ function nw_createmeta_keywords($content)
     $content         = str_replace($search_pattern, $replace_pattern, $content);
     $keywords        = explode(' ', $content);
     switch ($keywordsorder) {
-        case 0: // Ordre d'apparition dans le texte
+        case 0:    // Ordre d'apparition dans le texte
             $keywords = array_unique($keywords);
             break;
-        case 1: // Ordre de fréquence des mots
+        case 1:    // Ordre de fréquence des mots
             $keywords = array_count_values($keywords);
             asort($keywords);
             $keywords = array_keys($keywords);
             break;
-        case 2: // Ordre inverse de la fréquence des mots
+        case 2:    // Ordre inverse de la fréquence des mots
             $keywords = array_count_values($keywords);
             arsort($keywords);
             $keywords = array_keys($keywords);
@@ -614,7 +613,7 @@ function nw_updateCache()
     $tplfileHandler = xoops_getHandler('tplfile');
     $tpllist        = $tplfileHandler->find(null, null, null, $folder);
     $xoopsTpl       = new XoopsTpl();
-    xoops_template_clear_module_cache($xoopsModule->getVar('mid')); // Clear module's blocks cache
+    xoops_template_clear_module_cache($xoopsModule->getVar('mid'));            // Clear module's blocks cache
 
     // Remove cache for each page.
     foreach ($tpllist as $onetemplate) {
@@ -663,7 +662,7 @@ function nw_FieldExists($fieldname, $table)
 {
     global $xoopsDB;
     //
-    $result = $xoopsDB->queryF("SHOW COLUMNS FROM $table LIKE '$fieldname'");
+    $result = $xoopsDB->queryF("SHOW COLUMNS FROM    $table LIKE '$fieldname'");
 
     return ($xoopsDB->getRowsNum($result) > 0);
 }
@@ -758,7 +757,6 @@ function nw_make_infotips($text)
     $infotips = $xnews->getConfig('infotips');
     if ($infotips > 0) {
         $myts = \MyTextSanitizer::getInstance();
-
         //DNPROSSI changed xoops_substr to mb_substr for utf-8 support
         return $myts->htmlSpecialChars(mb_substr(strip_tags($text), 0, $infotips, 'UTF-8'));
     }
@@ -849,7 +847,7 @@ function nw_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words =
  * @param boolean $keep_original Do we have to keep the original picture ?
  * @param string  $fit           Resize mode (see the wideImage library for more information)
  * @return bool
-  */
+ */
 function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false, $fit = 'inside')
 {
     $xnews = XnewsXnews::getInstance();
@@ -890,12 +888,12 @@ function nw_latestnews_mk_chkbox($options, $number)
     if (1 == $options[$number]) {
         $chk = ' checked';
     }
-    $chkbox = "<input type='radio' name='options[$number]' value='1'" . $chk . '>&nbsp;' . _YES . '&nbsp;&nbsp;';
+    $chkbox = "<input type='radio' name='options[$number]' value='1'" . $chk . ' >&nbsp;' . _YES . '&nbsp;&nbsp;';
     $chk    = '';
     if (0 == $options[$number]) {
         $chk = ' checked';
     }
-    $chkbox .= "<input type='radio' name='options[$number]' value='0'" . $chk . '>&nbsp;' . _NO . '</td></tr>';
+    $chkbox .= "<input type='radio' name='options[$number]' value='0'" . $chk . ' >&nbsp;' . _NO . '</td></tr>';
 
     return $chkbox;
 }
@@ -911,12 +909,12 @@ function nw_latestnews_mk_select($options, $number)
     if (1 == $options[$number]) {
         $slc = ' checked';
     }
-    $select = "<input type='radio' name='options[$number]' value='1'" . $slc . '>&nbsp;' . _LEFT . '&nbsp;&nbsp;';
+    $select = "<input type='radio' name='options[$number]' value='1'" . $slc . ' >&nbsp;' . _LEFT . '&nbsp;&nbsp;';
     $slc    = '';
     if (0 == $options[$number]) {
         $slc = ' checked';
     }
-    $select .= "<input type='radio' name='options[$number]' value='0'" . $slc . '>&nbsp;' . _RIGHT . '</td></tr>';
+    $select .= "<input type='radio' name='options[$number]' value='0'" . $slc . ' >&nbsp;' . _RIGHT . '</td></tr>';
 
     return $select;
 }
@@ -953,7 +951,7 @@ function nw_prepareFolder($folder)
 function nw_remove_accents($chain)
 {
     $xnews = XnewsXnews::getInstance();
-    $myts  = \MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     //
     if (method_exists($myts, 'formatForML')) {
         $chain = $myts->formatForML($chain);
@@ -997,16 +995,17 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
         }
 
         switch ($op) {
-            case _MA_NW_SEO_PDF:
+                case _MD_XNEWS_SEO_PDF:
                 $short_url .= $xnews->getConfig('seo_endofurl_pdf');
-                break;
-            case _MA_NW_SEO_PRINT:
+                    break;
+
+                case _MD_XNEWS_SEO_PRINT:
                 $short_url .= $xnews->getConfig('seo_endofurl');
-                break;
-            case _MA_NW_SEO_ARTICLES:
+                    break;
+                case _MD_XNEWS_SEO_ARTICLES:
                 $short_url .= $xnews->getConfig('seo_endofurl');
-                break;
-            case _MA_NW_SEO_TOPICS:
+                    break;
+                case _MD_XNEWS_SEO_TOPICS:
                 $short_url .= $xnews->getConfig('seo_endofurl');
                 break;
         }
@@ -1052,13 +1051,13 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
     } else {
         // generate classic url
         switch ($op) {
-            case _MA_NW_SEO_TOPICS:
+            case _MD_XNEWS_SEO_TOPICS:
                 return XNEWS_MODULE_URL . "/index.php?topic_id=${id}";
-            case _MA_NW_SEO_ARTICLES:
+            case _MD_XNEWS_SEO_ARTICLES:
                 return XNEWS_MODULE_URL . "/article.php?storyid=${id}";
-            case _MA_NW_SEO_PRINT:
+            case _MD_XNEWS_SEO_PRINT:
                 return XNEWS_MODULE_URL . "/print.php?storyid=${id}";
-            case _MA_NW_SEO_PDF:
+            case _MD_XNEWS_SEO_PDF:
                 return XNEWS_MODULE_URL . "/makepdf.php?storyid=${id}";
             default:
                 die('Unknown SEO operation.');

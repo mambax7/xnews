@@ -47,10 +47,10 @@ function nw_b_news_bigstory_show()
     $infotips   = $xnews->getConfig('infotips');
 
     $block    = [];
-    $onestory = new nw_NewsStory();
+    $onestory = new XNewsStory();
     $stories  = $onestory->getBigStory(1, 0, $restricted, 0, 1, true, 'counter');
     if (0 == count($stories)) {
-        $block['message'] = _MB_NW_NOTYET;
+        $block['message'] = _MB_XNEWS_NOTYET;
     } else {
         foreach ($stories as $key => $story) {
             $htmltitle = '';
@@ -61,7 +61,7 @@ function nw_b_news_bigstory_show()
             //DNPROSSI ADDED
             $block['newsmodule_url']    = XNEWS_MODULE_URL;
             $block['htmltitle']         = $htmltitle;
-            $block['message']           = _MB_NW_TMRSI;
+            $block['message']           = _MB_XNEWS_TMRSI;
             $block['story_title']       = $story->title('Show');
             $block['story_id']          = $story->storyid();
             $block['story_date']        = formatTimestamp($story->published(), $dateformat);
@@ -74,6 +74,7 @@ function nw_b_news_bigstory_show()
             $block['story_topic_color'] = '#' . $myts->displayTarea($story->topic_color);
         }
     }
+
     // DNPROSSI SEO
     $seo_enabled = $xnews->getConfig('seo_enable');
     if (0 != $seo_enabled) {
@@ -91,7 +92,7 @@ function nw_b_news_bigstory_show()
 function nw_b_news_bigstory_onthefly($options)
 {
     $options = explode('|', $options);
-    $block   =& nw_b_news_bigstory_show($options);
+    $block   = &nw_b_news_bigstory_show($options);
 
     $tpl = new XoopsTpl();
     $tpl->assign('block', $block);

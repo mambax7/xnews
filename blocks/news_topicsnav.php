@@ -46,7 +46,7 @@ function nw_b_news_topicsnav_show($options)
     $block            = [];
     $newscountbytopic = [];
     $perms            = '';
-    $xt               = new nw_NewsTopic();
+    $xt               = new XNewsTopic();
     $restricted       = $xnews->getConfig('restrictindex');
     if ($restricted) {
         global $xoopsUser;
@@ -104,16 +104,16 @@ function nw_b_news_topicsnav_show($options)
  */
 function nw_b_news_topicsnav_edit($options)
 {
-    $form = _MB_NW_SHOW_NEWS_COUNT . " <input type='radio' name='options[]' value='1'";
+    $form = _MB_XNEWS_SHOW_NEWS_COUNT . " <input type='radio' name='options[]' value='1'";
     if (1 == $options[0]) {
         $form .= ' checked';
     }
-    $form .= '>' . _YES;
+    $form .= ' >' . _YES;
     $form .= "<input type='radio' name='options[]' value='0'";
     if (0 == $options[0]) {
         $form .= ' checked';
     }
-    $form .= '>' . _NO;
+    $form .= ' >' . _NO;
 
     return $form;
 }

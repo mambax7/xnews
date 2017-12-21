@@ -39,13 +39,13 @@ require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
 /**
  * Display archives
- * @param array $options            :
- *                                  0 = sort order (0=older first, 1=newer first)
- *                                  1 = Starting date, year
- *                                  2 = Starting date, month
- *                                  3 = Ending date, year
- *                                  4 = Ending date, month
- *                                  5 = until today ?
+ * @param array $options :
+ *                       0 = sort order (0=older first, 1=newer first)
+ *                       1 = Starting date, year
+ *                       2 = Starting date, month
+ *                       3 = Ending date, year
+ *                       4 = Ending date, month
+ *                       5 = until today ?
  * @return array|string
  */
 function nw_b_news_archives_show($options)
@@ -118,8 +118,8 @@ function nw_b_news_archives_edit($options)
     $seleyear  = $options[3];
     $selemonth = $options[4];
 
-    $tmpstory = new nw_NewsStory;
-    $tmpstory->GetOlderRecentnews($older, $recent); // We are searching for the module's older and more recent article's date
+    $tmpstory = new XNewsStory;
+    $tmpstory->GetOlderRecentnews($older, $recent);    // We are searching for the module's older and more recent article's date
 
     // Min and max value for the two dates selectors
     // We are going to use the older news for the starting date
@@ -139,40 +139,40 @@ function nw_b_news_archives_edit($options)
 
     // Sort order *************************************************************
     // (0=older first, 1=newer first)
-    $form .= '<b>' . _MB_NW_ORDER . "</b>&nbsp;<select name='options[]'>";
+    $form .= '<b>' . _MB_XNEWS_ORDER . "</b>&nbsp;<select name='options[]'>";
     $form .= "<option value='0'";
     if (0 == $options[0]) {
         $form .= " selected='selected'";
     }
-    $form .= '>' . _MB_NW_OLDER_FIRST . "</option>\n";
+    $form .= '>' . _MB_XNEWS_OLDER_FIRST . "</option>\n";
     $form .= "<option value='1'";
     if (1 == $options[0]) {
         $form .= " selected='selected'";
     }
-    $form .= '>' . _MB_NW_RECENT_FIRST . '</option>';
+    $form .= '>' . _MB_XNEWS_RECENT_FIRST . '</option>';
     $form .= "</select>\n";
 
     // Starting and ending dates **********************************************
-    $form .= '<br><br><b>' . _MB_NW_STARTING_DATE . '</b><br>';
-    $form .= _MB_NW_CAL_YEAR . "&nbsp;<select name='options[]'>";
+    $form .= '<br><br><b>' . _MB_XNEWS_STARTING_DATE . '</b><br>';
+    $form .= _MB_XNEWS_CAL_YEAR . "&nbsp;<select name='options[]'>";
     for ($i = $syear; $i <= $eyear; $i++) {
         $selected = ($i == $selsyear) ? "selected='selected'" : '';
         $form     .= "<option value='" . $i . "'" . $selected . '>' . $i . '</option>';
     }
-    $form .= '</select>&nbsp;' . _MB_NW_CAL_MONTH . "&nbsp;<select name='options[]'>";
+    $form .= '</select>&nbsp;' . _MB_XNEWS_CAL_MONTH . "&nbsp;<select name='options[]'>";
     for ($i = 1; $i <= 12; $i++) {
         $selected = ($i == $selsmonth) ? "selected='selected'" : '';
         $form     .= "<option value='" . $i . "'" . $selected . '>' . $i . '</option>';
     }
     $form .= '</select>';
 
-    $form .= '<br><br><b>' . _MB_NW_ENDING_DATE . '</b><br>';
-    $form .= _MB_NW_CAL_YEAR . "&nbsp;<select name='options[]'>";
+    $form .= '<br><br><b>' . _MB_XNEWS_ENDING_DATE . '</b><br>';
+    $form .= _MB_XNEWS_CAL_YEAR . "&nbsp;<select name='options[]'>";
     for ($i = $syear; $i <= $eyear; $i++) {
         $selected = ($i == $seleyear) ? "selected='selected'" : '';
         $form     .= "<option value='" . $i . "'" . $selected . '>' . $i . '</option>';
     }
-    $form .= '</select>&nbsp;' . _MB_NW_CAL_MONTH . "&nbsp;<select name='options[]'>";
+    $form .= '</select>&nbsp;' . _MB_XNEWS_CAL_MONTH . "&nbsp;<select name='options[]'>";
     for ($i = 1; $i <= 12; $i++) {
         $selected = ($i == $selemonth) ? "selected='selected'" : '';
         $form     .= "<option value='" . $i . "'" . $selected . '>' . $i . '</option>';
@@ -183,7 +183,7 @@ function nw_b_news_archives_edit($options)
     $form    .= '<br>';
     $checked = 1 == $options[5] ? ' checked' : '';
     $form    .= "<input type='checkbox' value='1' name='options[]'" . $checked . '>';
-    $form    .= ' <b>' . _MB_NW_UNTIL_TODAY . '</b>';
+    $form    .= ' <b>' . _MB_XNEWS_UNTIL_TODAY . '</b>';
 
     return $form;
 }

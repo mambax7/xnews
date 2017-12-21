@@ -22,6 +22,9 @@
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
+/**
+ * Class nw_keyhighlighter
+ */
 class nw_keyhighlighter
 {
 
@@ -56,7 +59,7 @@ class nw_keyhighlighter
      *                                   require ('nw_keyhighlighter.class.php');
      *
      * function my_highlighter ($matches) {
-     *   return '<span style="font-weight: bolder; color: #FF0000;">' . $matches[0] . '</span>';
+     *     return '<span style="font-weight: bolder; color: #FF0000;">' . $matches[0] . '</span>';
      * }
      *
      * new nw_keyhighlighter ('W3C', false, 'my_highlighter');

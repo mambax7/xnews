@@ -86,7 +86,7 @@ function XoSmartyPluginLoadGD()
 
 function XoSmartyPluginHTML2RGB($color = '#000000')
 {
-    if ('#' === substr($color, 0, 1)) {
+    if (0 === strpos($color, '#')) {
         $color = substr($color, 1, 6);
     }
 

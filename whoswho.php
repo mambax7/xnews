@@ -32,7 +32,6 @@ require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
 require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-
 if (!$xnews->getConfig('newsbythisauthor')) {
     redirect_header('index.php', 3, _ERRORS);
 }
@@ -41,7 +40,7 @@ $GLOBALS['xoopsOption']['template_main'] = 'nw_news_whos_who.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 $option  = $xnews->getConfig('displayname');
-$article = new nw_NewsStory();
+$article = new XNewsStory();
 $uid_ids = [];
 $uid_ids = $article->getWhosWho($xnews->getConfig('restrictindex'));
 if (count($uid_ids) > 0) {
@@ -52,10 +51,11 @@ if (count($uid_ids) > 0) {
     foreach ($tbl_users as $one_user) {
         $uname = '';
         switch ($option) {
-            case 1: // Username
+            case 1:        // Username
                 $uname = $one_user->getVar('uname');
                 break;
-            case 2: // Display full name (if it is not empty)
+
+            case 2:        // Display full name (if it is not empty)
                 if ('' != xoops_trim($one_user->getVar('name'))) {
                     $uname = $one_user->getVar('name');
                 } else {
@@ -76,9 +76,9 @@ $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
  */
 nw_CreateMetaDatas($article);
 
-$xoopsTpl->assign('xoops_pagetitle', _AM_NW_WHOS_WHO);
+$xoopsTpl->assign('xoops_pagetitle', _AM_XNEWS_WHOS_WHO);
 $myts             = \MyTextSanitizer::getInstance();
-$meta_description = _AM_NW_WHOS_WHO . ' - ' . $myts->htmlSpecialChars($xoopsModule->name());
+$meta_description = _AM_XNEWS_WHOS_WHO . ' - ' . $myts->htmlSpecialChars($xoopsModule->name());
 if (isset($xoTheme) && is_object($xoTheme)) {
     $xoTheme->addMeta('meta', 'description', $meta_description);
 } else {    // Compatibility for old Xoops versions

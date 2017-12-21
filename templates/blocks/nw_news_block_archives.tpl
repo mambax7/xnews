@@ -1,4 +1,4 @@
-<h2><{$smarty.const._MA_NW_NEWSARCHIVES}></h2>
+<h2><{$smarty.const._MD_XNEWS_NEWSARCHIVES}></h2>
 <ul>
 <{foreach item=onedate from=$block.archives}>
 <li>

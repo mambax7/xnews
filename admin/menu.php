@@ -17,9 +17,9 @@
  * @author     XOOPS Development Team
  */
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
-
 use Xoopsmodules\xnews;
+
+defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once __DIR__ . '/../class/Helper.php';
 //require_once __DIR__ . '/../include/common.php';
@@ -36,70 +36,70 @@ $adminmenu[] = [
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_ADMENU2,
+    'title'      => _MI_XNEWS_ADMENU2,
     'link'       => 'admin/index.php?op=topicsmanager',
     'icon'       => 'assets/images/topics32.png',
     'icon_small' => 'assets/images/topics32.png',
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_ADMENU3,
+    'title'      => _MI_XNEWS_ADMENU3,
     'link'       => 'admin/index.php?op=newarticle',
     'icon'       => 'assets/images/newarticle32.png',
     'icon_small' => 'assets/images/newarticle32.png',
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_GROUPPERMS,
+    'title'      => _MI_XNEWS_GROUPPERMS,
     'link'       => 'admin/permissions.php',
     'icon'       => $pathIcon32 . '/permissions.png',
     'icon_small' => $pathIcon32 . '/permissions.png',
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_PRUNENEWS,
+    'title'      => _MI_XNEWS_PRUNENEWS,
     'link'       => 'admin/prune.php',
     'icon'       => 'assets/images/prune32.png',
     'icon_small' => 'assets/images/prune32.png',
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_EXPORT,
+    'title'      => _MI_XNEWS_EXPORT,
     'link'       => 'admin/export.php',
     'icon'       => 'assets/images/export32.png',
     'icon_small' => 'assets/images/export32.png',
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_STATS,
+    'title'      => _MI_XNEWS_STATS,
     'link'       => 'admin/stats.php',
     'icon'       => 'assets/images/stats32.png',
     'icon_small' => 'assets/images/stats32.png',
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_NEWSLETTER,
+    'title'      => _MI_XNEWS_NEWSLETTER,
     'link'       => 'admin/newsletter.php',
     'icon'       => 'assets/images/newsletter32.png',
     'icon_small' => 'assets/images/newsletter32.png',
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_METAGEN,
+    'title'      => _MI_XNEWS_METAGEN,
     'link'       => 'admin/metagen.php',
     'icon'       => 'assets/images/metagen32.png',
     'icon_small' => 'assets/images/metagen32.png',
 ];
 
 $adminmenu[] = [
-    'title'      => _MI_NW_CLONER,
+    'title'      => _MI_XNEWS_CLONER,
     'link'       => 'admin/clone.php',
     'icon'       => 'assets/images/cloner32.png',
     'icon_small' => 'assets/images/cloner32.png',
 ];
 
 $adminmenu[] = [
-    'title' => _MI_NW_ABOUT,
+    'title' => _MI_XNEWS_ABOUT,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png'
 ];

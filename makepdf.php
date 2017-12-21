@@ -30,12 +30,12 @@
 // UPDATED TCPDF to latest - 4.4.006 (2008-12-11)
 // ------------------------------------------------------------------------- //
 
-use XoopsModules\xnews;
+use Xoopsmodules\xnews;
 
 require_once __DIR__ . '/header.php';
 
-/** @var \XoopsModules\xnews\Helper $helper */
-$helper = \XoopsModules\xnews\Helper::getInstance();
+/** @var \Xoopsmodules\xnews\Helper $helper */
+$helper = \Xoopsmodules\xnews\Helper::getInstance();
 
 error_reporting(0);
 require_once __DIR__ . '/header.php';
@@ -53,18 +53,18 @@ require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
 
 if (empty($storyid)) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
-$article = new nw_NewsStory($storyid);
+$article = new XNewsStory($storyid);
 // Not yet published
 if (0 == $article->published() || $article->published() > time()) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
 // Expired
 if (0 != $article->expired() && $article->expired() < time()) {
-    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
+    redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
 $gpermHandler = xoops_getHandler('groupperm');
@@ -159,7 +159,7 @@ $content .= '<b><i><u>'
             . ' : '
             . $myts->undoHtmlSpecialChars($article->uname())
             . '<br>'
-            . _MA_NW_POSTEDON
+            . _MD_XNEWS_POSTEDON
             . ' '
             . formatTimestamp($article->published(), $dateformat)
             . '<br><br><br>';

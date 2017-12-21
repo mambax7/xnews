@@ -1,4 +1,4 @@
-<{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._MA_NW_PAGE}> <{$pagenav}></div><{/if}>
+<{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._MD_XNEWS_PAGE}> <{$pagenav}></div><{/if}>
 <table width="100%" border="0" style="padding: 5px;">
     <tr>
     <{if $nav_links != 0}>
@@ -32,7 +32,7 @@
 </script>
 
 
-<{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._MA_NW_PAGE}> <{$pagenav}></div><{/if}>
+<{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._MD_XNEWS_PAGE}> <{$pagenav}></div><{/if}>
 
 <{if $tags}>
     <br><{include file="db:tag_bar.tpl"}>

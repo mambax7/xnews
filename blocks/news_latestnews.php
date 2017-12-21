@@ -58,7 +58,7 @@ require_once XOOPS_ROOT_PATH . '/class/tree.php';
 function nw_b_news_latestnews_show($options)
 {
     $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new nw_NewsStory();
+    $nw_NewsStoryHandler = new XNewsStory();
     //
     // IN PROGRESS
     // IN PROGRESS
@@ -143,7 +143,7 @@ function nw_b_news_latestnews_show($options)
 
                 $startdiv = '<div style="float:' . $imgposition . '"><a href="' . XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid . '">';
                 $style    = 'style="border: ' . $border . 'px solid #' . $bordercolor . '"';
-                $enddiv   = 'alt="' . $thisstory->title . '" width="' . $imgwidth . '" ' . $height . '></a></div>';
+                $enddiv   = 'alt="' . $thisstory->title . '" width="' . $imgwidth . '" ' . $height . ' ></a></div>';
 
                 $patterns[] = "/\[img align=(['\"]?)(left|center|right)\\1 width=(['\"]?)([0-9]*)\\3]([^\"\(\)\?\&'<>]*)\[\/img\]/sU";
                 $patterns[] = "/\[img align=(['\"]?)(left|center|right)\\1]([^\"\(\)\?\&'<>]*)\[\/img\]/sU";
@@ -160,7 +160,6 @@ function nw_b_news_latestnews_show($options)
                 //DNPROSSI Added - xlanguage installed and active
                 $story = '';
                 $story = $thisstory->hometext;
-
                 if (true === $xlang) {
                     require_once XOOPS_ROOT_PATH . '/modules/xlanguage/include/functions.php';
                     $story = xlanguage_ml($story);
@@ -181,7 +180,7 @@ function nw_b_news_latestnews_show($options)
                                  . XNEWS_MODULE_URL
                                  . '/assets/images/edit_block.png" alt="'
                                  . _EDIT
-                                 . '" width="18"></a> <a href="'
+                                 . '" width="18" ></a> <a href="'
                                  . XNEWS_MODULE_URL
                                  . '/admin/index.php?op=delete&amp;storyid='
                                  . $storyid
@@ -189,28 +188,28 @@ function nw_b_news_latestnews_show($options)
                                  . XNEWS_MODULE_URL
                                  . '/assets/images/delete_block.png" alt="'
                                  . _DELETE
-                                 . '" width="20"></a>';
+                                 . '" width="20" ></a>';
             } else {
                 $news['admin'] = '';
             }
             if (1 == $options[9]) {
-                $block['topiclink'] = '| <a href="' . XNEWS_MODULE_URL . '/topics_directory.php">' . _AM_NW_TOPICS_DIRECTORY . '</a> ';
+                $block['topiclink'] = '| <a href="' . XNEWS_MODULE_URL . '/topics_directory.php">' . _AM_XNEWS_TOPICS_DIRECTORY . '</a> ';
             }
             if (1 == $options[10]) {
-                $block['archivelink'] = '| <a href="' . XNEWS_MODULE_URL . '/archive.php">' . _MA_NW_NEWSARCHIVES . '</a> ';
+                $block['archivelink'] = '| <a href="' . XNEWS_MODULE_URL . '/archive.php">' . _MD_XNEWS_NEWSARCHIVES . '</a> ';
             }
             if (1 == $options[11]) {
                 if (empty($GLOBALS['xoopsUser'])) {
                     $block['submitlink'] = '';
                 } else {
-                    $block['submitlink'] = '| <a href="' . XNEWS_MODULE_URL . '/submit.php">' . _MA_NW_SUBMITNEWS . '</a> ';
+                    $block['submitlink'] = '| <a href="' . XNEWS_MODULE_URL . '/submit.php">' . _MD_XNEWS_SUBMITNEWS . '</a> ';
                 }
             }
 
             $news['poster'] = '';
             if (1 == $options[12]) {
                 if ('' != $thisstory->uname()) {
-                    $news['poster'] = '' . _MB_NW_LATESTNEWS_POSTER . ' ' . $thisstory->uname() . '';
+                    $news['poster'] = '' . _MB_XNEWS_LATESTNEWS_POSTER . ' ' . $thisstory->uname() . '';
                 }
             }
             $news['posttime'] = '';
@@ -218,7 +217,7 @@ function nw_b_news_latestnews_show($options)
                 if ('' != $thisstory->uname()) {
                     $news['posttime'] = '' . _ON . ' ' . $published . '';
                 } else {
-                    $news['posttime'] = '' . _MB_NW_POSTED . ' ' . _ON . ' ' . $published . '';
+                    $news['posttime'] = '' . _MB_XNEWS_POSTED . ' ' . _ON . ' ' . $published . '';
                 }
             }
             $news['topic_image']          = '';
@@ -229,7 +228,7 @@ function nw_b_news_latestnews_show($options)
             $news['topic_title'] = '';
             if (1 == $options[15]) {
                 $news['topic_title']     = '' . $thisstory->textlink() . '';
-                $news['topic_separator'] = ('' != $thisstory->textlink()) ? _MB_NW_SP : '';
+                $news['topic_separator'] = ('' != $thisstory->textlink()) ? _MB_XNEWS_SP : '';
             }
 
             $news['read'] = '';
@@ -239,7 +238,7 @@ function nw_b_news_latestnews_show($options)
 
             $comments = $thisstory->comments();
             if (!empty($bodytext) || $comments > 0) {
-                $news['more'] = '<a href="' . XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid . '">' . _MA_NW_READMORE . '</a>';
+                $news['more'] = '<a href="' . XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid . '">' . _MD_XNEWS_READMORE . '</a>';
             } else {
                 $news['more'] = '';
             }
@@ -249,31 +248,31 @@ function nw_b_news_latestnews_show($options)
                     //shows 1 comment instead of 1 comm. if comments ==1
                     //langugage file modified accordingly
                     if (1 == $comments) {
-                        $news['comment'] = '&nbsp;' . _MA_NW_ONECOMMENT . '</a>&nbsp;';
+                        $news['comment'] = '&nbsp;' . _MD_XNEWS_ONECOMMENT . '</a>&nbsp;';
                     } else {
-                        $news['comment'] = '&nbsp;' . $comments . '&nbsp;' . _MB_NW_LATESTNEWS_COMMENT . '</a>&nbsp;';
+                        $news['comment'] = '&nbsp;' . $comments . '&nbsp;' . _MB_XNEWS_LATESTNEWS_COMMENT . '</a>&nbsp;';
                     }
                 } else {
-                    $news['comment'] = '&nbsp;' . _MB_NW_NO_COMMENT . '</a>&nbsp;';
+                    $news['comment'] = '&nbsp;' . _MB_XNEWS_NO_COMMENT . '</a>&nbsp;';
                 }
             }
 
             $news['print'] = '';
             if (1 == $options[18]) {
-                $news['print'] = '<a href="' . XNEWS_MODULE_URL . '/print.php?storyid=' . $storyid . '" rel="nofollow"><img src="' . XNEWS_MODULE_URL . '/assets/images/print.png" width="22" alt="' . _MA_NW_PRINTERFRIENDLY . '"></a>';
+                $news['print'] = '<a href="' . XNEWS_MODULE_URL . '/print.php?storyid=' . $storyid . '" rel="nofollow"><img src="' . XNEWS_MODULE_URL . '/assets/images/print.png" width="22" alt="' . _MD_XNEWS_PRINTERFRIENDLY . '"></a>';
             }
 
             $news['pdf'] = '';
             if (1 == $options[19]) {
-                $news['pdf'] = '&nbsp;<a href="' . XNEWS_MODULE_URL . '/makepdf.php?storyid=' . $storyid . '" rel="nofollow"><img src="' . XNEWS_MODULE_URL . '/assets/images/acrobat.png" width="22" alt="' . _MA_NW_MAKEPDF . '"></a>&nbsp;';
+                $news['pdf'] = '&nbsp;<a href="' . XNEWS_MODULE_URL . '/makepdf.php?storyid=' . $storyid . '" rel="nofollow"><img src="' . XNEWS_MODULE_URL . '/assets/images/acrobat.png" width="22" alt="' . _MD_XNEWS_MAKEPDF . '"></a>&nbsp;';
             }
 
             $news['email'] = '';
             if (1 == $options[20]) {
                 $news['email'] = '<a href="mailto:?subject='
-                                 . sprintf(_MA_NW_INTARTICLE, $GLOBALS['xoopsConfig']['sitename'])
+                                 . sprintf(_MD_XNEWS_INTARTICLE, $GLOBALS['xoopsConfig']['sitename'])
                                  . '&amp;body='
-                                 . sprintf(_MA_NW_INTARTFOUND, $GLOBALS['xoopsConfig']['sitename'])
+                                 . sprintf(_MD_XNEWS_INTARTFOUND, $GLOBALS['xoopsConfig']['sitename'])
                                  . ':  '
                                  . XNEWS_MODULE_URL
                                  . '/article.php?storyid='
@@ -281,12 +280,12 @@ function nw_b_news_latestnews_show($options)
                                  . '" rel="nofollow"><img src="'
                                  . XNEWS_MODULE_URL
                                  . '/assets/images/friend.png" width="20" alt="'
-                                 . _MA_NW_SENDSTORY
-                                 . '"></a>&nbsp;';
+                                 . _MD_XNEWS_SENDSTORY
+                                 . '" ></a>&nbsp;';
             }
 
             if (1 == $options[21]) {
-                $block['morelink'] = '&nbsp;<a href="' . XNEWS_MODULE_URL . '/index.php ">' . _MB_NW_MORE_STORIES . '</a> ';
+                $block['morelink'] = '&nbsp;<a href="' . XNEWS_MODULE_URL . '/index.php ">' . _MB_XNEWS_MORE_STORIES . '</a> ';
             }
 
             if (1 == $options[22]) {
@@ -321,79 +320,79 @@ function nw_b_news_latestnews_edit($options)
     $tabletag2 = '</td><td>';
 
     $form = "<table border='0'>";
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_DISPLAY . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[0] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS . '</td></tr>';
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_COLUMNS . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[1] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_COLUMN . '</td></tr>';
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_TEXTLENGTH . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[2] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_LETTER . '</td></tr>';
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_IMGWIDTH . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[3] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . '</td></tr>';
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_IMGHEIGHT . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[4] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . '</td></tr>';
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_BORDER . $tabletag2;
-    $form .= "<input type='text' name='options[]' value='" . $options[5] . "' size='4'>&nbsp;" . _MB_NW_LATESTNEWS_PIXEL . '</td></tr>';
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_BORDERCOLOR . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_DISPLAY . $tabletag2;
+    $form .= "<input type='text' name='options[]' value='" . $options[0] . "' size='4'>&nbsp;" . _MB_XNEWS_LATESTNEWS . '</td></tr>';
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_COLUMNS . $tabletag2;
+    $form .= "<input type='text' name='options[]' value='" . $options[1] . "' size='4'>&nbsp;" . _MB_XNEWS_LATESTNEWS_COLUMN . '</td></tr>';
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_TEXTLENGTH . $tabletag2;
+    $form .= "<input type='text' name='options[]' value='" . $options[2] . "' size='4'>&nbsp;" . _MB_XNEWS_LATESTNEWS_LETTER . '</td></tr>';
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_IMGWIDTH . $tabletag2;
+    $form .= "<input type='text' name='options[]' value='" . $options[3] . "' size='4'>&nbsp;" . _MB_XNEWS_LATESTNEWS_PIXEL . '</td></tr>';
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_IMGHEIGHT . $tabletag2;
+    $form .= "<input type='text' name='options[]' value='" . $options[4] . "' size='4'>&nbsp;" . _MB_XNEWS_LATESTNEWS_PIXEL . '</td></tr>';
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_BORDER . $tabletag2;
+    $form .= "<input type='text' name='options[]' value='" . $options[5] . "' size='4'>&nbsp;" . _MB_XNEWS_LATESTNEWS_PIXEL . '</td></tr>';
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_BORDERCOLOR . $tabletag2;
     $form .= "<input type='text' name='options[]' value='" . $options[6] . "' size='8'></td></tr>";
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_SELECTEDSTORIES . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_SELECTEDSTORIES . $tabletag2;
     $form .= "<input type='text' name='options[]' value='" . $options[7] . "' size='16'></td></tr>";
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_IMGPOSITION . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_IMGPOSITION . $tabletag2;
     $form .= nw_latestnews_mk_select($options, 8);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_TOPICLINK . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_TOPICLINK . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 9);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_ARCHIVELINK . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_ARCHIVELINK . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 10);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_SUBMITLINK . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_SUBMITLINK . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 11);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_POSTEDBY . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_POSTEDBY . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 12);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_POSTTIME . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_POSTTIME . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 13);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_TOPICIMAGE . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_TOPICIMAGE . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 14);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_TOPICTITLE . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_TOPICTITLE . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 15);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_READ . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_READ . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 16);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_COMMENT . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_COMMENT . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 17);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_PRINT . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_PRINT . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 18);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_PDF . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_PDF . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 19);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_EMAIL . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_EMAIL . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 20);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_MORELINK . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_MORELINK . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 21);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_SCROLL . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_SCROLL . $tabletag2;
     $form .= nw_latestnews_mk_chkbox($options, 22);
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_SCROLLHEIGHT . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_SCROLLHEIGHT . $tabletag2;
     $form .= "<input type='text' name='options[]' value='" . $options[23] . "' size='4'></td></tr>";
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_SCROLLSPEED . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_SCROLLSPEED . $tabletag2;
     $form .= "<input type='text' name='options[]' value='" . $options[24] . "' size='4'></td></tr>";
 
     //order
-    $form .= $tabletag1 . _MB_NW_LATESTNEWS_ORDERBY . $tabletag2;
+    $form .= $tabletag1 . _MB_XNEWS_LATESTNEWS_ORDERBY . $tabletag2;
     $form .= "<select name='options[]'>";
     $form .= "<option value='published'";
     if ('published' === $options[25]) {
         $form .= " selected='selected'";
     }
-    $form .= '>' . _MB_NW_LATESTNEWS_DATE . "</option>\n";
+    $form .= '>' . _MB_XNEWS_LATESTNEWS_DATE . "</option>\n";
 
     $form .= "<option value='counter'";
     if ('counter' === $options[25]) {
         $form .= " selected='selected'";
     }
-    $form .= '>' . _MB_NW_LATESTNEWS_HITS . '</option>';
+    $form .= '>' . _MB_XNEWS_LATESTNEWS_HITS . '</option>';
     $form .= "<option value='rating'";
     if ('rating' === $options[25]) {
         $form .= " selected='selected'";
     }
-    $form .= '>' . _MB_NW_LATESTNEWS_RATE . '</option>';
+    $form .= '>' . _MB_XNEWS_LATESTNEWS_RATE . '</option>';
     $form .= '</select></td></tr>';
     //topics
-    $form       .= $tabletag1 . _MB_NW_LATESTNEWS_TOPICSDISPLAY . $tabletag2;
+    $form       .= $tabletag1 . _MB_XNEWS_LATESTNEWS_TOPICSDISPLAY . $tabletag2;
     $form       .= "<select name='options[]' multiple='multiple'>";
     $topics_arr = [];
     $xt         = new XoopsTree($GLOBALS['xoopsDB']->prefix('nw_topics'), 'topic_id', 'topic_pid');

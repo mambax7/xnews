@@ -1,11 +1,27 @@
 <?php
+
+use Xoopsmodules\xnews;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+
+include __DIR__ . '/../preloads/autoloader.php';
 
 // common Xoops stuff
 xoops_load('XoopsFormLoader');
 xoops_load('XoopsPageNav');
 xoops_load('XoopsUserUtility');
 xoops_load('XoopsLocal');
+
+
+$moduleDirName = basename(dirname(__DIR__));
+
+require_once __DIR__ . '/../class/Helper.php';
+require_once __DIR__ . '/../class/Utility.php';
+
+$db     = \XoopsDatabaseFactory::getDatabase();
+$helper = xnews\Helper::getInstance();
+/** @var xnews\Utility $utility */
+$utility = new xnews\Utility();
 
 // MyTextSanitizer object
 $myts = \MyTextSanitizer::getInstance();
@@ -26,6 +42,7 @@ define('XNEWS_TOPICS_FILES_PATH', XOOPS_ROOT_PATH . '/uploads/' . XNEWS_MODULE_D
 define('XNEWS_ATTACHED_FILES_PATH', XOOPS_ROOT_PATH . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 define('XNEWS_TOPICS_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/topics');
 define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
+
 xoops_loadLanguage('common', XNEWS_MODULE_DIRNAME);
 
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
@@ -50,7 +67,6 @@ if (is_object($xnews->getModule())) {
     // find if the user is admin of the module
     $xnews_isAdmin = xnews_userIsAdmin();
 }
-
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
     $GLOBALS['xoopsTpl'] = new XoopsTpl();
