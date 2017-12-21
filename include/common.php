@@ -33,6 +33,7 @@ require_once XNEWS_MODULE_PATH . '/include/constants.php';
 
 require_once XNEWS_MODULE_PATH . '/class/session.php'; // XnewsSession class
 require_once XNEWS_MODULE_PATH . '/class/xnews.php'; // XnewsXnews class
+require_once XNEWS_MODULE_PATH . '/class/Helper.php';
 //require_once XNEWS_MODULE_PATH . '/class/common/breadcrumb.php'; // XnewsBreadcrumb class
 //require_once XNEWS_MODULE_PATH . '/class/common/choicebyletter.php'; // XnewsChoiceByLetter class
 require_once XNEWS_MODULE_PATH . '/class/common/tree.php'; // xnews_MyXoopsObjectTree class
@@ -48,6 +49,11 @@ global $xnews_isAdmin;
 if (is_object($xnews->getModule())) {
     // find if the user is admin of the module
     $xnews_isAdmin = xnews_userIsAdmin();
+}
+
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
+    require_once $GLOBALS['xoops']->path('class/template.php');
+    $GLOBALS['xoopsTpl'] = new XoopsTpl();
 }
 
 require_once XNEWS_MODULE_PATH . '/include/config.php';

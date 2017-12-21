@@ -30,6 +30,13 @@
 // UPDATED TCPDF to latest - 4.4.006 (2008-12-11)
 // ------------------------------------------------------------------------- //
 
+use XoopsModules\xnews;
+
+require_once __DIR__ . '/header.php';
+
+/** @var \XoopsModules\xnews\Helper $helper */
+$helper = \XoopsModules\xnews\Helper::getInstance();
+
 error_reporting(0);
 require_once __DIR__ . '/header.php';
 
@@ -84,7 +91,8 @@ if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsMo
 //
 
 $storypage  = isset($_GET['page']) ? (int)$_GET['page'] : 0;
-$dateformat = nw_getmoduleoption('dateformat', NW_MODULE_DIR_NAME);
+//$dateformat = nw_getmoduleoption('dateformat', NW_MODULE_DIR_NAME);
+$dateformat = $helper->getConfig('dateformat');
 $hcontent   = '';
 
 
@@ -229,7 +237,11 @@ if (_LANGCODE === 'cn' || 'cn' === $multylang) {
 $pdf->setLanguageArray($l); //set language items
 
 //initialize document
-$pdf->AliasNbPages();
+//$pdf->AliasNbPages();
+
+//initialize document
+$pdf->Open();
+
 
 // ***** For Testing Purposes
 /*$pdf->AddPage();

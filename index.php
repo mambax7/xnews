@@ -70,6 +70,9 @@
  * @template_var                string         lang_sendstory fixed text : Send this Story to a Friend
  * @template_var                string         topic_select contains the topics selector
  */
+
+use XoopsModules\xnews;
+
 require_once __DIR__ . '/header.php';
 
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
@@ -158,7 +161,7 @@ if ($showclassic) {
         $helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
         $module        = $helper->getModule();
 
-        if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
+        if (xnews\Utility::checkVerXoops($module, '2.5.9')) {
             $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $xoopsOption['storytopic'], true, 0, '', '');
             $xoopsTpl->assign('topic_select', $topic_select->render());
         } else {

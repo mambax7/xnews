@@ -36,6 +36,8 @@
  *
  */
 
+use XoopsModules\xnews;
+
 require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 
@@ -86,7 +88,13 @@ function PrintPage()
 {
     global $xoopsConfig, $xoopsModule, $storyObj, $xoops_meta_keywords, $xoops_meta_description;
     $myts     = \MyTextSanitizer::getInstance();
-    $datetime = formatTimestamp($storyObj->published(), $xnews->getConfig('dateformat')); ?>
+
+    /** @var \XoopsModules\xnews\Helper $helper */
+    $helper = \XoopsModules\xnews\Helper::getInstance();
+
+    $dateformat = $helper->getConfig('dateformat');
+
+    $datetime = formatTimestamp($storyObj->published(), $dateformat); ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">
     <?php
@@ -99,7 +107,7 @@ function PrintPage()
     echo '<meta name="DESCRIPTION" content="' . $xoops_meta_description . '">';
     echo '<meta name="GENERATOR" content="XOOPS">';
     $supplemental = '';
-    if ($xnews->getConfig('footNoteLinks')) {
+    if ($helper->getConfig('footNoteLinks')) {
         $supplemental = "footnoteLinks('content','content'); "; ?>
         <script type="text/javascript">
             // <![CDATA[

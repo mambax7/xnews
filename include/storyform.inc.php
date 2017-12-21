@@ -18,6 +18,8 @@
  *
  */
 
+use XoopsModules\xnews;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 if (file_exists(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php')) {
@@ -51,7 +53,7 @@ $moduleDirName = basename(dirname(__DIR__));
 $helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
 $module        = $helper->getModule();
 
-if (XNewsUtility::checkVerXoops($module, '2.5.9')) {
+if (xnews\Utility::checkVerXoops($module, '2.5.9')) {
     //         $topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
     $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $topicid, false, 0, '', '');
     $sform->addElement($topic_select);

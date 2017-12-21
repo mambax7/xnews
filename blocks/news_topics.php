@@ -17,6 +17,8 @@
  * @author     XOOPS Development Team
  */
 
+use XoopsModules\xnews;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
@@ -54,7 +56,7 @@ function nw_b_news_topics_show()
     $topic_tree = new XnewsMyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
     $additional = " onchange='location=\"" . $jump . "\"+this.options[this.selectedIndex].value'";
 
-    if (XNewsUtility::checkVerXoops($GLOBALS['xoopsModule'], '2.5.9')) {
+    if (xnews\Utility::checkVerXoops($GLOBALS['xoopsModule'], '2.5.9')) {
         $topicSelect        = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', '', true, 0, $additional);
         $block['selectbox'] = $topicSelect->render();
     } else {

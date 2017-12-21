@@ -3,7 +3,7 @@
 use WideImage\WideImage;
 
 /**
- * Class XNewsUtility
+ * Class Utility
  */
 class Utility extends \XoopsObject
 {
@@ -84,12 +84,12 @@ class Utility extends \XoopsObject
      *
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
-     * @param XoopsModule $module
+     * @param \XoopsModule $module
      *
      * @param null|string $requiredVer
      * @return bool true if meets requirements, false if not
      */
-    public static function checkVerXoops(XoopsModule $module = null, $requiredVer = null)
+    public static function checkVerXoops(\XoopsModule $module = null, $requiredVer = null)
     {
         $moduleDirName = basename(dirname(__DIR__));
         if (null === $module) {
