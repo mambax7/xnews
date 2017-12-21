@@ -70,7 +70,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function GetCountStoriesPublishedBefore($timestamp, $expired, $topicsList = '')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $sql = 'SELECT count(*) as cpt';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
@@ -93,7 +93,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getStory($storyid)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $sql   = 'SELECT s.*, t.*';
         $sql   .= " FROM {$this->table} s, {$this->db->prefix('nw_topics')} t";
@@ -111,7 +111,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function DeleteBeforeDate($timestamp, $expired, $topicsList = '')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $sql = 'SELECT storyid';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
@@ -153,7 +153,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function _searchPreviousOrNextArticle($storyid, $next = true, $checkRight = false)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret     = [];
         $storyid = (int)$storyid;
@@ -180,7 +180,7 @@ class nw_NewsStory extends XnewsDeprecateStory
 
         $result = $this->db->query($sql, 1);
         if ($result) {
-            $myts = MyTextSanitizer::getInstance();
+            $myts = \MyTextSanitizer::getInstance();
             while ($row = $this->db->fetchArray($result)) {
                 $ret = ['storyid' => $row['storyid'], 'title' => $myts->htmlSpecialChars($row['title'])];
             }
@@ -223,7 +223,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllPublished($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'published', $topic_frontpage = false)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret = [];
         $sql = 'SELECT s.*, t.*';
@@ -293,7 +293,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getArchive($publish_start, $publish_end, $checkRight = false, $asObject = true, $order = 'published')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret = [];
         $sql = 'SELECT s.*, t.*';
@@ -335,7 +335,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getBigStory($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'counter')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret   = [];
         $tdate = mktime(0, 0, 0, date('n'), date('j'), date('Y'));
@@ -396,7 +396,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllPublishedByAuthor($uid, $checkRight = false, $asObject = true)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret = [];
         $sql = "SELECT {$this->db->prefix('nw_stories')}.*, {$this->db->prefix('nw_topics')}.topic_title, {$this->db->prefix('nw_topics')}.topic_color";
@@ -462,7 +462,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllExpired($limit = 0, $start = 0, $topic = 0, $ihome = 0, $asObject = true)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret = [];
         $sql = 'SELECT *';
@@ -497,7 +497,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllAutoStory($limit = 0, $asObject = true, $start = 0)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret    = [];
         $sql    = 'SELECT *';
@@ -526,7 +526,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllSubmitted($limit = 0, $asObject = true, $checkRight = false, $start = 0)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret      = [];
         $criteria = new CriteriaCompo(new Criteria('published', 0));
@@ -569,7 +569,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getAllStoriesCount($storyType = 1, $checkRight = false)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $sql = 'SELECT count(*) as cpt';
         $sql .= " FROM {$this->db->prefix('nw_stories')}";
@@ -677,7 +677,7 @@ class nw_NewsStory extends XnewsDeprecateStory
         if ('' == trim($this->topic_imgurl)) {
             $this->topic_imgurl = 'blank.png';
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         switch ($format) {
             case 'S':
                 $imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
@@ -704,7 +704,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function topic_title($format = 'S')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         switch ($format) {
             case 'S':
                 $title = $myts->htmlSpecialChars($this->topic_title);
@@ -732,7 +732,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function imglink()
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $topic_display = $this->xnews->getConfig('topicdisplay');
         //DNPROSSI SEO
@@ -785,7 +785,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function storylink()
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $seo_enabled = $this->xnews->getConfig('seo_enable');
         $ret         = '';
@@ -841,7 +841,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function prepare2show($filescount)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $infotips = $this->xnews->getConfig('infotips');
         //DNPROSSI SEO
@@ -1022,7 +1022,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function NewsExport($fromDate, $toDate, $topicsList = '', $usetopicsdef = 0, &$topicsTable, $asObject = true, $order = 'published')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret = [];
         if ($usetopicsdef) { // We firt begin by exporting topics definitions
@@ -1066,7 +1066,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function store($approved = false)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $counter     = isset($this->counter) ? $this->counter : 0;
         $title       = $myts->censorString($this->title);
@@ -1229,7 +1229,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function description($format = 'S')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         switch (strtoupper($format)) {
             case 'S':
@@ -1253,7 +1253,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function keywords($format = 'S')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         switch (strtoupper($format)) {
             case 'S':
@@ -1284,7 +1284,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getRandomNews($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $order = 'published', $topic_frontpage = false)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret = $rand_keys = $ret3 = [];
         $sql = 'SELECT storyid';
@@ -1359,7 +1359,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function GetStats($limit)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret = [];
         // Number of stories per topic, including expired and non published stories
@@ -1491,7 +1491,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function GetOlderRecentnews(&$older, &$recent)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $sql    = 'SELECT min(published) as minpublish, max(published) as maxpublish';
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
@@ -1514,7 +1514,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getWhosWho($checkRight = false, $limit = 0, $start = 0)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret = [];
         $sql = 'SELECT distinct(uid) as uid';
@@ -1545,7 +1545,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function auto_summary($text, &$titles)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $auto_summary = '';
         if ($this->xnews->getConfig('enhanced_pagenav')) {
@@ -1584,7 +1584,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function hometext($format = 'Show')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $html = $smiley = $xcodes = 1;
         $dobr = 0;
@@ -1625,7 +1625,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function bodytext($format = 'Show')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $html   = 1;
         $smiley = 1;
@@ -1673,7 +1673,7 @@ class nw_NewsStory extends XnewsDeprecateStory
      */
     public function getStoriesByIds($ids, $checkRight = true, $asObject = true, $order = 'published', $onlyOnline = true)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $limit = $start = 0;
         $ret   = [];

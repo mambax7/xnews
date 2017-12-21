@@ -421,7 +421,7 @@ function nw_CreateMetaDatas($story = null)
     $xnews = XnewsXnews::getInstance();
 
     $content = '';
-    $myts    = MyTextSanitizer::getInstance();
+    $myts    = \MyTextSanitizer::getInstance();
     require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
 
     /**
@@ -545,7 +545,7 @@ function nw_createmeta_keywords($content)
         $limit                         = $xoopsConfigSearch['keyword_min'];
         $_SESSION['nw_keywords_limit'] = $limit;
     }
-    $myts            = MyTextSanitizer::getInstance();
+    $myts            = \MyTextSanitizer::getInstance();
     $content         = str_replace('<br>', ' ', $content);
     $content         = $myts->undoHtmlSpecialChars($content);
     $content         = strip_tags($content);
@@ -757,7 +757,7 @@ function nw_make_infotips($text)
 {
     $infotips = $xnews->getConfig('infotips');
     if ($infotips > 0) {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 
         //DNPROSSI changed xoops_substr to mb_substr for utf-8 support
         return $myts->htmlSpecialChars(mb_substr(strip_tags($text), 0, $infotips, 'UTF-8'));
@@ -953,7 +953,7 @@ function nw_prepareFolder($folder)
 function nw_remove_accents($chain)
 {
     $xnews = XnewsXnews::getInstance();
-    $myts  = MyTextSanitizer::getInstance();
+    $myts  = \MyTextSanitizer::getInstance();
     //
     if (method_exists($myts, 'formatForML')) {
         $chain = $myts->formatForML($chain);

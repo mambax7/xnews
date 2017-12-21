@@ -35,7 +35,7 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 xoops_load('xoopspagenav');
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-$myts        = MyTextSanitizer::getInstance();
+$myts        = \MyTextSanitizer::getInstance();
 $topicscount = 0;
 
 $storiesTableName = $GLOBALS['xoopsDB']->prefix('nw_stories');

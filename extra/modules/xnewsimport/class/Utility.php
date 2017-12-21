@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class MyalbumUtil
+ * Class Utility
  */
 class XNewsImportUtility extends XoopsObject
 {

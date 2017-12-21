@@ -27,7 +27,7 @@ if (file_exists(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/ca
 }
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
-require_once XNEWS_MODULE_PATH . '/class/utility.php';
+require_once XNEWS_MODULE_PATH . '/class/Utility.php';
 
 $sform = new XoopsThemeForm(_MA_NW_SUBMITNEWS, 'storyform', XNEWS_MODULE_URL . '/submit.php');
 $sform->setExtra('enctype="multipart/form-data"');

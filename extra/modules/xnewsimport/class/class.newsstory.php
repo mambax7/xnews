@@ -74,7 +74,7 @@ class xni_NewsStory extends XoopsStory
      */
     public function store($approved = false)
     {
-        $myts        = MyTextSanitizer::getInstance();
+        $myts        = \MyTextSanitizer::getInstance();
         $counter     = isset($this->counter) ? $this->counter : 0;
         $title       = $myts->censorString($this->title);
         $title       = $myts->addSlashes($title);
@@ -179,7 +179,7 @@ class xni_NewsStory extends XoopsStory
      */
     public function description($format = 'S')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         switch (strtoupper($format)) {
             case 'S':
                 $description = $myts->htmlSpecialChars($this->description);
@@ -202,7 +202,7 @@ class xni_NewsStory extends XoopsStory
      */
     public function keywords($format = 'S')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         switch (strtoupper($format)) {
             case 'S':
                 $keywords = $myts->htmlSpecialChars($this->keywords);

@@ -79,7 +79,7 @@ function nw_b_news_latestnews_show($options)
         $xlang = false;
     }
 
-    $myts   = MyTextSanitizer::getInstance();
+    $myts   = \MyTextSanitizer::getInstance();
     $sfiles = new nw_sFiles();
 
     $dateformat = $xnews->getConfig('dateformat');

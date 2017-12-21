@@ -1,11 +1,11 @@
-<?php
+<?php namespace Xoopsmodules\xnews;
 
 use WideImage\WideImage;
 
 /**
  * Class XNewsUtility
  */
-class XNewsUtility extends XoopsObject
+class Utility extends \XoopsObject
 {
     /**
      * Function responsible for checking if a directory exists, we can also write in and create an index.html file

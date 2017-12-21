@@ -124,7 +124,7 @@ if (empty($storyid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MA_NW_NOSTORY);
 }
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 // Not yet published
 $article = new nw_NewsStory($storyid);

@@ -168,7 +168,7 @@ function TopicSelect()
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
     require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
     require_once XOOPS_ROOT_PATH . '/class/tree.php';
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
     //Detect in out modules and prepare form
     $from_import        = isset($_POST['importfrom']) ? $_POST['importfrom'] : 'nonselected';

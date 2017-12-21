@@ -31,7 +31,7 @@ class nw_blacklist
      */
     public function getAllKeywords()
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $ret      = $tbl_black_list = [];
         $filename = XOOPS_UPLOAD_PATH . '/nw_black_list.php';
@@ -75,7 +75,7 @@ class nw_blacklist
      */
     public function addkeywords($keyword)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         if (is_array($keyword)) {
             foreach ($keyword as $onekeyword) {

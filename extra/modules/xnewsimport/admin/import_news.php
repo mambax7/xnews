@@ -26,7 +26,7 @@ require_once XNI_MODULE_PATH . '/admin/functions.php';
 //require_once XNI_MODULE_PATH . '/class/class.newstopic.php';
 //require_once XNI_MODULE_PATH . '/class/class.newsstory.php';
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 $importFromModuleName = isset($_POST['importfrom']);
 $importToCloneID      = @$_POST['importto'];

@@ -25,7 +25,7 @@ $fileid = isset($_GET['fileid']) ? (int)$_GET['fileid'] : 0;
 if (empty($fileid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _ERRORS);
 }
-$myts   = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts   = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 $sfiles = new nw_sFiles($fileid);
 
 // Do we have the right to see the file ?

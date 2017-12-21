@@ -42,7 +42,7 @@ function nw_b_news_topicsnav_show($options)
 {
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
     require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-    $myts             = MyTextSanitizer::getInstance();
+    $myts             = \MyTextSanitizer::getInstance();
     $block            = [];
     $newscountbytopic = [];
     $perms            = '';

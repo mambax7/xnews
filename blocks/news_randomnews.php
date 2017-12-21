@@ -44,7 +44,7 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
  */
 function nw_b_news_randomnews_show($options)
 {
-    $myts                = MyTextSanitizer::getInstance();
+    $myts                = \MyTextSanitizer::getInstance();
     $xnews               = XnewsXnews::getInstance();
     $nw_NewsStoryHandler = new nw_NewsStory();
     //

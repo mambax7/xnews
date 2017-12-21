@@ -8,7 +8,7 @@ xoops_load('XoopsUserUtility');
 xoops_load('XoopsLocal');
 
 // MyTextSanitizer object
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 // load Xoops handlers
 $moduleHandler       = xoops_getHandler('module');

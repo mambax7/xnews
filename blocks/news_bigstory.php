@@ -41,7 +41,7 @@ function nw_b_news_bigstory_show()
 {
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
     require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-    $myts       = MyTextSanitizer::getInstance();
+    $myts       = \MyTextSanitizer::getInstance();
     $restricted = $xnews->getConfig('restrictindex');
     $dateformat = $xnews->getConfig('dateformat');
     $infotips   = $xnews->getConfig('infotips');

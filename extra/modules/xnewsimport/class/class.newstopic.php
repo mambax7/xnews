@@ -103,7 +103,7 @@ class xni_NewsTopic extends XoopsTopic
      */
     public function makeMySelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = 'topic_id', $onchange = '', $perms)
     {
-        $myts      = MyTextSanitizer::getInstance();
+        $myts      = \MyTextSanitizer::getInstance();
         $outbuffer = '';
         $outbuffer = "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
@@ -320,7 +320,7 @@ class xni_NewsTopic extends XoopsTopic
      */
     public function store()
     {
-        $myts              = MyTextSanitizer::getInstance();
+        $myts              = \MyTextSanitizer::getInstance();
         $title             = '';
         $imgurl            = '';
         $topic_description = $myts->censorString($this->topic_description);
@@ -441,7 +441,7 @@ class xni_NewsTopic extends XoopsTopic
      */
     public function topic_rssurl($format = 'S')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         switch ($format) {
             case 'S':
                 $topic_rssurl = $myts->displayTarea($this->topic_rssurl);
@@ -464,7 +464,7 @@ class xni_NewsTopic extends XoopsTopic
      */
     public function topic_color($format = 'S')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         switch ($format) {
             case 'S':
                 $topic_color = $myts->displayTarea($this->topic_color);
@@ -495,7 +495,7 @@ class xni_NewsTopic extends XoopsTopic
      */
     public function topic_description($format = 'S')
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         switch ($format) {
             case 'S':
                 $topic_description = $myts->displayTarea($this->topic_description, 1);
@@ -521,7 +521,7 @@ class xni_NewsTopic extends XoopsTopic
         if ('' == trim($this->topic_imgurl)) {
             $this->topic_imgurl = 'blank.png';
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         switch ($format) {
             case 'S':
                 $imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
@@ -549,7 +549,7 @@ class xni_NewsTopic extends XoopsTopic
      */
     public function getTopicTitleFromId($topic, &$topicstitles)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         $sql  = 'SELECT topic_id, topic_title, topic_imgurl FROM ' . $this->table . ' WHERE ';
         if (!is_array($topic)) {
             $sql .= ' topic_id=' . (int)$topic;
@@ -590,7 +590,7 @@ class xni_NewsTopic extends XoopsTopic
         }
         $result = $this->db->query($sql);
         $ret    = [];
-        $myts   = MyTextSanitizer::getInstance();
+        $myts   = \MyTextSanitizer::getInstance();
         while ($myrow = $this->db->fetchArray($result)) {
             $ret[$myrow['topic_id']] = ['title' => $myts->displayTarea($myrow['topic_title']), 'pid' => $myrow['topic_pid'], 'color' => $myrow['topic_color']];
         }

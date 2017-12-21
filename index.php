@@ -75,7 +75,7 @@ require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/utility.php';
+require_once XNEWS_MODULE_PATH . '/class/Utility.php';
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
 $nw_NewsStoryHandler = new nw_NewsStory();
@@ -118,7 +118,7 @@ if ('Classic' === $xnews->getConfig('newsdisplay') || $xoopsOption['storytopic']
 
 $firsttitle = '';
 $topictitle = '';
-$myts       = MyTextSanitizer::getInstance();
+$myts       = \MyTextSanitizer::getInstance();
 $sfiles     = new nw_sFiles();
 
 $column_count = $xnews->getConfig('columnmode');

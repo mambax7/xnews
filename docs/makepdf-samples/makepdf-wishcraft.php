@@ -19,7 +19,7 @@
 
 error_reporting(0);
 require_once __DIR__ . '/header.php';
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
