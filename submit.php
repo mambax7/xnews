@@ -405,7 +405,7 @@ switch ($op) {
         // Increment author's posts count (only if it's a new article)
         // First case, it's not an anonyous, the story is approved and it's a new story
         if ($uid && $approve && empty($storyid)) {
-            $tmpuser       = new xoopsUser($uid);
+            $tmpuser       = new \XoopsUser($uid);
             $memberHandler = xoops_getHandler('member');
             $memberHandler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
         }
@@ -414,7 +414,7 @@ switch ($op) {
         if (is_object($xoopsUser) && $approve && !empty($storyid)) {
             $storytemp = new XNewsStory($storyid);
             if (!$storytemp->published() && $storytemp->uid() > 0) { // the article has been submited but not approved
-                $tmpuser       = new xoopsUser($storytemp->uid());
+                $tmpuser       = new \XoopsUser($storytemp->uid());
                 $memberHandler = xoops_getHandler('member');
                 $memberHandler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
             }
@@ -455,7 +455,7 @@ switch ($op) {
                     $sfiles         = new nw_sFiles();
                     $destname       = $sfiles->createUploadName(XNEWS_TOPICS_FILES_PATH, $fldname);
                     $permittedTypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
-                    $uploader       = new XoopsMediaUploader(XNEWS_TOPICS_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
+                    $uploader       = new \XoopsMediaUploader(XNEWS_TOPICS_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
                     $uploader->setTargetFileName($destname);
                     if ($uploader->fetchMedia($_POST['xoops_upload_file'][1])) {
                         if ($uploader->upload()) {
@@ -536,7 +536,7 @@ switch ($op) {
                          */
                         $permittedTypes = explode("\n", str_replace("\r", '', $xnews->getConfig('mimetypes')));
                         array_walk($permittedTypes, 'trim');
-                        $uploader = new XoopsMediaUploader(XNEWS_ATTACHED_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
+                        $uploader = new \XoopsMediaUploader(XNEWS_ATTACHED_FILES_PATH, $permittedTypes, $xnews->getConfig('maxuploadsize'));
                         $uploader->setTargetFileName($destname);
                         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
                             if ($uploader->upload()) {

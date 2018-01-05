@@ -17,7 +17,7 @@
  * @author     XOOPS Development Team
  */
 
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -30,8 +30,8 @@ $adminObject->displayNavigation($currentFile);
 $permToSet = isset($_REQUEST['permToSet']) ? $_REQUEST['permToSet'] : 'nw_approve';
 // permissions selector
 xoops_load('XoopsFormLoader');
-$opForm   = new XoopsSimpleForm('', 'opform', $currentFile, 'get');
-$opSelect = new XoopsFormSelect('', 'permToSet', $permToSet, 1, false);
+$opForm   = new \XoopsSimpleForm('', 'opform', $currentFile, 'get');
+$opSelect = new \XoopsFormSelect('', 'permToSet', $permToSet, 1, false);
 $opSelect->setExtra('onchange="document.forms.opform.submit()"');
 $opSelect->addOption('nw_approve', _AM_XNEWS_APPROVEFORM);
 $opSelect->addOption('nw_submit', _AM_XNEWS_SUBMITFORM);
@@ -59,7 +59,7 @@ switch ($permToSet) {
 // render permissions grid
 $module_id = $GLOBALS['xoopsModule']->getVar('mid');
 require_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
-$permissionsForm = new XoopsGroupPermForm($titleOfForm, $module_id, $permName, $permDesc, "admin/{$currentFile}");
+$permissionsForm = new \XoopsGroupPermForm($titleOfForm, $module_id, $permName, $permDesc, "admin/{$currentFile}");
 $xt              = new XnewsDeprecateTopic($xoopsDB->prefix('nw_topics'));
 $alltopics       = $xt->getTopicsList();
 foreach ($alltopics as $topic_id => $topic) {

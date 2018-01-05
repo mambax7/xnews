@@ -94,7 +94,7 @@ function nw_b_news_bigstory_onthefly($options)
     $options = explode('|', $options);
     $block   = &nw_b_news_bigstory_show($options);
 
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_bigstory.tpl');
+    $tpl->display('db:xnews_block_bigstory.tpl');
 }

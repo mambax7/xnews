@@ -44,7 +44,6 @@ class XNewsTopic extends XnewsDeprecateTopic
     {
         $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $this->db->prefix('nw_topics');
-
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
         } elseif (0 != $topicid) {
@@ -95,8 +94,8 @@ class XNewsTopic extends XnewsDeprecateTopic
      *
      * @param        $title
      * @param string $order
-     * @param    int $preset_id is used to specify a preselected item
-     * @param    int $none      set $none to 1 to add a option with value 0
+     * @param int    $preset_id is used to specify a preselected item
+     * @param int    $none      set $none to 1 to add a option with value 0
      * @param string $sel_name
      * @param string $onchange
      * @param        $perms
@@ -133,6 +132,7 @@ class XNewsTopic extends XnewsDeprecateTopic
             foreach ($arr as $option) {
                 $option['prefix'] = str_replace('.', '--', $option['prefix']);
                 $catpath          = $option['prefix'] . '&nbsp;' . $myts->displayTarea($option[$title]);
+
                 if ($option['topic_id'] == $preset_id) {
                     $sel = " selected='selected'";
                 }
@@ -225,7 +225,7 @@ class XNewsTopic extends XnewsDeprecateTopic
      */
     public function getAllTopics($checkRight = true, $permission = 'nw_view')
     {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
         //
         $topics_arr = [];
         $sql        = 'SELECT *';
@@ -394,7 +394,7 @@ class XNewsTopic extends XnewsDeprecateTopic
         }
 
         if (true === $this->use_permission) {
-            $xt            = new XoopsTree($this->table, 'topic_id', 'topic_pid');
+            $xt            = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
             $parent_topics = $xt->getAllParentId($this->topic_id);
             if (!empty($this->m_groups) && is_array($this->m_groups)) {
                 foreach ($this->m_groups as $m_g) {
@@ -408,7 +408,7 @@ class XNewsTopic extends XnewsDeprecateTopic
                         }
                     }
                     if (true === $add) {
-                        $xp = new XoopsPerms();
+                        $xp = new \XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('ModInTopic');
                         $xp->setItemId($this->topic_id);
@@ -428,7 +428,7 @@ class XNewsTopic extends XnewsDeprecateTopic
                         }
                     }
                     if (true === $add) {
-                        $xp = new XoopsPerms();
+                        $xp = new \XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('SubmitInTopic');
                         $xp->setItemId($this->topic_id);
@@ -448,7 +448,7 @@ class XNewsTopic extends XnewsDeprecateTopic
                         }
                     }
                     if (true === $add) {
-                        $xp = new XoopsPerms();
+                        $xp = new \XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('ReadInTopic');
                         $xp->setItemId($this->topic_id);
@@ -589,7 +589,7 @@ class XNewsTopic extends XnewsDeprecateTopic
         $sql  .= " FROM {$this->table}";
         $sql  .= ' WHERE ';
         if (!is_array($topic)) {
-            $sql .= ' topic_id = ' . (int)$topic;
+            $sql .= ' topic_id=' . (int)$topic;
         } else {
             if (count($topic) > 0) {
                 $sql .= ' topic_id IN (' . implode(',', $topic) . ')';
@@ -616,7 +616,7 @@ class XNewsTopic extends XnewsDeprecateTopic
         $sql .= " FROM {$this->table}";
         $sql .= ' WHERE 1 ';
         if ($frontpage) {
-            $sql .= ' AND topic_frontpage = 1';
+            $sql .= ' AND topic_frontpage=1';
         }
         if ($perms) {
             $topicsids = [];

@@ -35,7 +35,7 @@
  *
  * @page_title            "news Archives" - Year - Month - Module's name
  *
- * @template_name        nw_news_archive.tpl
+ * @template_name        xnews_archive.tpl
  *
  * Template's variables :
  * @template_var     array     years            Contains all the years we have information for
@@ -70,7 +70,7 @@
 
 require_once __DIR__ . '/header.php';
 
-$GLOBALS['xoopsOption']['template_main'] = 'nw_news_archive.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'xnews_archive.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';

@@ -65,7 +65,7 @@ class XNewsObjectHandler extends XoopsObjectHandler
     {
         $id = (int)$id;
         if ($id > 0) {
-            $sql = $this->_selectQuery(new Criteria($this->_idfield, $id));
+            $sql = $this->_selectQuery(new \Criteria($this->_idfield, $id));
             if (!$result = $this->_db->query($sql)) {
                 return false;
             }

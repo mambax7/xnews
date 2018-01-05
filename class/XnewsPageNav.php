@@ -27,9 +27,7 @@
  * @copyright    (c) 2000-2003 The Xoops Project - www.xoops.org
  */
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined.');
 
 /**
  * Class XoopsPageNav

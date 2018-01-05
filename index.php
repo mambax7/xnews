@@ -34,7 +34,7 @@
  *
  * @page_title                  Topic's title - Story's title - Module's name
  *
- * @template_name         nw_news_index.tpl or nw_news_by_topic.tpl
+ * @template_name         xnews_index.tpl or xnews_by_topic.tpl
  *
  * Template's variables :
  * For each article
@@ -71,7 +71,7 @@
  * @template_var                string         topic_select contains the topics selector
  */
 
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 require_once __DIR__ . '/header.php';
 
@@ -127,7 +127,7 @@ $sfiles     = new nw_sFiles();
 $column_count = $xnews->getConfig('columnmode');
 
 if ($showclassic) {
-    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_index.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'xnews_index.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
     $xt = new XNewsTopic();
     //DNPROSSI - ADDED
@@ -153,7 +153,7 @@ if ($showclassic) {
         $xoopsTpl->assign('displaynav', true);
 
         $allTopics  = $xt->getAllTopics($xnews->getConfig('restrictindex'));
-        $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+        $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         //        $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
         //        $xoopsTpl->assign('topic_select', $topic_select);
 
@@ -161,7 +161,7 @@ if ($showclassic) {
         $helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
         $module        = $helper->getModule();
 
-        if (xnews\Utility::checkVerXoops($module, '2.5.9')) {
+        if (Xnews\Utility::checkVerXoops($module, '2.5.9')) {
             $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $xoopsOption['storytopic'], true, 0, '', '');
             $xoopsTpl->assign('topic_select', $topic_select->render());
         } else {
@@ -226,7 +226,7 @@ if ($showclassic) {
     $totalcount = $nw_NewsStoryHandler->countPublishedByTopic($xoopsOption['storytopic'], $xnews->getConfig('restrictindex'));
     if ($totalcount > $scount) {
         xoops_load('xoopspagenav');
-        $pagenav = new XoopsPageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'topic_id=' . $xoopsOption['storytopic']);
+        $pagenav = new \XoopsPageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'topic_id=' . $xoopsOption['storytopic']);
         if (nw_isbot()) { // A bot is reading the news, we are going to show it all the links so that he can read everything
             $xoopsTpl->assign('pagenav', $pagenav->renderNav($totalcount));
         } else {
@@ -236,7 +236,7 @@ if ($showclassic) {
         $xoopsTpl->assign('pagenav', '');
     }
 } else {    // Affichage par sujets
-    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_by_topic.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'xnews_by_topic.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
 
     //DNPROSSI - ADDED
@@ -304,7 +304,7 @@ nw_CreateMetaDatas();
  */
 if ($xoopsOption['storytopic']) {
     require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
-    $mytree    = new XoopsTree($xoopsDB->prefix('nw_topics'), 'topic_id', 'topic_pid');
+    $mytree    = new \XoopsTree($xoopsDB->prefix('nw_topics'), 'topic_id', 'topic_pid');
     $topicpath = $mytree->getNicePathFromId($xoopsOption['storytopic'], 'topic_title', 'index.php?op=1');
     $xoopsTpl->assign('topic_path', $topicpath);
     unset($mytree);

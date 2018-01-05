@@ -57,11 +57,11 @@ $charset = 'utf-8';
 
 header('Content-Type:text/xml; charset=' . $charset);
 $story = new XNewsStory();
-$tpl   = new XoopsTpl();
-$tpl->xoops_setCaching(2);
+$tpl   = new \XoopsTpl();
+$tpl->caching=(2);
 $tpl->xoops_setCacheTime(3600); // Change this to the value you want
 
-if (!$tpl->is_cached('db:nw_news_rss.tpl', $topicid)) {
+if (!$tpl->is_cached('db:xnews_rss.tpl', $topicid)) {
     $xt     = new XNewsTopic($topicid);
     $sarray = $story->getAllPublished($newsnumber, 0, $restricted, $topicid);
     if (is_array($sarray) && count($sarray > 0)) {
@@ -114,4 +114,4 @@ if (!$tpl->is_cached('db:nw_news_rss.tpl', $topicid)) {
     }
 }
 
-$tpl->display('db:nw_news_rss.tpl', $topicid);
+$tpl->display('db:xnews_rss.tpl', $topicid);

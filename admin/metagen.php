@@ -19,7 +19,7 @@
 
 
 use Xmf\Request;
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -85,28 +85,28 @@ switch ($op) {
             $keywordscount = $cfg['meta_keywords_count'];
             $keywordsorder = $cfg['meta_keywords_order'];
         }
-        $sform = new XoopsThemeForm(_OPTIONS, 'metagenoptions', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
-        $sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
-        $sform->addElement(new XoopsFormText(_AM_XNEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
-        $keywordsorder = new XoopsFormRadio(_AM_XNEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
+        $sform = new \XoopsThemeForm(_OPTIONS, 'metagenoptions', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
+        $sform->addElement(new \XoopsFormHidden('op', 'metagenoptions'), false);
+        $sform->addElement(new \XoopsFormText(_AM_XNEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
+        $keywordsorder = new \XoopsFormRadio(_AM_XNEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
         $keywordsorder->addOption(0, _AM_XNEWS_META_KEYWORDS_INTEXT);
         $keywordsorder->addOption(1, _AM_XNEWS_META_KEYWORDS_FREQ1);
         $keywordsorder->addOption(2, _AM_XNEWS_META_KEYWORDS_FREQ2);
         $sform->addElement($keywordsorder, false);
-        $button_tray = new XoopsFormElementTray('', '');
-        $submit_btn  = new XoopsFormButton('', 'post', _AM_XNEWS_MODIFY, 'submit');
+        $button_tray = new \XoopsFormElementTray('', '');
+        $submit_btn  = new \XoopsFormButton('', 'post', _AM_XNEWS_MODIFY, 'submit');
         $button_tray->addElement($submit_btn);
         $sform->addElement($button_tray);
         $sform->display();
 
         // Blacklist
-        $sform = new XoopsThemeForm(_AM_XNEWS_BLACKLIST, 'metagenblacklist', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
-        $sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
+        $sform = new \XoopsThemeForm(_AM_XNEWS_BLACKLIST, 'metagenblacklist', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
+        $sform->addElement(new \XoopsFormHidden('op', 'metagenblacklist'), false);
 
         // Remove words
-        $remove_tray = new XoopsFormElementTray(_AM_XNEWS_BLACKLIST);
+        $remove_tray = new \XoopsFormElementTray(_AM_XNEWS_BLACKLIST);
         $remove_tray->setDescription(_AM_XNEWS_BLACKLIST_DESC);
-        $blacklist = new XoopsFormSelect('', 'blacklist', '', 5, true);
+        $blacklist = new \XoopsFormSelect('', 'blacklist', '', 5, true);
         $words     = [];
 
         $metablack = new nw_blacklist();
@@ -119,16 +119,16 @@ switch ($op) {
 
         $blacklist->setDescription(_AM_XNEWS_BLACKLIST_DESC);
         $remove_tray->addElement($blacklist, false);
-        $remove_btn = new XoopsFormButton('', 'go', _AM_XNEWS_DELETE, 'submit');
+        $remove_btn = new \XoopsFormButton('', 'go', _AM_XNEWS_DELETE, 'submit');
         $remove_tray->addElement($remove_btn, false);
         $sform->addElement($remove_tray);
 
         // Add some words
-        $add_tray = new XoopsFormElementTray(_AM_XNEWS_BLACKLIST_ADD);
+        $add_tray = new \XoopsFormElementTray(_AM_XNEWS_BLACKLIST_ADD);
         $add_tray->setDescription(_AM_XNEWS_BLACKLIST_ADD_DSC);
-        $add_field = new XoopsFormTextArea('', 'keywords', '', 5, 70);
+        $add_field = new \XoopsFormTextArea('', 'keywords', '', 5, 70);
         $add_tray->addElement($add_field, false);
-        $add_btn = new XoopsFormButton('', 'go', _AM_XNEWS_ADD, 'submit');
+        $add_btn = new \XoopsFormButton('', 'go', _AM_XNEWS_ADD, 'submit');
         $add_tray->addElement($add_btn, false);
         $sform->addElement($add_tray);
         $sform->display();

@@ -9,7 +9,7 @@
 		<{counter start=0 print=false assign=storynum}>
         <{foreach item=story from=$topic.stories}>
         	<{if $storynum == 0}>
-        		<{include file="db:nw_news_item.tpl" story=$story}><br>
+        		<{include file="db:xnews_item.tpl" story=$story}><br>
 			<{else}>
         		<{if $storynum == 1}>
             		<ul>

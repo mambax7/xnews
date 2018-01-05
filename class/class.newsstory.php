@@ -530,15 +530,15 @@ class XNewsStory extends XnewsDeprecateStory
         $myts     = \MyTextSanitizer::getInstance();
         //
         $ret      = [];
-        $criteria = new CriteriaCompo(new Criteria('published', 0));
+        $criteria = new \CriteriaCompo(new \Criteria('published', 0));
         if ($checkRight) {
             if (!is_object($GLOBALS['xoopsUser'])) {
                 return $ret;
             }
             $allowedtopics = nw_MygetItemIds('nw_approve');
-            $criteria2     = new CriteriaCompo();
+            $criteria2     = new \CriteriaCompo();
             foreach ($allowedtopics as $key => $topicid) {
-                $criteria2->add(new Criteria('topicid', $topicid), 'OR');
+                $criteria2->add(new \Criteria('topicid', $topicid), 'OR');
             }
             $criteria->add($criteria2);
         }

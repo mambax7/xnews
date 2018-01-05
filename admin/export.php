@@ -19,7 +19,7 @@
 
 
 use Xmf\Request;
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -66,19 +66,19 @@ switch ($op) {
     default:
     case 'export':
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-        $sform      = new XoopsThemeForm(_AM_XNEWS_EXPORT_NEWS, 'exportform', $currentFile, 'post', true);
-        $dates_tray = new XoopsFormElementTray(_AM_XNEWS_EXPORT_BETWEEN);
-        $date1      = new XoopsFormTextDateSelect('', 'date1', 15, time());
-        $date2      = new XoopsFormTextDateSelect(_AM_XNEWS_EXPORT_AND, 'date2', 15, time());
+        $sform      = new \XoopsThemeForm(_AM_XNEWS_EXPORT_NEWS, 'exportform', $currentFile, 'post', true);
+        $dates_tray = new \XoopsFormElementTray(_AM_XNEWS_EXPORT_BETWEEN);
+        $date1      = new \XoopsFormTextDateSelect('', 'date1', 15, time());
+        $date2      = new \XoopsFormTextDateSelect(_AM_XNEWS_EXPORT_AND, 'date2', 15, time());
         $dates_tray->addElement($date1);
         $dates_tray->addElement($date2);
         $sform->addElement($dates_tray);
 
-        $topiclist  = new XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'export_topics', '', 5, true);
+        $topiclist  = new \XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'export_topics', '', 5, true);
         $topics_arr = [];
         $xt         = new XNewsTopic();
         $allTopics  = $xt->getAllTopics(false);                // The webmaster can see everything
-        $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+        $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topics_arr = $topic_tree->getAllChild(0);
         if (count($topics_arr)) {
             foreach ($topics_arr as $onetopic) {
@@ -87,10 +87,10 @@ switch ($op) {
         }
         $topiclist->setDescription(_AM_XNEWS_EXPORT_PRUNE_DSC);
         $sform->addElement($topiclist, false);
-        $sform->addElement(new XoopsFormRadioYN(_AM_XNEWS_EXPORT_INCTOPICS, 'includetopics', 0), false);
-        $sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
-        $button_tray = new XoopsFormElementTray('', '');
-        $submit_btn  = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+        $sform->addElement(new \XoopsFormRadioYN(_AM_XNEWS_EXPORT_INCTOPICS, 'includetopics', 0), false);
+        $sform->addElement(new \XoopsFormHidden('op', 'launchexport'), false);
+        $button_tray = new \XoopsFormElementTray('', '');
+        $submit_btn  = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
         $button_tray->addElement($submit_btn);
         $sform->addElement($button_tray);
         $sform->display();

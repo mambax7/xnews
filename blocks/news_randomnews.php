@@ -192,7 +192,7 @@ function nw_b_news_randomnews_onthefly($options)
     $options = explode('|', $options);
     $block   = &nw_b_news_randomnews_show($options);
 
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_moderate.tpl');
+    $tpl->display('db:xnews_block_moderate.tpl');
 }

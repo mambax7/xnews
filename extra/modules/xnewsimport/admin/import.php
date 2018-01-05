@@ -218,8 +218,8 @@ $moduleObj     = $moduleHandler->getByDirname($to_module_dirname);
 $module_id     = $moduleObj->getVar('mid');
 
 $commentHandler = xoops_getHandler('comment');
-$criteria       = new CriteriaCompo();
-$criteria->add(new Criteria('com_modid', $news_module_id));
+$criteria       = new \CriteriaCompo();
+$criteria->add(new \Criteria('com_modid', $news_module_id));
 $comments = $commentHandler->getObjects($criteria);
 foreach ($comments as $comment) {
     $comment->setVar('com_itemid', $newArticleArray[$comment->getVar('com_itemid')]);

@@ -17,6 +17,8 @@
  * @author     XOOPS Development Team
  */
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+
+require_once __DIR__ . '/preloads/autoloader.php';
 require_once __DIR__ . '/include/constants.php';
 
 $modversion['version']             = 2.00;
@@ -117,7 +119,7 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
         require_once __DIR__ . '/class/class.newstopic.php';
         $xt             = new XNewsTopic();
         $topicObjs      = $xt->getAllTopics($xnews->getConfig('restrictindex'));
-        $topicObjsTree  = new XoopsObjectTree($topicObjs, 'topic_id', 'topic_pid');
+        $topicObjsTree  = new \XoopsObjectTree($topicObjs, 'topic_id', 'topic_pid');
         $topicChildObjs = $topicObjsTree->getAllChild(0);
         foreach ($topicChildObjs as $topicChildObj) {
             if ($gpermHandler->checkRight('nw_view', $topicChildObj->topic_id(), $groups, $xnews->getModule()->getVar('mid')) && $topicChildObj->menu()) {
@@ -148,30 +150,30 @@ $modversion['sub'][$i]['url']  = 'topics_directory.php';
 ++$i;
 
 // Templates
-$modversion['templates'][1]['file']         = 'nw_news_item.tpl';
+$modversion['templates'][1]['file']         = 'xnews_item.tpl';
 $modversion['templates'][1]['description']  = '';
-$modversion['templates'][2]['file']         = 'nw_news_archive.tpl';
+$modversion['templates'][2]['file']         = 'xnews_archive.tpl';
 $modversion['templates'][2]['description']  = '';
-$modversion['templates'][3]['file']         = 'nw_news_article.tpl';
+$modversion['templates'][3]['file']         = 'xnews_article.tpl';
 $modversion['templates'][3]['description']  = '';
-$modversion['templates'][4]['file']         = 'nw_news_index.tpl';
+$modversion['templates'][4]['file']         = 'xnews_index.tpl';
 $modversion['templates'][4]['description']  = '';
-$modversion['templates'][5]['file']         = 'nw_news_by_topic.tpl';
+$modversion['templates'][5]['file']         = 'xnews_by_topic.tpl';
 $modversion['templates'][5]['description']  = '';
-$modversion['templates'][6]['file']         = 'nw_news_by_this_author.tpl';
+$modversion['templates'][6]['file']         = 'xnews_by_this_author.tpl';
 $modversion['templates'][6]['description']  = 'Shows a page resuming all the articles of the same author (according to the perms)';
-$modversion['templates'][7]['file']         = 'nw_news_ratenews.tpl';
+$modversion['templates'][7]['file']         = 'xnews_ratenews.tpl';
 $modversion['templates'][7]['description']  = 'Template used to rate a news';
-$modversion['templates'][8]['file']         = 'nw_news_rss.tpl';
+$modversion['templates'][8]['file']         = 'xnews_rss.tpl';
 $modversion['templates'][8]['description']  = 'Used for RSS per topics';
-$modversion['templates'][9]['file']         = 'nw_news_whos_who.tpl';
+$modversion['templates'][9]['file']         = 'xnews_whos_who.tpl';
 $modversion['templates'][9]['description']  = "Who's who";
-$modversion['templates'][10]['file']        = 'nw_news_topics_directory.tpl';
+$modversion['templates'][10]['file']        = 'xnews_topics_directory.tpl';
 $modversion['templates'][10]['description'] = 'Topics Directory';
 //WISHCRAFT
-$modversion['templates'][11]['file']        = 'nw_news_article_pdf.tpl';
+$modversion['templates'][11]['file']        = 'xnews_article_pdf.tpl';
 $modversion['templates'][11]['description'] = 'PDF Article Layout';
-$modversion['templates'][12]['file']        = 'nw_news_item_pdf.tpl';
+$modversion['templates'][12]['file']        = 'xnews_item_pdf.tpl';
 $modversion['templates'][12]['description'] = 'PDF Item Layout';
 
 $i = 0;
@@ -181,13 +183,13 @@ $modversion['blocks'][$i]['file']        = 'news_topics.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME1;
 $modversion['blocks'][$i]['description'] = 'Shows news topics';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_topics_show';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_topics.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_topics.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_bigstory.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME3;
 $modversion['blocks'][$i]['description'] = 'Shows most read story of the day';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_bigstory_show';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_bigstory.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_bigstory.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_top.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME4;
@@ -195,7 +197,7 @@ $modversion['blocks'][$i]['description'] = 'Shows top read news articles';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_top_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_top_edit';
 $modversion['blocks'][$i]['options']     = 'counter|10|25|0|0|0|0||1||||||';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_top.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_top.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_top.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME5;
@@ -203,19 +205,19 @@ $modversion['blocks'][$i]['description'] = 'Shows recent articles';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_top_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_top_edit';
 $modversion['blocks'][$i]['options']     = 'published|10|25|0|0|0|0||1||||||';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_top.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_top.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_moderate.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME6;
 $modversion['blocks'][$i]['description'] = 'Shows a block to moderate articles';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_topics_moderate';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_moderate.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_moderate.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_topicsnav.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME7;
 $modversion['blocks'][$i]['description'] = 'Shows a block to navigate topics';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_topicsnav_show';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_topicnav.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_topicnav.tpl';
 $modversion['blocks'][$i]['options']     = '0';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_topicsnav_edit';
 ++$i;
@@ -223,7 +225,7 @@ $modversion['blocks'][$i]['file']        = 'news_randomnews.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME8;
 $modversion['blocks'][$i]['description'] = 'Shows a block where news appears randomly';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_randomnews_show';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_randomnews.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_randomnews.tpl';
 $modversion['blocks'][$i]['options']     = 'published|10|25|0|0';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_randomnews_edit';
 ++$i;
@@ -231,7 +233,7 @@ $modversion['blocks'][$i]['file']        = 'news_ratenews.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME9;
 $modversion['blocks'][$i]['description'] = 'Shows a block where you can see archives';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_archives_show';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_archives.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_archives.tpl';
 $modversion['blocks'][$i]['options']     = '0|0|0|0|1|1';    // Starting date (year, month), ending date (year, month), until today, sort order
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_archives_edit';
 ++$i;
@@ -241,7 +243,7 @@ $modversion['blocks'][$i]['name']        = _MI_XNEWS_LATESTNEWS_BLOCK;
 $modversion['blocks'][$i]['description'] = 'Show latest news';
 $modversion['blocks'][$i]['show_func']   = 'nw_b_news_latestnews_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_b_news_latestnews_edit';
-$modversion['blocks'][$i]['template']    = 'nw_news_block_latestnews.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_block_latestnews.tpl';
 $modversion['blocks'][$i]['options']     = '6|2|200|100|100|2|dcdcdc|0|0|1|1|1|1|1|1|1|1|1|1|1|1|1|0|100|30|published|';
 ++$i;
 // Added in v1.63
@@ -251,7 +253,7 @@ $modversion['blocks'][$i]['description'] = 'Show top tags';
 $modversion['blocks'][$i]['show_func']   = 'nw_news_tag_block_top_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_news_tag_block_top_edit';
 $modversion['blocks'][$i]['options']     = '50|30|c';
-$modversion['blocks'][$i]['template']    = 'nw_news_tag_block_top.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_tag_block_top.tpl';
 ++$i;
 $modversion['blocks'][$i]['file']        = 'news_block_tag.php';
 $modversion['blocks'][$i]['name']        = _MI_XNEWS_BNAME10;
@@ -259,7 +261,7 @@ $modversion['blocks'][$i]['description'] = 'Show tag cloud';
 $modversion['blocks'][$i]['show_func']   = 'nw_news_tag_block_cloud_show';
 $modversion['blocks'][$i]['edit_func']   = 'nw_news_tag_block_cloud_edit';
 $modversion['blocks'][$i]['options']     = '100|0|150|80';
-$modversion['blocks'][$i]['template']    = 'nw_news_tag_block_cloud.tpl';
+$modversion['blocks'][$i]['template']    = 'xnews_tag_block_cloud.tpl';
 
 // Comments
 $modversion['hasComments']          = 1;

@@ -1,6 +1,6 @@
 <?php
 
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
@@ -19,9 +19,9 @@ require_once __DIR__ . '/../class/Helper.php';
 require_once __DIR__ . '/../class/Utility.php';
 
 $db     = \XoopsDatabaseFactory::getDatabase();
-$helper = xnews\Helper::getInstance();
-/** @var xnews\Utility $utility */
-$utility = new xnews\Utility();
+$helper = Xnews\Helper::getInstance();
+/** @var Xnews\Utility $utility */
+$utility = new Xnews\Utility();
 
 // MyTextSanitizer object
 $myts = \MyTextSanitizer::getInstance();
@@ -69,7 +69,7 @@ if (is_object($xnews->getModule())) {
 }
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
-    $GLOBALS['xoopsTpl'] = new XoopsTpl();
+    $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
 
 require_once XNEWS_MODULE_PATH . '/include/config.php';

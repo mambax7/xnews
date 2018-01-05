@@ -87,12 +87,12 @@ if (!$xnews->getConfig('newsbythisauthor')) {
 
 $myts                                    = \MyTextSanitizer::getInstance();
 $articles                                = new XNewsStory();
-$GLOBALS['xoopsOption']['template_main'] = 'nw_news_by_this_author.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'xnews_by_this_author.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 $dateformat = $xnews->getConfig('dateformat');
 $infotips   = $xnews->getConfig('infotips');
-$thisuser   = new XoopsUser($uid);
+$thisuser   = new \XoopsUser($uid);
 
 switch ($xnews->getConfig('displayname')) {
     case 1: // Username

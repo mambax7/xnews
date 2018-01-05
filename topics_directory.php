@@ -32,7 +32,7 @@ require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
 
-$GLOBALS['xoopsOption']['template_main'] = 'nw_news_topics_directory.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'xnews_topics_directory.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 //DNPROSSI SEO

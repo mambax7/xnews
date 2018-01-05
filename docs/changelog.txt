@@ -4,7 +4,7 @@
 ! Bug fix.
 o General comment.
 
-<h5>2.xx Beta 1  [NOT RELEASED]</h5>
+<h5>2.xx Beta 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.0
 <hr>
 + standardization for XOOPS 2.5.9 and PHP 7 (mamba)
 
@@ -156,7 +156,7 @@ Upgrading clones Beta to RC1:
    - seo.php in modules/xnews
    - function.xoLanguage.php in xoops/class/smarty/xoops_plugins 
 - Added new admin/index interface by voltan (thank you!)
-- Added new config option in module preferences Dispay topics title yes no this will hide topics 
+- Added new \Config option in module preferences Dispay topics title yes no this will hide topics
   from header title and also disable topic image clicking.
 - Language file changes
     main.php 

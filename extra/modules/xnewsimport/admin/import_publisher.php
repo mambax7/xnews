@@ -56,7 +56,7 @@ if ('start' === $op) {
         } else {
             echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . sprintf(_AM_XNI_IMPORT_MODULE_FOUND, $importFromModuleName, $totalArticles, $totalCat) . '</span>';
 
-            $form = new XoopsThemeForm(_AM_XNI_IMPORT_SETTINGS, 'import_form', PUBLISHER_ADMIN_URL . "/import/{$scriptname}");
+            $form = new \XoopsThemeForm(_AM_XNI_IMPORT_SETTINGS, 'import_form', PUBLISHER_ADMIN_URL . "/import/{$scriptname}");
 
             // Categories to be imported
             $sql = 'SELECT cat.categoryid, cat.parentid, cat.name, COUNT(art.itemid) FROM ' . $xoopsDB->prefix('smartsection_categories') . ' AS cat INNER JOIN ' . $xoopsDB->prefix('smartsection_items') . ' AS art ON cat.categoryid=art.categoryid GROUP BY art.categoryid';
@@ -69,24 +69,24 @@ if ('start' === $op) {
                 $cat_cbox_options[$cid] = "$cat_title ($art_count)";
             }
 
-            $cat_label = new XoopsFormLabel(_AM_XNI_IMPORT_CATEGORIES, implode('<br>', $cat_cbox_options));
+            $cat_label = new \XoopsFormLabel(_AM_XNI_IMPORT_CATEGORIES, implode('<br>', $cat_cbox_options));
             $cat_label->setDescription(_AM_XNI_IMPORT_CATEGORIES_DSC);
             $form->addElement($cat_label);
 
             // Publisher parent category
-            $mytree = new XoopsTree($xoopsDB->prefix('publisher_categories'), 'categoryid', 'parentid');
+            $mytree = new \XoopsTree($xoopsDB->prefix('publisher_categories'), 'categoryid', 'parentid');
             ob_start();
             $mytree->makeMySelBox('name', 'weight', $preset_id = 0, $none = 1, $sel_name = 'parent_category');
 
-            $parent_cat_sel = new XoopsFormLabel(_AM_XNI_IMPORT_PARENT_CATEGORY, ob_get_contents());
+            $parent_cat_sel = new \XoopsFormLabel(_AM_XNI_IMPORT_PARENT_CATEGORY, ob_get_contents());
             $parent_cat_sel->setDescription(_AM_XNI_IMPORT_PARENT_CATEGORY_DSC);
             $form->addElement($parent_cat_sel);
             ob_end_clean();
 
-            $form->addElement(new XoopsFormHidden('op', 'go'));
-            $form->addElement(new XoopsFormButton('', 'import', _AM_XNI_IMPORT, 'submit'));
+            $form->addElement(new \XoopsFormHidden('op', 'go'));
+            $form->addElement(new \XoopsFormButton('', 'import', _AM_XNI_IMPORT, 'submit'));
 
-            $form->addElement(new XoopsFormHidden('from_module_version', $_POST['news_version']));
+            $form->addElement(new \XoopsFormHidden('from_module_version', $_POST['news_version']));
 
             $form->display();
         }
@@ -218,8 +218,8 @@ if ('go' === $op) {
 
     // Looping through cat to change the parentid to the new parentid
     foreach ($newCatArray as $oldid => $newCat) {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('categoryid', $newCat['newid']));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('categoryid', $newCat['newid']));
         $oldpid = $newCat['oldpid'];
         if (0 == $oldpid) {
             $newpid = $parentId;
@@ -236,8 +236,8 @@ if ('go' === $op) {
     $publisher_module_id = $publisher->getModule()->mid();
 
     $commentHandler = xoops_getHandler('comment');
-    $criteria       = new CriteriaCompo();
-    $criteria->add(new Criteria('com_modid', $smartsection_module_id));
+    $criteria       = new \CriteriaCompo();
+    $criteria->add(new \Criteria('com_modid', $smartsection_module_id));
     $comments = $commentHandler->getObjects($criteria);
     foreach ($comments as $comment) {
         $comment->setVar('com_itemid', $newArticleArray[$comment->getVar('com_itemid')]);

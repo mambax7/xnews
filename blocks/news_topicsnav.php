@@ -126,7 +126,7 @@ function nw_b_news_topicsnav_onthefly($options)
     $options = explode('|', $options);
     $block   = &nw_b_news_topicsnav_show($options);
 
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_topicnav.tpl');
+    $tpl->display('db:xnews_block_topicnav.tpl');
 }

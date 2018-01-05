@@ -238,7 +238,7 @@ function nw_b_news_top_show($options)
 
             // Added 16 february 2007 *****************************************
             $story_user = null;
-            $story_user = new XoopsUser($tmpstory->uid());
+            $story_user = new \XoopsUser($tmpstory->uid());
             if (is_object($story_user)) {
                 $spotlight['avatar'] = XOOPS_UPLOAD_URL . '/' . $story_user->getVar('user_avatar');
             }
@@ -473,7 +473,7 @@ function nw_b_news_top_show($options)
                     }
                     // Added 16 february 2007 *****************************************
                     $story_user = null;
-                    $story_user = new XoopsUser($story->uid());
+                    $story_user = new \XoopsUser($story->uid());
                     if (is_object($story_user)) {
                         $spotlight['avatar'] = XOOPS_UPLOAD_URL . '/' . $story_user->getVar('user_avatar');
                     }
@@ -581,7 +581,7 @@ function nw_b_news_top_show($options)
                 }
                 // Added 16 february 2007 *****************************************
                 $story_user = null;
-                $story_user = new XoopsUser($spotlightArticle->uid());
+                $story_user = new \XoopsUser($spotlightArticle->uid());
                 if (is_object($story_user)) {
                     $spotlight['avatar'] = XOOPS_UPLOAD_URL . '/' . $story_user->getVar('user_avatar');
                 }
@@ -726,7 +726,7 @@ function nw_b_news_top_edit($options)
     require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
     $topics_arr = [];
     require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
-    $xt         = new XoopsTree($GLOBALS['xoopsDB']->prefix('nw_topics'), 'topic_id', 'topic_pid');
+    $xt         = new \XoopsTree($GLOBALS['xoopsDB']->prefix('nw_topics'), 'topic_id', 'topic_pid');
     $topics_arr = $xt->getChildTreeArray(0, 'topic_title');
     $size       = count($options);
     foreach ($topics_arr as $onetopic) {
@@ -756,7 +756,7 @@ function nw_b_news_top_onthefly($options)
     $options = explode('|', $options);
     $block   = &nw_b_news_top_show($options);
 
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_top.tpl');
+    $tpl->display('db:xnews_block_top.tpl');
 }

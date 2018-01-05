@@ -18,7 +18,7 @@
 <table width='100%' border='0'>
 <tr>
 	<{section name=i loop=$columns}>
-	<td width="<{$column_width}>%"><{foreach item=story from=$columns[i]}><{include file="db:nw_news_item.tpl" story=$story}><{/foreach}></td>
+	<td width="<{$column_width}>%"><{foreach item=story from=$columns[i]}><{include file="db:xnews_item.tpl" story=$story}><{/foreach}></td>
 	<{/section}>
 </tr>
 </table>

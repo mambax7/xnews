@@ -36,7 +36,7 @@ if (!$xnews->getConfig('newsbythisauthor')) {
     redirect_header('index.php', 3, _ERRORS);
 }
 
-$GLOBALS['xoopsOption']['template_main'] = 'nw_news_whos_who.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'xnews_whos_who.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 $option  = $xnews->getConfig('displayname');
@@ -46,7 +46,7 @@ $uid_ids = $article->getWhosWho($xnews->getConfig('restrictindex'));
 if (count($uid_ids) > 0) {
     $lst_uid       = implode(',', $uid_ids);
     $memberHandler = xoops_getHandler('member');
-    $critere       = new Criteria('uid', '(' . $lst_uid . ')', 'IN');
+    $critere       = new \Criteria('uid', '(' . $lst_uid . ')', 'IN');
     $tbl_users     = $memberHandler->getUsers($critere);
     foreach ($tbl_users as $one_user) {
         $uname = '';

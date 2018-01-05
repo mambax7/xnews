@@ -1,4 +1,4 @@
-<?php namespace XoopsModules\Xnews\Common;
+<?php namespace XoopsModules\Xnewsimport\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -29,6 +29,7 @@ trait VersionChecks
     public static function checkVerXoops(\XoopsModule $module = null, $requiredVer = null)
     {
         $moduleDirName = basename(dirname(dirname(__DIR__)));
+        $moduleDirNameUpper = strtoupper($moduleDirName);
         if (null === $module) {
             $module = \XoopsModule::getByDirname($moduleDirName);
         }
@@ -41,7 +42,7 @@ trait VersionChecks
         }
         $success     = true;
 
-        if (version_compare($currentVer, $requiredVer, '<')) {
+        if (version_compare($currentVer, $requiredVer, '<')){
             $success     = false;
             $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_XOOPS'), $requiredVer, $currentVer));
         }
@@ -59,6 +60,8 @@ trait VersionChecks
      */
     public static function checkVerPhp(\XoopsModule $module)
     {
+        $moduleDirName = basename(dirname(dirname(__DIR__)));
+        $moduleDirNameUpper = strtoupper($moduleDirName);
         xoops_loadLanguage('admin', $module->dirname());
         // check for minimum PHP version
         $success = true;

@@ -19,7 +19,7 @@
 
 
 use Xmf\Request;
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -73,17 +73,17 @@ switch ($op) {
         $adminObject->displayNavigation($currentFile);
         //
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-        $sform = new XoopsThemeForm(_AM_XNEWS_PRUNENEWS, 'pruneform', $currentFile, 'post', true);
-        $sform->addElement(new XoopsFormTextDateSelect(_AM_XNEWS_PRUNE_BEFORE, 'prune_date', 15, time()), true);
-        $onlyexpired = new xoopsFormCheckBox('', 'onlyexpired');
+        $sform = new \XoopsThemeForm(_AM_XNEWS_PRUNENEWS, 'pruneform', $currentFile, 'post', true);
+        $sform->addElement(new \XoopsFormTextDateSelect(_AM_XNEWS_PRUNE_BEFORE, 'prune_date', 15, time()), true);
+        $onlyexpired = new \XoopsFormCheckBox('', 'onlyexpired');
         $onlyexpired->addOption(1, _AM_XNEWS_PRUNE_EXPIREDONLY);
         $sform->addElement($onlyexpired, false);
-        $sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
-        $topiclist  = new XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'pruned_topics', '', 5, true);
+        $sform->addElement(new \XoopsFormHidden('op', 'confirmbeforetoprune'), false);
+        $topiclist  = new \XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'pruned_topics', '', 5, true);
         $topics_arr = [];
         $xt         = new XNewsTopic();
         $allTopics  = $xt->getAllTopics(false); // The webmaster can see everything
-        $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+        $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topics_arr = $topic_tree->getAllChild(0);
         if (count($topics_arr)) {
             foreach ($topics_arr as $onetopic) {
@@ -92,8 +92,8 @@ switch ($op) {
         }
         $topiclist->setDescription(_AM_XNEWS_EXPORT_PRUNE_DSC);
         $sform->addElement($topiclist, false);
-        $button_tray = new XoopsFormElementTray('', '');
-        $submit_btn  = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+        $button_tray = new \XoopsFormElementTray('', '');
+        $submit_btn  = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
         $button_tray->addElement($submit_btn);
         $sform->addElement($button_tray);
         $sform->display();

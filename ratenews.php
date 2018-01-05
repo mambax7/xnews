@@ -41,7 +41,7 @@
  *
  * @page_title            Story's title - "Rate this news" - Module's name
  *
- * @template_name        nw_news_ratenews.tpl
+ * @template_name        xnews_ratenews.tpl
  *
  * Template's variables :
  * @template_var    string    lang_voteonce    Fixed text "Please do not vote for the same resource more than once."
@@ -168,7 +168,7 @@ if (!empty($_POST['submit'])) {            // The form was submited
     $ratemessage = _MD_XNEWS_VOTEAPPRE . '<br>' . sprintf(_MD_XNEWS_THANKYOU, $xoopsConfig['sitename']);
     redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, $ratemessage);
 } else {        // Display the form to vote
-    $GLOBALS['xoopsOption']['template_main'] = 'nw_news_ratenews.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'xnews_ratenews.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
     $news = null;
     $news = new XNewsStory($storyid);

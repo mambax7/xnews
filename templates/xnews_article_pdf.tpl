@@ -27,7 +27,7 @@
     </tr>
 </table>
 
-<div style="padding: 3px; margin-right:3px;"><{include file="db:nw_news_item_pdf.tpl" story=$story}></div>
+<div style="padding: 3px; margin-right:3px;"><{include file="db:xnews_item_pdf.tpl" story=$story}></div>
 
 </script>
 

@@ -44,7 +44,7 @@ to your site as administrator, go to System Admin > Modules, look for the xNews
 icon in the list of uninstalled modules and click in the install icon. Follow
 the directions in the screen and you'll be ready to go.
 
-Please verify that the uploads\xnews\other directories are writable on the
+Please verify that the uploads\Xnews\other directories are writable on the
 server (read+write e.g. chmod=777).
 
 

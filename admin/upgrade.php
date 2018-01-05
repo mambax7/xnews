@@ -17,7 +17,7 @@
  * @author     XOOPS Development Team
  */
 
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';

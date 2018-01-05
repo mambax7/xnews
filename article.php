@@ -50,7 +50,7 @@
  *
  * @page_title                      Article's title - Topic's title - Module's name
  *
- * @template_name                   nw_news_article.tpl wich will call nw_news_item.tpl
+ * @template_name                   xnews_article.tpl wich will call xnews_item.tpl
  *
  * Template's variables :
  * @template_var                    string    pagenav    some links to navigate thru pages
@@ -172,7 +172,7 @@ if (empty($_GET['com_id']) && 0 == $storypage) {
         $article->updateCounter();
     }
 }
-$GLOBALS['xoopsOption']['template_main'] = 'nw_news_article.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'xnews_article.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 //DNPROSSI - ADDED
@@ -207,7 +207,7 @@ if ('' != xoops_trim($bodytext)) {
 
     if ($story_pages > 1) {
         xoops_load('xoopspagenav');
-        $pagenav = new XoopsPageNav($story_pages, 1, $storypage, 'page', 'storyid=' . $storyid);
+        $pagenav = new \XoopsPageNav($story_pages, 1, $storypage, 'page', 'storyid=' . $storyid);
         if (nw_isbot()) {         // A bot is reading the articles, we are going to show him all the links to the pages
             $xoopsTpl->assign('pagenav', $pagenav->renderNav($story_pages));
         } else {
@@ -259,7 +259,7 @@ $story['poster'] = $article->uname();
 if ($story['poster']) {
     $story['posterid']         = $article->uid();
     $story['poster']           = '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $story['posterid'] . '">' . $story['poster'] . '</a>';
-    $tmp_user                  = new XoopsUser($article->uid());
+    $tmp_user                  = new \XoopsUser($article->uid());
     $story['poster_avatar']    = XOOPS_UPLOAD_URL . '/' . $tmp_user->getVar('user_avatar');
     $story['poster_signature'] = $tmp_user->getVar('user_sig');
     $story['poster_email']     = $tmp_user->getVar('email');
@@ -412,7 +412,7 @@ if ($xnews->getConfig('newsbythisauthor')) {
  * Uncomment the code to be able to use it
  */
 if ($cfg['create_clickable_path']) {
-    $mytree    = new XoopsTree($xoopsDB->prefix('nw_topics'), 'topic_id', 'topic_pid');
+    $mytree    = new \XoopsTree($xoopsDB->prefix('nw_topics'), 'topic_id', 'topic_pid');
     $topicpath = $mytree->getNicePathFromId($article->topicid(), 'topic_title', 'index.php?op=1');
     $xoopsTpl->assign('topic_path', $topicpath);
     unset($mytree);

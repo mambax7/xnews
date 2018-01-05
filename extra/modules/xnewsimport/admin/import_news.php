@@ -162,8 +162,8 @@ if ('go' === $op) {
 
     // Looping through cat to change the parentid to the new parentid
     /*foreach ($newCatArray as $oldid => $newCat) {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('topic_id', $newCat['newid']));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('topic_id', $newCat['newid']));
         $oldpid = $newCat['oldpid'];
         if ($oldpid == 0) {
             $newpid = $parentId;
@@ -186,8 +186,8 @@ if ('go' === $op) {
             $publisher_module_id = $publisher->getModule()->mid();
 
             $commentHandler = xoops_getHandler('comment');
-            $criteria = new CriteriaCompo();
-            $criteria->add(new Criteria('com_modid', $news_module_id));
+            $criteria = new \CriteriaCompo();
+            $criteria->add(new \Criteria('com_modid', $news_module_id));
             $comments = $commentHandler->getObjects($criteria);
             foreach ($comments as $comment) {
                 $comment->setVar('com_itemid', $newArticleArray[$comment->getVar('com_itemid')]);

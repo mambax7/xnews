@@ -94,7 +94,7 @@ function nw_b_news_topics_moderate_onthefly($options)
     $options = explode('|', $options);
     $block   = &nw_b_news_topics_moderate($options);
 
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);
-    $tpl->display('db:nw_news_block_moderate.tpl');
+    $tpl->display('db:xnews_block_moderate.tpl');
 }

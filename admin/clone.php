@@ -19,7 +19,7 @@
 
 
 use Xmf\Request;
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
@@ -173,7 +173,7 @@ function NewsCloner()
         }
         echo $output;
     }
-    $pagenav = new XoopsPageNav($totalclones, $xnews->getConfig('storycountadmin'), $start, 'start', 'op=clonemanager');
+    $pagenav = new \XoopsPageNav($totalclones, $xnews->getConfig('storycountadmin'), $start, 'start', 'op=clonemanager');
     echo "</table><div align='right'>" . $pagenav->renderNav() . '</div><br>';
     echo "</div></div><br>\n";
 
@@ -204,18 +204,18 @@ function NewsCloner()
     }
 
     //Draw Form
-    $sform = new XoopsThemeForm(_AM_XNEWS_CLONER_ADD, 'clonerform', XNEWS_MODULE_URL . '/admin/clone.php', 'post', true);
+    $sform = new \XoopsThemeForm(_AM_XNEWS_CLONER_ADD, 'clonerform', XNEWS_MODULE_URL . '/admin/clone.php', 'post', true);
 
-    $filedir_tray = new XoopsFormElementTray(_AM_XNEWS_CLONER_NEWNAME, '');
+    $filedir_tray = new \XoopsFormElementTray(_AM_XNEWS_CLONER_NEWNAME, '');
     $label        = sprintf(_AM_XNEWS_CLONER_NEWNAMEDESC, $xnews->getModule()->name());
-    $filedir_tray->addElement(new XoopsFormLabel($label), false);
-    $filedir_tray->addElement(new XoopsFormText(_AM_XNEWS_CLONER_NEWNAMELABEL, 'clone_modulename', 50, 255, $clone_modulename), true);
+    $filedir_tray->addElement(new \XoopsFormLabel($label), false);
+    $filedir_tray->addElement(new \XoopsFormText(_AM_XNEWS_CLONER_NEWNAMELABEL, 'clone_modulename', 50, 255, $clone_modulename), true);
     $sform->addElement($filedir_tray);
 
-    $sform->addElement(new XoopsFormHidden('op', 'clonerapply'), false);
+    $sform->addElement(new \XoopsFormHidden('op', 'clonerapply'), false);
 
-    $button_tray = new XoopsFormElementTray('', '');
-    $submit_btn  = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+    $button_tray = new \XoopsFormElementTray('', '');
+    $submit_btn  = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
     $button_tray->addElement($submit_btn);
     $sform->addElement($button_tray);
     $sform->display();

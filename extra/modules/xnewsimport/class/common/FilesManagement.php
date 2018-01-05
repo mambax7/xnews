@@ -1,4 +1,4 @@
-<?php namespace XoopsModules\Xnews\Common;
+<?php namespace XoopsModules\Xnewsimport\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -23,6 +23,7 @@ trait FilesManagement
      * @param string $folder The full path of the directory to check
      *
      * @return void
+     * @throws \RuntimeException
      */
     public static function createFolder($folder)
     {
@@ -34,7 +35,8 @@ trait FilesManagement
 
                 file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }

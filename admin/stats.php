@@ -17,7 +17,7 @@
  * @author     XOOPS Development Team
  */
 
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';

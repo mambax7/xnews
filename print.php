@@ -36,7 +36,7 @@
  *
  */
 
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 require_once __DIR__ . '/header.php';
 require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
@@ -89,8 +89,8 @@ function PrintPage()
     global $xoopsConfig, $xoopsModule, $storyObj, $xoops_meta_keywords, $xoops_meta_description;
     $myts     = \MyTextSanitizer::getInstance();
 
-    /** @var \Xoopsmodules\xnews\Helper $helper */
-    $helper = \Xoopsmodules\xnews\Helper::getInstance();
+    /** @var \XoopsModules\Xnews\Helper $helper */
+    $helper = \XoopsModules\Xnews\Helper::getInstance();
 
     $dateformat = $helper->getConfig('dateformat');
 

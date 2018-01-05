@@ -382,7 +382,7 @@ function nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $heigh
     $editor_configs['height'] = $height;
     $editor_configs['editor'] = $editor_option;
 
-    $editor = new XoopsFormEditor($caption, $name, $editor_configs);
+    $editor = new \XoopsFormEditor($caption, $name, $editor_configs);
 
     return $editor;
 }
@@ -439,7 +439,7 @@ function nw_CreateMetaDatas($story = null)
         require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
         $xt         = new XNewsTopic();
         $allTopics  = $xt->getAllTopics($xnews->getConfig('restrictindex'));
-        $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+        $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topics_arr = $topic_tree->getAllChild(0);
         foreach ($topics_arr as $onetopic) {
             $content .= sprintf("<link rel=\"Chapter\" title=\"%s\" href=\"%s\">\n", $onetopic->topic_title(), XNEWS_MODULE_URL . '/index.php?topic_id=' . $onetopic->topic_id());
@@ -612,7 +612,7 @@ function nw_updateCache()
     require_once XOOPS_ROOT_PATH . '/class/template.php';
     $tplfileHandler = xoops_getHandler('tplfile');
     $tpllist        = $tplfileHandler->find(null, null, null, $folder);
-    $xoopsTpl       = new XoopsTpl();
+    $xoopsTpl       = new \XoopsTpl();
     xoops_template_clear_module_cache($xoopsModule->getVar('mid'));            // Clear module's blocks cache
 
     // Remove cache for each page.

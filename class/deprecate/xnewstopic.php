@@ -119,7 +119,7 @@ class XnewsDeprecateTopic
             if (empty($this->topic_id)) {
                 $this->topic_id = $this->db->getInsertId();
             }
-            $xt            = new XoopsTree($this->table, 'topic_id', 'topic_pid');
+            $xt            = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
             $parent_topics = $xt->getAllParentId($this->topic_id);
             if (!empty($this->m_groups) && is_array($this->m_groups)) {
                 foreach ($this->m_groups as $m_g) {
@@ -133,7 +133,7 @@ class XnewsDeprecateTopic
                         }
                     }
                     if (true === $add) {
-                        $xp = new XoopsPerms();
+                        $xp = new \XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('ModInTopic');
                         $xp->setItemId($this->topic_id);
@@ -153,7 +153,7 @@ class XnewsDeprecateTopic
                         }
                     }
                     if (true === $add) {
-                        $xp = new XoopsPerms();
+                        $xp = new \XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('SubmitInTopic');
                         $xp->setItemId($this->topic_id);
@@ -173,7 +173,7 @@ class XnewsDeprecateTopic
                         }
                     }
                     if (true === $add) {
-                        $xp = new XoopsPerms();
+                        $xp = new \XoopsPerms();
                         $xp->setModuleId($this->mid);
                         $xp->setName('ReadInTopic');
                         $xp->setItemId($this->topic_id);
@@ -263,7 +263,7 @@ class XnewsDeprecateTopic
     public function getFirstChildTopics()
     {
         $ret       = [];
-        $xt        = new XoopsTree($this->table, 'topic_id', 'topic_pid');
+        $xt        = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         $topic_arr = $xt->getFirstChild($this->topic_id, 'topic_title');
         if (is_array($topic_arr) && count($topic_arr)) {
             foreach ($topic_arr as $topic) {
@@ -280,7 +280,7 @@ class XnewsDeprecateTopic
     public function getAllChildTopics()
     {
         $ret       = [];
-        $xt        = new XoopsTree($this->table, 'topic_id', 'topic_pid');
+        $xt        = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         $topic_arr = $xt->getAllChild($this->topic_id, 'topic_title');
         if (is_array($topic_arr) && count($topic_arr)) {
             foreach ($topic_arr as $topic) {
@@ -297,7 +297,7 @@ class XnewsDeprecateTopic
     public function getChildTopicsTreeArray()
     {
         $ret       = [];
-        $xt        = new XoopsTree($this->table, 'topic_id', 'topic_pid');
+        $xt        = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         $topic_arr = $xt->getChildTreeArray($this->topic_id, 'topic_title');
         if (is_array($topic_arr) && count($topic_arr)) {
             foreach ($topic_arr as $topic) {
@@ -316,7 +316,7 @@ class XnewsDeprecateTopic
      */
     public function makeTopicSelBox($none = 0, $seltopic = -1, $selname = '', $onchange = '')
     {
-        $xt = new XoopsTree($this->table, 'topic_id', 'topic_pid');
+        $xt = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         if ($seltopic != -1) {
             $xt->makeMySelBox('topic_title', 'topic_title', $seltopic, $none, $selname, $onchange);
         } elseif (!empty($this->topic_id)) {
@@ -335,7 +335,7 @@ class XnewsDeprecateTopic
      */
     public function getNiceTopicPathFromId($funcURL)
     {
-        $xt  = new XoopsTree($this->table, 'topic_id', 'topic_pid');
+        $xt  = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         $ret = $xt->getNicePathFromId($this->topic_id, 'topic_title', $funcURL);
 
         return $ret;
@@ -346,7 +346,7 @@ class XnewsDeprecateTopic
      */
     public function getAllChildTopicsId()
     {
-        $xt  = new XoopsTree($this->table, 'topic_id', 'topic_pid');
+        $xt  = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         $ret = $xt->getAllChildId($this->topic_id, 'topic_title');
 
         return $ret;

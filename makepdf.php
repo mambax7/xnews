@@ -30,12 +30,12 @@
 // UPDATED TCPDF to latest - 4.4.006 (2008-12-11)
 // ------------------------------------------------------------------------- //
 
-use Xoopsmodules\xnews;
+use XoopsModules\Xnews;
 
 require_once __DIR__ . '/header.php';
 
-/** @var \Xoopsmodules\xnews\Helper $helper */
-$helper = \Xoopsmodules\xnews\Helper::getInstance();
+/** @var \XoopsModules\Xnews\Helper $helper */
+$helper = \XoopsModules\Xnews\Helper::getInstance();
 
 error_reporting(0);
 require_once __DIR__ . '/header.php';
@@ -115,7 +115,7 @@ if ($author->getVar('name')) {
 }
 
 ob_start();
-$GLOBALS['xoopsTpl']->display('db:nw_news_article_pdf.tpl');
+$GLOBALS['xoopsTpl']->display('db:xnews_article_pdf.tpl');
 $content = ob_get_contents();
 ob_end_clean();
 

@@ -114,35 +114,35 @@ function NewsImport()
     }
 
     if (isset($importfrom_array) && count($importfrom_array) > 0 && isset($importto_array) && count($importto_array) > 0) {
-        $sform = new XoopsThemeForm(_AM_XNI_IMPORT_SELECTION, 'op', xoops_getenv('PHP_SELF'), 'post', true);
+        $sform = new \XoopsThemeForm(_AM_XNI_IMPORT_SELECTION, 'op', xoops_getenv('PHP_SELF'), 'post', true);
         $sform->setExtra('enctype="multipart/form-data"');
 
         // Partners to import from
-        $importfrom = new XoopsFormSelect('', 'importfrom', $importfrom);
+        $importfrom = new \XoopsFormSelect('', 'importfrom', $importfrom);
         $importfrom->addOptionArray($importfrom_array);
-        $importfrom_tray = new XoopsFormElementTray(_AM_XNI_IMPORT_FROM, '&nbsp;');
+        $importfrom_tray = new \XoopsFormElementTray(_AM_XNI_IMPORT_FROM, '&nbsp;');
         $importfrom_tray->addElement($importfrom);
         $importfrom_tray->setDescription(_AM_XNI_IMPORT_FROM_DSC);
         $sform->addElement($importfrom_tray);
 
         // xNews & clones to import to
-        $importto = new XoopsFormSelect('', 'importto', $importto);
+        $importto = new \XoopsFormSelect('', 'importto', $importto);
         $importto->addOptionArray($importto_array);
-        $importto_tray = new XoopsFormElementTray(_AM_XNI_IMPORT_TO, '&nbsp;');
+        $importto_tray = new \XoopsFormElementTray(_AM_XNI_IMPORT_TO, '&nbsp;');
         $importto_tray->addElement($importto);
         $importto_tray->setDescription(_AM_XNI_IMPORT_TO_DSC);
         $sform->addElement($importto_tray);
 
         // Buttons
-        $button_tray = new XoopsFormElementTray('', '');
-        $hidden      = new XoopsFormHidden('op', 'topicselect');
+        $button_tray = new \XoopsFormElementTray('', '');
+        $hidden      = new \XoopsFormHidden('op', 'topicselect');
         $button_tray->addElement($hidden);
 
-        $butt_import = new XoopsFormButton('', '', _AM_XNI_IMPORT, 'submit');
+        $butt_import = new \XoopsFormButton('', '', _AM_XNI_IMPORT, 'submit');
         $butt_import->setExtra('onclick="this.form.elements.op.value=\'topicselect\'"');
         $button_tray->addElement($butt_import);
 
-        $butt_cancel = new XoopsFormButton('', '', _AM_XNI_CANCEL, 'button');
+        $butt_cancel = new \XoopsFormButton('', '', _AM_XNI_CANCEL, 'button');
         $butt_cancel->setExtra('onclick="history.go(-1)"');
         $button_tray->addElement($butt_cancel);
         $sform->addElement($button_tray);
@@ -279,14 +279,14 @@ function TopicSelect()
         } else {
             echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . sprintf(_AM_XNI_IMPORT_MODULE_FOUND, $totalArticles, $totalCat, $from_import_dirname) . '</span>';
 
-            $form = new XoopsThemeForm(_AM_XNI_IMPORT_SETTINGS, 'import_form', XNI_MODULE_URL . '/admin/main.php');
+            $form = new \XoopsThemeForm(_AM_XNI_IMPORT_SETTINGS, 'import_form', XNI_MODULE_URL . '/admin/main.php');
 
             $table_name = $from_topic_table;
-            $topiclist  = new XoopsFormSelect(_AM_XNI_IMPORT_FROM_TOPICS, 'from_topics', '', 5, true);
+            $topiclist  = new \XoopsFormSelect(_AM_XNI_IMPORT_FROM_TOPICS, 'from_topics', '', 5, true);
             $topics_arr = [];
             $xt         = new xni_NewsTopic();
             $allTopics  = $xt->getAllTopics($table_name, false); // The webmaster can see everything
-            $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+            $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
             $topics_arr = $topic_tree->getAllChild(0);
             if (count($topics_arr)) {
                 foreach ($topics_arr as $onetopic) {
@@ -297,11 +297,11 @@ function TopicSelect()
             $form->addElement($topiclist, false);
 
             /*$to_table_name = $to_subprefix . 'topics';
-            $to_topiclist=new XoopsFormSelect(_AM_XNI_IMPORT_TO_TOPICS, 'to_topic','',5,false);
+            $to_topiclist=new \XoopsFormSelect(_AM_XNI_IMPORT_TO_TOPICS, 'to_topic','',5,false);
             $to_topics_arr=array();
             $to_xt = new xni_NewsTopic();
             $to_allTopics = $to_xt->getAllTopics($to_table_name, false); // The webmaster can see everything
-            $to_topic_tree = new XoopsObjectTree($to_allTopics, 'topic_id', 'topic_pid');
+            $to_topic_tree = new \XoopsObjectTree($to_allTopics, 'topic_id', 'topic_pid');
             $to_topics_arr = $to_topic_tree->getAllChild(0);
             if (count($to_topics_arr)) {
                 foreach ($to_topics_arr as $to_onetopic) {
@@ -311,13 +311,13 @@ function TopicSelect()
             $to_topiclist->setDescription(_AM_XNI_IMPORT_TO_TOPICS_DSC);
             $form->addElement($to_topiclist, false);
             */
-            $form->addElement(new XoopsFormHidden('importfromdirname', $from_import_dirname));
-            $form->addElement(new XoopsFormHidden('importtodirname', $to_import_dirname));
-            $form->addElement(new XoopsFormHidden('importfromsubprefix', $from_subprefix));
-            $form->addElement(new XoopsFormHidden('importtosubprefix', $to_subprefix));
+            $form->addElement(new \XoopsFormHidden('importfromdirname', $from_import_dirname));
+            $form->addElement(new \XoopsFormHidden('importtodirname', $to_import_dirname));
+            $form->addElement(new \XoopsFormHidden('importfromsubprefix', $from_subprefix));
+            $form->addElement(new \XoopsFormHidden('importtosubprefix', $to_subprefix));
 
-            $form->addElement(new XoopsFormHidden('op', 'startimport'));
-            $form->addElement(new XoopsFormButton('', 'import', _AM_XNI_IMPORT, 'submit'));
+            $form->addElement(new \XoopsFormHidden('op', 'startimport'));
+            $form->addElement(new \XoopsFormButton('', 'import', _AM_XNI_IMPORT, 'submit'));
 
             $form->display();
         }
