@@ -14,9 +14,11 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team, Herve Thouzard, Instant Zero
+ * @author       XOOPS Development Team, Herve Thouzard, Instant Zero
  *
  */
+
+use XoopsModules\Xnews;
 
 /**
  * @param $items
@@ -34,8 +36,8 @@ function xnews_tag_iteminfo(&$items)
             $items_id[] = (int)$item_id;
         }
     }
-    require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-    $tempnw    = new XNewsStory();
+    // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+    $tempnw    = new Xnews\NewsStory();
     $items_obj = $tempnw->getStoriesByIds($items_id);
 
     foreach (array_keys($items) as $cat_id) {
@@ -64,7 +66,9 @@ function xnews_tag_synchronization($mid)
     global $xoopsDB;
     $itemHandler_keyName = 'storyid';
     $itemHandler_table   = $xoopsDB->prefix('nw_stories');
-    $linkHandler         = xoops_getModuleHandler('link', 'tag');
+//    $linkHandler         = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
+    /** @var \XoopsModules\Tag\LinkHandler $itemHandler */
+    $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link');
     $where               = "({$itemHandler_table}.published > 0 AND {$itemHandler_table}.published <= " . time() . ") AND ({$itemHandler_table}.expired = 0 OR {$itemHandler_table}.expired > " . time() . ')';
 
     /* clear tag-item links */

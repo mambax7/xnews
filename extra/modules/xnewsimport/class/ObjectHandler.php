@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Xnewsimport;
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -18,7 +18,7 @@
  * @author       Nazar Aziz <nazar@panthersoftware.com>
  * @version      $Id $
  */
-class XNewsObjectHandler extends XoopsObjectHandler
+class ObjectHandler extends \XoopsObjectHandler
 {
     /**
      * Database connection
@@ -84,7 +84,7 @@ class XNewsObjectHandler extends XoopsObjectHandler
      * retrieve objects from the database
      *
      * @param  \CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param  bool   $id_as_key Should the department ID be used as array key
+     * @param  bool             $id_as_key Should the department ID be used as array key
      * @return array  array of objects
      * @access  public
      */
@@ -125,7 +125,7 @@ class XNewsObjectHandler extends XoopsObjectHandler
      * @param bool         $force
      * @return bool|void
      */
-    public function insert(XoopsObject $obj, $force = false)
+    public function insert(\XoopsObject $obj, $force = false)
     {
         // Make sure object is of correct type
         if (0 != strcasecmp($this->classname, get_class($obj))) {
@@ -221,7 +221,7 @@ class XNewsObjectHandler extends XoopsObjectHandler
      * @return bool   deletion successful?
      * @access public
      */
-    public function delete(XoopsObject $obj, $force = false)
+    public function delete(\XoopsObject $obj, $force = false)
     {
         if (0 != strcasecmp($this->classname, get_class($obj))) {
             return false;
@@ -248,7 +248,7 @@ class XNewsObjectHandler extends XoopsObjectHandler
      * @return bool   FALSE if deletion failed
      * @access    public
      */
-    public function deleteAll(\CriteriaElement$criteria = null)
+    public function deleteAll(\CriteriaElement $criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
@@ -264,8 +264,8 @@ class XNewsObjectHandler extends XoopsObjectHandler
     /**
      * Assign a value to 1 field for tickets matching a set of conditions
      *
-     * @param         $fieldname
-     * @param         $fieldvalue
+     * @param                   $fieldname
+     * @param                   $fieldvalue
      * @param  \CriteriaElement $criteria {@link CriteriaElement}
      * @return bool FALSE if update failed
      * @access    public

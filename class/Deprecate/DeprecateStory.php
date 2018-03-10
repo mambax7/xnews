@@ -1,13 +1,16 @@
 <?php
+
+namespace XoopsModules\Xnews\Deprecate;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
 require_once XOOPS_ROOT_PATH . '/kernel/user.php';
 
 /**
- * Class XnewsDeprecateStory
+ * Class DeprecateStory
  */
-class XnewsDeprecateStory
+class DeprecateStory
 {
     public $table;
     public $storyid;
@@ -38,8 +41,7 @@ class XnewsDeprecateStory
      */
     public function Story($storyid = -1)
     {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        ;
+        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();;
         $this->table       = '';
         $this->topicstable = '';
         if (is_array($storyid)) {
@@ -227,65 +229,15 @@ class XnewsDeprecateStory
             $created    = time();
             $published  = $this->approved ? $this->published : 0;
 
-            $sql = sprintf(
-                "INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u)",
-                           $this->table,
-                $newstoryid,
-                $this->uid,
-                $title,
-                $created,
-                $published,
-                $expired,
-                $this->hostname,
-                $this->nohtml,
-                $this->nosmiley,
-                $hometext,
-                $bodytext,
-                0,
-                $this->topicid,
-                $this->ihome,
-                $this->notifypub,
-                $this->type,
-                $this->topicdisplay,
-                $this->topicalign,
-                $this->comments
-            );
+            $sql = sprintf("INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u)",
+                           $this->table, $newstoryid, $this->uid, $title, $created, $published, $expired, $this->hostname, $this->nohtml, $this->nosmiley, $hometext, $bodytext, 0, $this->topicid, $this->ihome, $this->notifypub, $this->type, $this->topicdisplay, $this->topicalign, $this->comments);
         } else {
             if ($this->approved) {
-                $sql = sprintf(
-                    "UPDATE %s SET title = '%s', published = %u, expired = %u, nohtml = %u, nosmiley = %u, hometext = '%s', bodytext = '%s', topicid = %u, ihome = %u, topicdisplay = %u, topicalign = '%s', comments = %u WHERE storyid = %u",
-                    $this->table,
-                    $title,
-                    $this->published,
-                    $expired,
-                               $this->nohtml,
-                    $this->nosmiley,
-                    $hometext,
-                    $bodytext,
-                    $this->topicid,
-                    $this->ihome,
-                    $this->topicdisplay,
-                    $this->topicalign,
-                    $this->comments,
-                    $this->storyid
-                );
+                $sql = sprintf("UPDATE %s SET title = '%s', published = %u, expired = %u, nohtml = %u, nosmiley = %u, hometext = '%s', bodytext = '%s', topicid = %u, ihome = %u, topicdisplay = %u, topicalign = '%s', comments = %u WHERE storyid = %u", $this->table, $title, $this->published, $expired,
+                               $this->nohtml, $this->nosmiley, $hometext, $bodytext, $this->topicid, $this->ihome, $this->topicdisplay, $this->topicalign, $this->comments, $this->storyid);
             } else {
-                $sql = sprintf(
-                    "UPDATE %s SET title = '%s', expired = %u, nohtml = %u, nosmiley = %u, hometext = '%s', bodytext = '%s', topicid = %u, ihome = %u, topicdisplay = %u, topicalign = '%s', comments = %u WHERE storyid = %u",
-                    $this->table,
-                    $title,
-                    $expired,
-                    $this->nohtml,
-                    $this->nosmiley,
-                               $hometext,
-                    $bodytext,
-                    $this->topicid,
-                    $this->ihome,
-                    $this->topicdisplay,
-                    $this->topicalign,
-                    $this->comments,
-                    $this->storyid
-                );
+                $sql = sprintf("UPDATE %s SET title = '%s', expired = %u, nohtml = %u, nosmiley = %u, hometext = '%s', bodytext = '%s', topicid = %u, ihome = %u, topicdisplay = %u, topicalign = '%s', comments = %u WHERE storyid = %u", $this->table, $title, $expired, $this->nohtml, $this->nosmiley,
+                               $hometext, $bodytext, $this->topicid, $this->ihome, $this->topicdisplay, $this->topicalign, $this->comments, $this->storyid);
             }
             $newstoryid = $this->storyid;
         }
@@ -368,11 +320,11 @@ class XnewsDeprecateStory
     }
 
     /**
-     * @return XnewsDeprecateTopic
+     * @return DeprecateTopic
      */
     public function topic()
     {
-        return new XnewsDeprecateTopic($this->topicstable, $this->topicid);
+        return new DeprecateTopic($this->topicstable, $this->topicid);
     }
 
     public function uid()

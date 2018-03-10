@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Xnews;
 
 /**
  * This file contains the keyhighlighter class that highlight the chosen keyword in the current output buffer.
@@ -7,7 +7,7 @@
  */
 
 /**
- * nw_keyhighlighter class
+ * Keyhighlighter class
  *
  * This class highlight the chosen keywords in the current output buffer
  *
@@ -23,9 +23,9 @@
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
- * Class nw_keyhighlighter
+ * Class Keyhighlighter
  */
-class nw_keyhighlighter
+class Keyhighlighter
 {
 
     /**
@@ -50,19 +50,19 @@ class nw_keyhighlighter
     /**
      * Main constructor
      *
-     * This is the main constructor of nw_keyhighlighter class. <br>
+     * This is the main constructor of Keyhighlighter class. <br>
      * It's the only public method of the class.
      * @param string   $keywords         the keywords you want to highlight
      * @param boolean  $singlewords      specify if it has to highlight also the single words.
      * @param callback $replace_callback a custom callback for keyword highlight.
      *                                   <code>
-     *                                   require ('nw_keyhighlighter.class.php');
+     *                                   require ('Keyhighlighter.class.php');
      *
      * function my_highlighter ($matches) {
      *     return '<span style="font-weight: bolder; color: #FF0000;">' . $matches[0] . '</span>';
      * }
      *
-     * new nw_keyhighlighter ('W3C', false, 'my_highlighter');
+     * new Keyhighlighter ('W3C', false, 'my_highlighter');
      * readfile ('http://www.w3c.org/');
      * </code>
      */

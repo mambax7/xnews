@@ -22,8 +22,8 @@ require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once XNI_MODULE_PATH . '/include/functions.php';
 require_once XNI_MODULE_PATH . '/admin/functions.php';
-require_once XNI_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNI_MODULE_PATH . '/class/class.newsstory.php';
+require_once XNI_MODULE_PATH . '/class/NewsTopic.php';
+require_once XNI_MODULE_PATH . '/class/NewsStory.php';
 require_once XNI_MODULE_PATH . '/class/class.xnewsimport.php';
 
 function NewsImport()

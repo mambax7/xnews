@@ -9,7 +9,7 @@
  * @author           Kazumi Ono    <onokazu@xoops.org>
  * @copyright    (c) 2000-2003 The Xoops Project - www.xoops.org
  */
-class XnewsMyXoopsObjectTree
+class ObjectTree
 {
 
     /**#@+

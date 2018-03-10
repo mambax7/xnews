@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Xnews;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -9,40 +10,42 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+use XoopsModules\Xnews;
+
 /**
  * @copyright    XOOPS Project https://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
-require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
 /**
- * Class XNewsTopic
+ * Class NewsTopic
  */
-class XNewsTopic extends XnewsDeprecateTopic
+class NewsTopic extends Xnews\Deprecate\DeprecateTopic
 {
     public $menu;
-//    public $db;
-//    public $table;
+    //    public $db;
+    //    public $table;
     public $topic_description;
     public $topic_frontpage;
     public $topic_rssurl;
     public $topic_color;
 
     /**
-     * XNewsTopic constructor.
+     * NewsTopic constructor.
      * @param int $topicid
      */
     public function __construct($topicid = 0)
     {
-        $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db    = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $this->db->prefix('nw_topics');
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
@@ -196,7 +199,7 @@ class XNewsTopic extends XnewsDeprecateTopic
     public function getAllTopicsCount($checkRight = true)
     {
         global $xoopsUser;
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
         //
         $perms = '';
         if ($checkRight) {
@@ -225,7 +228,7 @@ class XNewsTopic extends XnewsDeprecateTopic
      */
     public function getAllTopics($checkRight = true, $permission = 'nw_view')
     {
-        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
         //
         $topics_arr = [];
         $sql        = 'SELECT *';
@@ -240,7 +243,7 @@ class XNewsTopic extends XnewsDeprecateTopic
         $sql    .= ' ORDER BY topic_title';
         $result = $db->query($sql);
         while ($array = $db->fetchArray($result)) {
-            $topic = new XNewsTopic();
+            $topic = new Xnews\NewsTopic();
             $topic->makeTopic($array);
             $topics_arr[$array['topic_id']] = $topic;
             unset($topic);
@@ -254,7 +257,7 @@ class XNewsTopic extends XnewsDeprecateTopic
      */
     public function getnwCountByTopic()
     {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
         //
         $ret    = [];
         $sql    = 'SELECT count(storyid) as cpt, topicid';
@@ -354,35 +357,11 @@ class XNewsTopic extends XnewsDeprecateTopic
         if (empty($this->topic_id)) {
             $insert         = true;
             $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
-            $sql            = sprintf(
-                "INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color, topic_weight) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s', %u)",
-                $this->table,
-                (int)$this->topic_id,
-                                      (int)$this->topic_pid,
-                $imgurl,
-                $title,
-                (int)$this->menu,
-                $topic_description,
-                $topic_frontpage,
-                $topic_rssurl,
-                $topic_color,
-                (int)$this->topic_weight
-            );
+            $sql            = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color, topic_weight) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s', %u)", $this->table, (int)$this->topic_id,
+                                      (int)$this->topic_pid, $imgurl, $title, (int)$this->menu, $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)$this->topic_weight);
         } else {
-            $sql = sprintf(
-                "UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s', topic_weight='%u' WHERE topic_id = %u",
-                $this->table,
-                (int)$this->topic_pid,
-                $imgurl,
-                $title,
-                (int)$this->menu,
-                           $topic_description,
-                $topic_frontpage,
-                $topic_rssurl,
-                $topic_color,
-                (int)$this->topic_weight,
-                (int)$this->topic_id
-            );
+            $sql = sprintf("UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s', topic_weight='%u' WHERE topic_id = %u", $this->table, (int)$this->topic_pid, $imgurl, $title, (int)$this->menu,
+                           $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)$this->topic_weight, (int)$this->topic_id);
         }
         if (!$result = $this->db->query($sql)) {
             // TODO: Replace with something else
@@ -398,7 +377,7 @@ class XNewsTopic extends XnewsDeprecateTopic
             $parent_topics = $xt->getAllParentId($this->topic_id);
             if (!empty($this->m_groups) && is_array($this->m_groups)) {
                 foreach ($this->m_groups as $m_g) {
-                    $moderate_topics = XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
+                    $moderate_topics = \XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
                     $add             = true;
                     // only grant this permission when the group has this permission in all parent topics of the created topic
                     foreach ($parent_topics as $p_topic) {
@@ -419,7 +398,7 @@ class XNewsTopic extends XnewsDeprecateTopic
             }
             if (!empty($this->s_groups) && is_array($this->s_groups)) {
                 foreach ($this->s_groups as $s_g) {
-                    $submit_topics = XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
+                    $submit_topics = \XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
                     $add           = true;
                     foreach ($parent_topics as $p_topic) {
                         if (!in_array($p_topic, $submit_topics)) {
@@ -439,7 +418,7 @@ class XNewsTopic extends XnewsDeprecateTopic
             }
             if (!empty($this->r_groups) && is_array($this->r_groups)) {
                 foreach ($this->s_groups as $r_g) {
-                    $read_topics = XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
+                    $read_topics = \XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
                     $add         = true;
                     foreach ($parent_topics as $p_topic) {
                         if (!in_array($p_topic, $read_topics)) {
@@ -630,7 +609,7 @@ class XNewsTopic extends XnewsDeprecateTopic
         $result = $this->db->query($sql);
         $ret    = [];
         $myts   = \MyTextSanitizer::getInstance();
-        while ($myrow = $this->db->fetchArray($result)) {
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$myrow['topic_id']] = ['title' => $myts->displayTarea($myrow['topic_title']), 'pid' => $myrow['topic_pid'], 'color' => $myrow['topic_color']];
         }
 

@@ -5,7 +5,7 @@ require_once __DIR__ . '/functions.php';
  * @param \XoopsModule $xoopsModule
  * @return bool
  */
-function xoops_module_uninstall_xnews(XoopsModule $xoopsModule)
+function xoops_module_uninstall_xnews(\XoopsModule $xoopsModule)
 {
     global $xoopsDB;
     //
@@ -13,7 +13,7 @@ function xoops_module_uninstall_xnews(XoopsModule $xoopsModule)
     $module_name     = $xoopsModule->getVar('name');
     $module_dirname  = $xoopsModule->getVar('dirname');
     $module_version  = $xoopsModule->getVar('version');
-    $module_original = $xoopsModule->getInfo('original');
+    $module_original =& $xoopsModule->getInfo('original');
     // DROP cloner control table DNPROSSI
     if (nw_TableExists($xoopsDB->prefix('news_clonerdata'))) {
         // update database on clone uninstall

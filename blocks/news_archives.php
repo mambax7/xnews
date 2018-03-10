@@ -14,8 +14,10 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
+
+use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
@@ -35,7 +37,7 @@ if (!defined('XNEWS_MODULE_PATH')) {
     define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
 /**
  * Display archives
@@ -51,7 +53,7 @@ require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
 function nw_b_news_archives_show($options)
 {
     global $xoopsDB, $xoopsConfig;
-    require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+    // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
     require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
 
@@ -118,7 +120,7 @@ function nw_b_news_archives_edit($options)
     $seleyear  = $options[3];
     $selemonth = $options[4];
 
-    $tmpstory = new XNewsStory;
+    $tmpstory = new Xnews\NewsStory;
     $tmpstory->GetOlderRecentnews($older, $recent);    // We are searching for the module's older and more recent article's date
 
     // Min and max value for the two dates selectors

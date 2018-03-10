@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 /**
@@ -34,7 +34,7 @@
  *
  * @page_title                  Topic's title - Story's title - Module's name
  *
- * @template_name         xnews_index.tpl or xnews_by_topic.tpl
+ * @template_name               xnews_index.tpl or xnews_by_topic.tpl
  *
  * Template's variables :
  * For each article
@@ -75,13 +75,13 @@ use XoopsModules\Xnews;
 
 require_once __DIR__ . '/header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/Utility.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+// require_once XNEWS_MODULE_PATH . '/class/Files.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/Utility.php';
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-$nw_NewsStoryHandler = new XNewsStory();
+$newsStoryHandler = new Xnews\NewsStory();
 
 $topic_id = 0;
 if (isset($_GET['topic_id'])) {
@@ -91,7 +91,7 @@ if (isset($_GET['topic_id'])) {
 if ($topic_id) {
     $groups       = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
     $gpermHandler = xoops_getHandler('groupperm');
-    if (!$gpermHandler->checkRight('nw_view', $topic_id, $groups, $xnews->getModule()->getVar('mid'))) {
+    if (!$gpermHandler->checkRight('nw_view', $topic_id, $groups, $helper->getModule()->getVar('mid'))) {
         redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
     }
     $xoopsOption['storytopic'] = $topic_id;
@@ -101,10 +101,10 @@ if ($topic_id) {
 if (isset($_GET['storynum'])) {
     $xoopsOption['storynum'] = (int)$_GET['storynum'];
     if ($xoopsOption['storynum'] > 30) {
-        $xoopsOption['storynum'] = $xnews->getConfig('storyhome');
+        $xoopsOption['storynum'] = $helper->getConfig('storyhome');
     }
 } else {
-    $xoopsOption['storynum'] = $xnews->getConfig('storyhome');
+    $xoopsOption['storynum'] = $helper->getConfig('storyhome');
 }
 
 if (isset($_GET['start'])) {
@@ -113,7 +113,7 @@ if (isset($_GET['start'])) {
     $start = 0;
 }
 
-if ('Classic' === $xnews->getConfig('newsdisplay') || $xoopsOption['storytopic'] > 0) {
+if ('Classic' === $helper->getConfig('newsdisplay') || $xoopsOption['storytopic'] > 0) {
     $showclassic = 1;
 } else {
     $showclassic = 0;
@@ -122,19 +122,19 @@ if ('Classic' === $xnews->getConfig('newsdisplay') || $xoopsOption['storytopic']
 $firsttitle = '';
 $topictitle = '';
 $myts       = \MyTextSanitizer::getInstance();
-$sfiles     = new nw_sFiles();
+$sfiles     = new Xnews\Files();
 
-$column_count = $xnews->getConfig('columnmode');
+$column_count = $helper->getConfig('columnmode');
 
 if ($showclassic) {
     $GLOBALS['xoopsOption']['template_main'] = 'xnews_index.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
-    $xt = new XNewsTopic();
+    $xt = new Xnews\NewsTopic();
     //DNPROSSI - ADDED
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
     $xoopsTpl->assign('column_width', (int)(1 / $column_count * 100));
-    if ($xnews->getConfig('ratenews')) {
+    if ($helper->getConfig('ratenews')) {
         $xoopsTpl->assign('rates', true);
         $xoopsTpl->assign('lang_ratingc', _MD_XNEWS_RATINGC);
         $xoopsTpl->assign('lang_ratethisnews', _MD_XNEWS_RATETHISNEWS);
@@ -149,10 +149,10 @@ if ($showclassic) {
         $topictitle = $xt->topic_title();
     }
 
-    if (1 == $xnews->getConfig('displaynav')) {
+    if (1 == $helper->getConfig('displaynav')) {
         $xoopsTpl->assign('displaynav', true);
 
-        $allTopics  = $xt->getAllTopics($xnews->getConfig('restrictindex'));
+        $allTopics  = $xt->getAllTopics($helper->getConfig('restrictindex'));
         $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         //        $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
         //        $xoopsTpl->assign('topic_select', $topic_select);
@@ -186,7 +186,7 @@ if ($showclassic) {
     } else {
         $topic_frontpage = false;
     }
-    $sarray = $nw_NewsStoryHandler->getAllPublished($xoopsOption['storynum'], $start, $xnews->getConfig('restrictindex'), $xoopsOption['storytopic'], 0, true, 'published', $topic_frontpage);
+    $sarray = $newsStoryHandler->getAllPublished($xoopsOption['storynum'], $start, $helper->getConfig('restrictindex'), $xoopsOption['storytopic'], 0, true, 'published', $topic_frontpage);
 
     $scount = count($sarray);
     $xoopsTpl->assign('story_count', $scount);
@@ -223,7 +223,7 @@ if ($showclassic) {
     $xoopsTpl->assign('columns', $columns);
     unset($story);
 
-    $totalcount = $nw_NewsStoryHandler->countPublishedByTopic($xoopsOption['storytopic'], $xnews->getConfig('restrictindex'));
+    $totalcount = $newsStoryHandler->countPublishedByTopic($xoopsOption['storytopic'], $helper->getConfig('restrictindex'));
     if ($totalcount > $scount) {
         xoops_load('xoopspagenav');
         $pagenav = new \XoopsPageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'topic_id=' . $xoopsOption['storytopic']);
@@ -243,7 +243,7 @@ if ($showclassic) {
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
     $xoopsTpl->assign('column_width', (int)(1 / $column_count * 100));
-    if ($xnews->getConfig('ratenews')) {
+    if ($helper->getConfig('ratenews')) {
         $xoopsTpl->assign('rates', true);
         $xoopsTpl->assign('lang_ratingc', _MD_XNEWS_RATINGC);
         $xoopsTpl->assign('lang_ratethisnews', _MD_XNEWS_RATETHISNEWS);
@@ -251,13 +251,13 @@ if ($showclassic) {
         $xoopsTpl->assign('rates', false);
     }
 
-    $xt            = new XNewsTopic();
-    $alltopics     =& $xt->getTopicsList(true, $xnews->getConfig('restrictindex'));
+    $xt            = new Xnews\NewsTopic();
+    $alltopics     =& $xt->getTopicsList(true, $helper->getConfig('restrictindex'));
     $smarty_topics = [];
     $topicstories  = [];
 
     foreach ($alltopics as $topicid => $topic) {
-        $allstories  = $nw_NewsStoryHandler->getAllPublished($xnews->getConfig('storyhome'), 0, $xnews->getConfig('restrictindex'), $topicid);
+        $allstories  = $newsStoryHandler->getAllPublished($helper->getConfig('storyhome'), 0, $helper->getConfig('restrictindex'), $topicid);
         $storieslist = [];
         foreach ($allstories as $thisstory) {
             $storieslist[] = $thisstory->storyid();
@@ -290,7 +290,7 @@ if ($showclassic) {
     $xoopsTpl->assign('columns', $columns);
 }
 
-$xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
+$xoopsTpl->assign('advertisement', $helper->getConfig('advertisement'));
 
 /**
  * Create the Meta Datas
@@ -313,7 +313,7 @@ if ($xoopsOption['storytopic']) {
 /**
  * Create a link for the RSS feed (if the module's option is activated)
  */
-if ($xnews->getConfig('topicsrss') && $xoopsOption['storytopic']) {
+if ($helper->getConfig('topicsrss') && $xoopsOption['storytopic']) {
     $link = sprintf("<a href='%s' title='%s'><img src='%s' border='0' alt='%s'></a>", XNEWS_MODULE_URL . '/backendt.php?topicid=' . $xoopsOption['storytopic'], _MD_XNEWS_RSSFEED, XNEWS_MODULE_URL . '/assets/images/rss.gif', _MD_XNEWS_RSSFEED);
     $xoopsTpl->assign('topic_rssfeed_link', $link);
 }
@@ -322,12 +322,12 @@ if ($xnews->getConfig('topicsrss') && $xoopsOption['storytopic']) {
  * Assign page's title
  */
 if ('' != $firsttitle) {
-    $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($firsttitle) . ' - ' . $myts->htmlSpecialChars($xnews->getModule()->name()));
+    $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($firsttitle) . ' - ' . $myts->htmlSpecialChars($helper->getModule()->name()));
 } else {
     if ('' != $topictitle) {
         $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($topictitle));
     } else {
-        $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($xnews->getModule()->name()));
+        $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($helper->getModule()->name()));
     }
 }
 

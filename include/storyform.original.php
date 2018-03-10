@@ -14,15 +14,15 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  *
  */
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-xoops_loadLanguage('admin', $xnews->getModule()->dirname());
+xoops_loadLanguage('admin', $helper->getModule()->dirname());
 
 if (file_exists(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php')) {
     require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
@@ -31,7 +31,7 @@ if (file_exists(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/ca
 }
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
-require_once XNEWS_MODULE_PATH . '/class/Utility.php';
+// require_once XNEWS_MODULE_PATH . '/class/Utility.php';
 
 $sform = new \XoopsThemeForm(_MD_XNEWS_SUBMITNEWS, 'storyform', XNEWS_MODULE_URL . '/submit.php');
 $sform->setExtra('enctype="multipart/form-data"');
@@ -39,7 +39,7 @@ $sform->addElement(new \XoopsFormText(_MD_XNEWS_TITLE, 'title', 50, 255, $title)
 
 // Topic's selection box
 if (!isset($xt)) {
-    $xt = new XNewsTopic();
+    $xt = new Xnews\NewsTopic();
 }
 
 if (0 == $xt->getAllTopicsCount()) {
@@ -47,7 +47,7 @@ if (0 == $xt->getAllTopicsCount()) {
 }
 
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
-$allTopics  = $xt->getAllTopics($xnews->getConfig('restrictindex'), 'nw_submit');
+$allTopics  = $xt->getAllTopics($helper->getConfig('restrictindex'), 'nw_submit');
 $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 //$topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
 
@@ -101,14 +101,14 @@ if ($approveprivilege) {
     $editor2 = nw_getWysiwygForm(_AM_XNEWS_EXTEXT, 'bodytext', $bodytext, 15, 60, '100%', '350px', 'bodytext_hidden');
     $sform->addElement($editor2, false);
 
-    if ($xnews->getConfig('tags')) {
+    if ($helper->getConfig('tags')) {
         $itemIdForTag = isset($storyid) ? $storyid : 0;
         require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
         $sform->addElement(new TagFormTag('item_tag', 60, 255, $itemIdForTag, 0));
     }
 
-    if ($xnews->getConfig('metadata')) {
-        if (1 == $xnews->getConfig('extendmetadata')) {
+    if ($helper->getConfig('metadata')) {
+        if (1 == $helper->getConfig('extendmetadata')) {
             $textmaxlength_script = "\n
             <script type='text/javascript'><!--// \n
                 function EnforceMaximumLength(fld, len) { \n
@@ -135,7 +135,7 @@ if ($approveprivilege) {
 
 // Manage upload(s)
 $allowupload = false;
-switch ($xnews->getConfig('uploadgroups')) {
+switch ($helper->getConfig('uploadgroups')) {
     case 1: //Submitters and Approvers
         $allowupload = true;
         break;
@@ -149,7 +149,7 @@ switch ($xnews->getConfig('uploadgroups')) {
 
 if ($allowupload) {
     if ('edit' === $op) {
-        $sfiles   = new nw_sFiles();
+        $sfiles   = new Xnews\Files();
         $filesarr = [];
         $filesarr = $sfiles->getAllbyStory($storyid);
         if (count($filesarr) > 0) {
@@ -166,7 +166,7 @@ if ($allowupload) {
             $sform->addElement($upl_tray);
         }
     }
-    $sform->addElement(new \XoopsFormFile(_AM_XNEWS_SELFILE, 'attachedfile', $xnews->getConfig('maxuploadsize')), false);
+    $sform->addElement(new \XoopsFormFile(_AM_XNEWS_SELFILE, 'attachedfile', $helper->getConfig('maxuploadsize')), false);
     if ('edit' === $op) {
         if (isset($picture) && '' != xoops_trim($picture)) {
             $pictureTray = new \XoopsFormElementTray(_MD_XNEWS_CURENT_PICTURE, '<br>');
@@ -178,7 +178,7 @@ if ($allowupload) {
         }
     }
     //DNPROSSI - 1.71
-    if ($xnews->getConfig('images_display')) {
+    if ($helper->getConfig('images_display')) {
         //Select image rows
         $image_rows = new \XoopsFormSelect(_AM_XNEWS_IMAGE_ROWS, 'imagerows', $imagerows);
         $image_rows->addOption(1, '1');
@@ -188,7 +188,7 @@ if ($allowupload) {
         $image_rows->addOption(5, '5');
         $sform->addElement($image_rows);
     }
-    if ($xnews->getConfig('pdf_display')) {
+    if ($helper->getConfig('pdf_display')) {
         //Select pdf rows
         $pdf_rows = new \XoopsFormSelect(_AM_XNEWS_PDF_ROWS, 'pdfrows', $pdfrows);
         $pdf_rows->addOption(1, '1');
@@ -198,7 +198,7 @@ if ($allowupload) {
         $pdf_rows->addOption(5, '5');
         $sform->addElement($pdf_rows);
     }
-    $sform->addElement(new \XoopsFormFile(_MD_XNEWS_SELECT_IMAGE, 'attachedimage', $xnews->getConfig('maxuploadsize')), false);
+    $sform->addElement(new \XoopsFormFile(_MD_XNEWS_SELECT_IMAGE, 'attachedimage', $helper->getConfig('maxuploadsize')), false);
 }
 
 $option_tray = new \XoopsFormElementTray(_OPTIONS, '<br>');

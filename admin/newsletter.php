@@ -14,9 +14,8 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
 
 use Xmf\Request;
 use XoopsModules\Xnews;
@@ -24,14 +23,14 @@ use XoopsModules\Xnews;
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
-require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/Files.php';
+// require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
+// require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
 
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 xoops_load('xoopspagenav');
@@ -57,8 +56,8 @@ if (!nw_FieldExists('picture', $storiesTableName)) {
  */
 function Newsletter()
 {
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = new Xnews\NewsStory();
     //
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
@@ -76,7 +75,7 @@ function Newsletter()
     //
     $topiclist  = new \XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'export_topics', '', 5, true);
     $topics_arr = [];
-    $xt         = new XNewsTopic();
+    $xt         = new Xnews\NewsTopic();
     $allTopics  = $xt->getAllTopics(false); // The webmaster can see everything
     $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
     $topics_arr = $topic_tree->getAllChild(0);
@@ -105,8 +104,8 @@ function Newsletter()
  */
 function LaunchNewsletter()
 {
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = \XoopsModules\Xnews\Helper::getInstance()->getHandler('NewsStory');
     //
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
@@ -116,7 +115,7 @@ function LaunchNewsletter()
 
     $newslettertemplate = '';
     echo '<br>';
-    $story           = new XNewsStory();
+    $story           = new Xnews\NewsStory();
     $exportedStories = [];
     $topiclist       = '';
     $removeBr        = $removehtml = false;
@@ -174,9 +173,9 @@ function LaunchNewsletter()
             $replace_pattern = [
                 $exportedStory->title(),
                 $exportedStory->uname(),
-                formatTimestamp($exportedStory->created(), $xnews->getConfig('dateformat')),
-                formatTimestamp($exportedStory->published(), $xnews->getConfig('dateformat')),
-                formatTimestamp($exportedStory->expired(), $xnews->getConfig('dateformat')),
+                formatTimestamp($exportedStory->created(), $helper->getConfig('dateformat')),
+                formatTimestamp($exportedStory->published(), $helper->getConfig('dateformat')),
+                formatTimestamp($exportedStory->expired(), $helper->getConfig('dateformat')),
                 $exportedStory->hometext(),
                 $exportedStory->bodytext(),
                 $exportedStory->description(),

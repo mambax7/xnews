@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 use XoopsModules\Xnews;
@@ -44,16 +44,16 @@ function nw_b_news_topics_show()
 {
     global $topic_id; // Don't know why this is used and where it's coming from ....
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
-    require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+    require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
     require_once XNEWS_MODULE_PATH . '/class/common/tree.php';
 
     $jump       = XNEWS_MODULE_URL . '/index.php?topic_id=';
     $topic_id   = !empty($topic_id) ? (int)$topic_id : 0;
-    $restricted = $xnews->getConfig('restrictindex');
+    $restricted = $helper->getConfig('restrictindex');
 
-    $xt         = new XNewsTopic();
+    $xt         = new Xnews\NewsTopic();
     $allTopics  = $xt->getAllTopics($restricted);
-    $topic_tree = new XnewsMyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+    $topic_tree = new ObjectTree($allTopics, 'topic_id', 'topic_pid');
     $additional = " onchange='location=\"" . $jump . "\"+this.options[this.selectedIndex].value'";
 
     if (Xnews\Utility::checkVerXoops($GLOBALS['xoopsModule'], '2.5.9')) {
@@ -74,7 +74,7 @@ function nw_b_news_topics_show()
 function nw_b_news_topics_onthefly($options)
 {
     $options = explode('|', $options);
-    $block   = &nw_b_news_topics_show($options);
+    $block   = nw_b_news_topics_show($options);
 
     $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);

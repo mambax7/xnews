@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xnews;
+
 require_once __DIR__ . '/functions.php';
 
 //Default Permission Settings
@@ -10,7 +13,7 @@ function xoops_module_update_xnews($xoopsModule)
 {
     global $xoopsDB;
     require_once __DIR__ . '/common.php';
-    require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
+    // require_once XNEWS_MODULE_PATH . '/class/Files.php';
     //
     $module_id      = $xoopsModule->getVar('mid');
     $module_name    = $xoopsModule->getVar('name');
@@ -43,7 +46,7 @@ function xoops_module_update_xnews($xoopsModule)
     //echo count($stuff);
     while ($singlefile = $xoopsDB->fetchArray($result)) {
         //foreach ( $xoopsDB->fetchArray($result) as $singlefile ) {
-        $sfiles   = new nw_sFiles($singlefile['fileid']);
+        $sfiles   = new Xnews\Files($singlefile['fileid']);
         $destname = $sfiles->getDownloadname();
         if (strstr($sfiles->getMimetype(), 'image')) {
             $fullPictureName = XNEWS_ATTACHED_FILES_PATH . '/' . basename($destname);
@@ -52,7 +55,7 @@ function xoops_module_update_xnews($xoopsModule)
             // IN PROGRESS
             $thumbName = XNEWS_ATTACHED_FILES_PATH . '/thumb_' . basename($destname);
             if (!file_exists($thumbName)) {
-                nw_resizePicture($fullPictureName, $thumbName, $xnews->getConfig('thumb_maxwidth'), $xnews->getConfig('thumb_maxheight'), true);
+                nw_resizePicture($fullPictureName, $thumbName, $helper->getConfig('thumb_maxwidth'), $helper->getConfig('thumb_maxheight'), true);
             }
         }
     }

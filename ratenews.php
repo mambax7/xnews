@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 /*
@@ -55,13 +55,16 @@
  * @template_var                    int        storyid        Story's ID
  * @template_var                    string    title        story's title
  */
+
+use XoopsModules\Xnews;
+
 require_once __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/module.errorhandler.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
 // Verify the perms
 // 1) Is the vote activated in the module ?
-$ratenews = $xnews->getConfig('ratenews');
+$ratenews = $helper->getConfig('ratenews');
 if (!$ratenews) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
 }
@@ -84,7 +87,7 @@ if (isset($_GET['storyid'])) {
 }
 
 if (!empty($storyid)) {
-    $article = new XNewsStory($storyid);
+    $article = new Xnews\NewsStory($storyid);
     if (0 == $article->published() || $article->published() > time()) {
         redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
     }
@@ -171,7 +174,7 @@ if (!empty($_POST['submit'])) {            // The form was submited
     $GLOBALS['xoopsOption']['template_main'] = 'xnews_ratenews.tpl';
     require_once XOOPS_ROOT_PATH . '/header.php';
     $news = null;
-    $news = new XNewsStory($storyid);
+    $news = new Xnews\NewsStory($storyid);
     if (is_object($news)) {
         $title = $news->title('Show');
     } else {
@@ -180,7 +183,7 @@ if (!empty($_POST['submit'])) {            // The form was submited
     //DNPROSSI - ADDED
     $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
-    $xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
+    $xoopsTpl->assign('advertisement', $helper->getConfig('advertisement'));
     $xoopsTpl->assign('news', ['storyid' => $storyid, 'title' => $title]);
     $xoopsTpl->assign('lang_voteonce', _MD_XNEWS_VOTEONCE);
     $xoopsTpl->assign('lang_ratingscale', _MD_XNEWS_RATINGSCALE);

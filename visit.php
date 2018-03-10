@@ -14,22 +14,24 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
+use XoopsModules\Xnews;
+
 require_once __DIR__ . '/header.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/Files.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
 $fileid = isset($_GET['fileid']) ? (int)$_GET['fileid'] : 0;
 if (empty($fileid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _ERRORS);
 }
 $myts   = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
-$sfiles = new nw_sFiles($fileid);
+$sfiles = new Xnews\Files($fileid);
 
 // Do we have the right to see the file ?
-$article = new XNewsStory($sfiles->getStoryid());
+$article = new Xnews\NewsStory($sfiles->getStoryid());
 // and the news, can we see it ?
 if (0 == $article->published() || $article->published() > time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);

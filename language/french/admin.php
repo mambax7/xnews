@@ -203,10 +203,8 @@ define('_AM_XNEWS_CLONER_DIRFOL', 'Répertoire');
 define('_AM_XNEWS_CLONER_VERSION', 'Version');
 
 define('_AM_XNEWS_CLONER_NEWNAME', 'Nom du nouveau module');
-define(
-    '_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "Cette information affecte également le nom du répertoire du module. <br>La saisie est insensible à la casse et les espaces sont automatiquement supprimés.<br><br>Exemples :<br><strong>Library</strong> devient <strong>library</strong> dans le répertoire des modules<br><strong>My Library</strong> devient <strong>mylibrary</strong> dans le répertoire des modules<br><br> Le module d'origine est : <font color='#008400'><strong> %s </strong></font><br>"
-);
+define('_AM_XNEWS_CLONER_NEWNAMEDESC',
+       "Cette information affecte également le nom du répertoire du module. <br>La saisie est insensible à la casse et les espaces sont automatiquement supprimés.<br><br>Exemples :<br><strong>Library</strong> devient <strong>library</strong> dans le répertoire des modules<br><strong>My Library</strong> devient <strong>mylibrary</strong> dans le répertoire des modules<br><br> Le module d'origine est : <font color='#008400'><strong> %s </strong></font><br>");
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'Nouveau module :');
 
 define('_AM_XNEWS_CLONER_DIREXISTS', "Le répertoire '%s' existe déjà");

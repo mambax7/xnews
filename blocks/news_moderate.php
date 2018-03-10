@@ -14,8 +14,10 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
+
+use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
@@ -35,7 +37,7 @@ if (!defined('XNEWS_MODULE_PATH')) {
     define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
 
 /**
@@ -43,14 +45,14 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
  */
 function nw_b_news_topics_moderate()
 {
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = \XoopsModules\Xnews\Helper::getInstance()->getHandler('NewsStory');
     //
     $block      = [];
-    $dateformat = $xnews->getConfig('dateformat');
-    $infotips   = $xnews->getConfig('infotips');
+    $dateformat = $helper->getConfig('dateformat');
+    $infotips   = $helper->getConfig('infotips');
 
-    $storyarray = $nw_NewsStoryHandler->getAllSubmitted(0, true, $xnews->getConfig('restrictindex'));
+    $storyarray = $newsStoryHandler->getAllSubmitted(0, true, $helper->getConfig('restrictindex'));
     if (count($storyarray) > 0) {
         $block['lang_story_title']  = _MB_XNEWS_TITLE;
         $block['lang_story_date']   = _MB_XNEWS_POSTED;

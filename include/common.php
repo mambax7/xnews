@@ -12,13 +12,12 @@ xoops_load('XoopsPageNav');
 xoops_load('XoopsUserUtility');
 xoops_load('XoopsLocal');
 
-
 $moduleDirName = basename(dirname(__DIR__));
 
-require_once __DIR__ . '/../class/Helper.php';
-require_once __DIR__ . '/../class/Utility.php';
+// require_once __DIR__ . '/../class/Helper.php';
+// require_once __DIR__ . '/../class/Utility.php';
 
-$db     = \XoopsDatabaseFactory::getDatabase();
+$db     = \XoopsDatabaseFactory::getDatabaseConnection();
 $helper = Xnews\Helper::getInstance();
 /** @var Xnews\Utility $utility */
 $utility = new Xnews\Utility();
@@ -48,22 +47,22 @@ xoops_loadLanguage('common', XNEWS_MODULE_DIRNAME);
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
 require_once XNEWS_MODULE_PATH . '/include/constants.php';
 
-require_once XNEWS_MODULE_PATH . '/class/session.php'; // XnewsSession class
-require_once XNEWS_MODULE_PATH . '/class/xnews.php'; // XnewsXnews class
-require_once XNEWS_MODULE_PATH . '/class/Helper.php';
+// require_once XNEWS_MODULE_PATH . '/class/session.php'; // Session class
+// require_once XNEWS_MODULE_PATH . '/class/xnews.php'; // Xnews\Helper class
+// require_once XNEWS_MODULE_PATH . '/class/Helper.php';
 //require_once XNEWS_MODULE_PATH . '/class/common/breadcrumb.php'; // XnewsBreadcrumb class
 //require_once XNEWS_MODULE_PATH . '/class/common/choicebyletter.php'; // XnewsChoiceByLetter class
-require_once XNEWS_MODULE_PATH . '/class/common/tree.php'; // xnews_MyXoopsObjectTree class
+// require_once XNEWS_MODULE_PATH . '/class/common/tree.php'; // xnews_MyXoopsObjectTree class
 //require_once XNEWS_MODULE_PATH . '/class/common/uploader.php'; // XnewsMediaUploader class
 
-$debug = false;
-$xnews = XnewsXnews::getInstance($debug);
+$debug  = false;
+$helper = Xnews\Helper::getInstance($debug);
 
 // this is needed or it will not work in blocks
 global $xnews_isAdmin;
 
 // load only if module is installed
-if (is_object($xnews->getModule())) {
+if (is_object($helper->getModule())) {
     // find if the user is admin of the module
     $xnews_isAdmin = xnews_userIsAdmin();
 }

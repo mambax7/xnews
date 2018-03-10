@@ -18,5 +18,6 @@ contentend;/**
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
- * @version         $Id $
  **/;
+ 
+contentend;

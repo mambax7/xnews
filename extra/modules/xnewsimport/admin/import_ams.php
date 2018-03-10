@@ -27,14 +27,16 @@
  * @copyright 2005, 2006 - Instant Zero
  * @version   1.0
  */
+use XoopsModules\Ams;
+use XoopsModules\Xnews;
 
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 require_once NW_MODULE_PATH . '/include/functions.php';
-require_once NW_MODULE_PATH . '/class/class.newsstory.php';
-require_once NW_MODULE_PATH . '/class/class.sfiles.php';
-require_once NW_MODULE_PATH . '/class/class.newstopic.php';
+require_once NW_MODULE_PATH . '/class/NewsStory.php';
+require_once NW_MODULE_PATH . '/class/Files.php';
+require_once NW_MODULE_PATH . '/class/NewsTopic.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
 if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
@@ -49,17 +51,12 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
         echo "<br><br>If you check the two last options then the forum's link and all the external links will be added at the end of the body text.";
     } else {
         // Launch the import
-        if (file_exists(XOOPS_ROOT_PATH . '/modules/AMS/language/' . $xoopsConfig['language'] . '/main.php')) {
-            require_once XOOPS_ROOT_PATH . '/modules/AMS/language/' . $xoopsConfig['language'] . '/main.php';
-        } else {
-            require_once XOOPS_ROOT_PATH . '/modules/AMS/language/english/main.php';
-        }
-        if (file_exists(XOOPS_ROOT_PATH . '/modules/AMS/language/' . $xoopsConfig['language'] . '/admin.php')) {
-            require_once XOOPS_ROOT_PATH . '/modules/AMS/language/' . $xoopsConfig['language'] . '/admin.php';
-        } else {
-            require_once XOOPS_ROOT_PATH . '/modules/AMS/language/english/admin.php';
-        }
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+
+        /** @var Ams\Helper $helper */
+        $helper = Ams\Helper::getInstance();
+        $helper->loadLanguage('admin');
+        $helper->loadLanguage('main');
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
         // User's choices
         $use_forum    = (isset($_POST['useforum']) && 1 == $_POST['useforum']) ? 1 : 0;
         $use_extlinks = (isset($_POST['useextlinks']) && 1 == $_POST['useextlinks']) ? 1 : 0;
@@ -97,7 +94,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
                     $topicpid = $ams_news_topics[$one_amstopic['topic_pid']];
                 }
             }
-            $news_topic = new XNewsTopic();
+            $news_topic = new Xnews\NewsTopic();
             $news_topic->setTopicPid($topicpid);
             $news_topic->setTopicTitle($one_amstopic['topic_title']);
             $news_topic->setTopicImgurl($one_amstopic['topic_imgurl']);
@@ -144,7 +141,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
                 }
 
                 // We create the story
-                $news = new XNewsStory();
+                $news = new NewsStory();
                 $news->setUid($text_lastversion['uid']);
                 $news->setTitle($article['title']);
                 $news->created = $article['created'];
@@ -176,7 +173,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
                 // The files
                 $result4 = $db->query('SELECT * FROM ' . $ams_files . ' WHERE storyid=' . $ams_newsid);
                 while ($file = $db->fetchArray($result4)) {
-                    $sfile = new nw_sFiles();
+                    $sfile = new Xnews\Files();
                     $sfile->setFileRealName($file['filerealname']);
                     $sfile->setStoryid($news_newsid);
                     $sfile->date = $file['date'];

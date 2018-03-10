@@ -14,9 +14,8 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
 
 // 19-12-2008
 // DNPROSSI - Made a few changes to 1.63
@@ -46,8 +45,7 @@ if (!is_file(XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.p
     require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
 }
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
 // Verifications on the article
 $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
@@ -56,7 +54,7 @@ if (empty($storyid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
-$article = new XNewsStory($storyid);
+$article = new Xnews\NewsStory($storyid);
 // Not yet published
 if (0 == $article->published() || $article->published() > time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
@@ -90,15 +88,10 @@ if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsMo
 //}
 //
 
-$storypage  = isset($_GET['page']) ? (int)$_GET['page'] : 0;
+$storypage = isset($_GET['page']) ? (int)$_GET['page'] : 0;
 //$dateformat = nw_getmoduleoption('dateformat', NW_MODULE_DIR_NAME);
 $dateformat = $helper->getConfig('dateformat');
 $hcontent   = '';
-
-
-
-
-
 
 $pdf_data['title']    = $article->title();
 $pdf_data['subtitle'] = $article->topic_title();
@@ -135,7 +128,7 @@ define('K_PATH_IMAGES', XOOPS_ROOT_PATH . '/images/');
 //    require_once XOOPS_ROOT_PATH . '/Frameworks/tcpdf/config/lang/en.php';
 //}
 
-$dateformat = $xnews->getConfig('dateformat');
+$dateformat = $helper->getConfig('dateformat');
 
 //DNPROSSI Added - xlanguage installed and active
 $moduleHandler = xoops_getHandler('module');
@@ -241,7 +234,6 @@ $pdf->setLanguageArray($l); //set language items
 
 //initialize document
 $pdf->Open();
-
 
 // ***** For Testing Purposes
 /*$pdf->AddPage();

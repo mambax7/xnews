@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Xnews;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -14,19 +15,21 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
+
+use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-require_once XNEWS_MODULE_PATH . '/class/class.mimetype.php';
+// require_once XNEWS_MODULE_PATH . '/class/Mimetype.php';
 
 /**
- * Class nw_sFiles
+ * Class Files
  */
-class nw_sFiles
+class Files
 {
-    public $xnews;
+    public $helper;
     public $db;
     public $table;
     public $fileid;
@@ -38,13 +41,13 @@ class nw_sFiles
     public $counter;
 
     /**
-     * nw_sFiles constructor.
+     * Files constructor.
      * @param int $fileid
      */
     public function __construct($fileid = -1)
     {
-        $this->xnews        = XnewsXnews::getInstance();
-        $this->db           = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->xnews        = Xnews\Helper::getInstance();
+        $this->db           = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table        = $this->db->prefix('nw_stories_files');
         $this->storyid      = 0;
         $this->filerealname = '';
@@ -101,12 +104,12 @@ class nw_sFiles
      */
     public function giveMimetype($filename = '')
     {
-        $nw_cmimetype = new nw_cmimetype();
-        $workingfile  = $this->downloadname;
+        $Mimetype    = new Mimetype();
+        $workingfile = $this->downloadname;
         if ('' != xoops_trim($filename)) {
             $workingfile = $filename;
 
-            return $nw_cmimetype->getType($workingfile);
+            return $Mimetype->getType($workingfile);
         } else {
             return '';
         }
@@ -123,8 +126,8 @@ class nw_sFiles
         $sql    .= " FROM {$this->table}";
         $sql    .= ' WHERE storyid = ' . (int)$storyid;
         $result = $this->db->query($sql);
-        while ($myrow = $this->db->fetchArray($result)) {
-            $ret[] = new nw_sFiles($myrow);
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
+            $ret[] = new Xnews\Files($myrow);
         }
 
         return $ret;
@@ -157,7 +160,7 @@ class nw_sFiles
      */
     public function store()
     {
-        $myts         = \MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         //
         $fileRealName = $myts->addSlashes($this->filerealname);
         $downloadname = $myts->addSlashes($this->downloadname);
@@ -411,7 +414,7 @@ class nw_sFiles
             $sql    .= " FROM {$this->db->prefix('nw_stories_files')}";
             $sql    .= ' WHERE storyid IN (' . implode(',', $stories) . ') GROUP BY storyid';
             $result = $this->db->query($sql);
-            while ($myrow = $this->db->fetchArray($result)) {
+           while (false !== ($myrow = $this->db->fetchArray($result))) {
                 $ret[$myrow['storyid']] = $myrow['cnt'];
             }
         }

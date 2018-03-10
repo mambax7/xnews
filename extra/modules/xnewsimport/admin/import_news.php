@@ -23,8 +23,8 @@ require_once __DIR__ . '/../../../include/cp_header.php';
 require_once XNI_MODULE_PATH . '/include/functions.php';
 require_once XNI_MODULE_PATH . '/admin/functions.php';
 
-//require_once XNI_MODULE_PATH . '/class/class.newstopic.php';
-//require_once XNI_MODULE_PATH . '/class/class.newsstory.php';
+//require_once XNI_MODULE_PATH . '/class/NewsTopic.php';
+//require_once XNI_MODULE_PATH . '/class/NewsStory.php';
 
 $myts = \MyTextSanitizer::getInstance();
 
@@ -61,7 +61,7 @@ if ('go' === $op) {
         $newCat['oldid'] = $arrCat['topic_id'];
         $newCat['oldpid'] = $arrCat['topic_pid'];
 
-        $topic = new XNewsTopic;
+        $topic = new Xnews\NewsTopic;
 
         $result = $xoopsDB->query("SELECT * FROM " . $xoopsDB->prefix(XNI_SUBPREFIX . '_topics') . " WHERE topic_title = '" . $arrCat['topic_title'] . "'");
         $title_arr = $xoopsDB->fetchArray($result);
@@ -105,7 +105,7 @@ if ('go' === $op) {
         $resultArticles = $xoopsDB->query($sql);
         while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
             // insert article
-            $story =new XNewsStory;
+            $story =new NewsStory;
 
             $story->uid = $arrArticle['uid'];
             $story->title = $arrArticle['title'];

@@ -14,9 +14,8 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
 
 use Xmf\Request;
 use XoopsModules\Xnews;
@@ -24,14 +23,14 @@ use XoopsModules\Xnews;
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
-require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/Files.php';
+// require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
+// require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
 
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 xoops_load('xoopspagenav');
@@ -76,7 +75,7 @@ switch ($op) {
         echo _AM_XNEWS_METAGEN_DESC . '<br>';
 
         // Metagen Options
-        $registry = new nw_registryfile('nw_metagen_options.txt');
+        $registry = new Xnews\Registryfile('nw_metagen_options.txt');
         $content  = '';
         $content  = $registry->getfile();
         if ('' != xoops_trim($content)) {
@@ -109,7 +108,7 @@ switch ($op) {
         $blacklist = new \XoopsFormSelect('', 'blacklist', '', 5, true);
         $words     = [];
 
-        $metablack = new nw_blacklist();
+        $metablack = new Xnews\Blacklist();
         $words     = $metablack->getAllKeywords();
         if (is_array($words) && count($words) > 0) {
             foreach ($words as $key => $value) {
@@ -138,7 +137,7 @@ switch ($op) {
 
     case 'metagenoptions':
         // Save Metagen Options
-        $registry = new nw_registryfile('nw_metagen_options.txt');
+        $registry = new Registryfile('nw_metagen_options.txt');
         $registry->savefile((int)$_POST['keywordscount'] . ',' . (int)$_POST['keywordsorder']);
         redirect_header('index.php?op=metagen', 3, _AM_XNEWS_DBUPDATED);
         xoops_cp_footer();
@@ -146,7 +145,7 @@ switch ($op) {
 
     case 'metagenblacklist':
         // Save metagen's blacklist words
-        $blacklist = new nw_blacklist();
+        $blacklist = new Blacklist();
         $words     = $blacklist->getAllKeywords();
 
         if (isset($_POST['go']) && _AM_XNEWS_DELETE == $_POST['go']) {

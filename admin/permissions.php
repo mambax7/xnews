@@ -14,14 +14,14 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 use XoopsModules\Xnews;
 
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
-require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
 // admin navigation
 xoops_cp_header();
 $adminObject = \Xmf\Module\Admin::getInstance();
@@ -60,7 +60,7 @@ switch ($permToSet) {
 $module_id = $GLOBALS['xoopsModule']->getVar('mid');
 require_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
 $permissionsForm = new \XoopsGroupPermForm($titleOfForm, $module_id, $permName, $permDesc, "admin/{$currentFile}");
-$xt              = new XnewsDeprecateTopic($xoopsDB->prefix('nw_topics'));
+$xt              = new Xnews\Deprecate\DeprecateTopic($xoopsDB->prefix('nw_topics'));
 $alltopics       = $xt->getTopicsList();
 foreach ($alltopics as $topic_id => $topic) {
     $permissionsForm->addItem($topic_id, $topic['title'], $topic['pid']);

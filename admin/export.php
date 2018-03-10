@@ -14,9 +14,8 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
 
 use Xmf\Request;
 use XoopsModules\Xnews;
@@ -24,14 +23,14 @@ use XoopsModules\Xnews;
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
-require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/Files.php';
+// require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
+// require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
 
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 xoops_load('xoopspagenav');
@@ -76,7 +75,7 @@ switch ($op) {
 
         $topiclist  = new \XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'export_topics', '', 5, true);
         $topics_arr = [];
-        $xt         = new XNewsTopic();
+        $xt         = new Xnews\NewsTopic();
         $allTopics  = $xt->getAllTopics(false);                // The webmaster can see everything
         $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topics_arr = $topic_tree->getAllChild(0);
@@ -98,8 +97,8 @@ switch ($op) {
         break;
 
     case 'launchexport':
-        $story           = new XNewsStory();
-        $topic           = new XNewsTopic();
+        $story           = new Xnews\NewsStory();
+        $topic           = new Xnews\NewsTopic();
         $exportedstories = [];
         $date1           = $_POST['date1'];
         $date2           = $_POST['date2'];

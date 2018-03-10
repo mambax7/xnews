@@ -14,28 +14,30 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
+
+use XoopsModules\Xnews;
 
 require_once __DIR__ . '/header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
 // We verify that the user can post comments **********************************
-if (0 == $xnews->getConfig('com_rule')) { // Comments are deactivate
+if (0 == $helper->getConfig('com_rule')) { // Comments are deactivate
     die();
 }
 
-if (0 == $xnews->getConfig('com_anonpost') && !is_object($xoopsUser)) { // Anonymous users can't post
+if (0 == $helper->getConfig('com_anonpost') && !is_object($xoopsUser)) { // Anonymous users can't post
     die();
 }
 // ****************************************************************************
 
 $com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
 if ($com_itemid > 0) {
-    $article = new XNewsStory($com_itemid);
+    $article = new Xnews\NewsStory($com_itemid);
     if ($article->storyid > 0) {
-        $com_replytext = _POSTEDBY . '&nbsp;<b>' . $article->uname() . '</b>&nbsp;' . _DATE . '&nbsp;<b>' . formatTimestamp($article->published(), $xnews->getConfig('dateformat')) . '</b><br><br>' . $article->hometext();
+        $com_replytext = _POSTEDBY . '&nbsp;<b>' . $article->uname() . '</b>&nbsp;' . _DATE . '&nbsp;<b>' . formatTimestamp($article->published(), $helper->getConfig('dateformat')) . '</b><br><br>' . $article->hometext();
         $bodytext      = $article->bodytext();
         if ('' != $bodytext) {
             $com_replytext .= '<br><br>' . $bodytext . '';

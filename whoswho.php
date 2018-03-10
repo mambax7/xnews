@@ -14,9 +14,8 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
 
 /*
  * Created on 28 oct. 2006
@@ -29,20 +28,20 @@
  */
 require_once __DIR__ . '/header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-if (!$xnews->getConfig('newsbythisauthor')) {
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/Files.php';
+if (!$helper->getConfig('newsbythisauthor')) {
     redirect_header('index.php', 3, _ERRORS);
 }
 
 $GLOBALS['xoopsOption']['template_main'] = 'xnews_whos_who.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
-$option  = $xnews->getConfig('displayname');
-$article = new XNewsStory();
+$option  = $helper->getConfig('displayname');
+$article = new Xnews\NewsStory();
 $uid_ids = [];
-$uid_ids = $article->getWhosWho($xnews->getConfig('restrictindex'));
+$uid_ids = $article->getWhosWho($helper->getConfig('restrictindex'));
 if (count($uid_ids) > 0) {
     $lst_uid       = implode(',', $uid_ids);
     $memberHandler = xoops_getHandler('member');
@@ -69,7 +68,7 @@ if (count($uid_ids) > 0) {
 //DNPROSSI - ADDED
 $xoopsTpl->assign('newsmodule_url', XNEWS_MODULE_URL);
 
-$xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
+$xoopsTpl->assign('advertisement', $helper->getConfig('advertisement'));
 
 /**
  * Manage all the meta datas

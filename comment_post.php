@@ -14,16 +14,16 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 require_once __DIR__ . '/header.php';
 
-if (0 == $xnews->getConfig('com_rule')) {
+if (0 == $helper->getConfig('com_rule')) {
     // Comments are deactivated
     exit();
 }
-if (0 == $xnews->getConfig('com_anonpost') && !is_object($xoopsUser)) {
+if (0 == $helper->getConfig('com_anonpost') && !is_object($xoopsUser)) {
     // Anonymous users can't post
     exit();
 }

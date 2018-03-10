@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
@@ -41,13 +41,13 @@ if (!defined('XNEWS_MODULE_PATH')) {
 function nw_b_news_topicsnav_show($options)
 {
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
-    require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+    // require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
     $myts             = \MyTextSanitizer::getInstance();
     $block            = [];
     $newscountbytopic = [];
     $perms            = '';
-    $xt               = new XNewsTopic();
-    $restricted       = $xnews->getConfig('restrictindex');
+    $xt               = new Xnews\NewsTopic();
+    $restricted       = $helper->getConfig('restrictindex');
     if ($restricted) {
         global $xoopsUser;
         $moduleHandler = xoops_getHandler('module');
@@ -88,7 +88,7 @@ function nw_b_news_topicsnav_show($options)
     $block['newsmodule_url'] = XNEWS_MODULE_URL;
 
     // DNPROSSI SEO
-    $seo_enabled = $xnews->getConfig('seo_enable');
+    $seo_enabled = $helper->getConfig('seo_enable');
     if (0 != $seo_enabled) {
         $block['urlrewrite'] = 'true';
     } else {

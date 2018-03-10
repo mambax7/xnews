@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
@@ -22,8 +22,8 @@ require_once __DIR__ . '/preloads/autoloader.php';
 require_once __DIR__ . '/include/constants.php';
 
 $modversion['version']             = 2.00;
-$modversion['module_status']       = 'Alpha';
-$modversion['release_date']        = '2017/12/14'; // YYYY/mm/dd
+$modversion['module_status']       = 'Alpha 1';
+$modversion['release_date']        = '2018/01/12'; // YYYY/mm/dd
 $modversion['name']                = 'xNews';
 $modversion['description']         = _MI_XNEWS_DESC;
 $modversion['author']              = 'The XOOPS Project Module Dev Team & Instant Zero';
@@ -64,15 +64,11 @@ $modversion['tables'][$i] = 'nw_stories_files';
 $modversion['tables'][$i] = 'nw_stories_votedata';
 
 // Admin things
-$modversion['hasAdmin']   = 1;
+$modversion['hasAdmin']     = 1;
 $modversion['system_admin'] = 1;
 $modversion['adminindex']   = 'admin/index.php';
 $modversion['adminmenu']    = 'admin/menu.php';
-$modversion['system_menu'] = 1;
-
-
-
-
+$modversion['system_menu']  = 1;
 
 // Search
 $modversion['hasSearch']      = 1;
@@ -93,14 +89,14 @@ $isSubmissionAllowed   = false;
 // This part inserts the selected topics as sub items in the Xoops main menu
 $i = 1;
 if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() == $modversion['dirname'] && $xoopsModule->isactive()) {
-    if (!isset($xnews)) {
-        require_once __DIR__ . '/class/xnews.php';
-        $xnews = XnewsXnews::getInstance();
+    if (!isset($helper)) {
+        //        require_once __DIR__ . '/class/xnews.php';
+        $helper = Xnews\Helper::getInstance();
     }
     $groups       = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
     $gpermHandler = xoops_getHandler('groupperm');
     //
-    if ($gpermHandler->checkRight('nw_submit', 0, $groups, $xnews->getModule()->getVar('mid'))) {
+    if ($gpermHandler->checkRight('nw_submit', 0, $groups, $helper->getModule()->getVar('mid'))) {
         $isSubmissionAllowed = true;
     }
     //
@@ -116,13 +112,13 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
     }
     if ($count > 0) {
         require_once XOOPS_ROOT_PATH . '/class/tree.php';
-        require_once __DIR__ . '/class/class.newstopic.php';
-        $xt             = new XNewsTopic();
-        $topicObjs      = $xt->getAllTopics($xnews->getConfig('restrictindex'));
+        require_once __DIR__ . '/class/NewsTopic.php';
+        $xt             = new Xnews\NewsTopic();
+        $topicObjs      = $xt->getAllTopics($helper->getConfig('restrictindex'));
         $topicObjsTree  = new \XoopsObjectTree($topicObjs, 'topic_id', 'topic_pid');
         $topicChildObjs = $topicObjsTree->getAllChild(0);
         foreach ($topicChildObjs as $topicChildObj) {
-            if ($gpermHandler->checkRight('nw_view', $topicChildObj->topic_id(), $groups, $xnews->getModule()->getVar('mid')) && $topicChildObj->menu()) {
+            if ($gpermHandler->checkRight('nw_view', $topicChildObj->topic_id(), $groups, $helper->getModule()->getVar('mid')) && $topicChildObj->menu()) {
                 $modversion['sub'][$i]['name'] = $topicChildObj->topic_title();
                 $modversion['sub'][$i]['url']  = 'index.php?topic_id=' . $topicChildObj->topic_id();
                 ++$i;
@@ -139,7 +135,7 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
         ++$i;
     }
     unset($isSubmissionAllowed);
-    if ($xnews->getConfig('newsbythisauthor')) {
+    if ($helper->getConfig('newsbythisauthor')) {
         $modversion['sub'][$i]['name'] = _MI_XNEWS_WHOS_WHO;
         $modversion['sub'][$i]['url']  = 'whoswho.php';
         ++$i;
@@ -150,31 +146,21 @@ $modversion['sub'][$i]['url']  = 'topics_directory.php';
 ++$i;
 
 // Templates
-$modversion['templates'][1]['file']         = 'xnews_item.tpl';
-$modversion['templates'][1]['description']  = '';
-$modversion['templates'][2]['file']         = 'xnews_archive.tpl';
-$modversion['templates'][2]['description']  = '';
-$modversion['templates'][3]['file']         = 'xnews_article.tpl';
-$modversion['templates'][3]['description']  = '';
-$modversion['templates'][4]['file']         = 'xnews_index.tpl';
-$modversion['templates'][4]['description']  = '';
-$modversion['templates'][5]['file']         = 'xnews_by_topic.tpl';
-$modversion['templates'][5]['description']  = '';
-$modversion['templates'][6]['file']         = 'xnews_by_this_author.tpl';
-$modversion['templates'][6]['description']  = 'Shows a page resuming all the articles of the same author (according to the perms)';
-$modversion['templates'][7]['file']         = 'xnews_ratenews.tpl';
-$modversion['templates'][7]['description']  = 'Template used to rate a news';
-$modversion['templates'][8]['file']         = 'xnews_rss.tpl';
-$modversion['templates'][8]['description']  = 'Used for RSS per topics';
-$modversion['templates'][9]['file']         = 'xnews_whos_who.tpl';
-$modversion['templates'][9]['description']  = "Who's who";
-$modversion['templates'][10]['file']        = 'xnews_topics_directory.tpl';
-$modversion['templates'][10]['description'] = 'Topics Directory';
-//WISHCRAFT
-$modversion['templates'][11]['file']        = 'xnews_article_pdf.tpl';
-$modversion['templates'][11]['description'] = 'PDF Article Layout';
-$modversion['templates'][12]['file']        = 'xnews_item_pdf.tpl';
-$modversion['templates'][12]['description'] = 'PDF Item Layout';
+$modversion['templates'] = [
+    ['file' => 'xnews_item.tpl', 'description' => ''],
+    ['file' => 'xnews_archive.tpl', 'description' => ''],
+    ['file' => 'xnews_article.tpl', 'description' => ''],
+    ['file' => 'xnews_index.tpl', 'description' => ''],
+    ['file' => 'xnews_by_topic.tpl', 'description' => ''],
+    ['file' => 'xnews_by_this_author.tpl', 'description' => 'Shows a page resuming all the articles of the same author (according to the perms)'],
+    ['file' => 'xnews_ratenews.tpl', 'description' => 'Template used to rate a news'],
+    ['file' => 'xnews_rss.tpl', 'description' => 'Used for RSS per topics'],
+    ['file' => 'xnews_whos_who.tpl', 'description' => "Who's who"],
+    ['file' => 'xnews_topics_directory.tpl', 'description' => 'Topics Directory'],
+    //WISHCRAFT
+    ['file' => 'xnews_article_pdf.tpl', 'description' => 'PDF Article Layout'],
+    ['file' => 'xnews_item_pdf.tpl', 'description' => 'PDF Item Layout'],
+];
 
 $i = 0;
 ++$i;
@@ -500,8 +486,8 @@ $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'int';
 $modversion['config'][$i]['options']     = [
     _MI_XNEWS_NONE => 0,
-    'htaccess'  => 1,
-    'path-info' => 2
+    'htaccess'     => 1,
+    'path-info'    => 2
 ];
 $modversion['config'][$i]['default']     = 0;
 // Seo path
@@ -605,7 +591,7 @@ $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = 'dhtml';
 xoops_load('xoopseditorhandler');
-$editorHandler                       = XoopsEditorHandler::getInstance();
+$editorHandler                       = \XoopsEditorHandler::getInstance();
 $modversion['config'][$i]['options'] = array_flip($editorHandler->getList());
 // If you set this option to Yes then the keywords entered in the search will be highlighted in the articles.
 ++$i;

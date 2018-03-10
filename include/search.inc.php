@@ -14,11 +14,11 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  *
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * @param $queryarray
@@ -31,10 +31,10 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 function nw_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB, $xoopsUser;
-    require_once XNEWS_MODULE_PATH . '/include/common.php';
-    $restricted = $xnews->getConfig('restrictindex');
+    require_once __DIR__ . '/common.php';
+    $restricted = $helper->getConfig('restrictindex');
     $highlight  = false;
-    $highlight  = $xnews->getConfig('keywordshighlight'); // keywords highlighting
+    $highlight  = $helper->getConfig('keywordshighlight'); // keywords highlighting
 
     $moduleHandler = xoops_getHandler('module');
     $module        = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);

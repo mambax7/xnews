@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 /*
@@ -68,12 +68,14 @@
 # [11-may-2001] Kenneth Lee - http://www.nexgear.com/
 ######################################################################
 
+use XoopsModules\Xnews;
+
 require_once __DIR__ . '/header.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'xnews_archive.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
 $lastyear  = 0;
 $lastmonth = 0;
@@ -100,9 +102,9 @@ $pgtitle = '';
 if ($fromyear && $frommonth) {
     $pgtitle = sprintf(' - %d - %d', $fromyear, $frommonth);
 }
-$infotips   = $xnews->getConfig('infotips');
-$restricted = $xnews->getConfig('restrictindex');
-$dateformat = $xnews->getConfig('dateformat');
+$infotips   = $helper->getConfig('infotips');
+$restricted = $helper->getConfig('restrictindex');
+$dateformat = $helper->getConfig('dateformat');
 if ('' == $dateformat) {
     $dateformat = 'm';
 }
@@ -179,7 +181,7 @@ if (0 != $fromyear && 0 != $frommonth) {
     $monthend   = ($monthend > time()) ? time() : $monthend;
 
     $count      = 0;
-    $news       = new XNewsStory();
+    $news       = new Xnews\NewsStory();
     $storyarray = $news->getArchive($monthstart, $monthend, $restricted);
     $count      = count($storyarray);
     if (is_array($storyarray) && $count > 0) {
@@ -190,7 +192,7 @@ if (0 != $fromyear && 0 != $frommonth) {
                 $story['infotips'] = nw_make_infotips($article->hometext());
                 $htmltitle         = ' title="' . $story['infotips'] . '"';
             }
-            $seo_enabled = $xnews->getConfig('seo_enable');
+            $seo_enabled = $helper->getConfig('seo_enable');
             //DNPROSSI SEO
             $cat_path   = '';
             $item_path  = '';

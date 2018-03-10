@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Xnews;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -14,15 +15,15 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
- * Class nw_registryfile
+ * Class Registryfile
  */
-class nw_registryfile
+class Registryfile
 {
     public $filename; // filename to manage
 

@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 /*
@@ -30,15 +30,18 @@
  * NOTE : If you use this code, please make credit.
  *
  */
+
+use XoopsModules\Xnews;
+
 require_once __DIR__ . '/header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
-if (!$xnews->getConfig('firefox_microsummaries')) {
+if (!$helper->getConfig('firefox_microsummaries')) {
     exit();
 }
-$story      = new XNewsStory();
-$restricted = $xnews->getConfig('restrictindex');
+$story      = new Xnews\NewsStory();
+$restricted = $helper->getConfig('restrictindex');
 $sarray     = [];
 // Get the last news from all topics according to the module's restrictions
 $sarray = $story->getAllPublished(1, 0, $restricted, 0);

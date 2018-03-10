@@ -14,11 +14,12 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team, Herve Thouzard, Instant Zero
+ * @author       XOOPS Development Team, Herve Thouzard, Instant Zero
  *
  */
 
 use WideImage\WideImage;
+use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
@@ -30,14 +31,14 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 function xnews_userIsAdmin()
 {
     global $xoopsUser;
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
 
     static $xnews_isAdmin;
     if (isset($xnews_isAdmin)) {
         return $xnews_isAdmin;
     }
 
-    $xnews_isAdmin = (!is_object($xoopsUser)) ? false : $xoopsUser->isAdmin($xnews->getModule()->getVar('mid'));
+    $xnews_isAdmin = (!is_object($xoopsUser)) ? false : $xoopsUser->isAdmin($helper->getModule()->getVar('mid'));
 
     return $xnews_isAdmin;
 }
@@ -48,7 +49,7 @@ function xnews_userIsAdmin()
  */
 function xnews_collapsableBar($tablename = '', $iconname = '')
 {
-    $xnews = XnewsXnews::getInstance(); ?>
+    $helper = Xnews\Helper::getInstance(); ?>
     <script type="text/javascript"><!--
         function goto_URL(object) {
             window.location.href = object.options[object.selectedIndex].value;
@@ -225,7 +226,7 @@ function xnews_checkModule($dirname)
 function nw_updaterating($storyid)
 {
     global $xoopsDB;
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
 
     $query       = 'SELECT rating FROM ' . $xoopsDB->prefix('nw_stories_votedata') . ' WHERE storyid = ' . $storyid;
     $voteresult  = $xoopsDB->query($query);
@@ -256,7 +257,7 @@ function nw_MygetItemIds($permtype = 'nw_view')
 {
     global $xoopsUser;
     static $tblperms = [];
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
 
     if (is_array($tblperms) && array_key_exists($permtype, $tblperms)) {
         return $tblperms[$permtype];
@@ -369,9 +370,9 @@ function nw_xoops_version()
 //function &nw_getWysiwygForm($caption, $name, $value = '', $rows, $cols, $supplemental='')
 function nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
 {
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
     //
-    $editor_option            = strtolower($xnews->getConfig('form_options'));
+    $editor_option            = strtolower($helper->getConfig('form_options'));
     $editor                   = false;
     $editor_configs           = [];
     $editor_configs['name']   = $name;
@@ -417,16 +418,16 @@ function nw_DublinQuotes($text)
 function nw_CreateMetaDatas($story = null)
 {
     global $xoopsConfig, $xoTheme, $xoopsTpl;
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
 
     $content = '';
     $myts    = \MyTextSanitizer::getInstance();
-    require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+    // require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
 
     /**
      * Firefox and Opera Navigation's Bar
      */
-    if ($xnews->getConfig('sitenavbar')) {
+    if ($helper->getConfig('sitenavbar')) {
         $content .= sprintf("<link rel=\"Home\" title=\"%s\" href=\"%s/\" >\n", $xoopsConfig['sitename'], XOOPS_URL);
         $content .= sprintf("<link rel=\"Contents\" href=\"%s\">\n", XNEWS_MODULE_URL . '/index.php');
         $content .= sprintf("<link rel=\"Search\" href=\"%s\" >\n", XOOPS_URL . '/search.php');
@@ -436,9 +437,9 @@ function nw_CreateMetaDatas($story = null)
 
         // Create chapters
         require_once XOOPS_ROOT_PATH . '/class/tree.php';
-        require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-        $xt         = new XNewsTopic();
-        $allTopics  = $xt->getAllTopics($xnews->getConfig('restrictindex'));
+        // require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+        $xt         = new Xnews\NewsTopic();
+        $allTopics  = $xt->getAllTopics($helper->getConfig('restrictindex'));
         $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
         $topics_arr = $topic_tree->getAllChild(0);
         foreach ($topics_arr as $onetopic) {
@@ -474,7 +475,7 @@ function nw_CreateMetaDatas($story = null)
     /**
      * Dublin Core's meta datas
      */
-    if ($xnews->getConfig('dublincore') && isset($story) && is_object($story)) {
+    if ($helper->getConfig('dublincore') && isset($story) && is_object($story)) {
         $configHandler         = xoops_getHandler('config');
         $xoopsConfigMetaFooter = $configHandler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
         $content               .= '<meta name="DC.Title" content="' . nw_DublinQuotes($story->title()) . "\" >\n";
@@ -496,7 +497,7 @@ function nw_CreateMetaDatas($story = null)
     /**
      * Firefox 2 micro summaries
      */
-    if ($xnews->getConfig('firefox_microsummaries')) {
+    if ($helper->getConfig('firefox_microsummaries')) {
         $content .= sprintf("<link rel=\"microsummary\" href=\"%s\">\n", XNEWS_MODULE_URL . '/micro_summary.php');
     }
 
@@ -516,15 +517,15 @@ function nw_CreateMetaDatas($story = null)
  */
 function nw_createmeta_keywords($content)
 {
-    require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
-    require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
-    $xnews = XnewsXnews::getInstance();
+    // require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
+    // require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
+    $helper = Xnews\Helper::getInstance();
     global $cfg;
 
     if (!$cfg['meta_keywords_auto_generate']) {
         return '';
     }
-    $registry = new nw_registryfile('nw_metagen_options.txt');
+    $registry = new Registryfile('nw_metagen_options.txt');
     $tcontent = '';
     $tcontent = $registry->getfile();
     if ('' != xoops_trim($tcontent)) {
@@ -569,7 +570,7 @@ function nw_createmeta_keywords($content)
             break;
     }
     // Remove black listed words
-    $metablack = new nw_blacklist();
+    $metablack = new Blacklist();
     $words     = $metablack->getAllKeywords();
     $keywords  = $metablack->remove_blacklisted($keywords);
 
@@ -604,7 +605,7 @@ function nw_createmeta_keywords($content)
 function nw_updateCache()
 {
     global $xoopsModule;
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
 
     $folder  = $xoopsModule->getVar('dirname');
     $tpllist = [];
@@ -692,7 +693,7 @@ function nw_AddField($field, $table)
 function nw_is_admin_group()
 {
     global $xoopsUser, $xoopsModule;
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
     //
     if (is_object($xoopsUser)) {
         if (in_array('1', $xoopsUser->getGroups())) {
@@ -754,7 +755,7 @@ function nw_isbot()
  */
 function nw_make_infotips($text)
 {
-    $infotips = $xnews->getConfig('infotips');
+    $infotips = $helper->getConfig('infotips');
     if ($infotips > 0) {
         $myts = \MyTextSanitizer::getInstance();
         //DNPROSSI changed xoops_substr to mb_substr for utf-8 support
@@ -850,7 +851,7 @@ function nw_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words =
  */
 function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false, $fit = 'inside')
 {
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
     //    require_once XNEWS_MODULE_PATH . '/class/wideimage/WideImage.inc.php';
     //
     $resize            = true;
@@ -950,8 +951,8 @@ function nw_prepareFolder($folder)
  */
 function nw_remove_accents($chain)
 {
-    $xnews = XnewsXnews::getInstance();
-    $myts = \MyTextSanitizer::getInstance();
+    $helper = Xnews\Helper::getInstance();
+    $myts   = \MyTextSanitizer::getInstance();
     //
     if (method_exists($myts, 'formatForML')) {
         $chain = $myts->formatForML($chain);
@@ -987,35 +988,35 @@ function nw_remove_accents($chain)
  */
 function nw_seo_UrlGenerator($op, $id, $short_url = '')
 {
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
     //
-    if (0 != $xnews->getConfig('seo_enable')) {
+    if (0 != $helper->getConfig('seo_enable')) {
         if (!empty($short_url)) {
             $short_url = $short_url;
         }
 
         switch ($op) {
-                case _MD_XNEWS_SEO_PDF:
-                $short_url .= $xnews->getConfig('seo_endofurl_pdf');
-                    break;
+            case _MD_XNEWS_SEO_PDF:
+                $short_url .= $helper->getConfig('seo_endofurl_pdf');
+                break;
 
-                case _MD_XNEWS_SEO_PRINT:
-                $short_url .= $xnews->getConfig('seo_endofurl');
-                    break;
-                case _MD_XNEWS_SEO_ARTICLES:
-                $short_url .= $xnews->getConfig('seo_endofurl');
-                    break;
-                case _MD_XNEWS_SEO_TOPICS:
-                $short_url .= $xnews->getConfig('seo_endofurl');
+            case _MD_XNEWS_SEO_PRINT:
+                $short_url .= $helper->getConfig('seo_endofurl');
+                break;
+            case _MD_XNEWS_SEO_ARTICLES:
+                $short_url .= $helper->getConfig('seo_endofurl');
+                break;
+            case _MD_XNEWS_SEO_TOPICS:
+                $short_url .= $helper->getConfig('seo_endofurl');
                 break;
         }
-        if (1 == $xnews->getConfig('seo_enable')) {
+        if (1 == $helper->getConfig('seo_enable')) {
             // generate SEO url using htaccess
             $seo_path = '';
-            if ('' != $xnews->getConfig('seo_path')) {
+            if ('' != $helper->getConfig('seo_path')) {
                 // generate SEO url using seo path eg news, info, blog
-                $seo_path = '/' . strtolower($xnews->getConfig('seo_path'));
-                if (0 == $xnews->getConfig('seo_level')) {
+                $seo_path = '/' . strtolower($helper->getConfig('seo_path'));
+                if (0 == $helper->getConfig('seo_level')) {
                     // generate SEO url using root level htaccess
                     $seo_path .= '.';
 
@@ -1028,8 +1029,8 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
                 }
             } else {
                 // generate SEO url with no seo path
-                $seo_path = '/' . strtolower($xnews->getConfig('seo_path'));
-                if (0 == $xnews->getConfig('seo_level')) {
+                $seo_path = '/' . strtolower($helper->getConfig('seo_path'));
+                if (0 == $helper->getConfig('seo_level')) {
                     // generate SEO url using root level htaccess
                     return XOOPS_URL . '/' . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
                 } else {
@@ -1037,11 +1038,11 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
                     return XNEWS_MODULE_URL . $seo_path . "${op}.${id}/${short_url}";
                 }
             }
-        } elseif (2 == $xnews->getConfig('seo_enable')) {
+        } elseif (2 == $helper->getConfig('seo_enable')) {
             // generate SEO url using path-info
             $seo_path = '';
-            if ('' != $xnews->getConfig('seo_path')) {
-                $seo_path = strtolower($xnews->getConfig('seo_path')) . '.';
+            if ('' != $helper->getConfig('seo_path')) {
+                $seo_path = strtolower($helper->getConfig('seo_path')) . '.';
             }
 
             return XNEWS_MODULE_URL . '/index.php/' . $seo_path . "${op}.${id}/${short_url}";
@@ -1073,7 +1074,7 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
 function nw_callJavascriptFile($javascriptFile, $inLanguageFolder = false, $oldWay = false)
 {
     global $xoopsConfig, $xoTheme;
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
     //
     $fileToCall = $javascriptFile;
     if ($inLanguageFolder) {
@@ -1138,7 +1139,7 @@ function nw_detect_utf8_lang_encoding($string)
  */
 function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
 {
-    $xnews = XnewsXnews::getInstance();
+    $helper = Xnews\Helper::getInstance();
     //
     if ($considerHtml) {
         // if the plain text is shorter than the maximum length, return the whole text

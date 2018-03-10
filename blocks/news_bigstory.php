@@ -14,8 +14,10 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
+
+use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 /**
@@ -40,14 +42,15 @@ if (!defined('XNEWS_MODULE_PATH')) {
 function nw_b_news_bigstory_show()
 {
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
-    require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+    // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
     $myts       = \MyTextSanitizer::getInstance();
-    $restricted = $xnews->getConfig('restrictindex');
-    $dateformat = $xnews->getConfig('dateformat');
-    $infotips   = $xnews->getConfig('infotips');
+    $helper = Xnews\Helper::getInstance();
+    $restricted = $helper->getConfig('restrictindex');
+    $dateformat = $helper->getConfig('dateformat');
+    $infotips   = $helper->getConfig('infotips');
 
     $block    = [];
-    $onestory = new XNewsStory();
+    $onestory = new Xnews\NewsStory();
     $stories  = $onestory->getBigStory(1, 0, $restricted, 0, 1, true, 'counter');
     if (0 == count($stories)) {
         $block['message'] = _MB_XNEWS_NOTYET;
@@ -76,7 +79,7 @@ function nw_b_news_bigstory_show()
     }
 
     // DNPROSSI SEO
-    $seo_enabled = $xnews->getConfig('seo_enable');
+    $seo_enabled = $helper->getConfig('seo_enable');
     if (0 != $seo_enabled) {
         $block['urlrewrite'] = 'true';
     } else {
@@ -92,7 +95,7 @@ function nw_b_news_bigstory_show()
 function nw_b_news_bigstory_onthefly($options)
 {
     $options = explode('|', $options);
-    $block   = &nw_b_news_bigstory_show($options);
+    $block   = nw_b_news_bigstory_show($options);
 
     $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);

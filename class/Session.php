@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Xnews;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -9,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 /**
- *  XnewsSession class
+ *  Session class
  *
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
@@ -23,9 +24,9 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 require_once dirname(__DIR__) . '/include/common.php';
 
 /**
- * Class XnewsSession
+ * Class Session
  */
-class XnewsSession
+class Session
 {
     /**
      * Session constructor<br>
@@ -95,13 +96,13 @@ class XnewsSession
     }
 
     /**
-     * @return XnewsSession
+     * @return Session
      */
     public static function getInstance()
     {
         static $_sess;
         if (!isset($_sess)) {
-            $_sess = new XnewsSession();
+            $_sess = new Session();
         }
 
         return $_sess;

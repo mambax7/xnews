@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Xnews;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -9,12 +10,14 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+use XoopsModules\Xnews;
+
 /**
  * @copyright    XOOPS Project https://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 // ######################################################################
@@ -29,12 +32,12 @@
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
- * Class nw_Latestnewsstory
+ * Class Latestnewsstory
  */
-class nw_Latestnewsstory extends nw_NewsStory
+class Latestnewsstory extends Xnews\NewsStory
 {
     /**
-     * nw_Latestnewsstory constructor.
+     * Latestnewsstory constructor.
      * @param int $id
      */
     public function __construct($id = -1)
@@ -57,7 +60,7 @@ class nw_Latestnewsstory extends nw_NewsStory
      */
     public function getAllPublished($limit = 0, $selected_stories = true, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asObject = true, $order = 'published', $topic_frontpage = false)
     {
-        $db   = XoopsDatabaseFactory::getDatabaseConnection();
+        $db   = \XoopsDatabaseFactory::getDatabaseConnection();
         $myts = \MyTextSanitizer::getInstance();
 
         $ret = [];
@@ -111,7 +114,7 @@ class nw_Latestnewsstory extends nw_NewsStory
 
         while ($myrow = $db->fetchArray($result)) {
             if ($asObject) {
-                $ret[] = new nw_Latestnewsstory($myrow);
+                $ret[] = new Latestnewsstory($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }

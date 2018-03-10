@@ -18,7 +18,7 @@
  * @version      $Id $
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
@@ -42,7 +42,7 @@ class xni_NewsTopic extends XoopsTopic
      */
     public function __construct($topicid = 0, $subprefix = '')
     {
-        $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db    = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $this->db->prefix($subprefix . 'topics');
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
@@ -222,7 +222,7 @@ class xni_NewsTopic extends XoopsTopic
     public function getAllTopics($table_name = 'nw_topics', $checkRight = true, $permission = 'xni_view')
     {
         $topics_arr = [];
-        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $table      = $db->prefix($table_name);
         $sql        = 'SELECT * FROM ' . $table;
         if ($checkRight) {
@@ -342,33 +342,11 @@ class xni_NewsTopic extends XoopsTopic
         if (empty($this->topic_id)) {
             $insert         = true;
             $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
-            $sql            = sprintf(
-                "INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s')",
-                $this->table,
-                (int)$this->topic_id,
-                (int)$this->topic_pid,
-                $imgurl,
-                                      $title,
-                (int)$this->menu,
-                $topic_description,
-                $topic_frontpage,
-                $topic_rssurl,
-                $topic_color
-            );
+            $sql            = sprintf("INSERT INTO %s (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s')", $this->table, (int)$this->topic_id, (int)$this->topic_pid, $imgurl,
+                                      $title, (int)$this->menu, $topic_description, $topic_frontpage, $topic_rssurl, $topic_color);
         } else {
-            $sql = sprintf(
-                "UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s' WHERE topic_id = %u",
-                $this->table,
-                (int)$this->topic_pid,
-                $imgurl,
-                $title,
-                (int)$this->menu,
-                           $topic_description,
-                $topic_frontpage,
-                $topic_rssurl,
-                $topic_color,
-                (int)$this->topic_id
-            );
+            $sql = sprintf("UPDATE %s SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s' WHERE topic_id = %u", $this->table, (int)$this->topic_pid, $imgurl, $title, (int)$this->menu,
+                           $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)$this->topic_id);
         }
         if (!$result = $this->db->query($sql)) {
             // TODO: Replace with something else
@@ -385,7 +363,7 @@ class xni_NewsTopic extends XoopsTopic
             $parent_topics = $xt->getAllParentId($this->topic_id);
             if (!empty($this->m_groups) && is_array($this->m_groups)) {
                 foreach ($this->m_groups as $m_g) {
-                    $moderate_topics = XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
+                    $moderate_topics = \XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
                     $add             = true;
                     // only grant this permission when the group has this permission in all parent topics of the created topic
                     foreach ($parent_topics as $p_topic) {
@@ -406,7 +384,7 @@ class xni_NewsTopic extends XoopsTopic
             }
             if (!empty($this->s_groups) && is_array($this->s_groups)) {
                 foreach ($this->s_groups as $s_g) {
-                    $submit_topics = XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
+                    $submit_topics = \XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
                     $add           = true;
                     foreach ($parent_topics as $p_topic) {
                         if (!in_array($p_topic, $submit_topics)) {
@@ -426,7 +404,7 @@ class xni_NewsTopic extends XoopsTopic
             }
             if (!empty($this->r_groups) && is_array($this->r_groups)) {
                 foreach ($this->s_groups as $r_g) {
-                    $read_topics = XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
+                    $read_topics = \XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
                     $add         = true;
                     foreach ($parent_topics as $p_topic) {
                         if (!in_array($p_topic, $read_topics)) {
@@ -613,7 +591,7 @@ class xni_NewsTopic extends XoopsTopic
         $result = $this->db->query($sql);
         $ret    = [];
         $myts   = \MyTextSanitizer::getInstance();
-        while ($myrow = $this->db->fetchArray($result)) {
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$myrow['topic_id']] = ['title' => $myts->displayTarea($myrow['topic_title']), 'pid' => $myrow['topic_pid'], 'color' => $myrow['topic_color']];
         }
 

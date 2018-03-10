@@ -203,10 +203,8 @@ define('_AM_XNEWS_CLONER_DIRFOL', 'Dir/Cartella');
 define('_AM_XNEWS_CLONER_VERSION', 'Versione');
 
 define('_AM_XNEWS_CLONER_NEWNAME', 'Nome nuovo modulo');
-define(
-    '_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "Avrà effetto anche sulla creazione della nuova cartella. <br> Le maiuscole/minuscole e spazi vengono ignorati e corretti automaticamente. <br> es. nuovo nome = <b>Biblioteca</b> nuova dir = <b>biblioteca</b>, <br> nuovo nome <b>La Mia Biblioteca</b> nuova dir = <b>lamiacartella</b>. <br><br> Il modulo di partenza è: <font color='#008400'><b> %s </b></font><br>"
-);
+define('_AM_XNEWS_CLONER_NEWNAMEDESC',
+       "Avrà effetto anche sulla creazione della nuova cartella. <br> Le maiuscole/minuscole e spazi vengono ignorati e corretti automaticamente. <br> es. nuovo nome = <b>Biblioteca</b> nuova dir = <b>biblioteca</b>, <br> nuovo nome <b>La Mia Biblioteca</b> nuova dir = <b>lamiacartella</b>. <br><br> Il modulo di partenza è: <font color='#008400'><b> %s </b></font><br>");
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'Nuovo Modulo:');
 
 define('_AM_XNEWS_CLONER_DIREXISTS', "Dir/Cartella '%s' esistente!!");

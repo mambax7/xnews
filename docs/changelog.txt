@@ -4,9 +4,10 @@
 ! Bug fix.
 o General comment.
 
-<h5>2.xx Beta 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.0
+<h5>2.00 Alpha 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.3
 <hr>
 + standardization for XOOPS 2.5.9 and PHP 7 (mamba)
++ Namespaces, Autoload (mamba)
 
 
 <h5>2.00 [NOT RELEASED]</h5>
@@ -24,7 +25,7 @@ o Upgraded to Xoops 2.5.7 directory structure.
   $xoopsConfig['slogan']); and $xoopsConfig['sitename']);
 - Modified xnews/makepdf.php to reflect above changes
 - Changed old SEO samples with fixed working ones in xnews/docs/seo-samples
-- Fixed Missing tags variable in class.newsstory.php store function
+- Fixed Missing tags variable in NewsStory.php store function
   Fixes new news submit issue
 - Renamed and deleted xnews/extra/modules/tag content
   now only fixed xnews.php plugin and index.html should be there
@@ -307,7 +308,7 @@ I am writing a short help file eventhough changes are self explanatory and modul
 > Added some tests so that the module does not reveals its path
 > In the "Top news" block you can now see the avatar of the user who's story is at the spotlight
 > The block used to show a scrolling list of the topics ("news Topics") should use much less SQL queries
-> A bug correction in the file /xoops/modules/xnews/class/class.newstopic.php
+> A bug correction in the file /xoops/modules/xnews/class/NewsTopic.php
 > You have a new notification based on stories published in a given category (thank you very much Lankford for this)
 > It was possible to post a comment for a non existent article !
 > I have added some new translations in the file /xoops/modules/xnews/language/english/modinfo.php (see the file lang.diff)

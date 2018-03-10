@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Xnews;
+
 /**
  * Copyright (C) 2002 Jason Sheets <jsheets@shadonet.com>.
  * All rights reserved.
@@ -69,9 +70,9 @@
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
- * Class nw_cmimetype
+ * Class Mimetype
  */
-class nw_cmimetype
+class Mimetype
 {
     /**
      * @param $filename

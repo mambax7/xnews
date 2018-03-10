@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 // ######################################################################
@@ -25,6 +25,8 @@
 // # Trabis ( www.xuups.com ) and Bandit-x ( www.bandit-x.net )         #
 // #                                                                    #
 // ######################################################################
+
+use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
@@ -45,10 +47,10 @@ if (!defined('XNEWS_MODULE_PATH')) {
 }
 
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/class.latestnews.php'; //Bandit-X
+require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+require_once XNEWS_MODULE_PATH . '/class/Files.php';
+require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+require_once XNEWS_MODULE_PATH . '/class/Latestnewsstory.php'; //Bandit-X
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
 /**
@@ -57,8 +59,8 @@ require_once XOOPS_ROOT_PATH . '/class/tree.php';
  */
 function nw_b_news_latestnews_show($options)
 {
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = new Xnews\NewsStory();
     //
     // IN PROGRESS
     // IN PROGRESS
@@ -80,9 +82,9 @@ function nw_b_news_latestnews_show($options)
     }
 
     $myts   = \MyTextSanitizer::getInstance();
-    $sfiles = new nw_sFiles();
+    $sfiles = new Xnews\Files();
 
-    $dateformat = $xnews->getConfig('dateformat');
+    $dateformat = $helper->getConfig('dateformat');
     if ('' == $dateformat) {
         $dateformat = 's';
     }
@@ -109,10 +111,10 @@ function nw_b_news_latestnews_show($options)
     </style>' . $GLOBALS['xoopsTpl']->get_template_vars('xoops_module_header'));
 
     if (!isset($options[26])) {
-        $sarray = $nw_NewsStoryHandler->getAllPublished($limit, $selected_stories, 0, true, 0, 0, true, $options[25], false);
+        $sarray = $newsStoryHandler->getAllPublished($limit, $selected_stories, 0, true, 0, 0, true, $options[25], false);
     } else {
         $topics = array_slice($options, 26);
-        $sarray = $nw_NewsStoryHandler->getAllPublished($limit, $selected_stories, 0, true, $topics, 0, true, $options[25], false);
+        $sarray = $newsStoryHandler->getAllPublished($limit, $selected_stories, 0, true, $topics, 0, true, $options[25], false);
     }
 
     $scount  = count($sarray);

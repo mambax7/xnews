@@ -1,12 +1,15 @@
 <?php
+
+namespace XoopsModules\Xnews\Deprecate;
+
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
 /**
- * Class XnewsDeprecateTopic
+ * Class DeprecateTopic
  */
-class XnewsDeprecateTopic
+class DeprecateTopic
 {
     public $table;
     public $topic_id;
@@ -23,8 +26,7 @@ class XnewsDeprecateTopic
      */
     public function __construct($table, $topicid = 0)
     {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        ;
+        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();;
         $this->table = $table;
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
@@ -123,7 +125,7 @@ class XnewsDeprecateTopic
             $parent_topics = $xt->getAllParentId($this->topic_id);
             if (!empty($this->m_groups) && is_array($this->m_groups)) {
                 foreach ($this->m_groups as $m_g) {
-                    $moderate_topics = XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
+                    $moderate_topics = \XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
                     $add             = true;
                     // only grant this permission when the group has this permission in all parent topics of the created topic
                     foreach ($parent_topics as $p_topic) {
@@ -144,7 +146,7 @@ class XnewsDeprecateTopic
             }
             if (!empty($this->s_groups) && is_array($this->s_groups)) {
                 foreach ($s_groups as $s_g) {
-                    $submit_topics = XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
+                    $submit_topics = \XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
                     $add           = true;
                     foreach ($parent_topics as $p_topic) {
                         if (!in_array($p_topic, $submit_topics)) {
@@ -164,7 +166,7 @@ class XnewsDeprecateTopic
             }
             if (!empty($this->r_groups) && is_array($this->r_groups)) {
                 foreach ($r_groups as $r_g) {
-                    $read_topics = XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
+                    $read_topics = \XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
                     $add         = true;
                     foreach ($parent_topics as $p_topic) {
                         if (!in_array($p_topic, $read_topics)) {
@@ -267,7 +269,7 @@ class XnewsDeprecateTopic
         $topic_arr = $xt->getFirstChild($this->topic_id, 'topic_title');
         if (is_array($topic_arr) && count($topic_arr)) {
             foreach ($topic_arr as $topic) {
-                $ret[] = new XnewsDeprecateTopic($this->table, $topic);
+                $ret[] = new DeprecateTopic($this->table, $topic);
             }
         }
 
@@ -284,7 +286,7 @@ class XnewsDeprecateTopic
         $topic_arr = $xt->getAllChild($this->topic_id, 'topic_title');
         if (is_array($topic_arr) && count($topic_arr)) {
             foreach ($topic_arr as $topic) {
-                $ret[] = new XnewsDeprecateTopic($this->table, $topic);
+                $ret[] = new DeprecateTopic($this->table, $topic);
             }
         }
 
@@ -301,7 +303,7 @@ class XnewsDeprecateTopic
         $topic_arr = $xt->getChildTreeArray($this->topic_id, 'topic_title');
         if (is_array($topic_arr) && count($topic_arr)) {
             foreach ($topic_arr as $topic) {
-                $ret[] = new XnewsDeprecateTopic($this->table, $topic);
+                $ret[] = new DeprecateTopic($this->table, $topic);
             }
         }
 
@@ -360,7 +362,7 @@ class XnewsDeprecateTopic
         $result = $this->db->query('SELECT topic_id, topic_pid, topic_title FROM ' . $this->table);
         $ret    = [];
         $myts   = \MyTextSanitizer::getInstance();
-        while ($myrow = $this->db->fetchArray($result)) {
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$myrow['topic_id']] = ['title' => $myts->htmlspecialchars($myrow['topic_title']), 'pid' => $myrow['topic_pid']];
         }
 

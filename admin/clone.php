@@ -14,9 +14,8 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
 
 use Xmf\Request;
 use XoopsModules\Xnews;
@@ -24,14 +23,14 @@ use XoopsModules\Xnews;
 $currentFile = basename(__FILE__);
 require_once __DIR__ . '/admin_header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
-require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
-require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/Files.php';
+// require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
+// require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
 
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 xoops_load('xoopspagenav');
@@ -51,9 +50,9 @@ if (!nw_FieldExists('picture', $storiesTableName)) {
 function NewsCloner()
 {
     global $myts;
-    $currentFile = basename(__FILE__);
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $currentFile      = basename(__FILE__);
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = new Xnews\NewsStory();
 
     //  admin navigation
     xoops_cp_header();
@@ -165,7 +164,7 @@ function NewsCloner()
             } else {
                 $ok = false;
             }
-            if ($cpt >= $xnews->getConfig('storycountadmin')) {
+            if ($cpt >= $helper->getConfig('storycountadmin')) {
                 $ok = false;
             }
             $tmpcpt++;
@@ -173,13 +172,13 @@ function NewsCloner()
         }
         echo $output;
     }
-    $pagenav = new \XoopsPageNav($totalclones, $xnews->getConfig('storycountadmin'), $start, 'start', 'op=clonemanager');
+    $pagenav = new \XoopsPageNav($totalclones, $helper->getConfig('storycountadmin'), $start, 'start', 'op=clonemanager');
     echo "</table><div align='right'>" . $pagenav->renderNav() . '</div><br>';
     echo "</div></div><br>\n";
 
     $clone_id = isset($_GET['clone_id']) ? (int)$_GET['clone_id'] : 0;
     if ($clone_id > 0) {
-        $xtmod           = new XNewsTopic($clone_id);
+        $xtmod           = new Xnews\NewsTopic($clone_id);
         $clone_name      = $xtmod->clone_name('E');
         $clone_dir       = $xtmod->clone_dir('E');
         $clone_version   = $xtmod->clone_version('E');
@@ -207,7 +206,7 @@ function NewsCloner()
     $sform = new \XoopsThemeForm(_AM_XNEWS_CLONER_ADD, 'clonerform', XNEWS_MODULE_URL . '/admin/clone.php', 'post', true);
 
     $filedir_tray = new \XoopsFormElementTray(_AM_XNEWS_CLONER_NEWNAME, '');
-    $label        = sprintf(_AM_XNEWS_CLONER_NEWNAMEDESC, $xnews->getModule()->name());
+    $label        = sprintf(_AM_XNEWS_CLONER_NEWNAMEDESC, $helper->getModule()->name());
     $filedir_tray->addElement(new \XoopsFormLabel($label), false);
     $filedir_tray->addElement(new \XoopsFormText(_AM_XNEWS_CLONER_NEWNAMELABEL, 'clone_modulename', 50, 255, $clone_modulename), true);
     $sform->addElement($filedir_tray);
@@ -233,14 +232,14 @@ function NewsCloner()
  */
 function NewsClonerApply()
 {
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = new Xnews\NewsStory();
 
     require_once __DIR__ . '/cloner.php';
     if (!empty($_POST['clone_modulename'])) {
-        $module_version = $xnews->getModule()->version();
-        $old_dirname    = $xnews->getModule()->dirname();
-        $old_modulename = $xnews->getModule()->name();
+        $module_version = $helper->getModule()->version();
+        $old_dirname    = $helper->getModule()->dirname();
+        $old_modulename = $helper->getModule()->name();
         $old_subprefix  = XNEWS_SUBPREFIX;
 
         $new_modulename = $_POST['clone_modulename'];
@@ -303,8 +302,8 @@ function NewsClonerApply()
  */
 function CloneUpgrade()
 {
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = new Xnews\NewsStory();
     require_once __DIR__ . '/cloner.php';
     //
     if (!isset($_GET['clone_id'])) {
@@ -318,9 +317,9 @@ function CloneUpgrade()
             $clone_arr[$ix] = $clone;
             $ix++;
         }
-        $org_modulename = $xnews->getModule()->name();
-        $org_dirname    = $xnews->getModule()->dirname();
-        $org_version    = $xnews->getModule()->version();
+        $org_modulename = $helper->getModule()->name();
+        $org_dirname    = $helper->getModule()->dirname();
+        $org_version    = $helper->getModule()->version();
         $org_subprefix  = XNEWS_SUBPREFIX;
         //
         $upg_modulename = $clone_arr[0]['clone_name'];
@@ -366,8 +365,8 @@ function CloneUpgrade()
  */
 function CloneDelete()
 {
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = new Xnews\NewsStory();
     //  admin navigation
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
@@ -400,8 +399,8 @@ function CloneDelete()
  */
 function CloneDeleteApply()
 {
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = new Xnews\NewsStory();
     require_once __DIR__ . '/cloner.php';
     //
     //trigger_error("Not set", E_USER_WARNING);

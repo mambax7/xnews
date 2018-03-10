@@ -5,7 +5,6 @@ use Xmf\Request;
 use XoopsModules\Xnews;
 use XoopsModules\Xnews\Common;
 
-
 require_once __DIR__ . '/../include/common.php';
 
 /**
@@ -13,11 +12,11 @@ require_once __DIR__ . '/../include/common.php';
  */
 class Utility
 {
-    use common\VersionChecks; //checkVerXoops, checkVerPhp Traits
+    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
 
-    use common\ServerStats; // getServerStats Trait
+    use Common\ServerStats; // getServerStats Trait
 
-    use common\FilesManagement; // Files Management Trait
+    use Common\FilesManagement; // Files Management Trait
 
     //--------------- Custom module methods -----------------------------
 
@@ -196,7 +195,7 @@ class Utility
      * @param  string                                                                                                                         $width
      * @param  string                                                                                                                         $height
      * @param  string                                                                                                                         $supplemental
-     * @return bool|XoopsFormDhtmlTextArea|XoopsFormEditor|XoopsFormFckeditor|XoopsFormHtmlarea|XoopsFormTextArea|XoopsFormTinyeditorTextArea
+     * @return bool|\XoopsFormDhtmlTextArea|\XoopsFormEditor|\XoopsFormFckeditor|\XoopsFormHtmlarea|\XoopsFormTextArea|\XoopsFormTinyeditorTextArea
      */
     public static function getWysiwygForm($caption, $name, $value = '', $width = '100%', $height = '400px', $supplemental = '')
     {
@@ -247,12 +246,12 @@ class Utility
                 if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php')) {
                     require_once XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php';
                     $editor = new \XoopsFormTinyeditorTextArea([
-                                                                  'caption' => $caption,
-                                                                  'name'    => $name,
-                                                                  'value'   => $value,
-                                                                  'width'   => '100%',
-                                                                  'height'  => '400px'
-                                                              ]);
+                                                                   'caption' => $caption,
+                                                                   'name'    => $name,
+                                                                   'value'   => $value,
+                                                                   'width'   => '100%',
+                                                                   'height'  => '400px'
+                                                               ]);
                 }
                 break;
 
@@ -299,7 +298,7 @@ class Utility
         global $xoopsConfig, $xoTheme, $xoopsTpl;
         $content = '';
         $myts    = \MyTextSanitizer::getInstance();
-        require_once XOOPS_ROOT_PATH . '/modules/news/class/class.newstopic.php';
+        require_once XOOPS_ROOT_PATH . '/modules/news/class/NewsTopic.php';
 
         /**
          * Firefox and Opera Navigation's Bar
@@ -314,8 +313,8 @@ class Utility
 
             // Create chapters
             require_once XOOPS_ROOT_PATH . '/class/tree.php';
-            require_once XOOPS_ROOT_PATH . '/modules/news/class/class.newstopic.php';
-            $xt         = new NewsTopic();
+            require_once XOOPS_ROOT_PATH . '/modules/news/class/NewsTopic.php';
+            $xt         = new Xnews\NewsTopic();
             $allTopics  = $xt->getAllTopics(static::getModuleOption('restrictindex'));
             $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
             $topics_arr = $topic_tree->getAllChild(0);
@@ -786,8 +785,8 @@ class Utility
         $param_width,
         $param_height,
         $keep_original = false,
-        $fit = 'inside'
-    ) {
+        $fit = 'inside')
+    {
         //    require_once XOOPS_PATH . '/vendor/wideimage/WideImage.php';
         $resize            = true;
         $pictureDimensions = getimagesize($src_path);

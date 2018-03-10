@@ -14,9 +14,8 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
 
 /*
  * Created on 5 nov. 2006
@@ -29,19 +28,19 @@
  */
 require_once __DIR__ . '/header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'xnews_topics_directory.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 //DNPROSSI SEO
-$seo_enabled = $xnews->getConfig('seo_enable');
+$seo_enabled = $helper->getConfig('seo_enable');
 
 $newscountbytopic = $tbl_topics = [];
 $perms            = '';
-$xt               = new XNewsTopic();
-$restricted       = $xnews->getConfig('restrictindex');
+$xt               = new Xnews\NewsTopic();
+$restricted       = $helper->getConfig('restrictindex');
 if ($restricted) {
     global $xoopsUser;
     $moduleHandler = xoops_getHandler('module');
@@ -89,7 +88,7 @@ if (is_array($topics_arr) && count($topics_arr)) {
 }
 $xoopsTpl->assign('topics', $tbl_topics);
 
-$xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
+$xoopsTpl->assign('advertisement', $helper->getConfig('advertisement'));
 
 /**
  * Manage all the meta datas

@@ -14,13 +14,13 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 require_once __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/include/common.php';
 
 //SEO activity
-if (0 != $xnews->getConfig('seo_enable')) {
+if (0 != $helper->getConfig('seo_enable')) {
     require_once XNEWS_MODULE_PATH . '/seo.php';
 }

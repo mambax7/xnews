@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 /**
@@ -39,7 +39,7 @@
 use XoopsModules\Xnews;
 
 require_once __DIR__ . '/header.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
 $storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
 if (empty($storyid)) {
@@ -47,7 +47,7 @@ if (empty($storyid)) {
 }
 
 // Verify that the article is published
-$storyObj = new XNewsStory($storyid);
+$storyObj = new Xnews\NewsStory($storyid);
 // Not yet published
 if (0 == $storyObj->published() || $storyObj->published() > time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MD_XNEWS_NOSTORY);
@@ -87,7 +87,7 @@ if ('' != trim($storyObj->description())) {
 function PrintPage()
 {
     global $xoopsConfig, $xoopsModule, $storyObj, $xoops_meta_keywords, $xoops_meta_description;
-    $myts     = \MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
     /** @var \XoopsModules\Xnews\Helper $helper */
     $helper = \XoopsModules\Xnews\Helper::getInstance();

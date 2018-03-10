@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 /*
@@ -66,11 +66,14 @@
  *                                          string published Date of publication formated (according to user's prefs)
  *                                          int rating rating for this news
  */
+
+use XoopsModules\Xnews;
+
 require_once __DIR__ . '/header.php';
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
-require_once XNEWS_MODULE_PATH . '/class/class.newstopic.php';
-require_once XNEWS_MODULE_PATH . '/class/class.sfiles.php';
+require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
+// require_once XNEWS_MODULE_PATH . '/class/Files.php';
 
 global $xoopsUser;
 
@@ -81,20 +84,20 @@ if (empty($uid)) {
     redirect_header('index.php', 3, _ERRORS);
 }
 
-if (!$xnews->getConfig('newsbythisauthor')) {
+if (!$helper->getConfig('newsbythisauthor')) {
     redirect_header('index.php', 3, _ERRORS);
 }
 
 $myts                                    = \MyTextSanitizer::getInstance();
-$articles                                = new XNewsStory();
+$articles                                = new Xnews\NewsStory();
 $GLOBALS['xoopsOption']['template_main'] = 'xnews_by_this_author.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
-$dateformat = $xnews->getConfig('dateformat');
-$infotips   = $xnews->getConfig('infotips');
+$dateformat = $helper->getConfig('dateformat');
+$infotips   = $helper->getConfig('infotips');
 $thisuser   = new \XoopsUser($uid);
 
-switch ($xnews->getConfig('displayname')) {
+switch ($helper->getConfig('displayname')) {
     case 1: // Username
         $authname = $thisuser->getVar('uname');
         break;
@@ -117,7 +120,7 @@ $xoopsTpl->assign('author_name', $authname);
 $xoopsTpl->assign('lang_date', _MD_XNEWS_DATE);
 $xoopsTpl->assign('lang_hits', _MD_XNEWS_VIEWS);
 $xoopsTpl->assign('lang_title', _MD_XNEWS_TITLE);
-$xoopsTpl->assign('nw_rating', $xnews->getConfig('ratenews'));
+$xoopsTpl->assign('nw_rating', $helper->getConfig('ratenews'));
 $xoopsTpl->assign('lang_rating', _MD_XNEWS_RATING);
 $xoopsTpl->assign('author_name_with_link', sprintf("<a href='%s'>%s</a>", XOOPS_URL . '/userinfo.php?uid=' . $uid, $authname));
 
@@ -126,13 +129,13 @@ $oldtopictitle = '';
 $oldtopiccolor = '';
 $articlelist   = [];
 $articlestpl   = [];
-$articlelist   = $articles->getAllPublishedByAuthor($uid, $xnews->getConfig('restrictindex'), false);
+$articlelist   = $articles->getAllPublishedByAuthor($uid, $helper->getConfig('restrictindex'), false);
 $articlescount = count($articlelist);
 $xoopsTpl->assign('articles_count', $articlescount);
 $count_articles = $count_reads = 0;
 
 // DNPROSSI SEO
-$seo_enabled = $xnews->getConfig('seo_enable');
+$seo_enabled = $helper->getConfig('seo_enable');
 
 if ($articlescount > 0) {
     foreach ($articlelist as $article) {
@@ -194,7 +197,7 @@ $topic_link = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $oldtopic,
 
 $xoopsTpl->append('topics', ['topic_id' => $oldtopic, 'topic_title' => $oldtopictitle, 'topic_link' => $topic_link, 'news' => $articlestpl]);
 $xoopsTpl->assign('xoops_pagetitle', _MI_XNEWS_NEWSBYTHISAUTHOR . ' - ' . $authname . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
-$xoopsTpl->assign('advertisement', $xnews->getConfig('advertisement'));
+$xoopsTpl->assign('advertisement', $helper->getConfig('advertisement'));
 
 /**
  * Create the meta datas

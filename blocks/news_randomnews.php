@@ -14,8 +14,10 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
+
+use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
@@ -35,7 +37,7 @@ if (!defined('XNEWS_MODULE_PATH')) {
     define('XNEWS_ATTACHED_FILES_URL', XOOPS_URL . '/uploads/' . XNEWS_MODULE_DIRNAME . '/attached');
 }
 
-require_once XNEWS_MODULE_PATH . '/class/class.newsstory.php';
+// require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
 
 /**
@@ -44,9 +46,9 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
  */
 function nw_b_news_randomnews_show($options)
 {
-    $myts          = \MyTextSanitizer::getInstance();
-    $xnews               = XnewsXnews::getInstance();
-    $nw_NewsStoryHandler = new XNewsStory();
+    $myts             = \MyTextSanitizer::getInstance();
+    $helper           = Xnews\Helper::getInstance();
+    $newsStoryHandler = new Xnews\NewsStory();
     //
     $block         = [];
     $block['sort'] = $options[0];
@@ -60,10 +62,10 @@ function nw_b_news_randomnews_show($options)
         $xlang = false;
     }
 
-    $tmpstory   = new XNewsStory;
-    $restricted = $xnews->getConfig('restrictindex');
-    $dateformat = $xnews->getConfig('dateformat');
-    $infotips   = $xnews->getConfig('infotips');
+    $tmpstory   = new Xnews\NewsStory;
+    $restricted = $helper->getConfig('restrictindex');
+    $dateformat = $helper->getConfig('dateformat');
+    $infotips   = $helper->getConfig('infotips');
     if ('' == $dateformat) {
         $dateformat = 's';
     }
@@ -101,7 +103,7 @@ function nw_b_news_randomnews_show($options)
         $news['topic_color'] = '#' . $myts->displayTarea($story->topic_color);
 
         if ($options[3] > 0) {
-            $html             = 1 == $story->nohtml() ? 0 : 1;
+            $html = 1 == $story->nohtml() ? 0 : 1;
             //$news['teaser'] = nw_truncate_tagsafe($myts->displayTarea($story->hometext, $html), $options[3]+3);
             //DNPROSSI New truncate function - now works correctly with html and utf-8
             $news['teaser']   = nw_truncate($story->hometext(), $options[3] + 3, '...', true, $html);
@@ -122,7 +124,7 @@ function nw_b_news_randomnews_show($options)
     $block['lang_read_more'] = _MB_XNEWS_READMORE;
 
     // DNPROSSI SEO
-    $seo_enabled = $xnews->getConfig('seo_enable');
+    $seo_enabled = $helper->getConfig('seo_enable');
     if (0 != $seo_enabled) {
         $block['urlrewrite'] = 'true';
     } else {
@@ -164,8 +166,8 @@ function nw_b_news_randomnews_edit($options)
     $form .= _MB_XNEWS_TEASER . " <input type='text' name='options[]' value='" . $options[3] . "' >" . _MB_XNEWS_LENGTH;
     $form .= '<br><br>' . _MB_XNEWS_SPOTLIGHT_TOPIC . "<br><select id='options[4]' name='options[]' multiple='multiple'>";
 
-    require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
-    $xt                    = new XnewsDeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'));
+    // require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
+    $xt                    = new Xnews\Deprecate\DeprecateTopic($GLOBALS['xoopsDB']->prefix('nw_topics'));
     $alltopics             = $xt->getTopicsList();
     $alltopics[0]['title'] = _MB_XNEWS_SPOTLIGHT_ALL_TOPICS;
     ksort($alltopics);
