@@ -137,7 +137,7 @@ switch ($op) {
 
     case 'metagenoptions':
         // Save Metagen Options
-        $registry = new Registryfile('nw_metagen_options.txt');
+        $registry = new Xnews\Registryfile('nw_metagen_options.txt');
         $registry->savefile((int)$_POST['keywordscount'] . ',' . (int)$_POST['keywordsorder']);
         redirect_header('index.php?op=metagen', 3, _AM_XNEWS_DBUPDATED);
         xoops_cp_footer();
@@ -145,7 +145,7 @@ switch ($op) {
 
     case 'metagenblacklist':
         // Save metagen's blacklist words
-        $blacklist = new Blacklist();
+        $blacklist = new Xnews\Blacklist();
         $words     = $blacklist->getAllKeywords();
 
         if (isset($_POST['go']) && _AM_XNEWS_DELETE == $_POST['go']) {

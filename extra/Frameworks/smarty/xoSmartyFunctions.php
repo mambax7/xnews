@@ -26,6 +26,8 @@ define('XOSMARTY_DEFAULTVALUE', 'XoSmartyPlugin : %s use the default values');
 function XoSmartyPluginGetSection($section = '')
 {
     $config_file = 'xoSmartyPlugin';
+    /** @var \XoopsLogger $logger */
+    $logger = \XoopsLogger::getInstance();
     if (file_exists(XOOPS_ROOT_PATH . "/configs/$section.ini.php")) {
         $config_file = $section;
     }
@@ -34,7 +36,8 @@ function XoSmartyPluginGetSection($section = '')
         if (!empty($section)) {
             if (array_key_exists($section, $IniContent)) {
                 if (0 == count($IniContent[$section])) {
-                    XoopsErrorHandler_HandleError(E_USER_WARNING, sprintf(XOSMARTY_SECTIONNOTFOUND, $section, "/configs/$config_file.ini.php"), __FILE__, __LINE__);
+
+                    $logger->handleError(E_USER_WARNING, sprintf(XOSMARTY_SECTIONNOTFOUND, $section, "/configs/$config_file.ini.php"), __FILE__, __LINE__);
 
                     return [];
                 }
@@ -42,11 +45,11 @@ function XoSmartyPluginGetSection($section = '')
                 return $IniContent[$section];
             }
         }
-        XoopsErrorHandler_HandleError(E_USER_WARNING, sprintf(XOSMARTY_SECTIONNOTFOUND, $section, "/configs/$config_file.ini.php"), __FILE__, __LINE__);
+        $logger->handleError(E_USER_WARNING, sprintf(XOSMARTY_SECTIONNOTFOUND, $section, "/configs/$config_file.ini.php"), __FILE__, __LINE__);
 
         return $IniContent;
     }
-    XoopsErrorHandler_HandleError(E_USER_WARNING, sprintf(XOSMARTY_FILENOTFOUND, "/configs/$section.ini.php"), __FILE__, __LINE__);
+    $logger->handleError(E_USER_WARNING, sprintf(XOSMARTY_FILENOTFOUND, "/configs/$section.ini.php"), __FILE__, __LINE__);
 
     return [];
 }
@@ -64,7 +67,9 @@ function XoSmartyPluginLoadGD()
         $required_functions = ['imagecreate', 'imagecreatetruecolor', 'imagecolorallocate', 'imagefilledrectangle', 'ImagePNG', 'imagedestroy', 'imageftbbox', 'ImageColorTransparent'];
         foreach ($required_functions as $func) {
             if (!function_exists($func)) {
-                XoopsErrorHandler_HandleError(E_USER_WARNING, XOSMARTY_GDNOTINSTALLED, __FILE__, __LINE__);
+                /** @var \XoopsLogger $logger */
+                $logger = \XoopsLogger::getInstance();
+                $logger->handleError(E_USER_WARNING, XOSMARTY_GDNOTINSTALLED, __FILE__, __LINE__);
 
                 return false;
             }

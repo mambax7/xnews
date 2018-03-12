@@ -46,7 +46,7 @@ class Files
      */
     public function __construct($fileid = -1)
     {
-        $this->xnews        = Xnews\Helper::getInstance();
+        $this->helper        = Xnews\Helper::getInstance();
         $this->db           = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table        = $this->db->prefix('nw_stories_files');
         $this->storyid      = 0;
@@ -218,7 +218,7 @@ class Files
     {
         $sql = "UPDATE {$this->table} SET counter = counter + 1";
         $sql .= " WHERE fileid = {$this->getFileid()}";
-        if (!$result = $this->db->queryF($sql)) {
+        if (!$result = $this->db->query($sql)) {
             return false;
         }
 

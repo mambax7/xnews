@@ -54,7 +54,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
      */
     public function __construct($storyid = -1)
     {
-        $this->xnews       = Xnews\Helper::getInstance();
+        $this->helper       = Xnews\Helper::getInstance();
         $this->db          = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table       = $this->db->prefix('nw_stories');
         $this->topicstable = $this->db->prefix('nw_topics');
@@ -129,9 +129,9 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $result = $this->db->query($sql);
        while (false !== ($myrow = $this->db->fetchArray($result))) {
             // Delete comments
-            xoops_comment_delete($this->xnews->getModule()->getVar('mid'), $myrow['storyid']);
+            xoops_comment_delete($this->helper->getModule()->getVar('mid'), $myrow['storyid']);
             // Delete notifications
-            xoops_notification_deletebyitem($this->xnews->getModule()->getVar('mid'), 'story', $myrow['storyid']);
+            xoops_notification_deletebyitem($this->helper->getModule()->getVar('mid'), 'story', $myrow['storyid']);
             // Delete votes
             $this->db->queryF("DELETE FROM {$this->db->prefix('nw_stories_votedata')} WHERE storyid = " . $myrow['storyid']);
             // Remove files and records related to the files
@@ -382,7 +382,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
 
         return $ret;
         // DNPROSSI SEO
-        $seo_enabled = $this->xnews->getConfig('seo_enable');
+        $seo_enabled = $this->helper->getConfig('seo_enable');
         if (0 != $seo_enabled) {
             $xoopsTpl->assign('urlrewrite', true);
         } else {
@@ -739,9 +739,9 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
     {
         $myts = \MyTextSanitizer::getInstance();
         //
-        $topic_display = $this->xnews->getConfig('topicdisplay');
+        $topic_display = $this->helper->getConfig('topicdisplay');
         //DNPROSSI SEO
-        $seo_enabled = $this->xnews->getConfig('seo_enable');
+        $seo_enabled = $this->helper->getConfig('seo_enable');
         $ret         = '';
         $margin      = '';
         if ('left' === $this->topicalign()) {
@@ -792,7 +792,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
     {
         $myts = \MyTextSanitizer::getInstance();
         //
-        $seo_enabled = $this->xnews->getConfig('seo_enable');
+        $seo_enabled = $this->helper->getConfig('seo_enable');
         $ret         = '';
         $story_path  = '';
         if (0 != $seo_enabled) {
@@ -824,9 +824,9 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
      */
     public function textlink()
     {
-        $topic_display = $this->xnews->getConfig('topicdisplay');
+        $topic_display = $this->helper->getConfig('topicdisplay');
         //DNPROSSI SEO
-        $seo_enabled = $this->xnews->getConfig('seo_enable');
+        $seo_enabled = $this->helper->getConfig('seo_enable');
         $ret         = '';
         $cat_path    = '';
         if (1 == $topic_display) {
@@ -848,9 +848,9 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
     {
         $myts = \MyTextSanitizer::getInstance();
         //
-        $infotips = $this->xnews->getConfig('infotips');
+        $infotips = $this->helper->getConfig('infotips');
         //DNPROSSI SEO
-        $seo_enabled          = $this->xnews->getConfig('seo_enable');
+        $seo_enabled          = $this->helper->getConfig('seo_enable');
         $story                = [];
         $story['id']          = $this->storyid();
         $story['poster']      = $this->uname();
@@ -859,11 +859,11 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         if (false !== $story['poster']) {
             $story['poster'] = "<a href='" . XOOPS_URL . '/userinfo.php?uid=' . $this->uid() . "'>" . $story['poster'] . '</a>';
         } else {
-            if (3 != $this->xnews->getConfig('displayname')) {
+            if (3 != $this->helper->getConfig('displayname')) {
                 $story['poster'] = $GLOBALS['xoopsConfig']['anonymous'];
             }
         }
-        if ($this->xnews->getConfig('ratenews')) {
+        if ($this->helper->getConfig('ratenews')) {
             $story['rating'] = number_format($this->rating(), 2);
             if (1 == $this->votes) {
                 $story['votes'] = _MD_XNEWS_ONEVOTE;
@@ -872,7 +872,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
             }
         }
         $story['posttimestamp']     = $this->published();
-        $story['posttime']          = formatTimestamp($story['posttimestamp'], $this->xnews->getConfig('dateformat'));
+        $story['posttime']          = formatTimestamp($story['posttimestamp'], $this->helper->getConfig('dateformat'));
         $story['topic_description'] = $myts->displayTarea($this->topic_description);
 
         $auto_summary = '';
@@ -896,11 +896,11 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
             $morelink .= "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $this->storyid(), $story_path) . "'>";
             $morelink .= _MD_XNEWS_READMORE . '</a>';
             //$morelink .= " | ".sprintf(_MD_XNEWS_BYTESMORE, $totalcount);
-            if (XOOPS_COMMENT_APPROVENONE != $this->xnews->getConfig('com_rule')) {
+            if (XOOPS_COMMENT_APPROVENONE != $this->helper->getConfig('com_rule')) {
                 $morelink .= ' | ';
             }
         }
-        if (XOOPS_COMMENT_APPROVENONE != $this->xnews->getConfig('com_rule')) {
+        if (XOOPS_COMMENT_APPROVENONE != $this->helper->getConfig('com_rule')) {
             $ccount     = $this->comments();
             $story_path = '';
             //DNPROSSI SEO
@@ -928,7 +928,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
             $approveprivilege = 1;
         }
 
-        if (1 == $this->xnews->getConfig('authoredit') && (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->getVar('uid') == $this->uid())) {
+        if (1 == $this->helper->getConfig('authoredit') && (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->getVar('uid') == $this->uid())) {
             $approveprivilege = 1;
         }
         if ($approveprivilege) {
@@ -981,7 +981,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         if (is_array($tblusers) && array_key_exists($uid, $tblusers)) {
             return $tblusers[$uid];
         }
-        $option = $this->xnews->getConfig('displayname');
+        $option = $this->helper->getConfig('displayname');
         if (!$option) {
             $option = 1;
         }
@@ -1564,7 +1564,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $myts = \MyTextSanitizer::getInstance();
         //
         $auto_summary = '';
-        if ($this->xnews->getConfig('enhanced_pagenav')) {
+        if ($this->helper->getConfig('enhanced_pagenav')) {
             $expr_matches = [];
             $posdeb       = preg_match_all('/(\[pagebreak:|\[pagebreak).*\]/iU', $text, $expr_matches);
             if (count($expr_matches) > 0) {
@@ -1738,7 +1738,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
     public function nw_stripeKey($xoops_key, $num = 7, $length = 32, $uu = 0)
     {
         $strip = floor(strlen($xoops_key) / $num);
-        for ($i = 0; $i < strlen($xoops_key); $i++) {
+        for ($i = 0; $i < strlen($xoops_key); ++$i) {
             if ($i < $length) {
                 $uu++;
                 if ($uu == $strip) {

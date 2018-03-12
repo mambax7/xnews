@@ -525,7 +525,7 @@ function nw_createmeta_keywords($content)
     if (!$cfg['meta_keywords_auto_generate']) {
         return '';
     }
-    $registry = new Registryfile('nw_metagen_options.txt');
+    $registry = new Xnews\Registryfile('nw_metagen_options.txt');
     $tcontent = '';
     $tcontent = $registry->getfile();
     if ('' != xoops_trim($tcontent)) {
@@ -570,7 +570,7 @@ function nw_createmeta_keywords($content)
             break;
     }
     // Remove black listed words
-    $metablack = new Blacklist();
+    $metablack = new Xnews\Blacklist();
     $words     = $metablack->getAllKeywords();
     $keywords  = $metablack->remove_blacklisted($keywords);
 
@@ -733,7 +733,7 @@ function nw_isbot()
         $retval       = false;
         $botarray     = explode('|', $botlist);
         foreach ($botarray as $onebot) {
-            if (strstr($currentagent, $onebot)) {
+            if (false !== strpos($currentagent, $onebot)) {
                 $retval = true;
                 break;
             }
