@@ -103,7 +103,7 @@ if ('go' === $op) {
 
         $sql = "SELECT * FROM " . $xoopsDB->prefix('stories') .  " WHERE topicid=" . $arrCat['topic_id'];
         $resultArticles = $xoopsDB->query($sql);
-        while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
+        while (false !== ($arrArticle = $xoopsDB->fetchArray($resultArticles))) {
             // insert article
             $story =new NewsStory;
 
