@@ -107,7 +107,7 @@ class ObjectHandler extends \XoopsObjectHandler
         }
 
         // Add each returned record to the result array
-        while ($myrow = $this->_db->fetchArray($result)) {
+        while (false !== ($myrow = $this->_db->fetchArray($result))) {
             $obj = new $this->classname($myrow);
             if (!$id_as_key) {
                 $ret[] =& $obj;
@@ -180,7 +180,7 @@ class ObjectHandler extends \XoopsObjectHandler
      */
     public function _selectQuery(\CriteriaElement $criteria = null)
     {
-        $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
+        $sql = sprintf('SELECT * FROM `%s` ', $this->_db->prefix($this->_dbtable));
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -321,11 +321,11 @@ class ObjectHandler extends \XoopsObjectHandler
     public static function getInstance(\XoopsDatabase $db)
     {
         static $instance;
-        if (!isset($instance)) {
-            $classname = $this->classname . 'Handler';
-            $instance  = new $classname($db);
+        if (null === $instance) {
+            $instance = new static($db);
         }
 
         return $instance;
+
     }
 }

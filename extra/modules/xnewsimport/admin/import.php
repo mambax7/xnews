@@ -31,7 +31,7 @@ $resultALTER = $xoopsDB->query('ALTER TABLE ' . $xoopsDB->prefix($to_module_subp
 
 $newArticleArray = [];
 
-while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
+while (false !== ($arrCat = $xoopsDB->fetchArray($resultCat))) {
     $topic = new xni_NewsTopic(0, $to_module_subprefix);
 
     $topic->topic_pid         = $arrCat['topic_pid'];
@@ -101,7 +101,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
 
     $sql            = 'SELECT * FROM ' . $xoopsDB->prefix($from_module_subprefix . 'stories') . ' WHERE topicid=' . $arrCat['topic_id'];
     $resultArticles = $xoopsDB->query($sql);
-    while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
+    while (false !== ($arrArticle = $xoopsDB->fetchArray($resultArticles))) {
         // Insert article
         $story = new xni_NewsStory(-1, $to_module_subprefix);
 
@@ -155,7 +155,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
 
         $sql         = 'SELECT * FROM ' . $xoopsDB->prefix($from_module_subprefix . 'stories_files') . ' WHERE storyid=' . $arrArticle['storyid'];
         $resultfiles = $xoopsDB->query($sql);
-        while ($arrFiles = $xoopsDB->fetchArray($resultfiles)) {
+        while (false !== ($arrFiles = $xoopsDB->fetchArray($resultfiles))) {
             $result = $xoopsDB->query('INSERT INTO '
                                       . $xoopsDB->prefix($to_module_subprefix . 'stories_files')
                                       . ' (filerealname, storyid, date, mimetype, downloadname, counter)'
@@ -181,7 +181,7 @@ while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
         // Vote Data
         $sql         = 'SELECT * FROM ' . $xoopsDB->prefix($from_module_subprefix . 'stories_votedata') . ' WHERE storyid=' . $arrArticle['storyid'];
         $resultvotes = $xoopsDB->query($sql);
-        while ($arrVotes = $xoopsDB->fetchArray($resultvotes)) {
+        while (false !== ($arrVotes = $xoopsDB->fetchArray($resultvotes))) {
             $result = $xoopsDB->query('INSERT INTO '
                                       . $xoopsDB->prefix($to_module_subprefix . 'stories_votedata')
                                       . ' (storyid, ratinguser, rating, ratinghostname, ratingtimestamp)'

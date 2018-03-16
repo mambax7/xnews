@@ -68,7 +68,7 @@ function NewsCloner()
     $result = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata'));
     $ix     = 0;
     $iy     = 0;
-    while ($clone = $GLOBALS['xoopsDB']->fetchArray($result)) {
+    while (false !== ($clone = $GLOBALS['xoopsDB']->fetchArray($result))) {
         //DNPROSSI - Control if clone dir exists
         if (is_dir(XOOPS_ROOT_PATH . '/modules/' . $clone['clone_dir'])) {
             $clone_arr[$ix] = $clone;
@@ -313,7 +313,7 @@ function CloneUpgrade()
         $cloneid = $_GET['clone_id'];
         $result  = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' WHERE clone_id = ' . $cloneid);
         $ix      = 0;
-        while ($clone = $GLOBALS['xoopsDB']->fetchArray($result)) {
+        while (false !== ($clone = $GLOBALS['xoopsDB']->fetchArray($result))) {
             $clone_arr[$ix] = $clone;
             $ix++;
         }
@@ -380,7 +380,7 @@ function CloneDelete()
         $cloneid = $_GET['clone_id'];
         $result  = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata') . ' WHERE clone_id = ' . $cloneid);
         $ix      = 0;
-        while ($clone = $GLOBALS['xoopsDB']->fetchArray($result)) {
+        while (false !== ($clone = $GLOBALS['xoopsDB']->fetchArray($result))) {
             $clone_arr[$ix] = $clone;
             $ix++;
         }

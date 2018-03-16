@@ -123,7 +123,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         if ($none) {
             $outbuffer .= "<option value='0'>----</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = " selected='selected'";
@@ -169,7 +169,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         if (0 == $count) {
             return $parray;
         }
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $row['prefix'] = $r_prefix . '.';
             array_push($parray, $row);
             $parray = $this->getChildTreeArray($row['topic_id'], $order, $perms, $parray, $row['prefix']);
@@ -242,7 +242,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         }
         $sql    .= ' ORDER BY topic_title';
         $result = $db->query($sql);
-        while ($array = $db->fetchArray($result)) {
+        while (false !== ($array = $db->fetchArray($result))) {
             $topic = new Xnews\NewsTopic();
             $topic->makeTopic($array);
             $topics_arr[$array['topic_id']] = $topic;
@@ -264,7 +264,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         $sql    .= " FROM {$db->prefix('nw_stories')}";
         $sql    .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') GROUP BY topicid';
         $result = $db->query($sql);
-        while ($row = $db->fetchArray($result)) {
+        while (false !== ($row = $db->fetchArray($result))) {
             $ret[$row['topicid']] = $row['cpt'];
         }
 
@@ -577,7 +577,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
             }
         }
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $topicstitles[$row['topic_id']] = ['title' => $myts->displayTarea($row['topic_title']), 'picture' => XNEWS_TOPICS_FILES_URL . '/' . $row['topic_imgurl']];
         }
 

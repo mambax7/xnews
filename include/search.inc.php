@@ -72,7 +72,7 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
     $result = $xoopsDB->query($sql, $limit, $offset);
     $ret    = [];
     $i      = 0;
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $display = true;
         if ($modid && $gpermHandler) {
             if ($restricted && !$gpermHandler->checkRight('nw_view', $myrow['topicid'], $groups, $modid)) {
@@ -111,7 +111,7 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
         $i      = $ind;
         $sql    .= 'ORDER BY com_created DESC';
         $result = $xoopsDB->query($sql, $limit, $offset);
-        while ($myrow = $xoopsDB->fetchArray($result)) {
+        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
             $display = true;
             if ($modid && $gpermHandler) {
                 if ($restricted && !$gpermHandler->checkRight('nw_view', $myrow['com_itemid'], $groups, $modid)) {

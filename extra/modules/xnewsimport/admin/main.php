@@ -108,7 +108,7 @@ function NewsImport()
 
     $result = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('news_clonerdata') . ' WHERE clone_installed = 1');
     $ix     = 0;
-    while ($clone = $xoopsDB->fetchArray($result)) {
+    while (false !== ($clone = $xoopsDB->fetchArray($result))) {
         $importto_array[$ix] = $clone['clone_dir'];
         ++$ix;
     }
@@ -182,7 +182,7 @@ function TopicSelect()
     //Get selected xNews module or clone to import to
     $result = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('news_clonerdata') . ' WHERE clone_installed = 1');
     $ix     = 0;
-    while ($clone = $xoopsDB->fetchArray($result)) {
+    while (false !== ($clone = $xoopsDB->fetchArray($result))) {
         $clone_arr[$ix] = $clone;
         ++$ix;
     }

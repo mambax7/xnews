@@ -131,7 +131,7 @@ if (!$result) {
     $years  = [];
     $months = [];
     $i      = 0;
-    while (list($time) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($time) = $xoopsDB->fetchRow($result))) {
         $time = formatTimestamp($time, 'mysql', $useroffset);
         if (preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/', $time, $datetime)) {
             $this_year  = (int)$datetime[1];

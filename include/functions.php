@@ -232,7 +232,7 @@ function nw_updaterating($storyid)
     $voteresult  = $xoopsDB->query($query);
     $votesDB     = $xoopsDB->getRowsNum($voteresult);
     $totalrating = 0;
-    while (list($rating) = $xoopsDB->fetchRow($voteresult)) {
+    while (false !== (list($rating) = $xoopsDB->fetchRow($voteresult))) {
         $totalrating += $rating;
     }
     $finalrating = $totalrating / $votesDB;

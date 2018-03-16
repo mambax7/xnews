@@ -55,7 +55,7 @@ if ('go' === $op) {
     $newCatArray     = [];
     $newArticleArray = [];
     $oldToNew        = [];
-    while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
+    while (false !== ($arrCat = $xoopsDB->fetchArray($resultCat))) {
 
         /*$newCat = array();
         $newCat['oldid'] = $arrCat['topic_id'];

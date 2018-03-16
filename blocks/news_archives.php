@@ -92,7 +92,7 @@ function nw_b_news_archives_show($options)
     if (!$result) {
         return '';
     }
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $year                = (int)substr($myrow['published'], 0, 4);
         $month               = (int)substr($myrow['published'], 5, 2);
         $formated_month      = $months_arr[$month];

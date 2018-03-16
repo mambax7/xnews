@@ -118,7 +118,7 @@ class xni_NewsTopic extends XoopsTopic
         if ($none) {
             $outbuffer .= "<option value='0'>----</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = " selected='selected'";
@@ -162,7 +162,7 @@ class xni_NewsTopic extends XoopsTopic
         if (0 == $count) {
             return $parray;
         }
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $row['prefix'] = $r_prefix . '.';
             array_push($parray, $row);
             $parray = $this->getChildTreeArray($row['topic_id'], $order, $perms, $parray, $row['prefix']);
@@ -235,7 +235,7 @@ class xni_NewsTopic extends XoopsTopic
         }
         $sql    .= ' ORDER BY topic_title';
         $result = $db->query($sql);
-        while ($array = $db->fetchArray($result)) {
+        while (false !== ($array = $db->fetchArray($result))) {
             $topic = new xni_NewsTopic();
             $topic->makeTopic($array);
             $topics_arr[$array['topic_id']] = $topic;
@@ -253,7 +253,7 @@ class xni_NewsTopic extends XoopsTopic
         $ret    = [];
         $sql    = 'SELECT count(storyid) AS cpt, topicid FROM ' . $this->db->prefix('xni_stories') . ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') GROUP BY topicid';
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $ret[$row['topicid']] = $row['cpt'];
         }
 
@@ -561,7 +561,7 @@ class xni_NewsTopic extends XoopsTopic
             }
         }
         $result = $this->db->query($sql);
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $topicstitles[$row['topic_id']] = ['title' => $myts->displayTarea($row['topic_title']), 'picture' => XNI_TOPICS_FILES_URL . '/' . $row['topic_imgurl']];
         }
 

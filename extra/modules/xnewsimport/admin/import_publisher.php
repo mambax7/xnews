@@ -64,7 +64,7 @@ if ('start' === $op) {
             $result           = $xoopsDB->query($sql);
             $cat_cbox_options = [];
 
-            while (list($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow($result)) {
+            while (false !== (list($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow($result))) {
                 $cat_title              = $myts->displayTarea($cat_title);
                 $cat_cbox_options[$cid] = "$cat_title ($art_count)";
             }
@@ -120,7 +120,7 @@ if ('go' === $op) {
     $newArticleArray = [];
 
     $oldToNew = [];
-    while ($arrCat = $xoopsDB->fetchArray($resultCat)) {
+    while (false !== ($arrCat = $xoopsDB->fetchArray($resultCat))) {
         $newCat           = [];
         $newCat['oldid']  = $arrCat['categoryid'];
         $newCat['oldpid'] = $arrCat['parentid'];
@@ -148,7 +148,7 @@ if ('go' === $op) {
         $sql            = 'SELECT * FROM ' . $xoopsDB->prefix('smartsection_items') . ' WHERE categoryid=' . $arrCat['categoryid'];
         $resultArticles = $xoopsDB->query($sql);
 
-        while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
+        while (false !== ($arrArticle = $xoopsDB->fetchArray($resultArticles))) {
             // insert article
             $itemObj = $publisher->getHandler('item')->create();
 
@@ -181,7 +181,7 @@ if ('go' === $op) {
                 $sql               = 'SELECT * FROM ' . $xoopsDB->prefix('smartsection_files') . ' WHERE itemid=' . $arrArticle['itemid'];
                 $resultFiles       = $xoopsDB->query($sql);
                 $allowed_mimetypes = null;
-                while ($arrFile = $xoopsDB->fetchArray($resultFiles)) {
+                while (false !== ($arrFile = $xoopsDB->fetchArray($resultFiles))) {
                     $filename = XOOPS_ROOT_PATH . '/uploads/smartsection/' . $arrFile['filename'];
                     if (file_exists($filename)) {
                         if (copy($filename, XOOPS_ROOT_PATH . '/uploads/publisher/' . $arrFile['filename'])) {

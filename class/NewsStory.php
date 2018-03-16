@@ -136,7 +136,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
             $this->db->queryF("DELETE FROM {$this->db->prefix('nw_stories_votedata')} WHERE storyid = " . $myrow['storyid']);
             // Remove files and records related to the files
             $result2 = $this->db->query("SELECT * FROM {$this->db->prefix('nw_stories_files')} WHERE storyid = " . $myrow['storyid']);
-            while ($myrow2 = $this->db->fetchArray($result2)) {
+            while (false !== ($myrow2 = $this->db->fetchArray($result2))) {
                 $name = XOOPS_ROOT_PATH . '/uploads/' . $myrow2['downloadname'];
                 if (file_exists($name)) {
                     unlink($name);
@@ -185,7 +185,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $result = $this->db->query($sql, 1);
         if ($result) {
             $myts = \MyTextSanitizer::getInstance();
-            while ($row = $this->db->fetchArray($result)) {
+            while (false !== ($row = $this->db->fetchArray($result))) {
                 $ret = ['storyid' => $row['storyid'], 'title' => $myts->htmlSpecialChars($row['title'])];
             }
         }

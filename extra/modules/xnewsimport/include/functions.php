@@ -64,7 +64,7 @@ function xni_gettopics($subprefix)
         $result = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('topics'));
     }
     $ix = 0;
-    while ($all_topics = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all_topics = $xoopsDB->fetchArray($result))) {
         $topics_arr[$ix] = $all_topics;
         ++$ix;
     }
@@ -82,7 +82,7 @@ function xni_getcategories($subprefix)
     $topics_arr = '';
     $result     = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix($subprefix . 'categories'));
     $ix         = 0;
-    while ($all_topics = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all_topics = $xoopsDB->fetchArray($result))) {
         $topics_arr[$ix] = $all_topics;
         ++$ix;
     }

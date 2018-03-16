@@ -111,7 +111,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 
             // Then we insert all its articles
             $result = $db->query('SELECT * FROM ' . $ams_articles . ' WHERE topicid=' . $ams_topicid . ' ORDER BY created');
-            while ($article = $db->fetchArray($result)) {
+            while (false !== ($article = $db->fetchArray($result))) {
                 $ams_newsid = $article['storyid'];
 
                 // We search for the last version
@@ -126,7 +126,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
                 $links = '';
                 if ($use_extlinks) {
                     $result7 = $db->query('SELECT * FROM ' . $ams_links . ' WHERE storyid=' . $ams_newsid . ' ORDER BY linkid');
-                    while ($link = $db->fetchArray($result7)) {
+                    while (false !== ($link = $db->fetchArray($result7))) {
                         if ('' == trim($links)) {
                             $links = "\n\n" . _AMS_MD_XNEWS_RELATEDARTICLES . "\n\n";
                         }
@@ -172,7 +172,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 
                 // The files
                 $result4 = $db->query('SELECT * FROM ' . $ams_files . ' WHERE storyid=' . $ams_newsid);
-                while ($file = $db->fetchArray($result4)) {
+                while (false !== ($file = $db->fetchArray($result4))) {
                     $sfile = new Xnews\Files();
                     $sfile->setFileRealName($file['filerealname']);
                     $sfile->setStoryid($news_newsid);
@@ -187,7 +187,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 
                 // The ratings
                 $result5 = $db->query('SELECT * FROM ' . $ams_rating . ' WHERE storyid=' . $ams_newsid);
-                while ($ratings = $db->fetchArray($result5)) {
+                while (false !== ($ratings = $db->fetchArray($result5))) {
                     $result6 = $db->queryF('INSERT INTO '
                                            . $news_stories_votedata
                                            . ' (storyid, ratinguser, rating, ratinghostname, ratingtimestamp) VALUES ('

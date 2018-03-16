@@ -44,7 +44,7 @@ function xoops_module_update_xnews($xoopsModule)
     $result = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('nw_stories_files'));
     //$stuff = $xoopsDB->fetchArray($result);
     //echo count($stuff);
-    while ($singlefile = $xoopsDB->fetchArray($result)) {
+    while (false !== ($singlefile = $xoopsDB->fetchArray($result))) {
         //foreach ( $xoopsDB->fetchArray($result) as $singlefile ) {
         $sfiles   = new Xnews\Files($singlefile['fileid']);
         $destname = $sfiles->getDownloadname();

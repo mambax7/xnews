@@ -112,7 +112,7 @@ class Latestnewsstory extends Xnews\NewsStory
         $sql    .= " ORDER BY s.$order DESC";
         $result = $db->query($sql, (int)$limit, (int)$start);
 
-        while ($myrow = $db->fetchArray($result)) {
+        while (false !== ($myrow = $db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new Latestnewsstory($myrow);
             } else {
