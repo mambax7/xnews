@@ -785,8 +785,8 @@ class Utility
         $param_width,
         $param_height,
         $keep_original = false,
-        $fit = 'inside')
-    {
+        $fit = 'inside'
+    ) {
         //    require_once XOOPS_PATH . '/vendor/wideimage/WideImage.php';
         $resize            = true;
         $pictureDimensions = getimagesize($src_path);

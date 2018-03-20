@@ -26,7 +26,8 @@ class DeprecateTopic
      */
     public function __construct($table, $topicid = 0)
     {
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();;
+        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        ;
         $this->table = $table;
         if (is_array($topicid)) {
             $this->makeTopic($topicid);
@@ -362,7 +363,7 @@ class DeprecateTopic
         $result = $this->db->query('SELECT topic_id, topic_pid, topic_title FROM ' . $this->table);
         $ret    = [];
         $myts   = \MyTextSanitizer::getInstance();
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$myrow['topic_id']] = ['title' => $myts->htmlspecialchars($myrow['topic_title']), 'pid' => $myrow['topic_pid']];
         }
 

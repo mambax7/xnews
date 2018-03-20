@@ -806,7 +806,7 @@ Modifications :
 <hr>
 > Added ALT+S as submit option (include/storyform.inc.php, admin/storyform.inc.php)
 > Fixed warning about invalid index "anonpost" in submit form (include/storyform.inc.php)
-> Changed $HTTP_GET_VARS to $_GET and $HTTP_POST_VARS to $_POST
+> Changed $HTTP_GET_VARS to $_GET and $_POST to $_POST
 
 > Added per-usergroup permissions for viewing, submitting and approving newsstories per topic
 > Full articles only viewable to users with view permissions to that topic

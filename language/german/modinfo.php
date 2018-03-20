@@ -161,8 +161,10 @@ define('_MI_XNEWS_ADVERTISEMENT', 'Reklame- oder Werbeanzeige');
 define('_MI_XNEWS_ADV_DESCR', 'Einen Text oder z.B. auch Java Script eintragen um im Artikel anzeigen zu lassen.');
 define('_MI_XNEWS_MIME_TYPES', 'Hier die erlaubten Mime Types (Dateiformate) eintragen (separarieren durch neue Zeileneingabe)');
 define('_MI_XNEWS_ENHANCED_PAGENAV', 'Erweiterte Setennavigation nutzen?');
-define('_MI_XNEWS_ENHANCED_PAGENAV_DSC',
-       '>Mit dieser Option bzw. durch diesen Befehl können Sie einen Seitenumbruch erzwingen : [pagebreak:Titel oder Überschrift], Links werden dann in einer DropDown Liste angezeigt und Sie können auch die Zusammenfassung nutzen [summary] um eine automatische Zusammenfassung zu erstellen');
+define(
+    '_MI_XNEWS_ENHANCED_PAGENAV_DSC',
+       '>Mit dieser Option bzw. durch diesen Befehl können Sie einen Seitenumbruch erzwingen : [pagebreak:Titel oder Überschrift], Links werden dann in einer DropDown Liste angezeigt und Sie können auch die Zusammenfassung nutzen [summary] um eine automatische Zusammenfassung zu erstellen'
+);
 
 // Added in version 1.54
 define('_MI_XNEWS_CATEGORY_NOTIFY', 'Kategorie');

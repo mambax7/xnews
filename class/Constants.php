@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\Xnews;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -29,33 +30,32 @@ class Constants
      */
 
     const XOOPSDB = 'xoopsDB';
-/*
-    // CONFIG displayicons
-    const DISPLAYICONS_ICON = 1;
-    const DISPLAYICONS_TEXT = 2;
-    const DISPLAYICONS_NO = 3;
+    /*
+        // CONFIG displayicons
+        const DISPLAYICONS_ICON = 1;
+        const DISPLAYICONS_TEXT = 2;
+        const DISPLAYICONS_NO = 3;
 
-    // CONFIG submissions
-    const SUBMISSIONS_NONE = 1;
-    const SUBMISSIONS_DOWNLOAD = 2;
-    const SUBMISSIONS_MIRROR = 3;
-    const SUBMISSIONS_BOTH = 4;
+        // CONFIG submissions
+        const SUBMISSIONS_NONE = 1;
+        const SUBMISSIONS_DOWNLOAD = 2;
+        const SUBMISSIONS_MIRROR = 3;
+        const SUBMISSIONS_BOTH = 4;
 
-    // CONFIG anonpost
-    const ANONPOST_NONE = 1;
-    const ANONPOST_DOWNLOAD = 2;
-    const ANONPOST_MIRROR = 3;
-    const ANONPOST_BOTH = 4;
+        // CONFIG anonpost
+        const ANONPOST_NONE = 1;
+        const ANONPOST_DOWNLOAD = 2;
+        const ANONPOST_MIRROR = 3;
+        const ANONPOST_BOTH = 4;
 
-    // CONFIG autoapprove
-    const AUTOAPPROVE_NONE = 1;
-    const AUTOAPPROVE_DOWNLOAD = 2;
-    const AUTOAPPROVE_MIRROR = 3;
-    const AUTOAPPROVE_BOTH = 4;
+        // CONFIG autoapprove
+        const AUTOAPPROVE_NONE = 1;
+        const AUTOAPPROVE_DOWNLOAD = 2;
+        const AUTOAPPROVE_MIRROR = 3;
+        const AUTOAPPROVE_BOTH = 4;
 
-    const DEFAULT_ELEMENT_SIZE = 1;
-*/
+        const DEFAULT_ELEMENT_SIZE = 1;
+    */
 
     /**#@-*/
 }
-

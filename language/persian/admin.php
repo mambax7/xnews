@@ -203,8 +203,10 @@ define('_AM_XNEWS_CLONER_DIRFOL', 'مسیر/پوشه');
 define('_AM_XNEWS_CLONER_VERSION', 'نسخه');
 
 define('_AM_XNEWS_CLONER_NEWNAME', 'نام ماژول جدید');
-define('_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "این قسمت یک پوشه جدید برای ماژول ایجاد میکند. <br> حساسیت ها و نام های نا صحیح به طور خودکار اصلاح میشود. <br> به طور مثال. نام جدید = <b>Library</b> شاخه جدید  = <b>library</b>, <br> نام جدید <b>My Library</b> شاخه جدید = <b>mylibrary</b>. <br><br> نام ماژول فعلی: <font color='#008400'><b> %s </b></font><br>");
+define(
+    '_AM_XNEWS_CLONER_NEWNAMEDESC',
+       "این قسمت یک پوشه جدید برای ماژول ایجاد میکند. <br> حساسیت ها و نام های نا صحیح به طور خودکار اصلاح میشود. <br> به طور مثال. نام جدید = <b>Library</b> شاخه جدید  = <b>library</b>, <br> نام جدید <b>My Library</b> شاخه جدید = <b>mylibrary</b>. <br><br> نام ماژول فعلی: <font color='#008400'><b> %s </b></font><br>"
+);
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'ماژول جدید:');
 
 define('_AM_XNEWS_CLONER_DIREXISTS', "مسیر/شاخه '%s' هم اکنون موجود است !!");

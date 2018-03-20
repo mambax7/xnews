@@ -250,7 +250,7 @@ if ($filescount > 0) {
         if (false !== strpos($onefile->getMimetype(), 'image')) {
             $mime        = 'image';
             $newsfiles[] = ['visitlink' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(), 'file_realname' => $onefile->getFileRealName(), 'file_mimetype' => $mime];
-            //trigger_error($mime, E_USER_WARNING);
+        //trigger_error($mime, E_USER_WARNING);
         } else {
             $newsfiles[] = [
                 'file_id'           => $onefile->getFileid(),

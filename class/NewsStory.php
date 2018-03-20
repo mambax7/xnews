@@ -127,7 +127,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
             $sql .= ' AND topicid IN (' . $topicsList . ')';
         }
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             // Delete comments
             xoops_comment_delete($this->helper->getModule()->getVar('mid'), $myrow['storyid']);
             // Delete notifications
@@ -275,7 +275,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " ORDER BY s.$order DESC";
         $result = $this->db->query($sql, (int)$limit, (int)$start);
 
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new NewsStory($myrow);
             } else {
@@ -314,7 +314,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         }
         $sql    .= " ORDER BY $order DESC";
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new NewsStory($myrow);
             } else {
@@ -372,7 +372,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         }
         $sql    .= " ORDER BY $order DESC";
         $result = $this->db->query($sql, (int)$limit, (int)$start);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new NewsStory($myrow);
             } else {
@@ -416,7 +416,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         }
         $sql    .= " ORDER BY {$this->db->prefix('nw_topics')}.topic_title ASC, {$this->db->prefix('nw_stories')}.published DESC";
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new NewsStory($myrow);
             } else {
@@ -482,7 +482,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
 
         $sql    .= ' ORDER BY expired DESC';
         $result = $this->db->query($sql, (int)$limit, (int)$start);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new NewsStory($myrow);
             } else {
@@ -509,7 +509,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
         $sql    .= ' WHERE published > ' . time() . ' ORDER BY published ASC';
         $result = $this->db->query($sql, (int)$limit, (int)$start);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new NewsStory($myrow);
             } else {
@@ -550,7 +550,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t ";
         $sql    .= " {$criteria->renderWhere()} AND (s.topicid = t.topic_id) ORDER BY created DESC";
         $result = $this->db->query($sql, (int)$limit, (int)$start);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new NewsStory($myrow);
             } else {
@@ -620,7 +620,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
         $sql    .= 'WHERE topicid = ' . (int)$topicid . ' ORDER BY published DESC';
         $result = $this->db->query($sql, (int)$limit, 0);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[] = new NewsStory($myrow);
         }
 
@@ -1041,7 +1041,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
                 $sql .= " AND topicid IN ({$topicsList})";
             }
             $result = $this->db->query($sql);
-           while (false !== ($myrow = $this->db->fetchArray($result))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
                 $topicsTable[] = $myrow['topicid'];
             }
         }
@@ -1055,7 +1055,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         }
         $sql    .= " ORDER BY $order DESC";
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[] = new NewsStory($myrow);
             } else {
@@ -1110,13 +1110,66 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
             $created    = time();
             $published  = $this->approved ? (int)$this->published : 0;
             //DNPROSSI - ADD TAGS FOR UPDATES - ADDED imagerows, pdfrows
-            $sql = sprintf("INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture, dobr, tags, imagerows, pdfrows) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s', '%u','%s', %u, %u)",
-                           $this->table, $newstoryid, (int)$this->uid(), $title, $created, $published, $expired, $hostname, (int)$this->nohtml(), (int)$this->nosmiley(), $hometext, $bodytext, $counter, (int)$this->topicid(), (int)$this->ihome(), (int)$this->notifypub(), $type,
-                           (int)$this->topicdisplay(), $this->topicalign, (int)$this->comments(), $rating, $votes, $description, $keywords, $picture, (int)$this->dobr(), $tags, (int)$this->imagerows(), (int)$this->pdfrows());
+            $sql = sprintf(
+                "INSERT INTO %s (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments, rating, votes, description, keywords, picture, dobr, tags, imagerows, pdfrows) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u, %u, %u, '%s', '%s', '%s', '%u','%s', %u, %u)",
+                           $this->table,
+                $newstoryid,
+                (int)$this->uid(),
+                $title,
+                $created,
+                $published,
+                $expired,
+                $hostname,
+                (int)$this->nohtml(),
+                (int)$this->nosmiley(),
+                $hometext,
+                $bodytext,
+                $counter,
+                (int)$this->topicid(),
+                (int)$this->ihome(),
+                (int)$this->notifypub(),
+                $type,
+                           (int)$this->topicdisplay(),
+                $this->topicalign,
+                (int)$this->comments(),
+                $rating,
+                $votes,
+                $description,
+                $keywords,
+                $picture,
+                (int)$this->dobr(),
+                $tags,
+                (int)$this->imagerows(),
+                (int)$this->pdfrows()
+            );
         } else {
-            $sql        = sprintf("UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s', dobr='%u', tags='%s', imagerows='%u', pdfrows='%u' WHERE storyid = %u",
-                                  $this->table, $title, (int)$this->published(), $expired, (int)$this->nohtml(), (int)$this->nosmiley(), $hometext, $bodytext, (int)$this->topicid(), (int)$this->ihome(), (int)$this->topicdisplay(), $this->topicalign, (int)$this->comments(), $rating, $votes,
-                                  (int)$this->uid(), $description, $keywords, $picture, (int)$this->dobr(), $tags, (int)$this->imagerows(), (int)$this->pdfrows(), (int)$this->storyid());
+            $sql        = sprintf(
+                "UPDATE %s SET title='%s', published=%u, expired=%u, nohtml=%u, nosmiley=%u, hometext='%s', bodytext='%s', topicid=%u, ihome=%u, topicdisplay=%u, topicalign='%s', comments=%u, rating=%u, votes=%u, uid=%u, description='%s', keywords='%s', picture='%s', dobr='%u', tags='%s', imagerows='%u', pdfrows='%u' WHERE storyid = %u",
+                                  $this->table,
+                $title,
+                (int)$this->published(),
+                $expired,
+                (int)$this->nohtml(),
+                (int)$this->nosmiley(),
+                $hometext,
+                $bodytext,
+                (int)$this->topicid(),
+                (int)$this->ihome(),
+                (int)$this->topicdisplay(),
+                $this->topicalign,
+                (int)$this->comments(),
+                $rating,
+                $votes,
+                                  (int)$this->uid(),
+                $description,
+                $keywords,
+                $picture,
+                (int)$this->dobr(),
+                $tags,
+                (int)$this->imagerows(),
+                (int)$this->pdfrows(),
+                (int)$this->storyid()
+            );
             $newstoryid = (int)$this->storyid();
         }
         if (!$this->db->queryF($sql)) {
@@ -1336,7 +1389,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " ORDER BY $order DESC";
         $result = $this->db->query($sql);
 
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[] = $myrow['storyid'];
         }
         $cnt = count($ret);
@@ -1375,7 +1428,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
         $sql    .= ' WHERE s.topicid = t.topic_id GROUP BY s.topicid ORDER BY t.topic_title';
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['topicid']] = $myrow;
         }
         $ret['storiespertopic'] = $ret2;
@@ -1386,7 +1439,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    = 'SELECT Sum(counter) as cpt, topicid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} GROUP BY topicid ORDER BY topicid";
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['topicid']] = $myrow['cpt'];
         }
         $ret['readspertopic'] = $ret2;
@@ -1398,7 +1451,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories_files')} f, {$this->db->prefix('nw_stories')} s";
         $sql    .= ' WHERE f.storyid = s.storyid GROUP BY s.topicid ORDER BY s.topicid';
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['topicid']] = $myrow['cpt'];
         }
         $ret['filespertopic'] = $ret2;
@@ -1410,7 +1463,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
         $sql    .= ' WHERE expired > 0 AND expired <= ' . time() . ' GROUP BY topicid ORDER BY topicid';
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['topicid']] = $myrow['cpt'];
         }
         $ret['expiredpertopic'] = $ret2;
@@ -1421,7 +1474,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    = 'SELECT Count(Distinct(uid)) as cpt, topicid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} GROUP BY topicid ORDER BY topicid";
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['topicid']] = $myrow['cpt'];
         }
         $ret['authorspertopic'] = $ret2;
@@ -1433,7 +1486,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
         $sql    .= ' WHERE s.topicid = t.topic_id ORDER BY s.counter DESC';
         $result = $this->db->query($sql, (int)$limit);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['storyid']] = $myrow;
         }
         $ret['mostreadnews'] = $ret2;
@@ -1445,7 +1498,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
         $sql    .= ' WHERE s.topicid = t.topic_id ORDER BY s.counter';
         $result = $this->db->query($sql, (int)$limit);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['storyid']] = $myrow;
         }
         $ret['lessreadnews'] = $ret2;
@@ -1457,7 +1510,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')} s, {$this->db->prefix('nw_topics')} t";
         $sql    .= ' WHERE s.topicid = t.topic_id ORDER BY s.rating DESC';
         $result = $this->db->query($sql, (int)$limit);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['storyid']] = $myrow;
         }
         $ret['besratednw'] = $ret2;
@@ -1468,7 +1521,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    = 'SELECT Sum(counter) as cpt, uid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} GROUP BY uid ORDER BY cpt DESC";
         $result = $this->db->query($sql, (int)$limit);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['uid']] = $myrow['cpt'];
         }
         $ret['mostreadedauthors'] = $ret2;
@@ -1480,7 +1533,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " FROM {$this->db->prefix('nw_stories')}";
         $sql    .= ' WHERE votes > 0 GROUP BY uid ORDER BY cpt DESC';
         $result = $this->db->query($sql, (int)$limit);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['uid']] = $myrow['cpt'];
         }
         $ret['bestratedauthors'] = $ret2;
@@ -1491,7 +1544,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    = 'SELECT Count(*) as cpt, uid';
         $sql    .= " FROM {$this->db->prefix('nw_stories')} GROUP BY uid ORDER BY cpt DESC";
         $result = $this->db->query($sql, (int)$limit);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret2[$myrow['uid']] = $myrow['cpt'];
         }
         $ret['biggestcontributors'] = $ret2;
@@ -1546,7 +1599,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         }
         $sql    .= ' ORDER BY uid';
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[] = $myrow['uid'];
         }
 
@@ -1715,7 +1768,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         $sql    .= " ORDER BY s.$order DESC";
         $result = $this->db->query($sql, $limit, $start);
 
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($asObject) {
                 $ret[$myrow['storyid']] = new NewsStory($myrow);
             } else {

@@ -204,11 +204,15 @@ define('_MI_XNEWS_DISPLAYLINKICNS', 'Afficher les icônes additionnelles');
 define('_MI_XNEWS_DISPLAYLINKICNSDESC', 'Affiche les fonctions Impression, En parler à un ami et Exporter au format PDF');
 
 define('_MI_XNEWS_SEOPATH', 'Chemin SEO ');
-define('_MI_XNEWS_SEOPATHDESC',
-       'Cette option ajoute un titre SEO aux urls, générées via <strong>htaccess</strong> ou <strong>path-info</strong>. <br><br>Laisser vide affiche : <br>http://your.site.com/topics.1/your-topic-title.html <br><br>Saisir <strong>news</strong> affiche : <br>http://your.site.com/<strong>news</strong>/topics.1/your-topic-title.html <br><br>Les caractères a-z et - sont autorisés (ex. article-du-jour)');
+define(
+    '_MI_XNEWS_SEOPATHDESC',
+       'Cette option ajoute un titre SEO aux urls, générées via <strong>htaccess</strong> ou <strong>path-info</strong>. <br><br>Laisser vide affiche : <br>http://your.site.com/topics.1/your-topic-title.html <br><br>Saisir <strong>news</strong> affiche : <br>http://your.site.com/<strong>news</strong>/topics.1/your-topic-title.html <br><br>Les caractères a-z et - sont autorisés (ex. article-du-jour)'
+);
 define('_MI_XNEWS_SEOLEVEL', 'Niveau SEO ');
-define('_MI_XNEWS_SEOLEVELDESC',
-       "Cette option permet de modifier l'apparence de l'url<br><br>Niveau racine : <br>http://your.site.com/news/topics.1/your-topic-title.html <br><br>Niveau module : <br> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br><br>Cette option ne peut fonctionner qu'en mode htaccess et en personnalisant le fichier .htaccess.");
+define(
+    '_MI_XNEWS_SEOLEVELDESC',
+       "Cette option permet de modifier l'apparence de l'url<br><br>Niveau racine : <br>http://your.site.com/news/topics.1/your-topic-title.html <br><br>Niveau module : <br> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br><br>Cette option ne peut fonctionner qu'en mode htaccess et en personnalisant le fichier .htaccess."
+);
 define('_MI_XNEWS_MODULE_LEVEL', 'Niveau module');
 define('_MI_XNEWS_ROOT_LEVEL', 'Niveau racine');
 

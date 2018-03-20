@@ -36,7 +36,6 @@ function XoSmartyPluginGetSection($section = '')
         if (!empty($section)) {
             if (array_key_exists($section, $IniContent)) {
                 if (0 == count($IniContent[$section])) {
-
                     $logger->handleError(E_USER_WARNING, sprintf(XOSMARTY_SECTIONNOTFOUND, $section, "/configs/$config_file.ini.php"), __FILE__, __LINE__);
 
                     return [];

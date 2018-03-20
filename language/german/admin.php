@@ -215,8 +215,10 @@ define('_AM_XNEWS_CLONER_DIRFOL', 'Verzeichnis/Ordner');
 define('_AM_XNEWS_CLONER_VERSION', 'Version');
 
 define('_AM_XNEWS_CLONER_NEWNAME', 'Neuer Modulname');
-define('_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "Betrifft auch die Erzeugung des neuen Modul Ordners. <br> Gr0ß-/Kleinbuchstaben werden ignoriert und korrigiert. <br> zB.: neuer Name = <b>Aktuelles</b> neuer Ordner  = <b>aktuelles</b>, <br> nuer Name <b>Mein Aktuelles</b> neuer Ordner = <b>meinaktuelles</b>. <br><br> Start Modul ist: <font color='#008400'><b> %s </b></font><br>");
+define(
+    '_AM_XNEWS_CLONER_NEWNAMEDESC',
+       "Betrifft auch die Erzeugung des neuen Modul Ordners. <br> Gr0ß-/Kleinbuchstaben werden ignoriert und korrigiert. <br> zB.: neuer Name = <b>Aktuelles</b> neuer Ordner  = <b>aktuelles</b>, <br> nuer Name <b>Mein Aktuelles</b> neuer Ordner = <b>meinaktuelles</b>. <br><br> Start Modul ist: <font color='#008400'><b> %s </b></font><br>"
+);
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'Neues Modul:');
 
 define('_AM_XNEWS_CLONER_DIREXISTS', "Ordner '%s' existiert bereits!");

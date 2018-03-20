@@ -194,11 +194,11 @@ function nw_removewholeclone($directory, $empty = false)
     if (!file_exists($directory) || !is_dir($directory)) {
         // ... we return false and exit the function
         return false;
-        // ... if the path is not readable
+    // ... if the path is not readable
     } elseif (!is_readable($directory)) {
         // ... we return false and exit the function
         return false;
-        // ... else if the path is readable
+    // ... else if the path is readable
     } else {
         // we open the directory
         $handle = opendir($directory);
@@ -215,7 +215,7 @@ function nw_removewholeclone($directory, $empty = false)
                     // we call this function with the new path
                     nw_removewholeclone($path);
 
-                    // if the new path is a file
+                // if the new path is a file
                 } else {
                     // we remove the file
                     @unlink($path);

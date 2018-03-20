@@ -190,8 +190,10 @@ define('_MI_XNEWS_TOPICDISPLAY', 'Visualizza Argomenti');
 define('_MI_XNEWS_TOPICDISPLAYDESC', 'Abilita/disabilita la visualizzazione del titolo degli argomenti nelle intestazioni dei blocchi');
 
 define('_MI_XNEWS_SEOENABLE', 'Abilita SEO ');
-define('_MI_XNEWS_SEOENABLEDESC',
-       'This will enable/disable SEO activity.<br> If <b>htaccess</b> is selected you will get: <br> http://your.site.com/<b>xnews</b>/topics.1/your-topic-title.html <br> If path-info is selected you will get: <br> http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html');
+define(
+    '_MI_XNEWS_SEOENABLEDESC',
+       'This will enable/disable SEO activity.<br> If <b>htaccess</b> is selected you will get: <br> http://your.site.com/<b>xnews</b>/topics.1/your-topic-title.html <br> If path-info is selected you will get: <br> http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html'
+);
 
 // Added in version 1.68 RC1
 define('_MI_XNEWS_EXTEND_META_DATA', 'Estendi input meta-data');
@@ -205,11 +207,15 @@ define('_MI_XNEWS_DISPLAYLINKICNS', 'Visualizza Icone Link');
 define('_MI_XNEWS_DISPLAYLINKICNSDESC', 'Visualizza le icone di stampa, friend e pdf nessuno-sopra-sotto-entrambi');
 
 define('_MI_XNEWS_SEOPATH', 'Percorso SEO ');
-define('_MI_XNEWS_SEOPATHDESC',
-       'Questo aggiunge un titolo al url SEO sia per <b>htaccess</b> che per <b>path-info</b>. <br> Se lasciato vuoto si ottiene: <br> http://tuo.sito.com/argomenti.1/il-tuo-titolo-argomento.html <br> Se si scrive <b>notizie</b> si otterrà: <br> http://tuo.sito.com/<b>notizie</b>/argomenti.1/il-tuo-titolo-argomento.html <br><br> <b>sono accettati i caratteri a-z e il carattere meno. es. notizie-del-giorno</b>');
+define(
+    '_MI_XNEWS_SEOPATHDESC',
+       'Questo aggiunge un titolo al url SEO sia per <b>htaccess</b> che per <b>path-info</b>. <br> Se lasciato vuoto si ottiene: <br> http://tuo.sito.com/argomenti.1/il-tuo-titolo-argomento.html <br> Se si scrive <b>notizie</b> si otterrà: <br> http://tuo.sito.com/<b>notizie</b>/argomenti.1/il-tuo-titolo-argomento.html <br><br> <b>sono accettati i caratteri a-z e il carattere meno. es. notizie-del-giorno</b>'
+);
 define('_MI_XNEWS_SEOLEVEL', 'Livello SEO ');
-define('_MI_XNEWS_SEOLEVELDESC',
-       "Quì si può scegliere se avere l'htaccess nella cartella root di xoops o in quella del modulo. <br> Questo cambierà l'url visualizzato. <br> A livello root: <br> http://tuo.sito.com/notizie/argomenti.1/il-tuo-titolo-argomento.html  <br> A livello modulo: <br> http://tuo.sito.com/modules/xnews/notizie.argomenti.1/il-tuo-titolo-argomento.html<br><br> Solo nella modalità htaccess e i file dovranno essere installati di conseguenza.");
+define(
+    '_MI_XNEWS_SEOLEVELDESC',
+       "Quì si può scegliere se avere l'htaccess nella cartella root di xoops o in quella del modulo. <br> Questo cambierà l'url visualizzato. <br> A livello root: <br> http://tuo.sito.com/notizie/argomenti.1/il-tuo-titolo-argomento.html  <br> A livello modulo: <br> http://tuo.sito.com/modules/xnews/notizie.argomenti.1/il-tuo-titolo-argomento.html<br><br> Solo nella modalità htaccess e i file dovranno essere installati di conseguenza."
+);
 define('_MI_XNEWS_MODULE_LEVEL', 'Livello modulo');
 define('_MI_XNEWS_ROOT_LEVEL', 'Livello root');
 

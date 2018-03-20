@@ -118,8 +118,16 @@ foreach ($storiesPerTopic as $topicid => $data) {
     $totals[2] += $attachedFiles;
     $totals[3] += $expired;
     $class     = ('even' === $class) ? 'odd' : 'even';
-    printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td></tr>\n", $url, $myts->displayTarea($data['topic_title']), $articles, $views,
-           $attachedFiles, $expired, $authors);
+    printf(
+        "<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td><td align='right'>%u</td></tr>\n",
+        $url,
+        $myts->displayTarea($data['topic_title']),
+        $articles,
+        $views,
+           $attachedFiles,
+        $expired,
+        $authors
+    );
 }
 $class = ('even' === $class) ? 'odd' : 'even';
 printf("<tr class='{$class}'><td align='center'><b>%s</b></td><td align='right'><b>%u</b></td><td align='right'><b>%u</b></td><td align='right'><b>%u</b></td><td align='right'><b>%u</b></td><td>&nbsp;</td>\n", _AM_XNEWS_STATS2, $totals[0], $totals[1], $totals[2], $totals[3]);
@@ -135,8 +143,16 @@ foreach ($mostReadNews as $storyid => $data) {
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
     $url3  = XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
     $class = ('even' === $class) ? 'odd' : 'even';
-    printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n", $url1, $myts->displayTarea($data['topic_title']), $url2,
-           $myts->displayTarea($data['title']), $url3, $myts->htmlSpecialChars($news->uname($data['uid'])), $data['counter']);
+    printf(
+        "<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",
+        $url1,
+        $myts->displayTarea($data['topic_title']),
+        $url2,
+           $myts->displayTarea($data['title']),
+        $url3,
+        $myts->htmlSpecialChars($news->uname($data['uid'])),
+        $data['counter']
+    );
 }
 echo '</table>';
 
@@ -149,8 +165,16 @@ foreach ($lessReadNews as $storyid => $data) {
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
     $url3  = XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
     $class = ('even' === $class) ? 'odd' : 'even';
-    printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n", $url1, $myts->displayTarea($data['topic_title']), $url2,
-           $myts->displayTarea($data['title']), $url3, $myts->htmlSpecialChars($news->uname($data['uid'])), $data['counter']);
+    printf(
+        "<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",
+        $url1,
+        $myts->displayTarea($data['topic_title']),
+        $url2,
+           $myts->displayTarea($data['title']),
+        $url3,
+        $myts->htmlSpecialChars($news->uname($data['uid'])),
+        $data['counter']
+    );
 }
 echo '</table>';
 
@@ -163,8 +187,16 @@ foreach ($bestRatedNews as $storyid => $data) {
     $url2  = XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid;
     $url3  = XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
     $class = ('even' === $class) ? 'odd' : 'even';
-    printf("<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n", $url1, $myts->displayTarea($data['topic_title']), $url2,
-           $myts->displayTarea($data['title']), $url3, $myts->htmlSpecialChars($news->uname($data['uid'])), number_format($data['rating'], 2));
+    printf(
+        "<tr class='{$class}'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",
+        $url1,
+        $myts->displayTarea($data['topic_title']),
+        $url2,
+           $myts->displayTarea($data['title']),
+        $url3,
+        $myts->htmlSpecialChars($news->uname($data['uid'])),
+        number_format($data['rating'], 2)
+    );
 }
 echo '</table></div><br><br><br>';
 

@@ -126,7 +126,7 @@ class Files
         $sql    .= " FROM {$this->table}";
         $sql    .= ' WHERE storyid = ' . (int)$storyid;
         $result = $this->db->query($sql);
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[] = new Xnews\Files($myrow);
         }
 
@@ -414,7 +414,7 @@ class Files
             $sql    .= " FROM {$this->db->prefix('nw_stories_files')}";
             $sql    .= ' WHERE storyid IN (' . implode(',', $stories) . ') GROUP BY storyid';
             $result = $this->db->query($sql);
-           while (false !== ($myrow = $this->db->fetchArray($result))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
                 $ret[$myrow['storyid']] = $myrow['cnt'];
             }
         }
