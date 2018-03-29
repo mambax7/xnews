@@ -50,7 +50,7 @@ class xni_NewsStory extends XoopsStory
         $this->topicstable = $this->db->prefix($subprefix . 'topics');
         if (is_array($storyid)) {
             $this->makeStory($storyid);
-        } elseif ($storyid != -1) {
+        } elseif (-1 != $storyid) {
             $this->getStory((int)$storyid, $subprefix);
         }
     }

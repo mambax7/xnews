@@ -157,7 +157,7 @@ function XoSmartyPlugin_write_index_file($path = '')
 
         return false;
     }
-    if (fwrite($file, '<script>history.go(-1);</script>') == -1) {
+    if (-1 == fwrite($file, '<script>history.go(-1);</script>')) {
         echo 'failed write file';
 
         return false;

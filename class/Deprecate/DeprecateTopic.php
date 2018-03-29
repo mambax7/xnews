@@ -320,7 +320,7 @@ class DeprecateTopic
     public function makeTopicSelBox($none = 0, $seltopic = -1, $selname = '', $onchange = '')
     {
         $xt = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
-        if ($seltopic != -1) {
+        if (-1 != $seltopic) {
             $xt->makeMySelBox('topic_title', 'topic_title', $seltopic, $none, $selname, $onchange);
         } elseif (!empty($this->topic_id)) {
             $xt->makeMySelBox('topic_title', 'topic_title', $this->topic_id, $none, $selname, $onchange);

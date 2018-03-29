@@ -1139,7 +1139,7 @@ switch ($op) {
         $imageselect  = new \XoopsFormSelect($imgpath, 'topic_imgurl', $topicimage);
         $topics_array = \XoopsLists::getImgListAsArray(XNEWS_TOPICS_FILES_PATH);
         foreach ($topics_array as $image) {
-            $imageselect->addOption("$image", $image);
+            $imageselect->addOption((string)$image, $image);
         }
         $imageselect->setExtra("onchange='showImgSelected(\"image3\", \"topic_imgurl\", \"" . $uploadirectory . '", "", "' . XOOPS_URL . "\")'");
         $imgtray->addElement($imageselect, false);

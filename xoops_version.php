@@ -100,7 +100,7 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
         $isSubmissionAllowed = true;
     }
     //
-    if (!isset($_SESSION['items_count']) || $_SESSION['items_count'] == -1) {
+    if (!isset($_SESSION['items_count']) || -1 == $_SESSION['items_count']) {
         $sql    = 'SELECT COUNT(*) as cpt';
         $sql    .= " FROM {$GLOBALS['xoopsDB']->prefix('nw_topics')}";
         $sql    .= ' WHERE menu = 1';

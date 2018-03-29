@@ -80,7 +80,7 @@ class xni_NewsTopic extends XoopsTopic
             }
         }
 
-        if ($seltopic != -1) {
+        if (-1 != $seltopic) {
             return $this->makeMySelBox('topic_title', 'topic_title', $seltopic, $none, $selname, $onchange, $perms);
         } elseif (!empty($this->topic_id)) {
             return $this->makeMySelBox('topic_title', 'topic_title', $this->topic_id, $none, $selname, $onchange, $perms);
