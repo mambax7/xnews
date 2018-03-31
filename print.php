@@ -41,7 +41,7 @@ use XoopsModules\Xnews;
 require_once __DIR__ . '/header.php';
 // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
-$storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
+$storyid = \Xmf\Request::getInt('storyid', 0, 'GET');
 if (empty($storyid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 2, _MD_XNEWS_NOSTORY);
 }

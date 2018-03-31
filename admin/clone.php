@@ -63,7 +63,7 @@ function NewsCloner()
 
     $clone_modulename = '';
 
-    $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+    $start = \Xmf\Request::getInt('start', 0, 'GET');
 
     $result = $GLOBALS['xoopsDB']->query('SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('news_clonerdata'));
     $ix     = 0;
@@ -176,7 +176,7 @@ function NewsCloner()
     echo "</table><div align='right'>" . $pagenav->renderNav() . '</div><br>';
     echo "</div></div><br>\n";
 
-    $clone_id = isset($_GET['clone_id']) ? (int)$_GET['clone_id'] : 0;
+    $clone_id = \Xmf\Request::getInt('clone_id', 0, 'GET');
     if ($clone_id > 0) {
         $xtmod           = new Xnews\NewsTopic($clone_id);
         $clone_name      = $xtmod->clone_name('E');

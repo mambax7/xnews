@@ -79,7 +79,7 @@ global $xoopsUser;
 
 xoops_loadLanguage('modinfo', XNEWS_MODULE_DIRNAME);
 
-$uid = isset($_GET['uid']) ? (int)$_GET['uid'] : 0;
+$uid = \Xmf\Request::getInt('uid', 0, 'GET');
 if (empty($uid)) {
     redirect_header('index.php', 3, _ERRORS);
 }

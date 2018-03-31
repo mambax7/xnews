@@ -162,7 +162,7 @@ function TopicSelect()
     adminMenu(0, _AM_XNI_IMPORT);
     global $xoopsDB;
 
-    $begin = isset($_GET['begin']) ? (int)$_GET['begin'] : 0;
+    $begin = \Xmf\Request::getInt('begin', 0, 'GET');
     require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';

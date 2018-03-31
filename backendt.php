@@ -44,7 +44,7 @@ if (!$helper->getConfig('topicsrss')) {
     exit();
 }
 
-$topicid = isset($_GET['topicid']) ? (int)$_GET['topicid'] : 0;
+$topicid = \Xmf\Request::getInt('topicid', 0, 'GET');
 if (0 == $topicid) {
     exit();
 }

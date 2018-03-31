@@ -121,7 +121,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 // require_once XNEWS_MODULE_PATH . '/class/NewsTopic.php';
 // require_once XNEWS_MODULE_PATH . '/class/Keyhighlighter.php';
 
-$storyid = isset($_GET['storyid']) ? (int)$_GET['storyid'] : 0;
+$storyid = \Xmf\Request::getInt('storyid', 0, 'GET');
 
 if (empty($storyid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
@@ -149,7 +149,7 @@ if (!$gpermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoopsMo
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
 }
 
-$storypage  = isset($_GET['page']) ? (int)$_GET['page'] : 0;
+$storypage  = \Xmf\Request::getInt('page', 0, 'GET');
 $dateformat = $helper->getConfig('dateformat');
 $hcontent   = '';
 

@@ -23,7 +23,7 @@ require_once __DIR__ . '/header.php';
 // require_once XNEWS_MODULE_PATH . '/class/Files.php';
 // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
 
-$fileid = isset($_GET['fileid']) ? (int)$_GET['fileid'] : 0;
+$fileid = \Xmf\Request::getInt('fileid', 0, 'GET');
 if (empty($fileid)) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _ERRORS);
 }

@@ -119,10 +119,10 @@ function LaunchNewsletter()
     $exportedStories = [];
     $topiclist       = '';
     $removeBr        = $removehtml = false;
-    $removeBr        = isset($_POST['removebr']) ? (int)$_POST['removebr'] : 0;
-    $removehtml      = isset($_POST['removehtml']) ? (int)$_POST['removehtml'] : 0;
-    $header          = isset($_POST['header']) ? $_POST['header'] : '';
-    $footer          = isset($_POST['footer']) ? $_POST['footer'] : '';
+    $removeBr        = \Xmf\Request::getInt('removebr', 0, 'POST');
+    $removehtml      = \Xmf\Request::getInt('removehtml', 0, 'POST');
+    $header          = \Xmf\Request::getString('header', '', 'POST');
+    $footer          = \Xmf\Request::getString('footer', '', 'POST');
     //
     $dateTimeObj = DateTime::createFromFormat(_SHORTDATESTRING, $_POST['date1']);
     $dateTimeObj->setTime(0, 0, 0);

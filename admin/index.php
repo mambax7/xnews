@@ -61,7 +61,7 @@ function newSubmissions()
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = new Xnews\NewsStory();
     //
-    $start       = isset($_GET['startnew']) ? (int)$_GET['startnew'] : 0;
+    $start       = \Xmf\Request::getInt('startnew', 0, 'GET');
     $newsubcount = $newsStoryHandler->getAllStoriesCount(3, false);
     $storyarray  = $newsStoryHandler->getAllSubmitted($helper->getConfig('storycountadmin'), true, $helper->getConfig('restrictindex'), $start);
     if (count($storyarray) > 0) {
@@ -130,7 +130,7 @@ function autoStories()
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = new Xnews\NewsStory();
     //
-    $start        = isset($_GET['startauto']) ? (int)$_GET['startauto'] : 0;
+    $start        = \Xmf\Request::getInt('startauto', 0, 'GET');
     $storiescount = $newsStoryHandler->getAllStoriesCount(2, false);
     $storyarray   = $newsStoryHandler->getAllAutoStory($helper->getConfig('storycountadmin'), true, $start);
     $class        = '';
@@ -228,7 +228,7 @@ function lastStories()
     echo "<div id='laststories'>";
     echo '<br>';
     echo "<div style='text-align: center;'>";
-    $start        = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+    $start        = \Xmf\Request::getInt('start', 0, 'GET');
     $storyarray   = $newsStoryHandler->getAllPublished($helper->getConfig('storycountadmin'), $start, false, 0, 1);
     $storiescount = $newsStoryHandler->getAllStoriesCount(4, false);
     $pagenav      = new \XoopsPageNav($storiescount, $helper->getConfig('storycountadmin'), $start, 'start', 'op=newarticle');
@@ -326,7 +326,7 @@ function expStories()
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = new Xnews\NewsStory();
     //
-    $start        = isset($_GET['startexp']) ? (int)$_GET['startexp'] : 0;
+    $start        = \Xmf\Request::getInt('startexp', 0, 'GET');
     $expiredcount = $newsStoryHandler->getAllStoriesCount(1, false);
     $storyarray   = $newsStoryHandler->getAllExpired($helper->getConfig('storycountadmin'), $start, 0, 1);
     $pagenav      = new \XoopsPageNav($expiredcount, $helper->getConfig('storycountadmin'), $start, 'startexp', 'op=newarticle');
@@ -558,7 +558,7 @@ function addTopic()
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = new Xnews\NewsStory();
     //
-    $topicpid = isset($_POST['topic_pid']) ? (int)$_POST['topic_pid'] : 0;
+    $topicpid = \Xmf\Request::getInt('topic_pid', 0, 'POST');
     $xt       = new Xnews\NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
         $xt->setTopicPid($topicpid);
@@ -772,7 +772,7 @@ switch ($op) {
 
         $uploadfolder   = sprintf(_AM_XNEWS_UPLOAD_WARNING, XNEWS_TOPICS_FILES_URL);
         $uploadirectory = '/uploads/' . $helper->getModule()->dirname() . '/assets/images/topics';
-        $start          = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+        $start          = \Xmf\Request::getInt('start', 0, 'GET');
 
         $xt          = new \XoopsTree($GLOBALS[Constants::XOOPSDB]->prefix('nw_topics'), 'topic_id', 'topic_pid');
         $topics_arr  = $xt->getChildTreeArray(0, 'topic_title');
@@ -848,7 +848,7 @@ switch ($op) {
         echo "</table><div align='right'>" . $pagenav->renderNav() . '</div><br>';
         echo "</div></div><br>\n";
 
-        $topic_id = isset($_GET['topic_id']) ? (int)$_GET['topic_id'] : 0;
+        $topic_id = \Xmf\Request::getInt('topic_id', 0, 'GET');
         if ($topic_id > 0) {
             $xtmod             = new Xnews\NewsTopic($topic_id);
             $topic_title       = $xtmod->topic_title('E');
