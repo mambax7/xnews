@@ -90,8 +90,8 @@ if (isset($_GET['topic_id'])) {
 
 if ($topic_id) {
     $groups       = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gpermHandler = xoops_getHandler('groupperm');
-    if (!$gpermHandler->checkRight('nw_view', $topic_id, $groups, $helper->getModule()->getVar('mid'))) {
+    $grouppermHandler = xoops_getHandler('groupperm');
+    if (!$grouppermHandler->checkRight('nw_view', $topic_id, $groups, $helper->getModule()->getVar('mid'))) {
         redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
     }
     $xoopsOption['storytopic'] = $topic_id;

@@ -342,7 +342,7 @@ function StartImport()
     $moduleObj      = $moduleHandler->getByDirname($from_module_dirname);
     $news_module_id = $moduleObj->getVar('mid');
 
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
 
     $cnt_imported_cat      = 0;
     $cnt_imported_articles = 0;

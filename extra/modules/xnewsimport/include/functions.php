@@ -105,8 +105,8 @@ function xni_MygetItemIds($permtype = 'nw_view')
     $moduleHandler       = xoops_getHandler('module');
     $newsModule          = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
     $groups              = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gpermHandler        = xoops_getHandler('groupperm');
-    $topics              = $gpermHandler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
+    $grouppermHandler        = xoops_getHandler('groupperm');
+    $topics              = $grouppermHandler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
     $tblperms[$permtype] = $topics;
 
     return $topics;
@@ -152,13 +152,13 @@ function xni_savePermissions($dirname, $groups, $itemid, $permname)
     $result = true;
 
     $module_id    = $news_module->getVar('mid');
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
     // First, if the permissions are already there, delete them
-    $gpermHandler->deleteByModule($module_id, $permname, $itemid);
+    $grouppermHandler->deleteByModule($module_id, $permname, $itemid);
     // Save the new permissions
     if (count($groups) > 0) {
         foreach ($groups as $group_id) {
-            $gpermHandler->addRight($permname, $itemid, $group_id, $module_id);
+            $grouppermHandler->addRight($permname, $itemid, $group_id, $module_id);
             //trigger_error($permname . ' ---- ' . $itemid . ' ---- ' . $group_id . ' ---- ' . $module_id, E_USER_WARNING);
         }
     }

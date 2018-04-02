@@ -74,8 +74,8 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
             $moduleHandler = xoops_getHandler('module');
             $newsModule    = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
             $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-            $gpermHandler  = xoops_getHandler('groupperm');
-            $topics        = $gpermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
+            $grouppermHandler  = xoops_getHandler('groupperm');
+            $topics        = $grouppermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
                 $perms = ' AND topic_id IN (' . implode(',', $topics) . ') ';
             } else {
@@ -206,8 +206,8 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
             $moduleHandler = xoops_getHandler('module');
             $newsModule    = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
             $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-            $gpermHandler  = xoops_getHandler('groupperm');
-            $topics        = $gpermHandler->getItemIds('nw_submit', $groups, $newsModule->getVar('mid'));
+            $grouppermHandler  = xoops_getHandler('groupperm');
+            $topics        = $grouppermHandler->getItemIds('nw_submit', $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
                 $perms = ' WHERE topic_id IN (' . implode(',', $topics) . ') ';
             } else {

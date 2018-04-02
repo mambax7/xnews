@@ -192,7 +192,7 @@ class DeprecateTopic
 
     public function delete()
     {
-        $sql = sprintf('DELETE FROM %s WHERE topic_id = %u', $this->table, $this->topic_id);
+        $sql = sprintf('DELETE FROM `%s` WHERE topic_id = %u', $this->table, $this->topic_id);
         $this->db->query($sql);
     }
 

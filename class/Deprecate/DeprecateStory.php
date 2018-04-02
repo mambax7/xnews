@@ -329,7 +329,7 @@ class DeprecateStory
      */
     public function delete()
     {
-        $sql = sprintf('DELETE FROM %s WHERE storyid = %u', $this->table, $this->storyid);
+        $sql = sprintf('DELETE FROM `%s` WHERE storyid = %u', $this->table, $this->storyid);
         if (!$result = $this->db->query($sql)) {
             return false;
         }

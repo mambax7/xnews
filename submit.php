@@ -39,7 +39,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 
-$gpermHandler = xoops_getHandler('groupperm');
+$grouppermHandler = xoops_getHandler('groupperm');
 
 if (isset($_POST['topic_id'])) {
     $perm_itemid = (int)$_POST['topic_id'];
@@ -47,14 +47,14 @@ if (isset($_POST['topic_id'])) {
     $perm_itemid = 0;
 }
 //If no access
-if (!$gpermHandler->checkRight('nw_submit', $perm_itemid, $groups, $helper->getModule()->getVar('mid'))) {
+if (!$grouppermHandler->checkRight('nw_submit', $perm_itemid, $groups, $helper->getModule()->getVar('mid'))) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
 }
 $op = 'form';
 
 //If approve privileges
 $approveprivilege = 0;
-if (is_object($xoopsUser) && $gpermHandler->checkRight('nw_approve', $perm_itemid, $groups, $helper->getModule()->getVar('mid'))) {
+if (is_object($xoopsUser) && $grouppermHandler->checkRight('nw_approve', $perm_itemid, $groups, $helper->getModule()->getVar('mid'))) {
     $approveprivilege = 1;
 }
 
@@ -124,7 +124,7 @@ switch ($op) {
         //    $storyid=intval($_POST['storyid']);
         //}
         $story = new Xnews\NewsStory($storyid);
-        if (!$gpermHandler->checkRight('nw_view', $story->topicid(), $groups, $helper->getModule()->getVar('mid'))) {
+        if (!$grouppermHandler->checkRight('nw_view', $story->topicid(), $groups, $helper->getModule()->getVar('mid'))) {
             redirect_header(XNEWS_MODULE_URL . '/index.php', 0, _NOPERM);
         }
         echo "<table width='100%' border='0' cellspacing='1' class='outer'><tr><td class=\"odd\">";

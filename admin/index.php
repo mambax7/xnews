@@ -469,40 +469,40 @@ function modTopicS()
     $xt->store();
 
     // Permissions
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
     $criteria     = new \CriteriaCompo();
     $criteria->add(new \Criteria('gperm_itemid', $xt->topic_id(), '='));
     $criteria->add(new \Criteria('gperm_modid', $helper->getModule()->getVar('mid'), '='));
     $criteria->add(new \Criteria('gperm_name', 'nw_approve', '='));
-    $gpermHandler->deleteAll($criteria);
+    $grouppermHandler->deleteAll($criteria);
     //
     $criteria = new \CriteriaCompo();
     $criteria->add(new \Criteria('gperm_itemid', $xt->topic_id(), '='));
     $criteria->add(new \Criteria('gperm_modid', $helper->getModule()->getVar('mid'), '='));
     $criteria->add(new \Criteria('gperm_name', 'nw_submit', '='));
-    $gpermHandler->deleteAll($criteria);
+    $grouppermHandler->deleteAll($criteria);
     //
     $criteria = new \CriteriaCompo();
     $criteria->add(new \Criteria('gperm_itemid', $xt->topic_id(), '='));
     $criteria->add(new \Criteria('gperm_modid', $helper->getModule()->getVar('mid'), '='));
     $criteria->add(new \Criteria('gperm_name', 'nw_view', '='));
-    $gpermHandler->deleteAll($criteria);
+    $grouppermHandler->deleteAll($criteria);
     //
     if (isset($_POST['groups_news_can_approve'])) {
         foreach ($_POST['groups_news_can_approve'] as $onegroup_id) {
-            $gpermHandler->addRight('nw_approve', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
+            $grouppermHandler->addRight('nw_approve', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
         }
     }
     //
     if (isset($_POST['groups_news_can_submit'])) {
         foreach ($_POST['groups_news_can_submit'] as $onegroup_id) {
-            $gpermHandler->addRight('nw_submit', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
+            $grouppermHandler->addRight('nw_submit', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
         }
     }
     //
     if (isset($_POST['groups_news_can_view'])) {
         foreach ($_POST['groups_news_can_view'] as $onegroup_id) {
-            $gpermHandler->addRight('nw_view', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
+            $grouppermHandler->addRight('nw_view', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
         }
     }
     //
@@ -604,22 +604,22 @@ function addTopic()
         }
         $xt->store();
         // Permissions
-        $gpermHandler = xoops_getHandler('groupperm');
+        $grouppermHandler = xoops_getHandler('groupperm');
         if (isset($_POST['groups_news_can_approve'])) {
             foreach ($_POST['groups_news_can_approve'] as $onegroup_id) {
-                $gpermHandler->addRight('nw_approve', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
+                $grouppermHandler->addRight('nw_approve', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
             }
         }
 
         if (isset($_POST['groups_news_can_submit'])) {
             foreach ($_POST['groups_news_can_submit'] as $onegroup_id) {
-                $gpermHandler->addRight('nw_submit', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
+                $grouppermHandler->addRight('nw_submit', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
             }
         }
 
         if (isset($_POST['groups_news_can_view'])) {
             foreach ($_POST['groups_news_can_view'] as $onegroup_id) {
-                $gpermHandler->addRight('nw_view', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
+                $grouppermHandler->addRight('nw_view', $xt->topic_id(), $onegroup_id, $helper->getModule()->getVar('mid'));
             }
         }
         nw_updateCache();
@@ -1155,12 +1155,12 @@ switch ($op) {
         // Permissions
         $memberHandler = xoops_getHandler('member');
         $group_list    = $memberHandler->getGroupList();
-        $gpermHandler  = xoops_getHandler('groupperm');
+        $grouppermHandler  = xoops_getHandler('groupperm');
         $full_list     = array_keys($group_list);
 
         $groups_ids = [];
         if ($topic_id > 0) {        // Edit mode
-            $groups_ids                       = $gpermHandler->getGroupIds('nw_approve', $topic_id, $helper->getModule()->getVar('mid'));
+            $groups_ids                       = $grouppermHandler->getGroupIds('nw_approve', $topic_id, $helper->getModule()->getVar('mid'));
             $groups_ids                       = array_values($groups_ids);
             $groups_news_can_approve_checkbox = new \XoopsFormCheckBox(_AM_XNEWS_APPROVEFORM, 'groups_news_can_approve[]', $groups_ids);
         } else {    // Creation mode
@@ -1171,7 +1171,7 @@ switch ($op) {
 
         $groups_ids = [];
         if ($topic_id > 0) {        // Edit mode
-            $groups_ids                      = $gpermHandler->getGroupIds('nw_submit', $topic_id, $helper->getModule()->getVar('mid'));
+            $groups_ids                      = $grouppermHandler->getGroupIds('nw_submit', $topic_id, $helper->getModule()->getVar('mid'));
             $groups_ids                      = array_values($groups_ids);
             $groups_news_can_submit_checkbox = new \XoopsFormCheckBox(_AM_XNEWS_SUBMITFORM, 'groups_news_can_submit[]', $groups_ids);
         } else {    // Creation mode
@@ -1182,7 +1182,7 @@ switch ($op) {
 
         $groups_ids = [];
         if ($topic_id > 0) {        // Edit mode
-            $groups_ids                    = $gpermHandler->getGroupIds('nw_view', $topic_id, $helper->getModule()->getVar('mid'));
+            $groups_ids                    = $grouppermHandler->getGroupIds('nw_view', $topic_id, $helper->getModule()->getVar('mid'));
             $groups_ids                    = array_values($groups_ids);
             $groups_news_can_view_checkbox = new \XoopsFormCheckBox(_AM_XNEWS_VIEWFORM, 'groups_news_can_view[]', $groups_ids);
         } else {    // Creation mode

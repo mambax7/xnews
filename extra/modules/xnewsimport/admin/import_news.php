@@ -43,7 +43,7 @@ if ('go' === $op) {
     $moduleObj      = $moduleHandler->getByDirname('news');
     $news_module_id = $moduleObj->getVar('mid');
 
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
 
     $cnt_imported_cat      = 0;
     $cnt_imported_articles = 0;
@@ -148,9 +148,9 @@ if ('go' === $op) {
             }
 
         // Saving category permissions
-        //$groupsIds = $gpermHandler->getGroupIds('news_view', $arrCat['topic_id'], $news_module_id);
+        //$groupsIds = $grouppermHandler->getGroupIds('news_view', $arrCat['topic_id'], $news_module_id);
         //nw_saveCategory_Permissions($groupsIds, $categoryObj->categoryid(), 'category_read');
-        //$groupsIds = $gpermHandler->getGroupIds('news_submit', $arrCat['topic_id'], $news_module_id);
+        //$groupsIds = $grouppermHandler->getGroupIds('news_submit', $arrCat['topic_id'], $news_module_id);
         //nw_saveCategory_Permissions($groupsIds, $categoryObj->categoryid(), 'item_submit');
 
         // Saving items permissions

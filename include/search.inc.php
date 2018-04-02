@@ -41,7 +41,7 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
     $modid         = $module->getVar('mid');
     $searchparam   = '';
 
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
     if (is_object($xoopsUser)) {
         $groups = $xoopsUser->getGroups();
     } else {
@@ -74,8 +74,8 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
     $i      = 0;
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $display = true;
-        if ($modid && $gpermHandler) {
-            if ($restricted && !$gpermHandler->checkRight('nw_view', $myrow['topicid'], $groups, $modid)) {
+        if ($modid && $grouppermHandler) {
+            if ($restricted && !$grouppermHandler->checkRight('nw_view', $myrow['topicid'], $groups, $modid)) {
                 $display = false;
             }
         }
@@ -113,8 +113,8 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
         $result = $xoopsDB->query($sql, $limit, $offset);
         while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
             $display = true;
-            if ($modid && $gpermHandler) {
-                if ($restricted && !$gpermHandler->checkRight('nw_view', $myrow['com_itemid'], $groups, $modid)) {
+            if ($modid && $grouppermHandler) {
+                if ($restricted && !$grouppermHandler->checkRight('nw_view', $myrow['com_itemid'], $groups, $modid)) {
                     $display = false;
                 }
             }

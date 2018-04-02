@@ -13,13 +13,13 @@ function xoops_module_install_xnews(&$xoopsModule)
     $module_name    = $xoopsModule->getVar('name');
     $module_dirname = $xoopsModule->getVar('dirname');
     $module_version = $xoopsModule->getVar('version');
-    $gpermHandler   = xoops_getHandler('groupperm');
+    $grouppermHandler   = xoops_getHandler('groupperm');
     // access rights
-    $gpermHandler->addRight('nw_approve', 1, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('nw_submit', 1, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('nw_view', 1, XOOPS_GROUP_ADMIN, $module_id);
-    $gpermHandler->addRight('nw_view', 1, XOOPS_GROUP_USERS, $module_id);
-    $gpermHandler->addRight('nw_view', 1, XOOPS_GROUP_ANONYMOUS, $module_id);
+    $grouppermHandler->addRight('nw_approve', 1, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('nw_submit', 1, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('nw_view', 1, XOOPS_GROUP_ADMIN, $module_id);
+    $grouppermHandler->addRight('nw_view', 1, XOOPS_GROUP_USERS, $module_id);
+    $grouppermHandler->addRight('nw_view', 1, XOOPS_GROUP_ANONYMOUS, $module_id);
     // recalc original subprefix
     $sub             = nw_remove_numbers(XNEWS_SUBPREFIX);
     $module_original = $xoopsModule->getInfo('original');

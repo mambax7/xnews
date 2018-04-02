@@ -106,8 +106,8 @@ class Utility
         $moduleHandler       = xoops_getHandler('module');
         $newsModule          = $moduleHandler->getByDirname('news');
         $groups              = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-        $gpermHandler        = xoops_getHandler('groupperm');
-        $topics              = $gpermHandler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
+        $grouppermHandler        = xoops_getHandler('groupperm');
+        $topics              = $grouppermHandler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
         $tblperms[$permtype] = $topics;
 
         return $topics;
@@ -264,6 +264,39 @@ class Utility
         }
 
         return $editor;
+    }
+
+    /**
+     * @param string $name
+     * @param string $value
+     * @param \Xmf\Module\Helper\ $helper;
+     * @return \XoopsFormDhtmlTextArea|\XoopsFormEditor
+     */
+    public static function getEditor($name, $value, $helper = null)
+    {
+        /** @var Xnews\Helper $helper */
+        $options = [];
+        $isAdmin = $helper->isUserAdmin();
+
+        if (class_exists('XoopsFormEditor')) {
+            $options['name']   = $name;
+            $options['value']  = $value;
+            $options['rows']   = 5;
+            $options['cols']   = '100%';
+            $options['width']  = '100%';
+            $options['height'] = '200px';
+            if ($isAdmin) {
+                $descEditor = new \XoopsFormEditor(ucfirst($name), $helper->getConfig('editorAdmin'), $options, $nohtml = false, $onfailure = 'textarea');
+            } else {
+                $descEditor = new \XoopsFormEditor(ucfirst($name), $helper->getConfig('editorUser'), $options, $nohtml = false, $onfailure = 'textarea');
+            }
+        } else {
+            $descEditor = new \XoopsFormDhtmlTextArea(ucfirst($name), $name, $value, '100%', '100%');
+        }
+
+        //        $form->addElement($descEditor);
+
+        return $descEditor;
     }
 
     /**

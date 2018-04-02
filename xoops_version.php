@@ -94,9 +94,9 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
         $helper = Xnews\Helper::getInstance();
     }
     $groups       = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
     //
-    if ($gpermHandler->checkRight('nw_submit', 0, $groups, $helper->getModule()->getVar('mid'))) {
+    if ($grouppermHandler->checkRight('nw_submit', 0, $groups, $helper->getModule()->getVar('mid'))) {
         $isSubmissionAllowed = true;
     }
     //
@@ -118,7 +118,7 @@ if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() ==
         $topicObjsTree  = new \XoopsObjectTree($topicObjs, 'topic_id', 'topic_pid');
         $topicChildObjs = $topicObjsTree->getAllChild(0);
         foreach ($topicChildObjs as $topicChildObj) {
-            if ($gpermHandler->checkRight('nw_view', $topicChildObj->topic_id(), $groups, $helper->getModule()->getVar('mid')) && $topicChildObj->menu()) {
+            if ($grouppermHandler->checkRight('nw_view', $topicChildObj->topic_id(), $groups, $helper->getModule()->getVar('mid')) && $topicChildObj->menu()) {
                 $modversion['sub'][$i]['name'] = $topicChildObj->topic_title();
                 $modversion['sub'][$i]['url']  = 'index.php?topic_id=' . $topicChildObj->topic_id();
                 ++$i;

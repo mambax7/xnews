@@ -79,19 +79,19 @@ while (false !== ($arrCat = $xoopsDB->fetchArray($resultCat))) {
 
     // Saving topic permissions
     if ('news' === $from_module_dirname) {
-        $groupsIds = $gpermHandler->getGroupIds('news_approve', $arrCat['topic_id'], $news_module_id);
+        $groupsIds = $grouppermHandler->getGroupIds('news_approve', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'approve');
-        $groupsIds = $gpermHandler->getGroupIds('news_view', $arrCat['topic_id'], $news_module_id);
+        $groupsIds = $grouppermHandler->getGroupIds('news_view', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'view');
-        $groupsIds = $gpermHandler->getGroupIds('news_submit', $arrCat['topic_id'], $news_module_id);
+        $groupsIds = $grouppermHandler->getGroupIds('news_submit', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'submit');
     // echo (int)($topic->topic_id()) . '<br>';
     } else {
-        $groupsIds = $gpermHandler->getGroupIds($from_module_subprefix . 'approve', $arrCat['topic_id'], $news_module_id);
+        $groupsIds = $grouppermHandler->getGroupIds($from_module_subprefix . 'approve', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'approve');
-        $groupsIds = $gpermHandler->getGroupIds($from_module_subprefix . 'view', $arrCat['topic_id'], $news_module_id);
+        $groupsIds = $grouppermHandler->getGroupIds($from_module_subprefix . 'view', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'view');
-        $groupsIds = $gpermHandler->getGroupIds($from_module_subprefix . 'submit', $arrCat['topic_id'], $news_module_id);
+        $groupsIds = $grouppermHandler->getGroupIds($from_module_subprefix . 'submit', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'submit');
     }
 
