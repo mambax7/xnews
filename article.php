@@ -342,7 +342,7 @@ $j                = 0;
 $xoopsTpl->assign('attached_files_count', $filescount);
 if ($filescount > 0) {
     foreach ($filesarr as $onefile) {
-        if (strstr($onefile->getMimetype(), 'image')) {
+        if (false !== strpos($onefile->getMimetype(), 'image')) {
             $mime = 'image';
             //DNPROSSI - Added file_downloadname
             // IN PROGRESS

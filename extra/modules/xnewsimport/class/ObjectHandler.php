@@ -217,7 +217,8 @@ class ObjectHandler extends \XoopsObjectHandler
     /**
      * delete object based on id
      *
-     * @param  XoopsObject $obj   {@link XoopsObject} to delete
+     * @param \XoopsObject $obj   {@link XoopsObject}
+     *                            to delete
      * @param  bool        $force override XOOPS delete protection
      * @return bool   deletion successful?
      * @access public
@@ -316,7 +317,7 @@ class ObjectHandler extends \XoopsObjectHandler
      * Singleton - prevent multiple instances of this class
      *
      * @param  \XoopsDatabase &$db {@link XoopsHandlerFactory}
-     * @return \XoopsObject {@link pagesCategoryHandler}
+     * @return \XoopsModules\Xnewsimport\ObjectHandler <a href='psi_element://pagesCategoryHandler'>pagesCategoryHandler</a>
      * @access public
      */
     public static function getInstance(\XoopsDatabase $db)

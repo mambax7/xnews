@@ -33,7 +33,7 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined.');
 /**
  * Class XoopsPageNav
  */
-class PageNav extends XoopsPageNav
+class PageNav extends \XoopsPageNav
 {
 
     /**

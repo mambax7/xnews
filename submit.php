@@ -555,7 +555,7 @@ switch ($op) {
                                     echo _AM_XNEWS_UPLOAD_DBERROR_SAVE;
                                 }
                                 //DNPROSSI - 1.71 - creates attached image maxsize
-                                if (strstr($sfiles->getMimetype(), 'image')) {
+                                if (false !== strpos($sfiles->getMimetype(), 'image')) {
                                     $fullPictureName = XNEWS_ATTACHED_FILES_PATH . '/' . basename($destname);
                                     $newName         = XNEWS_ATTACHED_FILES_PATH . '/redim_' . basename($destname);
                                     // IN PROGRESS
@@ -568,7 +568,7 @@ switch ($op) {
                                     }
                                 }
                                 //DNPROSSI - 1.71 - creates attached image thumb
-                                if (strstr($sfiles->getMimetype(), 'image')) {
+                                if (false !== strpos($sfiles->getMimetype(), 'image')) {
                                     $fullPictureName = XNEWS_ATTACHED_FILES_PATH . '/' . basename($destname);
                                     $thumbName       = XNEWS_ATTACHED_FILES_PATH . '/thumb_' . basename($destname);
                                     // IN PROGRESS
