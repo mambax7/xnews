@@ -1394,7 +1394,7 @@ class NewsStory extends Xnews\Deprecate\DeprecateStory
         }
         $cnt = count($ret);
         if ($cnt) {
-            srand((double)microtime() * 10000000);
+            mt_srand((double)microtime() * 10000000);
             if ($limit > $cnt) {
                 $limit = $cnt;
             }
