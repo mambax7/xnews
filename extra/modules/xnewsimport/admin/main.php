@@ -364,14 +364,7 @@ function StartImport()
     xoops_cp_footer();
 }
 
-$op = 'none';
-
-if (isset($_GET['op'])) {
-    $op = $_GET['op'];
-}
-if (isset($_POST['op'])) {
-    $op = $_POST['op'];
-}
+$op    = \Xmf\Request::getCmd('op', 'none');
 
 switch ($op) {
     case 'startimport':

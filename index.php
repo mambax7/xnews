@@ -84,8 +84,8 @@ require_once XOOPS_ROOT_PATH . '/class/tree.php';
 $newsStoryHandler = new Xnews\NewsStory();
 
 $topic_id = 0;
-if (isset($_GET['topic_id'])) {
-    $topic_id = (int)$_GET['topic_id'];
+if (\Xmf\Request::hasVar('topic_id', 'GET')) { 
+ $topic_id = \Xmf\Request::getInt('topic_id', 0, 'GET');
 }
 
 if ($topic_id) {
@@ -99,7 +99,7 @@ if ($topic_id) {
     $xoopsOption['storytopic'] = 0;
 }
 if (isset($_GET['storynum'])) {
-    $xoopsOption['storynum'] = (int)$_GET['storynum'];
+    $xoopsOption['storynum'] = \Xmf\Request::getInt('storynum', 0, 'GET');
     if ($xoopsOption['storynum'] > 30) {
         $xoopsOption['storynum'] = $helper->getConfig('storyhome');
     }
@@ -107,11 +107,7 @@ if (isset($_GET['storynum'])) {
     $xoopsOption['storynum'] = $helper->getConfig('storyhome');
 }
 
-if (isset($_GET['start'])) {
-    $start = (int)$_GET['start'];
-} else {
-    $start = 0;
-}
+$start = \Xmf\Request::getInt('start', 0, 'GET');
 
 if ('Classic' === $helper->getConfig('newsdisplay') || $xoopsOption['storytopic'] > 0) {
     $showclassic = 1;

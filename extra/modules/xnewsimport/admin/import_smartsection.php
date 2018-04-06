@@ -28,9 +28,9 @@ $importFromModuleName = 'Smartsection ' . @$_POST['smartsection_version'];
 $scriptname = 'smartsection.php';
 
 $op = 'start';
-
-if (isset($_POST['op']) && ('go' === $_POST['op'])) {
-    $op = $_POST['op'];
+//$op    = \Xmf\Request::getCmd('op', 'default');
+if ('go' === \Xmf\Request::getCmd('op', 'start', 'POST')) {
+    $op = 'go';
 }
 
 if ('start' === $op) {

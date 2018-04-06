@@ -29,8 +29,8 @@ $scriptname = 'smartsection.php';
 
 $op = 'start';
 
-if (isset($_POST['op']) && ('go' === $_POST['op'])) {
-    $op = $_POST['op'];
+if ('go' === \Xmf\Request::getCmd('op', 'start', 'POST')) {
+    $op = 'go';
 }
 
 if ('start' === $op) {

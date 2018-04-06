@@ -108,7 +108,7 @@ switch ($op) {
         if (isset($_POST['export_topics'])) {
             $topiclist = implode(',', $_POST['export_topics']);
         }
-        $topicsexport    = (int)$_POST['includetopics'];
+        $topicsexport    = \Xmf\Request::getInt('includetopics', 0, 'POST');
         $tbltopics       = [];
         $exportedstories = $story->NewsExport($timestamp1, $timestamp2, $topiclist, $topicsexport, $tbltopics);
         if (count($exportedstories)) {

@@ -420,11 +420,11 @@ function modTopicS()
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = new Xnews\NewsStory();
     //
-    $xt = new Xnews\NewsTopic((int)$_POST['topic_id']);
-    if ((int)$_POST['topic_pid'] == (int)$_POST['topic_id']) {
+    $xt = new Xnews\NewsTopic(\Xmf\Request::getInt('topic_id', 0, 'POST'));
+    if (\Xmf\Request::getInt('topic_pid', 0, 'POST') == \Xmf\Request::getInt('topic_id', 0, 'POST')) {
         redirect_header('index.php?op=topicsmanager', 3, _AM_XNEWS_ADD_TOPIC_ERROR1);
     }
-    $xt->setTopicPid((int)$_POST['topic_pid']);
+    $xt->setTopicPid(\Xmf\Request::getInt('topic_pid', 0, 'POST'));
     if (empty($_POST['topic_title'])) {
         redirect_header('index.php?op=topicsmanager', 3, _AM_XNEWS_ERRORTOPICNAME);
     }
@@ -435,8 +435,8 @@ function modTopicS()
     if (isset($_POST['topic_imgurl']) && '' != $_POST['topic_imgurl']) {
         $xt->setTopicImgurl($_POST['topic_imgurl']);
     }
-    $xt->setMenu((int)$_POST['submenu']);
-    $xt->setTopicFrontpage((int)$_POST['topic_frontpage']);
+    $xt->setMenu(\Xmf\Request::getInt('submenu', 0, 'POST'));
+    $xt->setTopicFrontpage(\Xmf\Request::getInt('topic_frontpage', 0, 'POST'));
     if (isset($_POST['topic_description'])) {
         $xt->setTopicDescription($_POST['topic_description']);
     } else {
@@ -519,11 +519,11 @@ function delTopic()
     if (!isset($_POST['ok'])) {
         xoops_cp_header();
         echo '<h2>' . _AM_XNEWS_TOPICSMNGR . '</h2>';
-        $xt = new Xnews\Deprecate\DeprecateTopic($GLOBALS[Constants::XOOPSDB]->prefix('nw_topics'), (int)$_GET['topic_id']);
-        xoops_confirm(['op' => 'delTopic', 'topic_id' => (int)$_GET['topic_id'], 'ok' => 1], 'index.php', _AM_XNEWS_WAYSYWTDTTAL . '<br>' . $xt->topic_title('S'));
+        $xt = new Xnews\Deprecate\DeprecateTopic($GLOBALS[Constants::XOOPSDB]->prefix('nw_topics'), \Xmf\Request::getInt('topic_id', 0, 'GET'));
+        xoops_confirm(['op' => 'delTopic', 'topic_id' => \Xmf\Request::getInt('topic_id', 0, 'GET'), 'ok' => 1], 'index.php', _AM_XNEWS_WAYSYWTDTTAL . '<br>' . $xt->topic_title('S'));
     } else {
         xoops_cp_header();
-        $xt = new Xnews\Deprecate\DeprecateTopic($GLOBALS[Constants::XOOPSDB]->prefix('nw_topics'), (int)$_POST['topic_id']);
+        $xt = new Xnews\Deprecate\DeprecateTopic($GLOBALS[Constants::XOOPSDB]->prefix('nw_topics'), \Xmf\Request::getInt('topic_id', 0, 'POST'));
         if (isset($_SESSION['items_count'])) {
             $_SESSION['items_count'] = -1;
         }
@@ -571,8 +571,8 @@ function addTopic()
         if (isset($_POST['topic_imgurl']) && '' != $_POST['topic_imgurl']) {
             $xt->setTopicImgurl($_POST['topic_imgurl']);
         }
-        $xt->setMenu((int)$_POST['submenu']);
-        $xt->setTopicFrontpage((int)$_POST['topic_frontpage']);
+        $xt->setMenu(\Xmf\Request::getInt('submenu', 0, 'POST'));
+        $xt->setTopicFrontpage(\Xmf\Request::getInt('topic_frontpage', 0, 'POST'));
         if (isset($_SESSION['items_count'])) {
             $_SESSION['items_count'] = -1;
         }
@@ -711,11 +711,9 @@ switch ($op) {
         break;
 
     case 'delete':
-        if (isset($_REQUEST['storyid'])) {
-            $storyid = (int)$_REQUEST['storyid'];
-        } else {
-            $storyid = 0;
-        }
+
+        $storyid = \Xmf\Request::getInt('storyid', 0, 'REQUEST');
+
         if (!empty($_POST['ok'])) {
             if (empty($storyid)) {
                 redirect_header('index.php?op=newarticle', 3, _AM_XNEWS_EMPTYNODELETE);

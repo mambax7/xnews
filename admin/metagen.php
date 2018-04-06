@@ -138,7 +138,7 @@ switch ($op) {
     case 'metagenoptions':
         // Save Metagen Options
         $registry = new Xnews\Registryfile('nw_metagen_options.txt');
-        $registry->savefile((int)$_POST['keywordscount'] . ',' . (int)$_POST['keywordsorder']);
+        $registry->savefile(\Xmf\Request::getInt('keywordscount', 0, 'POST') . ',' . \Xmf\Request::getInt('keywordsorder', 0, 'POST'));
         redirect_header('index.php?op=metagen', 3, _AM_XNEWS_DBUPDATED);
         xoops_cp_footer();
         break;

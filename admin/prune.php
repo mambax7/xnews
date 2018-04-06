@@ -109,10 +109,9 @@ switch ($op) {
         if (isset($_POST['pruned_topics'])) {
             $topiclist = implode(',', $_POST['pruned_topics']);
         }
-        $expired = 0;
-        if (isset($_POST['onlyexpired'])) {
-            $expired = (int)$_POST['onlyexpired'];
-        }
+
+        $expired = \Xmf\Request::getInt('onlyexpired', 0, 'POST');
+
         $dateTimeObj = DateTime::createFromFormat(_SHORTDATESTRING, $_POST['prune_date']);
         $dateTimeObj->setTime(0, 0, 0);
         $timestamp = $dateTimeObj->getTimestamp();
@@ -131,13 +130,13 @@ switch ($op) {
 
     case 'prunenews':
         $story     = new Xnews\NewsStory();
-        $timestamp = (int)$_POST['prune_date'];
-        $expired   = (int)$_POST['expired'];
+        $timestamp = \Xmf\Request::getInt('prune_date', 0, 'POST');
+        $expired   = \Xmf\Request::getInt('expired', 0, 'POST');
         $topiclist = '';
         if (isset($_POST['pruned_topics'])) {
             $topiclist = $_POST['pruned_topics'];
         }
-        if (1 == (int)$_POST['ok']) {
+        if (1 == \Xmf\Request::getInt('ok', 0, 'POST')) {
             $story = new Xnews\NewsStory();
             xoops_cp_header();
             $count = $story->GetCountStoriesPublishedBefore($timestamp, $expired, $topiclist);

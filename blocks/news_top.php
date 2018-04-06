@@ -152,13 +152,9 @@ function nw_b_news_top_show($options)
         $usespotlight = false;
 
         if (isset($_GET['nwTab'])) {
-            $_SESSION['nwTab'] = (int)$_GET['nwTab'];
-            $currenttab        = (int)$_GET['nwTab'];
-        } elseif (isset($_SESSION['nwTab'])) {
-            $currenttab = (int)$_SESSION['nwTab'];
-        } else {
-            $currenttab = 0;
-        }
+            $_SESSION['nwTab'] = \Xmf\Request::getInt('nwTab', 0, 'GET');
+            $currenttab        = \Xmf\Request::getInt('nwTab', 0, 'GET');
+        } else$currenttab = \Xmf\Request::getInt('nwTab', 0, 'SESSION');
 
         $tmpstory    = new Xnews\NewsStory();
         $topic        = new Xnews\NewsTopic();

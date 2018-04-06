@@ -78,12 +78,12 @@ if ($cfg['config_rating_registred_only']) {
 
 // 2) Is the story published ?
 $storyid = 0;
-if (isset($_GET['storyid'])) {
-    $storyid = (int)$_GET['storyid'];
+if (\Xmf\Request::hasVar('storyid', 'GET')) {
+ $storyid =  \Xmf\Request::getInt('storyid', 0, 'GET');
 } else {
-    if (isset($_POST['storyid'])) {
-        $storyid = (int)$_POST['storyid'];
-    }
+ if (\Xmf\Request::hasVar('storyid', 'POST')) {
+$storyid =  \Xmf\Request::getInt('storyid', 0, 'POST');
+}
 }
 
 if (!empty($storyid)) {
@@ -122,8 +122,8 @@ if (!empty($_POST['submit'])) {            // The form was submited
     //Make sure only 1 anonymous from an IP in a single day.
     $anonwaitdays = 1;
     $ip           = getenv('REMOTE_ADDR');
-    $storyid      = (int)$_POST['storyid'];
-    $rating       = (int)$_POST['rating'];
+    $storyid      = \Xmf\Request::getInt('storyid', 0, 'POST');
+    $rating       = \Xmf\Request::getInt('rating', 0, 'POST');
 
     // Check if Rating is Null
     if ('--' == $rating) {
