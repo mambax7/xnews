@@ -236,7 +236,7 @@ function NewsClonerApply()
     $newsStoryHandler = new Xnews\NewsStory();
 
     require_once __DIR__ . '/cloner.php';
-    if (!empty($_POST['clone_modulename'])) {
+   if (\Xmf\Request::hasVar('clone_modulename', 'POST')) {
         $module_version = $helper->getModule()->version();
         $old_dirname    = $helper->getModule()->dirname();
         $old_modulename = $helper->getModule()->name();
