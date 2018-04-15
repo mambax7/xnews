@@ -623,7 +623,7 @@ function addTopic()
             }
         }
         nw_updateCache();
-
+        /** @var \XoopsNotificationHandler $notificationHandler */
         $notificationHandler = xoops_getHandler('notification');
         $tags                = [];
         $tags['TOPIC_NAME']  = $_POST['topic_title'];

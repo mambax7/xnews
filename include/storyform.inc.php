@@ -50,7 +50,7 @@ $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 
 //$module = $helper->getModule();
 $moduleDirName = basename(dirname(__DIR__));
-$helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
+$helper        = \XoopsModules\Xnews\Helper::getInstance();
 $module        = $helper->getModule();
 
 if (Xnews\Utility::checkVerXoops($module, '2.5.9')) {

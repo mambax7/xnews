@@ -27,7 +27,7 @@ require_once XNI_MODULE_PATH . '/include/functions.php';
 /**
  * Class xni_NewsStory
  */
-class xni_NewsStory extends XoopsStory
+class xni_NewsStory extends \XoopsStory
 {
     public $newstopic;    // XoopsTopic object
     public $rating;        // news rating

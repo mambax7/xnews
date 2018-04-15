@@ -54,6 +54,7 @@ function nw_b_news_randomnews_show($options)
     $block['sort'] = $options[0];
 
     //DNPROSSI Added - xlanguage installed and active
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $xlanguage     = $moduleHandler->getByDirname('xlanguage');
     if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {

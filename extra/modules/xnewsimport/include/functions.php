@@ -22,6 +22,7 @@ function xni_getmoduleoption($option, $repmodule)
             $retval = $xoopsModuleConfig[$option];
         }
     } else {
+        /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $module        = $moduleHandler->getByDirname($repmodule);
         $configHandler = xoops_getHandler('config');
@@ -145,7 +146,7 @@ function xni_clonecopyfile($srcpath, $destpath, $filename)
 function xni_savePermissions($dirname, $groups, $itemid, $permname)
 {
     global $xoopsModule;
-
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $news_module   = $moduleHandler->getByDirname($dirname);
 

@@ -154,7 +154,7 @@ if ($showclassic) {
         //        $xoopsTpl->assign('topic_select', $topic_select);
 
         $moduleDirName = basename(__DIR__);
-        $helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
+        $helper = \XoopsModules\Xnews\Helper::getInstance();
         $module        = $helper->getModule();
 
         if (Xnews\Utility::checkVerXoops($module, '2.5.9')) {

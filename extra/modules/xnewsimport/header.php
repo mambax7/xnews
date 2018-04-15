@@ -18,7 +18,7 @@
  * @version      $Id $
  */
 
-require_once __DIR__ . '/../../mainfile.php';
+require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 define('XNI_SUBPREFXNI', 'XNI');
 define('XNI_MODULE_DIR_NAME', 'xnewsimport');

@@ -388,7 +388,7 @@ class DeprecateStory
      */
     public function uname()
     {
-        return XoopsUser::getUnameFromId($this->uid);
+        return \XoopsUser::getUnameFromId($this->uid);
     }
 
     /**

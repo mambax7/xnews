@@ -21,8 +21,8 @@ use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-// require_once __DIR__ . '/../class/Helper.php';
-//require_once __DIR__ . '/../include/common.php';
+// require_once  dirname(__DIR__) . '/class/Helper.php';
+//require_once  dirname(__DIR__) . '/include/common.php';
 $helper = Xnews\Helper::getInstance();
 
 $pathIcon32    = \Xmf\Module\Admin::menuIconPath('');

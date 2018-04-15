@@ -4,7 +4,7 @@ use XoopsModules\Xnews;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-include __DIR__ . '/../preloads/autoloader.php';
+include  dirname(__DIR__) . '/preloads/autoloader.php';
 
 // common Xoops stuff
 xoops_load('XoopsFormLoader');
@@ -14,8 +14,8 @@ xoops_load('XoopsLocal');
 
 $moduleDirName = basename(dirname(__DIR__));
 
-// require_once __DIR__ . '/../class/Helper.php';
-// require_once __DIR__ . '/../class/Utility.php';
+// require_once  dirname(__DIR__) . '/class/Helper.php';
+// require_once  dirname(__DIR__) . '/class/Utility.php';
 
 $db     = \XoopsDatabaseFactory::getDatabaseConnection();
 $helper = Xnews\Helper::getInstance();
@@ -28,6 +28,7 @@ $myts = \MyTextSanitizer::getInstance();
 // load Xoops handlers
 $moduleHandler       = xoops_getHandler('module');
 $memberHandler       = xoops_getHandler('member');
+/** @var \XoopsNotificationHandler $notificationHandler */
 $notificationHandler = xoops_getHandler('notification');
 $grouppermHandler    = xoops_getHandler('groupperm');
 

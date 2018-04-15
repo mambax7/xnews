@@ -18,7 +18,7 @@
  * @version      $Id $
  */
 // better place this on a separate file so you can reuse it
-class xni_TableObject extends XoopsObject
+class xni_TableObject extends \XoopsObject
 {
     /**
      * constructor

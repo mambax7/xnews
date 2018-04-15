@@ -50,6 +50,7 @@ function nw_b_news_topicsnav_show($options)
     $restricted       = $helper->getConfig('restrictindex');
     if ($restricted) {
         global $xoopsUser;
+        /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $newsModule    = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
         $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;

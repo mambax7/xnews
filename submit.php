@@ -478,6 +478,7 @@ switch ($op) {
             if (!$editmode) {
                 //     Notification
                 // TODO: modifier afin qu'en cas de prépublication, la notification ne se fasse pas
+                /** @var \XoopsNotificationHandler $notificationHandler */
                 $notificationHandler = xoops_getHandler('notification');
                 $tags                = [];
                 $tags['STORY_NAME']  = $story->title();

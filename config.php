@@ -18,6 +18,7 @@
  */
 
 use XoopsModules\Xnews;
+
 /** @var Xnews\Helper $helper */
 $helper = Xnews\Helper::getInstance();
 

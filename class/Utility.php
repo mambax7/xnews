@@ -5,7 +5,7 @@ use Xmf\Request;
 use XoopsModules\Xnews;
 use XoopsModules\Xnews\Common;
 
-require_once __DIR__ . '/../include/common.php';
+require_once  dirname(__DIR__) . '/include/common.php';
 
 /**
  * Class Utility

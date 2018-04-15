@@ -27,7 +27,7 @@ require_once XNI_MODULE_PATH . '/include/functions.php';
 /**
  * Class xni_NewsTopic
  */
-class xni_NewsTopic extends XoopsTopic
+class xni_NewsTopic extends \XoopsTopic
 {
     public $menu;
     public $topic_description;
@@ -67,6 +67,7 @@ class xni_NewsTopic extends XoopsTopic
         $perms = '';
         if ($checkRight) {
             global $xoopsUser;
+            /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler = xoops_getHandler('module');
             $newsModule    = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
             $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
@@ -194,6 +195,7 @@ class xni_NewsTopic extends XoopsTopic
         $perms = '';
         if ($checkRight) {
             global $xoopsUser;
+            /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler = xoops_getHandler('module');
             $newsModule    = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
             $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
