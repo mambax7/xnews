@@ -85,7 +85,7 @@ while (false !== ($arrCat = $xoopsDB->fetchArray($resultCat))) {
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'view');
         $groupsIds = $grouppermHandler->getGroupIds('news_submit', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'submit');
-    // echo (int)($topic->topic_id()) . '<br>';
+        // echo (int)($topic->topic_id()) . '<br>';
     } else {
         $groupsIds = $grouppermHandler->getGroupIds($from_module_subprefix . 'approve', $arrCat['topic_id'], $news_module_id);
         xni_savePermissions($to_module_dirname, $groupsIds, $topic->topic_id(), $to_module_subprefix . 'approve');
@@ -203,11 +203,10 @@ while (false !== ($arrCat = $xoopsDB->fetchArray($resultCat))) {
         if (!$story->store()) {
             echo sprintf('  ' . _AM_XNI_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . '<br>';
             continue;
-        } else {
-            $newArticleArray[$arrArticle['storyid']] = $story->storyid();
-            echo sprintf(_AM_XNI_IMPORTED_ARTICLE, $story->title()) . '<br>';
-            ++$cnt_imported_articles;
         }
+        $newArticleArray[$arrArticle['storyid']] = $story->storyid();
+        echo sprintf(_AM_XNI_IMPORTED_ARTICLE, $story->title()) . '<br>';
+        ++$cnt_imported_articles;
     }
 }
 

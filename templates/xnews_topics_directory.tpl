@@ -2,6 +2,6 @@
 <br>
 <ul>
 <{foreach item=topic from=$topics}>
-	<li><{$topic.prefix}><{$topic.topic_link}> (<{$topic.nw_count}>)</li>
+    <li><{$topic.prefix}><{$topic.topic_link}> (<{$topic.nw_count}>)</li>
 <{/foreach}>
 </ul>

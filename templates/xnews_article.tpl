@@ -121,21 +121,21 @@
 
 
 
-<{if $showsummary == true && $summary_count>0}>
+<{if $showsummary === true && $summary_count>0}>
 <br><br>
 <table width='50%' cellspacing='0' cellpadding='1'>
     <tr>
         <th><{$lang_other_story}></th>
     </tr>
-<{if $urlrewrite == true}>
+<{if $urlrewrite === true}>
 <{foreach item=onesummary from=$summary}>
-    <tr class="<{cycle values="even,odd}>">
+    <tr class="<{cycle values="even,odd"}>">
         <td align='left'><{$onesummary.story_published}> - <{$onesummary.story_title}></td>
     </tr>
 <{/foreach}>
 <{else}>
 <{foreach item=onesummary from=$summary}>
-    <tr class="<{cycle values="even,odd}>">
+    <tr class="<{cycle values="even,odd"}>">
         <td align='left'><{$onesummary.story_published}> - <a href="<{$newsmodule_url}>/article.php?storyid=<{$onesummary.story_id}>"<{$onesummary.htmltitle}>><{$onesummary.story_title}></a></td>
     </tr>
 <{/foreach}>
@@ -146,7 +146,7 @@
 
 
 
-<{if $bookmarkme == true}>
+<{if $bookmarkme === true}>
 <br>
 <br>
 <table width='50%' cellspacing='0' cellpadding='1'>
@@ -156,7 +156,7 @@
     <tr>
         <td>
             <br>
-        <{if $urlrewrite == true}>
+        <{if $urlrewrite === true}>
             <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_BLINKLIST}>" href="http://www.blinklist.com/index.php?Action=Blink/addblink.php&Description=&Url=<{$story_url}>&Title=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/blinklist.gif"></a>&nbsp;
             <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_DELICIOUS}>" href="http://del.icio.us/post?url=<{$story_url}>&title=<{$encoded_title}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/delicious.gif"></a>&nbsp;
             <a target="_blank" title="<{$smarty.const._MD_XNEWS_BOOKMARK_TO_DIGG}>" href="http://digg.com/submit?phase=2&url=<{$story_url}>" title="" rel="nofollw"><img border="0" alt="" src="<{$newsmodule_url}>/assets/images/diggman.gif"></a>&nbsp;

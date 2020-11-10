@@ -1,8 +1,6 @@
-<?php namespace XoopsModules\Xnewsimport;
+<?php
 
-use Xmf\Request;
-use XoopsModules\Xnewsimport;
-use XoopsModules\Xnewsimport\Common;
+namespace XoopsModules\Xnewsimport;
 
 /**
  * Class Utility

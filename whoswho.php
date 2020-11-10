@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -26,6 +26,9 @@
  * @author Instant Zero
  * @copyright (c) Instant Zero - http://www.instant-zero.com
  */
+
+use XoopsModules\Xnews;
+
 require_once __DIR__ . '/header.php';
 
 // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
@@ -43,7 +46,8 @@ $article = new Xnews\NewsStory();
 $uid_ids = [];
 $uid_ids = $article->getWhosWho($helper->getConfig('restrictindex'));
 if (count($uid_ids) > 0) {
-    $lst_uid       = implode(',', $uid_ids);
+    $lst_uid = implode(',', $uid_ids);
+    /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $critere       = new \Criteria('uid', '(' . $lst_uid . ')', 'IN');
     $tbl_users     = $memberHandler->getUsers($critere);
@@ -53,7 +57,6 @@ if (count($uid_ids) > 0) {
             case 1:        // Username
                 $uname = $one_user->getVar('uname');
                 break;
-
             case 2:        // Display full name (if it is not empty)
                 if ('' != xoops_trim($one_user->getVar('name'))) {
                     $uname = $one_user->getVar('name');

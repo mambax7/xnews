@@ -112,7 +112,7 @@ define('_MI_XNEWS_TOPICS_RSS_DESC', 'Si es activada esta opción, los contenidos
 define('_MI_XNEWS_DATEFORMAT', 'Formato de la fecha');
 define(
     '_MI_XNEWS_DATEFORMAT_DESC',
-       "Por favor consulte la <a href='http://fr.php.net/manual/es/function.date.php' target='_blank'>documentación Php</a>, para obtener más información sobre como configurar el formato de fecha y hora.<br> Nota: Si no define ningún formato, se usará el formato por defecto."
+    "Por favor consulte la <a href='http://fr.php.net/manual/es/function.date.php' target='_blank'>documentación Php</a>, para obtener más información sobre como configurar el formato de fecha y hora.<br> Nota: Si no define ningún formato, se usará el formato por defecto."
 );
 define('_MI_XNEWS_META_DATA', 'Habilitar inclusión de meta datos');
 define('_MI_XNEWS_META_DATA_DESC', 'Si es activada esta opción, los usuarios con permisos para enviar noticias podrán incluir datos en la etiqueta Meta, estos son: metakeywords y metadescription');
@@ -195,7 +195,7 @@ define('_MI_XNEWS_TOPICDISPLAYDESC', 'Esto habilita/desabilita Temas en el títu
 define('_MI_XNEWS_SEOENABLE', 'Habilitar SEO');
 define(
     '_MI_XNEWS_SEOENABLEDESC',
-       'Esto habilita/desabilita la actividad SEO.<br> Si <b>htaccess</b> se selecciona usted obtendrá:<br> http://su.sitio.com/<b>xnews</b>/topics.1/titulo-de-su-tema.html <br> Si selecciona path-info is selected usted obtendrá: <br> http://su.sitio.com/modules/xnews/index.php/topics.1/titulo-de_su-tema.html'
+    'Esto habilita/desabilita la actividad SEO.<br> Si <b>htaccess</b> se selecciona usted obtendrá:<br> http://su.sitio.com/<b>xnews</b>/topics.1/titulo-de-su-tema.html <br> Si selecciona path-info is selected usted obtendrá: <br> http://su.sitio.com/modules/xnews/index.php/topics.1/titulo-de_su-tema.html'
 );
 
 // Added in version 1.68 RC1
@@ -212,12 +212,12 @@ define('_MI_XNEWS_DISPLAYLINKICNSDESC', 'Mostrar impresión amigable e iconos de
 define('_MI_XNEWS_SEOPATH', 'Ruta SEO');
 define(
     '_MI_XNEWS_SEOPATHDESC',
-       'Esto agregará un título a la URL de SEO para ambos modos <b>htaccess</b> y <b>path-info</b>. <br> Si se deja vacío usted obtendrá: <br> http://su.sitio.com/topics.1/titulo-de-su-tema.html <br> Si escribe <b>noticias</b> usted obtendrá: <br> http://su.sitio.com/<b>noticias</b>/topics.1/titulo-de-su-tema.html <br><br> <b>son aceptados caracteres de a-z y el caracter menos(-). ej. noticia-del-dia</b>'
+    'Esto agregará un título a la URL de SEO para ambos modos <b>htaccess</b> y <b>path-info</b>. <br> Si se deja vacío usted obtendrá: <br> http://su.sitio.com/topics.1/titulo-de-su-tema.html <br> Si escribe <b>noticias</b> usted obtendrá: <br> http://su.sitio.com/<b>noticias</b>/topics.1/titulo-de-su-tema.html <br><br> <b>son aceptados caracteres de a-z y el caracter menos(-). ej. noticia-del-dia</b>'
 );
 define('_MI_XNEWS_SEOLEVEL', 'Nivel SEO');
 define(
     '_MI_XNEWS_SEOLEVELDESC',
-       'Aquí puedes elegir si tener htaccess en la raíz de xoops o en el módulo. <br> Esto cambiará la apariencia de la URL.<br> En el Nivel Raíz: <br> http://su.sitio.com/news/topics.1/titulo-de-su-tema.html <br> En el nivel Módulo: <br> http://su.sitio.com/modules/xnews/news.topics.1/titulo-de-su-tema.html<br><br> Solo trabaja en el modo htaccess y el archivo htaccess tendrá que ser instalado en consecuencia.'
+    'Aquí puedes elegir si tener htaccess en la raíz de xoops o en el módulo. <br> Esto cambiará la apariencia de la URL.<br> En el Nivel Raíz: <br> http://su.sitio.com/news/topics.1/titulo-de-su-tema.html <br> En el nivel Módulo: <br> http://su.sitio.com/modules/xnews/news.topics.1/titulo-de-su-tema.html<br><br> Solo trabaja en el modo htaccess y el archivo htaccess tendrá que ser instalado en consecuencia.'
 );
 define('_MI_XNEWS_MODULE_LEVEL', 'Nivel Módulo');
 define('_MI_XNEWS_ROOT_LEVEL', 'Nivel Raíz');

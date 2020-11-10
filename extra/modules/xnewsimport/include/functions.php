@@ -1,5 +1,5 @@
 <?php
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Returns a module's option
@@ -46,7 +46,7 @@ function xni_getmoduleoption($option, $repmodule)
 function xni_fieldexists($fieldname, $table)
 {
     global $xoopsDB;
-    $result = $xoopsDB->queryF("SHOW COLUMNS FROM	$table LIKE '$fieldname'");
+    $result = $xoopsDB->queryF("SHOW COLUMNS FROM   $table LIKE '$fieldname'");
 
     return ($xoopsDB->getRowsNum($result) > 0);
 }
@@ -106,7 +106,7 @@ function xni_MygetItemIds($permtype = 'nw_view')
     $moduleHandler       = xoops_getHandler('module');
     $newsModule          = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
     $groups              = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $grouppermHandler        = xoops_getHandler('groupperm');
+    $grouppermHandler    = xoops_getHandler('groupperm');
     $topics              = $grouppermHandler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
     $tblperms[$permtype] = $topics;
 
@@ -120,7 +120,8 @@ function xni_MygetItemIds($permtype = 'nw_view')
  */
 function xni_clonecopyfile($srcpath, $destpath, $filename)
 {
-    if ($handle = opendir($srcpath)) {
+    $handle = opendir($srcpath);
+    if ($handle) {
         if ('' == $filename) {
             while ($file = readdir($handle)) {
                 if ('.' !== $file && '..' !== $file) {
@@ -152,7 +153,7 @@ function xni_savePermissions($dirname, $groups, $itemid, $permname)
 
     $result = true;
 
-    $module_id    = $news_module->getVar('mid');
+    $module_id        = $news_module->getVar('mid');
     $grouppermHandler = xoops_getHandler('groupperm');
     // First, if the permissions are already there, delete them
     $grouppermHandler->deleteByModule($module_id, $permname, $itemid);

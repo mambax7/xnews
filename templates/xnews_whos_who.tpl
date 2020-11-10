@@ -5,6 +5,6 @@
 <br>
 <ul>
 <{foreach item=who from=$whoswho}>
-	<li><a href="<{$newsmodule_url}>/newsbythisauthor.php?uid=<{$who.uid}>"><{$who.name}></a></li>
+    <li><a href="<{$newsmodule_url}>/newsbythisauthor.php?uid=<{$who.uid}>"><{$who.name}></a></li>
 <{/foreach}>
 </ul>

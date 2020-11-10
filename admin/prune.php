@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -61,7 +61,6 @@ $newsStoryHandler = new Xnews\NewsStory();
  * message with the number of news that will be removed.
  * Note, the topics are not deleted (even if there are no more news inside them).
  */
-
 $op = Request::getString('op', 'default');
 
 switch ($op) {
@@ -70,7 +69,7 @@ switch ($op) {
         xoops_cp_header();
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
-        //
+
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         $sform = new \XoopsThemeForm(_AM_XNEWS_PRUNENEWS, 'pruneform', $currentFile, 'post', true);
         $sform->addElement(new \XoopsFormTextDateSelect(_AM_XNEWS_PRUNE_BEFORE, 'prune_date', 15, time()), true);
@@ -91,22 +90,21 @@ switch ($op) {
         }
         $topiclist->setDescription(_AM_XNEWS_EXPORT_PRUNE_DSC);
         $sform->addElement($topiclist, false);
-        $button_tray = new \XoopsFormElementTray('', '');
-        $submit_btn  = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
-        $button_tray->addElement($submit_btn);
-        $sform->addElement($button_tray);
+        $buttonTray = new \XoopsFormElementTray('', '');
+        $submit_btn = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
+        $buttonTray->addElement($submit_btn);
+        $sform->addElement($buttonTray);
         $sform->display();
         xoops_cp_footer();
         break;
-
     case 'confirmbeforetoprune':
         xoops_cp_header();
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
-        //
+
         $story     = new Xnews\NewsStory();
         $topiclist = '';
-        if (isset($_POST['pruned_topics'])) {
+        if (\Xmf\Request::hasVar('pruned_topics', 'POST')) {
             $topiclist = implode(',', $_POST['pruned_topics']);
         }
 
@@ -127,13 +125,12 @@ switch ($op) {
         unset($story);
         xoops_cp_footer();
         break;
-
     case 'prunenews':
         $story     = new Xnews\NewsStory();
         $timestamp = \Xmf\Request::getInt('prune_date', 0, 'POST');
         $expired   = \Xmf\Request::getInt('expired', 0, 'POST');
         $topiclist = '';
-        if (isset($_POST['pruned_topics'])) {
+        if (\Xmf\Request::hasVar('pruned_topics', 'POST')) {
             $topiclist = $_POST['pruned_topics'];
         }
         if (1 == \Xmf\Request::getInt('ok', 0, 'POST')) {

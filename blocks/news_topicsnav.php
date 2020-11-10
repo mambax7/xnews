@@ -11,13 +11,15 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
  */
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+use XoopsModules\Xnews;
+
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 /**
  * Solves issue when upgrading xoops version
  * Paths not set and block would not work
@@ -54,8 +56,9 @@ function nw_b_news_topicsnav_show($options)
         $moduleHandler = xoops_getHandler('module');
         $newsModule    = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
         $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-        $grouppermHandler  = xoops_getHandler('groupperm');
-        $topics        = $grouppermHandler->getItemIds('nw_view', $groups, $newsModule->getVar('mid'));
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
+        $topics           = $grouppermHandler->getItemIds('nw_view', $groups, $newsModule->getVar('mid'));
         if (count($topics) > 0) {
             $topics = implode(',', $topics);
             $perms  = ' AND topic_id IN (' . $topics . ') ';
@@ -81,7 +84,7 @@ function nw_b_news_topicsnav_show($options)
                 'id'          => $onetopic['topic_id'],
                 'nw_count'    => $count,
                 'topic_color' => '#' . $onetopic['topic_color'],
-                'title'       => $myts->displayTarea($onetopic['topic_title'])
+                'title'       => $myts->displayTarea($onetopic['topic_title']),
             ];
         }
     }
@@ -125,7 +128,7 @@ function nw_b_news_topicsnav_edit($options)
 function nw_b_news_topicsnav_onthefly($options)
 {
     $options = explode('|', $options);
-    $block   = &nw_b_news_topicsnav_show($options);
+    $block   = nw_b_news_topicsnav_show($options);
 
     $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);

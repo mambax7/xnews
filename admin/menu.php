@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -19,14 +19,17 @@
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
-
 // require_once  dirname(__DIR__) . '/class/Helper.php';
 //require_once  dirname(__DIR__) . '/include/common.php';
+/** @var Xnews\Helper $helper */
 $helper = Xnews\Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
 
-$pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
-$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+}
 
 $adminmenu[] = [
     'title'      => _MAIN,
@@ -54,6 +57,13 @@ $adminmenu[] = [
     'link'       => 'admin/permissions.php',
     'icon'       => $pathIcon32 . '/permissions.png',
     'icon_small' => $pathIcon32 . '/permissions.png',
+];
+
+// Blocks Admin
+$adminmenu[] = [
+    'title' => _MI_XNEWS_BLOCKS,
+    'link'  => 'admin/blocksadmin.php',
+    'icon'  => $pathIcon32 . '/block.png',
 ];
 
 $adminmenu[] = [
@@ -101,5 +111,5 @@ $adminmenu[] = [
 $adminmenu[] = [
     'title' => _MI_XNEWS_ABOUT,
     'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png'
+    'icon'  => $pathIcon32 . '/about.png',
 ];

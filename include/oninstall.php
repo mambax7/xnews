@@ -1,9 +1,10 @@
 <?php
+
 /**
  * @param $xoopsModule
  * @return bool
  */
-function xoops_module_install_xnews(&$xoopsModule)
+function xoops_module_install_xnews($xoopsModule)
 {
     require_once __DIR__ . '/common.php';
     global $xoopsDB;
@@ -13,7 +14,8 @@ function xoops_module_install_xnews(&$xoopsModule)
     $module_name    = $xoopsModule->getVar('name');
     $module_dirname = $xoopsModule->getVar('dirname');
     $module_version = $xoopsModule->getVar('version');
-    $grouppermHandler   = xoops_getHandler('groupperm');
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
     // access rights
     $grouppermHandler->addRight('nw_approve', 1, XOOPS_GROUP_ADMIN, $module_id);
     $grouppermHandler->addRight('nw_submit', 1, XOOPS_GROUP_ADMIN, $module_id);

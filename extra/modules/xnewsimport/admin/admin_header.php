@@ -17,16 +17,18 @@
  * @author       XOOPS Development Team
  * @version      $Id $
  */
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require dirname(__DIR__) . '/preloads/autoloader.php';
 
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 //require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 //require_once  dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-$helper = \XoopsModules\Xnews\Helper::getInstance();
-$adminObject   = \Xmf\Module\Admin::getInstance();
+/** @var \XoopsModules\Xnews\Helper $helper */
+$helper      = \XoopsModules\Xnews\Helper::getInstance();
+$adminObject = \Xmf\Module\Admin::getInstance();
 
 $pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);

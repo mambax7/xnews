@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -26,7 +26,7 @@ require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation($currentFile);
-//
+
 $permToSet = isset($_REQUEST['permToSet']) ? $_REQUEST['permToSet'] : 'nw_approve';
 // permissions selector
 xoops_load('XoopsFormLoader');
@@ -69,4 +69,4 @@ echo $permissionsForm->render();
 echo "<br>\n";
 unset($permissionsForm);
 
-include __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

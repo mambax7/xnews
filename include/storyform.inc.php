@@ -11,16 +11,15 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
- *
  */
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 if (file_exists(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php')) {
     require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
@@ -50,8 +49,9 @@ $topic_tree = new \XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 
 //$module = $helper->getModule();
 $moduleDirName = basename(dirname(__DIR__));
-$helper        = \XoopsModules\Xnews\Helper::getInstance();
-$module        = $helper->getModule();
+/** @var \XoopsModules\Xnews\Helper $helper */
+$helper = \XoopsModules\Xnews\Helper::getInstance();
+$module = $helper->getModule();
 
 if (Xnews\Utility::checkVerXoops($module, '2.5.9')) {
     //         $topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
@@ -84,6 +84,7 @@ if ($approveprivilege && is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModu
     if (!isset($newsauthor)) {
         $newsauthor = $xoopsUser->getVar('uid');
     }
+    /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $usercount     = $memberHandler->getUserCount();
     if ($usercount < $cfg['config_max_users_list']) {
@@ -106,7 +107,7 @@ if ($approveprivilege) {
     if ($helper->getConfig('tags')) {
         $itemIdForTag = isset($storyid) ? $storyid : 0;
         require_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
-        $sform->addElement(new TagFormTag('item_tag', 60, 255, $itemIdForTag, 0));
+        $sform->addElement(new \XoopsModules\Tag\FormTag('item_tag', 60, 255, $itemIdForTag, 0));
     }
 
     if ($helper->getConfig('metadata')) {
@@ -235,14 +236,14 @@ $option_tray->addElement($linebreak_checkbox);
 $sform->addElement($option_tray);
 
 //Submit buttons
-$button_tray = new \XoopsFormElementTray('', '');
+$buttonTray  = new \XoopsFormElementTray('', '');
 $preview_btn = new \XoopsFormButton('', 'preview', _PREVIEW, 'submit');
 $preview_btn->setExtra('accesskey="p"');
-$button_tray->addElement($preview_btn);
+$buttonTray->addElement($preview_btn);
 $submit_btn = new \XoopsFormButton('', 'post', _MD_XNEWS_POST, 'submit');
 $submit_btn->setExtra('accesskey="s"');
-$button_tray->addElement($submit_btn);
-$sform->addElement($button_tray);
+$buttonTray->addElement($submit_btn);
+$sform->addElement($buttonTray);
 
 //Hidden variables
 if (isset($storyid)) {

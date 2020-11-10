@@ -2,8 +2,6 @@
 
 namespace XoopsModules\Xnews\Deprecate;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
-
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
 /**
@@ -27,9 +25,9 @@ class DeprecateTopic
     public function __construct($table, $topicid = 0)
     {
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
-        ;
+
         $this->table = $table;
-        if (is_array($topicid)) {
+        if (\is_array($topicid)) {
             $this->makeTopic($topicid);
         } elseif (0 != $topicid) {
             $this->getTopic((int)$topicid);
@@ -106,14 +104,14 @@ class DeprecateTopic
         if (isset($this->topic_imgurl) && '' != $this->topic_imgurl) {
             $imgurl = $myts->addSlashes($this->topic_imgurl);
         }
-        if (!isset($this->topic_pid) || !is_numeric($this->topic_pid)) {
+        if (!isset($this->topic_pid) || !\is_numeric($this->topic_pid)) {
             $this->topic_pid = 0;
         }
         if (empty($this->topic_id)) {
             $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
-            $sql            = sprintf("INSERT INTO `%s` (topic_id, topic_pid, topic_imgurl, topic_title) VALUES (%u, %u, '%s', '%s')", $this->table, $this->topic_id, $this->topic_pid, $imgurl, $title);
+            $sql            = \sprintf("INSERT INTO `%s` (topic_id, topic_pid, topic_imgurl, topic_title) VALUES (%u, %u, '%s', '%s')", $this->table, $this->topic_id, $this->topic_pid, $imgurl, $title);
         } else {
-            $sql = sprintf("UPDATE `%s` SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s' WHERE topic_id = %u", $this->table, $this->topic_pid, $imgurl, $title, $this->topic_id);
+            $sql = \sprintf("UPDATE `%s` SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s' WHERE topic_id = %u", $this->table, $this->topic_pid, $imgurl, $title, $this->topic_id);
         }
         if (!$result = $this->db->query($sql)) {
             ErrorHandler::show('0022');
@@ -124,13 +122,13 @@ class DeprecateTopic
             }
             $xt            = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
             $parent_topics = $xt->getAllParentId($this->topic_id);
-            if (!empty($this->m_groups) && is_array($this->m_groups)) {
+            if (!empty($this->m_groups) && \is_array($this->m_groups)) {
                 foreach ($this->m_groups as $m_g) {
                     $moderate_topics = \XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
                     $add             = true;
                     // only grant this permission when the group has this permission in all parent topics of the created topic
                     foreach ($parent_topics as $p_topic) {
-                        if (!in_array($p_topic, $moderate_topics)) {
+                        if (!\in_array($p_topic, $moderate_topics)) {
                             $add = false;
                             continue;
                         }
@@ -145,12 +143,12 @@ class DeprecateTopic
                     }
                 }
             }
-            if (!empty($this->s_groups) && is_array($this->s_groups)) {
+            if (!empty($this->s_groups) && \is_array($this->s_groups)) {
                 foreach ($s_groups as $s_g) {
                     $submit_topics = \XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
                     $add           = true;
                     foreach ($parent_topics as $p_topic) {
-                        if (!in_array($p_topic, $submit_topics)) {
+                        if (!\in_array($p_topic, $submit_topics)) {
                             $add = false;
                             continue;
                         }
@@ -165,12 +163,12 @@ class DeprecateTopic
                     }
                 }
             }
-            if (!empty($this->r_groups) && is_array($this->r_groups)) {
+            if (!empty($this->r_groups) && \is_array($this->r_groups)) {
                 foreach ($r_groups as $r_g) {
                     $read_topics = \XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
                     $add         = true;
                     foreach ($parent_topics as $p_topic) {
-                        if (!in_array($p_topic, $read_topics)) {
+                        if (!\in_array($p_topic, $read_topics)) {
                             $add = false;
                             continue;
                         }
@@ -192,7 +190,7 @@ class DeprecateTopic
 
     public function delete()
     {
-        $sql = sprintf('DELETE FROM `%s` WHERE topic_id = %u', $this->table, $this->topic_id);
+        $sql = \sprintf('DELETE FROM `%s` WHERE topic_id = %u', $this->table, $this->topic_id);
         $this->db->query($sql);
     }
 
@@ -268,9 +266,9 @@ class DeprecateTopic
         $ret       = [];
         $xt        = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         $topic_arr = $xt->getFirstChild($this->topic_id, 'topic_title');
-        if (is_array($topic_arr) && count($topic_arr)) {
+        if (\is_array($topic_arr) && \count($topic_arr)) {
             foreach ($topic_arr as $topic) {
-                $ret[] = new DeprecateTopic($this->table, $topic);
+                $ret[] = new self($this->table, $topic);
             }
         }
 
@@ -285,9 +283,9 @@ class DeprecateTopic
         $ret       = [];
         $xt        = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         $topic_arr = $xt->getAllChild($this->topic_id, 'topic_title');
-        if (is_array($topic_arr) && count($topic_arr)) {
+        if (\is_array($topic_arr) && \count($topic_arr)) {
             foreach ($topic_arr as $topic) {
-                $ret[] = new DeprecateTopic($this->table, $topic);
+                $ret[] = new self($this->table, $topic);
             }
         }
 
@@ -302,9 +300,9 @@ class DeprecateTopic
         $ret       = [];
         $xt        = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
         $topic_arr = $xt->getChildTreeArray($this->topic_id, 'topic_title');
-        if (is_array($topic_arr) && count($topic_arr)) {
+        if (\is_array($topic_arr) && \count($topic_arr)) {
             foreach ($topic_arr as $topic) {
-                $ret[] = new DeprecateTopic($this->table, $topic);
+                $ret[] = new self($this->table, $topic);
             }
         }
 
@@ -364,7 +362,7 @@ class DeprecateTopic
         $ret    = [];
         $myts   = \MyTextSanitizer::getInstance();
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $ret[$myrow['topic_id']] = ['title' => $myts->htmlspecialchars($myrow['topic_title']), 'pid' => $myrow['topic_pid']];
+            $ret[$myrow['topic_id']] = ['title' => $myts->htmlSpecialChars($myrow['topic_title']), 'pid' => $myrow['topic_pid']];
         }
 
         return $ret;
@@ -378,13 +376,13 @@ class DeprecateTopic
      */
     public function topicExists($pid, $title)
     {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->table . ' WHERE topic_pid = ' . (int)$pid . " AND topic_title = '" . trim($title) . "'";
+        $sql = 'SELECT COUNT(*) FROM ' . $this->table . ' WHERE topic_pid = ' . (int)$pid . " AND topic_title = '" . \trim($title) . "'";
         $rs  = $this->db->query($sql);
-        list($count) = $this->db->fetchRow($rs);
+        [$count] = $this->db->fetchRow($rs);
         if ($count > 0) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 }

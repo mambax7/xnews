@@ -17,8 +17,7 @@
  * @author       XOOPS Development Team, hthouzard
  * @version      $Id $
  */
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
@@ -68,11 +67,11 @@ class xni_NewsTopic extends \XoopsTopic
         if ($checkRight) {
             global $xoopsUser;
             /** @var \XoopsModuleHandler $moduleHandler */
-            $moduleHandler = xoops_getHandler('module');
-            $newsModule    = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
-            $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-            $grouppermHandler  = xoops_getHandler('groupperm');
-            $topics        = $grouppermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
+            $moduleHandler    = xoops_getHandler('module');
+            $newsModule       = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
+            $groups           = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+            $grouppermHandler = xoops_getHandler('groupperm');
+            $topics           = $grouppermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
                 $topics = implode(',', $topics);
                 $perms  = ' AND topic_id IN (' . $topics . ') ';
@@ -85,9 +84,9 @@ class xni_NewsTopic extends \XoopsTopic
             return $this->makeMySelBox('topic_title', 'topic_title', $seltopic, $none, $selname, $onchange, $perms);
         } elseif (!empty($this->topic_id)) {
             return $this->makeMySelBox('topic_title', 'topic_title', $this->topic_id, $none, $selname, $onchange, $perms);
-        } else {
-            return $this->makeMySelBox('topic_title', 'topic_title', 0, $none, $selname, $onchange, $perms);
         }
+
+        return $this->makeMySelBox('topic_title', 'topic_title', 0, $none, $selname, $onchange, $perms);
     }
 
     /**
@@ -102,7 +101,7 @@ class xni_NewsTopic extends \XoopsTopic
      * @param        $perms
      * @return string
      */
-    public function makeMySelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = 'topic_id', $onchange = '', $perms)
+    public function makeMySelBox($title, $order, $preset_id, $none, $sel_name, $onchange, $perms)
     {
         $myts      = \MyTextSanitizer::getInstance();
         $outbuffer = '';
@@ -119,7 +118,7 @@ class xni_NewsTopic extends \XoopsTopic
         if ($none) {
             $outbuffer .= "<option value='0'>----</option>\n";
         }
-        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
+        while (list($catid, $name) = $this->db->fetchRow($result)) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = " selected='selected'";
@@ -180,15 +179,15 @@ class xni_NewsTopic extends \XoopsTopic
     {
         if (method_exists($this, $var)) {
             return call_user_func([$this, $var]);
-        } else {
-            return $this->$var;
         }
+
+        return $this->$var;
     }
 
     /**
      * Get the total number of topics in the base
      * @param bool $checkRight
-     * @return null
+     * @return |null
      */
     public function getAllTopicsCount($checkRight = true)
     {
@@ -196,11 +195,11 @@ class xni_NewsTopic extends \XoopsTopic
         if ($checkRight) {
             global $xoopsUser;
             /** @var \XoopsModuleHandler $moduleHandler */
-            $moduleHandler = xoops_getHandler('module');
-            $newsModule    = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
-            $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-            $grouppermHandler  = xoops_getHandler('groupperm');
-            $topics        = $grouppermHandler->getItemIds('xni_submit', $groups, $newsModule->getVar('mid'));
+            $moduleHandler    = xoops_getHandler('module');
+            $newsModule       = $moduleHandler->getByDirname(XNI_MODULE_DIR_NAME);
+            $groups           = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+            $grouppermHandler = xoops_getHandler('groupperm');
+            $topics           = $grouppermHandler->getItemIds('xni_submit', $groups, $newsModule->getVar('mid'));
             if (count($topics) > 0) {
                 $topics = implode(',', $topics);
                 $perms  = ' WHERE topic_id IN (' . $topics . ') ';
@@ -238,7 +237,7 @@ class xni_NewsTopic extends \XoopsTopic
         $sql    .= ' ORDER BY topic_title';
         $result = $db->query($sql);
         while (false !== ($array = $db->fetchArray($result))) {
-            $topic = new xni_NewsTopic();
+            $topic = new self();
             $topic->makeTopic($array);
             $topics_arr[$array['topic_id']] = $topic;
             unset($topic);
@@ -344,33 +343,11 @@ class xni_NewsTopic extends \XoopsTopic
         if (empty($this->topic_id)) {
             $insert         = true;
             $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
-            $sql            = sprintf(
-                "INSERT INTO `%s` (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s')",
-                $this->table,
-                (int)$this->topic_id,
-                (int)$this->topic_pid,
-                $imgurl,
-                                      $title,
-                (int)$this->menu,
-                $topic_description,
-                $topic_frontpage,
-                $topic_rssurl,
-                $topic_color
-            );
+            $sql            = sprintf("INSERT INTO `%s` (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s')", $this->table, (int)$this->topic_id, (int)$this->topic_pid, $imgurl,
+                                      $title, (int)$this->menu, $topic_description, $topic_frontpage, $topic_rssurl, $topic_color);
         } else {
-            $sql = sprintf(
-                "UPDATE `%s` SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s' WHERE topic_id = %u",
-                $this->table,
-                (int)$this->topic_pid,
-                $imgurl,
-                $title,
-                (int)$this->menu,
-                           $topic_description,
-                $topic_frontpage,
-                $topic_rssurl,
-                $topic_color,
-                (int)$this->topic_id
-            );
+            $sql = sprintf("UPDATE `%s` SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s' WHERE topic_id = %u", $this->table, (int)$this->topic_pid, $imgurl, $title, (int)$this->menu,
+                           $topic_description, $topic_frontpage, $topic_rssurl, $topic_color, (int)$this->topic_id);
         }
         if (!$result = $this->db->query($sql)) {
             // TODO: Replace with something else
@@ -569,7 +546,7 @@ class xni_NewsTopic extends \XoopsTopic
     /**
      * @param $topic
      * @param $topicstitles
-     * @return null
+     * @return |null
      */
     public function getTopicTitleFromId($topic, &$topicstitles)
     {
@@ -650,10 +627,10 @@ class xni_NewsTopic extends \XoopsTopic
      * Set a variabe in on of the request variables
      *
      * @access    public
-     * @param  string  $name      Name
-     * @param  string  $value     Value
-     * @param  string  $hash      Hash
-     * @param  boolean $overwrite Boolean
+     * @param  string $name      Name
+     * @param  string $value     Value
+     * @param  string $hash      Hash
+     * @param  bool   $overwrite Boolean
      * @return string  Previous value
      */
     public function setVar($name, $value = null, $hash = 'method', $overwrite = true)
@@ -664,9 +641,9 @@ class xni_NewsTopic extends \XoopsTopic
         }
 
         // Get the request hash value
-        $hash = strtoupper($hash);
+        $hash = mb_strtoupper($hash);
         if ('METHOD' === $hash) {
-            $hash = strtoupper($_SERVER['REQUEST_METHOD']);
+            $hash = mb_strtoupper($_SERVER['REQUEST_METHOD']);
         }
 
         $previous = array_key_exists($name, $_REQUEST) ? $_REQUEST[$name] : null;

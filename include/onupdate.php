@@ -48,7 +48,7 @@ function xoops_module_update_xnews($xoopsModule)
         //foreach ( $xoopsDB->fetchArray($result) as $singlefile ) {
         $sfiles   = new Xnews\Files($singlefile['fileid']);
         $destname = $sfiles->getDownloadname();
-        if (false !== strpos($sfiles->getMimetype(), 'image')) {
+        if (false !== mb_strpos($sfiles->getMimetype(), 'image')) {
             $fullPictureName = XNEWS_ATTACHED_FILES_PATH . '/' . basename($destname);
             // IN PROGRESS
             // IN PROGRESS

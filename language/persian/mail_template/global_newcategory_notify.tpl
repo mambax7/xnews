@@ -17,7 +17,7 @@ agar matne farsi ra nemibinid baraye didane matne farsi rooye in safhe click ras
 
 -----------
 
-{X_SITENAME} ({X_SITEURL}) 
+{X_SITENAME} ({X_SITEURL})
 مدير سايت
 {X_ADMINMAIL}
 
@@ -40,6 +40,6 @@ Please do not reply to this message.
 
 -----------
 
-{X_SITENAME} ({X_SITEURL}) 
+{X_SITENAME} ({X_SITEURL})
 webmaster
 {X_ADMINMAIL}

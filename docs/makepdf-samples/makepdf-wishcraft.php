@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -49,7 +49,7 @@ $ret = $GLOBALS['xoopsDB']->query($sql);
 $row = $GLOBALS['xoopsDB']->fetchArray($ret);
 $url = XOOPS_URL . '/' . $GLOBALS['xoopsModuleConfig']['seopath'] . '/' . xoops_sef($row['topic_title']) . '/' . xoops_sef($row['title']) . '/pdf,' . $_REQUEST['storyid'] . $GLOBALS['xoopsModuleConfig']['seo_endofurl_pdf'];
 
-if (!strpos($url, $_SERVER['REQUEST_URI']) && 1 == $GLOBALS['xoopsModuleConfig']['seo_enable']) {
+if (!mb_strpos($url, $_SERVER['REQUEST_URI']) && 1 == $GLOBALS['xoopsModuleConfig']['seo_enable']) {
     header('HTTP/1.1 301 Moved Permanently');
     header("Location: $url");
     exit(0);
@@ -70,6 +70,7 @@ if (0 != $article->expired() && $article->expired() < time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
@@ -162,7 +163,7 @@ $GLOBALS['xoopsTpl']->assign('advertisement', $helper->getConfig('advertisement'
 function my_highlighter($matches)
 {
     $color = $helper->getConfig('highlightcolor');
-    if (0 !== strpos($color, '#')) {
+    if (0 !== mb_strpos($color, '#')) {
         $color = '#' . $color;
     }
 
@@ -247,10 +248,10 @@ $filescount = count($filesarr);
 $GLOBALS['xoopsTpl']->assign('attached_files_count', $filescount);
 if ($filescount > 0) {
     foreach ($filesarr as $onefile) {
-        if (false !== strpos($onefile->getMimetype(), 'image')) {
+        if (false !== mb_strpos($onefile->getMimetype(), 'image')) {
             $mime        = 'image';
             $newsfiles[] = ['visitlink' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(), 'file_realname' => $onefile->getFileRealName(), 'file_mimetype' => $mime];
-        //trigger_error($mime, E_USER_WARNING);
+            //trigger_error($mime, E_USER_WARNING);
         } else {
             $newsfiles[] = [
                 'file_id'           => $onefile->getFileid(),
@@ -258,7 +259,7 @@ if ($filescount > 0) {
                 'file_realname'     => $onefile->getFileRealName(),
                 'file_attacheddate' => formatTimestamp($onefile->getDate(), $dateformat),
                 'file_mimetype'     => $onefile->getMimetype(),
-                'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
+                'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(),
             ];
         }
     }
@@ -322,23 +323,29 @@ if ($helper->getConfig('showsummarytable')) {
             if (0 != $seo_enabled) {
                 $story_path = nw_remove_accents($onearticle->title());
                 $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
-                $GLOBALS['xoopsTpl']->append('summary', [
-                    'story_id'        => $onearticle->storyid(),
-                    'htmltitle'       => $htmltitle,
-                    'infotips'        => $tooltips,
-                    'story_title'     => $storyTitle,
-                    'story_hits'      => $onearticle->counter(),
-                    'story_published' => formatTimestamp($onearticle->published, $dateformat)
-                ]);
+                $GLOBALS['xoopsTpl']->append(
+                    'summary',
+                    [
+                        'story_id'        => $onearticle->storyid(),
+                        'htmltitle'       => $htmltitle,
+                        'infotips'        => $tooltips,
+                        'story_title'     => $storyTitle,
+                        'story_hits'      => $onearticle->counter(),
+                        'story_published' => formatTimestamp($onearticle->published, $dateformat),
+                    ]
+                );
             } else {
-                $GLOBALS['xoopsTpl']->append('summary', [
-                    'story_id'        => $onearticle->storyid(),
-                    'htmltitle'       => $htmltitle,
-                    'infotips'        => $tooltips,
-                    'story_title'     => $onearticle->title(),
-                    'story_hits'      => $onearticle->counter(),
-                    'story_published' => formatTimestamp($onearticle->published, $dateformat)
-                ]);
+                $GLOBALS['xoopsTpl']->append(
+                    'summary',
+                    [
+                        'story_id'        => $onearticle->storyid(),
+                        'htmltitle'       => $htmltitle,
+                        'infotips'        => $tooltips,
+                        'story_title'     => $onearticle->title(),
+                        'story_hits'      => $onearticle->counter(),
+                        'story_published' => formatTimestamp($onearticle->published, $dateformat),
+                    ]
+                );
             }
         }
     }
@@ -512,6 +519,7 @@ $pdf_data['subtitle'] = $article->topic_title();
 $pdf_data['subsubtitle'] = $xoopsModule->name();
 $pdf_data['date']        = ': ' . date(_DATESTRING, $article->published());
 
+/** @var \XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
 $author        = $memberHandler->getUser($article->uid());
 if ($author->getVar('name')) {
@@ -542,6 +550,7 @@ define('K_PATH_IMAGES', XOOPS_ROOT_PATH . '/images/');
 //}
 
 //DNPROSSI Added - xlanguage installed and active
+/** @var \XoopsModuleHandler $moduleHandler */
 $moduleHandler = xoops_getHandler('module');
 $xlanguage     = $moduleHandler->getByDirname('xlanguage');
 if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {

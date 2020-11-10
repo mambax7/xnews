@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -56,23 +56,24 @@ if (!nw_FieldExists('picture', $storiesTableName)) {
  */
 function Newsletter()
 {
+    /** @var Xnews\Helper $helper */
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = new Xnews\NewsStory();
-    //
+
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
     $adminObject->displayNavigation('newsletter.php');
-    //
+
     xoops_load('XoopsFormLoader');
     $sform = new \XoopsThemeForm(_AM_XNEWS_NEWSLETTER, 'newsletterform', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
-    //
+
     $dates_tray = new \XoopsFormElementTray(_AM_XNEWS_NEWSLETTER_BETWEEN);
     $date1      = new \XoopsFormTextDateSelect('', 'date1', 15, time());
     $dates_tray->addElement($date1);
     $date2 = new \XoopsFormTextDateSelect(_AM_XNEWS_EXPORT_AND, 'date2', 15, time());
     $dates_tray->addElement($date2);
     $sform->addElement($dates_tray);
-    //
+
     $topiclist  = new \XoopsFormSelect(_AM_XNEWS_PRUNE_TOPICS, 'export_topics', '', 5, true);
     $topics_arr = [];
     $xt         = new Xnews\NewsTopic();
@@ -86,16 +87,16 @@ function Newsletter()
     }
     $topiclist->setDescription(_AM_XNEWS_EXPORT_PRUNE_DSC);
     $sform->addElement($topiclist, false);
-    //
+
     $sform->addElement(new \XoopsFormHidden('op', 'launchnewsletter'), false);
     $sform->addElement(new \XoopsFormRadioYN(_AM_XNEWS_REMOVE_BR, 'removebr', 1), false);
     $sform->addElement(new \XoopsFormRadioYN(_AM_XNEWS_NEWSLETTER_HTML_TAGS, 'removehtml', 0), false);
     $sform->addElement(new \XoopsFormTextArea(_AM_XNEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
     $sform->addElement(new \XoopsFormTextArea(_AM_XNEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
-    $button_tray = new \XoopsFormElementTray('', '');
-    $submit_btn  = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
-    $button_tray->addElement($submit_btn);
-    $sform->addElement($button_tray);
+    $buttonTray = new \XoopsFormElementTray('', '');
+    $submit_btn = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
+    $buttonTray->addElement($submit_btn);
+    $sform->addElement($buttonTray);
     $sform->display();
 }
 
@@ -104,9 +105,10 @@ function Newsletter()
  */
 function LaunchNewsletter()
 {
+    /** @var Xnews\Helper $helper */
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = \XoopsModules\Xnews\Helper::getInstance()->getHandler('NewsStory');
-    //
+
     xoops_cp_header();
     $adminObject = \Xmf\Module\Admin::getInstance();
     $adminObject->displayNavigation('index.php?op=configurenewsletter');
@@ -123,18 +125,18 @@ function LaunchNewsletter()
     $removehtml      = \Xmf\Request::getInt('removehtml', 0, 'POST');
     $header          = \Xmf\Request::getString('header', '', 'POST');
     $footer          = \Xmf\Request::getString('footer', '', 'POST');
-    //
+
     $dateTimeObj = DateTime::createFromFormat(_SHORTDATESTRING, $_POST['date1']);
     $dateTimeObj->setTime(0, 0, 0);
     $timestamp1 = $dateTimeObj->getTimestamp();
     unset($dateTimeObj);
-    //
+
     $dateTimeObj = DateTime::createFromFormat(_SHORTDATESTRING, $_POST['date2']);
     $dateTimeObj->setTime(0, 0, 0);
     $timestamp2 = $dateTimeObj->getTimestamp();
     unset($dateTimeObj);
-    //
-    if (isset($_POST['export_topics'])) {
+
+    if (\Xmf\Request::hasVar('export_topics', 'POST')) {
         $topiclist = implode(',', $_POST['export_topics']);
     }
     $tbltopics       = [];
@@ -168,7 +170,7 @@ function LaunchNewsletter()
                 '%votes%',
                 '%publisher%',
                 '%publisher_id%',
-                '%link%'
+                '%link%',
             ];
             $replace_pattern = [
                 $exportedStory->title(),
@@ -188,7 +190,7 @@ function LaunchNewsletter()
                 $exportedStory->votes(),
                 $exportedStory->uname(),
                 $exportedStory->uid(),
-                XNEWS_MODULE_URL . '/article.php?storyid=' . $exportedStory->storyid()
+                XNEWS_MODULE_URL . '/article.php?storyid=' . $exportedStory->storyid(),
             ];
             $content         = str_replace($search_pattern, $replace_pattern, $content);
             if ($removeBr) {
@@ -221,7 +223,6 @@ switch ($op) {
         Newsletter();
         xoops_cp_footer();
         break;
-
     case 'launchnewsletter':
         LaunchNewsletter();
         xoops_cp_footer();

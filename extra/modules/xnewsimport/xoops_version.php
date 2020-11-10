@@ -17,8 +17,7 @@
  * @author       XOOPS Development Team, DNPROSSI
  * @version      $Id $
  */
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
@@ -44,13 +43,10 @@ $modversion['release_date']        = '2013/09/14';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['module_status']       = 'Beta 1';
-$modversion['min_php']             = '5.2';
-$modversion['min_xoops']           = '2.5.6';
+$modversion['min_php']             = '7.1';
+$modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.1';
-$modversion['min_db']              = [
-    'mysql'  => '5.0.7',
-    'mysqli' => '5.0.7'
-];
+$modversion['min_db']      = ['mysql' => '5.5'];
 
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
@@ -65,11 +61,6 @@ $modversion['adminmenu']   = 'admin/menu.php';
 
 // Menu
 $modversion['hasMain'] = 0;
-
-$modversion['min_php']   = '5.5';
-$modversion['min_xoops'] = '2.5.9';
-$modversion['min_admin'] = '1.2';
-$modversion['min_db']    = ['mysql' => '5.5'];
 
 // Config
 $i = 0;

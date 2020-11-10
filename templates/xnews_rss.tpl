@@ -27,7 +27,7 @@
       <description><{$item.description}></description>
       <pubDate><{$item.pubdate}></pubDate>
       <guid><{$item.guid}></guid>
-	  <category><{$item.category}></category>
+      <category><{$item.category}></category>
     </item>
     <{/foreach}>
   </channel>

@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -19,7 +19,7 @@
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
  * Solves issue when upgrading xoops version
@@ -46,10 +46,11 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
  */
 function nw_b_news_randomnews_show($options)
 {
-    $myts             = \MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
+    /** @var Xnews\Helper $helper */
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = new Xnews\NewsStory();
-    //
+
     $block         = [];
     $block['sort'] = $options[0];
 
@@ -63,7 +64,7 @@ function nw_b_news_randomnews_show($options)
         $xlang = false;
     }
 
-    $tmpstory   = new Xnews\NewsStory;
+    $tmpstory   = new Xnews\NewsStory();
     $restricted = $helper->getConfig('restrictindex');
     $dateformat = $helper->getConfig('dateformat');
     $infotips   = $helper->getConfig('infotips');
@@ -83,7 +84,7 @@ function nw_b_news_randomnews_show($options)
     foreach ($stories as $story) {
         $news  = [];
         $title = $story->title();
-        if (strlen($title) > $options[2]) {
+        if (mb_strlen($title) > $options[2]) {
             //DNPROSSI Added - xlanguage installed and active
             $title = $thisstory->hometext;
             if (true === $xlang) {
@@ -175,7 +176,7 @@ function nw_b_news_randomnews_edit($options)
     $size = count($options);
     foreach ($alltopics as $topicid => $topic) {
         $sel = '';
-        for ($i = 4; $i < $size; $i++) {
+        for ($i = 4; $i < $size; ++$i) {
             if ($options[$i] == $topicid) {
                 $sel = " selected='selected'";
             }
@@ -193,7 +194,7 @@ function nw_b_news_randomnews_edit($options)
 function nw_b_news_randomnews_onthefly($options)
 {
     $options = explode('|', $options);
-    $block   = &nw_b_news_randomnews_show($options);
+    $block   = nw_b_news_randomnews_show($options);
 
     $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);

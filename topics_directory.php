@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -26,6 +26,9 @@
  * @author Instant Zero
  * @copyright (c) Instant Zero - http://xoops.instant-zero.com
  */
+
+use XoopsModules\Xnews;
+
 require_once __DIR__ . '/header.php';
 
 // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
@@ -43,11 +46,13 @@ $xt               = new Xnews\NewsTopic();
 $restricted       = $helper->getConfig('restrictindex');
 if ($restricted) {
     global $xoopsUser;
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $newsModule    = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
     $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $grouppermHandler  = xoops_getHandler('groupperm');
-    $topics        = $grouppermHandler->getItemIds('nw_view', $groups, $newsModule->getVar('mid'));
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
+    $topics           = $grouppermHandler->getItemIds('nw_view', $groups, $newsModule->getVar('mid'));
     if (count($topics) > 0) {
         $topics = implode(',', $topics);
         $perms  = ' AND topic_id IN (' . $topics . ') ';
@@ -82,7 +87,7 @@ if (is_array($topics_arr) && count($topics_arr)) {
             'topic_color' => '#' . $onetopic['topic_color'],
             'prefix'      => $onetopic['prefix'],
             'title'       => $myts->displayTarea($onetopic['topic_title']),
-            'topic_link'  => $topic_link
+            'topic_link'  => $topic_link,
         ];
     }
 }

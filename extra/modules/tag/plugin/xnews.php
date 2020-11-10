@@ -15,7 +15,6 @@
  * @package
  * @since
  * @author       XOOPS Development Team, Herve Thouzard, Instant Zero
- *
  */
 
 use XoopsModules\Xnews;
@@ -43,14 +42,14 @@ function xnews_tag_iteminfo(&$items)
     foreach (array_keys($items) as $cat_id) {
         foreach (array_keys($items[$cat_id]) as $item_id) {
             if (isset($items_obj[$item_id])) {
-                $item_obj                 =& $items_obj[$item_id];
+                $item_obj                 = &$items_obj[$item_id];
                 $items[$cat_id][$item_id] = [
                     'title'   => $item_obj->title(),
                     'uid'     => $item_obj->uid(),
                     'link'    => "article.php?storyid={$item_id}",
                     'time'    => $item_obj->published(),
                     'tags'    => tag_parse_tag($item_obj->tags()), // optional
-                    'content' => $item_obj->hometext()
+                    'content' => $item_obj->hometext(),
                 ];
             }
         }
@@ -66,10 +65,10 @@ function xnews_tag_synchronization($mid)
     global $xoopsDB;
     $itemHandler_keyName = 'storyid';
     $itemHandler_table   = $xoopsDB->prefix('nw_stories');
-//    $linkHandler         = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
+    //    $linkHandler         = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link'); //@var \XoopsModules\Tag\Handler $tagHandler
     /** @var \XoopsModules\Tag\LinkHandler $itemHandler */
     $linkHandler = \XoopsModules\Tag\Helper::getInstance()->getHandler('Link');
-    $where               = "({$itemHandler_table}.published > 0 AND {$itemHandler_table}.published <= " . time() . ") AND ({$itemHandler_table}.expired = 0 OR {$itemHandler_table}.expired > " . time() . ')';
+    $where       = "({$itemHandler_table}.published > 0 AND {$itemHandler_table}.published <= " . time() . ") AND ({$itemHandler_table}.expired = 0 OR {$itemHandler_table}.expired > " . time() . ')';
 
     /* clear tag-item links */
     if ($linkHandler->mysql_major_version() >= 4) {

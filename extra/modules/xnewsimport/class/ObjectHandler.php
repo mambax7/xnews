@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnewsimport;
+<?php
+
+namespace XoopsModules\Xnewsimport;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -39,7 +41,7 @@ class ObjectHandler extends \XoopsObjectHandler
     /**
      * Constructor
      *
-     * @param \XoopsDatabase $db reference to a xoopsDB object
+     * @param \XoopsDatabase|null $db reference to a xoopsDB object
      */
     public function init($db)
     {
@@ -111,9 +113,9 @@ class ObjectHandler extends \XoopsObjectHandler
         while (false !== ($myrow = $this->_db->fetchArray($result))) {
             $obj = new $this->classname($myrow);
             if (!$id_as_key) {
-                $ret[] =& $obj;
+                $ret[] = &$obj;
             } else {
-                $ret[$obj->getVar($id)] =& $obj;
+                $ret[$obj->getVar($id)] = &$obj;
             }
             unset($obj);
         }
@@ -182,7 +184,7 @@ class ObjectHandler extends \XoopsObjectHandler
     public function _selectQuery(\CriteriaElement $criteria = null)
     {
         $sql = sprintf('SELECT * FROM `%s` ', $this->_db->prefix($this->_dbtable));
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . '
@@ -203,10 +205,10 @@ class ObjectHandler extends \XoopsObjectHandler
     public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->_db->prefix($this->_dbtable);
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if (!$result =& $this->_db->query($sql)) {
+        if (!$result = &$this->_db->query($sql)) {
             return 0;
         }
         list($count) = $this->_db->fetchRow($result);
@@ -253,7 +255,7 @@ class ObjectHandler extends \XoopsObjectHandler
     public function deleteAll(\CriteriaElement $criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->_db->prefix($this->_dbtable);
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->_db->query($sql)) {
@@ -276,7 +278,7 @@ class ObjectHandler extends \XoopsObjectHandler
     {
         $set_clause = is_numeric($fieldvalue) ? $fieldname . ' = ' . $fieldvalue : $fieldname . ' = ' . $this->_db->quoteString($fieldvalue);
         $sql        = 'UPDATE ' . $this->_db->prefix($this->_dbtable) . ' SET ' . $set_clause;
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->_db->query($sql)) {
@@ -320,7 +322,7 @@ class ObjectHandler extends \XoopsObjectHandler
      * @return \XoopsModules\Xnewsimport\ObjectHandler <a href='psi_element://pagesCategoryHandler'>pagesCategoryHandler</a>
      * @access public
      */
-    public static function getInstance(\XoopsDatabase $db)
+    public static function getInstance(\XoopsDatabase $db = null)
     {
         static $instance;
         if (null === $instance) {

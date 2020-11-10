@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/functions.php';
 
 /**
@@ -8,18 +9,18 @@ require_once __DIR__ . '/functions.php';
 function xoops_module_uninstall_xnews(\XoopsModule $xoopsModule)
 {
     global $xoopsDB;
-    //
+
     $module_id       = $xoopsModule->getVar('mid');
     $module_name     = $xoopsModule->getVar('name');
     $module_dirname  = $xoopsModule->getVar('dirname');
     $module_version  = $xoopsModule->getVar('version');
-    $module_original =& $xoopsModule->getInfo('original');
+    $module_original = &$xoopsModule->getInfo('original');
     // DROP cloner control table DNPROSSI
     if (nw_TableExists($xoopsDB->prefix('news_clonerdata'))) {
         // update database on clone uninstall
         $sql    = "SELECT * FROM {$xoopsDB->prefix('news_clonerdata')}";
         $result = $xoopsDB->query();
-        list($count) = $xoopsDB->fetchRow($result);
+        [$count] = $xoopsDB->fetchRow($result);
         $sql        = "SELECT clone_id FROM {$xoopsDB->prefix('news_clonerdata')} WHERE clone_dir = '{$module_dirname}' ;";
         $result     = $xoopsDB->query();
         $tmpcloneid = $xoopsDB->fetchRow($result);

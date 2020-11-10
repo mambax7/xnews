@@ -1,4 +1,5 @@
 <?php
+
 $newslettertemplate = <<<contentend
 عنوان : %title%
 سرفصل : %topic_title%

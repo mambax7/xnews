@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -12,7 +14,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -28,14 +30,11 @@
  * @copyright    (c) 2000-2003 The Xoops Project - www.xoops.org
  */
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined.');
-
 /**
  * Class XoopsPageNav
  */
 class PageNav extends \XoopsPageNav
 {
-
     /**
      * Constructor
      *
@@ -53,8 +52,8 @@ class PageNav extends \XoopsPageNav
     /**
      * Create an enhanced navigational dropdown list
      *
-     * @param  boolean $showbutton Show the "Go" button?
-     * @param null     $titles
+     * @param bool $showbutton Show the "Go" button?
+     * @param null $titles
      * @return string
      */
     public function renderEnhancedSelect($showbutton = false, $titles = null)
@@ -62,13 +61,13 @@ class PageNav extends \XoopsPageNav
         if ($this->total < $this->perpage) {
             return;
         }
-        $total_pages = ceil($this->total / $this->perpage);
+        $total_pages = \ceil($this->total / $this->perpage);
         $ret         = '';
         if ($total_pages > 1) {
             $ret          = '<form name="pagenavform">';
             $ret          .= '<select name="pagenavselect" onchange="location=this.options[this.options.selectedIndex].value;">';
             $counter      = 1;
-            $current_page = (int)floor(($this->current + $this->perpage) / $this->perpage);
+            $current_page = (int)\floor(($this->current + $this->perpage) / $this->perpage);
             while ($counter <= $total_pages) {
                 if (isset($titles[$counter - 1])) {
                     $title = $titles[$counter - 1];

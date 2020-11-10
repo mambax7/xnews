@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -26,7 +26,7 @@ $cfg = [];
 /**
  * How many items do you want to display in the Summary table visible in the article's page ?
  */
-$cfg['article_summary_items_count'] = (null !== ($helper->getConfig('storyhome'))) ? $helper->getConfig('storyhome') : 10;
+$cfg['article_summary_items_count'] = (null !== $helper->getConfig('storyhome')) ? $helper->getConfig('storyhome') : 10;
 
 /**
  * Auto generate meta keywords ?

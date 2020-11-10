@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -19,7 +19,7 @@
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
  * Solves issue when upgrading xoops version
@@ -53,15 +53,14 @@ if (!defined('XNEWS_MODULE_PATH')) {
 function nw_b_news_archives_show($options)
 {
     global $xoopsDB, $xoopsConfig;
+
     // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
     require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/calendar.php';
 
-    if (file_exists(XNEWS_MODULE_PATH . '/language/' . $xoopsConfig['language'] . '/main.php')) {
-        require_once XNEWS_MODULE_PATH . '/language/' . $xoopsConfig['language'] . '/main.php';
-    } else {
-        require_once XNEWS_MODULE_PATH . '/language/english/main.php';
-    }
+    /** @var \XoopsModules\Xnews\Helper $helper */
+    $helper = \XoopsModules\Xnews\Helper::getInstance();
+    $helper->loadLanguage('main');
 
     $months_arr    = [
         1  => _CAL_JANUARY,
@@ -75,7 +74,7 @@ function nw_b_news_archives_show($options)
         9  => _CAL_SEPTEMBER,
         10 => _CAL_OCTOBER,
         11 => _CAL_NOVEMBER,
-        12 => _CAL_DECEMBER
+        12 => _CAL_DECEMBER,
     ];
     $block         = [];
     $sort_order    = 0 == $options[0] ? 'ASC' : 'DESC';
@@ -93,8 +92,8 @@ function nw_b_news_archives_show($options)
         return '';
     }
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
-        $year                = (int)substr($myrow['published'], 0, 4);
-        $month               = (int)substr($myrow['published'], 5, 2);
+        $year                = (int)mb_substr($myrow['published'], 0, 4);
+        $month               = (int)mb_substr($myrow['published'], 5, 2);
         $formated_month      = $months_arr[$month];
         $block['archives'][] = ['month' => $month, 'year' => $year, 'formated_month' => $formated_month];
     }
@@ -120,7 +119,7 @@ function nw_b_news_archives_edit($options)
     $seleyear  = $options[3];
     $selemonth = $options[4];
 
-    $tmpstory = new Xnews\NewsStory;
+    $tmpstory = new Xnews\NewsStory();
     $tmpstory->GetOlderRecentnews($older, $recent);    // We are searching for the module's older and more recent article's date
 
     // Min and max value for the two dates selectors
@@ -157,12 +156,12 @@ function nw_b_news_archives_edit($options)
     // Starting and ending dates **********************************************
     $form .= '<br><br><b>' . _MB_XNEWS_STARTING_DATE . '</b><br>';
     $form .= _MB_XNEWS_CAL_YEAR . "&nbsp;<select name='options[]'>";
-    for ($i = $syear; $i <= $eyear; $i++) {
+    for ($i = $syear; $i <= $eyear; ++$i) {
         $selected = ($i == $selsyear) ? "selected='selected'" : '';
         $form     .= "<option value='" . $i . "'" . $selected . '>' . $i . '</option>';
     }
     $form .= '</select>&nbsp;' . _MB_XNEWS_CAL_MONTH . "&nbsp;<select name='options[]'>";
-    for ($i = 1; $i <= 12; $i++) {
+    for ($i = 1; $i <= 12; ++$i) {
         $selected = ($i == $selsmonth) ? "selected='selected'" : '';
         $form     .= "<option value='" . $i . "'" . $selected . '>' . $i . '</option>';
     }
@@ -170,12 +169,12 @@ function nw_b_news_archives_edit($options)
 
     $form .= '<br><br><b>' . _MB_XNEWS_ENDING_DATE . '</b><br>';
     $form .= _MB_XNEWS_CAL_YEAR . "&nbsp;<select name='options[]'>";
-    for ($i = $syear; $i <= $eyear; $i++) {
+    for ($i = $syear; $i <= $eyear; ++$i) {
         $selected = ($i == $seleyear) ? "selected='selected'" : '';
         $form     .= "<option value='" . $i . "'" . $selected . '>' . $i . '</option>';
     }
     $form .= '</select>&nbsp;' . _MB_XNEWS_CAL_MONTH . "&nbsp;<select name='options[]'>";
-    for ($i = 1; $i <= 12; $i++) {
+    for ($i = 1; $i <= 12; ++$i) {
         $selected = ($i == $selemonth) ? "selected='selected'" : '';
         $form     .= "<option value='" . $i . "'" . $selected . '>' . $i . '</option>';
     }
@@ -196,7 +195,7 @@ function nw_b_news_archives_edit($options)
 function nw_b_news_archives_onthefly($options)
 {
     $options = explode('|', $options);
-    $block   = &nw_b_news_archives_show($options);
+    $block   = nw_b_news_archives_show($options);
 
     $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);

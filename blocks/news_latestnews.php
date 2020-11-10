@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -28,7 +28,7 @@
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
  * Solves issue when upgrading xoops version
@@ -59,20 +59,23 @@ require_once XOOPS_ROOT_PATH . '/class/tree.php';
  */
 function nw_b_news_latestnews_show($options)
 {
+    /** @var Xnews\Helper $helper */
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = new Xnews\NewsStory();
+    $helper->loadLanguage('main');
     //
     // IN PROGRESS
     // IN PROGRESS
     // IN PROGRESS
     $block = [];
-    if (file_exists(XNEWS_MODULE_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/main.php')) {
-        require_once XNEWS_MODULE_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/main.php';
-    } else {
-        require_once XNEWS_MODULE_PATH . '/language/english/main.php';
-    }
+    //    if (file_exists(XNEWS_MODULE_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/main.php')) {
+    //        require_once XNEWS_MODULE_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/main.php';
+    //    } else {
+    //        require_once XNEWS_MODULE_PATH . '/language/english/main.php';
+    //    }
 
     //DNPROSSI Added - xlanguage installed and active
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $xlanguage     = $moduleHandler->getByDirname('xlanguage');
     if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {
@@ -105,10 +108,13 @@ function nw_b_news_latestnews_show($options)
         $imgposition = 'left';
     }
 
-    $GLOBALS['xoopsTpl']->assign('xoops_module_header', '<style type="text/css">
+    $GLOBALS['xoopsTpl']->assign(
+        'xoops_module_header',
+        '<style type="text/css">
     .itemText {text-align: left;}
     .latestnews { border-bottom: 1px solid #cccccc; }
-    </style>' . $GLOBALS['xoopsTpl']->get_template_vars('xoops_module_header'));
+    </style>' . $GLOBALS['xoopsTpl']->get_template_vars('xoops_module_header')
+    );
 
     if (!isset($options[26])) {
         $sarray = $newsStoryHandler->getAllPublished($limit, $selected_stories, 0, true, 0, 0, true, $options[25], false);
@@ -134,7 +140,7 @@ function nw_b_news_latestnews_show($options)
             $bodytext   = $thisstory->bodytext;
             $news       = $thisstory->prepare2show($filescount);
 
-            $len = strlen($thisstory->hometext());
+            $len = mb_strlen($thisstory->hometext());
             if ($letters < $len && $letters > 0) {
                 $patterns     = [];
                 $replacements = [];
@@ -407,7 +413,7 @@ function nw_b_news_latestnews_edit($options)
         } else {
             $onetopic['prefix'] = str_replace('.', '', $onetopic['prefix']);
         }
-        for ($i = 26; $i < $size; $i++) {
+        for ($i = 26; $i < $size; ++$i) {
             if ($options[$i] == $onetopic['topic_id']) {
                 $sel = " selected='selected'";
             }

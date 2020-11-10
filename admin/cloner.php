@@ -11,13 +11,11 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
  */
-
-use XoopsModules\Xnews;
 
 /**
  * Module Cloner file
@@ -26,13 +24,12 @@ use XoopsModules\Xnews;
  *
  * NOTE : Please give credits if you copy this code !
  *
- * @package       News
- * @author        DNPROSSI
- * @copyright (c) DNPROSSI
  * @param $path
  * @param $patterns
+ * @copyright (c) DNPROSSI
+ * @package       News
+ * @author        DNPROSSI
  */
-
 function nw_cloneFileFolder($path, $patterns)
 {
     $patKeys   = array_keys($patterns);
@@ -66,7 +63,8 @@ function nw_cloneFileFolder($path, $patterns)
             mkdir($newpath);
         }
         // check all files in dir, and process them
-        if ($handle = opendir($path)) {
+        $handle = opendir($path);
+        if ($handle) {
             while ($file = readdir($handle)) {
                 if ('.' !== $file && '..' !== $file) {
                     nw_cloneFileFolder("$path/$file", $patterns);
@@ -86,7 +84,7 @@ function nw_cloneFileFolder($path, $patterns)
             //trigger_error($path , E_USER_WARNING);
             $content = file_get_contents($path);
             if ('txt' !== $path_ext) {
-                for ($i = 0; $i < count($patterns); ++$i) {
+                for ($i = 0, $iMax = count($patterns); $i < $iMax; ++$i) {
                     $content = str_replace($patKeys[$i], $patValues[$i], $content);
                 }
             }
@@ -105,8 +103,9 @@ function nw_cloneFileFolder($path, $patterns)
  */
 function nw_clonefilename($path, $old_subprefix, $new_subprefix)
 {
-    for ($i = 0; $i <= 1; $i++) {
-        if ($handle = opendir($path[$i])) {
+    for ($i = 0; $i <= 1; ++$i) {
+        $handle = opendir($path[$i]);
+        if ($handle) {
             while ($file = readdir($handle)) {
                 if ('.' !== $file && '..' !== $file) {
                     $newfilename = str_replace($old_subprefix, $new_subprefix, $file);
@@ -125,11 +124,12 @@ function nw_clonefilename($path, $old_subprefix, $new_subprefix)
  */
 function nw_deleteclonefile($path, $new_subprefix)
 {
-    for ($i = 0; $i <= 1; $i++) {
-        if ($handle = opendir($path[$i])) {
+    for ($i = 0; $i <= 1; ++$i) {
+        $handle = opendir($path[$i]);
+        if ($handle) {
             while ($file = readdir($handle)) {
                 if ('.' !== $file && '..' !== $file) {
-                    $pos = strpos($file, $new_subprefix);
+                    $pos = mb_strpos($file, $new_subprefix);
                     if (false !== $pos) {
                         //trigger_error($file. ' ---- Deleted' , E_USER_WARNING);
                         @unlink($path[$i] . $file);
@@ -149,7 +149,8 @@ function nw_deleteclonefile($path, $new_subprefix)
  */
 function nw_clonecopyfile($srcpath, $destpath, $filename)
 {
-    if ($handle = opendir($srcpath)) {
+    $handle = opendir($srcpath);
+    if ($handle) {
         if ('' == $filename) {
             while ($file = readdir($handle)) {
                 if ('.' !== $file && '..' !== $file) {
@@ -157,7 +158,7 @@ function nw_clonecopyfile($srcpath, $destpath, $filename)
                 }
             }
         } else {
-            if (file_exists($srcpath . $filename)) {
+            if (is_file($srcpath . $filename)) {
                 @copy($srcpath . $filename, $destpath . $filename);
             }
         }
@@ -186,54 +187,52 @@ function nw_clonecopyfile($srcpath, $destpath, $filename)
 function nw_removewholeclone($directory, $empty = false)
 {
     // if the path has a slash at the end we remove it here
-    if ('/' === substr($directory, -1)) {
-        $directory = substr($directory, 0, -1);
+    if ('/' === mb_substr($directory, -1)) {
+        $directory = mb_substr($directory, 0, -1);
     }
 
     // if the path is not valid or is not a directory ...
-    if (!file_exists($directory) || !is_dir($directory)) {
+    if (!is_dir($directory) || !is_dir($directory)) {
         // ... we return false and exit the function
         return false;
-    // ... if the path is not readable
+        // ... if the path is not readable
     } elseif (!is_readable($directory)) {
         // ... we return false and exit the function
         return false;
-    // ... else if the path is readable
-    } else {
-        // we open the directory
-        $handle = opendir($directory);
-        // and scan through the items inside
-        while (false !== ($item = readdir($handle))) {
-            // if the filepointer is not the current directory
-            // or the parent directory
-            if ('.' !== $item && '..' !== $item) {
-                // we build the new path to delete
-                $path = $directory . '/' . $item;
-
-                // if the new path is a directory
-                if (is_dir($path)) {
-                    // we call this function with the new path
-                    nw_removewholeclone($path);
-
-                // if the new path is a file
-                } else {
-                    // we remove the file
-                    @unlink($path);
-                }
-            }
-        }
-        // close the directory
-        closedir($handle);
-
-        // if the option to empty is not set to true
-        if (false === $empty) {
-            // try to delete the now empty directory
-            if (!rmdir($directory)) {
-                // return false if not possible
-                return false;
-            }
-        }
-        // return success
-        return true;
+        // ... else if the path is readable
     }
+    // we open the directory
+    $handle = opendir($directory);
+    // and scan through the items inside
+    while (false !== ($item = readdir($handle))) {
+        // if the filepointer is not the current directory
+        // or the parent directory
+        if ('.' !== $item && '..' !== $item) {
+            // we build the new path to delete
+            $path = $directory . '/' . $item;
+
+            // if the new path is a directory
+            if (is_dir($path)) {
+                // we call this function with the new path
+                nw_removewholeclone($path);
+                // if the new path is a file
+            } else {
+                // we remove the file
+                @unlink($path);
+            }
+        }
+    }
+    // close the directory
+    closedir($handle);
+
+    // if the option to empty is not set to true
+    if (false === $empty) {
+        // try to delete the now empty directory
+        if (!rmdir($directory)) {
+            // return false if not possible
+            return false;
+        }
+    }
+    // return success
+    return true;
 }

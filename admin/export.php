@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -48,7 +48,6 @@ if (!nw_FieldExists('picture', $storiesTableName)) {
 xoops_cp_header();
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation($currentFile);
-//
 
 /**
  * @param $text
@@ -88,24 +87,23 @@ switch ($op) {
         $sform->addElement($topiclist, false);
         $sform->addElement(new \XoopsFormRadioYN(_AM_XNEWS_EXPORT_INCTOPICS, 'includetopics', 0), false);
         $sform->addElement(new \XoopsFormHidden('op', 'launchexport'), false);
-        $button_tray = new \XoopsFormElementTray('', '');
-        $submit_btn  = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
-        $button_tray->addElement($submit_btn);
-        $sform->addElement($button_tray);
+        $buttonTray = new \XoopsFormElementTray('', '');
+        $submit_btn = new \XoopsFormButton('', 'post', _SUBMIT, 'submit');
+        $buttonTray->addElement($submit_btn);
+        $sform->addElement($buttonTray);
         $sform->display();
         xoops_cp_footer();
         break;
-
     case 'launchexport':
         $story           = new Xnews\NewsStory();
         $topic           = new Xnews\NewsTopic();
         $exportedstories = [];
         $date1           = $_POST['date1'];
         $date2           = $_POST['date2'];
-        $timestamp1      = mktime(0, 0, 0, (int)substr($date1, 5, 2), (int)substr($date1, 8, 2), (int)substr($date1, 0, 4));
-        $timestamp2      = mktime(23, 59, 59, (int)substr($date2, 5, 2), (int)substr($date2, 8, 2), (int)substr($date2, 0, 4));
+        $timestamp1      = mktime(0, 0, 0, (int)mb_substr($date1, 5, 2), (int)mb_substr($date1, 8, 2), (int)mb_substr($date1, 0, 4));
+        $timestamp2      = mktime(23, 59, 59, (int)mb_substr($date2, 5, 2), (int)mb_substr($date2, 8, 2), (int)mb_substr($date2, 0, 4));
         $topiclist       = '';
-        if (isset($_POST['export_topics'])) {
+        if (\Xmf\Request::hasVar('export_topics', 'POST')) {
             $topiclist = implode(',', $_POST['export_topics']);
         }
         $topicsexport    = \Xmf\Request::getInt('includetopics', 0, 'POST');

@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -65,6 +65,7 @@ if (0 != $article->expired() && $article->expired() < time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
@@ -72,6 +73,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 if (!isset($xoopsModule)) {
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $xoopsModule   = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
 }
@@ -99,6 +101,7 @@ $pdf_data['subtitle'] = $article->topic_title();
 $pdf_data['subsubtitle'] = $xoopsModule->name();
 $pdf_data['date']        = ': ' . date(_DATESTRING, $article->published());
 
+/** @var \XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
 $author        = $memberHandler->getUser($article->uid());
 if ($author->getVar('name')) {
@@ -131,6 +134,7 @@ define('K_PATH_IMAGES', XOOPS_ROOT_PATH . '/images/');
 $dateformat = $helper->getConfig('dateformat');
 
 //DNPROSSI Added - xlanguage installed and active
+/** @var \XoopsModuleHandler $moduleHandler */
 $moduleHandler = xoops_getHandler('module');
 $xlanguage     = $moduleHandler->getByDirname('xlanguage');
 if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {
@@ -143,19 +147,10 @@ $tempcontent = $article->title() . ' ' . $article->topic_title() . ' ' . $articl
 $multylang   = nw_detect_utf8_lang_encoding(urlencode($tempcontent));
 
 $content = '';
-$content .= '<b><i><u>'
-            . $myts->undoHtmlSpecialChars($article->title())
-            . '</u></i></b><br><b>'
-            . $myts->undoHtmlSpecialChars($article->topic_title())
-            . '</b><br>'
-            . _POSTEDBY
-            . ' : '
-            . $myts->undoHtmlSpecialChars($article->uname())
-            . '<br>'
-            . _MD_XNEWS_POSTEDON
-            . ' '
-            . formatTimestamp($article->published(), $dateformat)
-            . '<br><br><br>';
+$content .= '<b><i><u>' . $myts->undoHtmlSpecialChars($article->title()) . '</u></i></b><br><b>' . $myts->undoHtmlSpecialChars($article->topic_title()) . '</b><br>' . _POSTEDBY . ' : ' . $myts->undoHtmlSpecialChars($article->uname()) . '<br>' . _MD_XNEWS_POSTEDON . ' ' . formatTimestamp(
+        $article->published(),
+        $dateformat
+    ) . '<br><br><br>';
 //$content .= $myts->undoHtmlSpecialChars($article->hometext()) . '<br><br><br>' . $myts->undoHtmlSpecialChars($article->bodytext());
 //$content = str_replace('[pagebreak]','<br>',$content);
 $content .= $myts->undoHtmlSpecialChars($article->hometext()) . '<br>' . $myts->undoHtmlSpecialChars($article->bodytext());

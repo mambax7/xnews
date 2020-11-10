@@ -163,7 +163,7 @@ define('_MI_XNEWS_MIME_TYPES', 'Hier die erlaubten Mime Types (Dateiformate) ein
 define('_MI_XNEWS_ENHANCED_PAGENAV', 'Erweiterte Setennavigation nutzen?');
 define(
     '_MI_XNEWS_ENHANCED_PAGENAV_DSC',
-       '>Mit dieser Option bzw. durch diesen Befehl können Sie einen Seitenumbruch erzwingen : [pagebreak:Titel oder Überschrift], Links werden dann in einer DropDown Liste angezeigt und Sie können auch die Zusammenfassung nutzen [summary] um eine automatische Zusammenfassung zu erstellen'
+    '>Mit dieser Option bzw. durch diesen Befehl können Sie einen Seitenumbruch erzwingen : [pagebreak:Titel oder Überschrift], Links werden dann in einer DropDown Liste angezeigt und Sie können auch die Zusammenfassung nutzen [summary] um eine automatische Zusammenfassung zu erstellen'
 );
 
 // Added in version 1.54

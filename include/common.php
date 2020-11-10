@@ -2,9 +2,9 @@
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include  dirname(__DIR__) . '/preloads/autoloader.php';
+require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
 // common Xoops stuff
 xoops_load('XoopsFormLoader');
@@ -17,7 +17,8 @@ $moduleDirName = basename(dirname(__DIR__));
 // require_once  dirname(__DIR__) . '/class/Helper.php';
 // require_once  dirname(__DIR__) . '/class/Utility.php';
 
-$db     = \XoopsDatabaseFactory::getDatabaseConnection();
+$db = \XoopsDatabaseFactory::getDatabaseConnection();
+/** @var Xnews\Helper $helper */
 $helper = Xnews\Helper::getInstance();
 /** @var Xnews\Utility $utility */
 $utility = new Xnews\Utility();
@@ -26,11 +27,14 @@ $utility = new Xnews\Utility();
 $myts = \MyTextSanitizer::getInstance();
 
 // load Xoops handlers
-$moduleHandler       = xoops_getHandler('module');
-$memberHandler       = xoops_getHandler('member');
+/** @var \XoopsModuleHandler $moduleHandler */
+$moduleHandler = xoops_getHandler('module');
+/** @var \XoopsMemberHandler $memberHandler */
+$memberHandler = xoops_getHandler('member');
 /** @var \XoopsNotificationHandler $notificationHandler */
 $notificationHandler = xoops_getHandler('notification');
-$grouppermHandler    = xoops_getHandler('groupperm');
+/** @var \XoopsGroupPermHandler $grouppermHandler */
+$grouppermHandler = xoops_getHandler('groupperm');
 
 // common module_skeleton stuff
 define('XNEWS_SUBPREFIX', 'nw');
@@ -67,9 +71,9 @@ if (is_object($helper->getModule())) {
     // find if the user is admin of the module
     $xnews_isAdmin = xnews_userIsAdmin();
 }
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
     $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
 
-require_once XNEWS_MODULE_PATH . '/include/config.php';
+require_once XNEWS_MODULE_PATH . '/config/config.php';

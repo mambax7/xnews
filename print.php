@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -33,7 +33,6 @@
  * @page_title                  Story's title - Printer Friendly Page - Topic's title - Site's name
  *
  * @template_name               This page does not use any template
- *
  */
 
 use XoopsModules\Xnews;
@@ -59,6 +58,7 @@ if (0 != $storyObj->expired() && $storyObj->expired() < time()) {
 }
 
 // Verify permissions
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
@@ -95,8 +95,8 @@ function PrintPage()
     $dateformat = $helper->getConfig('dateformat');
 
     $datetime = formatTimestamp($storyObj->published(), $dateformat); ?>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">
+    <!DOCTYPE html>
+<html xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">
     <?php
     echo "<head>\n";
     echo '<title>' . $myts->htmlSpecialChars($storyObj->title()) . ' - ' . _MD_XNEWS_PRINTER . ' - ' . $myts->htmlSpecialChars($storyObj->topic_title()) . ' - ' . $xoopsConfig['sitename'] . '</title>';

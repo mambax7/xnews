@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -79,11 +79,11 @@ if ($cfg['config_rating_registred_only']) {
 // 2) Is the story published ?
 $storyid = 0;
 if (\Xmf\Request::hasVar('storyid', 'GET')) {
- $storyid =  \Xmf\Request::getInt('storyid', 0, 'GET');
+    $storyid = \Xmf\Request::getInt('storyid', 0, 'GET');
 } else {
- if (\Xmf\Request::hasVar('storyid', 'POST')) {
-$storyid =  \Xmf\Request::getInt('storyid', 0, 'POST');
-}
+    if (\Xmf\Request::hasVar('storyid', 'POST')) {
+        $storyid = \Xmf\Request::getInt('storyid', 0, 'POST');
+    }
 }
 
 if (!empty($storyid)) {
@@ -101,6 +101,7 @@ if (!empty($storyid)) {
 }
 
 // 3) Does the user can see this news ? If he can't see it, he can't vote for
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
@@ -112,7 +113,7 @@ if (!$grouppermHandler->checkRight('nw_view', $article->topicid(), $groups, $xoo
 }
 
 if (!empty($_POST['submit'])) {            // The form was submited
-    $eh = new ErrorHandler;             //ErrorHandler object
+    $eh = new ErrorHandler();             //ErrorHandler object
     if (!is_object($xoopsUser)) {
         $ratinguser = 0;
     } else {
@@ -131,13 +132,13 @@ if (!empty($_POST['submit'])) {            // The form was submited
     }
 
     if ($rating < 1 || $rating > 10) {
-        die(_ERROR);
+        exit(_ERROR);
     }
 
     // Check if News POSTER is voting (UNLESS Anonymous users allowed to post)
     if (0 != $ratinguser) {
         $result = $xoopsDB->query('SELECT uid FROM ' . $xoopsDB->prefix('nw_stories') . " WHERE storyid={$storyid}");
-        while (false !== (list($ratinguserDB) = $xoopsDB->fetchRow($result))) {
+        while (list($ratinguserDB) = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB == $ratinguser) {
                 redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MD_XNEWS_CANTVOTEOWN);
             }
@@ -145,7 +146,7 @@ if (!empty($_POST['submit'])) {            // The form was submited
 
         // Check if REG user is trying to vote twice.
         $result = $xoopsDB->query('SELECT ratinguser FROM ' . $xoopsDB->prefix('nw_stories_votedata') . " WHERE storyid={$storyid}");
-        while (false !== (list($ratinguserDB) = $xoopsDB->fetchRow($result))) {
+        while (list($ratinguserDB) = $xoopsDB->fetchRow($result)) {
             if ($ratinguserDB == $ratinguser) {
                 redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MD_XNEWS_VOTEONCE);
             }
@@ -154,7 +155,7 @@ if (!empty($_POST['submit'])) {            // The form was submited
         // Check if ANONYMOUS user is trying to vote more than once per day.
         $yesterday = (time() - (86400 * $anonwaitdays));
         $result    = $xoopsDB->query("SELECT COUNT(*) FROM {$xoopsDB->prefix('nw_stories_votedata')} WHERE storyid={$storyid} AND ratinguser=0 AND ratinghostname = '{$ip}' AND ratingtimestamp > {$yesterday}");
-        list($anonvotecount) = $xoopsDB->fetchRow($result);
+        [$anonvotecount] = $xoopsDB->fetchRow($result);
         if ($anonvotecount >= 1) {
             redirect_header(XNEWS_MODULE_URL . '/article.php?storyid=' . $storyid, 3, _MD_XNEWS_VOTEONCE);
         }
@@ -164,7 +165,7 @@ if (!empty($_POST['submit'])) {            // The form was submited
     $newid    = $xoopsDB->genId($xoopsDB->prefix('nw_stories_votedata') . '_ratingid_seq');
     $datetime = time();
     $sql      = sprintf("INSERT INTO `%s` (ratingid, storyid, ratinguser, rating, ratinghostname, ratingtimestamp) VALUES (%u, %u, %u, %u, '%s', %u)", $xoopsDB->prefix('nw_stories_votedata'), $newid, $storyid, $ratinguser, $rating, $ip, $datetime);
-    $xoopsDB->query($sql);// or $eh('0013');
+    $xoopsDB->query($sql); // or $eh('0013');
 
     //All is well.  Calculate Score & Add to Summary (for quick retrieval & sorting) to DB.
     nw_updaterating($storyid);

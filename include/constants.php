@@ -1,1 +1,3 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;

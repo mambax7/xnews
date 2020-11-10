@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnewsimport\Common;
+<?php
+
+namespace XoopsModules\Xnewsimport\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -26,7 +28,7 @@ trait ServerStats
     {
         //mb    $wfdownloads = WfdownloadsWfdownloads::getInstance();
         $moduleDirName      = basename(dirname(dirname(__DIR__)));
-        $moduleDirNameUpper = strtoupper($moduleDirName);
+        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         xoops_loadLanguage('common', $moduleDirName);
         $html = '';
         //        $sql   = 'SELECT metavalue';

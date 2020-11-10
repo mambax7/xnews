@@ -11,14 +11,12 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
- *
  */
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * @param $queryarray
@@ -36,11 +34,13 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
     $highlight  = false;
     $highlight  = $helper->getConfig('keywordshighlight'); // keywords highlighting
 
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $module        = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
     $modid         = $module->getVar('mid');
     $searchparam   = '';
 
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
     if (is_object($xoopsUser)) {
         $groups = $xoopsUser->getGroups();
@@ -57,7 +57,7 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
     // is not an array, we must check if $querryarray is really an array
     if (is_array($queryarray) && $count = count($queryarray)) {
         $sql .= " AND ((hometext LIKE '%$queryarray[0]%' OR bodytext LIKE '%$queryarray[0]%' OR title LIKE '%$queryarray[0]%' OR keywords LIKE '%$queryarray[0]%' OR description LIKE '%$queryarray[0]%')";
-        for ($i = 1; $i < $count; $i++) {
+        for ($i = 1; $i < $count; ++$i) {
             $sql .= " $andor ";
             $sql .= "(hometext LIKE '%$queryarray[$i]%' OR bodytext LIKE '%$queryarray[$i]%' OR title LIKE '%$queryarray[$i]%' OR keywords LIKE '%$queryarray[$i]%' OR description LIKE '%$queryarray[$i]%')";
         }
@@ -102,7 +102,7 @@ function nw_search($queryarray, $andor, $limit, $offset, $userid)
 
         if (is_array($queryarray) && $count = count($queryarray)) {
             $sql .= " AND ((com_title LIKE '%$queryarray[0]%' OR com_text LIKE '%$queryarray[0]%')";
-            for ($i = 1; $i < $count; $i++) {
+            for ($i = 1; $i < $count; ++$i) {
                 $sql .= " $andor ";
                 $sql .= "(com_title LIKE '%$queryarray[$i]%' OR com_text LIKE '%$queryarray[$i]%')";
             }

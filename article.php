@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -40,11 +40,6 @@
  * - If you are a module's admin, you have the possibility to see two links at the bottom
  *   of the article, "Edit & Delete"
  *
- * @package                         News
- * @author                          Xoops Modules Dev Team
- * @copyright (c)                   The Xoops Project - www.xoops.org
- *
- * Parameters received by this page :
  * @param int storyid    Id of the story we want to see
  * @param int page        page's number (in the case where there are more than one page)
  *
@@ -109,6 +104,11 @@
  * @template_var                    float    rating    Article's rating
  * @template_var                    string    votes    "1 vote" or "X votes"
  * @template_var                    string    topic_path    A path from the root to the current topic (of the current news)
+ * @copyright (c)                   The Xoops Project - www.xoops.org
+ *
+ * Parameters received by this page :
+ * @package                         News
+ * @author                          Xoops Modules Dev Team
  */
 
 use XoopsModules\Xnews;
@@ -139,6 +139,7 @@ if (0 != $article->expired() && $article->expired() < time()) {
     redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _MD_XNEWS_NOSTORY);
 }
 
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
@@ -241,7 +242,7 @@ $xoopsTpl->assign('advertisement', $helper->getConfig('advertisement'));
 function my_highlighter($matches)
 {
     $color = $helper->getConfig('highlightcolor');
-    if ('#' !== substr($color, 0, 1)) {
+    if ('#' !== mb_substr($color, 0, 1)) {
         $color = '#' . $color;
     }
 
@@ -253,7 +254,7 @@ $highlight = $helper->getConfig('keywordshighlight');
 
 if ($highlight && isset($_GET['keywords'])) {
     $keywords      = $myts->htmlSpecialChars(trim(urldecode($_GET['keywords'])));
-    $h             = new Keyhighlighter($keywords, true, 'my_highlighter');
+    $h             = new Xnews\Keyhighlighter($keywords, true, 'my_highlighter');
     $story['text'] = $h->highlight($story['text']);
 }
 // ****************************************************************************************************************
@@ -342,7 +343,7 @@ $j                = 0;
 $xoopsTpl->assign('attached_files_count', $filescount);
 if ($filescount > 0) {
     foreach ($filesarr as $onefile) {
-        if (false !== strpos($onefile->getMimetype(), 'image')) {
+        if (false !== mb_strpos($onefile->getMimetype(), 'image')) {
             $mime = 'image';
             //DNPROSSI - Added file_downloadname
             // IN PROGRESS
@@ -352,13 +353,13 @@ if ($filescount > 0) {
                 'visitlink'         => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(),
                 'file_realname'     => $onefile->getFileRealName(),
                 'file_mimetype'     => $mime,
-                'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
+                'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(),
             ];
             $newsimages       = [
                 'visitlink'     => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(),
                 'file_realname' => $onefile->getFileRealName(),
                 'file_mimetype' => $mime,
-                'thumbname'     => XNEWS_ATTACHED_FILES_URL . '/thumb_' . $onefile->getDownloadname()
+                'thumbname'     => XNEWS_ATTACHED_FILES_URL . '/thumb_' . $onefile->getDownloadname(),
             ];
             $row_images[$j][] = $newsimages;
             $j++;
@@ -372,7 +373,7 @@ if ($filescount > 0) {
                 'file_realname'     => $onefile->getFileRealName(),
                 'file_attacheddate' => formatTimestamp($onefile->getDate(), $dateformat),
                 'file_mimetype'     => $onefile->getMimetype(),
-                'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
+                'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(),
             ];
             $newspdf       = [
                 'file_id'           => $onefile->getFileid(),
@@ -380,7 +381,7 @@ if ($filescount > 0) {
                 'file_realname'     => $onefile->getFileRealName(),
                 'file_attacheddate' => formatTimestamp($onefile->getDate(), $dateformat),
                 'file_mimetype'     => $onefile->getMimetype(),
-                'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname()
+                'file_downloadname' => XNEWS_ATTACHED_FILES_URL . '/' . $onefile->getDownloadname(),
             ];
             $row_pdf[$k][] = $newspdf;
             $k++;
@@ -454,23 +455,29 @@ if ($helper->getConfig('showsummarytable')) {
             if (0 != $seo_enabled) {
                 $story_path = nw_remove_accents($onearticle->title());
                 $storyTitle = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_ARTICLES, $onearticle->storyid(), $story_path) . "'>" . $onearticle->title() . '</a>';
-                $xoopsTpl->append('summary', [
-                    'story_id'        => $onearticle->storyid(),
-                    'htmltitle'       => $htmltitle,
-                    'infotips'        => $tooltips,
-                    'story_title'     => $storyTitle,
-                    'story_hits'      => $onearticle->counter(),
-                    'story_published' => formatTimestamp($onearticle->published, $dateformat)
-                ]);
+                $xoopsTpl->append(
+                    'summary',
+                    [
+                        'story_id'        => $onearticle->storyid(),
+                        'htmltitle'       => $htmltitle,
+                        'infotips'        => $tooltips,
+                        'story_title'     => $storyTitle,
+                        'story_hits'      => $onearticle->counter(),
+                        'story_published' => formatTimestamp($onearticle->published, $dateformat),
+                    ]
+                );
             } else {
-                $xoopsTpl->append('summary', [
-                    'story_id'        => $onearticle->storyid(),
-                    'htmltitle'       => $htmltitle,
-                    'infotips'        => $tooltips,
-                    'story_title'     => $onearticle->title(),
-                    'story_hits'      => $onearticle->counter(),
-                    'story_published' => formatTimestamp($onearticle->published, $dateformat)
-                ]);
+                $xoopsTpl->append(
+                    'summary',
+                    [
+                        'story_id'        => $onearticle->storyid(),
+                        'htmltitle'       => $htmltitle,
+                        'infotips'        => $tooltips,
+                        'story_title'     => $onearticle->title(),
+                        'story_hits'      => $onearticle->counter(),
+                        'story_published' => formatTimestamp($onearticle->published, $dateformat),
+                    ]
+                );
             }
         }
     }
@@ -698,12 +705,14 @@ if (0 != $helper->getConfig('com_rule')) {
 </table>
 </form>';
 
-        $xoopsTpl->assign([
-                              'commentsnav'        => $navbar,
-                              'editcomment_link'   => XNEWS_MODULE_URL . '/comment_edit.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
-                              'deletecomment_link' => XNEWS_MODULE_URL . '/comment_delete.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
-                              'replycomment_link'  => XNEWS_MODULE_URL . '/comment_reply.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra
-                          ]);
+        $xoopsTpl->assign(
+            [
+                'commentsnav'        => $navbar,
+                'editcomment_link'   => XNEWS_MODULE_URL . '/comment_edit.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
+                'deletecomment_link' => XNEWS_MODULE_URL . '/comment_delete.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
+                'replycomment_link'  => XNEWS_MODULE_URL . '/comment_reply.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
+            ]
+        );
         $xoopsTpl->_tpl_vars['commentsnav'] = str_replace("self.location.href='", "self.location.href='" . XNEWS_MODULE_URL . '/', $xoopsTpl->_tpl_vars['commentsnav']);
     }
 }

@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -124,7 +124,7 @@ foreach ($storiesPerTopic as $topicid => $data) {
         $myts->displayTarea($data['topic_title']),
         $articles,
         $views,
-           $attachedFiles,
+        $attachedFiles,
         $expired,
         $authors
     );
@@ -148,7 +148,7 @@ foreach ($mostReadNews as $storyid => $data) {
         $url1,
         $myts->displayTarea($data['topic_title']),
         $url2,
-           $myts->displayTarea($data['title']),
+        $myts->displayTarea($data['title']),
         $url3,
         $myts->htmlSpecialChars($news->uname($data['uid'])),
         $data['counter']
@@ -170,7 +170,7 @@ foreach ($lessReadNews as $storyid => $data) {
         $url1,
         $myts->displayTarea($data['topic_title']),
         $url2,
-           $myts->displayTarea($data['title']),
+        $myts->displayTarea($data['title']),
         $url3,
         $myts->htmlSpecialChars($news->uname($data['uid'])),
         $data['counter']
@@ -192,7 +192,7 @@ foreach ($bestRatedNews as $storyid => $data) {
         $url1,
         $myts->displayTarea($data['topic_title']),
         $url2,
-           $myts->displayTarea($data['title']),
+        $myts->displayTarea($data['title']),
         $url3,
         $myts->htmlSpecialChars($news->uname($data['uid'])),
         number_format($data['rating'], 2)

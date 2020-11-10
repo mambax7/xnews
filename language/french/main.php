@@ -127,10 +127,10 @@ define('_MD_XNEWS_METASIZE', "Vous ne devez pas ajouter plus de '+len+' caractè
 define('_MD_XNEWS_SEO_TOPICS', 'Catégories');
 define('_MD_XNEWS_SEO_ARTICLES', 'Articles');
 define('_MD_XNEWS_SEO_PRINT', 'Impression');
-define('_MD_XNEWS_SEO_PDF', 'pdf');/**
+define('_MD_XNEWS_SEO_PDF', 'pdf'); /**
  * @translation     Communauté Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  * @version         $Id $
- **/;
+ **/

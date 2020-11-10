@@ -1,6 +1,6 @@
 <?php
 // $Id: admin.php,v 1.18 2004/07/26 17:51:25 hthouzard Exp $
-//%%%%%%	Admin Module Name  Articles 	%%%%%
+//%%%%%%    Admin Module Name  Articles     %%%%%
 define('_AM_XNEWS_DBUPDATED', 'Datenbank wurde erfolgreich aktualisiert!');
 define('_AM_XNEWS_CONFIG', 'Artikelkonfiguration');
 define('_AM_XNEWS_AUTOARTICLES', 'Automatisierte Artikel');
@@ -47,7 +47,7 @@ define('_AM_XNEWS_SAVE', 'Sichern');
 define('_AM_XNEWS_PUBINHOME', 'Auf der Homepage anzeigen?');
 define('_AM_XNEWS_ADD', 'Hinzufügen');
 
-//%%%%%%	Admin Module Name  Topics 	%%%%%
+//%%%%%%    Admin Module Name  Topics   %%%%%
 
 define('_AM_XNEWS_ADDMTOPIC', 'Ein Hauptthema hinzufügen');
 define('_AM_XNEWS_TOPICNAME', 'Thementitel');
@@ -217,7 +217,7 @@ define('_AM_XNEWS_CLONER_VERSION', 'Version');
 define('_AM_XNEWS_CLONER_NEWNAME', 'Neuer Modulname');
 define(
     '_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "Betrifft auch die Erzeugung des neuen Modul Ordners. <br> Gr0ß-/Kleinbuchstaben werden ignoriert und korrigiert. <br> zB.: neuer Name = <b>Aktuelles</b> neuer Ordner  = <b>aktuelles</b>, <br> nuer Name <b>Mein Aktuelles</b> neuer Ordner = <b>meinaktuelles</b>. <br><br> Start Modul ist: <font color='#008400'><b> %s </b></font><br>"
+    "Betrifft auch die Erzeugung des neuen Modul Ordners. <br> Gr0ß-/Kleinbuchstaben werden ignoriert und korrigiert. <br> zB.: neuer Name = <b>Aktuelles</b> neuer Ordner  = <b>aktuelles</b>, <br> nuer Name <b>Mein Aktuelles</b> neuer Ordner = <b>meinaktuelles</b>. <br><br> Start Modul ist: <font color='#008400'><b> %s </b></font><br>"
 );
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'Neues Modul:');
 
@@ -233,9 +233,12 @@ define('_AM_XNEWS_CLONER_ACTION_INSTALL', 'Install/Uninstall');
 
 define('_AM_XNEWS_CLONER_IMPORTNEWS', 'Importiere original News Modul Daten');
 define('_AM_XNEWS_CLONER_IMPORTNEWSDESC1', 'Original News Modul existiert! Daten jetzt importieren?');
-define('_AM_XNEWS_CLONER_IMPORTNEWSDESC2', 'Der Import Button erscheint nur, wenn die x' . "News 'stories' Tabelle leer ist. <br>
+define(
+    '_AM_XNEWS_CLONER_IMPORTNEWSDESC2',
+    'Der Import Button erscheint nur, wenn die x' . "News 'stories' Tabelle leer ist. <br>
                                          wenn vor dem importieren bereits Inhalte hinzugefügt wurden,<br>
                                          muß x" . 'News de- und neu installiert werden! <br>
-                                         Falls die Daten bereits importiert wurden, ist nichts weiter nötig.');
+                                         Falls die Daten bereits importiert wurden, ist nichts weiter nötig.'
+);
 define('_AM_XNEWS_CLONER_IMPORTNEWSSUB', 'Import');
 define('_AM_XNEWS_CLONER_NEWSIMPORTED', 'Original News Modul Daten korrekt importiert');

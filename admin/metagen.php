@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -66,7 +66,7 @@ switch ($op) {
         xoops_cp_header();
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation($currentFile);
-        //
+
         xoops_load('XoopsFormLoader');
 
         $myts = \MyTextSanitizer::getInstance();
@@ -79,10 +79,10 @@ switch ($op) {
         $content  = '';
         $content  = $registry->getfile();
         if ('' != xoops_trim($content)) {
-            list($keywordscount, $keywordsorder) = explode(',', $content);
+            [$keywordscount, $keywordsorder] = explode(',', $content);
         } else {
-            $keywordscount = $cfg['meta_keywords_count'];
-            $keywordsorder = $cfg['meta_keywords_order'];
+            $keywordscount = $cfg['meta_keywords_count'] ?? 0;
+            $keywordsorder = $cfg['meta_keywords_order'] ?? '';
         }
         $sform = new \XoopsThemeForm(_OPTIONS, 'metagenoptions', XNEWS_MODULE_URL . '/admin/index.php', 'post', true);
         $sform->addElement(new \XoopsFormHidden('op', 'metagenoptions'), false);
@@ -92,10 +92,10 @@ switch ($op) {
         $keywordsorder->addOption(1, _AM_XNEWS_META_KEYWORDS_FREQ1);
         $keywordsorder->addOption(2, _AM_XNEWS_META_KEYWORDS_FREQ2);
         $sform->addElement($keywordsorder, false);
-        $button_tray = new \XoopsFormElementTray('', '');
-        $submit_btn  = new \XoopsFormButton('', 'post', _AM_XNEWS_MODIFY, 'submit');
-        $button_tray->addElement($submit_btn);
-        $sform->addElement($button_tray);
+        $buttonTray = new \XoopsFormElementTray('', '');
+        $submit_btn = new \XoopsFormButton('', 'post', _AM_XNEWS_MODIFY, 'submit');
+        $buttonTray->addElement($submit_btn);
+        $sform->addElement($buttonTray);
         $sform->display();
 
         // Blacklist
@@ -110,7 +110,7 @@ switch ($op) {
 
         $metablack = new Xnews\Blacklist();
         $words     = $metablack->getAllKeywords();
-        if (is_array($words) && count($words) > 0) {
+        if ($words && is_array($words)) {
             foreach ($words as $key => $value) {
                 $blacklist->addOption($key, $value);
             }
@@ -134,7 +134,6 @@ switch ($op) {
 
         xoops_cp_footer();
         break;
-
     case 'metagenoptions':
         // Save Metagen Options
         $registry = new Xnews\Registryfile('nw_metagen_options.txt');
@@ -142,19 +141,18 @@ switch ($op) {
         redirect_header('index.php?op=metagen', 3, _AM_XNEWS_DBUPDATED);
         xoops_cp_footer();
         break;
-
     case 'metagenblacklist':
         // Save metagen's blacklist words
         $blacklist = new Xnews\Blacklist();
         $words     = $blacklist->getAllKeywords();
 
-        if (isset($_POST['go']) && _AM_XNEWS_DELETE == $_POST['go']) {
+        if (\Xmf\Request::hasVar('go', 'POST') && _AM_XNEWS_DELETE == $_POST['go']) {
             foreach ($_POST['blacklist'] as $black_id) {
                 $blacklist->delete($black_id);
             }
             $blacklist->store();
         } else {
-            if (isset($_POST['go']) && _AM_XNEWS_ADD == $_POST['go']) {
+            if (\Xmf\Request::hasVar('go', 'POST') && _AM_XNEWS_ADD == $_POST['go']) {
                 $p_keywords = $_POST['keywords'];
                 $keywords   = explode("\n", $p_keywords);
                 foreach ($keywords as $keyword) {

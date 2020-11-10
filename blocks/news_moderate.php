@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -19,7 +19,7 @@
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
  * Solves issue when upgrading xoops version
@@ -45,9 +45,10 @@ require_once XNEWS_MODULE_PATH . '/include/functions.php';
  */
 function nw_b_news_topics_moderate()
 {
+    /** @var Xnews\Helper $helper */
     $helper           = Xnews\Helper::getInstance();
     $newsStoryHandler = \XoopsModules\Xnews\Helper::getInstance()->getHandler('NewsStory');
-    //
+
     $block      = [];
     $dateformat = $helper->getConfig('dateformat');
     $infotips   = $helper->getConfig('infotips');
@@ -80,7 +81,7 @@ function nw_b_news_topics_moderate()
             $story['action']      = "<a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=edit&amp;storyid=' . $newstory->storyid() . "'>" . _EDIT . "</a> - <a href='" . XNEWS_MODULE_URL . '/admin/index.php?op=delete&amp;storyid=' . $newstory->storyid() . "'>" . _MB_XNEWS_DELETE . '</a>';
             $story['topic_title'] = $newstory->topic_title();
             $story['topic_color'] = '#' . $myts->displayTarea($newstory->topic_color);
-            $block['stories'][]   =& $story;
+            $block['stories'][]   = &$story;
             unset($story);
         }
     }
@@ -94,7 +95,7 @@ function nw_b_news_topics_moderate()
 function nw_b_news_topics_moderate_onthefly($options)
 {
     $options = explode('|', $options);
-    $block   = &nw_b_news_topics_moderate($options);
+    $block   = nw_b_news_topics_moderate($options);
 
     $tpl = new \XoopsTpl();
     $tpl->assign('block', $block);

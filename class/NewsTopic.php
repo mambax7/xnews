@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,13 +16,11 @@ use XoopsModules\Xnews;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
  */
-
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once XNEWS_MODULE_PATH . '/include/functions.php';
 // require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewsstory.php';
@@ -47,7 +47,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
     {
         $this->db    = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $this->db->prefix('nw_topics');
-        if (is_array($topicid)) {
+        if (\is_array($topicid)) {
             $this->makeTopic($topicid);
         } elseif (0 != $topicid) {
             $this->getTopic((int)$topicid);
@@ -71,13 +71,13 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
 
         $perms = '';
         if ($checkRight) {
-            $moduleHandler = xoops_getHandler('module');
-            $newsModule    = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
-            $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-            $grouppermHandler  = xoops_getHandler('groupperm');
-            $topics        = $grouppermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
-            if (count($topics) > 0) {
-                $perms = ' AND topic_id IN (' . implode(',', $topics) . ') ';
+            $moduleHandler    = \xoops_getHandler('module');
+            $newsModule       = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
+            $groups           = \is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+            $grouppermHandler = \xoops_getHandler('groupperm');
+            $topics           = $grouppermHandler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
+            if (\count($topics) > 0) {
+                $perms = ' AND topic_id IN (' . \implode(',', $topics) . ') ';
             } else {
                 return null;
             }
@@ -87,9 +87,9 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
             return $this->makeMySelBox('topic_title', 'topic_title', $seltopic, $none, $selname, $onchange, $perms);
         } elseif (!empty($this->topic_id)) {
             return $this->makeMySelBox('topic_title', 'topic_title', $this->topic_id, $none, $selname, $onchange, $perms);
-        } else {
-            return $this->makeMySelBox('topic_title', 'topic_title', 0, $none, $selname, $onchange, $perms);
         }
+
+        return $this->makeMySelBox('topic_title', 'topic_title', 0, $none, $selname, $onchange, $perms);
     }
 
     /**
@@ -104,7 +104,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
      * @param        $perms
      * @return string
      */
-    public function makeMySelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = 'topic_id', $onchange = '', $perms)
+    public function makeMySelBox($title, $order, $preset_id, $none, $sel_name, $onchange, $perms)
     {
         $myts      = \MyTextSanitizer::getInstance();
         $outbuffer = '';
@@ -123,7 +123,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         if ($none) {
             $outbuffer .= "<option value='0'>----</option>\n";
         }
-        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
+        while (list($catid, $name) = $this->db->fetchRow($result)) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = " selected='selected'";
@@ -133,7 +133,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
             $sel       = '';
             $arr       = $this->getChildTreeArray($catid, $order, $perms);
             foreach ($arr as $option) {
-                $option['prefix'] = str_replace('.', '--', $option['prefix']);
+                $option['prefix'] = \str_replace('.', '--', $option['prefix']);
                 $catpath          = $option['prefix'] . '&nbsp;' . $myts->displayTarea($option[$title]);
 
                 if ($option['topic_id'] == $preset_id) {
@@ -171,7 +171,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         }
         while (false !== ($row = $this->db->fetchArray($result))) {
             $row['prefix'] = $r_prefix . '.';
-            array_push($parray, $row);
+            \array_push($parray, $row);
             $parray = $this->getChildTreeArray($row['topic_id'], $order, $perms, $parray, $row['prefix']);
         }
 
@@ -184,32 +184,32 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
      */
     public function getVar($var)
     {
-        if (method_exists($this, $var)) {
-            return call_user_func([$this, $var]);
-        } else {
-            return $this->$var;
+        if (\method_exists($this, $var)) {
+            return \call_user_func([$this, $var]);
         }
+
+        return $this->$var;
     }
 
     /**
      * Get the total number of topics in the base
      * @param bool $checkRight
-     * @return null
+     * @return |null
      */
     public function getAllTopicsCount($checkRight = true)
     {
         global $xoopsUser;
         $db = \XoopsDatabaseFactory::getDatabaseConnection();
-        //
+
         $perms = '';
         if ($checkRight) {
-            $moduleHandler = xoops_getHandler('module');
-            $newsModule    = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
-            $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-            $grouppermHandler  = xoops_getHandler('groupperm');
-            $topics        = $grouppermHandler->getItemIds('nw_submit', $groups, $newsModule->getVar('mid'));
-            if (count($topics) > 0) {
-                $perms = ' WHERE topic_id IN (' . implode(',', $topics) . ') ';
+            $moduleHandler    = \xoops_getHandler('module');
+            $newsModule       = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
+            $groups           = \is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+            $grouppermHandler = \xoops_getHandler('groupperm');
+            $topics           = $grouppermHandler->getItemIds('nw_submit', $groups, $newsModule->getVar('mid'));
+            if (\count($topics) > 0) {
+                $perms = ' WHERE topic_id IN (' . \implode(',', $topics) . ') ';
             } else {
                 return null;
             }
@@ -229,16 +229,16 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
     public function getAllTopics($checkRight = true, $permission = 'nw_view')
     {
         $db = \XoopsDatabaseFactory::getDatabaseConnection();
-        //
+
         $topics_arr = [];
         $sql        = 'SELECT *';
         $sql        .= " FROM {$db->prefix('nw_topics')}";
         if ($checkRight) {
-            $topics = nw_MygetItemIds($permission);
-            if (0 == count($topics)) {
+            $topics = \nw_MygetItemIds($permission);
+            if (0 == \count($topics)) {
                 return [];
             }
-            $sql .= ' WHERE topic_id IN (' . implode(',', $topics) . ')';
+            $sql .= ' WHERE topic_id IN (' . \implode(',', $topics) . ')';
         }
         $sql    .= ' ORDER BY topic_title';
         $result = $db->query($sql);
@@ -258,11 +258,11 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
     public function getnwCountByTopic()
     {
         $db = \XoopsDatabaseFactory::getDatabaseConnection();
-        //
+
         $ret    = [];
         $sql    = 'SELECT count(storyid) as cpt, topicid';
         $sql    .= " FROM {$db->prefix('nw_stories')}";
-        $sql    .= ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') GROUP BY topicid';
+        $sql    .= ' WHERE (published > 0 AND published <= ' . \time() . ') AND (expired = 0 OR expired > ' . \time() . ') GROUP BY topicid';
         $result = $db->query($sql);
         while (false !== ($row = $db->fetchArray($result))) {
             $ret[$row['topicid']] = $row['cpt'];
@@ -281,7 +281,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         $ret          = [];
         $sql          = 'SELECT count(storyid) as cpt1, sum(counter) as cpt2';
         $sql          .= " FROM {$this->db->prefix('nw_stories')}";
-        $sql          .= " WHERE (topicid = {$topicid}) AND (published>0 AND published <= " . time() . ') AND (expired = 0 OR expired > ' . time() . ')';
+        $sql          .= " WHERE (topicid = {$topicid}) AND (published>0 AND published <= " . \time() . ') AND (expired = 0 OR expired > ' . \time() . ')';
         $result       = $this->db->query($sql);
         $row          = $this->db->fetchArray($result);
         $ret['count'] = $row['cpt1'];
@@ -323,7 +323,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
      */
     public function makeTopic($array)
     {
-        if (is_array($array)) {
+        if (\is_array($array)) {
             foreach ($array as $key => $value) {
                 $this->$key = $value;
             }
@@ -349,7 +349,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         if (isset($this->topic_imgurl) && '' != $this->topic_imgurl) {
             $imgurl = $myts->addSlashes($this->topic_imgurl);
         }
-        if (!isset($this->topic_pid) || !is_numeric($this->topic_pid)) {
+        if (!isset($this->topic_pid) || !\is_numeric($this->topic_pid)) {
             $this->topic_pid = 0;
         }
         $topic_frontpage = (int)$this->topic_frontpage;
@@ -357,11 +357,11 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         if (empty($this->topic_id)) {
             $insert         = true;
             $this->topic_id = $this->db->genId($this->table . '_topic_id_seq');
-            $sql            = sprintf(
+            $sql            = \sprintf(
                 "INSERT INTO `%s` (topic_id, topic_pid, topic_imgurl, topic_title, menu, topic_description, topic_frontpage, topic_rssurl, topic_color, topic_weight) VALUES (%u, %u, '%s', '%s', %u, '%s', %d, '%s', '%s', %u)",
                 $this->table,
                 (int)$this->topic_id,
-                                      (int)$this->topic_pid,
+                (int)$this->topic_pid,
                 $imgurl,
                 $title,
                 (int)$this->menu,
@@ -372,14 +372,14 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
                 (int)$this->topic_weight
             );
         } else {
-            $sql = sprintf(
+            $sql = \sprintf(
                 "UPDATE `%s` SET topic_pid = %u, topic_imgurl = '%s', topic_title = '%s', menu=%d, topic_description='%s', topic_frontpage=%d, topic_rssurl='%s', topic_color='%s', topic_weight='%u' WHERE topic_id = %u",
                 $this->table,
                 (int)$this->topic_pid,
                 $imgurl,
                 $title,
                 (int)$this->menu,
-                           $topic_description,
+                $topic_description,
                 $topic_frontpage,
                 $topic_rssurl,
                 $topic_color,
@@ -399,13 +399,13 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         if (true === $this->use_permission) {
             $xt            = new \XoopsTree($this->table, 'topic_id', 'topic_pid');
             $parent_topics = $xt->getAllParentId($this->topic_id);
-            if (!empty($this->m_groups) && is_array($this->m_groups)) {
+            if (!empty($this->m_groups) && \is_array($this->m_groups)) {
                 foreach ($this->m_groups as $m_g) {
                     $moderate_topics = \XoopsPerms::getPermitted($this->mid, 'ModInTopic', $m_g);
                     $add             = true;
                     // only grant this permission when the group has this permission in all parent topics of the created topic
                     foreach ($parent_topics as $p_topic) {
-                        if (!in_array($p_topic, $moderate_topics)) {
+                        if (!\in_array($p_topic, $moderate_topics)) {
                             $add = false;
                             continue;
                         }
@@ -420,12 +420,12 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
                     }
                 }
             }
-            if (!empty($this->s_groups) && is_array($this->s_groups)) {
+            if (!empty($this->s_groups) && \is_array($this->s_groups)) {
                 foreach ($this->s_groups as $s_g) {
                     $submit_topics = \XoopsPerms::getPermitted($this->mid, 'SubmitInTopic', $s_g);
                     $add           = true;
                     foreach ($parent_topics as $p_topic) {
-                        if (!in_array($p_topic, $submit_topics)) {
+                        if (!\in_array($p_topic, $submit_topics)) {
                             $add = false;
                             continue;
                         }
@@ -440,12 +440,12 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
                     }
                 }
             }
-            if (!empty($this->r_groups) && is_array($this->r_groups)) {
+            if (!empty($this->r_groups) && \is_array($this->r_groups)) {
                 foreach ($this->s_groups as $r_g) {
                     $read_topics = \XoopsPerms::getPermitted($this->mid, 'ReadInTopic', $r_g);
                     $add         = true;
                     foreach ($parent_topics as $p_topic) {
-                        if (!in_array($p_topic, $read_topics)) {
+                        if (!\in_array($p_topic, $read_topics)) {
                             $add = false;
                             continue;
                         }
@@ -556,7 +556,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
      */
     public function topic_imgurl($format = 'S')
     {
-        if ('' == trim($this->topic_imgurl)) {
+        if ('' == \trim($this->topic_imgurl)) {
             $this->topic_imgurl = 'blank.png';
         }
         $myts = \MyTextSanitizer::getInstance();
@@ -583,7 +583,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
     /**
      * @param $topic
      * @param $topicstitles
-     * @return null
+     * @return |null
      */
     public function getTopicTitleFromId($topic, &$topicstitles)
     {
@@ -591,11 +591,11 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         $sql  = 'SELECT topic_id, topic_title, topic_imgurl';
         $sql  .= " FROM {$this->table}";
         $sql  .= ' WHERE ';
-        if (!is_array($topic)) {
+        if (!\is_array($topic)) {
             $sql .= ' topic_id=' . (int)$topic;
         } else {
-            if (count($topic) > 0) {
-                $sql .= ' topic_id IN (' . implode(',', $topic) . ')';
+            if (\count($topic) > 0) {
+                $sql .= ' topic_id IN (' . \implode(',', $topic) . ')';
             } else {
                 return null;
             }
@@ -613,7 +613,7 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
      * @param bool $perms
      * @return array|string
      */
-    public function &getTopicsList($frontpage = false, $perms = false)
+    public function getTopicsList($frontpage = false, $perms = false)
     {
         $sql = 'SELECT topic_id, topic_pid, topic_title, topic_color';
         $sql .= " FROM {$this->table}";
@@ -623,11 +623,11 @@ class NewsTopic extends Xnews\Deprecate\DeprecateTopic
         }
         if ($perms) {
             $topicsids = [];
-            $topicsids = nw_MygetItemIds();
-            if (0 == count($topicsids)) {
+            $topicsids = \nw_MygetItemIds();
+            if (0 == \count($topicsids)) {
                 return '';
             }
-            $topics = implode(',', $topicsids);
+            $topics = \implode(',', $topicsids);
             $sql    .= " AND topic_id IN ({$topics})";
         }
         $result = $this->db->query($sql);

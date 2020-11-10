@@ -1,6 +1,6 @@
 <?php
 // $Id: admin.php,v 1.18 2004/07/26 17:51:25 hthouzard Exp $
-//%%%%%%	Admin Module Name  Articles 	%%%%%
+//%%%%%%    Admin Module Name  Articles     %%%%%
 define('_AM_XNEWS_DBUPDATED', 'پایگاه‌داده با موفقیت به‌روز شد!');
 define('_AM_XNEWS_CONFIG', 'تنظیمات اخبار');
 define('_AM_XNEWS_AUTOARTICLES', 'خبر‌های خودکار');
@@ -46,7 +46,7 @@ define('_AM_XNEWS_SAVE', 'ذخیره');
 define('_AM_XNEWS_PUBINHOME', 'قرار گرفتن خبر در صفحه اصلی؟');
 define('_AM_XNEWS_ADD', 'اضافه');
 
-//%%%%%%	Admin Module Name  Topics 	%%%%%
+//%%%%%%    Admin Module Name  Topics   %%%%%
 
 define('_AM_XNEWS_ADDMTOPIC', 'اضافه‌کردن یک سرفصل اصلی');
 define('_AM_XNEWS_TOPICNAME', 'عنوان سرفصل');
@@ -205,7 +205,7 @@ define('_AM_XNEWS_CLONER_VERSION', 'نسخه');
 define('_AM_XNEWS_CLONER_NEWNAME', 'نام ماژول جدید');
 define(
     '_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "این قسمت یک پوشه جدید برای ماژول ایجاد میکند. <br> حساسیت ها و نام های نا صحیح به طور خودکار اصلاح میشود. <br> به طور مثال. نام جدید = <b>Library</b> شاخه جدید  = <b>library</b>, <br> نام جدید <b>My Library</b> شاخه جدید = <b>mylibrary</b>. <br><br> نام ماژول فعلی: <font color='#008400'><b> %s </b></font><br>"
+    "این قسمت یک پوشه جدید برای ماژول ایجاد میکند. <br> حساسیت ها و نام های نا صحیح به طور خودکار اصلاح میشود. <br> به طور مثال. نام جدید = <b>Library</b> شاخه جدید  = <b>library</b>, <br> نام جدید <b>My Library</b> شاخه جدید = <b>mylibrary</b>. <br><br> نام ماژول فعلی: <font color='#008400'><b> %s </b></font><br>"
 );
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'ماژول جدید:');
 
@@ -221,16 +221,22 @@ define('_AM_XNEWS_CLONER_ACTION_INSTALL', 'نصب/حذف');
 
 define('_AM_XNEWS_CLONER_IMPORTNEWS', 'وارد کردن اطلاعات ماژول اخبار');
 define('_AM_XNEWS_CLONER_IMPORTNEWSDESC1', 'ماژول اخبار در دسترس است ! اطلاعات آن منتقل شود؟');
-define('_AM_XNEWS_CLONER_IMPORTNEWSDESC2', 'این گزینه زمانی فعال است که جدول stories این ماژول خالی باشد. <br>
+define(
+    '_AM_XNEWS_CLONER_IMPORTNEWSDESC2',
+    'این گزینه زمانی فعال است که جدول stories این ماژول خالی باشد. <br>
                                          اگر شما قبل از وارد کردن اطلاعات خبری در این ماژول ارسال کرده باشید<br>
                                           باید ابتدا این ماژول رو از نصب خارج کرده و مجدد نصب کنید. <br>
-                                         اگر شما هم اکنون اطلاعات را از ماژول اخبار منتقل کرده اید از این بخش خارج شود.');
+                                         اگر شما هم اکنون اطلاعات را از ماژول اخبار منتقل کرده اید از این بخش خارج شود.'
+);
 define('_AM_XNEWS_CLONER_IMPORTNEWSSUB', 'وارد کردن');
 define('_AM_XNEWS_CLONER_NEWSIMPORTED', 'اطلاعات ماژول اصلی اخبار هم اکنون منتقل شذ');
 
 // Added in version 1.68 Beta
-define('_AM_XNEWS_DESCRIPTION', '<H3>ماژول xNews نسخه تکثیر شونده ماژول News</H3> 
-							  کاربران میتوانند خبر یا نظر ارسال کنند . این ماژول میتواند تکثیر شود و با یک روش امکان استفاده های متفاوت را فراهم کند . همچنین علاوه بر اخبار برای استفاده های دیگر هم مناسب است . و میتوانید آن را با استفاده از عنوان ها و بلاک ها و تنظیمات  شخصی سازی کنید. ');
+define(
+    '_AM_XNEWS_DESCRIPTION',
+    '<H3>ماژول xNews نسخه تکثیر شونده ماژول News</H3>
+                              کاربران میتوانند خبر یا نظر ارسال کنند . این ماژول میتواند تکثیر شود و با یک روش امکان استفاده های متفاوت را فراهم کند . همچنین علاوه بر اخبار برای استفاده های دیگر هم مناسب است . و میتوانید آن را با استفاده از عنوان ها و بلاک ها و تنظیمات  شخصی سازی کنید. '
+);
 
 // Added in version 1.68 RC1
 define('_AM_XNEWS_CLONER_CLONEDELETED', "کلون '%s' با موفقیت حذف شد .");

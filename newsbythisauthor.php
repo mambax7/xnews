@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -28,7 +28,7 @@
  *
  * @package News
  * @author Xoops Modules Dev Team
- * @copyright	(c) The Xoops Project - www.xoops.org
+ * @copyright   (c) The Xoops Project - www.xoops.org
  *
  * Parameters received by this page :
  * @page_param int              uid Id of the user you want to treat
@@ -41,7 +41,7 @@
  * @template_var string         lang_page_title contains "News by the same author"
  * @template_var int            author_id contains the user ID
  * @template_var string         author_name Name of the author (according to the user preferences (username or full name or nothing))
- * @template_var string	author_name_with_link Name of the author with an hyperlink pointing to userinfo.php (to see his "identity")
+ * @template_var string author_name_with_link Name of the author with an hyperlink pointing to userinfo.php (to see his "identity")
  * @template_var int            articles_count Total number of visibles articles (for the current user and according to the permissions)
  * @template_var string         lang_date Fixed string, "Date"
  * @template_var string         lang_hits Fixed string, 'Views'
@@ -54,7 +54,7 @@
  *                                  topic_id int Topic's ID
  *                                  topic_title string Topic's title
  *                                  topic_color string Topic's color
- *                                  topic_link	string	Link to see all the articles in this topic + topic's title
+ *                                  topic_link  string  Link to see all the articles in this topic + topic's title
  *                                  news array List of all the articles from this author for this topic
  *                                      Structure :
  *                                          int id Article's Id
@@ -147,15 +147,18 @@ if ($articlescount > 0) {
                     $cat_path = nw_remove_accents($oldtopictitle);
                 }
                 $topic_link = "<a href='" . nw_seo_UrlGenerator(_MD_XNEWS_SEO_TOPICS, $oldtopic, $cat_path) . "'>" . $oldtopictitle . '</a>';
-                $xoopsTpl->append('topics', [
-                    'topic_id'             => $oldtopic,
-                    'topic_count_articles' => sprintf(_AM_XNEWS_TOTAL, $count_articles),
-                    'topic_count_reads'    => $count_reads,
-                    'topic_color'          => $oldtopiccolor,
-                    'topic_title'          => $oldtopictitle,
-                    'topic_link'           => $topic_link,
-                    'news'                 => $articlestpl
-                ]);
+                $xoopsTpl->append(
+                    'topics',
+                    [
+                        'topic_id'             => $oldtopic,
+                        'topic_count_articles' => sprintf(_AM_XNEWS_TOTAL, $count_articles),
+                        'topic_count_reads'    => $count_reads,
+                        'topic_color'          => $oldtopiccolor,
+                        'topic_title'          => $oldtopictitle,
+                        'topic_link'           => $topic_link,
+                        'news'                 => $articlestpl,
+                    ]
+                );
             }
             $oldtopic       = $article['topicid'];
             $oldtopictitle  = $article['topic_title'];
@@ -183,7 +186,7 @@ if ($articlescount > 0) {
             'created'      => formatTimestamp($article['created'], $dateformat),
             'article_link' => $storyTitle,
             'published'    => formatTimestamp($article['published'], $dateformat),
-            'rating'       => $article['rating']
+            'rating'       => $article['rating'],
         ];
     }
 }

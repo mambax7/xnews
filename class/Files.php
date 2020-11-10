@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -12,15 +14,13 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
  */
 
 use XoopsModules\Xnews;
-
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 // require_once XNEWS_MODULE_PATH . '/class/Mimetype.php';
 
@@ -46,7 +46,8 @@ class Files
      */
     public function __construct($fileid = -1)
     {
-        $this->helper        = Xnews\Helper::getInstance();
+        /** @var Xnews\Helper $this ->helper */
+        $this->helper       = Xnews\Helper::getInstance();
         $this->db           = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table        = $this->db->prefix('nw_stories_files');
         $this->storyid      = 0;
@@ -55,7 +56,7 @@ class Files
         $this->mimetype     = '';
         $this->downloadname = 'downloadfile';
         $this->counter      = 0;
-        if (is_array($fileid)) {
+        if (\is_array($fileid)) {
             $this->makeFile($fileid);
         } elseif (-1 != $fileid) {
             $this->getFile((int)$fileid);
@@ -71,26 +72,26 @@ class Files
     public function createUploadName($folder, $filename, $trimname = false)
     {
         $workingfolder = $folder;
-        if ('/' !== xoops_substr($workingfolder, strlen($workingfolder) - 1, 1)) {
+        if ('/' !== \xoops_substr($workingfolder, mb_strlen($workingfolder) - 1, 1)) {
             $workingfolder .= '/';
         }
-        $ext  = basename($filename);
-        $ext  = explode('.', $ext);
-        $ext  = '.' . $ext[count($ext) - 1];
+        $ext  = \basename($filename);
+        $ext  = \explode('.', $ext);
+        $ext  = '.' . $ext[\count($ext) - 1];
         $true = true;
         while ($true) {
-            $ipbits = explode('.', $_SERVER['REMOTE_ADDR']);
-            list($usec, $sec) = explode(' ', microtime());
+            $ipbits = \explode('.', $_SERVER['REMOTE_ADDR']);
+            [$usec, $sec] = \explode(' ', \microtime());
 
-            $usec = (integer)($usec * 65536);
-            $sec  = ((integer)$sec) & 0xFFFF;
+            $usec = ($usec * 65536);
+            $sec  = ((int)$sec) & 0xFFFF;
 
             if ($trimname) {
-                $uid = sprintf('%06x%04x%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
+                $uid = \sprintf('%06x%04x%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
             } else {
-                $uid = sprintf('%08x-%04x-%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
+                $uid = \sprintf('%08x-%04x-%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
             }
-            if (!file_exists($workingfolder . $uid . $ext)) {
+            if (!\file_exists($workingfolder . $uid . $ext)) {
                 $true = false;
             }
         }
@@ -106,13 +107,13 @@ class Files
     {
         $Mimetype    = new Mimetype();
         $workingfile = $this->downloadname;
-        if ('' != xoops_trim($filename)) {
+        if ('' != \xoops_trim($filename)) {
             $workingfile = $filename;
 
             return $Mimetype->getType($workingfile);
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
@@ -161,10 +162,10 @@ class Files
     public function store()
     {
         $myts = \MyTextSanitizer::getInstance();
-        //
+
         $fileRealName = $myts->addSlashes($this->filerealname);
         $downloadname = $myts->addSlashes($this->downloadname);
-        $date         = time();
+        $date         = \time();
         $mimetype     = $myts->addSlashes($this->mimetype);
         $counter      = (int)$this->counter;
         $storyid      = (int)$this->storyid;
@@ -197,14 +198,14 @@ class Files
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-        if (file_exists($workdir . '/' . $this->downloadname)) {
-            unlink($workdir . '/' . $this->downloadname);
+        if (\is_file($workdir . '/' . $this->downloadname)) {
+            \unlink($workdir . '/' . $this->downloadname);
             //DNPROSSI - Added thumb deletion
-            if (false !== strpos($this->getMimetype(), 'image')) {
+            if (false !== mb_strpos($this->getMimetype(), 'image')) {
                 // IN PROGRESS
                 // IN PROGRESS
                 // IN PROGRESS
-                unlink($workdir . '/thumb_' . $this->downloadname);
+                \unlink($workdir . '/thumb_' . $this->downloadname);
             }
         }
 
@@ -228,6 +229,7 @@ class Files
     // ****************************************************************************************************************
     // All the Sets
     // ****************************************************************************************************************
+
     /**
      * @param $filename
      */
@@ -263,6 +265,7 @@ class Files
     // ****************************************************************************************************************
     // All the Gets
     // ****************************************************************************************************************
+
     /**
      * @return int
      */
@@ -302,7 +305,7 @@ class Files
     public function getFileRealName($format = 'S')
     {
         $myts = \MyTextSanitizer::getInstance();
-        //
+
         switch ($format) {
             case 'S':
             case 'Show':
@@ -332,7 +335,7 @@ class Files
     public function getMimetype($format = 'S')
     {
         $myts = \MyTextSanitizer::getInstance();
-        //
+
         switch ($format) {
             case 'S':
             case 'Show':
@@ -362,7 +365,7 @@ class Files
     public function getDownloadname($format = 'S')
     {
         $myts = \MyTextSanitizer::getInstance();
-        //
+
         switch ($format) {
             case 'S':
             case 'Show':
@@ -409,10 +412,10 @@ class Files
     public function getCountbyStories($stories)
     {
         $ret = [];
-        if (count($stories) > 0) {
+        if (\count($stories) > 0) {
             $sql    = 'SELECT storyid, count(fileid) AS cnt';
             $sql    .= " FROM {$this->db->prefix('nw_stories_files')}";
-            $sql    .= ' WHERE storyid IN (' . implode(',', $stories) . ') GROUP BY storyid';
+            $sql    .= ' WHERE storyid IN (' . \implode(',', $stories) . ') GROUP BY storyid';
             $result = $this->db->query($sql);
             while (false !== ($myrow = $this->db->fetchArray($result))) {
                 $ret[$myrow['storyid']] = $myrow['cnt'];

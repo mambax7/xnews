@@ -11,13 +11,12 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
  */
-
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 $seoOp  = @$_GET['seoOp'];
 $seoArg = @$_GET['seoArg'];
@@ -48,18 +47,18 @@ $seoMap = [
     _MD_XNEWS_SEO_TOPICS   => 'index.php',
     _MD_XNEWS_SEO_ARTICLES => 'article.php',
     _MD_XNEWS_SEO_PRINT    => 'print.php',
-    _MD_XNEWS_SEO_PDF      => 'makepdf.php'
+    _MD_XNEWS_SEO_PDF      => 'makepdf.php',
 ];
 
 if (!empty($seoOp) && !empty($seoMap[$seoOp])) {
     //module specific dispatching logic, other module must implement as
     //per their requirements.
-    $url_arr = explode('/modules/', $_SERVER['PHP_SELF']);
+    $url_arr = explode('/modules/', $_SERVER['SCRIPT_NAME']);
     $newUrl  = $url_arr[0] . '/modules/' . XNEWS_MODULE_DIRNAME . '/' . $seoMap[$seoOp];
 
-    $_ENV['PHP_SELF']       = $newUrl;
+    $_ENV['SCRIPT_NAME']    = $newUrl;
     $_SERVER['SCRIPT_NAME'] = $newUrl;
-    $_SERVER['PHP_SELF']    = $newUrl;
+    $_SERVER['SCRIPT_NAME'] = $newUrl;
     switch ($seoOp) {
         case _MD_XNEWS_SEO_TOPICS:
             $_SERVER['REQUEST_URI'] = $newUrl . '?topic_id=' . $seoArg;
@@ -73,7 +72,7 @@ if (!empty($seoOp) && !empty($seoMap[$seoOp])) {
             $_GET['storyid']        = $seoArg;
     }
 
-    include $seoMap[$seoOp];
+    require_once $seoMap[$seoOp];
     exit;
     //trigger_error('out', E_USER_WARNING);
 }

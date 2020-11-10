@@ -92,7 +92,7 @@ function small_window(myurl, w, h) {
 }
 
 // Adds the list of selected items selected in the child
-// window to its list. It is called by child window to do so.  
+// window to its list. It is called by child window to do so.
 function addToParentList(sourceList) {
     destinationList = window.document.forms[0].elements['moderators[]'];
     for (var count = destinationList.options.length - 1; count >= 0; count--) {
@@ -104,7 +104,7 @@ function addToParentList(sourceList) {
     }
 }
 
-// Marks all the items as selected for the submit button.  
+// Marks all the items as selected for the submit button.
 function selectList(sourceList) {
     sourceList = window.document.forms[0].elements['moderators[]'];
     for (var i = 0; i < sourceList.options.length; i++) {

@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -20,8 +22,8 @@
  * @author          Harry Fuecks (PHP Anthology Volume II)
  * @version         $Id: session.php 10283 2012-11-28 13:39:36Z trabis $
  */
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
-require_once dirname(__DIR__) . '/include/common.php';
+
+require_once \dirname(__DIR__) . '/include/common.php';
 
 /**
  * Class Session
@@ -36,7 +38,9 @@ class Session
      */
     protected function __construct()
     {
-        @session_start();
+        if (false === @\session_start()) {
+            throw new \RuntimeException('Session could not start.');
+        }
     }
 
     /**
@@ -45,7 +49,6 @@ class Session
      * @param string $name  name of variable
      * @param mixed  $value value of variable
      *
-     * @return void
      * @access public
      */
     public function set($name, $value)
@@ -65,9 +68,9 @@ class Session
     {
         if (isset($_SESSION[$name])) {
             return $_SESSION[$name];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -75,7 +78,6 @@ class Session
      *
      * @param string $name name of variable
      *
-     * @return void
      * @access public
      */
     public function del($name)
@@ -86,13 +88,12 @@ class Session
     /**
      * Destroys the whole session
      *
-     * @return void
      * @access public
      */
     public function destroy()
     {
         $_SESSION = [];
-        session_destroy();
+        \session_destroy();
     }
 
     /**
@@ -102,7 +103,7 @@ class Session
     {
         static $_sess;
         if (!isset($_sess)) {
-            $_sess = new Session();
+            $_sess = new self();
         }
 
         return $_sess;

@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -12,13 +14,11 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
  */
-
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
  * Class Registryfile
@@ -57,11 +57,11 @@ class Registryfile
         } else {
             $fw = XOOPS_UPLOAD_PATH . '/' . $file;
         }
-        if (file_exists($fw)) {
+        if (\file_exists($fw)) {
             return file_get_contents($fw);
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
@@ -77,12 +77,12 @@ class Registryfile
         } else {
             $fw = XOOPS_UPLOAD_PATH . '/' . $file;
         }
-        if (file_exists($fw)) {
-            @unlink($fw);
+        if (\is_file($fw)) {
+            @\unlink($fw);
         }
-        $fp = fopen($fw, 'w') || exit(_ERRORS);
-        fwrite($fp, $content);
-        fclose($fp);
+        $fp = \fopen($fw, 'w') || exit(_ERRORS);
+        \fwrite($fp, $content);
+        \fclose($fp);
 
         return true;
     }

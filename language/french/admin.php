@@ -1,6 +1,6 @@
 <?php
 // $Id: admin.php 1243 2010-08-29 18:59:52Z kris_fr $
-//%%%%%%	Admin Module Name  Articles 	%%%%%
+//%%%%%%    Admin Module Name  Articles     %%%%%
 define('_AM_XNEWS_DBUPDATED', 'La Base de données a été mise à jour');
 define('_AM_XNEWS_CONFIG', 'Gestion du module');
 define('_AM_XNEWS_AUTOARTICLES', 'Articles à publication automatisée');
@@ -46,7 +46,7 @@ define('_AM_XNEWS_SAVE', 'Sauvegarder');
 define('_AM_XNEWS_PUBINHOME', "Afficher en page d'accueil du module ?");
 define('_AM_XNEWS_ADD', 'Ajouter');
 
-//%%%%%%	Admin Module Name  Topics 	%%%%%
+//%%%%%%    Admin Module Name  Topics   %%%%%
 
 define('_AM_XNEWS_ADDMTOPIC', 'Ajouter une catégorie principale');
 define('_AM_XNEWS_TOPICNAME', 'Intitulé de la catégorie');
@@ -205,7 +205,7 @@ define('_AM_XNEWS_CLONER_VERSION', 'Version');
 define('_AM_XNEWS_CLONER_NEWNAME', 'Nom du nouveau module');
 define(
     '_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "Cette information affecte également le nom du répertoire du module. <br>La saisie est insensible à la casse et les espaces sont automatiquement supprimés.<br><br>Exemples :<br><strong>Library</strong> devient <strong>library</strong> dans le répertoire des modules<br><strong>My Library</strong> devient <strong>mylibrary</strong> dans le répertoire des modules<br><br> Le module d'origine est : <font color='#008400'><strong> %s </strong></font><br>"
+    "Cette information affecte également le nom du répertoire du module. <br>La saisie est insensible à la casse et les espaces sont automatiquement supprimés.<br><br>Exemples :<br><strong>Library</strong> devient <strong>library</strong> dans le répertoire des modules<br><strong>My Library</strong> devient <strong>mylibrary</strong> dans le répertoire des modules<br><br> Le module d'origine est : <font color='#008400'><strong> %s </strong></font><br>"
 );
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'Nouveau module :');
 
@@ -221,16 +221,22 @@ define('_AM_XNEWS_CLONER_ACTION_INSTALL', 'Installer / désinstaller');
 
 define('_AM_XNEWS_CLONER_IMPORTNEWS', 'Importer les données depuis le module News');
 define('_AM_XNEWS_CLONER_IMPORTNEWSDESC1', 'Le module News a été trouvé. Voulez-vous importer les données ?');
-define('_AM_XNEWS_CLONER_IMPORTNEWSDESC2', "Le bouton d'import n'est disponible que si la table des artciles du module xNews est vierge.<br>
+define(
+    '_AM_XNEWS_CLONER_IMPORTNEWSDESC2',
+    "Le bouton d'import n'est disponible que si la table des artciles du module xNews est vierge.<br>
                                          Si vous avez déjà créé des articles dans xNews<br>
                                          veuillez le désinstaller complètement et le réinstaller.<br>
-                                         Si vous avez déjà importé des données depuis le module News, un nouvel import est impossible.");
+                                         Si vous avez déjà importé des données depuis le module News, un nouvel import est impossible."
+);
 define('_AM_XNEWS_CLONER_IMPORTNEWSSUB', 'Importer');
 define('_AM_XNEWS_CLONER_NEWSIMPORTED', 'Les données du module News ont été importées.');
 
 // Added in version 1.68 Beta
-define('_AM_XNEWS_DESCRIPTION', "<h3>xNews est une version clonable du module News</h3> 
-							  Les utilisateur peuvent poster des articles et les commenter.<br>Le module peut être cloné et ainsi couvrir tous vos besoins en matière de gestion d'articles.");
+define(
+    '_AM_XNEWS_DESCRIPTION',
+    "<h3>xNews est une version clonable du module News</h3>
+                              Les utilisateur peuvent poster des articles et les commenter.<br>Le module peut être cloné et ainsi couvrir tous vos besoins en matière de gestion d'articles."
+);
 
 // Added in version 1.68 RC1
 define('_AM_XNEWS_CLONER_CLONEDELETED', "Le clone '%s' a été supprimé.");
@@ -247,10 +253,10 @@ define('_AM_XNEWS_INDEX', 'Index');
 // Added in version 1.68 RC3
 define('_AM_XNEWS_DOLINEBREAK', 'Activer le saut de ligne');
 
-define('_AM_XNEWS_TOPICS', 'Catégories');/**
+define('_AM_XNEWS_TOPICS', 'Catégories'); /**
  * @translation     Communauté Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  * @version         $Id $
- **/;
+ **/

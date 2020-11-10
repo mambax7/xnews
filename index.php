@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -84,12 +84,13 @@ require_once XOOPS_ROOT_PATH . '/class/tree.php';
 $newsStoryHandler = new Xnews\NewsStory();
 
 $topic_id = 0;
-if (\Xmf\Request::hasVar('topic_id', 'GET')) { 
- $topic_id = \Xmf\Request::getInt('topic_id', 0, 'GET');
+if (\Xmf\Request::hasVar('topic_id', 'GET')) {
+    $topic_id = \Xmf\Request::getInt('topic_id', 0, 'GET');
 }
 
 if ($topic_id) {
-    $groups       = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
     if (!$grouppermHandler->checkRight('nw_view', $topic_id, $groups, $helper->getModule()->getVar('mid'))) {
         redirect_header(XNEWS_MODULE_URL . '/index.php', 3, _NOPERM);
@@ -98,7 +99,7 @@ if ($topic_id) {
 } else {
     $xoopsOption['storytopic'] = 0;
 }
-if (isset($_GET['storynum'])) {
+if (\Xmf\Request::hasVar('storynum', 'GET')) {
     $xoopsOption['storynum'] = \Xmf\Request::getInt('storynum', 0, 'GET');
     if ($xoopsOption['storynum'] > 30) {
         $xoopsOption['storynum'] = $helper->getConfig('storyhome');
@@ -154,8 +155,9 @@ if ($showclassic) {
         //        $xoopsTpl->assign('topic_select', $topic_select);
 
         $moduleDirName = basename(__DIR__);
+        /** @var \XoopsModules\Xnews\Helper $helper */
         $helper = \XoopsModules\Xnews\Helper::getInstance();
-        $module        = $helper->getModule();
+        $module = $helper->getModule();
 
         if (Xnews\Utility::checkVerXoops($module, '2.5.9')) {
             $topic_select = $topic_tree->makeSelectElement('topic_id', 'topic_title', '--', $xoopsOption['storytopic'], true, 0, '', '');
@@ -248,7 +250,7 @@ if ($showclassic) {
     }
 
     $xt            = new Xnews\NewsTopic();
-    $alltopics     =& $xt->getTopicsList(true, $helper->getConfig('restrictindex'));
+    $alltopics     = $xt->getTopicsList(true, $helper->getConfig('restrictindex'));
     $smarty_topics = [];
     $topicstories  = [];
 
@@ -264,7 +266,7 @@ if ($showclassic) {
             $story                    = $thisstory->prepare2show($filescount);
             $story['topic_title']     = $thisstory->textlink();
             $story['topic_separator'] = ('' != $thisstory->textlink()) ? _MD_XNEWS_SP : '';
-            $story['news_title']      = $story['title'];//$thisstory->storylink();
+            $story['news_title']      = $story['title']; //$thisstory->storylink();
             $topicstories[$topicid][] = $story;
         }
         if (isset($topicstories[$topicid])) {

@@ -19,7 +19,6 @@
  * @author          Marius Scurtescu <mariuss@romanians.bc.ca>
  * @version         $Id: news.php 0 2009-06-11 18:47:04Z trabis $
  */
-
 require_once dirname(__DIR__) . '/admin_header.php';
 $myts = \MyTextSanitizer::getInstance();
 
@@ -64,7 +63,7 @@ if ('start' === $op) {
             $result           = $xoopsDB->query($sql);
             $cat_cbox_options = [];
 
-            while (false !== (list($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow($result))) {
+            while (list($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow($result)) {
                 $cat_title              = $myts->displayTarea($cat_title);
                 $cat_cbox_options[$cid] = "$cat_title ($art_count)";
             }
@@ -162,7 +161,7 @@ if ('go' === $op) {
             // TODO: copy contents folder
             /*
              if ($arrArticle['htmlpage']) {
-             $pagewrap_filename	= XOOPS_ROOT_PATH . "/modules/wfsection/html/" .$arrArticle['htmlpage'];
+             $pagewrap_filename = XOOPS_ROOT_PATH . "/modules/wfsection/html/" .$arrArticle['htmlpage'];
              if (file_exists($pagewrap_filename)) {
              if (copy($pagewrap_filename, XOOPS_ROOT_PATH . "/uploads/publisher/content/" . $arrArticle['htmlpage'])) {
              $itemObj->setVar('body', "[pagewrap=" . $arrArticle['htmlpage'] . "]");
@@ -175,31 +174,30 @@ if ('go' === $op) {
             if (!$itemObj->store()) {
                 echo sprintf('  ' . _AM_XNI_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . '<br>';
                 continue;
-            } else {
+            }
 
-                // Linkes files
-                $sql               = 'SELECT * FROM ' . $xoopsDB->prefix('smartsection_files') . ' WHERE itemid=' . $arrArticle['itemid'];
-                $resultFiles       = $xoopsDB->query($sql);
-                $allowed_mimetypes = null;
-                while (false !== ($arrFile = $xoopsDB->fetchArray($resultFiles))) {
-                    $filename = XOOPS_ROOT_PATH . '/uploads/smartsection/' . $arrFile['filename'];
-                    if (file_exists($filename)) {
-                        if (copy($filename, XOOPS_ROOT_PATH . '/uploads/publisher/' . $arrFile['filename'])) {
-                            $fileObj = $publisher->getHandler('file')->create();
-                            $fileObj->setVars($arrFile);
-                            $fileObj->setVar('fileid', 0);
+            // Linkes files
+            $sql               = 'SELECT * FROM ' . $xoopsDB->prefix('smartsection_files') . ' WHERE itemid=' . $arrArticle['itemid'];
+            $resultFiles       = $xoopsDB->query($sql);
+            $allowed_mimetypes = null;
+            while (false !== ($arrFile = $xoopsDB->fetchArray($resultFiles))) {
+                $filename = XOOPS_ROOT_PATH . '/uploads/smartsection/' . $arrFile['filename'];
+                if (file_exists($filename)) {
+                    if (copy($filename, XOOPS_ROOT_PATH . '/uploads/publisher/' . $arrFile['filename'])) {
+                        $fileObj = $publisher->getHandler('file')->create();
+                        $fileObj->setVars($arrFile);
+                        $fileObj->setVar('fileid', 0);
 
-                            if ($fileObj->store($allowed_mimetypes, true, false)) {
-                                echo '&nbsp;&nbsp;&nbsp;&nbsp;' . sprintf(_AM_XNI_IMPORTED_ARTICLE_FILE, $arrFile['filename']) . '<br>';
-                            }
+                        if ($fileObj->store($allowed_mimetypes, true, false)) {
+                            echo '&nbsp;&nbsp;&nbsp;&nbsp;' . sprintf(_AM_XNI_IMPORTED_ARTICLE_FILE, $arrFile['filename']) . '<br>';
                         }
                     }
                 }
-
-                $newArticleArray[$arrArticle['itemid']] = $itemObj->itemid();
-                echo '&nbsp;&nbsp;' . sprintf(_AM_XNI_IMPORTED_ARTICLE, $itemObj->title()) . '<br>';
-                ++$cnt_imported_articles;
             }
+
+            $newArticleArray[$arrArticle['itemid']] = $itemObj->itemid();
+            echo '&nbsp;&nbsp;' . sprintf(_AM_XNI_IMPORTED_ARTICLE, $itemObj->title()) . '<br>';
+            ++$cnt_imported_articles;
         }
 
         // Saving category permissions

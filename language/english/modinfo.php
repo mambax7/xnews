@@ -192,7 +192,7 @@ define('_MI_XNEWS_TOPICDISPLAYDESC', 'This will enable/disable Topics title in t
 define('_MI_XNEWS_SEOENABLE', 'SEO enable ');
 define(
     '_MI_XNEWS_SEOENABLEDESC',
-       'This will enable/disable SEO activity.<br> If <b>htaccess</b> is selected you will get: <br> http://your.site.com/<b>xnews</b>/topics.1/your-topic-title.html <br> If path-info is selected you will get: <br> http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html'
+    'This will enable/disable SEO activity.<br> If <b>htaccess</b> is selected you will get: <br> http://your.site.com/<b>xnews</b>/topics.1/your-topic-title.html <br> If path-info is selected you will get: <br> http://your.site.com/modules/xnews/index.php/topics.1/your-topic-title.html'
 );
 
 // Added in version 1.68 RC1
@@ -209,12 +209,12 @@ define('_MI_XNEWS_DISPLAYLINKICNSDESC', 'Display print, friend and pdf icons non
 define('_MI_XNEWS_SEOPATH', 'SEO path ');
 define(
     '_MI_XNEWS_SEOPATHDESC',
-       'This will add a title to SEO url for both <b>htaccess</b> and <b>path-info</b> modes. <br> If left empty you will get: <br> http://your.site.com/topics.1/your-topic-title.html <br> If you type <b>news</b> you will get: <br> http://your.site.com/<b>news</b>/topics.1/your-topic-title.html <br><br> <b>a-z chars and minus char accepted. eg. news-of-day</b>'
+    'This will add a title to SEO url for both <b>htaccess</b> and <b>path-info</b> modes. <br> If left empty you will get: <br> http://your.site.com/topics.1/your-topic-title.html <br> If you type <b>news</b> you will get: <br> http://your.site.com/<b>news</b>/topics.1/your-topic-title.html <br><br> <b>a-z chars and minus char accepted. eg. news-of-day</b>'
 );
 define('_MI_XNEWS_SEOLEVEL', 'SEO level ');
 define(
     '_MI_XNEWS_SEOLEVELDESC',
-       'Here you can chose whether to have htaccess in xoops root dir or in module one. <br> This will change the appearance of the url. <br> In root level: <br> http://your.site.com/news/topics.1/your-topic-title.html <br> In module level: <br> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br><br> Only works in htaccess mode and htaccess files will have to be installed accordingly.'
+    'Here you can chose whether to have htaccess in xoops root dir or in module one. <br> This will change the appearance of the url. <br> In root level: <br> http://your.site.com/news/topics.1/your-topic-title.html <br> In module level: <br> http://your.site.com/modules/xnews/news.topics.1/your-topic-title.html<br><br> Only works in htaccess mode and htaccess files will have to be installed accordingly.'
 );
 define('_MI_XNEWS_MODULE_LEVEL', 'Module level');
 define('_MI_XNEWS_ROOT_LEVEL', 'Root level');
@@ -253,3 +253,5 @@ define('_MI_XNEWS_SUPPORT', 'Support');
 
 define('_MI_XNEWS_HOME', 'Home');
 define('_MI_XNEWS_ABOUT', 'About');
+
+define('_MI_XNEWS_BLOCKS', 'Blocks Admin');

@@ -1,5 +1,6 @@
 <?php
-// $Id: blocks.php,v 1.70 2010/09/01 17:48:07 dnprossi Exp $								 //
+
+// $Id: blocks.php,v 1.70 2010/09/01 17:48:07 dnprossi Exp $                                 //
 define('_MB_XNEWS_NOTYET', "Non c'è nessuna notizia del giorno, ancora.");
 define('_MB_XNEWS_TMRSI', 'La notizia più letta di oggi è:');
 define('_MB_XNEWS_ORDER', 'Ordine');

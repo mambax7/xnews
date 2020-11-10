@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -19,7 +19,7 @@
 
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 /**
  * Solves issue when upgrading xoops version
  * Paths not set and block would not work
@@ -43,8 +43,9 @@ function nw_b_news_bigstory_show()
 {
     require_once XNEWS_MODULE_PATH . '/include/functions.php';
     // require_once XNEWS_MODULE_PATH . '/class/NewsStory.php';
-    $myts       = \MyTextSanitizer::getInstance();
-    $helper = Xnews\Helper::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
+    /** @var Xnews\Helper $helper */
+    $helper     = Xnews\Helper::getInstance();
     $restricted = $helper->getConfig('restrictindex');
     $dateformat = $helper->getConfig('dateformat');
     $infotips   = $helper->getConfig('infotips');

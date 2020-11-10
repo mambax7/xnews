@@ -696,9 +696,7 @@
 
         ul#tabNavigation li {
             display: inline;
-            list-style-image: none;
-            list-style-position: outside;
-            list-style-type: none;
+            list-style: none outside none;
         }
 
         ul#tabNavigation a,
@@ -1000,12 +998,12 @@
         <li class="fixTabsIE"><a href="javascript:void(0);">&nbsp;</a></li>
     </ul>
     <{if $block.current_is_spotlight}>
-        <div style="border-top: 1px solid rgb(0, 0, 0); background: <{$block.color1}> none repeat scroll 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">
+        <div style="border-top: 1px solid rgb(0, 0, 0); background: <{$block.color1}> none repeat scroll 0; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">
             <{$block.spotlight.author}> <{$block.lang_on}> <{$block.spotlight.date}> <{if $block.use_rating}> - <{$block.spotlight.rating}>/10 (<{$block.spotlight.number_votes}>)<{/if}>, <{$block.spotlight.hits}> <{$block.lang_reads}>
             <br>
         </div>
     <{else}>
-        <div style="border-top: 1px solid rgb(0, 0, 0); background: <{$block.color1}> none repeat scroll 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">
+        <div style="border-top: 1px solid rgb(0, 0, 0); background: <{$block.color1}> none repeat scroll 0; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">
             <{foreach item=onesummary from=$block.smallheader}>
                 <{$onesummary}>&nbsp;
             <{/foreach}>

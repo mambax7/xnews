@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /**
  * This file contains the keyhighlighter class that highlight the chosen keyword in the current output buffer.
@@ -20,14 +22,11 @@
  * @link      http://setecastronomy.stufftoread.com
  */
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
-
 /**
  * Class Keyhighlighter
  */
 class Keyhighlighter
 {
-
     /**
      * @access private
      */
@@ -44,19 +43,17 @@ class Keyhighlighter
      * @access private
      */
     public $replace_callback = null;
-
     public $content;
-
     /**
      * Main constructor
      *
      * This is the main constructor of Keyhighlighter class. <br>
      * It's the only public method of the class.
      * @param string   $keywords         the keywords you want to highlight
-     * @param boolean  $singlewords      specify if it has to highlight also the single words.
+     * @param bool     $singlewords      specify if it has to highlight also the single words.
      * @param callback $replace_callback a custom callback for keyword highlight.
      *                                   <code>
-     *                                   require ('Keyhighlighter.class.php');
+     *                                   require_once ('Keyhighlighter.class.php');
      *
      * function my_highlighter ($matches) {
      *     return '<span style="font-weight: bolder; color: #FF0000;">' . $matches[0] . '</span>';
@@ -83,7 +80,7 @@ class Keyhighlighter
     {
         $patterns = [];
         if ($this->singlewords) {
-            $keywords = explode(' ', $this->preg_keywords);
+            $keywords = \explode(' ', $this->preg_keywords);
             foreach ($keywords as $keyword) {
                 $patterns[] = '/(?' . '>' . $keyword . '+)/si';
             }
@@ -95,9 +92,9 @@ class Keyhighlighter
 
         foreach ($patterns as $pattern) {
             if (null !== $this->replace_callback) {
-                $result = preg_replace_callback($pattern, $this->replace_callback, $result);
+                $result = \preg_replace_callback($pattern, $this->replace_callback, $result);
             } else {
-                $result = preg_replace($pattern, '<span class="highlightedkey">\\0</span>', $result);
+                $result = \preg_replace($pattern, '<span class="highlightedkey">\\0</span>', $result);
             }
         }
 
@@ -112,9 +109,9 @@ class Keyhighlighter
     public function highlight($buffer)
     {
         $buffer              = '>' . $buffer . '<';
-        $this->preg_keywords = preg_replace('/[^\w ]/si', '', $this->keywords);
-        $buffer              = preg_replace_callback("/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", [&$this, 'replace'], $buffer);
-        $buffer              = xoops_substr($buffer, 1, -1);
+        $this->preg_keywords = \preg_replace('/[^\w ]/si', '', $this->keywords);
+        $buffer              = \preg_replace_callback("/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", [&$this, 'replace'], $buffer);
+        $buffer              = \xoops_substr($buffer, 1, -1);
 
         return $buffer;
     }

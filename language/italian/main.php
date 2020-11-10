@@ -1,6 +1,6 @@
 <?php
 // $Id: main.php,v 1.70 2010/09/01 17:48:07 dnprossi Exp $
-//%%%%%%		File Name index.php 		%%%%%
+//%%%%%%        File Name index.php         %%%%%
 define('_MD_XNEWS_PRINTER', 'Pagina stampabile');
 define('_MD_XNEWS_SENDSTORY', 'Invia questa notizia a un amico');
 define('_MD_XNEWS_READMORE', 'Leggi tutto...');
@@ -10,7 +10,7 @@ define('_MD_XNEWS_BYTESMORE', 'altri %s bytes');
 define('_MD_XNEWS_NUMCOMMENTS', '%s commenti');
 define('_MD_XNEWS_MORERELEASES', 'Ulteriori rilasci in ');
 
-//%%%%%%		File Name submit.php		%%%%%
+//%%%%%%        File Name submit.php        %%%%%
 define('_MD_XNEWS_SUBMITNEWS', 'Invia Notizia');
 define('_MD_XNEWS_TITLE', 'Titolo');
 define('_MD_XNEWS_TOPIC', 'Argomento');
@@ -23,7 +23,7 @@ define('_MD_XNEWS_THANKS', 'Grazie del tuo contributo!'); //submission of news a
 define('_MD_XNEWS_NOTIFYSBJCT', 'Notizia per il mio sito'); // Notification mail subject
 define('_MD_XNEWS_NOTIFYMSG', 'Hey! Hai ricevuto un nuova notizia per il tuo sito.'); // Notification mail message
 
-//%%%%%%		File Name archive.php		%%%%%
+//%%%%%%        File Name archive.php       %%%%%
 define('_MD_XNEWS_NEWSARCHIVES', 'Archivo Notizie');
 define('_MD_XNEWS_ARTICLES', 'Notizie');
 define('_MD_XNEWS_VIEWS', 'Letture');
@@ -41,7 +41,7 @@ define('_MD_XNEWS_TOPICC', 'Argomento:');
 define('_MD_XNEWS_URL', 'Indirizzo:');
 define('_MD_XNEWS_NOSTORY', "Spiacenti, ma l'articolo selezionato non esiste.");
 
-//%%%%%%	File Name print.php 	%%%%%
+//%%%%%%    File Name print.php     %%%%%
 
 define('_MD_XNEWS_URLFORSTORY', "L'indirizzo di questa notizia è:");
 

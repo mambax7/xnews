@@ -11,13 +11,12 @@
 
 /**
  * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package
  * @since
  * @author       XOOPS Development Team
  */
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * @param $category
@@ -45,9 +44,9 @@ function nw_notify_iteminfo($category, $item_id)
             $item['url']  = XNEWS_MODULE_URL . '/article.php?storyid=' . (int)$item_id;
 
             return $item;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     // Added by Lankford on 2007/3/23
@@ -60,8 +59,8 @@ function nw_notify_iteminfo($category, $item_id)
             $item['url']  = XNEWS_MODULE_URL . '/index.php?topic_id=' . (int)$item_id;
 
             return $item;
-        } else {
-            return null;
         }
+
+        return null;
     }
 }

@@ -17,9 +17,7 @@
  * @author       XOOPS Development Team, DNPROSSI
  * @version      $Id $
  */
-
 require_once __DIR__ . '/admin_header.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require_once XNI_MODULE_PATH . '/include/functions.php';
 require_once XNI_MODULE_PATH . '/admin/functions.php';
 
@@ -56,7 +54,6 @@ if ('go' === $op) {
     $newArticleArray = [];
     $oldToNew        = [];
     while (false !== ($arrCat = $xoopsDB->fetchArray($resultCat))) {
-
         /*$newCat = array();
         $newCat['oldid'] = $arrCat['topic_id'];
         $newCat['oldpid'] = $arrCat['topic_pid'];

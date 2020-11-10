@@ -1,20 +1,20 @@
 /*
-	Copyright (c) 2004-2006, The Dojo Foundation
-	All Rights Reserved.
+    Copyright (c) 2004-2006, The Dojo Foundation
+    All Rights Reserved.
 
-	Licensed under the Academic Free License version 2.1 or above OR the
-	modified BSD license. For more information on Dojo licensing, see:
+    Licensed under the Academic Free License version 2.1 or above OR the
+    modified BSD license. For more information on Dojo licensing, see:
 
-		http://dojotoolkit.org/community/licensing.shtml
+        http://dojotoolkit.org/community/licensing.shtml
 */
 
 /*
-	This is a compiled version of Dojo, built for deployment and not for
-	development. To get an editable version, please visit:
+    This is a compiled version of Dojo, built for deployment and not for
+    development. To get an editable version, please visit:
 
-		http://dojotoolkit.org
+        http://dojotoolkit.org
 
-	for documentation and information on getting the source.
+    for documentation and information on getting the source.
 */
 
 if(typeof dojo=="undefined"){
@@ -2333,7 +2333,7 @@ elem.setAttributeNode(_25b);
 dojo.provide("dojo.undo.browser");
 try{
 if((!djConfig["preventBackButtonFix"])&&(!dojo.hostenv.post_load_)){
-document.write("<iframe style='border: 0px; width: 1px; height: 1px; position: absolute; bottom: 0px; right: 0px; visibility: visible;' name='djhistory' id='djhistory' src='"+(dojo.hostenv.getBaseScriptUri()+"iframe_history.html")+"'></iframe>");
+document.write("<iframe style='border: 0; width: 1px; height: 1px; position: absolute; bottom: 0; right: 0; visibility: visible;' name='djhistory' id='djhistory' src='"+(dojo.hostenv.getBaseScriptUri()+"iframe_history.html")+"'></iframe>");
 }
 }
 catch(e){

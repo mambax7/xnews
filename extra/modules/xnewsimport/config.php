@@ -17,7 +17,6 @@
  * @author       XOOPS Development Team,
  * @version      $Id $
  */
-
 $cfg = [];
 /**
  * Use the "fun" menu for the module's administration ?

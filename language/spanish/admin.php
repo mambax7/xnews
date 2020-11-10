@@ -1,6 +1,6 @@
 <?php
 // $Id: admin.php,v 1.18 2004/07/26 17:51:25 hthouzard Exp $
-//%%%%%%	Admin Module Name  Articles 	%%%%%
+//%%%%%%    Admin Module Name  Articles     %%%%%
 define('_AM_XNEWS_DBUPDATED', '¡Base de datos actualizada satisfactoriamente!');
 define('_AM_XNEWS_CONFIG', 'Configuración de los noticias');
 define('_AM_XNEWS_AUTOARTICLES', 'Noticias automáticas');
@@ -46,7 +46,7 @@ define('_AM_XNEWS_SAVE', 'Publicar');
 define('_AM_XNEWS_PUBINHOME', 'Publicar en el inicio');
 define('_AM_XNEWS_ADD', 'Agregar');
 
-//%%%%%%	Admin Module Name  Topics 	%%%%%
+//%%%%%%    Admin Module Name  Topics   %%%%%
 
 define('_AM_XNEWS_ADDMTOPIC', 'Agregar un tema principal');
 define('_AM_XNEWS_TOPICNAME', 'Nombre del tema');
@@ -205,7 +205,7 @@ define('_AM_XNEWS_CLONER_VERSION', 'Versión');
 define('_AM_XNEWS_CLONER_NEWNAME', 'Nombre del Módulo');
 define(
     '_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "Esto también afectará a la creación de la carpeta del módulo nuevo. <br> mayúsculas, minúsculas y los espacios son ignorados y se auto corrigen. <br> ej. nuevo nombre = <b>Biblioteca</b> nuevo dir  = <b>biblioteca</b>, <br> nuevo nombre <b>Mi Biblioteca</b> new dir = <b>mibiblioteca</b>. <br><br> módulo de inicio es: <font color='#008400'><b> %s </b></font><br>"
+    "Esto también afectará a la creación de la carpeta del módulo nuevo. <br> mayúsculas, minúsculas y los espacios son ignorados y se auto corrigen. <br> ej. nuevo nombre = <b>Biblioteca</b> nuevo dir  = <b>biblioteca</b>, <br> nuevo nombre <b>Mi Biblioteca</b> new dir = <b>mibiblioteca</b>. <br><br> módulo de inicio es: <font color='#008400'><b> %s </b></font><br>"
 );
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'Nuevo Módulo:');
 
@@ -221,16 +221,22 @@ define('_AM_XNEWS_CLONER_ACTION_INSTALL', 'Instalar/Desinstalar');
 
 define('_AM_XNEWS_CLONER_IMPORTNEWS', 'Importar datos originales del módulo de Noticias');
 define('_AM_XNEWS_CLONER_IMPORTNEWSDESC1', 'Módulo original de Noticias existe! ¿Importar datos ahora?');
-define('_AM_XNEWS_CLONER_IMPORTNEWSDESC2', 'El botón de importación sólo aparece si la tabla stories del módulo x' . 'News está vacia. <br>
+define(
+    '_AM_XNEWS_CLONER_IMPORTNEWSDESC2',
+    'El botón de importación sólo aparece si la tabla stories del módulo x' . 'News está vacia. <br>
                                          Si ha añadido el tema de la historia antes de importar<br>
                                          El módulo original de Noticias tendrá que desinstalar / reinstalar x' . 'News. <br>
-                                         Si usted ya ha importado los datos originales del módulo Noticias, déjelo como está.');
+                                         Si usted ya ha importado los datos originales del módulo Noticias, déjelo como está.'
+);
 define('_AM_XNEWS_CLONER_IMPORTNEWSSUB', 'Importar');
 define('_AM_XNEWS_CLONER_NEWSIMPORTED', 'Los datos originales del módulo News se importaron correctamente.');
 
 // Added in version 1.68 Beta
-define('_AM_XNEWS_DESCRIPTION', '<H3>x' . 'News es un módulo clonable de noticias </H3> 
-							  donde los usuarios pueden publicar noticias y comentarios. El módulo puede ser clonado para que ser un método único para muchas tareas diferentes. Otras noticias que las de costumbre,  También puede ser utilizado para obtener información, enlaces y más, todos con sus propios bloques, temas y sus ajustes.');
+define(
+    '_AM_XNEWS_DESCRIPTION',
+    '<H3>x' . 'News es un módulo clonable de noticias </H3>
+                              donde los usuarios pueden publicar noticias y comentarios. El módulo puede ser clonado para que ser un método único para muchas tareas diferentes. Otras noticias que las de costumbre,  También puede ser utilizado para obtener información, enlaces y más, todos con sus propios bloques, temas y sus ajustes.'
+);
 
 // Added in version 1.68 RC1
 define('_AM_XNEWS_CLONER_CLONEDELETED', "'%s' El clon se ha eliminado con éxito.");

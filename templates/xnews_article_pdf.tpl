@@ -74,7 +74,7 @@
     </div>
 <{/if}>
 
-<{if $showsummary == true && $summary_count>0}>
+<{if $showsummary === true && $summary_count>0}>
 <br>
 <br>
 <table width='50%' cellspacing='0' cellpadding='1'>
@@ -83,7 +83,7 @@
     </tr>
 
 
-<{if $urlrewrite == true}>
+<{if $urlrewrite === true}>
     <{foreach item=onesummary from=$summary}>
         <tr class="<{cycle values="even,odd}>">
             <td align='left'><{$onesummary.story_published}> - <{$onesummary.story_title}></td>

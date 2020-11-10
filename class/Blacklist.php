@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -12,13 +14,11 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
  */
-
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
  * Class Blacklist
@@ -33,19 +33,19 @@ class Blacklist
     public function getAllKeywords()
     {
         $myts = \MyTextSanitizer::getInstance();
-        //
+
         $ret      = $tbl_black_list = [];
         $filename = XOOPS_UPLOAD_PATH . '/nw_black_list.php';
-        if (file_exists($filename)) {
+        if (\is_file($filename)) {
             require_once $filename;
             foreach ($tbl_black_list as $onekeyword) {
-                if ('' != xoops_trim($onekeyword)) {
+                if ('' != \xoops_trim($onekeyword)) {
                     $onekeyword       = $myts->htmlSpecialChars($onekeyword);
                     $ret[$onekeyword] = $onekeyword;
                 }
             }
         }
-        asort($ret);
+        \asort($ret);
         $this->keywords = $ret;
 
         return $this->keywords;
@@ -57,7 +57,7 @@ class Blacklist
      */
     public function delete($keyword)
     {
-        if (is_array($keyword)) {
+        if (\is_array($keyword)) {
             foreach ($keyword as $onekeyword) {
                 if (isset($this->keywords[$onekeyword])) {
                     unset($this->keywords[$onekeyword]);
@@ -77,16 +77,16 @@ class Blacklist
     public function addkeywords($keyword)
     {
         $myts = \MyTextSanitizer::getInstance();
-        //
-        if (is_array($keyword)) {
+
+        if (\is_array($keyword)) {
             foreach ($keyword as $onekeyword) {
-                $onekeyword = xoops_trim($myts->htmlSpecialChars($onekeyword));
+                $onekeyword = \xoops_trim($myts->htmlSpecialChars($onekeyword));
                 if ('' != $onekeyword) {
                     $this->keywords[$onekeyword] = $onekeyword;
                 }
             }
         } else {
-            $keyword = xoops_trim($myts->htmlSpecialChars($keyword));
+            $keyword = \xoops_trim($myts->htmlSpecialChars($keyword));
             if ('' != $keyword) {
                 $this->keywords[$keyword] = $keyword;
             }
@@ -101,11 +101,11 @@ class Blacklist
     public function remove_blacklisted($keywords)
     {
         $ret       = [];
-        $tmp_array = array_values($this->keywords);
+        $tmp_array = \array_values($this->keywords);
         foreach ($keywords as $onekeyword) {
             $add = true;
             foreach ($tmp_array as $onebanned) {
-                if (preg_match('/' . $onebanned . '/i', $onekeyword)) {
+                if (\preg_match('/' . $onebanned . '/i', $onekeyword)) {
                     $add = false;
                     break;
                 }
@@ -124,17 +124,17 @@ class Blacklist
     public function store()
     {
         $filename = XOOPS_UPLOAD_PATH . '/nw_black_list.php';
-        if (file_exists($filename)) {
-            unlink($filename);
+        if (\is_file($filename)) {
+            \unlink($filename);
         }
-        $fd = fopen($filename, 'w') || exit('Error unable to create the blacklist file');
-        fwrite($fd, "<?php\n");
-        fwrite($fd, '$tbl_black_list=array(' . "\n");
+        $fd = \fopen($filename, 'w') or exit('Error unable to create the blacklist file');
+        \fwrite($fd, "<?php\n");
+        \fwrite($fd, '$tbl_black_list=array(' . "\n");
         foreach ($this->keywords as $onekeyword) {
-            fwrite($fd, '"' . $onekeyword . "\",\n");
+            \fwrite($fd, '"' . $onekeyword . "\",\n");
         }
-        fwrite($fd, "'');\n");
-        fwrite($fd, '?' . ">\n");
-        fclose($fd);
+        \fwrite($fd, "'');\n");
+        \fwrite($fd, '?' . ">\n");
+        \fclose($fd);
     }
 }

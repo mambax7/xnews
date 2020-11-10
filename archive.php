@@ -11,7 +11,7 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -92,7 +92,7 @@ $months_arr = [
     9  => _CAL_SEPTEMBER,
     10 => _CAL_OCTOBER,
     11 => _CAL_NOVEMBER,
-    12 => _CAL_DECEMBER
+    12 => _CAL_DECEMBER,
 ];
 
 $fromyear  = \Xmf\Request::getInt('year', 0, 'GET');
@@ -127,43 +127,42 @@ $result = $xoopsDB->query('SELECT published FROM ' . $xoopsDB->prefix('nw_storie
 if (!$result) {
     echo _ERRORS;
     exit();
-} else {
-    $years  = [];
-    $months = [];
-    $i      = 0;
-    while (false !== (list($time) = $xoopsDB->fetchRow($result))) {
-        $time = formatTimestamp($time, 'mysql', $useroffset);
-        if (preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/', $time, $datetime)) {
-            $this_year  = (int)$datetime[1];
-            $this_month = (int)$datetime[2];
-            if (empty($lastyear)) {
-                $lastyear = $this_year;
-            }
-            if (0 == $lastmonth) {
-                $lastmonth                    = $this_month;
-                $months[$lastmonth]['string'] = $months_arr[$lastmonth];
-                $months[$lastmonth]['number'] = $lastmonth;
-            }
-            if ($lastyear != $this_year) {
-                $years[$i]['number'] = $lastyear;
-                $years[$i]['months'] = $months;
-                $months              = [];
-                $lastmonth           = 0;
-                $lastyear            = $this_year;
-                $i++;
-            }
-            if ($lastmonth != $this_month) {
-                $lastmonth                    = $this_month;
-                $months[$lastmonth]['string'] = $months_arr[$lastmonth];
-                $months[$lastmonth]['number'] = $lastmonth;
-            }
+}
+$years  = [];
+$months = [];
+$i      = 0;
+while (list($time) = $xoopsDB->fetchRow($result)) {
+    $time = formatTimestamp($time, 'mysql', $useroffset);
+    if (preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/', $time, $datetime)) {
+        $this_year  = (int)$datetime[1];
+        $this_month = (int)$datetime[2];
+        if (empty($lastyear)) {
+            $lastyear = $this_year;
+        }
+        if (0 == $lastmonth) {
+            $lastmonth                    = $this_month;
+            $months[$lastmonth]['string'] = $months_arr[$lastmonth];
+            $months[$lastmonth]['number'] = $lastmonth;
+        }
+        if ($lastyear != $this_year) {
+            $years[$i]['number'] = $lastyear;
+            $years[$i]['months'] = $months;
+            $months              = [];
+            $lastmonth           = 0;
+            $lastyear            = $this_year;
+            $i++;
+        }
+        if ($lastmonth != $this_month) {
+            $lastmonth                    = $this_month;
+            $months[$lastmonth]['string'] = $months_arr[$lastmonth];
+            $months[$lastmonth]['number'] = $lastmonth;
         }
     }
-
-    $years[$i]['number'] = $this_year;
-    $years[$i]['months'] = $months;
-    $xoopsTpl->assign('years', $years);
 }
+
+$years[$i]['number'] = $this_year;
+$years[$i]['months'] = $months;
+$xoopsTpl->assign('years', $years);
 
 if (0 != $fromyear && 0 != $frommonth) {
     $xoopsTpl->assign('show_articles', true);

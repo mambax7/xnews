@@ -1,4 +1,5 @@
 <?php
+
 $newslettertemplate = <<<contentend
 Titre : %title%
 Catégorie : %topic_title%
@@ -19,5 +20,5 @@ contentend;/**
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  **/;
- 
+
 contentend;

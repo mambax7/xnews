@@ -1,6 +1,6 @@
 <?php
 // $Id: main.php,v 1.9 2004/07/26 17:51:25 hthouzard Exp $
-//%%%%%%		File Name index.php 		%%%%%
+//%%%%%%        File Name index.php         %%%%%
 define('_MD_XNEWS_PRINTER', 'Printer Friendly Page');
 define('_MD_XNEWS_SENDSTORY', 'Send this Story to a Friend');
 define('_MD_XNEWS_READMORE', 'Read More...');
@@ -10,7 +10,7 @@ define('_MD_XNEWS_BYTESMORE', '%s bytes more');
 define('_MD_XNEWS_NUMCOMMENTS', '%s comments');
 define('_MD_XNEWS_MORERELEASES', 'More releases in ');
 
-//%%%%%%		File Name submit.php		%%%%%
+//%%%%%%        File Name submit.php        %%%%%
 define('_MD_XNEWS_SUBMITNEWS', 'Submit News');
 define('_MD_XNEWS_TITLE', 'Title');
 define('_MD_XNEWS_TOPIC', 'Topic');
@@ -23,7 +23,7 @@ define('_MD_XNEWS_THANKS', 'Thanks for your submission.'); //submission of news 
 define('_MD_XNEWS_NOTIFYSBJCT', 'NEWS for my site'); // Notification mail subject
 define('_MD_XNEWS_NOTIFYMSG', 'Hey! You got a new submission for your site.'); // Notification mail message
 
-//%%%%%%		File Name archive.php		%%%%%
+//%%%%%%        File Name archive.php       %%%%%
 define('_MD_XNEWS_NEWSARCHIVES', 'News Archives');
 define('_MD_XNEWS_ARTICLES', 'Articles');
 define('_MD_XNEWS_VIEWS', 'Views');
@@ -41,7 +41,7 @@ define('_MD_XNEWS_TOPICC', 'Topic:');
 define('_MD_XNEWS_URL', 'URL:');
 define('_MD_XNEWS_NOSTORY', 'Sorry, the selected story does not exist.');
 
-//%%%%%%	File Name print.php 	%%%%%
+//%%%%%%    File Name print.php     %%%%%
 
 define('_MD_XNEWS_URLFORSTORY', 'The URL for this story is:');
 

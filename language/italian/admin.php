@@ -1,6 +1,6 @@
 <?php
 // $Id: admin.php,v 1.70 2010/09/01 17:48:07 dnprossi Exp $
-//%%%%%%	Admin Module Name  Articles 	%%%%%
+//%%%%%%    Admin Module Name  Articles     %%%%%
 define('_AM_XNEWS_DBUPDATED', 'Database aggiornato con successo!');
 define('_AM_XNEWS_CONFIG', 'Amministrazione Notizie');
 define('_AM_XNEWS_AUTOARTICLES', 'Notizie automatizzate');
@@ -46,7 +46,7 @@ define('_AM_XNEWS_SAVE', 'Salva');
 define('_AM_XNEWS_PUBINHOME', 'Pubblica sulla pagina principale?');
 define('_AM_XNEWS_ADD', 'Aggiungi');
 
-//%%%%%%	Admin Module Name  Topics 	%%%%%
+//%%%%%%    Admin Module Name  Topics   %%%%%
 
 define('_AM_XNEWS_ADDMTOPIC', 'Aggiungi un argomento principale');
 define('_AM_XNEWS_TOPICNAME', "Nome dell'argomento");
@@ -205,7 +205,7 @@ define('_AM_XNEWS_CLONER_VERSION', 'Versione');
 define('_AM_XNEWS_CLONER_NEWNAME', 'Nome nuovo modulo');
 define(
     '_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "Avrà effetto anche sulla creazione della nuova cartella. <br> Le maiuscole/minuscole e spazi vengono ignorati e corretti automaticamente. <br> es. nuovo nome = <b>Biblioteca</b> nuova dir = <b>biblioteca</b>, <br> nuovo nome <b>La Mia Biblioteca</b> nuova dir = <b>lamiacartella</b>. <br><br> Il modulo di partenza è: <font color='#008400'><b> %s </b></font><br>"
+    "Avrà effetto anche sulla creazione della nuova cartella. <br> Le maiuscole/minuscole e spazi vengono ignorati e corretti automaticamente. <br> es. nuovo nome = <b>Biblioteca</b> nuova dir = <b>biblioteca</b>, <br> nuovo nome <b>La Mia Biblioteca</b> nuova dir = <b>lamiacartella</b>. <br><br> Il modulo di partenza è: <font color='#008400'><b> %s </b></font><br>"
 );
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'Nuovo Modulo:');
 
@@ -221,16 +221,22 @@ define('_AM_XNEWS_CLONER_ACTION_INSTALL', 'Installa/Disinstalla');
 
 define('_AM_XNEWS_CLONER_IMPORTNEWS', 'Importare dati del modulo News originale');
 define('_AM_XNEWS_CLONER_IMPORTNEWSDESC1', 'Il modulo News originale esiste! Importare i dati ora?');
-define('_AM_XNEWS_CLONER_IMPORTNEWSDESC2', 'Il bottone di importazione appare solo se la tabella stories è vuota. <br>
-                                         Se è stata aggiunto una notizia prima di importare dal modulo news originale <br> 
+define(
+    '_AM_XNEWS_CLONER_IMPORTNEWSDESC2',
+    'Il bottone di importazione appare solo se la tabella stories è vuota. <br>
+                                         Se è stata aggiunto una notizia prima di importare dal modulo news originale <br>
                                          si dovrà disinstallare e reinstallare x' . 'News. <br>
-                                         Se sono già stati importati i dati dal mosulo originale News, lasciare così.');
+                                         Se sono già stati importati i dati dal mosulo originale News, lasciare così.'
+);
 define('_AM_XNEWS_CLONER_IMPORTNEWSSUB', 'Importa');
 define('_AM_XNEWS_CLONER_NEWSIMPORTED', 'Dati modulo News originale importati correttamente');
 
 // Added in version 1.68 Beta
-define('_AM_XNEWS_DESCRIPTION', '<H3>x' . 'News e un modulo delle notizie clonabile</H3> 
-							  dove gli utenti possono inviare notizie/commenti. Il modulo può essere clonato per avere un unico metodo per diversi compiti. Oltre che per le normali notizie il modulo può essere utilizzato per info, collegamenti e altro ancora, tutti coi propri blocchi, argomenti e impostazioni.');
+define(
+    '_AM_XNEWS_DESCRIPTION',
+    '<H3>x' . 'News e un modulo delle notizie clonabile</H3>
+                              dove gli utenti possono inviare notizie/commenti. Il modulo può essere clonato per avere un unico metodo per diversi compiti. Oltre che per le normali notizie il modulo può essere utilizzato per info, collegamenti e altro ancora, tutti coi propri blocchi, argomenti e impostazioni.'
+);
 
 // Added in version 1.68 RC1
 define('_AM_XNEWS_CLONER_CLONEDELETED', "Il clone '%s' è stato cancellato con successo.");

@@ -1,4 +1,5 @@
 <?php
+
 // $Id: blocks.php 1243 2010-08-29 18:59:52Z kris_fr $
 define('_MB_XNEWS_NOTYET', 'Aucun article du jour pour le moment.');
 define('_MB_XNEWS_TMRSI', "L'article le plus consulté aujourd'hui est :");
@@ -92,10 +93,10 @@ define('_MB_XNEWS_LATESTNEWS_EMAIL', "Afficher l'icône d'envoi par Email");
 define('_MB_XNEWS_LATESTNEWS_SCROLL', 'Activer le défilement des articles');
 define('_MB_XNEWS_LATESTNEWS_SCROLLHEIGHT', 'Hauteur de la zone défilante');
 define('_MB_XNEWS_LATESTNEWS_SCROLLSPEED', 'Vitesse du défilement');
-define('_MB_XNEWS_LATESTNEWS_SELECTEDSTORIES', "Indiquer l'ID des articles, séparés par une virgule (exemple : 3,8,23,46)<br>Note : 0 équivaut à sélectionner tous les articles");/**
+define('_MB_XNEWS_LATESTNEWS_SELECTEDSTORIES', "Indiquer l'ID des articles, séparés par une virgule (exemple : 3,8,23,46)<br>Note : 0 équivaut à sélectionner tous les articles"); /**
  * @translation     Communauté Francophone des Utilisateurs de Xoops
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8 sans Bom
  *
  * @version         $Id $
- **/;
+ **/

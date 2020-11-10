@@ -54,21 +54,21 @@ You can use this new version on all the recent versions of Xoops 2.4.x & 2.5.x
 
 PHP/MYSQL supported versions
 =============================
- Mysql >= 5.x 
+ Mysql >= 5.x
  Php 5.3.x
 
 
 How to upgrade xNews
 ====================
 
-Remove all files in modules/xnews and copy all the new files to 
-your empty modules/xnews, then go in the Xoops modules manager 
+Remove all files in modules/xnews and copy all the new files to
+your empty modules/xnews, then go in the Xoops modules manager
 and update the module.
 
 How to upgrade clones
 =====================
 
-Remove all files in modules/your_clone_name go in Admin-xNews-xNews Cloner and click on 
+Remove all files in modules/your_clone_name go in Admin-xNews-xNews Cloner and click on
 Upgrade or Force Upgrade once finished go in the Xoops modules manager and update your_clone_name
 
 In case of troubles, consult the file UPGRADE.txt present in the module.

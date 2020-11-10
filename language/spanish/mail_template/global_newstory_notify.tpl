@@ -16,7 +16,7 @@ Por favor no responda este mensaje.
 
 -----------
 
-{X_SITENAME} ({X_SITEURL}) 
+{X_SITENAME} ({X_SITEURL})
 Administrador
-{X_ADMINMAIL} 
+{X_ADMINMAIL}
 

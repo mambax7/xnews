@@ -1,4 +1,5 @@
 <?php
+
 // $Id: blocks.php,v 1.16 2004/09/01 17:48:07 hthouzard Exp $
 define('_MB_XNEWS_NOTYET', 'No hay historia del día por el momento.');
 define('_MB_XNEWS_TMRSI', 'El documento más leído durante el día de hoy es:');

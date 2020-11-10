@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -14,7 +16,7 @@ use XoopsModules\Xnews;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
@@ -28,8 +30,6 @@ use XoopsModules\Xnews;
 // # Trabis ( www.xuups.com ) and Bandit-x ( www.bandit-x.net )         #
 // #                                                                    #
 // ######################################################################
-
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
  * Class Latestnewsstory
@@ -66,38 +66,37 @@ class Latestnewsstory extends Xnews\NewsStory
         $ret = [];
         $sql = 'SELECT s.*, t.*';
         $sql .= " FROM {$db->prefix('nw_stories')} s, {$db->prefix('nw_topics')}";
-        $sql .= ' t WHERE (s.published > 0 AND s.published <= ' . time() . ') AND (s.expired = 0 OR s.expired > ' . time() . ') AND (s.topicid = t.topic_id) ';
+        $sql .= ' t WHERE (s.published > 0 AND s.published <= ' . \time() . ') AND (s.expired = 0 OR s.expired > ' . \time() . ') AND (s.topicid = t.topic_id) ';
         if (0 != $topic) {
             if ($selected_stories) {
                 $sql .= " AND s.storyid IN ({$selected_stories})";
             }
-            if (!is_array($topic)) {
+            if (!\is_array($topic)) {
                 if ($checkRight) {
-                    $topics = nw_MygetItemIds('nw_view');
-                    if (!in_array($topic, $topics)) {
+                    $topics = \nw_MygetItemIds('nw_view');
+                    if (!\in_array($topic, $topics)) {
                         return null;
-                    } else {
-                        $sql .= ' AND s.topicid = ' . (int)$topic . ' AND (s.ihome = 1 OR s.ihome = 0)';
                     }
+                    $sql .= ' AND s.topicid = ' . (int)$topic . ' AND (s.ihome = 1 OR s.ihome = 0)';
                 } else {
                     $sql .= ' AND s.topicid = ' . (int)$topic . ' AND (s.ihome = 1 OR s.ihome = 0)';
                 }
             } else {
                 if ($checkRight) {
-                    $topics = nw_MygetItemIds('nw_view');
-                    $topic  = array_intersect($topic, $topics);
+                    $topics = \nw_MygetItemIds('nw_view');
+                    $topic  = \array_intersect($topic, $topics);
                 }
-                if (count($topic) > 0) {
-                    $sql .= ' AND s.topicid IN (' . implode(',', $topic) . ')';
+                if (\count($topic) > 0) {
+                    $sql .= ' AND s.topicid IN (' . \implode(',', $topic) . ')';
                 } else {
                     return null;
                 }
             }
         } else {
             if ($checkRight) {
-                $topics = nw_MygetItemIds('nw_view');
-                if (count($topics) > 0) {
-                    $sql .= ' AND s.topicid IN (' . implode(',', $topics) . ')';
+                $topics = \nw_MygetItemIds('nw_view');
+                if (\count($topics) > 0) {
+                    $sql .= ' AND s.topicid IN (' . \implode(',', $topics) . ')';
                 } else {
                     return null;
                 }
@@ -114,7 +113,7 @@ class Latestnewsstory extends Xnews\NewsStory
 
         while (false !== ($myrow = $db->fetchArray($result))) {
             if ($asObject) {
-                $ret[] = new Latestnewsstory($myrow);
+                $ret[] = new self($myrow);
             } else {
                 $ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
             }

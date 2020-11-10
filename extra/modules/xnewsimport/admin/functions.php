@@ -7,12 +7,15 @@ function adminmenu($currentoption = 0, $breadcrumb = '')
 {
     global $xoopsModule, $xoopsConfig;
 
-    include XNI_MODULE_PATH . '/config.php';
-    if (file_exists(XNI_MODULE_PATH . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-        require_once XNI_MODULE_PATH . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
-    } else {
-        require_once XNI_MODULE_PATH . '/language/english/modinfo.php';
-    }
+    require XNI_MODULE_PATH . '/config.php';
+//    if (file_exists(XNI_MODULE_PATH . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
+//        require_once XNI_MODULE_PATH . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
+//    } else {
+//        require_once XNI_MODULE_PATH . '/language/english/modinfo.php';
+//    }
+    /** @var \XoopsModules\Xnews\Helper $helper */
+    $helper = \XoopsModules\Xnews\Helper::getInstance();
+    $helper->loadLanguage('modinfo');
 
     $tblColors = ['', ''];
     if ($currentoption >= 0) {

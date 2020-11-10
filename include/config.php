@@ -1,4 +1,5 @@
 <?php
+
 $cfg = [];
 // How many items do you want to display in the Summary table visible in the article's page ?
 $cfg['article_summary_items_count'] = (null !== $helper->getConfig('storyhome')) ? $helper->getConfig('storyhome') : 10;

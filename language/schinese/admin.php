@@ -1,6 +1,6 @@
 <?php
 // $Id: admin.php,v 1.18 2004/07/26 17:51:25 hthouzard Exp $
-//%%%%%%	Admin Module Name  Articles 	%%%%%
+//%%%%%%    Admin Module Name  Articles     %%%%%
 define('_AM_XNEWS_DBUPDATED', '数据库更新完成！');
 define('_AM_XNEWS_CONFIG', '新闻区设置');
 define('_AM_XNEWS_AUTOARTICLES', '自动发布');
@@ -46,7 +46,7 @@ define('_AM_XNEWS_SAVE', '保存');
 define('_AM_XNEWS_PUBINHOME', '发布在首页？');
 define('_AM_XNEWS_ADD', '添加');
 
-//%%%%%%	Admin Module Name  Topics 	%%%%%
+//%%%%%%    Admin Module Name  Topics   %%%%%
 
 define('_AM_XNEWS_ADDMTOPIC', '添加一个主分类');
 define('_AM_XNEWS_TOPICNAME', '分类名称');
@@ -205,7 +205,7 @@ define('_AM_XNEWS_CLONER_VERSION', 'Version');
 define('_AM_XNEWS_CLONER_NEWNAME', 'New module name');
 define(
     '_AM_XNEWS_CLONER_NEWNAMEDESC',
-       "This will also affect the creation of the new module folder. <br> Case sensitivity and spaces are ignored and will be auto corrected. <br> eg. new name = <b>Library</b> new dir  = <b>library</b>, <br> new name <b>My Library</b> new dir = <b>mylibrary</b>. <br><br> Start module is: <font color='#008400'><b> %s </b></font><br>"
+    "This will also affect the creation of the new module folder. <br> Case sensitivity and spaces are ignored and will be auto corrected. <br> eg. new name = <b>Library</b> new dir  = <b>library</b>, <br> new name <b>My Library</b> new dir = <b>mylibrary</b>. <br><br> Start module is: <font color='#008400'><b> %s </b></font><br>"
 );
 define('_AM_XNEWS_CLONER_NEWNAMELABEL', 'New Module:');
 
@@ -221,16 +221,22 @@ define('_AM_XNEWS_CLONER_ACTION_INSTALL', 'Install/Uninstall');
 
 define('_AM_XNEWS_CLONER_IMPORTNEWS', 'Import original News module data');
 define('_AM_XNEWS_CLONER_IMPORTNEWSDESC1', 'Original News module exists! Import data now?');
-define('_AM_XNEWS_CLONER_IMPORTNEWSDESC2', 'The import button only appears if x' . 'News module stories table is empty. <br>
+define(
+    '_AM_XNEWS_CLONER_IMPORTNEWSDESC2',
+    'The import button only appears if x' . 'News module stories table is empty. <br>
                                          If you added story item before importing from <br>
                                          original News module you will have to uninstall/reinstall x' . 'News. <br>
-                                         If you already imported original News Module data, leave as is.');
+                                         If you already imported original News Module data, leave as is.'
+);
 define('_AM_XNEWS_CLONER_IMPORTNEWSSUB', 'Import');
 define('_AM_XNEWS_CLONER_NEWSIMPORTED', 'Original News module data correctly imported');
 
 // Added in version 1.68 Beta
-define('_AM_XNEWS_DESCRIPTION', '<H3>x' . 'News is a clonable news module</H3> 
-							  where users can post news/comments. The module can be cloned to enable one only method for many different tasks. Other than usual news it can be used for info, links and more all with their own blocks, topics and settings.');
+define(
+    '_AM_XNEWS_DESCRIPTION',
+    '<H3>x' . 'News is a clonable news module</H3>
+                              where users can post news/comments. The module can be cloned to enable one only method for many different tasks. Other than usual news it can be used for info, links and more all with their own blocks, topics and settings.'
+);
 
 // Added in version 1.68 RC1
 define('_AM_XNEWS_CLONER_CLONEDELETED', "'%s' clone has been deleted succesfully.");

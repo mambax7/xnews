@@ -8,7 +8,6 @@
  * Purpose        : Common functions for Xoops's smarty plugins
  * -------------------------------------------------------------------------------------
  **/
-
 define('XOSMARTY_FILENOTFOUND', 'XoSmartyPlugin : %s does not exist');
 define('XOSMARTY_SECTIONNOTFOUND', 'XoSmartyPlugin : section [%s] does not exist in %s');
 define('XOSMARTY_GDNOTINSTALLED', 'XoSmartyPlugin : GD Librairy is not installed');
@@ -18,9 +17,9 @@ define('XOSMARTY_DEFAULTVALUE', 'XoSmartyPlugin : %s use the default values');
  * -------------------------------------------------------------------------------------
  * get the contents of the section of ini file :
  *
- * @param        String $section name of the section of ini file
+ * @param        string $section name of the section of ini file
  *
- * @return        Array
+ * @return        array
  * -------------------------------------------------------------------------------------
  **/
 function XoSmartyPluginGetSection($section = '')
@@ -57,7 +56,7 @@ function XoSmartyPluginGetSection($section = '')
  * -------------------------------------------------------------------------------------
  * Check if the GD Librairy is installed
  *
- * @return        Boolean        TRUE if GD Librairy is installed, FALSE otherwise
+ * @return        bool        TRUE if GD Librairy is installed, FALSE otherwise
  * -------------------------------------------------------------------------------------
  **/
 function XoSmartyPluginLoadGD()
@@ -82,21 +81,20 @@ function XoSmartyPluginLoadGD()
  * -------------------------------------------------------------------------------------
  * Convert Hexacimal color in RGB color
  *
- * @param        String $color hexacimal color
+ * @param        string $color hexacimal color
  *
- * @return        Array            {0 => red color value, 1 => green color value, 2 => blue color value)
+ * @return        array            {0 => red color value, 1 => green color value, 2 => blue color value)
  * -------------------------------------------------------------------------------------
  **/
-
 function XoSmartyPluginHTML2RGB($color = '#000000')
 {
-    if (0 === strpos($color, '#')) {
-        $color = substr($color, 1, 6);
+    if (0 === mb_strpos($color, '#')) {
+        $color = mb_substr($color, 1, 6);
     }
 
-    $ret[0] = hexdec(substr($color, 0, 2));
-    $ret[1] = hexdec(substr($color, 2, 2));
-    $ret[2] = hexdec(substr($color, 4, 2));
+    $ret[0] = hexdec(mb_substr($color, 0, 2));
+    $ret[1] = hexdec(mb_substr($color, 2, 2));
+    $ret[2] = hexdec(mb_substr($color, 4, 2));
 
     return $ret;
 }
@@ -105,13 +103,13 @@ function XoSmartyPluginHTML2RGB($color = '#000000')
  * -------------------------------------------------------------------------------------
  * Truncate string
  *
- * @param        string  $string      string to truncate
- * @param        int     $length      determines how many characters to truncate to.
- * @param        string  $etc         replace the truncated text
- * @param        boolean $break_words determines whether or not to truncate at a word boundary
- * @param        boolean $middle      determines whether the truncation happens at the end of the string
+ * @param        string $string      string to truncate
+ * @param        int    $length      determines how many characters to truncate to.
+ * @param        string $etc         replace the truncated text
+ * @param        bool   $break_words determines whether or not to truncate at a word boundary
+ * @param        bool   $middle      determines whether the truncation happens at the end of the string
  *
- * @return        String
+ * @return        string
  * -------------------------------------------------------------------------------------
  **/
 function XoSmartyPlugin_truncate($string, $length = 80, $etc = '...', $break_words = false, $middle = false)
@@ -120,19 +118,19 @@ function XoSmartyPlugin_truncate($string, $length = 80, $etc = '...', $break_wor
         return '';
     }
 
-    if (strlen($string) > $length) {
-        $length -= min($length, strlen($etc));
+    if (mb_strlen($string) > $length) {
+        $length -= min($length, mb_strlen($etc));
         if (!$break_words && !$middle) {
-            $string = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $length + 1));
+            $string = preg_replace('/\s+?(\S+)?$/', '', mb_substr($string, 0, $length + 1));
         }
         if (!$middle) {
-            return substr($string, 0, $length) . $etc;
-        } else {
-            return substr($string, 0, $length / 2) . $etc . substr($string, -$length / 2);
+            return mb_substr($string, 0, $length) . $etc;
         }
-    } else {
-        return $string;
+
+        return mb_substr($string, 0, $length / 2) . $etc . mb_substr($string, -$length / 2);
     }
+
+    return $string;
 }
 
 /**
@@ -145,7 +143,7 @@ function XoSmartyPlugin_write_index_file($path = '')
         return false;
     }
 
-    $path     = '/' === substr($path, -1) ? substr($path, 0, -1) : $path;
+    $path     = '/' === mb_substr($path, -1) ? mb_substr($path, 0, -1) : $path;
     $filename = $path . '/index.html';
 
     if (file_exists($filename)) {

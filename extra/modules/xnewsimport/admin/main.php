@@ -17,9 +17,8 @@
  * @author       XOOPS Development Team, DNPROSSI
  * @version      $Id $
  */
-
 require_once __DIR__ . '/admin_header.php';
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require_once XNI_MODULE_PATH . '/include/functions.php';
 require_once XNI_MODULE_PATH . '/admin/functions.php';
 require_once XNI_MODULE_PATH . '/class/NewsTopic.php';
@@ -33,7 +32,7 @@ function NewsImport()
     $importfrom = 'none';
     $importto   = 'none';
 
-    //	adminMenu(0, _AM_XNI_IMPORT);
+    //  adminMenu(0, _AM_XNI_IMPORT);
 
     echo '<h1>' . _AM_XNI_IMPORT_TITLE . '</h1>';
     echo _AM_XNI_IMPORT_INFO . '<br><br>';
@@ -46,13 +45,13 @@ function NewsImport()
     $news_fieldsearch_array = [
         'topic_id',
         'topic_pid',
-        'banner'
+        'banner',
     ];
 
     $other_fieldsearch_array = [
         'categoryid',
         'parentid',
-        'moderator'
+        'moderator',
     ];
 
     //Get From Module Data
@@ -114,7 +113,7 @@ function NewsImport()
     }
 
     if (isset($importfrom_array) && count($importfrom_array) > 0 && isset($importto_array) && count($importto_array) > 0) {
-        $sform = new \XoopsThemeForm(_AM_XNI_IMPORT_SELECTION, 'op', xoops_getenv('PHP_SELF'), 'post', true);
+        $sform = new \XoopsThemeForm(_AM_XNI_IMPORT_SELECTION, 'op', xoops_getenv('SCRIPT_NAME'), 'post', true);
         $sform->setExtra('enctype="multipart/form-data"');
 
         // Partners to import from
@@ -134,18 +133,18 @@ function NewsImport()
         $sform->addElement($importto_tray);
 
         // Buttons
-        $button_tray = new \XoopsFormElementTray('', '');
-        $hidden      = new \XoopsFormHidden('op', 'topicselect');
-        $button_tray->addElement($hidden);
+        $buttonTray = new \XoopsFormElementTray('', '');
+        $hidden     = new \XoopsFormHidden('op', 'topicselect');
+        $buttonTray->addElement($hidden);
 
         $butt_import = new \XoopsFormButton('', '', _AM_XNI_IMPORT, 'submit');
         $butt_import->setExtra('onclick="this.form.elements.op.value=\'topicselect\'"');
-        $button_tray->addElement($butt_import);
+        $buttonTray->addElement($butt_import);
 
         $butt_cancel = new \XoopsFormButton('', '', _AM_XNI_CANCEL, 'button');
         $butt_cancel->setExtra('onclick="history.go(-1)"');
-        $button_tray->addElement($butt_cancel);
-        $sform->addElement($button_tray);
+        $buttonTray->addElement($butt_cancel);
+        $sform->addElement($buttonTray);
         $sform->display();
         unset($hidden);
     } else {
@@ -331,7 +330,7 @@ function StartImport()
 
     xoops_cp_header();
 
-    if (isset($_POST['importfromdirname'])) {
+    if (\Xmf\Request::hasVar('importfromdirname', 'POST')) {
         $from_module_dirname   = $_POST['importfromdirname'];
         $from_module_subprefix = $_POST['importfromsubprefix'];
         $to_module_dirname     = $_POST['importtodirname'];
@@ -364,7 +363,7 @@ function StartImport()
     xoops_cp_footer();
 }
 
-$op    = \Xmf\Request::getCmd('op', 'none');
+$op = \Xmf\Request::getCmd('op', 'none');
 
 switch ($op) {
     case 'startimport':
@@ -373,11 +372,9 @@ switch ($op) {
     case 'topicselect':
         TopicSelect();
         break;
-
     case 'import':
         NewsImport();
         break;
-
     case 'default':
     default:
         xoops_cp_header();

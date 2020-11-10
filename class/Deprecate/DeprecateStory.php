@@ -2,8 +2,6 @@
 
 namespace XoopsModules\Xnews\Deprecate;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
-
 // require_once XNEWS_MODULE_PATH . '/class/deprecate/xnewstopic.php';
 require_once XOOPS_ROOT_PATH . '/kernel/user.php';
 
@@ -42,10 +40,10 @@ class DeprecateStory
     public function Story($storyid = -1)
     {
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
-        ;
+
         $this->table       = '';
         $this->topicstable = '';
-        if (is_array($storyid)) {
+        if (\is_array($storyid)) {
             $this->makeStory($storyid);
         } elseif (-1 != $storyid) {
             $this->getStory((int)$storyid);
@@ -227,12 +225,12 @@ class DeprecateStory
         if (!isset($this->storyid)) {
             //$newpost = 1;
             $newstoryid = $this->db->genId($this->table . '_storyid_seq');
-            $created    = time();
+            $created    = \time();
             $published  = $this->approved ? $this->published : 0;
 
-            $sql = sprintf(
+            $sql = \sprintf(
                 "INSERT INTO `%s` (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments) VALUES (%u, %u, '%s', %u, %u, %u, '%s', %u, %u, '%s', '%s', %u, %u, %u, %u, '%s', %u, '%s', %u)",
-                           $this->table,
+                $this->table,
                 $newstoryid,
                 $this->uid,
                 $title,
@@ -255,13 +253,13 @@ class DeprecateStory
             );
         } else {
             if ($this->approved) {
-                $sql = sprintf(
+                $sql = \sprintf(
                     "UPDATE `%s` SET title = '%s', published = %u, expired = %u, nohtml = %u, nosmiley = %u, hometext = '%s', bodytext = '%s', topicid = %u, ihome = %u, topicdisplay = %u, topicalign = '%s', comments = %u WHERE storyid = %u",
                     $this->table,
                     $title,
                     $this->published,
                     $expired,
-                               $this->nohtml,
+                    $this->nohtml,
                     $this->nosmiley,
                     $hometext,
                     $bodytext,
@@ -273,14 +271,14 @@ class DeprecateStory
                     $this->storyid
                 );
             } else {
-                $sql = sprintf(
+                $sql = \sprintf(
                     "UPDATE `%s` SET title = '%s', expired = %u, nohtml = %u, nosmiley = %u, hometext = '%s', bodytext = '%s', topicid = %u, ihome = %u, topicdisplay = %u, topicalign = '%s', comments = %u WHERE storyid = %u",
                     $this->table,
                     $title,
                     $expired,
                     $this->nohtml,
                     $this->nosmiley,
-                               $hometext,
+                    $hometext,
                     $bodytext,
                     $this->topicid,
                     $this->ihome,
@@ -329,7 +327,7 @@ class DeprecateStory
      */
     public function delete()
     {
-        $sql = sprintf('DELETE FROM `%s` WHERE storyid = %u', $this->table, $this->storyid);
+        $sql = \sprintf('DELETE FROM `%s` WHERE storyid = %u', $this->table, $this->storyid);
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -342,7 +340,7 @@ class DeprecateStory
      */
     public function updateCounter()
     {
-        $sql = sprintf('UPDATE `%s` SET counter = counter+1 WHERE storyid = %u', $this->table, $this->storyid);
+        $sql = \sprintf('UPDATE `%s` SET counter = counter+1 WHERE storyid = %u', $this->table, $this->storyid);
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }
@@ -357,7 +355,7 @@ class DeprecateStory
      */
     public function updateComments($total)
     {
-        $sql = sprintf('UPDATE `%s` SET comments = %u WHERE storyid = %u', $this->table, $total, $this->storyid);
+        $sql = \sprintf('UPDATE `%s` SET comments = %u WHERE storyid = %u', $this->table, $total, $this->storyid);
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }
@@ -439,13 +437,13 @@ class DeprecateStory
                 $hometext = $myts->displayTarea($this->hometext, $html, $smiley, $xcodes);
                 break;
             case 'Edit':
-                $hometext = htmlspecialchars($this->hometext, ENT_QUOTES);
+                $hometext = \htmlspecialchars($this->hometext, \ENT_QUOTES);
                 break;
             case 'Preview':
                 $hometext = $myts->previewTarea($this->hometext, $html, $smiley, $xcodes);
                 break;
             case 'InForm':
-                $hometext = htmlspecialchars($myts->stripSlashesGPC($this->hometext), ENT_QUOTES);
+                $hometext = \htmlspecialchars($myts->stripSlashesGPC($this->hometext), \ENT_QUOTES);
                 break;
         }
 
@@ -474,13 +472,13 @@ class DeprecateStory
                 $bodytext = $myts->displayTarea($this->bodytext, $html, $smiley, $xcodes);
                 break;
             case 'Edit':
-                $bodytext = htmlspecialchars($this->bodytext, ENT_QUOTES);
+                $bodytext = \htmlspecialchars($this->bodytext, \ENT_QUOTES);
                 break;
             case 'Preview':
                 $bodytext = $myts->previewTarea($this->bodytext, $html, $smiley, $xcodes);
                 break;
             case 'InForm':
-                $bodytext = htmlspecialchars($myts->stripSlashesGPC($this->bodytext), ENT_QUOTES);
+                $bodytext = \htmlspecialchars($myts->stripSlashesGPC($this->bodytext), \ENT_QUOTES);
                 break;
         }
 

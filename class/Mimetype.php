@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xnews;
+<?php
+
+namespace XoopsModules\Xnews;
 
 /**
  * Copyright (C) 2002 Jason Sheets <jsheets@shadonet.com>.
@@ -67,7 +69,6 @@
  * to use, or modify it however you like.  If you find this script useful please
  * e-mail me.
  **/
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 /**
  * Class Mimetype
@@ -81,13 +82,13 @@ class Mimetype
     public function getType($filename)
     {
         // get base name of the filename provided by user
-        $filename = basename($filename);
+        $filename = \basename($filename);
 
         // break file into parts seperated by .
-        $filename = explode('.', $filename);
+        $filename = \explode('.', $filename);
 
         // take the last part of the file to get the file extension
-        $filename = $filename[count($filename) - 1];
+        $filename = $filename[\count($filename) - 1];
 
         // find mime type
         return $this->privFindType($filename);
@@ -105,10 +106,10 @@ class Mimetype
         // return mime type for extension
         if (isset($mimetypes[$ext])) {
             return $mimetypes[$ext];
-        // if the extension wasn't found return octet-stream
-        } else {
-            return 'unknown';
+            // if the extension wasn't found return octet-stream
         }
+
+        return 'unknown';
     }
 
     /**
@@ -269,7 +270,7 @@ class Mimetype
             'php'     => 'text/php',
             'php3'    => 'text/php3',
             'ice'     => 'x-conference-xcooltalk',
-            'unknown' => 'application/octet-stream'
+            'unknown' => 'application/octet-stream',
         ];
     }
 }

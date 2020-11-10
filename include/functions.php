@@ -11,26 +11,26 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team, Herve Thouzard, Instant Zero
- *
  */
 
 use WideImage\WideImage;
 use XoopsModules\Xnews;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
  * Checks if a user is admin of Module_skeleton
  *
- * @return boolean
+ * @return bool
  */
 function xnews_userIsAdmin()
 {
     global $xoopsUser;
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
 
     static $xnews_isAdmin;
@@ -49,6 +49,7 @@ function xnews_userIsAdmin()
  */
 function xnews_collapsableBar($tablename = '', $iconname = '')
 {
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance(); ?>
     <script type="text/javascript"><!--
         function goto_URL(object) {
@@ -103,7 +104,7 @@ if (!function_exists('xoops_sef')) {
      */
     function xoops_sef($datab, $char = '-')
     {
-        $datab             = urldecode(strtolower($datab));
+        $datab             = urldecode(mb_strtolower($datab));
         $datab             = urlencode($datab);
         $datab             = str_replace(urlencode('æ'), 'ae', $datab);
         $datab             = str_replace(urlencode('ø'), 'oe', $datab);
@@ -170,7 +171,7 @@ if (!function_exists('xoops_sef')) {
             '¼',
             '½',
             '¾',
-            '¿'
+            '¿',
         ];
         $return_data       = str_replace($replacement_chars, $char, urldecode($datab));
         #print $return_data."<BR><BR>";
@@ -199,16 +200,17 @@ if (!function_exists('sef')) {
 }
 /**
  * Check if a module exist and return module verision
+ * @param string $dirname
+ * @return bool|int      FALSE if module is not installed or not active, module version if module is installed
  * @author luciorota
  *
- * @param string $dirname
- * @return boolean|int      FALSE if module is not installed or not active, module version if module is installed
  */
 function xnews_checkModule($dirname)
 {
     if (!xoops_isActiveModule($dirname)) {
         return false;
     }
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $module        = $moduleHandler->getByDirname($dirname);
 
@@ -218,21 +220,22 @@ function xnews_checkModule($dirname)
 /**
  * Updates rating data in item table for a given item
  *
- * @package       News
+ * @param $storyid
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
- * @param $storyid
+ * @package       News
  */
 function nw_updaterating($storyid)
 {
     global $xoopsDB;
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
 
     $query       = 'SELECT rating FROM ' . $xoopsDB->prefix('nw_stories_votedata') . ' WHERE storyid = ' . $storyid;
     $voteresult  = $xoopsDB->query($query);
     $votesDB     = $xoopsDB->getRowsNum($voteresult);
     $totalrating = 0;
-    while (false !== (list($rating) = $xoopsDB->fetchRow($voteresult))) {
+    while (list($rating) = $xoopsDB->fetchRow($voteresult)) {
         $totalrating += $rating;
     }
     $finalrating = $totalrating / $votesDB;
@@ -257,16 +260,19 @@ function nw_MygetItemIds($permtype = 'nw_view')
 {
     global $xoopsUser;
     static $tblperms = [];
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
 
     if (is_array($tblperms) && array_key_exists($permtype, $tblperms)) {
         return $tblperms[$permtype];
     }
 
-    $moduleHandler       = xoops_getHandler('module');
-    $newsModule          = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
-    $groups              = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $grouppermHandler        = xoops_getHandler('groupperm');
+    /** @var \XoopsModuleHandler $moduleHandler */
+    $moduleHandler = xoops_getHandler('module');
+    $newsModule    = $moduleHandler->getByDirname(XNEWS_MODULE_DIRNAME);
+    $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler    = xoops_getHandler('groupperm');
     $topics              = $grouppermHandler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
     $tblperms[$permtype] = $topics;
 
@@ -298,13 +304,13 @@ function nw_html2text($document)
         "'&(cent|#162);'i",
         "'&(pound|#163);'i",
         "'&(copy|#169);'i",
-        "'&#(\d+);'e"
+        "'&#(\d+);'e",
     ];                    // evaluate as php
 
     $replace = [
         '',
         '',
-        "\\1",
+        '\\1',
         '"',
         '&',
         '<',
@@ -314,7 +320,7 @@ function nw_html2text($document)
         chr(162),
         chr(163),
         chr(169),
-        "chr(\\1)"
+        'chr(\\1)',
     ];
 
     $text = preg_replace($search, $replace, $document);
@@ -325,13 +331,13 @@ function nw_html2text($document)
 /**
  * Is Xoops 2.3.x ?
  *
- * @return boolean need to say it ?
+ * @return bool need to say it ?
  */
 function nw_isX23()
 {
     $x23 = false;
     $xv  = str_replace('XOOPS ', '', XOOPS_VERSION);
-    if (substr($xv, 2, 1) >= '3') {
+    if (mb_substr($xv, 2, 1) >= '3') {
         $x23 = true;
     }
 
@@ -347,16 +353,13 @@ function nw_xoops_version()
 {
     $xv = '';
     $xv = str_replace('XOOPS ', '', XOOPS_VERSION);
-    $xv = substr($xv, 0, 3);
+    $xv = mb_substr($xv, 0, 3);
 
     return $xv;
 }
 
 /**
  * Retreive an editor according to the module's option "form_options"
- * @package       News
- * @author        Instant Zero (http://xoops.instant-zero.com)
- * @copyright (c) Instant Zero
  * @param $caption
  * @param $name
  * @param $value
@@ -366,13 +369,17 @@ function nw_xoops_version()
  * @param $height
  * @param $supplemental
  * @return bool|\XoopsFormEditor
+ * @package       News
+ * @author        Instant Zero (http://xoops.instant-zero.com)
+ * @copyright (c) Instant Zero
  */
 //function &nw_getWysiwygForm($caption, $name, $value = '', $rows, $cols, $supplemental='')
 function nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $height, $supplemental)
 {
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
-    //
-    $editor_option            = strtolower($helper->getConfig('form_options'));
+
+    $editor_option            = mb_strtolower($helper->getConfig('form_options'));
     $editor                   = false;
     $editor_configs           = [];
     $editor_configs['name']   = $name;
@@ -391,11 +398,11 @@ function nw_getWysiwygForm($caption, $name, $value, $rows, $cols, $width, $heigh
 /**
  * Internal function
  *
- * @package       News
- * @author        Instant Zero (http://xoops.instant-zero.com)
- * @copyright (c) Instant Zero
  * @param $text
  * @return mixed
+ * @copyright (c) Instant Zero
+ * @package       News
+ * @author        Instant Zero (http://xoops.instant-zero.com)
  */
 function nw_DublinQuotes($text)
 {
@@ -410,14 +417,15 @@ function nw_DublinQuotes($text)
  * - The meta keywords
  * - The meta description
  *
- * @package       News
+ * @param null $story
  * @author        Instant Zero (http://xoops.instant-zero.com)
  * @copyright (c) Instant Zero
- * @param null $story
+ * @package       News
  */
 function nw_CreateMetaDatas($story = null)
 {
     global $xoopsConfig, $xoTheme, $xoopsTpl;
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
 
     $content = '';
@@ -476,6 +484,7 @@ function nw_CreateMetaDatas($story = null)
      * Dublin Core's meta datas
      */
     if ($helper->getConfig('dublincore') && isset($story) && is_object($story)) {
+        /** @var \XoopsConfigHandler $configHandler */
         $configHandler         = xoops_getHandler('config');
         $xoopsConfigMetaFooter = $configHandler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
         $content               .= '<meta name="DC.Title" content="' . nw_DublinQuotes($story->title()) . "\" >\n";
@@ -509,16 +518,17 @@ function nw_CreateMetaDatas($story = null)
 /**
  * Create the meta keywords based on the content
  *
- * @package       News
- * @author        Instant Zero (http://xoops.instant-zero.com)
- * @copyright (c) Instant Zero
  * @param $content
  * @return string
+ * @copyright (c) Instant Zero
+ * @package       News
+ * @author        Instant Zero (http://xoops.instant-zero.com)
  */
 function nw_createmeta_keywords($content)
 {
     // require_once XNEWS_MODULE_PATH . '/class/blacklist.php';
     // require_once XNEWS_MODULE_PATH . '/class/registryfile.php';
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
     global $cfg;
 
@@ -529,7 +539,7 @@ function nw_createmeta_keywords($content)
     $tcontent = '';
     $tcontent = $registry->getfile();
     if ('' != xoops_trim($tcontent)) {
-        list($keywordscount, $keywordsorder) = explode(',', $tcontent);
+        [$keywordscount, $keywordsorder] = explode(',', $tcontent);
     } else {
         $keywordscount = $cfg['meta_keywords_count'];
         $keywordsorder = $cfg['meta_keywords_order'];
@@ -537,9 +547,10 @@ function nw_createmeta_keywords($content)
 
     $tmp = [];
     // Search for the "Minimum keyword length"
-    if (isset($_SESSION['nw_keywords_limit'])) {
+    if (\Xmf\Request::hasVar('nw_keywords_limit', 'SESSION')) {
         $limit = $_SESSION['nw_keywords_limit'];
     } else {
+        /** @var \XoopsConfigHandler $configHandler */
         $configHandler                 = xoops_getHandler('config');
         $xoopsConfigSearch             = $configHandler->getConfigsByCat(XOOPS_CONF_SEARCH);
         $limit                         = $xoopsConfigSearch['keyword_min'];
@@ -549,7 +560,7 @@ function nw_createmeta_keywords($content)
     $content         = str_replace('<br>', ' ', $content);
     $content         = $myts->undoHtmlSpecialChars($content);
     $content         = strip_tags($content);
-    $content         = strtolower($content);
+    $content         = mb_strtolower($content);
     $search_pattern  = ['&nbsp;', "\t", "\r\n", "\r", "\n", ',', '.', "'", ';', ':', ')', '(', '"', '?', '!', '{', '}', '[', ']', '<', '>', '/', '+', '-', '_', '\\', '*'];
     $replace_pattern = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
     $content         = str_replace($search_pattern, $replace_pattern, $content);
@@ -575,24 +586,24 @@ function nw_createmeta_keywords($content)
     $keywords  = $metablack->remove_blacklisted($keywords);
 
     foreach ($keywords as $keyword) {
-        if (strlen($keyword) >= $limit && !is_numeric($keyword)) {
+        if (mb_strlen($keyword) >= $limit && !is_numeric($keyword)) {
             $tmp[] = $keyword;
         }
     }
     $tmp = array_slice($tmp, 0, $keywordscount);
     if (count($tmp) > 0) {
         return implode(',', $tmp);
-    } else {
-        if (!isset($configHandler) || !is_object($configHandler)) {
-            $configHandler = xoops_getHandler('config');
-        }
-        $xoopsConfigMetaFooter = $configHandler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
-        if (isset($xoopsConfigMetaFooter['meta_keywords'])) {
-            return $xoopsConfigMetaFooter['meta_keywords'];
-        } else {
-            return '';
-        }
     }
+    if (!isset($configHandler) || !is_object($configHandler)) {
+        /** @var \XoopsConfigHandler $configHandler */
+        $configHandler = xoops_getHandler('config');
+    }
+    $xoopsConfigMetaFooter = $configHandler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
+    if (isset($xoopsConfigMetaFooter['meta_keywords'])) {
+        return $xoopsConfigMetaFooter['meta_keywords'];
+    }
+
+    return '';
 }
 
 /**
@@ -605,12 +616,14 @@ function nw_createmeta_keywords($content)
 function nw_updateCache()
 {
     global $xoopsModule;
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
 
     $folder  = $xoopsModule->getVar('dirname');
     $tpllist = [];
     require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
     require_once XOOPS_ROOT_PATH . '/class/template.php';
+    /** @var \XoopsTplfileHandler $tplfileHandler */
     $tplfileHandler = xoops_getHandler('tplfile');
     $tpllist        = $tplfileHandler->find(null, null, null, $folder);
     $xoopsTpl       = new \XoopsTpl();
@@ -621,7 +634,7 @@ function nw_updateCache()
         if ('module' === $onetemplate->getVar('tpl_type')) {
             // Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
             $files_del = [];
-            $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');
+            $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*', GLOB_NOSORT);
             if (count($files_del) > 0) {
                 foreach ($files_del as $one_file) {
                     unlink($one_file);
@@ -634,16 +647,16 @@ function nw_updateCache()
 /**
  * Verify that a mysql table exists
  *
- * @package       News
- * @author        Instant Zero (http://xoops.instant-zero.com)
- * @copyright (c) Instant Zero
  * @param $tablename
  * @return bool
+ * @copyright (c) Instant Zero
+ * @package       News
+ * @author        Instant Zero (http://xoops.instant-zero.com)
  */
 function nw_TableExists($tablename)
 {
     global $xoopsDB;
-    //
+
     $result = $xoopsDB->queryF("SHOW TABLES LIKE '$tablename'");
 
     return ($xoopsDB->getRowsNum($result) > 0);
@@ -652,17 +665,17 @@ function nw_TableExists($tablename)
 /**
  * Verify that a field exists inside a mysql table
  *
- * @package       News
- * @author        Instant Zero (http://xoops.instant-zero.com)
- * @copyright (c) Instant Zero
  * @param $fieldname
  * @param $table
  * @return bool
+ * @package       News
+ * @author        Instant Zero (http://xoops.instant-zero.com)
+ * @copyright (c) Instant Zero
  */
 function nw_FieldExists($fieldname, $table)
 {
     global $xoopsDB;
-    //
+
     $result = $xoopsDB->queryF("SHOW COLUMNS FROM    $table LIKE '$fieldname'");
 
     return ($xoopsDB->getRowsNum($result) > 0);
@@ -671,17 +684,17 @@ function nw_FieldExists($fieldname, $table)
 /**
  * Add a field to a mysql table
  *
- * @package       News
- * @author        Instant Zero (http://xoops.instant-zero.com)
- * @copyright (c) Instant Zero
  * @param $field
  * @param $table
  * @return bool|\mysqli_result
+ * @package       News
+ * @author        Instant Zero (http://xoops.instant-zero.com)
+ * @copyright (c) Instant Zero
  */
 function nw_AddField($field, $table)
 {
     global $xoopsDB;
-    //
+
     $result = $xoopsDB->queryF('ALTER TABLE ' . $table . " ADD $field;");
 
     return $result;
@@ -693,27 +706,27 @@ function nw_AddField($field, $table)
 function nw_is_admin_group()
 {
     global $xoopsUser, $xoopsModule;
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
-    //
+
     if (is_object($xoopsUser)) {
         if (in_array('1', $xoopsUser->getGroups())) {
             return true;
-        } else {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            } else {
-                return false;
-            }
         }
-    } else {
+        if ($xoopsUser->isAdmin($xoopsModule->mid())) {
+            return true;
+        }
+
         return false;
     }
+
+    return false;
 }
 
 /**
  * Verify if the current "user" is a bot or not
  *
- * If you have a problem with this function, insert the folowing code just before the line if(isset($_SESSION['nw_cache_bot'])) { :
+ * If you have a problem with this function, insert the folowing code just before the line if (\Xmf\Request::hasVar('nw_cache_bot', 'SESSION'))) { :
  * return false;
  *
  * @package       News
@@ -722,23 +735,23 @@ function nw_is_admin_group()
  */
 function nw_isbot()
 {
-    if (isset($_SESSION['nw_cache_bot'])) {
+    if (\Xmf\Request::hasVar('nw_cache_bot', 'SESSION')) {
         return $_SESSION['nw_cache_bot'];
-    } else {
-        // Add here every bot you know separated by a pipe | (not matter with the upper or lower cases)
-        // If you want to see the result for yourself, add your navigator's user agent at the end (mozilla for example)
-        $botlist      = 'AbachoBOT|Arachnoidea|ASPSeek|Atomz|cosmos|crawl25-public.alexa.com|CrawlerBoy Pinpoint.com|Crawler|DeepIndex|EchO!|exabot|Excalibur Internet Spider|FAST-WebCrawler|Fluffy the spider|GAIS Robot/1.0B2|GaisLab data gatherer|Google|Googlebot-Image|googlebot|Gulliver|ia_archiver|Infoseek|Links2Go|Lycos_Spider_(modspider)|Lycos_Spider_(T-Rex)|MantraAgent|Mata Hari|Mercator|MicrosoftPrototypeCrawler|Mozilla@somewhere.com|MSNBOT|NEC Research Agent|NetMechanic|Nokia-WAPToolkit|nttdirectory_robot|Openfind|Oracle Ultra Search|PicoSearch|Pompos|Scooter|Slider_Search_v1-de|Slurp|Slurp.so|SlySearch|Spider|Spinne|SurferF3|Surfnomore Spider|suzuran|teomaagent1|TurnitinBot|Ultraseek|VoilaBot|vspider|W3C_Validator|Web Link Validator|WebTrends|WebZIP|whatUseek_winona|WISEbot|Xenu Link Sleuth|ZyBorg';
-        $botlist      = strtoupper($botlist);
-        $currentagent = strtoupper(xoops_getenv('HTTP_USER_AGENT'));
-        $retval       = false;
-        $botarray     = explode('|', $botlist);
-        foreach ($botarray as $onebot) {
-            if (false !== strpos($currentagent, $onebot)) {
-                $retval = true;
-                break;
-            }
+    }
+    // Add here every bot you know separated by a pipe | (not matter with the upper or lower cases)
+    // If you want to see the result for yourself, add your navigator's user agent at the end (mozilla for example)
+    $botlist      = 'AbachoBOT|Arachnoidea|ASPSeek|Atomz|cosmos|crawl25-public.alexa.com|CrawlerBoy Pinpoint.com|Crawler|DeepIndex|EchO!|exabot|Excalibur Internet Spider|FAST-WebCrawler|Fluffy the spider|GAIS Robot/1.0B2|GaisLab data gatherer|Google|Googlebot-Image|googlebot|Gulliver|ia_archiver|Infoseek|Links2Go|Lycos_Spider_(modspider)|Lycos_Spider_(T-Rex)|MantraAgent|Mata Hari|Mercator|MicrosoftPrototypeCrawler|Mozilla@somewhere.com|MSNBOT|NEC Research Agent|NetMechanic|Nokia-WAPToolkit|nttdirectory_robot|Openfind|Oracle Ultra Search|PicoSearch|Pompos|Scooter|Slider_Search_v1-de|Slurp|Slurp.so|SlySearch|Spider|Spinne|SurferF3|Surfnomore Spider|suzuran|teomaagent1|TurnitinBot|Ultraseek|VoilaBot|vspider|W3C_Validator|Web Link Validator|WebTrends|WebZIP|whatUseek_winona|WISEbot|Xenu Link Sleuth|ZyBorg';
+    $botlist      = mb_strtoupper($botlist);
+    $currentagent = mb_strtoupper(xoops_getenv('HTTP_USER_AGENT'));
+    $retval       = false;
+    $botarray     = explode('|', $botlist);
+    foreach ($botarray as $onebot) {
+        if (false !== mb_strpos($currentagent, $onebot)) {
+            $retval = true;
+            break;
         }
     }
+
     $_SESSION['nw_cache_bot'] = $retval;
 
     return $retval;
@@ -747,11 +760,11 @@ function nw_isbot()
 /**
  * Create an infotip
  *
- * @package       News
- * @author        Instant Zero (http://xoops.instant-zero.com)
- * @copyright (c) Instant Zero
  * @param $text
  * @return
+ * @copyright (c) Instant Zero
+ * @package       News
+ * @author        Instant Zero (http://xoops.instant-zero.com)
  */
 function nw_make_infotips($text)
 {
@@ -764,10 +777,10 @@ function nw_make_infotips($text)
 }
 
 /**
- * @author   Monte Ohrt <monte at ohrt dot com>, modified by Amos Robinson
- *           <amos dot robinson at gmail dot com>
  * @param $string
  * @return string
+ * @author   Monte Ohrt <monte at ohrt dot com>, modified by Amos Robinson
+ *           <amos dot robinson at gmail dot com>
  */
 function nw_close_tags($string)
 {
@@ -780,7 +793,7 @@ function nw_close_tags($string)
             $end_tags      = $end_tags[1];
 
             foreach ($start_tags as $key => $val) {
-                $posb = array_search($val, $end_tags);
+                $posb = array_search($val, $end_tags, true);
                 if (is_int($posb)) {
                     unset($end_tags[$posb]);
                 } else {
@@ -792,7 +805,7 @@ function nw_close_tags($string)
         }
 
         $complete_tags = array_reverse($complete_tags);
-        for ($i = 0; $i < count($complete_tags); $i++) {
+        for ($i = 0, $iMax = count($complete_tags); $i < $iMax; ++$i) {
             $string .= '</' . $complete_tags[$i] . '>';
         }
     }
@@ -810,48 +823,49 @@ function nw_close_tags($string)
  *           appending the $etc string or inserting $etc into the middle.
  *           Makes sure no tags are left half-open or half-closed
  *           (e.g. "Banana in a <a...")
+ * @param mixed $string
+ * @param mixed $length
+ * @param mixed $etc
+ * @param mixed $break_words
+ * @return string
  * @author   Monte Ohrt <monte at ohrt dot com>, modified by Amos Robinson
  *           <amos dot robinson at gmail dot com>
- * @param string
- * @param integer
- * @param string
- * @param boolean
- * @param boolean
- * @return string
  */
 function nw_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words = false)
 {
     if (0 == $length) {
         return '';
     }
-    if (strlen($string) > $length) {
-        $length -= strlen($etc);
+    if (mb_strlen($string) > $length) {
+        $length -= mb_strlen($etc);
         if (!$break_words) {
-            $string = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $length + 1));
+            $string = preg_replace('/\s+?(\S+)?$/', '', mb_substr($string, 0, $length + 1));
             $string = preg_replace('/<[^>]*$/', '', $string);
             $string = nw_close_tags($string);
         }
 
         return $string . $etc;
-    } else {
-        return $string;
     }
+
+    return $string;
 }
 
 /**
  * Resize a Picture to some given dimensions (using the wideImage library)
  *
- * @param string  $src_path      Picture's source
- * @param string  $dst_path      Picture's destination
- * @param integer $param_width   Maximum picture's width
- * @param integer $param_height  Maximum picture's height
- * @param boolean $keep_original Do we have to keep the original picture ?
- * @param string  $fit           Resize mode (see the wideImage library for more information)
+ * @param string $src_path      Picture's source
+ * @param string $dst_path      Picture's destination
+ * @param int    $param_width   Maximum picture's width
+ * @param int    $param_height  Maximum picture's height
+ * @param bool   $keep_original Do we have to keep the original picture ?
+ * @param string $fit           Resize mode (see the wideImage library for more information)
  * @return bool
  */
 function nw_resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false, $fit = 'inside')
 {
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
+
     //    require_once XNEWS_MODULE_PATH . '/class/wideimage/WideImage.inc.php';
     //
     $resize            = true;
@@ -951,9 +965,10 @@ function nw_prepareFolder($folder)
  */
 function nw_remove_accents($chain)
 {
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
     $myts   = \MyTextSanitizer::getInstance();
-    //
+
     if (method_exists($myts, 'formatForML')) {
         $chain = $myts->formatForML($chain);
     }
@@ -961,6 +976,7 @@ function nw_remove_accents($chain)
     /**
      * if xLanguage is present, let's prepare the title with the current language
      */
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $xlanguage     = $moduleHandler->getByDirname('xlanguage');
     if (is_object($xlanguage) && true === $xlanguage->getVar('isactive')) {
@@ -988,8 +1004,9 @@ function nw_remove_accents($chain)
  */
 function nw_seo_UrlGenerator($op, $id, $short_url = '')
 {
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
-    //
+
     if (0 != $helper->getConfig('seo_enable')) {
         if (!empty($short_url)) {
             $short_url = $short_url;
@@ -999,7 +1016,6 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
             case _MD_XNEWS_SEO_PDF:
                 $short_url .= $helper->getConfig('seo_endofurl_pdf');
                 break;
-
             case _MD_XNEWS_SEO_PRINT:
                 $short_url .= $helper->getConfig('seo_endofurl');
                 break;
@@ -1015,54 +1031,49 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
             $seo_path = '';
             if ('' != $helper->getConfig('seo_path')) {
                 // generate SEO url using seo path eg news, info, blog
-                $seo_path = '/' . strtolower($helper->getConfig('seo_path'));
+                $seo_path = '/' . mb_strtolower($helper->getConfig('seo_path'));
                 if (0 == $helper->getConfig('seo_level')) {
                     // generate SEO url using root level htaccess
                     $seo_path .= '.';
 
                     return XOOPS_URL . '/' . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
-                } else {
-                    // generate SEO url using module level htaccess
-                    $seo_path .= '.';
+                }
+                // generate SEO url using module level htaccess
+                $seo_path .= '.';
 
-                    return XNEWS_MODULE_URL . $seo_path . "${op}.${id}/${short_url}";
-                }
-            } else {
-                // generate SEO url with no seo path
-                $seo_path = '/' . strtolower($helper->getConfig('seo_path'));
-                if (0 == $helper->getConfig('seo_level')) {
-                    // generate SEO url using root level htaccess
-                    return XOOPS_URL . '/' . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
-                } else {
-                    // generate SEO url using module level htaccess
-                    return XNEWS_MODULE_URL . $seo_path . "${op}.${id}/${short_url}";
-                }
+                return XNEWS_MODULE_URL . $seo_path . "${op}.${id}/${short_url}";
             }
+            // generate SEO url with no seo path
+            $seo_path = '/' . mb_strtolower($helper->getConfig('seo_path'));
+            if (0 == $helper->getConfig('seo_level')) {
+                // generate SEO url using root level htaccess
+                return XOOPS_URL . '/' . XNEWS_MODULE_DIRNAME . $seo_path . "${op}.${id}/${short_url}";
+            }
+            // generate SEO url using module level htaccess
+            return XNEWS_MODULE_URL . $seo_path . "${op}.${id}/${short_url}";
         } elseif (2 == $helper->getConfig('seo_enable')) {
             // generate SEO url using path-info
             $seo_path = '';
             if ('' != $helper->getConfig('seo_path')) {
-                $seo_path = strtolower($helper->getConfig('seo_path')) . '.';
+                $seo_path = mb_strtolower($helper->getConfig('seo_path')) . '.';
             }
 
             return XNEWS_MODULE_URL . '/index.php/' . $seo_path . "${op}.${id}/${short_url}";
-        } else {
-            die('Unknown SEO method.');
         }
-    } else {
-        // generate classic url
-        switch ($op) {
-            case _MD_XNEWS_SEO_TOPICS:
-                return XNEWS_MODULE_URL . "/index.php?topic_id=${id}";
-            case _MD_XNEWS_SEO_ARTICLES:
-                return XNEWS_MODULE_URL . "/article.php?storyid=${id}";
-            case _MD_XNEWS_SEO_PRINT:
-                return XNEWS_MODULE_URL . "/print.php?storyid=${id}";
-            case _MD_XNEWS_SEO_PDF:
-                return XNEWS_MODULE_URL . "/makepdf.php?storyid=${id}";
-            default:
-                die('Unknown SEO operation.');
-        }
+        exit('Unknown SEO method.');
+    }
+    // generate classic url
+    switch ($op) {
+        case _MD_XNEWS_SEO_TOPICS:
+            return XNEWS_MODULE_URL . "/index.php?topic_id=${id}";
+        case _MD_XNEWS_SEO_ARTICLES:
+            return XNEWS_MODULE_URL . "/article.php?storyid=${id}";
+        case _MD_XNEWS_SEO_PRINT:
+            return XNEWS_MODULE_URL . "/print.php?storyid=${id}";
+        case _MD_XNEWS_SEO_PDF:
+            return XNEWS_MODULE_URL . "/makepdf.php?storyid=${id}";
+        default:
+            exit('Unknown SEO operation.');
     }
 }
 
@@ -1074,8 +1085,9 @@ function nw_seo_UrlGenerator($op, $id, $short_url = '')
 function nw_callJavascriptFile($javascriptFile, $inLanguageFolder = false, $oldWay = false)
 {
     global $xoopsConfig, $xoTheme;
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
-    //
+
     $fileToCall = $javascriptFile;
     if ($inLanguageFolder) {
         if (file_exists(XNEWS_MODULE_PATH . 'language/' . $xoopsConfig['language'] . '/' . $javascriptFile)) {
@@ -1101,7 +1113,7 @@ function nw_detect_utf8_lang_encoding($string)
 {
     $pattern_array = [
         'arabic'  => '/\%D8\%([A-F0-9]{2})\%D9\%([A-F0-9]{2})/i',
-        'chinese' => '/\%E5\%([A-F0-9]{2})\%([A-F0-9]{2})\%E6\%([A-F0-9]{2})\%([A-F0-9]{2})/i'
+        'chinese' => '/\%E5\%([A-F0-9]{2})\%([A-F0-9]{2})\%E6\%([A-F0-9]{2})\%([A-F0-9]{2})/i',
     ];
 
     //$pattern = '/[\%D8\%([A-Z0-9]{2})-\%DB\%([A-Z0-9]{2})]/i'; //arabic
@@ -1139,16 +1151,17 @@ function nw_detect_utf8_lang_encoding($string)
  */
 function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
 {
+    /** @var Xnews\Helper $helper */
     $helper = Xnews\Helper::getInstance();
-    //
+
     if ($considerHtml) {
         // if the plain text is shorter than the maximum length, return the whole text
-        if (strlen(preg_replace('/<.*?' . '>/', '', $text)) <= $length) {
+        if (mb_strlen(preg_replace('/<.*?' . '>/', '', $text)) <= $length) {
             return $text;
         }
         // splits all html-tags to scanable lines
         preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
-        $total_length = strlen($ending);
+        $total_length = mb_strlen($ending);
         $open_tags    = [];
         $truncate     = '';
         foreach ($lines as $line_matchings) {
@@ -1160,20 +1173,20 @@ function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $con
                     // if tag is a closing tag
                 } elseif (preg_match('/^<\s*\/([^\s]+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
                     // delete tag from $open_tags list
-                    $pos = array_search($tag_matchings[1], $open_tags);
+                    $pos = array_search($tag_matchings[1], $open_tags, true);
                     if (false !== $pos) {
                         unset($open_tags[$pos]);
                     }
                     // if tag is an opening tag
                 } elseif (preg_match('/^<\s*([^\s>!]+).*?' . '>$/s', $line_matchings[1], $tag_matchings)) {
                     // add tag to the beginning of $open_tags list
-                    array_unshift($open_tags, strtolower($tag_matchings[1]));
+                    array_unshift($open_tags, mb_strtolower($tag_matchings[1]));
                 }
                 // add html-tag to $truncate'd text
                 $truncate .= $line_matchings[1];
             }
             // calculate the length of the plain text part of the line; handle entities as one character
-            $content_length = strlen(preg_replace('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|[0-9a-f]{1,6};/i', ' ', $line_matchings[2]));
+            $content_length = mb_strlen(preg_replace('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|[0-9a-f]{1,6};/i', ' ', $line_matchings[2]));
             if ($total_length + $content_length > $length) {
                 // the number of characters which are left
                 $left            = $length - $total_length;
@@ -1182,9 +1195,9 @@ function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $con
                 if (preg_match_all('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|[0-9a-f]{1,6};/i', $line_matchings[2], $entities, PREG_OFFSET_CAPTURE)) {
                     // calculate the real length of all entities in the legal range
                     foreach ($entities[0] as $entity) {
-                        if ($entity[1] + 1 - $entities_length <= $left) {
+                        if ($left >= $entity[1] + 1 - $entities_length) {
                             $left--;
-                            $entities_length += strlen($entity[0]);
+                            $entities_length += mb_strlen($entity[0]);
                         } else {
                             // no more characters left
                             break;
@@ -1194,26 +1207,25 @@ function nw_truncate($text, $length = 100, $ending = '...', $exact = false, $con
                 $truncate .= mb_substr($line_matchings[2], 0, $left + $entities_length, 'UTF-8');
                 // maximum lenght is reached, so get off the loop
                 break;
-            } else {
-                $truncate     .= $line_matchings[2];
-                $total_length += $content_length;
             }
+            $truncate     .= $line_matchings[2];
+            $total_length += $content_length;
+
             // if the maximum length is reached, get off the loop
             if ($total_length >= $length) {
                 break;
             }
         }
     } else {
-        if (strlen($text) <= $length) {
+        if (mb_strlen($text) <= $length) {
             return $text;
-        } else {
-            $truncate = mb_substr($text, 0, $length - strlen($ending), 'UTF-8');
         }
+        $truncate = mb_substr($text, 0, $length - mb_strlen($ending), 'UTF-8');
     }
     // if the words shouldn't be cut in the middle...
     if (!$exact) {
         // ...search the last occurance of a space...
-        $spacepos = strrpos($truncate, ' ');
+        $spacepos = mb_strrpos($truncate, ' ');
         if (isset($spacepos)) {
             // ...and cut the text in this position
             $truncate = mb_substr($truncate, 0, $spacepos, 'UTF-8');
@@ -1258,7 +1270,7 @@ function nw_detect_adobe()
         </script>
     ';
 
-    if (isset($_COOKIE['xnews'])) {
+    if (\Xmf\Request::hasVar('xnews', 'COOKIE')) {
         $has_adobe = $_COOKIE['xnews'];
         //Delete cookie
         setcookie('xnews', '', time() - 3600);
